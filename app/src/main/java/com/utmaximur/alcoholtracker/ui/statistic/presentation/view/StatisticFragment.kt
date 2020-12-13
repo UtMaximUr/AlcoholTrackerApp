@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
-import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+import com.google.android.material.tabs.TabLayout
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.ui.statistic.presentation.presenter.StatisticPresenter
 import com.utmaximur.alcoholtracker.ui.statistic.presentation.presenter.factory.StatisticPresenterFactory
@@ -25,7 +25,7 @@ class StatisticFragment :
 
     private lateinit var topDrinkList: RecyclerView
     private lateinit var statisticPager: ViewPager
-    private lateinit var statisticIndicator: WormDotsIndicator
+    private lateinit var statisticIndicator: TabLayout
 
     private lateinit var statisticCountsDays: TextView
 
@@ -46,7 +46,7 @@ class StatisticFragment :
     private fun findViewById(view: View) {
         topDrinkList = view.findViewById(R.id.top_drinks_list)
         statisticPager = view.findViewById(R.id.statistic_view_pager)
-        statisticIndicator = view.findViewById(R.id.statistic_indicator)
+        statisticIndicator = view.findViewById(R.id.view_pager_indicator)
         statisticCountsDays = view.findViewById(R.id.count_days_text)
     }
 
@@ -57,7 +57,7 @@ class StatisticFragment :
         (topDrinkList.adapter as TopDrinkAdapter).setDrinkList(presenter.getAllDrink())
 
         statisticPager.adapter = StatisticViewPagerAdapter(presenter.getPriceListByPeriod(), requireContext())
-        statisticIndicator.setViewPager(statisticPager)
+        statisticIndicator.setupWithViewPager(statisticPager, true)
 
         statisticCountsDays.text = presenter.getCountDayOffYear(requireContext())
     }

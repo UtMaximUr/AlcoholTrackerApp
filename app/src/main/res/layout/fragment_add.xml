@@ -50,24 +50,22 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
-                    android:id="@+id/worm_dots_indicator"
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/view_pager_indicator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    app:dotsColor="@color/white"
-                    app:dotsCornerRadius="8dp"
-                    app:dotsSize="8dp"
-                    app:dotsSpacing="2dp"
-                    app:dotsStrokeColor="@color/white"
-                    app:dotsStrokeWidth="1dp"
+                    android:background="@android:color/transparent"
+                    app:tabBackground="@drawable/dot_tab_selector"
+                    app:tabGravity="center"
+                    app:tabIndicatorHeight="0dp"
                     app:layout_constraintBottom_toBottomOf="@+id/view_pager_drinks"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -161,7 +159,7 @@
 
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"

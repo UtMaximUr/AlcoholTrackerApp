@@ -10,16 +10,13 @@ import android.view.View
 import android.view.View.GONE
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.Button
-import android.widget.EditText
-import android.widget.NumberPicker
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
-import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+import com.google.android.material.tabs.TabLayout
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
 import com.utmaximur.alcoholtracker.data.model.Drink
@@ -60,7 +57,7 @@ class AddFragment : Fragment(),
     private lateinit var todayButton: Button
 
     private lateinit var drinksPager: ViewPager
-    private lateinit var dotsIndicator: WormDotsIndicator
+    private lateinit var dotsIndicator: TabLayout
 
     private var dateAndTime = Calendar.getInstance()
 
@@ -97,7 +94,7 @@ class AddFragment : Fragment(),
         volumeNumberPicker = view.findViewById(R.id.volume_number_picker)
 
         drinksPager = view.findViewById(R.id.view_pager_drinks)
-        dotsIndicator = view.findViewById(R.id.worm_dots_indicator)
+        dotsIndicator = view.findViewById(R.id.view_pager_indicator)
     }
 
     private fun initUi(view: View) {
@@ -120,7 +117,7 @@ class AddFragment : Fragment(),
 
         // выбор напитков
         drinksPager.adapter = DrinkViewPagerAdapter(getDrinksList(), requireContext())
-        dotsIndicator.setViewPager(drinksPager)
+        dotsIndicator.setupWithViewPager(drinksPager, true)
         drinksPager.addOnPageChangeListener(object : OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {}
             override fun onPageScrolled(
@@ -222,6 +219,7 @@ class AddFragment : Fragment(),
                     resources.getStringArray(it.alcoholVolume).indexOf(alcoholTrack.volume)
                 setDrinkDegreeArray(position)
                 degreeNumberPicker.value = it.alcoholStrength.indexOf(alcoholTrack.degree) + 1
+                dotsIndicator.getTabAt(position)?.select()
             }
         }
 
