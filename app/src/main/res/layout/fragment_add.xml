@@ -26,6 +26,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:navigationIcon="@drawable/ic_back"
             app:menu="@menu/menu_toolbar"
+            android:theme="@style/ToolbarTheme"
             app:title="@string/add_drink_title" />
 
         <androidx.cardview.widget.CardView
