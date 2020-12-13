@@ -5,7 +5,6 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
 import com.utmaximur.alcoholtracker.data.storage.`object`.AlcoholTrackerRealmObject
-import com.utmaximur.alcoholtracker.data.storage.service.LiveRealmData
 import io.realm.Realm
 import io.realm.RealmResults
 

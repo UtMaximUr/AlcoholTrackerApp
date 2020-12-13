@@ -239,7 +239,7 @@ class AddFragment : Fragment(),
             dateAndTime[Calendar.YEAR] = year
             dateAndTime[Calendar.MONTH] = monthOfYear
             dateAndTime[Calendar.DAY_OF_MONTH] = dayOfMonth
-            viewModel.date = Date(dateAndTime.timeInMillis).time
+            viewModel.date = dateAndTime.timeInMillis
             addDateButton.text =
                 presenter.setDateOnButton(requireContext(), Date(dateAndTime.timeInMillis))
             todayButton.visibility = GONE

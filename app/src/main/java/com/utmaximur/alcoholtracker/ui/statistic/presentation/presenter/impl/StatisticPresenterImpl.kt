@@ -53,6 +53,7 @@ class StatisticPresenterImpl(private val interactor: StatisticInteractor) :
         when (period) {
             weekPeriod -> {
                 cal.set(Calendar.DAY_OF_WEEK, cal.firstDayOfWeek)
+                cal.set(Calendar.HOUR_OF_DAY, 0)
                 alcoholTrackList.forEach {
                     if (it.date > cal.timeInMillis) {
                         sumPrice += it.quantity * it.price
