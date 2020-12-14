@@ -24,7 +24,6 @@ import com.utmaximur.alcoholtracker.ui.add.addtrack.presentation.presenter.AddPr
 import com.utmaximur.alcoholtracker.ui.add.addtrack.presentation.presenter.factory.AddPresenterFactory
 import com.utmaximur.alcoholtracker.ui.add.addtrack.presentation.view.AddView
 import com.utmaximur.alcoholtracker.ui.add.addtrack.presentation.view.impl.adapter.DrinkViewPagerAdapter
-import com.utmaximur.alcoholtracker.ui.main.presentation.view.impl.MainActivity
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -32,11 +31,12 @@ import java.util.*
 class AddFragment : Fragment(),
     AddView {
 
-    private var onNavigationBarListener: OnNavigationBarListener? = null
+    private var addFragmentListener: AddFragmentListener? = null
 
-    interface OnNavigationBarListener {
+    interface AddFragmentListener {
         fun onHideNavigationBar()
         fun onShowNavigationBar()
+        fun closeFragment()
     }
 
     private lateinit var toolbar: Toolbar
@@ -101,14 +101,14 @@ class AddFragment : Fragment(),
         findViewById(view)
 
         toolbar.setNavigationOnClickListener {
-            (requireActivity() as MainActivity).closeFragment()
+            addFragmentListener?.closeFragment()
         }
 
         toolbar.setOnMenuItemClickListener {
             if (presenter.checkIsEmptyField()) {
                 presenter.onSaveButtonClick()
-                onNavigationBarListener!!.onShowNavigationBar()
-                (requireActivity() as MainActivity).closeFragment()
+                addFragmentListener!!.onShowNavigationBar()
+                addFragmentListener?.closeFragment()
             }
             true
         }
@@ -245,17 +245,17 @@ class AddFragment : Fragment(),
 
     override fun onStart() {
         super.onStart()
-        onNavigationBarListener!!.onHideNavigationBar()
+        addFragmentListener!!.onHideNavigationBar()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        onNavigationBarListener!!.onShowNavigationBar()
+        addFragmentListener!!.onShowNavigationBar()
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        onNavigationBarListener = context as OnNavigationBarListener
+        addFragmentListener = context as AddFragmentListener
     }
 
     override fun getIdDrink(): String {

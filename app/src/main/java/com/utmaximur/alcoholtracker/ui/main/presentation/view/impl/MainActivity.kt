@@ -14,7 +14,7 @@ import com.utmaximur.alcoholtracker.ui.add.addtrack.presentation.view.impl.AddFr
 
 
 class MainActivity : AppCompatActivity(),
-    AddFragment.OnNavigationBarListener {
+    AddFragment.AddFragmentListener {
 
     private lateinit var menu: BottomNavigationView
     private lateinit var navHostFragment: NavHostFragment
@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity(),
         menu.setupWithNavController(navController)
     }
 
-    fun closeFragment() {
+    override fun closeFragment() {
         navController.popBackStack()
     }
 
