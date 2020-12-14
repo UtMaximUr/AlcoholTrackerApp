@@ -1,6 +1,7 @@
 package com.utmaximur.alcoholtracker.ui.calendar.presentation.view.impl
 
 import android.app.Application
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -19,13 +20,19 @@ import com.utmaximur.alcoholtracker.ui.calendar.presentation.presenter.CalendarP
 import com.utmaximur.alcoholtracker.ui.calendar.presentation.presenter.factory.CalendarPresenterFactory
 import com.utmaximur.alcoholtracker.ui.calendar.presentation.view.CalendarView
 import com.utmaximur.alcoholtracker.ui.calendar.presentation.view.impl.adapter.DrinksListAdapter
-import com.utmaximur.alcoholtracker.ui.main.presentation.view.impl.MainActivity
 import java.util.*
 
 
 class CalendarFragment : Fragment(),
     CalendarView,
     DrinksListAdapter.OnDrinkAdapterListener {
+
+    private var calendarFragmentListener: CalendarFragmentListener? = null
+
+    interface CalendarFragmentListener {
+        fun showEditAlcoholTrackerFragment(bundle: Bundle)
+        fun showAddAlcoholTrackerFragment()
+    }
 
     private lateinit var viewModel: CalendarViewModel
     private lateinit var presenter: CalendarPresenter
@@ -72,7 +79,7 @@ class CalendarFragment : Fragment(),
         findViewById(view)
 
         addButton.setOnClickListener {
-            (requireActivity() as MainActivity).showAddAlcoholTrackerFragment()
+            calendarFragmentListener?.showAddAlcoholTrackerFragment()
         }
 
         calendarView.setOnDayClickListener { eventDay ->
@@ -110,8 +117,16 @@ class CalendarFragment : Fragment(),
         }
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        calendarFragmentListener = context as CalendarFragmentListener
+    }
+
     override fun onEdit(date: Long) {
-        (requireActivity() as MainActivity).showEditAlcoholTrackerFragment(presenter.getDrink(date))
+        val drink = (presenter.getDrink(date))
+        val bundle = Bundle()
+        bundle.putParcelable("drink", drink)
+        calendarFragmentListener?.showEditAlcoholTrackerFragment(bundle)
     }
 
     override fun onDelete(id: String) {
