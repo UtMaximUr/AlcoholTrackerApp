@@ -6,6 +6,7 @@ import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
@@ -30,29 +31,12 @@ class MainActivity : AppCompatActivity(),
         menu = findViewById(R.id.bottom_navigation_view)
         navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        navController = navHostFragment.navController
     }
 
     private fun initUi() {
         findViewById()
-        menu.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.menu_calendar -> {
-                    navController.navigate(R.id.calendarFragment)
-                }
-                R.id.menu_statistic -> {
-                    navController.navigate(R.id.statisticFragment)
-                }
-                R.id.menu_settings -> {
-                    navController.navigate(R.id.settingsFragment)
-                }
-            }
-            true
-        }
-
-        menu.setOnNavigationItemReselectedListener {
-            //Обработка повторного вызова
-        }
+        navController = navHostFragment.navController
+        menu.setupWithNavController(navController)
     }
 
     fun closeFragment() {

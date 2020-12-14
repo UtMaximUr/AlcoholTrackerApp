@@ -3,19 +3,15 @@
 
     <group android:checkableBehavior="single">
 
-<!--        <item android:id="@+id/menu_add"-->
-<!--            android:icon="@drawable/ic_add"-->
-<!--            android:title="@string/add"/>-->
-
-        <item android:id="@+id/menu_calendar"
+        <item android:id="@+id/calendarFragment"
             android:icon="@drawable/ic_calendar"
             android:title="@string/calendar"/>
 
-        <item android:id="@+id/menu_statistic"
+        <item android:id="@+id/statisticFragment"
             android:icon="@drawable/ic_statistic"
             android:title="@string/statistic"/>
 
-        <item android:id="@+id/menu_settings"
+        <item android:id="@+id/settingsFragment"
             android:icon="@drawable/ic_settings"
             android:title="@string/settings"/>
 

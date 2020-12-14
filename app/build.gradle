@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'kotlin-android-extensions'
     id 'realm-android'
+    id 'androidx.navigation.safeargs'
 }
 
 
@@ -38,7 +39,6 @@ android {
 
 dependencies {
     def nav_version = "2.3.2"
-    def dagger_version = '2.17'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.2'
@@ -61,8 +61,8 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
-    kapt "com.google.dagger:dagger-compiler:$dagger_version"
-    implementation "com.google.dagger:dagger:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:2.17"
+    implementation "com.google.dagger:dagger:2.29.1"
 
     implementation 'com.google.code.gson:gson:2.8.6'
 
