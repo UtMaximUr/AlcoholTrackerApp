@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "189166702743",
+    "project_id": "alcoholtrackapp",
+    "storage_bucket": "alcoholtrackapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:189166702743:android:f7702ff55e6f6aafc1d9d2",
+        "android_client_info": {
+          "package_name": "com.utmaximur.alcoholtracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "189166702743-jcr5v4bpcru9unucs9vmpd2dp69a4cim.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuB0NN1lw182E5EEP_hQGnzsfzZALGH1c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "189166702743-jcr5v4bpcru9unucs9vmpd2dp69a4cim.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
