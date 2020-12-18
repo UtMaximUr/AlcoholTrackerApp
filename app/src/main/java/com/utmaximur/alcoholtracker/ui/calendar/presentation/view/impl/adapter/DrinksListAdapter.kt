@@ -90,6 +90,7 @@ class DrinksListAdapter(
             override fun removeAt(position: Int) {
                 alcoholTracks.removeAt(position)
                 notifyItemRemoved(position)
+                notifyItemRangeChanged (position, itemCount)
             }
         })
     }
