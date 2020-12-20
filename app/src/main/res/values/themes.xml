@@ -25,13 +25,6 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
-    <!-- Кастомная AppTheme.Launcher. Устанавливает в качестве фона вашу drawable -->
-    <style name="Theme.AlcoholTracker.Launcher">
-        <item name="android:windowBackground">@drawable/launch_screen</item>
-        <!-- для Android 5+ вы можете поменять цвет colorPrimaryDark, чтобы соответствовать цвету windowBackground -->
-        <item name="colorPrimaryDark">@android:color/white</item>
-    </style>
-
     <style name="ToolbarTheme" parent="ThemeOverlay.MaterialComponents.Light">
         <item name="android:fontFamily">@font/roboto_condensed_regular</item>
     </style>
