@@ -27,7 +27,4 @@ interface StorageManager {
 
     fun getAllAlcoholTrack(): MutableList<AlcoholTrack>
 
-    // test RX
-    fun getAllAlcoholTrackList(): Flowable<RealmResults<AlcoholTrackerRealmObject>>
-    // test RX
 }

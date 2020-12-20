@@ -52,17 +52,6 @@ class StorageModuleImpl(storageService: StorageService) : StorageModule {
         return drink
     }
 
-    // test RX
-    override fun getAllAlcoholTrackList(): Flowable<RealmResults<AlcoholTrackerRealmObject>> {
-        val query = realm.where(AlcoholTrackerRealmObject::class.java)
-        val flowable: Flowable<RealmResults<AlcoholTrackerRealmObject>>
-        flowable = query
-            .findAllAsync()
-            .asFlowable()
-        return flowable
-    }
-    // test RX
-
     override fun getAllAlcoholTrack(): MutableList<AlcoholTrack> {
         val trackObject = realm.where<AlcoholTrackerRealmObject>()
             .findAll()

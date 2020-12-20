@@ -16,8 +16,4 @@ interface CalendarInteractor {
 
     fun deleteDrink(id: String)
 
-    // test RX
-    fun getAllAlcoholTrackList(): Flowable<RealmResults<AlcoholTrackerRealmObject>>
-    // test RX
-
 }

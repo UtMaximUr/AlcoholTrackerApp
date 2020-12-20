@@ -26,10 +26,4 @@ class CalendarInteractorImpl(private val storageManager: StorageManager) :
     override fun deleteDrink(id: String) {
         storageManager.deleteAlcoholTrack(id)
     }
-
-    // test RX
-    override fun getAllAlcoholTrackList(): Flowable<RealmResults<AlcoholTrackerRealmObject>> {
-        return storageManager.getAllAlcoholTrackList()
-    }
-    // test RX
 }

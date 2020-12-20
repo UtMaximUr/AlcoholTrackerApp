@@ -23,7 +23,4 @@ interface CalendarPresenter : MvpPresenter<CalendarView> {
 
     fun setIconOnDate()
 
-    // test RX
-    fun getAllAlcoholTrackList()
-    // test RX
 }

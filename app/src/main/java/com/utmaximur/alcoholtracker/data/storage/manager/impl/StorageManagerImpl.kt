@@ -47,10 +47,4 @@ class StorageManagerImpl(private val storageModule: StorageModule): StorageManag
     override fun getAllAlcoholTrack(): MutableList<AlcoholTrack> {
         return storageModule.getAllAlcoholTrack()
     }
-
-    // test RX
-    override fun getAllAlcoholTrackList(): Flowable<RealmResults<AlcoholTrackerRealmObject>>{
-        return storageModule.getAllAlcoholTrackList()
-    }
-    // test RX
 }

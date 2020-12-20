@@ -1,8 +1,6 @@
 package com.utmaximur.alcoholtracker.ui.calendar.presentation.presenter.impl
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import com.applandeo.materialcalendarview.EventDay
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
@@ -11,7 +9,6 @@ import com.utmaximur.alcoholtracker.ui.base.BasePresenter
 import com.utmaximur.alcoholtracker.ui.calendar.interactor.CalendarInteractor
 import com.utmaximur.alcoholtracker.ui.calendar.presentation.presenter.CalendarPresenter
 import com.utmaximur.alcoholtracker.ui.calendar.presentation.view.CalendarView
-import io.reactivex.android.schedulers.AndroidSchedulers
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -27,8 +24,8 @@ class CalendarPresenterImpl(private val interactor: CalendarInteractor) :
                 context.getString(R.string.enum_beer),
                 getDoubleDegree(3.5, 50),
                 R.array.volume_beer_array,
-                R.drawable.ic_beer,
-                R.drawable.beer
+                R.raw.ic_beer,
+                R.raw.beer
             )
         )
         drinks.add(
@@ -36,8 +33,8 @@ class CalendarPresenterImpl(private val interactor: CalendarInteractor) :
                 context.getString(R.string.enum_absent),
                 getIntDegree(69, 15),
                 R.array.volume_absent_array,
-                R.drawable.ic_absent,
-                R.drawable.absent
+                R.raw.ic_absent,
+                R.raw.absent
             )
         )
         drinks.add(
@@ -45,8 +42,8 @@ class CalendarPresenterImpl(private val interactor: CalendarInteractor) :
                 context.getString(R.string.enum_brandy),
                 getIntDegree(39, 5),
                 R.array.volume_brandy_array,
-                R.drawable.ic_brandy,
-                R.drawable.brandy
+                R.raw.ic_brandy,
+                R.raw.brandy
             )
         )
         drinks.add(
@@ -54,8 +51,8 @@ class CalendarPresenterImpl(private val interactor: CalendarInteractor) :
                 context.getString(R.string.enum_champagne),
                 getIntDegree(8, 18),
                 R.array.volume_champagne_array,
-                R.drawable.ic_champagne,
-                R.drawable.champagne
+                R.raw.ic_champagne,
+                R.raw.champagne
             )
         )
         drinks.add(
@@ -63,8 +60,8 @@ class CalendarPresenterImpl(private val interactor: CalendarInteractor) :
                 context.getString(R.string.enum_cocktail),
                 getDoubleDegree(5.0, 20),
                 R.array.volume_cocktail_array,
-                R.drawable.ic_cocktail,
-                R.drawable.coctail
+                R.raw.ic_cocktail,
+                R.raw.coctail
             )
         )
         drinks.add(
@@ -72,8 +69,8 @@ class CalendarPresenterImpl(private val interactor: CalendarInteractor) :
                 context.getString(R.string.enum_cognac),
                 getIntDegree(39, 5),
                 R.array.volume_cognac_array,
-                R.drawable.ic_cognac,
-                R.drawable.cognac
+                R.raw.ic_cognac,
+                R.raw.cognac
             )
         )
         drinks.add(
@@ -81,8 +78,8 @@ class CalendarPresenterImpl(private val interactor: CalendarInteractor) :
                 context.getString(R.string.enum_liqueur),
                 getIntDegree(14, 30),
                 R.array.volume_liquor_array,
-                R.drawable.ic_liqueur,
-                R.drawable.liquor
+                R.raw.ic_liqueur,
+                R.raw.liquor
             )
         )
         drinks.add(
@@ -90,8 +87,8 @@ class CalendarPresenterImpl(private val interactor: CalendarInteractor) :
                 context.getString(R.string.enum_tequila),
                 getIntDegree(34, 20),
                 R.array.volume_tequila_array,
-                R.drawable.ic_tequila,
-                R.drawable.tequila
+                R.raw.ic_tequila,
+                R.raw.tequila
             )
         )
         drinks.add(
@@ -99,8 +96,8 @@ class CalendarPresenterImpl(private val interactor: CalendarInteractor) :
                 context.getString(R.string.enum_vodka),
                 getIntDegree(37, 18),
                 R.array.volume_vodka_array,
-                R.drawable.ic_vodka,
-                R.drawable.vodka
+                R.raw.ic_vodka,
+                R.raw.vodka
             )
         )
         drinks.add(
@@ -108,8 +105,8 @@ class CalendarPresenterImpl(private val interactor: CalendarInteractor) :
                 context.getString(R.string.enum_whiskey),
                 getIntDegree(39, 10),
                 R.array.volume_whiskey_array,
-                R.drawable.ic_whiskey,
-                R.drawable.whiskey
+                R.raw.ic_whiskey,
+                R.raw.whiskey
             )
         )
         drinks.add(
@@ -117,8 +114,8 @@ class CalendarPresenterImpl(private val interactor: CalendarInteractor) :
                 context.getString(R.string.enum_gin),
                 getIntDegree(37, 10),
                 R.array.volume_gin_array,
-                R.drawable.ic_gin,
-                R.drawable.gin
+                R.raw.ic_gin,
+                R.raw.gin
             )
         )
         drinks.add(
@@ -126,8 +123,8 @@ class CalendarPresenterImpl(private val interactor: CalendarInteractor) :
                 context.getString(R.string.enum_wine),
                 getIntDegree(9, 14),
                 R.array.volume_wine_array,
-                R.drawable.ic_wine,
-                R.drawable.wine
+                R.raw.ic_wine,
+                R.raw.wine
             )
         )
         drinks.add(
@@ -135,8 +132,8 @@ class CalendarPresenterImpl(private val interactor: CalendarInteractor) :
                 context.getString(R.string.enum_cider),
                 getDoubleDegree(6.0, 20),
                 R.array.volume_cider_array,
-                R.drawable.ic_cider,
-                R.drawable.cider
+                R.raw.ic_cider,
+                R.raw.cider
             )
         )
         drinks.add(
@@ -144,8 +141,8 @@ class CalendarPresenterImpl(private val interactor: CalendarInteractor) :
                 context.getString(R.string.enum_shot),
                 getIntDegree(35, 40),
                 R.array.volume_shots_array,
-                R.drawable.ic_shot,
-                R.drawable.shots
+                R.raw.ic_shot,
+                R.raw.shots
             )
         )
         drinks.add(
@@ -153,8 +150,8 @@ class CalendarPresenterImpl(private val interactor: CalendarInteractor) :
                 context.getString(R.string.enum_rum),
                 getIntDegree(37, 12),
                 R.array.volume_rum_array,
-                R.drawable.ic_rum,
-                R.drawable.rum
+                R.raw.ic_rum,
+                R.raw.rum
             )
         )
 
@@ -231,14 +228,4 @@ class CalendarPresenterImpl(private val interactor: CalendarInteractor) :
         }
         view?.setIconOnDate(events)
     }
-
-    // test RX
-    @SuppressLint("CheckResult")
-    override fun getAllAlcoholTrackList() {
-        interactor.getAllAlcoholTrackList()
-            .observeOn(AndroidSchedulers.mainThread()).subscribe { list ->
-                Log.d("====", " RX - > $list")
-            }
-    }
-    // test RX
 }
