@@ -98,7 +98,7 @@ class CalendarFragment : Fragment(),
         initCalendar()
     }
 
-    private fun initCalendar(){
+    private fun initCalendar() {
         // добавление иконок алкоголя в календарь
         presenter.setIconOnDate()
 
@@ -136,7 +136,7 @@ class CalendarFragment : Fragment(),
         }
     }
 
-    override fun setIconOnDate(events: MutableList<EventDay>){
+    override fun setIconOnDate(events: MutableList<EventDay>) {
         calendarView.setEvents(events)
     }
 }
