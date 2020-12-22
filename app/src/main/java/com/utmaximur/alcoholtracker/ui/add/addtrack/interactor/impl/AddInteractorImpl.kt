@@ -1,7 +1,5 @@
 package com.utmaximur.alcoholtracker.ui.add.addtrack.interactor.impl
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
 import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
 import com.utmaximur.alcoholtracker.data.model.Drink
 import com.utmaximur.alcoholtracker.data.storage.manager.StorageManager
@@ -38,18 +36,5 @@ class AddInteractorImpl(private val storageManager: StorageManager) :
 
     override fun getAllDrink(): MutableList<Drink>{
         return storageManager.getAllDrink()
-    }
-
-    override fun getLiveData(): LiveData<HashMap<String, Long>> {
-
-
-        val dateLiveData =
-            Transformations.map(storageManager.getPaymentsLiveData()) { map: Map<String, AlcoholTrack> ->
-                val newMap = hashMapOf<String, Long>()
-                newMap
-            }
-
-        return dateLiveData
-
     }
 }

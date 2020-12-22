@@ -1,7 +1,6 @@
 package com.utmaximur.alcoholtracker.ui.add.addtrack.presentation.presenter.impl
 
 import android.content.Context
-import androidx.lifecycle.LiveData
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.data.model.Drink
 import com.utmaximur.alcoholtracker.ui.add.addtrack.interactor.AddInteractor
@@ -10,7 +9,6 @@ import com.utmaximur.alcoholtracker.ui.add.addtrack.presentation.view.AddView
 import com.utmaximur.alcoholtracker.ui.base.BasePresenter
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.HashMap
 
 
 class AddPresenterImpl(private val interactor: AddInteractor) :
@@ -47,10 +45,6 @@ class AddPresenterImpl(private val interactor: AddInteractor) :
 
     override fun getAllDrink(): MutableList<Drink>{
         return interactor.getAllDrink()
-    }
-
-    override fun getLiveData(): LiveData<HashMap<String, Long>> {
-        return interactor.getLiveData()
     }
 
     override fun getFloatDegree(): Array<String?> {

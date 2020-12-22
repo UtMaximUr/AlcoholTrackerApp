@@ -10,8 +10,6 @@ import kotlin.collections.HashMap
 
 interface AddPresenter : MvpPresenter<AddView> {
 
-    fun getLiveData(): LiveData<HashMap<String, Long>>
-
     fun onSaveButtonClick()
 
     fun getAllDrink(): MutableList<Drink>

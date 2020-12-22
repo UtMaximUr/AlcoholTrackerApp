@@ -16,7 +16,7 @@ class DrinksListAdapter(
 
     interface OnDrinkAdapterListener {
         fun onEdit(date: Long)
-        fun onDelete(id: String)
+        fun onDelete(alcoholTrack: AlcoholTrack)
     }
 
     interface OnDeleteDyList {
@@ -69,7 +69,7 @@ class DrinksListAdapter(
                 listener.onEdit(alcoholTrack.date)
             }
             deleteButton?.setOnClickListener {
-                listener.onDelete(alcoholTrack.id)
+                listener.onDelete(alcoholTrack)
                 onDeleteDyList.removeAt(position)
             }
         }

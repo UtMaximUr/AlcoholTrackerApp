@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.applandeo.materialcalendarview.EventDay
 import com.utmaximur.alcoholtracker.R
+import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
 import com.utmaximur.alcoholtracker.ui.calendar.presentation.presenter.CalendarPresenter
 import com.utmaximur.alcoholtracker.ui.calendar.presentation.presenter.factory.CalendarPresenterFactory
 import com.utmaximur.alcoholtracker.ui.calendar.presentation.view.CalendarView
@@ -94,20 +95,18 @@ class CalendarFragment : Fragment(),
                 emptyDrinkListText.visibility = View.INVISIBLE
             }
         }
+        initCalendar()
+    }
+
+    private fun initCalendar(){
+        // добавление иконок алкоголя в календарь
+        presenter.setIconOnDate()
 
         Handler(Looper.getMainLooper()).post {
-            // добавление иконок алкоголя в календарь
-            presenter.setIconOnDate()
-            // добавдение напитков в список
-            presenter.initRealmWithData(requireContext())
             drinksListAdapter = DrinksListAdapter(presenter.getAlcoholTrackByDay(Date().time), this)
             recyclerView.adapter = drinksListAdapter
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        if (presenter.getDrinkByMonth(Date().time).isNotEmpty()) {
+        if (presenter.getTracks().isNotEmpty()) {
             addToStartText.visibility = View.GONE
             if (presenter.getAlcoholTrackByDay(Date().time).isEmpty()) {
                 emptyDrinkListText.visibility = View.VISIBLE
@@ -129,8 +128,8 @@ class CalendarFragment : Fragment(),
         calendarFragmentListener?.showEditAlcoholTrackerFragment(bundle)
     }
 
-    override fun onDelete(id: String) {
-        presenter.deleteDrink(id)
+    override fun onDelete(alcoholTrack: AlcoholTrack) {
+        presenter.deleteDrink(alcoholTrack)
         presenter.setIconOnDate()
         if (presenter.getAlcoholTrackByDay(Date().time).isEmpty()) {
             emptyDrinkListText.visibility = View.VISIBLE
