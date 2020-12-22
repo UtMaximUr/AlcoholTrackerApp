@@ -2,9 +2,13 @@ package com.utmaximur.alcoholtracker.data.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
+@Entity(tableName = "track_database")
 data class AlcoholTrack(
 
+    @PrimaryKey
     var id: String,
     val drink: String,
     val volume: String,

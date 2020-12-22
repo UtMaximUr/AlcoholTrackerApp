@@ -1,30 +1,22 @@
 package com.utmaximur.alcoholtracker.data.storage.module
 
-import androidx.lifecycle.LiveData
 import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
 import com.utmaximur.alcoholtracker.data.model.Drink
-import com.utmaximur.alcoholtracker.data.storage.`object`.AlcoholTrackerRealmObject
-import io.reactivex.Flowable
-import io.realm.RealmResults
 
 interface StorageModule {
 
-    fun getPaymentsLiveData(): LiveData<Map<String, AlcoholTrack>>
-
-    fun initRealmWithData(drinks:List<Drink>)
-
-    fun addAlcoholTrack(alcoholTrack: AlcoholTrack)
-
-    fun getAlcoholTrack(date: Long): AlcoholTrack?
-
-    fun getAlcoholTrackByMonth(month: Long): MutableList<AlcoholTrack>
-
-    fun deleteAlcoholTrack(id: String)
-
-    fun addDrink(drink: Drink)
+    fun updateDrink(drink: Drink)
 
     fun getAllDrink(): MutableList<Drink>
 
+    fun addAlcoholTrack(track: AlcoholTrack)
+
+    fun updateTrack(track: AlcoholTrack)
+
+    fun deleteAlcoholTrack(track: AlcoholTrack)
+
     fun getAllAlcoholTrack(): MutableList<AlcoholTrack>
+
+    fun getTrack(date: Long): AlcoholTrack?
 
 }
