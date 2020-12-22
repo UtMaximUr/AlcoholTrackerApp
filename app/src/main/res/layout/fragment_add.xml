@@ -192,7 +192,7 @@
                     android:layout_weight="1"
                     android:gravity="end"
                     android:imeOptions="actionDone"
-                    android:inputType="numberDecimal"
+                    android:inputType="number"
                     android:textColor="@color/text_color_black" />
 
             </LinearLayout>
