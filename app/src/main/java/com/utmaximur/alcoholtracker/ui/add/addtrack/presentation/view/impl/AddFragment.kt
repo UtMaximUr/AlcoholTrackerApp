@@ -1,16 +1,21 @@
 package com.utmaximur.alcoholtracker.ui.add.addtrack.presentation.view.impl
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.NumberPicker
+import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -24,6 +29,9 @@ import com.utmaximur.alcoholtracker.ui.add.addtrack.presentation.presenter.AddPr
 import com.utmaximur.alcoholtracker.ui.add.addtrack.presentation.presenter.factory.AddPresenterFactory
 import com.utmaximur.alcoholtracker.ui.add.addtrack.presentation.view.AddView
 import com.utmaximur.alcoholtracker.ui.add.addtrack.presentation.view.impl.adapter.DrinkViewPagerAdapter
+import io.reactivex.Flowable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -75,8 +83,9 @@ class AddFragment : Fragment(),
             AddPresenterFactory.createPresenter(activity?.applicationContext as Application)
         presenter.onAttachView(this)
 
-        initUi(view)
-
+//        initUi(view)
+        setDrinksList()
+        findViewById(view)
         return view
     }
 
@@ -97,8 +106,8 @@ class AddFragment : Fragment(),
         dotsIndicator = view.findViewById(R.id.view_pager_indicator)
     }
 
-    private fun initUi(view: View) {
-        findViewById(view)
+    private fun initUi() {
+//        findViewById(view)
 
         toolbar.setNavigationOnClickListener {
             addFragmentListener?.closeFragment()
@@ -113,7 +122,7 @@ class AddFragment : Fragment(),
             true
         }
 
-        setDrinksList()
+//        setDrinksList()
 
         // выбор напитков
         drinksPager.adapter = DrinkViewPagerAdapter(getDrinksList(), requireContext())
@@ -310,8 +319,25 @@ class AddFragment : Fragment(),
         return getDrinksList()[drinksPager.currentItem].icon
     }
 
+    @SuppressLint("CheckResult")
     private fun setDrinksList() {
-        viewModel.drinks = presenter.getAllDrink()
+        Flowable.fromCallable {
+            presenter.getAllDrink()
+        }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnComplete {
+                initUi()
+            }
+            .subscribe(
+                { list: List<Drink> ->
+                    viewModel.drinks = list
+                }
+            ) { obj: Throwable ->
+                obj.printStackTrace()
+                Log.e("fix", "error rx")
+            }
+//        viewModel.drinks = presenter.getAllDrink()
     }
 
     private fun getDrinksList(): List<Drink> {
