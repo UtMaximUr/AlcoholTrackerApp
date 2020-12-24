@@ -1,6 +1,5 @@
 package com.utmaximur.alcoholtracker.data.storage.module.impl
 
-import android.util.Log
 import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
 import com.utmaximur.alcoholtracker.data.model.Drink
 import com.utmaximur.alcoholtracker.data.storage.module.StorageModule
