@@ -31,7 +31,7 @@ abstract class StorageService: RoomDatabase() {
             if (INSTANCE == null){
                 synchronized(StorageService::class){
                     INSTANCE = Room.databaseBuilder(context.applicationContext, StorageService::class.java, "trackDB")
-                        .allowMainThreadQueries()
+//                        .allowMainThreadQueries()
                         .addCallback(object : Callback() {
                             override fun onCreate(db: SupportSQLiteDatabase) {
                                 super.onCreate(db)
