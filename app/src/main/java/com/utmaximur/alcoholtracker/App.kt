@@ -2,7 +2,6 @@ package com.utmaximur.alcoholtracker
 
 import android.app.Application
 import android.content.Context
-import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatDelegate
 import com.utmaximur.alcoholtracker.dagger.component.AlcoholTrackComponent
 import com.utmaximur.alcoholtracker.dagger.component.DaggerAlcoholTrackComponent
