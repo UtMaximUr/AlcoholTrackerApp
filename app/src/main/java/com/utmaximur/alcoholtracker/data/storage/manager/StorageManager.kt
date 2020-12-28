@@ -9,10 +9,10 @@ interface StorageManager {
 
     fun deleteAlcoholTrack(alcoholTrack: AlcoholTrack)
 
-    fun getAllDrink(): MutableList<Drink>
+//    fun getAllDrink(): MutableList<Drink>
 
-    fun getAllAlcoholTrack(): MutableList<AlcoholTrack>
+//    fun getAllAlcoholTrack(): MutableList<AlcoholTrack>
 
-    fun getTrack(date: Long): AlcoholTrack?
+//    fun getTrack(date: Long): AlcoholTrack?
 
 }

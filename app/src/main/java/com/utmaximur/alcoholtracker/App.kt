@@ -1,23 +1,24 @@
 package com.utmaximur.alcoholtracker
 
 import android.app.Application
-import android.content.Context
-import com.utmaximur.alcoholtracker.data.storage.manager.StorageManager
-import com.utmaximur.alcoholtracker.data.storage.manager.factory.StorageManagerFactory
+import com.utmaximur.alcoholtracker.dagger.component.AlcoholTrackComponent
+import com.utmaximur.alcoholtracker.dagger.component.DaggerAlcoholTrackComponent
+import com.utmaximur.alcoholtracker.dagger.module.RoomDatabaseModule
 
 open class App: Application() {
 
-    private lateinit var storageManager: StorageManager
+    companion object {
+        lateinit var instance: App
+    }
+    lateinit var alcoholTrackComponent: AlcoholTrackComponent
 
     override fun onCreate() {
         super.onCreate()
-        storageManager = StorageManagerFactory.createManager(this)
-    }
+        instance = this
 
-    companion object {
-
-        fun getStorageManager(context: Context): StorageManager = getApp(context).storageManager
-
-        private fun getApp(context: Context) = context.applicationContext as App
+        alcoholTrackComponent = DaggerAlcoholTrackComponent
+            .builder()
+            .roomDatabaseModule(RoomDatabaseModule(this))
+            .build()
     }
 }

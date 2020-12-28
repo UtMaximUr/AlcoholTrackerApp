@@ -13,8 +13,6 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.utmaximur.alcoholtracker.BuildConfig
 import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.ui.settings.presenter.SettingsPresenter
-import com.utmaximur.alcoholtracker.ui.settings.presenter.factory.SettingsPresenterFactory
 import com.utmaximur.alcoholtracker.ui.settings.view.SettingsView
 
 
@@ -26,16 +24,12 @@ class SettingsFragment : Fragment(), SettingsView {
     private lateinit var rateUsButton: Button
     private lateinit var versionApp: TextView
 
-    private lateinit var presenter: SettingsPresenter
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_settings, container, false)
-        presenter = SettingsPresenterFactory.createPresenter(requireContext())
-        presenter.onAttachView(this)
         initUi(view)
         return view
     }
@@ -52,40 +46,21 @@ class SettingsFragment : Fragment(), SettingsView {
         findViewById(view)
 
         privacyPolicyLayout.setOnClickListener {
-            //presenter.onPrivacyPolicyClicked()
+
         }
 
         termsOfUseLayout.setOnClickListener {
-            //presenter.onTermsOfUseClicked()
+
         }
 
         rateUsButton.setOnClickListener {
-            presenter.onRateUsClicked()
+            rateUs()
         }
 
         versionApp.text = BuildConfig.VERSION_NAME
     }
 
-
-    override fun showPrivacyPolicy() {
-        startActivity(
-            Intent(
-                Intent.ACTION_VIEW,
-                Uri.parse("")
-            )
-        )
-    }
-
-    override fun showTermsOfUse() {
-        startActivity(
-            Intent(
-                Intent.ACTION_VIEW,
-                Uri.parse("")
-            )
-        )
-    }
-
-    override fun rateUs() {
+    private fun rateUs() {
         val appPackageName: String = requireContext().packageName
         try {
             startActivity(
@@ -106,6 +81,5 @@ class SettingsFragment : Fragment(), SettingsView {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        presenter.onDetachView()
     }
 }

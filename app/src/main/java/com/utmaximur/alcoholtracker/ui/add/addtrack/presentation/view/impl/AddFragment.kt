@@ -1,7 +1,5 @@
 package com.utmaximur.alcoholtracker.ui.add.addtrack.presentation.view.impl
 
-import android.annotation.SuppressLint
-import android.app.Application
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.content.Context
@@ -19,20 +17,19 @@ import android.widget.NumberPicker
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.google.android.material.tabs.TabLayout
+import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.R
+import com.utmaximur.alcoholtracker.dagger.component.AlcoholTrackComponent
+import com.utmaximur.alcoholtracker.dagger.factory.AddViewModelFactory
 import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
 import com.utmaximur.alcoholtracker.data.model.Drink
-import com.utmaximur.alcoholtracker.ui.add.addtrack.presentation.presenter.AddPresenter
-import com.utmaximur.alcoholtracker.ui.add.addtrack.presentation.presenter.factory.AddPresenterFactory
 import com.utmaximur.alcoholtracker.ui.add.addtrack.presentation.view.AddView
 import com.utmaximur.alcoholtracker.ui.add.addtrack.presentation.view.impl.adapter.DrinkViewPagerAdapter
-import io.reactivex.Flowable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -51,7 +48,6 @@ class AddFragment : Fragment(),
     private lateinit var toolbar: Toolbar
 
     private lateinit var viewModel: AddViewModel
-    private lateinit var presenter: AddPresenter
 
     private lateinit var totalMoneyText: TextView
     private lateinit var priceEditText: EditText
@@ -76,17 +72,26 @@ class AddFragment : Fragment(),
         savedInstanceState: Bundle?
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_add, container, false)
-
-        viewModel =
-            ViewModelProvider.AndroidViewModelFactory(activity?.applicationContext as Application)
-                .create(AddViewModel::class.java)
-        presenter =
-            AddPresenterFactory.createPresenter(activity?.applicationContext as Application)
-        presenter.onAttachView(this)
-
+        injectDagger()
+        initViewModel()
         setDrinksList()
         findViewById(view)
         return view
+    }
+
+    private fun injectDagger() {
+        App.instance.alcoholTrackComponent.inject(this)
+    }
+
+    private fun initViewModel() {
+        val dependencyFactory: AlcoholTrackComponent =
+            (requireActivity().application as App).alcoholTrackComponent
+        val drinkRepository = dependencyFactory.provideDrinkRepository()
+        val trackRepository = dependencyFactory.provideTrackRepository()
+        val viewModel: AddViewModel by viewModels {
+            AddViewModelFactory(drinkRepository, trackRepository)
+        }
+        this.viewModel = viewModel
     }
 
     private fun findViewById(view: View) {
@@ -113,17 +118,21 @@ class AddFragment : Fragment(),
         }
 
         toolbar.setOnMenuItemClickListener {
-            if (presenter.checkIsEmptyField()) {
-                Flowable.fromCallable {
-                    presenter.onSaveButtonClick()
-                }
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .doOnComplete {
-                        addFragmentListener?.closeFragment()
-                        addFragmentListener!!.onShowNavigationBar()
-                    }
-                    .subscribe()
+            if (checkIsEmptyField()) {
+                viewModel.onSaveButtonClick(
+                    AlcoholTrack(
+                        getIdDrink(),
+                        getDrink(),
+                        getVolume(),
+                        getQuantity(),
+                        getDegree(),
+                        getPrice(),
+                        getDate(),
+                        getIcon()
+                    )
+                )
+                addFragmentListener?.closeFragment()
+                addFragmentListener!!.onShowNavigationBar()
             }
             true
         }
@@ -150,15 +159,15 @@ class AddFragment : Fragment(),
         quantityNumberPicker.maxValue = 10
         quantityNumberPicker.minValue = 1
         quantityNumberPicker.setOnScrollListener { _, _ ->
-            if (presenter.checkIsEmptyFieldPrice()) {
-                totalMoneyText.text = presenter.getTotalMoney()
+            if (checkIsEmptyFieldPrice()) {
+                totalMoneyText.text = getTotalMoney()
             }
         }
 
         //Градус
-        degreeNumberPicker.maxValue = presenter.getFloatDegree().size
+        degreeNumberPicker.maxValue = getFloatDegree().size
         degreeNumberPicker.minValue = 1
-        degreeNumberPicker.displayedValues = presenter.getFloatDegree()
+        degreeNumberPicker.displayedValues = getFloatDegree()
         setDrinkDegreeArray(degreeNumberPicker.value) // устанавливаем по умолчанию первый напиток
 
         //Объем
@@ -175,17 +184,19 @@ class AddFragment : Fragment(),
         }
 
         todayButton.setOnClickListener {
-            addDateButton.text = presenter.setDateOnButton(
+            addDateButton.text = setDateOnButton(
                 requireContext(),
                 Date()
             )
+            viewModel.date = Date().time
             todayButton.visibility = GONE
         }
 
         priceEditText.setOnEditorActionListener { _, i, _ ->
             if (i == EditorInfo.IME_ACTION_DONE) {
-                if (presenter.checkIsEmptyFieldPrice()) {
-                    totalMoneyText.text = presenter.getTotalMoney()
+                if (checkIsEmptyFieldPrice()) {
+                    totalMoneyText.text = getTotalMoney()
+                    viewModel.price = priceEditText.text.toString().toFloat()
                     priceEditText.clearFocus()
                 }
             }
@@ -193,7 +204,7 @@ class AddFragment : Fragment(),
         }
 
         priceEditText.setOnFocusChangeListener { _, b ->
-            if(b){
+            if (b) {
                 priceEditText.hint = ""
             }
         }
@@ -258,7 +269,8 @@ class AddFragment : Fragment(),
             dateAndTime[Calendar.DAY_OF_MONTH] = dayOfMonth
             viewModel.date = dateAndTime.timeInMillis
             addDateButton.text =
-                presenter.setDateOnButton(requireContext(), Date(dateAndTime.timeInMillis))
+                setDateOnButton(requireContext(), Date(dateAndTime.timeInMillis))
+            viewModel.date = Date(dateAndTime.timeInMillis).time
             todayButton.visibility = GONE
         }
 
@@ -329,37 +341,60 @@ class AddFragment : Fragment(),
         return getDrinksList()[drinksPager.currentItem].icon
     }
 
-    @SuppressLint("CheckResult")
     private fun setDrinksList() {
-        Flowable.fromCallable {
-            presenter.getAllDrink()
-        }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnComplete {
-                initUi()
-            }
-            .subscribe(
-                { list: List<Drink> ->
-                    viewModel.drinks = list
-                }
-            ) { obj: Throwable ->
-                obj.printStackTrace()
-                Log.e("fix", "error rx")
-            }
+        viewModel.getAllDrink().observe(viewLifecycleOwner, Observer { list ->
+            viewModel.drinks = list
+            initUi()
+        })
     }
 
     private fun getDrinksList(): List<Drink> {
         return viewModel.drinks
     }
 
-    override fun showWarningEmptyField(){
-        if(viewModel.price == 0.0f){
+    override fun showWarningEmptyField() {
+        if (viewModel.price == 0.0f) {
             priceEditText.hint = getText(R.string.enter_price)
-        }else if(viewModel.date == 0L){
+        } else if (viewModel.date == 0L) {
             val buttonAnimation =
                 AnimationUtils.loadAnimation(context, R.anim.button_animation)
             addDateButton.startAnimation(buttonAnimation)
         }
+    }
+
+    private fun checkIsEmptyField(): Boolean {
+        return if (getPrice() == 0.0f || getDate() == 0L) {
+            showWarningEmptyField()
+            false
+        } else {
+            true
+        }
+    }
+
+    private fun checkIsEmptyFieldPrice(): Boolean {
+        return getPrice() != 0.0f
+    }
+
+    private fun getTotalMoney(): String? {
+        return (getQuantity() * getPrice().toString().toDouble()).toString()
+    }
+
+    private fun setDateOnButton(context: Context, date: Date): String {
+        val sdf = SimpleDateFormat(
+            context.resources.getString(R.string.date_format_pattern),
+            Locale.getDefault()
+        )
+        return String.format("%s", sdf.format(date))
+    }
+
+    private fun getFloatDegree(): Array<String?> {
+        val nums: Array<String?> = arrayOfNulls(200)
+        var double = 0.0
+        for (i in 0..199) {
+            double += 0.5
+            val format: String = String.format("%.1f", double)
+            nums[i] = format
+        }
+        return nums
     }
 }

@@ -1,35 +1,35 @@
 package com.utmaximur.alcoholtracker.ui.calendar.presentation.view.impl
 
-import android.annotation.SuppressLint
-import android.app.Application
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.applandeo.materialcalendarview.EventDay
+import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.R
+import com.utmaximur.alcoholtracker.dagger.component.AlcoholTrackComponent
+import com.utmaximur.alcoholtracker.dagger.factory.CalendarViewModelFactory
 import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
-import com.utmaximur.alcoholtracker.ui.calendar.presentation.presenter.CalendarPresenter
-import com.utmaximur.alcoholtracker.ui.calendar.presentation.presenter.factory.CalendarPresenterFactory
 import com.utmaximur.alcoholtracker.ui.calendar.presentation.view.CalendarView
 import com.utmaximur.alcoholtracker.ui.calendar.presentation.view.impl.adapter.DrinksListAdapter
-import io.reactivex.Flowable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import java.util.*
+import javax.inject.Inject
 
 
 class CalendarFragment : Fragment(),
     CalendarView,
     DrinksListAdapter.OnDrinkAdapterListener {
+
+    @Inject
+    lateinit var calendarViewModelFactory: CalendarViewModelFactory
 
     private var calendarFragmentListener: CalendarFragmentListener? = null
 
@@ -39,7 +39,6 @@ class CalendarFragment : Fragment(),
     }
 
     private lateinit var viewModel: CalendarViewModel
-    private lateinit var presenter: CalendarPresenter
     private lateinit var calendarView: com.applandeo.materialcalendarview.CalendarView
 
     private lateinit var recyclerView: RecyclerView
@@ -56,17 +55,26 @@ class CalendarFragment : Fragment(),
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_calendar, container, false)
 
-        viewModel =
-            ViewModelProvider.AndroidViewModelFactory(activity?.applicationContext as Application)
-                .create(CalendarViewModel::class.java)
-        presenter =
-            CalendarPresenterFactory.createPresenter(activity?.applicationContext as Application)
-        presenter.onAttachView(this)
-        presenter.viewIsReady()
-
+        injectDagger()
+        initViewModel()
         initUI(view)
 
         return view
+    }
+
+    private fun injectDagger() {
+        App.instance.alcoholTrackComponent.inject(this)
+    }
+
+    private fun initViewModel() {
+        val dependencyFactory: AlcoholTrackComponent =
+            (requireActivity().application as App).alcoholTrackComponent
+        val trackRepository = dependencyFactory.provideTrackRepository()
+
+        val viewModel: CalendarViewModel by viewModels {
+            CalendarViewModelFactory(trackRepository)
+        }
+        this.viewModel = viewModel
     }
 
     private fun findViewById(view: View) {
@@ -87,76 +95,21 @@ class CalendarFragment : Fragment(),
         }
 
         calendarView.setOnDayClickListener { eventDay ->
-            Flowable.fromCallable {
-                presenter.getAlcoholTrackByDay(eventDay.calendar.timeInMillis)
-            }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                    { list: MutableList<AlcoholTrack> ->
-                        drinksListAdapter = DrinksListAdapter(
-                            list,
-                            this@CalendarFragment
-                        )
-                        recyclerView.adapter = drinksListAdapter
-
-                        if (list.isNotEmpty()) {
-                            emptyDrinkListText.visibility = View.INVISIBLE
-                        } else {
-                            if (addToStartText.visibility != View.VISIBLE) {
-                                emptyDrinkListText.visibility = View.VISIBLE
-                            }
-                        }
-                    }
-                ) { obj: Throwable ->
-                    obj.printStackTrace()
-                    Log.e("fix", "error rx")
-                }
+            getAlcoholTrackByDay(eventDay.calendar.timeInMillis)
         }
         initCalendar()
     }
 
-    @SuppressLint("CheckResult")
     private fun initCalendar() {
         // добавление иконок алкоголя в календарь
-        Flowable.fromCallable {
-            presenter.setIconOnDate()
-        }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe()
-
-        Flowable.fromCallable {
-            presenter.getTracks()
-        }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                { list: MutableList<AlcoholTrack> ->
-                    if (list.isNotEmpty()) {
-                        addToStartText.visibility = View.GONE
-                    }
-                }
-            ) { obj: Throwable -> obj.printStackTrace() }
-
-        Flowable.fromCallable {
-            presenter.getAlcoholTrackByDay(Date().time)
-        }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                { list: MutableList<AlcoholTrack> ->
-                    drinksListAdapter = DrinksListAdapter(list, this)
-                    recyclerView.adapter = drinksListAdapter
-                    if (list.isEmpty()) {
-                        if (addToStartText.visibility != View.VISIBLE) {
-                            emptyDrinkListText.visibility = View.VISIBLE
-                        }
-                    } else {
-                        emptyDrinkListText.visibility = View.INVISIBLE
-                    }
-                }
-            ) { obj: Throwable -> obj.printStackTrace() }
+        setIconOnDate()
+        viewModel.getTracks().observe(viewLifecycleOwner, Observer { list ->
+            if (list.isNotEmpty()) {
+                addToStartText.visibility = View.GONE
+            }
+        })
+        drinksListAdapter = DrinksListAdapter(getAlcoholTrackByDay(Date().time), this)
+        recyclerView.adapter = drinksListAdapter
     }
 
     override fun onAttach(context: Context) {
@@ -164,31 +117,67 @@ class CalendarFragment : Fragment(),
         calendarFragmentListener = context as CalendarFragmentListener
     }
 
-    @SuppressLint("CheckResult")
     override fun onEdit(date: Long) {
-        Flowable.fromCallable {
-            presenter.getDrink(date)
-        }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                { drink: AlcoholTrack? ->
-                    val bundle = Bundle()
-                    bundle.putParcelable("drink", drink)
-                    calendarFragmentListener?.showEditAlcoholTrackerFragment(bundle)
-                }
-            ) { obj: Throwable -> obj.printStackTrace() }
+        val bundle = Bundle()
+        viewModel.getTrack(date).observe(viewLifecycleOwner, Observer { track ->
+            bundle.putParcelable("drink", track)
+            calendarFragmentListener?.showEditAlcoholTrackerFragment(bundle)
+        })
     }
 
     override fun onDelete(alcoholTrack: AlcoholTrack) {
-        presenter.deleteDrink(alcoholTrack)
-        presenter.setIconOnDate()
-        if (presenter.getAlcoholTrackByDay(Date().time).isEmpty()) {
+        viewModel.deleteDrink(alcoholTrack)
+        getAlcoholTrackByDay(Date().time)
+        setIconOnDate()
+        if (getAlcoholTrackByDay(Date().time).isEmpty()) {
             emptyDrinkListText.visibility = View.VISIBLE
         }
     }
 
     override fun setIconOnDate(events: MutableList<EventDay>) {
         calendarView.setEvents(events)
+    }
+
+    private fun getAlcoholTrackByDay(eventDay: Long): MutableList<AlcoholTrack> {
+        val alcoholTrack: ArrayList<AlcoholTrack> = ArrayList()
+        val calendar: Calendar = Calendar.getInstance()
+        calendar.timeInMillis = eventDay
+        val startTimeDay: Int = calendar.get(Calendar.DAY_OF_MONTH)
+        val endTimeDay: Int = startTimeDay + 1
+        val month: Int = calendar.get(Calendar.MONTH)
+        viewModel.getTracks().observe(viewLifecycleOwner, Observer { list ->
+            list.forEach {
+                calendar.timeInMillis = it.date
+                if (calendar.get(Calendar.DAY_OF_MONTH) in startTimeDay until endTimeDay && calendar.get(
+                        Calendar.MONTH
+                    ) == month
+                ) {
+                    alcoholTrack.add(it)
+                }
+            }
+            drinksListAdapter = DrinksListAdapter(
+                alcoholTrack,
+                this@CalendarFragment
+            )
+            recyclerView.adapter = drinksListAdapter
+            if (alcoholTrack.isNotEmpty()) {
+                emptyDrinkListText.visibility = View.INVISIBLE
+            } else {
+                emptyDrinkListText.visibility = View.VISIBLE
+            }
+        })
+        return alcoholTrack
+    }
+
+    private fun setIconOnDate() {
+        val events: MutableList<EventDay> = ArrayList()
+        viewModel.getTracks().observe(viewLifecycleOwner, Observer { list ->
+            list.forEach {
+                val calendar = Calendar.getInstance()
+                calendar.timeInMillis = it.date
+                events.add(EventDay(calendar, it.icon))
+            }
+            setIconOnDate(events)
+        })
     }
 }
