@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.calendar.presentation.view.impl
+package com.utmaximur.alcoholtracker.ui.calendar.presentation.view
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

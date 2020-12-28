@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.calendar.presentation.view.impl
+package com.utmaximur.alcoholtracker.ui.calendar.presentation.view
 
 import android.content.Context
 import android.os.Bundle
@@ -18,14 +18,12 @@ import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.dagger.component.AlcoholTrackComponent
 import com.utmaximur.alcoholtracker.dagger.factory.CalendarViewModelFactory
 import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
-import com.utmaximur.alcoholtracker.ui.calendar.presentation.view.CalendarView
-import com.utmaximur.alcoholtracker.ui.calendar.presentation.view.impl.adapter.DrinksListAdapter
+import com.utmaximur.alcoholtracker.ui.calendar.presentation.view.adapter.DrinksListAdapter
 import java.util.*
 import javax.inject.Inject
 
 
 class CalendarFragment : Fragment(),
-    CalendarView,
     DrinksListAdapter.OnDrinkAdapterListener {
 
     @Inject
@@ -134,10 +132,6 @@ class CalendarFragment : Fragment(),
         }
     }
 
-    override fun setIconOnDate(events: MutableList<EventDay>) {
-        calendarView.setEvents(events)
-    }
-
     private fun getAlcoholTrackByDay(eventDay: Long): MutableList<AlcoholTrack> {
         val alcoholTrack: ArrayList<AlcoholTrack> = ArrayList()
         val calendar: Calendar = Calendar.getInstance()
@@ -177,7 +171,7 @@ class CalendarFragment : Fragment(),
                 calendar.timeInMillis = it.date
                 events.add(EventDay(calendar, it.icon))
             }
-            setIconOnDate(events)
+            calendarView.setEvents(events)
         })
     }
 }

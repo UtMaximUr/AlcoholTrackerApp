@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.add.addtrack.presentation.view.impl
+package com.utmaximur.alcoholtracker.ui.add.presentation.view.impl
 
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
@@ -27,8 +27,8 @@ import com.utmaximur.alcoholtracker.dagger.component.AlcoholTrackComponent
 import com.utmaximur.alcoholtracker.dagger.factory.AddViewModelFactory
 import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
 import com.utmaximur.alcoholtracker.data.model.Drink
-import com.utmaximur.alcoholtracker.ui.add.addtrack.presentation.view.AddView
-import com.utmaximur.alcoholtracker.ui.add.addtrack.presentation.view.impl.adapter.DrinkViewPagerAdapter
+import com.utmaximur.alcoholtracker.ui.add.presentation.view.AddView
+import com.utmaximur.alcoholtracker.ui.add.presentation.view.impl.adapter.DrinkViewPagerAdapter
 import java.util.*
 
 

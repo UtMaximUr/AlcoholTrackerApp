@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.main.presentation.view.impl
+package com.utmaximur.alcoholtracker.ui.main.presentation.view
 
 import android.os.Bundle
 import android.view.View.GONE
@@ -9,8 +9,8 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.ui.add.addtrack.presentation.view.impl.AddFragment
-import com.utmaximur.alcoholtracker.ui.calendar.presentation.view.impl.CalendarFragment
+import com.utmaximur.alcoholtracker.ui.add.presentation.view.impl.AddFragment
+import com.utmaximur.alcoholtracker.ui.calendar.presentation.view.CalendarFragment
 
 
 class MainActivity : AppCompatActivity(),

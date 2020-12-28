@@ -4,8 +4,8 @@ import com.utmaximur.alcoholtracker.dagger.module.AlcoholTrackModule
 import com.utmaximur.alcoholtracker.dagger.module.RoomDatabaseModule
 import com.utmaximur.alcoholtracker.repository.DrinkRepository
 import com.utmaximur.alcoholtracker.repository.TrackRepository
-import com.utmaximur.alcoholtracker.ui.add.addtrack.presentation.view.impl.AddFragment
-import com.utmaximur.alcoholtracker.ui.calendar.presentation.view.impl.CalendarFragment
+import com.utmaximur.alcoholtracker.ui.add.presentation.view.impl.AddFragment
+import com.utmaximur.alcoholtracker.ui.calendar.presentation.view.CalendarFragment
 import com.utmaximur.alcoholtracker.ui.statistic.presentation.view.StatisticFragment
 import dagger.Component
 import javax.inject.Singleton

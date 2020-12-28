@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.add.addtrack.presentation.view.impl
+package com.utmaximur.alcoholtracker.ui.add.presentation.view.impl
 
 import android.content.Context
 import androidx.lifecycle.LiveData

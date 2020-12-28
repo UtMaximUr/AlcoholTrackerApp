@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.add.addtrack.presentation.view
+package com.utmaximur.alcoholtracker.ui.add.presentation.view
 
 import com.utmaximur.alcoholtracker.ui.base.MvpView
 

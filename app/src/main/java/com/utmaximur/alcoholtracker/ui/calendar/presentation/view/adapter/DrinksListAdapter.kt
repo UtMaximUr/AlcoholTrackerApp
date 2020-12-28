@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.calendar.presentation.view.impl.adapter
+package com.utmaximur.alcoholtracker.ui.calendar.presentation.view.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

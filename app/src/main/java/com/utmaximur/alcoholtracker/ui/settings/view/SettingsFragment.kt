@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.settings.view.impl
+package com.utmaximur.alcoholtracker.ui.settings.view
 
 
 import android.content.ActivityNotFoundException
@@ -13,11 +13,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.utmaximur.alcoholtracker.BuildConfig
 import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.ui.settings.view.SettingsView
 
 
-
-class SettingsFragment : Fragment(), SettingsView {
+class SettingsFragment : Fragment() {
 
     private lateinit var privacyPolicyLayout: Button
     private lateinit var termsOfUseLayout: Button
