@@ -55,7 +55,7 @@
     <string name="statistic_drink_count">x 0</string>
 
     <!--regex-->
-    <string name="only_number_regex" tools:ignore="TypographyDashes">[^0-9]</string>
+    <string name="only_number_regex" tools:ignore="TypographyDashes">[^0-9, .]</string>
     <string name="only_text_regex">[^A–z, А-я]</string>
 
     <plurals name="plurals_day">

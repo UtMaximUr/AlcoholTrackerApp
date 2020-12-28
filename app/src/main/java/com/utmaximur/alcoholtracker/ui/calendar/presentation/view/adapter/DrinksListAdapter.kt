@@ -55,12 +55,12 @@ class DrinksListAdapter(
                 itemView.context.getString(R.string.only_text_regex).toRegex(),
                 ""
             )
-            val volume = (Integer.parseInt(
+            val volume = ((
                 alcoholTrack.volume.replace(
                     itemView.context.getString(R.string.only_number_regex).toRegex(),
                     ""
                 )
-            ) * alcoholTrack.quantity).toString() + mlOrL
+            ).toDouble() * alcoholTrack.quantity).toString() + mlOrL
             volumeText?.text = volume
             drinkText?.text = drinkTitle
             degreeText?.text = alcoholTrack.degree
