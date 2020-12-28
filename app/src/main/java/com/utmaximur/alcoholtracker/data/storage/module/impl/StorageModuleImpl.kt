@@ -17,10 +17,10 @@ class StorageModuleImpl(private val storageService: StorageService) : StorageMod
     }
 
     override fun addAlcoholTrack(track: AlcoholTrack) {
-        if(track.id == "") {
+        if (track.id == "") {
             track.id = getTrackId()
             storageService.trackDao().insertTrack(track)
-        }else{
+        } else {
             storageService.trackDao().updateTrack(track)
         }
     }
