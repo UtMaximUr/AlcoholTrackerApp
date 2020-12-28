@@ -83,7 +83,6 @@ class AddFragment : Fragment(),
             AddPresenterFactory.createPresenter(activity?.applicationContext as Application)
         presenter.onAttachView(this)
 
-//        initUi(view)
         setDrinksList()
         findViewById(view)
         return view
@@ -107,7 +106,6 @@ class AddFragment : Fragment(),
     }
 
     private fun initUi() {
-//        findViewById(view)
 
         toolbar.setNavigationOnClickListener {
             addFragmentListener?.closeFragment()
@@ -115,14 +113,17 @@ class AddFragment : Fragment(),
 
         toolbar.setOnMenuItemClickListener {
             if (presenter.checkIsEmptyField()) {
-                presenter.onSaveButtonClick()
+                Flowable.fromCallable {
+                    presenter.onSaveButtonClick()
+                }
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe()
                 addFragmentListener!!.onShowNavigationBar()
                 addFragmentListener?.closeFragment()
             }
             true
         }
-
-//        setDrinksList()
 
         // выбор напитков
         drinksPager.adapter = DrinkViewPagerAdapter(getDrinksList(), requireContext())
@@ -337,7 +338,6 @@ class AddFragment : Fragment(),
                 obj.printStackTrace()
                 Log.e("fix", "error rx")
             }
-//        viewModel.drinks = presenter.getAllDrink()
     }
 
     private fun getDrinksList(): List<Drink> {

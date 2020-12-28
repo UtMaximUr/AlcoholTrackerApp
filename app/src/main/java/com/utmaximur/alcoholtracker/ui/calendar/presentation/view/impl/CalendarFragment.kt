@@ -103,24 +103,15 @@ class CalendarFragment : Fragment(),
                         if (list.isNotEmpty()) {
                             emptyDrinkListText.visibility = View.INVISIBLE
                         } else {
-                            emptyDrinkListText.visibility = View.VISIBLE
+                            if (addToStartText.visibility != View.VISIBLE) {
+                                emptyDrinkListText.visibility = View.VISIBLE
+                            }
                         }
                     }
                 ) { obj: Throwable ->
                     obj.printStackTrace()
                     Log.e("fix", "error rx")
                 }
-
-//            drinksListAdapter = DrinksListAdapter(
-//                presenter.getAlcoholTrackByDay(eventDay.calendar.timeInMillis),
-//                this@CalendarFragment
-//            )
-//            recyclerView.adapter = drinksListAdapter
-//            if (presenter.getAlcoholTrackByDay(eventDay.calendar.timeInMillis).isEmpty()) {
-//                emptyDrinkListText.visibility = View.VISIBLE
-//            } else {
-//                emptyDrinkListText.visibility = View.INVISIBLE
-//            }
         }
         initCalendar()
     }
@@ -136,23 +127,6 @@ class CalendarFragment : Fragment(),
             .subscribe()
 
         Flowable.fromCallable {
-            presenter.getAlcoholTrackByDay(Date().time)
-        }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                { list: MutableList<AlcoholTrack> ->
-                    drinksListAdapter = DrinksListAdapter(list, this)
-                    recyclerView.adapter = drinksListAdapter
-                    if (list.isEmpty()) {
-                        emptyDrinkListText.visibility = View.VISIBLE
-                    } else {
-                        emptyDrinkListText.visibility = View.INVISIBLE
-                    }
-                }
-            ) { obj: Throwable -> obj.printStackTrace() }
-
-        Flowable.fromCallable {
             presenter.getTracks()
         }
             .subscribeOn(Schedulers.io())
@@ -165,20 +139,24 @@ class CalendarFragment : Fragment(),
                 }
             ) { obj: Throwable -> obj.printStackTrace() }
 
-//        presenter.setIconOnDate()
-//       Handler(Looper.getMainLooper()).post {
-//            drinksListAdapter = DrinksListAdapter(presenter.getAlcoholTrackByDay(Date().time), this)
-//            recyclerView.adapter = drinksListAdapter
-//        }
-
-//        if (presenter.getTracks().isNotEmpty()) {
-//            addToStartText.visibility = View.GONE
-//            if (presenter.getAlcoholTrackByDay(Date().time).isEmpty()) {
-//                emptyDrinkListText.visibility = View.VISIBLE
-//            } else {
-//                emptyDrinkListText.visibility = View.INVISIBLE
-//            }
-//        }
+        Flowable.fromCallable {
+            presenter.getAlcoholTrackByDay(Date().time)
+        }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { list: MutableList<AlcoholTrack> ->
+                    drinksListAdapter = DrinksListAdapter(list, this)
+                    recyclerView.adapter = drinksListAdapter
+                    if (list.isEmpty()) {
+                        if (addToStartText.visibility != View.VISIBLE) {
+                            emptyDrinkListText.visibility = View.VISIBLE
+                        }
+                    } else {
+                        emptyDrinkListText.visibility = View.INVISIBLE
+                    }
+                }
+            ) { obj: Throwable -> obj.printStackTrace() }
     }
 
     override fun onAttach(context: Context) {
@@ -186,11 +164,20 @@ class CalendarFragment : Fragment(),
         calendarFragmentListener = context as CalendarFragmentListener
     }
 
+    @SuppressLint("CheckResult")
     override fun onEdit(date: Long) {
-        val drink = (presenter.getDrink(date))
-        val bundle = Bundle()
-        bundle.putParcelable("drink", drink)
-        calendarFragmentListener?.showEditAlcoholTrackerFragment(bundle)
+        Flowable.fromCallable {
+            presenter.getDrink(date)
+        }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { drink: AlcoholTrack? ->
+                    val bundle = Bundle()
+                    bundle.putParcelable("drink", drink)
+                    calendarFragmentListener?.showEditAlcoholTrackerFragment(bundle)
+                }
+            ) { obj: Throwable -> obj.printStackTrace() }
     }
 
     override fun onDelete(alcoholTrack: AlcoholTrack) {
