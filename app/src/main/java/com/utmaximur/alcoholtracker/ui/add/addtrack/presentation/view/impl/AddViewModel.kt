@@ -73,4 +73,9 @@ class AddViewModel(private var drinkRepository: DrinkRepository,
         }
         return nums
     }
+
+    fun getFormatString(context: Context, date: Long): String{
+        val sdf = SimpleDateFormat(context.resources.getString(R.string.date_format_pattern), Locale.getDefault())
+        return String.format("%s", sdf.format(Date(date)))
+    }
 }

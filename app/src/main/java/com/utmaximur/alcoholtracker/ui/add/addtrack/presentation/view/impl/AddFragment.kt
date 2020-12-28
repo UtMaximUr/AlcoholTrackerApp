@@ -29,7 +29,6 @@ import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
 import com.utmaximur.alcoholtracker.data.model.Drink
 import com.utmaximur.alcoholtracker.ui.add.addtrack.presentation.view.AddView
 import com.utmaximur.alcoholtracker.ui.add.addtrack.presentation.view.impl.adapter.DrinkViewPagerAdapter
-import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -255,8 +254,7 @@ class AddFragment : Fragment(),
         }
 
         priceEditText.setText(alcoholTrack.price.toString())
-        val sdf = SimpleDateFormat(getString(R.string.date_format_pattern), Locale.getDefault())
-        addDateButton.text = String.format("%s", sdf.format(Date(alcoholTrack.date)))
+        addDateButton.text = viewModel.getFormatString(requireContext(), alcoholTrack.date)
         todayButton.visibility = GONE
 
         totalMoneyText.text =
