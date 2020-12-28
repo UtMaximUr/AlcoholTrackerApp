@@ -9,14 +9,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        app:todayLabelColor="#D50000"
-        app:abbreviationsLabelsColor="@android:color/black"
-        app:headerColor="@android:color/white"
-        app:headerLabelColor="@android:color/black"
+        app:todayLabelColor="@color/accent_color"
+        app:abbreviationsLabelsColor="@color/calendar_color"
+        app:headerColor="@color/background_color"
+        app:pagesColor="@color/background_color"
+        app:abbreviationsBarColor="@color/background_color"
+        app:headerLabelColor="@color/calendar_color"
+        app:daysLabelsColor="@color/calendar_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:selectionColor="#D50000"
+        app:selectionColor="@color/accent_color"
         app:type="one_day_picker"
         app:eventsEnabled="true" />
 
@@ -49,7 +52,7 @@
             android:fontFamily="@font/roboto_condensed_regular"
             android:text="@string/calendar_add_press"
             android:layout_gravity="center"
-            android:textColor="@color/black" />
+            android:textColor="@color/accent_color" />
 
         <TextView
             android:id="@+id/empty_drink_list"
@@ -59,7 +62,7 @@
             android:text="@string/calendar_empty"
             android:layout_gravity="center"
             android:visibility="gone"
-            android:textColor="@color/black" />
+            android:textColor="@color/accent_color" />
 
     </androidx.cardview.widget.CardView>
 
@@ -73,7 +76,7 @@
         android:layout_marginBottom="12dp"
         android:fontFamily="@font/roboto_condensed_regular"
         android:text="@string/add"
-        android:textColor="@color/black"
+        android:textColor="@color/accent_color"
         app:cornerRadius="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

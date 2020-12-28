@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/background_color">
 
 
     <LinearLayout
@@ -27,6 +26,7 @@
             app:navigationIcon="@drawable/ic_back"
             app:menu="@menu/menu_toolbar"
             android:theme="@style/ToolbarTheme"
+            app:titleTextColor="@color/text_color"
             app:title="@string/add_drink_title" />
 
         <androidx.cardview.widget.CardView
@@ -93,7 +93,7 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/roboto_condensed_regular"
                         android:text="@string/add_quantity"
-                        android:textColor="@color/text_color_black" />
+                        android:textColor="@color/text_color" />
 
                     <NumberPicker
                         android:id="@+id/quantity_number_picker"
@@ -118,7 +118,7 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/roboto_condensed_regular"
                         android:text="@string/add_volume"
-                        android:textColor="@color/text_color_black" />
+                        android:textColor="@color/text_color" />
 
                     <NumberPicker
                         android:id="@+id/volume_number_picker"
@@ -144,7 +144,7 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/roboto_condensed_regular"
                         android:text="@string/add_degree"
-                        android:textColor="@color/text_color_black" />
+                        android:textColor="@color/text_color" />
 
                     <NumberPicker
                         android:id="@+id/degree_number_picker"
@@ -182,7 +182,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_condensed_regular"
                     android:text="@string/add_price"
-                    android:textColor="@color/text_color_black" />
+                    android:textColor="@color/text_color" />
 
                 <EditText
                     android:id="@+id/price_edit_text"
@@ -194,7 +194,7 @@
                     android:textColorHint="@color/text_warning_color"
                     android:imeOptions="actionDone"
                     android:inputType="number"
-                    android:textColor="@color/text_color_black" />
+                    android:textColor="@color/text_color" />
 
             </LinearLayout>
 
@@ -217,7 +217,7 @@
                 android:fontFamily="@font/roboto_condensed_regular"
                 android:text="@string/add_date"
                 android:textColor="@color/text_color_white"
-                app:backgroundTint="@color/button_color"
+                app:backgroundTint="@color/accent_color"
                 app:cornerRadius="18dp"
                 app:strokeColor="@color/button_stroke_color" />
 
@@ -229,7 +229,7 @@
                 android:layout_margin="2dp"
                 android:fontFamily="@font/roboto_condensed_regular"
                 android:text="@string/add_today"
-                android:textColor="@color/text_color_black"
+                android:textColor="@color/text_color"
                 app:cornerRadius="18dp"
                 app:strokeColor="@color/button_stroke_color" />
 
@@ -256,14 +256,14 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/roboto_condensed_regular"
                     android:text="@string/add_total_money"
-                    android:textColor="@color/text_color_black" />
+                    android:textColor="@color/text_color" />
 
                 <TextView
                     android:id="@+id/total_money_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/add_empty"
-                    android:textColor="@color/text_color_black" />
+                    android:textColor="@color/text_color" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -271,30 +271,11 @@
                     android:layout_marginStart="4dp"
                     android:fontFamily="@font/roboto_condensed_regular"
                     android:text="@string/add_currency"
-                    android:textColor="@color/text_color_black" />
-
-                <!--                </LinearLayout>-->
+                    android:textColor="@color/text_color" />
 
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
-
-<!--        <com.google.android.material.button.MaterialButton-->
-<!--            android:id="@+id/add_save_button"-->
-<!--            style="@style/Widget.MaterialComponents.Button.OutlinedButton"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_margin="12dp"-->
-<!--            android:elevation="3dp"-->
-<!--            android:fontFamily="@font/roboto_condensed_regular"-->
-<!--            android:text="@string/add_save"-->
-<!--            android:textColor="@color/text_color_white"-->
-<!--            app:backgroundTint="@color/button_color"-->
-<!--            app:cornerRadius="18dp"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:strokeColor="@color/button_stroke_color" />-->
 
     </LinearLayout>
 

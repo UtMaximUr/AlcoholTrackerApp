@@ -31,7 +31,7 @@
         android:layout_margin="24dp"
         android:fontFamily="@font/roboto_condensed_regular"
         android:text="@string/settings_version"
-        android:textColor="@android:color/black"
+        android:textColor="@color/text_color"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toStartOf="@+id/version_app" />
 
@@ -42,7 +42,7 @@
         android:layout_gravity="end"
         android:layout_margin="24dp"
         android:fontFamily="@font/roboto_condensed_regular"
-        android:textColor="@android:color/black"
+        android:textColor="@color/text_color"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="1.0.0" />
@@ -74,7 +74,7 @@
                 android:textAllCaps="false"
                 android:visibility="gone"
                 android:textColor="@color/text_color_white"
-                app:backgroundTint="@color/button_color"
+                app:backgroundTint="@color/accent_color"
                 app:cornerRadius="18dp"
                 app:strokeColor="@color/button_stroke_color" />
 
@@ -89,9 +89,32 @@
                 android:textAllCaps="false"
                 android:visibility="gone"
                 android:textColor="@color/text_color_white"
-                app:backgroundTint="@color/button_color"
+                app:backgroundTint="@color/accent_color"
                 app:cornerRadius="18dp"
                 app:strokeColor="@color/button_stroke_color" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Темная тема"
+                    android:textSize="18sp"
+                    android:padding="12dp"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/roboto_condensed_regular"
+                    android:textColor="@color/text_color"/>
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:useMaterialThemeColors="true"
+                    android:layout_margin="12dp"/>
+            </LinearLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/rate_app_button"
@@ -103,7 +126,7 @@
                 android:text="@string/rate_app"
                 android:textAllCaps="false"
                 android:textColor="@color/text_color_white"
-                app:backgroundTint="@color/button_color"
+                app:backgroundTint="@color/accent_color"
                 app:cornerRadius="18dp"
                 app:strokeColor="@color/button_stroke_color" />
 

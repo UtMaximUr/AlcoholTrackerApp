@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_condensed_regular"
             android:padding="12dp"
-            android:textColor="@color/text_color_black"
+            android:textColor="@color/text_color"
             android:textSize="24sp" />
     </androidx.cardview.widget.CardView>
 

@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/roboto_condensed_regular"
-            android:textColor="@color/text_color_black"
+            android:textColor="@color/top_drink_color"
             android:text="@string/statistic_drink_count"/>
 
     </LinearLayout>
@@ -37,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_condensed_regular"
-        android:textColor="@color/text_color_black"
+        android:textColor="@color/top_drink_color"
         android:singleLine="true"
         android:ellipsize="end"
         app:layout_constraintEnd_toEndOf="@+id/item_drink_container"
