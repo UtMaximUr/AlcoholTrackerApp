@@ -25,10 +25,6 @@ class StorageModuleImpl(private val storageService: StorageService) : StorageMod
         }
     }
 
-    override fun updateTrack(track: AlcoholTrack) {
-        storageService.trackDao().updateTrack(track)
-    }
-
     override fun deleteAlcoholTrack(track: AlcoholTrack) {
         storageService.trackDao().deleteTrack(track)
     }

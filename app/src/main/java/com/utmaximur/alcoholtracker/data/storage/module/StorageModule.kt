@@ -11,8 +11,6 @@ interface StorageModule {
 
     fun addAlcoholTrack(track: AlcoholTrack)
 
-    fun updateTrack(track: AlcoholTrack)
-
     fun deleteAlcoholTrack(track: AlcoholTrack)
 
     fun getAllAlcoholTrack(): MutableList<AlcoholTrack>
