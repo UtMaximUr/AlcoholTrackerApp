@@ -4,6 +4,7 @@ import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
 import com.utmaximur.alcoholtracker.data.model.Drink
 import com.utmaximur.alcoholtracker.data.storage.module.StorageModule
 import com.utmaximur.alcoholtracker.data.storage.service.StorageService
+import java.util.*
 
 class StorageModuleImpl(private val storageService: StorageService) : StorageModule {
 
@@ -16,7 +17,12 @@ class StorageModuleImpl(private val storageService: StorageService) : StorageMod
     }
 
     override fun addAlcoholTrack(track: AlcoholTrack) {
-        storageService.trackDao().insertTrack(track)
+        if(track.id == "") {
+            track.id = getTrackId()
+            storageService.trackDao().insertTrack(track)
+        }else{
+            storageService.trackDao().updateTrack(track)
+        }
     }
 
     override fun updateTrack(track: AlcoholTrack) {
@@ -34,4 +40,6 @@ class StorageModuleImpl(private val storageService: StorageService) : StorageMod
     override fun getTrack(date: Long): AlcoholTrack? {
         return storageService.trackDao().getTrack(date)
     }
+
+    private fun getTrackId(): String = UUID.randomUUID().toString()
 }
