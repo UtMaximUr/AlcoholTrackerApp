@@ -4,7 +4,6 @@ import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -118,7 +117,7 @@ class AddFragment : Fragment(),
         }
 
         toolbar.setOnMenuItemClickListener {
-            if (checkIsEmptyField()) {
+            if (viewModel.checkIsEmptyField(getPrice(), getDate())) {
                 viewModel.onSaveButtonClick(
                     AlcoholTrack(
                         getIdDrink(),
@@ -133,6 +132,8 @@ class AddFragment : Fragment(),
                 )
                 addFragmentListener?.closeFragment()
                 addFragmentListener!!.onShowNavigationBar()
+            }else{
+                showWarningEmptyField()
             }
             true
         }
@@ -159,15 +160,15 @@ class AddFragment : Fragment(),
         quantityNumberPicker.maxValue = 10
         quantityNumberPicker.minValue = 1
         quantityNumberPicker.setOnScrollListener { _, _ ->
-            if (checkIsEmptyFieldPrice()) {
-                totalMoneyText.text = getTotalMoney()
+            if (viewModel.checkIsEmptyFieldPrice(getPrice())) {
+                totalMoneyText.text = viewModel.getTotalMoney(getQuantity(), getPrice())
             }
         }
 
         //Градус
-        degreeNumberPicker.maxValue = getFloatDegree().size
+        degreeNumberPicker.maxValue = viewModel.getFloatDegree().size
         degreeNumberPicker.minValue = 1
-        degreeNumberPicker.displayedValues = getFloatDegree()
+        degreeNumberPicker.displayedValues = viewModel.getFloatDegree()
         setDrinkDegreeArray(degreeNumberPicker.value) // устанавливаем по умолчанию первый напиток
 
         //Объем
@@ -184,7 +185,7 @@ class AddFragment : Fragment(),
         }
 
         todayButton.setOnClickListener {
-            addDateButton.text = setDateOnButton(
+            addDateButton.text = viewModel.setDateOnButton(
                 requireContext(),
                 Date()
             )
@@ -194,8 +195,8 @@ class AddFragment : Fragment(),
 
         priceEditText.setOnEditorActionListener { _, i, _ ->
             if (i == EditorInfo.IME_ACTION_DONE) {
-                if (checkIsEmptyFieldPrice()) {
-                    totalMoneyText.text = getTotalMoney()
+                if (viewModel.checkIsEmptyFieldPrice(getPrice())) {
+                    totalMoneyText.text = viewModel.getTotalMoney(getQuantity(), getPrice())
                     viewModel.price = priceEditText.text.toString().toFloat()
                     priceEditText.clearFocus()
                 }
@@ -269,7 +270,7 @@ class AddFragment : Fragment(),
             dateAndTime[Calendar.DAY_OF_MONTH] = dayOfMonth
             viewModel.date = dateAndTime.timeInMillis
             addDateButton.text =
-                setDateOnButton(requireContext(), Date(dateAndTime.timeInMillis))
+                viewModel.setDateOnButton(requireContext(), Date(dateAndTime.timeInMillis))
             viewModel.date = Date(dateAndTime.timeInMillis).time
             todayButton.visibility = GONE
         }
@@ -360,41 +361,5 @@ class AddFragment : Fragment(),
                 AnimationUtils.loadAnimation(context, R.anim.button_animation)
             addDateButton.startAnimation(buttonAnimation)
         }
-    }
-
-    private fun checkIsEmptyField(): Boolean {
-        return if (getPrice() == 0.0f || getDate() == 0L) {
-            showWarningEmptyField()
-            false
-        } else {
-            true
-        }
-    }
-
-    private fun checkIsEmptyFieldPrice(): Boolean {
-        return getPrice() != 0.0f
-    }
-
-    private fun getTotalMoney(): String? {
-        return (getQuantity() * getPrice().toString().toDouble()).toString()
-    }
-
-    private fun setDateOnButton(context: Context, date: Date): String {
-        val sdf = SimpleDateFormat(
-            context.resources.getString(R.string.date_format_pattern),
-            Locale.getDefault()
-        )
-        return String.format("%s", sdf.format(date))
-    }
-
-    private fun getFloatDegree(): Array<String?> {
-        val nums: Array<String?> = arrayOfNulls(200)
-        var double = 0.0
-        for (i in 0..199) {
-            double += 0.5
-            val format: String = String.format("%.1f", double)
-            nums[i] = format
-        }
-        return nums
     }
 }
