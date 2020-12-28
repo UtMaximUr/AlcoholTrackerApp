@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
@@ -118,9 +119,11 @@ class AddFragment : Fragment(),
                 }
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
+                    .doOnComplete {
+                        addFragmentListener?.closeFragment()
+                        addFragmentListener!!.onShowNavigationBar()
+                    }
                     .subscribe()
-                addFragmentListener!!.onShowNavigationBar()
-                addFragmentListener?.closeFragment()
             }
             true
         }
@@ -147,7 +150,7 @@ class AddFragment : Fragment(),
         quantityNumberPicker.maxValue = 10
         quantityNumberPicker.minValue = 1
         quantityNumberPicker.setOnScrollListener { _, _ ->
-            if (presenter.checkIsEmptyField()) {
+            if (presenter.checkIsEmptyFieldPrice()) {
                 totalMoneyText.text = presenter.getTotalMoney()
             }
         }
@@ -181,12 +184,18 @@ class AddFragment : Fragment(),
 
         priceEditText.setOnEditorActionListener { _, i, _ ->
             if (i == EditorInfo.IME_ACTION_DONE) {
-                if (presenter.checkIsEmptyField()) {
+                if (presenter.checkIsEmptyFieldPrice()) {
                     totalMoneyText.text = presenter.getTotalMoney()
                     priceEditText.clearFocus()
                 }
             }
             false
+        }
+
+        priceEditText.setOnFocusChangeListener { _, b ->
+            if(b){
+                priceEditText.hint = ""
+            }
         }
 
         if (arguments != null) {
@@ -342,5 +351,15 @@ class AddFragment : Fragment(),
 
     private fun getDrinksList(): List<Drink> {
         return viewModel.drinks
+    }
+
+    override fun showWarningEmptyField(){
+        if(viewModel.price == 0.0f){
+            priceEditText.hint = getText(R.string.enter_price)
+        }else if(viewModel.date == 0L){
+            val buttonAnimation =
+                AnimationUtils.loadAnimation(context, R.anim.button_animation)
+            addDateButton.startAnimation(buttonAnimation)
+        }
     }
 }
