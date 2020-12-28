@@ -13,7 +13,7 @@ class AddViewModel : ViewModel() {
     val quantity: Int = 0
     var degree: String = ""
     val price: Float = 0.0f
-    var date: Long = Date().time
+    var date: Long = 0L
     var icon: Int = 0
     var drinks: List<Drink> = ArrayList()
     var volums: List<String> = ArrayList()

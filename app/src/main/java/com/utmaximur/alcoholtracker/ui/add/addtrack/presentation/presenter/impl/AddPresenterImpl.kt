@@ -59,6 +59,18 @@ class AddPresenterImpl(private val interactor: AddInteractor) :
     }
 
     override fun checkIsEmptyField(): Boolean {
+        if(view!!.getPrice() == 0.0f){
+            view!!.showWarningEmptyField()
+            return false
+        }else if (view!!.getDate() == 0L){
+            view!!.showWarningEmptyField()
+            return false
+        }else{
+            return true
+        }
+    }
+
+    override fun checkIsEmptyFieldPrice(): Boolean {
         return view!!.getPrice() != 0.0f
     }
 

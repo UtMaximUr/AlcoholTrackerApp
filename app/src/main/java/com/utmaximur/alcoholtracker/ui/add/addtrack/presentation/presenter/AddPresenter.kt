@@ -24,4 +24,5 @@ interface AddPresenter : MvpPresenter<AddView> {
 
     fun setDateOnButton(context: Context, date: Date): String
 
+    fun checkIsEmptyFieldPrice(): Boolean
 }

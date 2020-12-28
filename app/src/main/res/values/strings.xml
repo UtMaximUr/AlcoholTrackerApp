@@ -28,6 +28,7 @@
     <string name="add_currency">RUR</string>
     <string name="add_litres">л</string>
     <string name="add_save">Сохранить</string>
+    <string name="enter_price">!Введите стоимость</string>
 
     <!--edit-->
     <string name="edit_drink_title">Редактировать напиток</string>

@@ -28,4 +28,6 @@ interface AddView : MvpView {
 
     fun getDegreeList(): List<String?>
 
+    fun showWarningEmptyField()
+
 }

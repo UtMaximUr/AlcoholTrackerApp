@@ -191,6 +191,7 @@
                     android:layout_marginStart="30dp"
                     android:layout_weight="1"
                     android:gravity="end"
+                    android:textColorHint="@color/text_warning_color"
                     android:imeOptions="actionDone"
                     android:inputType="number"
                     android:textColor="@color/text_color_black" />

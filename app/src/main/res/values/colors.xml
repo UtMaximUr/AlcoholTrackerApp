@@ -11,5 +11,6 @@
     <color name="text_color_black">#FF000000</color>
     <color name="button_stroke_color">#FF000000</color>
     <color name="button_color">#D50000</color>
+    <color name="text_warning_color">#D50000</color>
 
 </resources>
