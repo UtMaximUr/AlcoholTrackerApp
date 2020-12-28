@@ -33,7 +33,7 @@ class StatisticViewModel(private var drinkRepository: DrinkRepository,
         allAlcoholTrackList?.addAll(list!!)
     }
 
-    fun getTrackList(): ArrayList<AlcoholTrack>?{
+    private fun getTrackList(): ArrayList<AlcoholTrack>?{
        return allAlcoholTrackList
     }
 
