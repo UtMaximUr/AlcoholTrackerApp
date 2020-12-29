@@ -101,11 +101,11 @@ class CalendarFragment : Fragment(),
     private fun initCalendar() {
         // добавление иконок алкоголя в календарь
         setIconOnDate()
-        viewModel.getTracks().observe(viewLifecycleOwner, Observer { list ->
-            if (list.isNotEmpty()) {
-                addToStartText.visibility = View.GONE
-            }
-        })
+//        viewModel.getTracks().observe(viewLifecycleOwner, Observer { list ->
+//            if (list.isNotEmpty()) {
+//                addToStartText.visibility = View.GONE
+//            }
+//        })
         drinksListAdapter = DrinksListAdapter(getAlcoholTrackByDay(Date().time), this)
         recyclerView.adapter = drinksListAdapter
     }
@@ -157,7 +157,9 @@ class CalendarFragment : Fragment(),
             if (alcoholTrack.isNotEmpty()) {
                 emptyDrinkListText.visibility = View.INVISIBLE
             } else {
-                if (addToStartText.visibility != View.VISIBLE) {
+                if(list.isEmpty()){
+                    addToStartText.visibility = View.VISIBLE
+                }else{
                     emptyDrinkListText.visibility = View.VISIBLE
                 }
             }

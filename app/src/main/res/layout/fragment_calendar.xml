@@ -52,6 +52,7 @@
             android:fontFamily="@font/roboto_condensed_regular"
             android:text="@string/calendar_add_press"
             android:layout_gravity="center"
+            android:visibility="gone"
             android:textColor="@color/accent_color" />
 
         <TextView
