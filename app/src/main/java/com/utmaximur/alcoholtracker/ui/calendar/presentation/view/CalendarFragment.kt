@@ -157,7 +157,9 @@ class CalendarFragment : Fragment(),
             if (alcoholTrack.isNotEmpty()) {
                 emptyDrinkListText.visibility = View.INVISIBLE
             } else {
-                emptyDrinkListText.visibility = View.VISIBLE
+                if (addToStartText.visibility != View.VISIBLE) {
+                    emptyDrinkListText.visibility = View.VISIBLE
+                }
             }
         })
         return alcoholTrack
