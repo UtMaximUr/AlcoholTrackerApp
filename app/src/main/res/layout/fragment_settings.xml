@@ -21,7 +21,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="20dp"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@mipmap/ic_launcher"
+            android:contentDescription="@string/cd_icon_app" />
 
     </androidx.cardview.widget.CardView>
 
@@ -102,7 +103,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Темная тема"
+                    android:text="@string/dark_theme"
                     android:textSize="18sp"
                     android:padding="12dp"
                     android:layout_gravity="center"
