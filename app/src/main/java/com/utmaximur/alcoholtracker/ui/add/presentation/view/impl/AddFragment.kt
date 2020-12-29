@@ -131,7 +131,7 @@ class AddFragment : Fragment(),
                 )
                 addFragmentListener?.closeFragment()
                 addFragmentListener!!.onShowNavigationBar()
-            }else{
+            } else {
                 showWarningEmptyField()
             }
             true
@@ -195,8 +195,12 @@ class AddFragment : Fragment(),
         priceEditText.setOnEditorActionListener { _, i, _ ->
             if (i == EditorInfo.IME_ACTION_DONE) {
                 if (viewModel.checkIsEmptyFieldPrice(getPrice())) {
-                    totalMoneyText.text = viewModel.getTotalMoney(getQuantity(), getPrice())
-                    viewModel.price = priceEditText.text.toString().toFloat()
+                    if (priceEditText.text.isNotEmpty()) {
+                        totalMoneyText.text = viewModel.getTotalMoney(getQuantity(), getPrice())
+                        viewModel.price = priceEditText.text.toString().toFloat()
+                    }else{
+                        totalMoneyText.text = getText(R.string.add_empty)
+                    }
                     priceEditText.clearFocus()
                 }
             }
