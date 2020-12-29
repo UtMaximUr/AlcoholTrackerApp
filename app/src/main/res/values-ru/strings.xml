@@ -43,7 +43,13 @@
     <string name="terms_of_use">Пользовательское соглашение</string>
     <string name="settings_version">Версия</string>
     <string name="rate_app">Оценить приложение</string>
-    <string name="dark_theme">Темная тема</string>
+    <string name="default_theme">Использовать системную тему</string>
+
+    <string-array name="theme_array">
+        <item>Светлая тема</item>
+        <item>Темная тема</item>
+
+    </string-array>
 
     <!--statistic-->
     <string name="statistic_week_days">Неделю</string>
@@ -61,6 +67,7 @@
     <string name="cd_delete_button">Удалить</string>
     <string name="cd_show_panel">Сдвинуть в влево</string>
     <string name="cd_image_drink">Изображение напитка</string>
+    <string name="cd_choice_theme">Выбранная тема</string>
 
     <!--regex-->
     <string name="only_number_regex" tools:ignore="TypographyDashes">[^0-9, .]</string>

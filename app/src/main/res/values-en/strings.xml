@@ -43,7 +43,13 @@
     <string name="terms_of_use">Terms of use</string>
     <string name="settings_version">Version</string>
     <string name="rate_app">Rate app</string>
-    <string name="dark_theme">Dark theme</string>
+    <string name="default_theme">Use system theme</string>
+
+    <string-array name="theme_array">
+        <item>Light theme</item>
+        <item>Dark theme</item>
+
+    </string-array>
 
     <!--statistic-->
     <string name="statistic_week_days">Week</string>
@@ -61,6 +67,7 @@
     <string name="cd_delete_button">Delete</string>
     <string name="cd_show_panel">Move left</string>
     <string name="cd_image_drink">Image of a drink</string>
+    <string name="cd_choice_theme">Selected theme</string>
 
     <!--regex-->
     <string name="only_number_regex" tools:ignore="TypographyDashes">[^0-9, .]</string>
