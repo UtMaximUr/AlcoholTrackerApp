@@ -273,6 +273,9 @@
     <string name="material_calendar_sunday">Вс</string>
     <string name="cd_icon_app">Иконка приложения</string>
     <string name="dark_theme">Темная тема</string>
+    <string name="cd_edit_button">Редактировать</string>
+    <string name="cd_delete_button">Удалить</string>
+    <string name="cd_show_panel">Сдвинуть в влево</string>
 
     <array name="material_calendar_months_array">
         <item>Январь</item>

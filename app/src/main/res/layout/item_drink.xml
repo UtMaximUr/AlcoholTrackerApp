@@ -20,14 +20,16 @@
             android:layout_width="56dp"
             android:layout_height="match_parent"
             android:background="@color/accent_color"
-            android:src="@drawable/ic_edit" />
+            android:src="@drawable/ic_edit"
+            android:contentDescription="@string/cd_edit_button" />
 
         <ImageButton
             android:id="@+id/delete_button"
             android:layout_width="56dp"
             android:layout_height="match_parent"
             android:background="@color/accent_color"
-            android:src="@drawable/ic_delete" />
+            android:src="@drawable/ic_delete"
+            android:contentDescription="@string/cd_delete_button" />
 
     </LinearLayout>
 
@@ -128,7 +130,8 @@
             android:src="@drawable/ic_arrow_right"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/cd_show_panel" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
