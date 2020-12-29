@@ -43,6 +43,7 @@
     <string name="terms_of_use">Пользовательское соглашение</string>
     <string name="settings_version">Версия</string>
     <string name="rate_app">Оценить приложение</string>
+    <string name="dark_theme">Темная тема</string>
 
     <!--statistic-->
     <string name="statistic_week_days">Неделю</string>
@@ -53,6 +54,13 @@
     <string name="statistic_drinks">Напитки выпитые мною</string>
     <string name="statistic_spent">Мною потрачено за</string>
     <string name="statistic_drink_count">x 0</string>
+
+    <!--content description-->
+    <string name="cd_icon_app">Иконка приложения</string>
+    <string name="cd_edit_button">Редактировать</string>
+    <string name="cd_delete_button">Удалить</string>
+    <string name="cd_show_panel">Сдвинуть в влево</string>
+    <string name="cd_image_drink">Изображение напитка</string>
 
     <!--regex-->
     <string name="only_number_regex" tools:ignore="TypographyDashes">[^0-9, .]</string>
@@ -271,12 +279,6 @@
     <string name="material_calendar_friday">Пт</string>
     <string name="material_calendar_saturday">Сб</string>
     <string name="material_calendar_sunday">Вс</string>
-    <string name="cd_icon_app">Иконка приложения</string>
-    <string name="dark_theme">Темная тема</string>
-    <string name="cd_edit_button">Редактировать</string>
-    <string name="cd_delete_button">Удалить</string>
-    <string name="cd_show_panel">Сдвинуть в влево</string>
-    <string name="cd_image_drink">Изображение напитка</string>
 
     <array name="material_calendar_months_array">
         <item>Январь</item>
