@@ -168,6 +168,7 @@ class CalendarFragment : Fragment(),
     private fun setIconOnDate() {
         val events: MutableList<EventDay> = ArrayList()
         viewModel.getTracks().observe(viewLifecycleOwner, Observer { list ->
+            events.clear()
             list.forEach {
                 val calendar = Calendar.getInstance()
                 calendar.timeInMillis = it.date
