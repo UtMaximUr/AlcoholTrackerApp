@@ -1,0 +1,267 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Alcohol Tracker</string>
+
+    <!--menu-->
+    <string name="add">Add drink</string>
+    <string name="calendar">Сalendar</string>
+    <string name="statistic">Statistics</string>
+    <string name="settings">Settings</string>
+
+    <!--calendar-->
+    <string name="calendar_add_press">Add a drink to get started</string>
+    <string name="calendar_empty">Not a single gram was drunk on this day!:)</string>
+    <string name="calendar_date">Date</string>
+
+    <!--add-->
+    <string name="add_drink_title">Add drink</string>
+    <string name="date_format_pattern">dd/MM/yyyy</string>
+    <string name="add_drink">Drink</string>
+    <string name="add_volume">Volume</string>
+    <string name="add_quantity">Quantity</string>
+    <string name="add_degree">Degree</string>
+    <string name="add_price">Cost of one drink</string>
+    <string name="add_date">Select date</string>
+    <string name="add_today">Today</string>
+    <string name="add_total_litres">Quantity</string>
+    <string name="add_total_money">Total</string>
+    <string name="add_empty">0</string>
+    <string name="add_currency">USD</string>
+    <string name="add_litres">l</string>
+    <string name="add_save">Save</string>
+    <string name="enter_price">!Enter the cost</string>
+
+    <!--edit-->
+    <string name="edit_drink_title">Edit drink</string>
+
+    <!--create drink-->
+    <string name="create_drink_title">Create a drink</string>
+    <string name="create_drink_hint">Enter the title</string>
+
+
+    <!--settings-->
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="terms_of_use">Terms of use</string>
+    <string name="settings_version">Version</string>
+    <string name="rate_app">Rate app</string>
+    <string name="dark_theme">Dark theme</string>
+
+    <!--statistic-->
+    <string name="statistic_week_days">Week</string>
+    <string name="statistic_month_days">Month</string>
+    <string name="statistic_year_days">Year</string>
+    <string name="statistic_count_days">I drank %s from %d days</string>
+    <string name="statistic_count_drink">x %d</string>
+    <string name="statistic_drinks">The drinks I drank</string>
+    <string name="statistic_spent">I spent in a</string>
+    <string name="statistic_drink_count">x 0</string>
+
+    <!--content description-->
+    <string name="cd_icon_app">Application Icon</string>
+    <string name="cd_edit_button">Edit</string>
+    <string name="cd_delete_button">Delete</string>
+    <string name="cd_show_panel">Move left</string>
+    <string name="cd_image_drink">Image of a drink</string>
+
+    <!--regex-->
+    <string name="only_number_regex" tools:ignore="TypographyDashes">[^0-9, .]</string>
+    <string name="only_text_regex">[^A–z, А-я]</string>
+
+    <plurals name="plurals_day">
+        <item quantity="one">%1$d day</item>
+        <item quantity="other">%1$d days</item>
+    </plurals>
+
+    <string-array name="statistic_period_array">
+        <item>Week</item>
+        <item>Month</item>
+        <item>Year</item>
+
+    </string-array>
+
+    <!--enum-->
+    <string name="enum_absent">Absinthe</string>
+    <string name="enum_beer">Beer</string>
+    <string name="enum_brandy">Brandy</string>
+    <string name="enum_champagne">Champagne</string>
+    <string name="enum_cider">Cider</string>
+    <string name="enum_cocktail">Cocktail</string>
+    <string name="enum_cognac">Cognac</string>
+    <string name="enum_liqueur">Liquor</string>
+    <string name="enum_shot">Shots</string>
+    <string name="enum_tequila">Tequila</string>
+    <string name="enum_vodka">Vodka</string>
+    <string name="enum_whiskey">Whiskey</string>
+    <string name="enum_rum">Rum</string>
+    <string name="enum_gin">Gin</string>
+    <string name="enum_wine">Wine</string>
+
+    <string-array name="volume_beer_array">
+        <item>0.33 l</item>
+        <item>0.375 l</item>
+        <item>0.45 l</item>
+        <item>0.48 l</item>
+        <item>0.5 l</item>
+        <item>0.568 l</item>
+        <item>1 l</item>
+
+    </string-array>
+
+    <string-array name="volume_absent_array">
+        <item>20 ml</item>
+        <item>30 ml</item>
+        <item>40 ml</item>
+        <item>50 ml</item>
+
+    </string-array>
+
+    <string-array name="volume_brandy_array">
+        <item>0.05 l</item>
+        <item>0.3 l</item>
+        <item>0.4 l</item>
+        <item>0.5 l</item>
+        <item>0.7 l</item>
+        <item>1 l</item>
+
+    </string-array>
+
+    <string-array name="volume_champagne_array">
+        <item>0.125 l</item>
+        <item>0.175 l</item>
+        <item>0.375 l</item>
+        <item>0.750 l</item>
+
+    </string-array>
+
+    <string-array name="volume_cocktail_array">
+        <item>20 ml</item>
+        <item>35 ml</item>
+        <item>40 ml</item>
+        <item>50 ml</item>
+        <item>100 ml</item>
+        <item>150 ml</item>
+        <item>200 ml</item>
+        <item>220 ml</item>
+        <item>250 ml</item>
+
+    </string-array>
+
+    <string-array name="volume_cognac_array">
+        <item>0.05 l</item>
+        <item>0.3 l</item>
+        <item>0.4 l</item>
+        <item>0.5 l</item>
+        <item>0.7 l</item>
+        <item>1 l</item>
+
+    </string-array>
+
+    <string-array name="volume_liquor_array">
+        <item>20 ml</item>
+        <item>35 ml</item>
+        <item>40 ml</item>
+        <item>50 ml</item>
+
+    </string-array>
+
+    <string-array name="volume_tequila_array">
+        <item>20 ml</item>
+        <item>35 ml</item>
+        <item>40 ml</item>
+        <item>50 ml</item>
+
+    </string-array>
+
+
+    <string-array name="volume_vodka_array">
+        <item>0.05 l</item>
+        <item>0.3 l</item>
+        <item>0.4 l</item>
+        <item>0.5 l</item>
+        <item>0.7 l</item>
+        <item>1 l</item>
+
+    </string-array>
+
+    <string-array name="volume_whiskey_array">
+        <item>0.05 l</item>
+        <item>0.3 l</item>
+        <item>0.4 l</item>
+        <item>0.5 l</item>
+        <item>0.7 l</item>
+        <item>1 l</item>
+
+    </string-array>
+
+    <string-array name="volume_gin_array">
+        <item>0.05 l</item>
+        <item>0.3 l</item>
+        <item>0.4 l</item>
+        <item>0.5 l</item>
+        <item>0.7 l</item>
+        <item>1 l</item>
+
+    </string-array>
+
+    <string-array name="volume_wine_array">
+        <item>100 ml</item>
+        <item>125 ml</item>
+        <item>150 ml</item>
+        <item>175 ml</item>
+        <item>375 ml</item>
+        <item>750 ml</item>
+
+    </string-array>
+
+    <string-array name="volume_cider_array">
+        <item>0.33 l</item>
+        <item>0.375 l</item>
+        <item>0.45 l</item>
+        <item>0.48 l</item>
+        <item>0.5 l</item>
+        <item>0.568 l</item>
+        <item>1 l</item>
+
+    </string-array>
+
+    <string-array name="volume_shots_array">
+        <item>20 ml</item>
+        <item>35 ml</item>
+        <item>40 ml</item>
+        <item>50 ml</item>
+
+    </string-array>
+
+    <string-array name="volume_rum_array">
+        <item>0.05 l</item>
+        <item>0.3 l</item>
+        <item>0.4 l</item>
+        <item>0.5 l</item>
+        <item>0.7 l</item>
+        <item>1 l</item>
+
+    </string-array>
+
+    <string name="material_calendar_monday">Mon</string>
+    <string name="material_calendar_tuesday">Tue</string>
+    <string name="material_calendar_wednesday">Wed</string>
+    <string name="material_calendar_thursday">Thu</string>
+    <string name="material_calendar_friday">Fri</string>
+    <string name="material_calendar_saturday">Sat</string>
+    <string name="material_calendar_sunday">Sun</string>
+
+    <array name="material_calendar_months_array">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </array>
+
+</resources>
