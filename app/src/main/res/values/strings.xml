@@ -276,6 +276,7 @@
     <string name="cd_edit_button">Редактировать</string>
     <string name="cd_delete_button">Удалить</string>
     <string name="cd_show_panel">Сдвинуть в влево</string>
+    <string name="cd_image_drink">Изображение напитка</string>
 
     <array name="material_calendar_months_array">
         <item>Январь</item>
