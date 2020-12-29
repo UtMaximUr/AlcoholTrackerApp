@@ -71,7 +71,7 @@ class AddFragment : Fragment() {
         injectDagger()
         initViewModel()
         setDrinksList()
-        findViewById(view)
+        initUi(view)
         return view
     }
 
@@ -107,7 +107,8 @@ class AddFragment : Fragment() {
         dotsIndicator = view.findViewById(R.id.view_pager_indicator)
     }
 
-    private fun initUi() {
+    private fun initUi(view: View) {
+        findViewById(view)
 
         toolbar.setNavigationOnClickListener {
             addFragmentListener?.closeFragment()
@@ -136,7 +137,7 @@ class AddFragment : Fragment() {
         }
 
         // выбор напитков
-        drinksPager.adapter = DrinkViewPagerAdapter(getDrinksList(), requireContext())
+//        drinksPager.adapter = DrinkViewPagerAdapter(getDrinksList(), requireContext())
         dotsIndicator.setupWithViewPager(drinksPager, true)
         drinksPager.addOnPageChangeListener(object : OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {}
@@ -163,13 +164,19 @@ class AddFragment : Fragment() {
         }
 
         //Градус
-        degreeNumberPicker.maxValue = viewModel.getFloatDegree().size
+        // устанавливаем по умолчанию первый напиток
         degreeNumberPicker.minValue = 1
+        degreeNumberPicker.maxValue =
+            requireContext().resources.getStringArray(R.array.volume_beer_array).size - 1
         degreeNumberPicker.displayedValues = viewModel.getFloatDegree()
-        setDrinkDegreeArray(degreeNumberPicker.value) // устанавливаем по умолчанию первый напиток
 
         //Объем
-        setDrinkVolumeArray(volumeNumberPicker.value)
+        // устанавливаем по умолчанию первый напиток
+        volumeNumberPicker.value = 1
+        volumeNumberPicker.maxValue =
+            requireContext().resources.getStringArray(R.array.volume_beer_array).size - 1
+        volumeNumberPicker.displayedValues =
+            requireContext().resources.getStringArray(R.array.volume_beer_array)
 
         addDateButton.setOnClickListener {
             datePecker = DatePickerDialog(
@@ -196,7 +203,7 @@ class AddFragment : Fragment() {
                     if (priceEditText.text.isNotEmpty()) {
                         totalMoneyText.text = viewModel.getTotalMoney(getQuantity(), getPrice())
                         viewModel.price = priceEditText.text.toString().toFloat()
-                    }else{
+                    } else {
                         totalMoneyText.text = getText(R.string.add_empty)
                     }
                     priceEditText.clearFocus()
@@ -330,10 +337,6 @@ class AddFragment : Fragment() {
         viewModel.degrees = degree
     }
 
-    private fun getDegreeList(): List<String?> {
-        return viewModel.degrees
-    }
-
     private fun getVolumeList(): List<String> {
         return viewModel.volums
     }
@@ -345,7 +348,7 @@ class AddFragment : Fragment() {
     private fun setDrinksList() {
         viewModel.getAllDrink().observe(viewLifecycleOwner, Observer { list ->
             viewModel.drinks = list
-            initUi()
+            drinksPager.adapter = DrinkViewPagerAdapter(getDrinksList(), requireContext())
         })
     }
 

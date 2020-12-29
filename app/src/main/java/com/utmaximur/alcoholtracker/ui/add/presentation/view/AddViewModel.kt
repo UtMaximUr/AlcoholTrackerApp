@@ -64,9 +64,9 @@ class AddViewModel(private var drinkRepository: DrinkRepository,
     }
 
      fun getFloatDegree(): Array<String?> {
-        val nums: Array<String?> = arrayOfNulls(200)
-        var double = 0.0
-        for (i in 0..199) {
+        val nums: Array<String?> = arrayOfNulls(11)
+        var double = 3.5
+        for (i in 0..10) {
             double += 0.5
             val format: String = String.format("%.1f", double)
             nums[i] = format
