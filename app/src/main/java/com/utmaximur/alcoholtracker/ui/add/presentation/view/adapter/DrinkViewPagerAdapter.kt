@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.add.presentation.view.impl.adapter
+package com.utmaximur.alcoholtracker.ui.add.presentation.view.adapter
 
 import android.content.Context
 import android.view.LayoutInflater

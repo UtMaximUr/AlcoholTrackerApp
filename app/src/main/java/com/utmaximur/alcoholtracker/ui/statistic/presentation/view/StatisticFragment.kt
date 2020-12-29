@@ -20,7 +20,6 @@ import com.utmaximur.alcoholtracker.ui.statistic.presentation.view.adapter.Stati
 import com.utmaximur.alcoholtracker.ui.statistic.presentation.view.adapter.TopDrinkAdapter
 
 class StatisticFragment :
-    StatisticView,
     Fragment() {
 
     private lateinit var viewModel: StatisticViewModel

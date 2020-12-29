@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.add.presentation.view.impl
+package com.utmaximur.alcoholtracker.ui.add.presentation.view
 
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
@@ -27,13 +27,11 @@ import com.utmaximur.alcoholtracker.dagger.component.AlcoholTrackComponent
 import com.utmaximur.alcoholtracker.dagger.factory.AddViewModelFactory
 import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
 import com.utmaximur.alcoholtracker.data.model.Drink
-import com.utmaximur.alcoholtracker.ui.add.presentation.view.AddView
-import com.utmaximur.alcoholtracker.ui.add.presentation.view.impl.adapter.DrinkViewPagerAdapter
+import com.utmaximur.alcoholtracker.ui.add.presentation.view.adapter.DrinkViewPagerAdapter
 import java.util.*
 
 
-class AddFragment : Fragment(),
-    AddView {
+class AddFragment : Fragment() {
 
     private var addFragmentListener: AddFragmentListener? = null
 
@@ -292,23 +290,23 @@ class AddFragment : Fragment(),
         addFragmentListener = context as AddFragmentListener
     }
 
-    override fun getIdDrink(): String {
+    private fun getIdDrink(): String {
         return viewModel.id
     }
 
-    override fun getDrink(): String {
+    private fun getDrink(): String {
         return getDrinksList()[drinksPager.currentItem].drink
     }
 
-    override fun getQuantity(): Int {
+    private fun getQuantity(): Int {
         return quantityNumberPicker.value
     }
 
-    override fun getDegree(): String {
+    private fun getDegree(): String {
         return degreeNumberPicker.displayedValues[degreeNumberPicker.value].toString()
     }
 
-    override fun getPrice(): Float {
+    private fun getPrice(): Float {
         return if (priceEditText.text.toString().isEmpty()) {
             viewModel.price
         } else {
@@ -316,31 +314,31 @@ class AddFragment : Fragment(),
         }
     }
 
-    override fun getDate(): Long {
+    private fun getDate(): Long {
         return viewModel.date
     }
 
-    override fun getVolume(): String {
+    private fun getVolume(): String {
         return getVolumeList()[volumeNumberPicker.value]
     }
 
-    override fun setVolume(volume: List<String>) {
+    private fun setVolume(volume: List<String>) {
         viewModel.volums = volume
     }
 
-    override fun setDegreeList(degree: List<String?>) {
+    private fun setDegreeList(degree: List<String?>) {
         viewModel.degrees = degree
     }
 
-    override fun getDegreeList(): List<String?> {
+    private fun getDegreeList(): List<String?> {
         return viewModel.degrees
     }
 
-    override fun getVolumeList(): List<String> {
+    private fun getVolumeList(): List<String> {
         return viewModel.volums
     }
 
-    override fun getIcon(): Int {
+    private fun getIcon(): Int {
         return getDrinksList()[drinksPager.currentItem].icon
     }
 
@@ -355,7 +353,7 @@ class AddFragment : Fragment(),
         return viewModel.drinks
     }
 
-    override fun showWarningEmptyField() {
+    private fun showWarningEmptyField() {
         if (viewModel.price == 0.0f) {
             priceEditText.hint = getText(R.string.enter_price)
         } else if (viewModel.date == 0L) {
