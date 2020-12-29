@@ -13,7 +13,7 @@
         android:layout_weight="1"
         android:fontFamily="@font/roboto_condensed_regular"
         android:text="@string/statistic_week_days"
-        android:textColor="@color/accent_color"
+        android:textColor="@color/statistic_color"
         android:textSize="18sp" />
 
     <TextView
@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_condensed_regular"
-        android:textColor="@color/accent_color"
+        android:textColor="@color/statistic_color"
         android:textSize="24sp" />
 
     <TextView
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
         android:fontFamily="@font/roboto_condensed_regular"
-        android:textColor="@color/accent_color"
+        android:textColor="@color/statistic_color"
         android:textSize="24sp" />
 
 </LinearLayout>

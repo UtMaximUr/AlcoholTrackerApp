@@ -15,6 +15,7 @@
     <color name="top_drink_color">#FFFFFFFF</color>
     <color name="text_color">#FFFFFFFF</color>
     <color name="accent_color">#FFBB86FC</color>
+    <color name="statistic_color">#FFBB86FC</color>
 
 
 </resources>
