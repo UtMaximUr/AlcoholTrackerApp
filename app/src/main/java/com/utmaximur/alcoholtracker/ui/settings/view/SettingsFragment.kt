@@ -34,7 +34,6 @@ const val THEME_HEIGHT = 250
 
 class SettingsFragment : Fragment(), ThemeListAdapter.ThemeListener {
 
-    private lateinit var privacyPolicyLayout: Button
     private lateinit var termsOfUseLayout: Button
     private lateinit var rateUsButton: Button
     private lateinit var versionApp: TextView
@@ -59,7 +58,6 @@ class SettingsFragment : Fragment(), ThemeListAdapter.ThemeListener {
     }
 
     private fun findViewById(view: View) {
-        privacyPolicyLayout = view.findViewById(R.id.privacy_policy_button)
         termsOfUseLayout = view.findViewById(R.id.terms_of_use_button)
         rateUsButton = view.findViewById(R.id.rate_app_button)
         versionApp = view.findViewById(R.id.version_app)
@@ -71,10 +69,6 @@ class SettingsFragment : Fragment(), ThemeListAdapter.ThemeListener {
     private fun initUi(view: View) {
         findViewById(view)
         initTheme()
-
-        privacyPolicyLayout.setOnClickListener {
-
-        }
 
         termsOfUseLayout.setOnClickListener {
 
