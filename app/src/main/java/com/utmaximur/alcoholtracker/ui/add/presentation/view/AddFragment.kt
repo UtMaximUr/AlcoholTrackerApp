@@ -218,10 +218,6 @@ class AddFragment : Fragment() {
                 priceEditText.hint = ""
             }
         }
-
-        if (arguments != null) {
-            setEditArguments()
-        }
     }
 
     private fun setDrinkDegreeArray(position: Int) {
@@ -311,7 +307,7 @@ class AddFragment : Fragment() {
     }
 
     private fun getDegree(): String {
-        return degreeNumberPicker.displayedValues[degreeNumberPicker.value].toString()
+        return degreeNumberPicker.displayedValues[degreeNumberPicker.value - 1].toString()
     }
 
     private fun getPrice(): Float {
@@ -350,6 +346,9 @@ class AddFragment : Fragment() {
         viewModel.getAllDrink().observe(viewLifecycleOwner, Observer { list ->
             viewModel.drinks = list
             drinksPager.adapter = DrinkViewPagerAdapter(getDrinksList(), requireContext())
+            if (arguments != null) {
+                setEditArguments()
+            }
         })
     }
 
