@@ -30,6 +30,7 @@ const val KEY_THEME = "prefs.theme"
 const val THEME_UNDEFINED = -1
 const val THEME_LIGHT = 0
 const val THEME_DARK = 1
+const val THEME_HEIGHT = 250
 
 class SettingsFragment : Fragment(), ThemeListAdapter.ThemeListener {
 
@@ -96,7 +97,7 @@ class SettingsFragment : Fragment(), ThemeListAdapter.ThemeListener {
                 saveTheme(THEME_UNDEFINED)
                 animateViewHeight(themeList, 0)
             } else {
-                animateViewHeight(themeList, 250)
+                animateViewHeight(themeList, THEME_HEIGHT)
             }
         }
 
@@ -122,11 +123,15 @@ class SettingsFragment : Fragment(), ThemeListAdapter.ThemeListener {
         when (getSavedTheme()) {
             THEME_DARK -> {
                 themeSwitch.isChecked = false
-                themeList.visibility = View.VISIBLE
+                val params = themeList.layoutParams
+                params.height = THEME_HEIGHT
+                themeList.layoutParams = params
             }
             THEME_LIGHT -> {
                 themeSwitch.isChecked = false
-                themeList.visibility = View.VISIBLE
+                val params = themeList.layoutParams
+                params.height = THEME_HEIGHT
+                themeList.layoutParams = params
             }
             THEME_UNDEFINED -> {
                 themeSwitch.isChecked = true
@@ -159,6 +164,11 @@ class SettingsFragment : Fragment(), ThemeListAdapter.ThemeListener {
         } else {
             THEME_LIGHT
         }
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        Log.e("fix", "onConfigurationChanged")
     }
 
     private fun rateUs() {
