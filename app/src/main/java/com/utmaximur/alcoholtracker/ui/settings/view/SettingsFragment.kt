@@ -1,6 +1,8 @@
 package com.utmaximur.alcoholtracker.ui.settings.view
 
 
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
@@ -21,6 +23,7 @@ import com.google.android.material.switchmaterial.SwitchMaterial
 import com.utmaximur.alcoholtracker.BuildConfig
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.ui.settings.view.adapter.ThemeListAdapter
+
 
 const val PREFS_NAME = "theme_prefs"
 const val KEY_THEME = "prefs.theme"
@@ -90,14 +93,24 @@ class SettingsFragment : Fragment(), ThemeListAdapter.ThemeListener {
             if (b) {
                 Log.e("fix", " getDefaultNightMode() ${AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM}")
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.getDefaultNightMode())
-                themeList.visibility = View.GONE
                 saveTheme(THEME_UNDEFINED)
+                animateViewHeight(themeList, 0)
             } else {
-                themeList.visibility = View.VISIBLE
+                animateViewHeight(themeList, 250)
             }
         }
 
         versionApp.text = BuildConfig.VERSION_NAME
+    }
+
+    private fun animateViewHeight(view: RecyclerView, targetHeight: Int) {
+        val animator: ValueAnimator = ObjectAnimator.ofInt(view.height, targetHeight)
+        animator.addUpdateListener { animation ->
+            val params = view.layoutParams
+            params.height = animation.animatedValue as Int
+            view.layoutParams = params
+        }
+        animator.start()
     }
 
     private fun initTheme() {
