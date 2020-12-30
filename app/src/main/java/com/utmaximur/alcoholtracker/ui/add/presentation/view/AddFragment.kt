@@ -177,6 +177,7 @@ class AddFragment : Fragment() {
             requireContext().resources.getStringArray(R.array.volume_beer_array).size - 1
         volumeNumberPicker.displayedValues =
             requireContext().resources.getStringArray(R.array.volume_beer_array)
+        setVolume(requireContext().resources.getStringArray(R.array.volume_beer_array).toList())
 
         addDateButton.setOnClickListener {
             datePecker = DatePickerDialog(
