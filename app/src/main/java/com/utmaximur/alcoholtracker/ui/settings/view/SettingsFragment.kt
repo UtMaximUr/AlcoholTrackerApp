@@ -32,8 +32,12 @@ const val THEME_LIGHT = 0
 const val THEME_DARK = 1
 const val THEME_HEIGHT = 250
 
+const val PRIVACY_POLICY = "https://alcohol-tracker.flycricket.io/privacy.html"
+const val TERMS_OF_USE = "https://alcohol-tracker.flycricket.io/terms.html"
+
 class SettingsFragment : Fragment(), ThemeListAdapter.ThemeListener {
 
+    private lateinit var privacyPolicyLayout: Button
     private lateinit var termsOfUseLayout: Button
     private lateinit var rateUsButton: Button
     private lateinit var versionApp: TextView
@@ -58,6 +62,7 @@ class SettingsFragment : Fragment(), ThemeListAdapter.ThemeListener {
     }
 
     private fun findViewById(view: View) {
+        privacyPolicyLayout = view.findViewById(R.id.privacy_policy_button)
         termsOfUseLayout = view.findViewById(R.id.terms_of_use_button)
         rateUsButton = view.findViewById(R.id.rate_app_button)
         versionApp = view.findViewById(R.id.version_app)
@@ -70,8 +75,12 @@ class SettingsFragment : Fragment(), ThemeListAdapter.ThemeListener {
         findViewById(view)
         initTheme()
 
-        termsOfUseLayout.setOnClickListener {
+        privacyPolicyLayout.setOnClickListener {
+            goToUrl(PRIVACY_POLICY)
+        }
 
+        termsOfUseLayout.setOnClickListener {
+            goToUrl(TERMS_OF_USE)
         }
 
         rateUsButton.setOnClickListener {
@@ -163,6 +172,15 @@ class SettingsFragment : Fragment(), ThemeListAdapter.ThemeListener {
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         Log.e("fix", "onConfigurationChanged")
+    }
+
+    private fun goToUrl(url: String) {
+        startActivity(
+            Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse(url)
+            )
+        )
     }
 
     private fun rateUs() {
