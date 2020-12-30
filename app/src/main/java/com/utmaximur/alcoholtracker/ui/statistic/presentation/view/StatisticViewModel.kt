@@ -63,6 +63,7 @@ class StatisticViewModel(private var drinkRepository: DrinkRepository,
             }
             monthPeriod -> {
                 cal.set(Calendar.DAY_OF_MONTH, 1)
+                cal.set(Calendar.HOUR_OF_DAY, 0)
                 alcoholTrackList.forEach {
                     if (it.date > cal.timeInMillis) {
                         sumPrice += it.quantity * it.price
