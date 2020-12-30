@@ -169,11 +169,6 @@ class SettingsFragment : Fragment(), ThemeListAdapter.ThemeListener {
         }
     }
 
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-        Log.e("fix", "onConfigurationChanged")
-    }
-
     private fun goToUrl(url: String) {
         startActivity(
             Intent(
