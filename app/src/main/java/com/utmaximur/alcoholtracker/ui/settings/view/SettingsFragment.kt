@@ -15,6 +15,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
@@ -42,6 +43,7 @@ class SettingsFragment : Fragment(), ThemeListAdapter.ThemeListener {
     private lateinit var rateUsButton: Button
     private lateinit var versionApp: TextView
     private lateinit var themeSwitch: SwitchMaterial
+    private lateinit var themeLayout: LinearLayout
     private lateinit var themeList: RecyclerView
 
     private val sharedPrefs by lazy {
@@ -67,6 +69,7 @@ class SettingsFragment : Fragment(), ThemeListAdapter.ThemeListener {
         rateUsButton = view.findViewById(R.id.rate_app_button)
         versionApp = view.findViewById(R.id.version_app)
         themeSwitch = view.findViewById(R.id.theme_switch)
+        themeLayout = view.findViewById(R.id.theme_layout)
         themeList = view.findViewById(R.id.theme_list)
     }
 
@@ -119,9 +122,9 @@ class SettingsFragment : Fragment(), ThemeListAdapter.ThemeListener {
 
     private fun initTheme() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            themeSwitch.visibility = View.VISIBLE
+            themeLayout.visibility = View.VISIBLE
         } else {
-            themeSwitch.visibility = View.GONE
+            themeLayout.visibility = View.GONE
         }
         when (getSavedTheme()) {
             THEME_DARK -> {
