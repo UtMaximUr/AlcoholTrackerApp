@@ -104,6 +104,25 @@
     <string name="enum_gin">Джин</string>
     <string name="enum_wine">Вино</string>
 
+    <!--calculator-->
+    <string name="calc_ac" translatable="false">AC</string>
+    <string name="calc_ok" translatable="false">OK</string>
+    <string name="calc_7" translatable="false">7</string>
+    <string name="calc_8" translatable="false">8</string>
+    <string name="calc_9" translatable="false">9</string>
+    <string name="calc_divide" translatable="false">/</string>
+    <string name="calc_4" translatable="false">4</string>
+    <string name="calc_5" translatable="false">5</string>
+    <string name="calc_6" translatable="false">6</string>
+    <string name="calc_multiply" translatable="false">*</string>
+    <string name="calc_1" translatable="false">1</string>
+    <string name="calc_2" translatable="false">2</string>
+    <string name="calc_3" translatable="false">3</string>
+    <string name="calc_minus" translatable="false">-</string>
+    <string name="calc_0" translatable="false">0</string>
+    <string name="calc_equally" translatable="false">=</string>
+    <string name="calc_plus" translatable="false">+</string>
+
     <string-array name="volume_beer_array">
         <item>0.33 л</item>
         <item>0.375 л</item>
