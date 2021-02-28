@@ -10,10 +10,7 @@ import android.view.View.GONE
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.EditorInfo
-import android.widget.Button
-import android.widget.EditText
-import android.widget.NumberPicker
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -28,10 +25,12 @@ import com.utmaximur.alcoholtracker.dagger.factory.AddViewModelFactory
 import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
 import com.utmaximur.alcoholtracker.data.model.Drink
 import com.utmaximur.alcoholtracker.ui.add.presentation.view.adapter.DrinkViewPagerAdapter
+import com.utmaximur.alcoholtracker.ui.calculator.view.CalculatorFragment
+import com.utmaximur.alcoholtracker.ui.calculator.view.CalculatorFragment.*
 import java.util.*
 
 
-class AddFragment : Fragment() {
+class AddFragment : Fragment(), CalculatorListener {
 
     private var addFragmentListener: AddFragmentListener? = null
 
@@ -59,6 +58,8 @@ class AddFragment : Fragment() {
 
     private lateinit var drinksPager: ViewPager
     private lateinit var dotsIndicator: TabLayout
+
+    private lateinit var calculatorFragment: LinearLayout
 
     private var dateAndTime = Calendar.getInstance()
 
@@ -105,6 +106,8 @@ class AddFragment : Fragment() {
 
         drinksPager = view.findViewById(R.id.view_pager_drinks)
         dotsIndicator = view.findViewById(R.id.view_pager_indicator)
+
+        calculatorFragment = view.findViewById(R.id.calculator_layout)
     }
 
     private fun initUi(view: View) {
@@ -196,6 +199,16 @@ class AddFragment : Fragment() {
             )
             viewModel.date = Date().time
             todayButton.visibility = GONE
+        }
+
+
+        priceEditText.setOnClickListener {
+//           viewModel.showCalculator(calculatorFragment)
+            val calculatorFragment = CalculatorFragment()
+            calculatorFragment.setListener(this)
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.add(R.id.container_calculator, calculatorFragment)
+                ?.commit()
         }
 
         priceEditText.setOnEditorActionListener { _, i, _ ->
@@ -364,5 +377,9 @@ class AddFragment : Fragment() {
                 AnimationUtils.loadAnimation(context, R.anim.button_animation)
             addDateButton.startAnimation(buttonAnimation)
         }
+    }
+
+    override fun getValueCalculating(value: String) {
+        priceEditText.setText(value)
     }
 }

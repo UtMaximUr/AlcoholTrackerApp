@@ -173,36 +173,55 @@
             app:cardElevation="6dp">
 
             <LinearLayout
-                android:id="@+id/add_price_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/price_text"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/add_price_button"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_condensed_regular"
-                    android:text="@string/add_price"
-                    android:textColor="@color/text_color" />
+                    android:layout_margin="12dp"
+                    android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/price_edit_text"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:labelFor="@id/price_text"
-                    android:textColorHint="@color/text_warning_color"
-                    android:imeOptions="actionDone"
-                    android:inputType="number"
-                    android:textColor="@color/text_color"
-                    android:importantForAutofill="no"
-                    tools:ignore="LabelFor" />
+                    <TextView
+                        android:id="@+id/price_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_condensed_regular"
+                        android:text="@string/add_price"
+                        android:textColor="@color/text_color" />
+
+                    <EditText
+                        android:id="@+id/price_edit_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:labelFor="@id/price_text"
+                        android:textColorHint="@color/text_warning_color"
+                        android:imeOptions="actionDone"
+                        android:inputType="none"
+                        android:textColor="@color/text_color"
+                        android:importantForAutofill="no"
+                        android:focusable="false"
+                        tools:ignore="LabelFor" />
+
+                </LinearLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/container_calculator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <include layout="@layout/fragment_calculator"
+                    android:id="@+id/calculator_layout"
+                    android:visibility="gone"/>
 
             </LinearLayout>
+
+
 
         </androidx.cardview.widget.CardView>
 
