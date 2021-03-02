@@ -1,17 +1,25 @@
 package com.utmaximur.alcoholtracker.ui.add.presentation.view
 
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.EditorInfo
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.NumberPicker
+import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -26,18 +34,24 @@ import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
 import com.utmaximur.alcoholtracker.data.model.Drink
 import com.utmaximur.alcoholtracker.ui.add.presentation.view.adapter.DrinkViewPagerAdapter
 import com.utmaximur.alcoholtracker.ui.calculator.view.CalculatorFragment
-import com.utmaximur.alcoholtracker.ui.calculator.view.CalculatorFragment.*
+import com.utmaximur.alcoholtracker.ui.calculator.view.CalculatorFragment.CalculatorListener
+import com.utmaximur.alcoholtracker.util.Convert
 import java.util.*
 
 
 class AddFragment : Fragment(), CalculatorListener {
 
     private var addFragmentListener: AddFragmentListener? = null
+    private var heightViewListener: HeightViewListener? = null
 
     interface AddFragmentListener {
         fun onHideNavigationBar()
         fun onShowNavigationBar()
         fun closeFragment()
+    }
+
+    interface HeightViewListener {
+        fun getHeight(height: Int)
     }
 
     private lateinit var toolbar: Toolbar
@@ -59,7 +73,7 @@ class AddFragment : Fragment(), CalculatorListener {
     private lateinit var drinksPager: ViewPager
     private lateinit var dotsIndicator: TabLayout
 
-    private lateinit var calculatorFragment: LinearLayout
+    private lateinit var containerFragment: ConstraintLayout
 
     private var dateAndTime = Calendar.getInstance()
 
@@ -107,7 +121,7 @@ class AddFragment : Fragment(), CalculatorListener {
         drinksPager = view.findViewById(R.id.view_pager_drinks)
         dotsIndicator = view.findViewById(R.id.view_pager_indicator)
 
-        calculatorFragment = view.findViewById(R.id.calculator_layout)
+        containerFragment = view.findViewById(R.id.container_calculator)
     }
 
     private fun initUi(view: View) {
@@ -203,12 +217,16 @@ class AddFragment : Fragment(), CalculatorListener {
 
 
         priceEditText.setOnClickListener {
-//           viewModel.showCalculator(calculatorFragment)
-            val calculatorFragment = CalculatorFragment()
-            calculatorFragment.setListener(this)
-            activity?.supportFragmentManager?.beginTransaction()
-                ?.add(R.id.container_calculator, calculatorFragment)
-                ?.commit()
+//            viewModel.expandView(containerFragment)
+            if (containerFragment.height == 0) {
+                val calculatorFragment = CalculatorFragment()
+                calculatorFragment.setListener(this@AddFragment)
+                activity?.supportFragmentManager?.beginTransaction()
+                    ?.add(R.id.container_calculator, calculatorFragment)
+                    ?.setCustomAnimations(R.anim.fragment_open_enter, R.anim.fragment_close_exit)
+                    ?.commit()
+                animateViewHeight(containerFragment, Convert.dpToPx(245, requireContext()))
+            }
         }
 
         priceEditText.setOnEditorActionListener { _, i, _ ->
@@ -231,6 +249,16 @@ class AddFragment : Fragment(), CalculatorListener {
                 priceEditText.hint = ""
             }
         }
+    }
+
+    private fun animateViewHeight(view: ConstraintLayout, targetHeight: Int) {
+        val animator: ValueAnimator = ObjectAnimator.ofInt(view.height, targetHeight)
+        animator.addUpdateListener { animation ->
+            val params = view.layoutParams
+            params.height = animation.animatedValue as Int
+            view.layoutParams = params
+        }
+        animator.start()
     }
 
     private fun setDrinkDegreeArray(position: Int) {
@@ -381,5 +409,9 @@ class AddFragment : Fragment(), CalculatorListener {
 
     override fun getValueCalculating(value: String) {
         priceEditText.setText(value)
+    }
+
+    override fun closeCalculator() {
+        animateViewHeight(containerFragment, 0)
     }
 }

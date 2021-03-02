@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="245dp"
     android:orientation="vertical">
 
     <LinearLayout
@@ -15,10 +15,10 @@
             android:id="@+id/calculator_button_ac"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="6dp"
+            android:layout_marginStart="6dp"
             android:text="@string/calc_ac"
             android:backgroundTint="@color/background_color"
-            android:textColor="@color/text_color_black"
+            android:textColor="@color/text_color"
             android:layout_weight="1"
             tools:ignore="ButtonStyle" />
 
@@ -29,6 +29,7 @@
             android:layout_gravity="center_vertical"
             android:text="@string/calc_ok"
             android:backgroundTint="@color/cardview_dark_background"
+            android:layout_marginStart="6dp"
             android:layout_marginEnd="6dp"
             tools:ignore="ButtonStyle" />
 
@@ -46,8 +47,9 @@
             android:layout_weight="1"
             android:text="@string/calc_7"
             android:backgroundTint="@color/background_color"
-            android:textColor="@color/text_color_black"
-            android:layout_margin="6dp"
+            android:textColor="@color/text_color"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
             tools:ignore="ButtonStyle" />
 
         <Button
@@ -57,7 +59,7 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:backgroundTint="@color/background_color"
-            android:textColor="@color/text_color_black"
+            android:textColor="@color/text_color"
             android:text="@string/calc_8"
             tools:ignore="ButtonStyle" />
 
@@ -68,8 +70,9 @@
             android:layout_weight="1"
             android:text="@string/calc_9"
             android:backgroundTint="@color/background_color"
-            android:textColor="@color/text_color_black"
-            android:layout_margin="6dp"
+            android:textColor="@color/text_color"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
             tools:ignore="ButtonStyle" />
 
         <Button
@@ -96,8 +99,9 @@
             android:layout_weight="1"
             android:text="@string/calc_4"
             android:backgroundTint="@color/background_color"
-            android:textColor="@color/text_color_black"
-            android:layout_margin="6dp"
+            android:textColor="@color/text_color"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
             tools:ignore="ButtonStyle" />
 
         <Button
@@ -107,7 +111,7 @@
             android:layout_weight="1"
             android:text="@string/calc_5"
             android:backgroundTint="@color/background_color"
-            android:textColor="@color/text_color_black"
+            android:textColor="@color/text_color"
             android:layout_gravity="center_vertical"
             tools:ignore="ButtonStyle" />
 
@@ -118,8 +122,9 @@
             android:layout_weight="1"
             android:text="@string/calc_6"
             android:backgroundTint="@color/background_color"
-            android:textColor="@color/text_color_black"
-            android:layout_margin="6dp"
+            android:textColor="@color/text_color"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
             tools:ignore="ButtonStyle" />
 
         <Button
@@ -146,8 +151,9 @@
             android:layout_weight="1"
             android:text="@string/calc_1"
             android:backgroundTint="@color/background_color"
-            android:textColor="@color/text_color_black"
-            android:layout_margin="6dp"
+            android:textColor="@color/text_color"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
             tools:ignore="ButtonStyle" />
 
         <Button
@@ -157,7 +163,7 @@
             android:layout_weight="1"
             android:text="@string/calc_2"
             android:backgroundTint="@color/background_color"
-            android:textColor="@color/text_color_black"
+            android:textColor="@color/text_color"
             android:layout_gravity="center_vertical"
             tools:ignore="ButtonStyle" />
 
@@ -168,8 +174,9 @@
             android:layout_weight="1"
             android:text="@string/calc_3"
             android:backgroundTint="@color/background_color"
-            android:textColor="@color/text_color_black"
-            android:layout_margin="6dp"
+            android:textColor="@color/text_color"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
             tools:ignore="ButtonStyle" />
 
         <Button
@@ -187,6 +194,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
         android:orientation="horizontal">
 
         <Button
@@ -195,8 +203,9 @@
             android:layout_height="wrap_content"
             android:text="@string/calc_0"
             android:backgroundTint="@color/background_color"
-            android:textColor="@color/text_color_black"
-            android:layout_margin="6dp"
+            android:textColor="@color/text_color"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
             tools:ignore="ButtonStyle" />
 
         <Button
@@ -215,7 +224,8 @@
             android:layout_height="wrap_content"
             android:text="@string/calc_plus"
             android:backgroundTint="@color/cardview_dark_background"
-            android:layout_margin="6dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
             tools:ignore="ButtonStyle" />
 
     </LinearLayout>

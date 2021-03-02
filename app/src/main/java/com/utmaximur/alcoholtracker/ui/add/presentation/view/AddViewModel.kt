@@ -3,6 +3,7 @@ package com.utmaximur.alcoholtracker.ui.add.presentation.view
 import android.content.Context
 import android.view.View
 import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.utmaximur.alcoholtracker.R
@@ -10,6 +11,7 @@ import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
 import com.utmaximur.alcoholtracker.data.model.Drink
 import com.utmaximur.alcoholtracker.repository.DrinkRepository
 import com.utmaximur.alcoholtracker.repository.TrackRepository
+import com.utmaximur.alcoholtracker.ui.add.presentation.view.AddFragment.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -25,6 +27,7 @@ class AddViewModel(private var drinkRepository: DrinkRepository,
     var price: Float = 0.0f
     var date: Long = 0L
     var icon: Int = 0
+    var heightCalculator = 0
     var drinks: List<Drink> = ArrayList()
     var volums: List<String> = ArrayList()
     var degrees: List<String?> = ArrayList()
@@ -82,6 +85,10 @@ class AddViewModel(private var drinkRepository: DrinkRepository,
         return String.format("%s", sdf.format(Date(date)))
     }
 
+    fun getHeight(): Int {
+        return heightCalculator
+    }
+
     fun showCalculator(calculatorFragment: LinearLayout) {
         if (isShow) {
             calculatorFragment.visibility = View.VISIBLE
@@ -89,5 +96,16 @@ class AddViewModel(private var drinkRepository: DrinkRepository,
             calculatorFragment.visibility = View.GONE
         }
         isShow = !isShow
+    }
+
+    fun expandView(view: View) {
+        view.visibility = View.VISIBLE
+        val parms: LinearLayout.LayoutParams = view.layoutParams as LinearLayout.LayoutParams
+        val width: Int = view.width - parms.leftMargin - parms.rightMargin
+        view.measure(
+            View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.AT_MOST),
+            View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+        )
+        heightCalculator = view.measuredHeight
     }
 }
