@@ -6,8 +6,6 @@ import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.content.Context
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -42,16 +40,11 @@ import java.util.*
 class AddFragment : Fragment(), CalculatorListener {
 
     private var addFragmentListener: AddFragmentListener? = null
-    private var heightViewListener: HeightViewListener? = null
 
     interface AddFragmentListener {
         fun onHideNavigationBar()
         fun onShowNavigationBar()
         fun closeFragment()
-    }
-
-    interface HeightViewListener {
-        fun getHeight(height: Int)
     }
 
     private lateinit var toolbar: Toolbar
