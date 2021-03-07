@@ -10,11 +10,13 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.ui.add.presentation.view.AddFragment
+import com.utmaximur.alcoholtracker.ui.addmydrink.view.AddNewDrink
 import com.utmaximur.alcoholtracker.ui.calendar.presentation.view.CalendarFragment
 
 
 class MainActivity : AppCompatActivity(),
     AddFragment.AddFragmentListener,
+    AddNewDrink.AddNewFragmentListener,
     CalendarFragment.CalendarFragmentListener {
 
     private lateinit var menu: BottomNavigationView
@@ -43,8 +45,8 @@ class MainActivity : AppCompatActivity(),
         navController.popBackStack()
     }
 
-    override fun showAddAlcoholTrackerFragment() {
-        navController.navigate(R.id.addFragment)
+    override fun showAddAlcoholTrackerFragment(bundle: Bundle?) {
+        navController.navigate(R.id.addFragment, bundle)
     }
 
     override fun showEditAlcoholTrackerFragment(bundle: Bundle) {
@@ -57,5 +59,9 @@ class MainActivity : AppCompatActivity(),
 
     override fun onShowNavigationBar() {
         menu.visibility = VISIBLE
+    }
+
+    override fun onShowAddNewDrinkFragment() {
+        navController.navigate(R.id.addNewDrinkFragment)
     }
 }
