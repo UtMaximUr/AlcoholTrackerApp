@@ -30,12 +30,24 @@
     <string name="add_save">Сохранить</string>
     <string name="enter_price">!Введите стоимость</string>
 
+    <!--add new drink-->
+    <string name="add_new_drink">Создать напиток</string>
+
     <!--edit-->
     <string name="edit_drink_title">Редактировать напиток</string>
 
     <!--create drink-->
     <string name="create_drink_title">Создать напиток</string>
-    <string name="create_drink_hint">Введите Название</string>
+    <string name="create_drink_hint">Название напитка</string>
+    <string name="bottom_sheet_option_camera">Использовать камеру</string>
+    <string name="bottom_sheet_option_gallery">Загрузить из галлереи</string>
+    <string name="bottom_sheet_option_heading">Добавить фотографию</string>
+    <string name="bottom_sheet_option_remove_photo">Удалить фотографию</string>
+
+    <!--dialog select date-->
+    <string name="dialog_select_date_title">Использовать выбранную дату для добавления напитка?</string>
+    <string name="dialog_select_date_ok">Да</string>
+    <string name="dialog_select_date_no">Нет</string>
 
 
     <!--settings-->
