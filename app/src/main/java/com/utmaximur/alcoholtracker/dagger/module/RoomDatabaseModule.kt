@@ -9,6 +9,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.data.AlcoholTrackDatabase
 import com.utmaximur.alcoholtracker.data.model.Drink
+import com.utmaximur.alcoholtracker.data.model.Icon
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.CoroutineScope
@@ -30,6 +31,11 @@ class RoomDatabaseModule(private var application: Application) {
             CoroutineScope(Dispatchers.IO).launch {
                 initRealmWithData(application).forEach {
                     alcoholTrackDatabase.getDrinkDao().addDrink(it)
+                }
+            }
+            CoroutineScope(Dispatchers.IO).launch {
+                initRealmWithDataIcon().forEach {
+                    alcoholTrackDatabase.getIconDao().addIcon(it)
                 }
             }
         }
@@ -191,6 +197,28 @@ class RoomDatabaseModule(private var application: Application) {
         return drinks
     }
 
+    fun initRealmWithDataIcon(): List<Icon>{
+        val icons: ArrayList<Icon> = ArrayList()
+
+        icons.add(Icon(UUID.randomUUID().toString(),R.raw.ic_add_drink_0))
+        icons.add(Icon(UUID.randomUUID().toString(),R.raw.ic_add_drink_1))
+        icons.add(Icon(UUID.randomUUID().toString(),R.raw.ic_add_drink_2))
+        icons.add(Icon(UUID.randomUUID().toString(),R.raw.ic_add_drink_3))
+        icons.add(Icon(UUID.randomUUID().toString(),R.raw.ic_add_drink_4))
+        icons.add(Icon(UUID.randomUUID().toString(),R.raw.ic_add_drink_5))
+        icons.add(Icon(UUID.randomUUID().toString(),R.raw.ic_add_drink_6))
+        icons.add(Icon(UUID.randomUUID().toString(),R.raw.ic_add_drink_7))
+        icons.add(Icon(UUID.randomUUID().toString(),R.raw.ic_add_drink_8))
+        icons.add(Icon(UUID.randomUUID().toString(),R.raw.ic_add_drink_9))
+        icons.add(Icon(UUID.randomUUID().toString(),R.raw.ic_add_drink_10))
+        icons.add(Icon(UUID.randomUUID().toString(),R.raw.ic_add_drink_11))
+        icons.add(Icon(UUID.randomUUID().toString(),R.raw.ic_add_drink_12))
+        icons.add(Icon(UUID.randomUUID().toString(),R.raw.ic_add_drink_13))
+        icons.add(Icon(UUID.randomUUID().toString(),R.raw.ic_add_drink_14))
+
+        return icons
+    }
+
     private fun getDoubleDegree(degree: Double, size: Int): List<String?> {
         val nums: Array<String?> = arrayOfNulls(size)
         var double = degree
@@ -229,4 +257,8 @@ class RoomDatabaseModule(private var application: Application) {
     @Singleton
     @Provides
     fun providesDrinkDAO(alcoholTrackDatabase: AlcoholTrackDatabase) = alcoholTrackDatabase.getDrinkDao()
+
+    @Singleton
+    @Provides
+    fun providesIconDAO(alcoholTrackDatabase: AlcoholTrackDatabase) = alcoholTrackDatabase.getIconDao()
 }
