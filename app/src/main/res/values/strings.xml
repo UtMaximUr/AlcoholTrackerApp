@@ -27,6 +27,7 @@
     <string name="add_empty">0</string>
     <string name="add_currency">RUR</string>
     <string name="add_litres">л</string>
+    <string name="add_degree_s" translatable="false">°</string>
     <string name="add_save">Сохранить</string>
     <string name="enter_price">!Введите стоимость</string>
 
@@ -88,6 +89,7 @@
     <!--regex-->
     <string name="only_number_regex" tools:ignore="TypographyDashes">[^0-9, .]</string>
     <string name="only_text_regex">[^A–z, А-я]</string>
+    <string name="divide_value" translatable="false"> - </string>
 
     <plurals name="plurals_day">
         <item quantity="one">%1$d день</item>

@@ -16,6 +16,8 @@
     <color name="text_color">#FFFFFFFF</color>
     <color name="accent_color">#FFBB86FC</color>
     <color name="statistic_color">#FFBB86FC</color>
+    <color name="seekBarActiveColor">#FFBB86FC</color>
+    <color name="seekBarInactiveColor">#9B9B9B</color>
 
 
 </resources>
