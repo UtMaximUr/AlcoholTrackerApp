@@ -12,7 +12,8 @@ class AddDrinkDialogFragment : DialogFragment() {
     private var addDrinkDialogListener: AddDrinkDialogListener? = null
 
     interface AddDrinkDialogListener {
-        fun onAddDrinkDialog()
+        fun addDrinkDialogPositiveClick()
+        fun addDrinkDialogNegativeClick()
     }
 
     fun setListener(addDrinkDialogListener: AddDrinkDialogListener) {
@@ -24,12 +25,12 @@ class AddDrinkDialogFragment : DialogFragment() {
             val builder = AlertDialog.Builder(it)
             builder.setTitle(getText(R.string.dialog_select_date_title))
                 .setPositiveButton(getText(R.string.dialog_select_date_ok)) { dialog, _ ->
-                    addDrinkDialogListener?.onAddDrinkDialog()
+                    addDrinkDialogListener?.addDrinkDialogPositiveClick()
                     dialog.cancel()
                 }
                 .setNegativeButton(getText(R.string.dialog_select_date_no)) {
                         dialog, _ ->
-                    addDrinkDialogListener?.onAddDrinkDialog()
+                    addDrinkDialogListener?.addDrinkDialogNegativeClick()
                     dialog.cancel()
                 }
             builder.create()
