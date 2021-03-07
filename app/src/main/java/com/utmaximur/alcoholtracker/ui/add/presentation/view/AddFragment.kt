@@ -6,6 +6,7 @@ import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -31,19 +32,21 @@ import com.utmaximur.alcoholtracker.dagger.factory.AddViewModelFactory
 import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
 import com.utmaximur.alcoholtracker.data.model.Drink
 import com.utmaximur.alcoholtracker.ui.add.presentation.view.adapter.DrinkViewPagerAdapter
+import com.utmaximur.alcoholtracker.ui.add.presentation.view.adapter.DrinkViewPagerAdapter.AddDrinkListener
 import com.utmaximur.alcoholtracker.ui.calculator.view.CalculatorFragment
 import com.utmaximur.alcoholtracker.ui.calculator.view.CalculatorFragment.CalculatorListener
-import com.utmaximur.alcoholtracker.util.Convert
+import com.utmaximur.alcoholtracker.util.dpToPx
 import java.util.*
 
 
-class AddFragment : Fragment(), CalculatorListener {
+class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
 
     private var addFragmentListener: AddFragmentListener? = null
 
     interface AddFragmentListener {
         fun onHideNavigationBar()
         fun onShowNavigationBar()
+        fun onShowAddNewDrinkFragment()
         fun closeFragment()
     }
 
@@ -147,7 +150,6 @@ class AddFragment : Fragment(), CalculatorListener {
         }
 
         // выбор напитков
-//        drinksPager.adapter = DrinkViewPagerAdapter(getDrinksList(), requireContext())
         dotsIndicator.setupWithViewPager(drinksPager, true)
         drinksPager.addOnPageChangeListener(object : OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {}
@@ -159,8 +161,10 @@ class AddFragment : Fragment(), CalculatorListener {
             }
 
             override fun onPageSelected(position: Int) {
-                setDrinkDegreeArray(position)
-                setDrinkVolumeArray(position)
+                if (getDrinksList().size != position) {
+                    setDrinkDegreeArray(position)
+                    setDrinkVolumeArray(position)
+                }
             }
         })
 
@@ -190,6 +194,9 @@ class AddFragment : Fragment(), CalculatorListener {
         setVolume(requireContext().resources.getStringArray(R.array.volume_beer_array).toList())
 
         addDateButton.setOnClickListener {
+            if(viewModel.date != 0L) {
+                dateAndTime.timeInMillis = viewModel.date
+            }
             datePecker = DatePickerDialog(
                 this.requireContext(), onDateSetListener,
                 dateAndTime.get(Calendar.YEAR),
@@ -218,7 +225,7 @@ class AddFragment : Fragment(), CalculatorListener {
                     ?.add(R.id.container_calculator, calculatorFragment)
                     ?.setCustomAnimations(R.anim.fragment_open_enter, R.anim.fragment_close_exit)
                     ?.commit()
-                animateViewHeight(containerFragment, Convert.dpToPx(245, requireContext()))
+                animateViewHeight(containerFragment, 245.dpToPx())
             }
         }
 
@@ -256,7 +263,6 @@ class AddFragment : Fragment(), CalculatorListener {
 
     private fun setDrinkDegreeArray(position: Int) {
         val drink: Drink = getDrinksList()[position]
-
         degreeNumberPicker.value = 0
         degreeNumberPicker.maxValue = drink.alcoholStrength.size - 1
         degreeNumberPicker.displayedValues = drink.alcoholStrength.toTypedArray()
@@ -379,9 +385,20 @@ class AddFragment : Fragment(), CalculatorListener {
     private fun setDrinksList() {
         viewModel.getAllDrink().observe(viewLifecycleOwner, Observer { list ->
             viewModel.drinks = list
-            drinksPager.adapter = DrinkViewPagerAdapter(getDrinksList(), requireContext())
+            val adapter =  DrinkViewPagerAdapter(getDrinksList(), requireContext())
+            adapter.setListener(this)
+            drinksPager.adapter = adapter
             if (arguments != null) {
-                setEditArguments()
+                if (arguments?.containsKey("selectDate")!! && arguments?.getLong("selectDate") != 0L){
+                    addDateButton.text = viewModel.setDateOnButton(
+                        requireContext(),
+                        Date(requireArguments().getLong("selectDate"))
+                    )
+                    viewModel.date = requireArguments().getLong("selectDate")
+                    todayButton.visibility = GONE
+                } else {
+                    setEditArguments()
+                }
             }
         })
     }
@@ -406,5 +423,13 @@ class AddFragment : Fragment(), CalculatorListener {
 
     override fun closeCalculator() {
         animateViewHeight(containerFragment, 0)
+    }
+
+    override fun addNewDrink() {
+        addFragmentListener?.onShowAddNewDrinkFragment()
+    }
+
+    override fun deleteDrink(drink: Drink) {
+        Log.e("listener_drink", "deleteDrink")
     }
 }
