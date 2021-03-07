@@ -6,9 +6,19 @@ import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
 import com.utmaximur.alcoholtracker.repository.TrackRepository
 
 
-open class CalendarViewModel(private var trackRepository: TrackRepository) : ViewModel(){
+open class CalendarViewModel(private var trackRepository: TrackRepository) : ViewModel() {
 
-    fun getTrack(date: Long): LiveData<AlcoholTrack?>{
+    private var selectDate = 0L
+
+    fun setSelectDate(selectDate: Long) {
+         this.selectDate = selectDate
+    }
+
+    fun getSelectDate(): Long {
+        return selectDate
+    }
+
+    fun getTrack(date: Long): LiveData<AlcoholTrack?> {
         return trackRepository.getTrack(date)
     }
 
