@@ -3,7 +3,7 @@ package com.utmaximur.alcoholtracker.dagger.factory
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.utmaximur.alcoholtracker.repository.IconRepository
-import com.utmaximur.alcoholtracker.ui.dialog.AddIconDrinkViewModel
+import com.utmaximur.alcoholtracker.ui.dialog.addicon.AddIconDrinkViewModel
 import javax.inject.Inject
 import javax.inject.Singleton
 
