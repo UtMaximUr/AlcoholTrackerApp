@@ -35,6 +35,7 @@ import com.utmaximur.alcoholtracker.ui.add.presentation.view.adapter.DrinkViewPa
 import com.utmaximur.alcoholtracker.ui.add.presentation.view.adapter.DrinkViewPagerAdapter.AddDrinkListener
 import com.utmaximur.alcoholtracker.ui.calculator.view.CalculatorFragment
 import com.utmaximur.alcoholtracker.ui.calculator.view.CalculatorFragment.CalculatorListener
+import com.utmaximur.alcoholtracker.util.AlphaView
 import com.utmaximur.alcoholtracker.util.dpToPx
 import java.util.*
 
@@ -388,6 +389,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
             val adapter =  DrinkViewPagerAdapter(getDrinksList(), requireContext())
             adapter.setListener(this)
             drinksPager.adapter = adapter
+            AlphaView(drinksPager, requireContext())
             if (arguments != null) {
                 if (arguments?.containsKey("selectDate")!! && arguments?.getLong("selectDate") != 0L){
                     addDateButton.text = viewModel.setDateOnButton(
