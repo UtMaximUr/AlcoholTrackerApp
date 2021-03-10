@@ -20,7 +20,7 @@ import com.utmaximur.alcoholtracker.dagger.factory.CalendarViewModelFactory
 import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
 import com.utmaximur.alcoholtracker.ui.calendar.presentation.view.adapter.DrinksListAdapter
 import com.utmaximur.alcoholtracker.ui.dialog.adddrink.AddDrinkDialogFragment
-import com.utmaximur.alcoholtracker.util.AlphaView
+import com.utmaximur.alcoholtracker.util.alphaView
 import java.util.*
 import javax.inject.Inject
 
@@ -172,16 +172,16 @@ class CalendarFragment : Fragment(),
                 this@CalendarFragment
             )
             recyclerView.adapter = drinksListAdapter
-            AlphaView(recyclerView, requireContext())
+            recyclerView.alphaView(requireContext())
             if (alcoholTrack.isNotEmpty()) {
                 emptyDrinkListText.visibility = View.INVISIBLE
             } else {
                 if (list.isEmpty()) {
                     addToStartText.visibility = View.VISIBLE
-                    AlphaView(addToStartText, requireContext())
+                    addToStartText.alphaView(requireContext())
                 } else {
                     emptyDrinkListText.visibility = View.VISIBLE
-                    AlphaView(emptyDrinkListText, requireContext())
+                    emptyDrinkListText.alphaView(requireContext())
                 }
             }
         })
