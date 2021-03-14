@@ -195,7 +195,16 @@ class CalendarFragment : Fragment(),
             list.forEach {
                 val calendar = Calendar.getInstance()
                 calendar.timeInMillis = it.date
-                events.add(EventDay(calendar, it.icon))
+                events.add(
+                    EventDay(
+                        calendar,
+                        requireContext().resources.getIdentifier(
+                            it.icon,
+                            "raw",
+                            requireContext().packageName
+                        )
+                    )
+                )
             }
             calendarView.setEvents(events)
         })
