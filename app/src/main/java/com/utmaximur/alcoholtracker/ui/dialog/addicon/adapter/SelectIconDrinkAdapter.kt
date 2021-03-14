@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.data.model.Icon
 
@@ -45,7 +46,7 @@ open class SelectIconDrinkAdapter :
         }
 
         fun bind(icon: Icon, selectIconListener: SelectIconListener?) {
-            drinkImage?.setImageResource(icon.icon)
+            Glide.with(itemView).load(icon.icon).into(drinkImage!!)
             drinkImage?.setOnClickListener {
                 selectIconListener?.selectIcon(icon.icon)
             }
