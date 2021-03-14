@@ -16,7 +16,7 @@ data class AlcoholTrack(
     val degree: String,
     val price: Float,
     val date: Long,
-    var icon: Int
+    var icon: String
 
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
@@ -27,7 +27,7 @@ data class AlcoholTrack(
         parcel.readString().toString(),
         parcel.readFloat(),
         parcel.readLong(),
-        parcel.readInt()
+        parcel.readString().toString()
     )
 
     override fun describeContents(): Int {
@@ -39,7 +39,7 @@ data class AlcoholTrack(
             arrayOf(
                 id, drink, volume, quantity.toString(), degree, price.toString(),
                 date.toString(),
-                icon.toString()
+                icon
             )
         )
     }
