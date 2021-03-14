@@ -11,9 +11,10 @@ data class Drink(
     var id: String,
     var drink: String,
     @TypeConverters(Converters::class)
-    var alcoholStrength: List<String?>,
-    var alcoholVolume: Int,
-    var icon: Int,
-    var image: Int
+    var degree: List<String?>,
+    @TypeConverters(Converters::class)
+    var volume: List<String?>,
+    var icon: String,
+    var photo: String
 
 )
