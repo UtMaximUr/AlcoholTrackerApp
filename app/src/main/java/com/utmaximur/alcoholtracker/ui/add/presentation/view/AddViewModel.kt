@@ -24,7 +24,7 @@ class AddViewModel(private var drinkRepository: DrinkRepository,
     var date: Long = 0L
     var icon: Int = 0
     var drinks: List<Drink> = ArrayList()
-    var volums: List<String> = ArrayList()
+    var volums: List<String?> = ArrayList()
     var degrees: List<String?> = ArrayList()
 
 
@@ -77,6 +77,10 @@ class AddViewModel(private var drinkRepository: DrinkRepository,
     fun getFormatString(context: Context, date: Long): String{
         val sdf = SimpleDateFormat(context.resources.getString(R.string.date_format_pattern), Locale.getDefault())
         return String.format("%s", sdf.format(Date(date)))
+    }
+
+    fun deleteDrink(drink: Drink) {
+        drinkRepository.deleteDrink(drink)
     }
 
 //    fun expandView(view: View) {
