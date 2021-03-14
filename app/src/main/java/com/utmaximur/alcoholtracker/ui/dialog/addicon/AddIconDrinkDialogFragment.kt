@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.utmaximur.alcoholtracker.App
@@ -67,12 +66,9 @@ class AddIconDrinkDialogFragment : DialogFragment(), SelectIconListener {
         findViewById(view)
 
         iconList.layoutManager = GridLayoutManager(context, 5)
-        viewModel.getIcons().observe(this, Observer { list ->
             iconList.adapter = SelectIconDrinkAdapter()
-            (iconList.adapter as SelectIconDrinkAdapter).setIcons(list)
+            (iconList.adapter as SelectIconDrinkAdapter).setIcons(viewModel.getIcons())
             (iconList.adapter as SelectIconDrinkAdapter).setListener(this)
-        })
-
     }
 
     override fun selectIcon(icon: Int) {
