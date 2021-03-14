@@ -53,6 +53,9 @@
     <string name="dialog_select_date_ok">Да</string>
     <string name="dialog_select_date_no">Нет</string>
 
+    <!--dialog delete-->
+    <string name="dialog_delete_title">Вы действительно хотите удалить запись?</string>
+
 
     <!--settings-->
     <string name="privacy_policy">Политика конфиденциальности</string>
