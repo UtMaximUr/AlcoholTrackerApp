@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.data.model.Drink
 
@@ -34,7 +35,13 @@ class TopDrinkAdapter(private var drinksDrunkByMe: Map<String, Int>) :
 
         fun bind(drink: Drink, drinksDrunkByMe: Map<String, Int>) {
             drinkText?.text = drink.drink
-            drinkImage?.setImageResource(drink.icon)
+            Glide.with(itemView).load(
+                itemView.context.resources.getIdentifier(
+                    drink.icon,
+                    "raw",
+                    itemView.context.packageName
+                )
+            ).into(drinkImage!!)
             drinksDrunkByMe.forEach {
                 if (it.key == drink.drink) {
                     drinkCountText?.text = String.format(
