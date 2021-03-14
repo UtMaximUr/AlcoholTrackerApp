@@ -46,6 +46,18 @@
         android:contentDescription="@string/cd_delete_button" />
 
     <ImageButton
+        android:id="@+id/item_drink_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_edit"
+        android:padding="24dp"
+        android:visibility="gone"
+        android:background="@android:color/transparent"
+        app:layout_constraintEnd_toStartOf="@id/item_drink_delete"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/cd_edit_button" />
+
+    <ImageButton
         android:id="@+id/item_drink_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
