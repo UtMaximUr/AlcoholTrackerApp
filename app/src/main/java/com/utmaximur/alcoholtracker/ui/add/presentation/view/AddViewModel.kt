@@ -63,17 +63,6 @@ class AddViewModel(private var drinkRepository: DrinkRepository,
         return String.format("%s", sdf.format(date))
     }
 
-     fun getFloatDegree(): Array<String?> {
-        val nums: Array<String?> = arrayOfNulls(11)
-        var double = 3.5
-        for (i in 0..10) {
-            double += 0.5
-            val format: String = String.format("%.1f", double)
-            nums[i] = format
-        }
-        return nums
-    }
-
     fun getFormatString(context: Context, date: Long): String{
         val sdf = SimpleDateFormat(context.resources.getString(R.string.date_format_pattern), Locale.getDefault())
         return String.format("%s", sdf.format(Date(date)))
