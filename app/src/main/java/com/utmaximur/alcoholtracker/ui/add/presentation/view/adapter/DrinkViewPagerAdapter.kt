@@ -9,6 +9,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.viewpager.widget.PagerAdapter
+import com.bumptech.glide.Glide
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.data.model.Drink
 import java.io.InputStream
@@ -23,6 +24,7 @@ class DrinkViewPagerAdapter(private var drinksList: List<Drink>, private var con
     interface AddDrinkListener {
         fun addNewDrink()
         fun deleteDrink(drink: Drink)
+        fun editDrink(drink: Drink)
     }
 
     fun setListener(addDrinkListener: AddDrinkListener) {
@@ -33,6 +35,7 @@ class DrinkViewPagerAdapter(private var drinksList: List<Drink>, private var con
         val drinkImage: ImageView
         val drinkName: TextView
         val drinkDelete: ImageButton
+        val drinkEdit: ImageButton
         val drinkAdd: ImageButton
 
         val inflater = context
@@ -44,6 +47,7 @@ class DrinkViewPagerAdapter(private var drinksList: List<Drink>, private var con
         drinkImage = itemView.findViewById(R.id.item_drink_image)
         drinkName = itemView.findViewById(R.id.item_drink_name)
         drinkDelete = itemView.findViewById(R.id.item_drink_delete)
+        drinkEdit = itemView.findViewById(R.id.item_drink_edit)
         drinkAdd = itemView.findViewById(R.id.item_drink_add)
 
         if (position == drinksList.size) {
@@ -53,8 +57,13 @@ class DrinkViewPagerAdapter(private var drinksList: List<Drink>, private var con
             drinkAdd.visibility = View.VISIBLE
             drinkName.text = itemView.context.getText(R.string.add_new_drink)
         } else {
-            drinkImage.setImageResource(drinksList[position].image)
+            Glide.with(itemView).load(drinksList[position].photo).into(drinkImage)
             drinkName.text = drinksList[position].drink
+        }
+
+        if (position < drinksList.size && drinksList[position].id.length > 2) {
+            drinkDelete.visibility = View.VISIBLE
+            drinkEdit.visibility = View.VISIBLE
         }
 
         drinkAdd.setOnClickListener {
@@ -63,6 +72,10 @@ class DrinkViewPagerAdapter(private var drinksList: List<Drink>, private var con
 
         drinkDelete.setOnClickListener {
             addDrinkListener?.deleteDrink(drinksList[position])
+        }
+
+        drinkEdit.setOnClickListener {
+            addDrinkListener?.editDrink(drinksList[position])
         }
 
         container.addView(itemView)
