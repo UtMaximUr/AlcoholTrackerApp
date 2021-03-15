@@ -2,6 +2,7 @@ package com.utmaximur.alcoholtracker.ui.add.presentation.view
 
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.content.Context
@@ -36,6 +37,8 @@ import com.utmaximur.alcoholtracker.ui.calculator.view.CalculatorFragment
 import com.utmaximur.alcoholtracker.ui.calculator.view.CalculatorFragment.CalculatorListener
 import com.utmaximur.alcoholtracker.util.alphaView
 import com.utmaximur.alcoholtracker.util.dpToPx
+import java.lang.reflect.InvocationTargetException
+import java.lang.reflect.Method
 import java.util.*
 
 
@@ -183,14 +186,16 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
             // устанавливаем по умолчанию первый напиток
             degreeNumberPicker.maxValue = list.first().degree.size - 1
             degreeNumberPicker.displayedValues = list.first().degree.toTypedArray()
-            degreeNumberPicker.minValue = 1
+            degreeNumberPicker.value = 1
+            changeValueByOne(degreeNumberPicker)
 
             //Объем
             // устанавливаем по умолчанию первый напиток
             volumeNumberPicker.maxValue = list.first().volume.size - 1
             volumeNumberPicker.displayedValues = list.first().volume.toTypedArray()
             volumeNumberPicker.value = 1
-            setVolume( list.first().volume.toList())
+            changeValueByOne(volumeNumberPicker)
+            setVolume(list.first().volume.toList())
         })
 
         addDateButton.setOnClickListener {
@@ -247,6 +252,24 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
             if (b) {
                 priceEditText.hint = ""
             }
+        }
+    }
+
+    @SuppressLint("DiscouragedPrivateApi")
+    private fun changeValueByOne(numberPicker: NumberPicker) {
+        try {
+            val method: Method = numberPicker.javaClass
+                .getDeclaredMethod("changeValueByOne", Boolean::class.javaPrimitiveType)
+            method.isAccessible = true
+            method.invoke(numberPicker, true)
+        } catch (e: NoSuchMethodException) {
+            e.printStackTrace()
+        } catch (e: IllegalArgumentException) {
+            e.printStackTrace()
+        } catch (e: IllegalAccessException) {
+            e.printStackTrace()
+        } catch (e: InvocationTargetException) {
+            e.printStackTrace()
         }
     }
 
