@@ -6,7 +6,6 @@ import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -134,7 +133,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
                     AlcoholTrack(
                         getIdDrink(),
                         getDrink(),
-                        getVolume(),
+                        getVolume()!!,
                         getQuantity(),
                         getDegree(),
                         getPrice(),
@@ -178,24 +177,24 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
             }
         }
 
-        //Градус
-        // устанавливаем по умолчанию первый напиток
-        degreeNumberPicker.minValue = 1
-        degreeNumberPicker.maxValue =
-            requireContext().resources.getStringArray(R.array.volume_beer_array).size - 1
-        degreeNumberPicker.displayedValues = viewModel.getFloatDegree()
 
-        //Объем
-        // устанавливаем по умолчанию первый напиток
-        volumeNumberPicker.value = 1
-        volumeNumberPicker.maxValue =
-            requireContext().resources.getStringArray(R.array.volume_beer_array).size - 1
-        volumeNumberPicker.displayedValues =
-            requireContext().resources.getStringArray(R.array.volume_beer_array)
-        setVolume(requireContext().resources.getStringArray(R.array.volume_beer_array).toList())
+        viewModel.getAllDrink().observe(viewLifecycleOwner, Observer { list ->
+            //Градус
+            // устанавливаем по умолчанию первый напиток
+            degreeNumberPicker.maxValue = list.first().degree.size - 1
+            degreeNumberPicker.displayedValues = list.first().degree.toTypedArray()
+            degreeNumberPicker.minValue = 1
+
+            //Объем
+            // устанавливаем по умолчанию первый напиток
+            volumeNumberPicker.maxValue = list.first().volume.size - 1
+            volumeNumberPicker.displayedValues = list.first().volume.toTypedArray()
+            volumeNumberPicker.value = 1
+            setVolume( list.first().volume.toList())
+        })
 
         addDateButton.setOnClickListener {
-            if(viewModel.date != 0L) {
+            if (viewModel.date != 0L) {
                 dateAndTime.timeInMillis = viewModel.date
             }
             datePecker = DatePickerDialog(
@@ -218,7 +217,6 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
 
 
         priceEditText.setOnClickListener {
-//            viewModel.expandView(containerFragment)
             if (containerFragment.height == 0) {
                 val calculatorFragment = CalculatorFragment()
                 calculatorFragment.setListener(this@AddFragment)
@@ -264,19 +262,19 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
 
     private fun setDrinkDegreeArray(position: Int) {
         val drink: Drink = getDrinksList()[position]
-        degreeNumberPicker.value = 0
-        degreeNumberPicker.maxValue = drink.alcoholStrength.size - 1
-        degreeNumberPicker.displayedValues = drink.alcoholStrength.toTypedArray()
+        degreeNumberPicker.displayedValues = null
         degreeNumberPicker.value = 1
-        setDegreeList(drink.alcoholStrength)
+        degreeNumberPicker.maxValue = drink.degree.size - 1
+        degreeNumberPicker.displayedValues = drink.degree.toTypedArray()
+        setDegreeList(drink.degree)
     }
 
     private fun setDrinkVolumeArray(position: Int) {
         val drink: Drink = getDrinksList()[position]
         volumeNumberPicker.value = 1
-        volumeNumberPicker.maxValue = resources.getStringArray(drink.alcoholVolume).size - 1
-        volumeNumberPicker.displayedValues = resources.getStringArray(drink.alcoholVolume)
-        setVolume(resources.getStringArray(drink.alcoholVolume).toList())
+        volumeNumberPicker.maxValue = drink.volume.size - 1
+        volumeNumberPicker.displayedValues = drink.volume.toTypedArray()
+        setVolume(drink.volume)
     }
 
     private fun setEditArguments() {
@@ -293,9 +291,9 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
                 quantityNumberPicker.value = alcoholTrack.quantity
                 setDrinkVolumeArray(position)
                 volumeNumberPicker.value =
-                    resources.getStringArray(it.alcoholVolume).indexOf(alcoholTrack.volume)
+                    it.volume.indexOf(alcoholTrack.volume)
                 setDrinkDegreeArray(position)
-                degreeNumberPicker.value = it.alcoholStrength.indexOf(alcoholTrack.degree) + 1
+                degreeNumberPicker.value = it.degree.indexOf(alcoholTrack.degree) + 1
                 dotsIndicator.getTabAt(position)?.select()
             }
         }
@@ -363,11 +361,11 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         return viewModel.date
     }
 
-    private fun getVolume(): String {
+    private fun getVolume(): String? {
         return getVolumeList()[volumeNumberPicker.value]
     }
 
-    private fun setVolume(volume: List<String>) {
+    private fun setVolume(volume: List<String?>) {
         viewModel.volums = volume
     }
 
@@ -375,23 +373,23 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         viewModel.degrees = degree
     }
 
-    private fun getVolumeList(): List<String> {
+    private fun getVolumeList(): List<String?> {
         return viewModel.volums
     }
 
-    private fun getIcon(): Int {
+    private fun getIcon(): String {
         return getDrinksList()[drinksPager.currentItem].icon
     }
 
     private fun setDrinksList() {
         viewModel.getAllDrink().observe(viewLifecycleOwner, Observer { list ->
             viewModel.drinks = list
-            val adapter =  DrinkViewPagerAdapter(getDrinksList(), requireContext())
+            val adapter = DrinkViewPagerAdapter(getDrinksList(), requireContext())
             adapter.setListener(this)
             drinksPager.adapter = adapter
             drinksPager.alphaView(requireContext())
             if (arguments != null) {
-                if (arguments?.containsKey("selectDate")!! && arguments?.getLong("selectDate") != 0L){
+                if (arguments?.containsKey("selectDate")!! && arguments?.getLong("selectDate") != 0L) {
                     addDateButton.text = viewModel.setDateOnButton(
                         requireContext(),
                         Date(requireArguments().getLong("selectDate"))
@@ -432,6 +430,10 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
     }
 
     override fun deleteDrink(drink: Drink) {
-        Log.e("listener_drink", "deleteDrink")
+        viewModel.deleteDrink(drink)
+    }
+
+    override fun editDrink(drink: Drink) {
+
     }
 }
