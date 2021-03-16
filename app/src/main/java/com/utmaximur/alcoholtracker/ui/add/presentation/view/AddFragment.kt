@@ -184,6 +184,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         viewModel.getAllDrink().observe(viewLifecycleOwner, Observer { list ->
             //Градус
             // устанавливаем по умолчанию первый напиток
+            degreeNumberPicker.displayedValues = null
             degreeNumberPicker.maxValue = list.first().degree.size - 1
             degreeNumberPicker.displayedValues = list.first().degree.toTypedArray()
             degreeNumberPicker.value = 1
@@ -191,6 +192,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
 
             //Объем
             // устанавливаем по умолчанию первый напиток
+            volumeNumberPicker.displayedValues = null
             volumeNumberPicker.maxValue = list.first().volume.size - 1
             volumeNumberPicker.displayedValues = list.first().volume.toTypedArray()
             volumeNumberPicker.value = 1
