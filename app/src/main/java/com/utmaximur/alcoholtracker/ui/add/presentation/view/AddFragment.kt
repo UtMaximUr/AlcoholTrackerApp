@@ -294,6 +294,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
 
     private fun setDrinkVolumeArray(position: Int) {
         val drink: Drink = getDrinksList()[position]
+        volumeNumberPicker.displayedValues = null
         volumeNumberPicker.value = 1
         volumeNumberPicker.maxValue = drink.volume.size - 1
         volumeNumberPicker.displayedValues = drink.volume.toTypedArray()
