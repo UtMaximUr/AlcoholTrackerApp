@@ -56,6 +56,11 @@
     <!--dialog delete-->
     <string name="dialog_delete_title">Вы действительно хотите удалить запись?</string>
 
+    <!--dialog add volume-->
+    <string name="dialog_add_volume_title">Выберите объем</string>
+    <string name="dialog_add_volume_ok">Готово</string>
+    <string name="dialog_add_volume_cancel">Отмена</string>
+
 
     <!--settings-->
     <string name="privacy_policy">Политика конфиденциальности</string>

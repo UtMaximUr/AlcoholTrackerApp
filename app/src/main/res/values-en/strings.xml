@@ -56,6 +56,11 @@
     <!--dialog delete-->
     <string name="dialog_delete_title">Are you sure you want to delete the entry?</string>
 
+    <!--dialog add volume-->
+    <string name="dialog_add_volume_title">Select the volume of the drink</string>
+    <string name="dialog_add_volume_ok">OK</string>
+    <string name="dialog_add_volume_cancel">Cancel</string>
+
 
     <!--settings-->
     <string name="privacy_policy">Privacy policy</string>

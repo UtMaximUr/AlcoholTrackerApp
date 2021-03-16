@@ -57,6 +57,11 @@
     <!--dialog delete-->
     <string name="dialog_delete_title">Вы действительно хотите удалить запись?</string>
 
+    <!--dialog add volume-->
+    <string name="dialog_add_volume_title">Выберите объем</string>
+    <string name="dialog_add_volume_ok">Готово</string>
+    <string name="dialog_add_volume_cancel">Отмена</string>
+
 
     <!--settings-->
     <string name="privacy_policy">Политика конфиденциальности</string>
@@ -167,5 +172,25 @@
         <item>Ноябрь</item>
         <item>Декабрь</item>
     </array>
+
+    <string-array name="volume_array">
+
+        <item>0.02 л</item>
+        <item>0.05 л</item>
+        <item>0.125 л</item>
+        <item>0.175 л</item>
+        <item>0.3 л</item>
+        <item>0.33 л</item>
+        <item>0.375 л</item>
+        <item>0.4 л</item>
+        <item>0.45 л</item>
+        <item>0.48 л</item>
+        <item>0.5 л</item>
+        <item>0.568 л</item>
+        <item>0.7 л</item>
+        <item>0.750 л</item>
+        <item>1 л</item>
+
+    </string-array>
 
 </resources>
