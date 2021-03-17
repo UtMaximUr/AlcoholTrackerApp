@@ -8,13 +8,18 @@ import kotlin.collections.ArrayList
 
 class AddNewDrinkViewModel(private var drinkRepository: DrinkRepository): ViewModel() {
 
+    var id: String = ""
     var icon: String = ""
     var photo: String = ""
     var volumeList: List<String> = ArrayList()
 
     fun onSaveButtonClick(drink: Drink){
-        drink.id = getDrinkId()
-        drinkRepository.insertDrink(drink)
+        if (id == "") {
+            drink.id = getDrinkId()
+            drinkRepository.insertDrink(drink)
+        } else {
+            drinkRepository.updateDrink(drink)
+        }
     }
 
     private fun getDrinkId(): String = UUID.randomUUID().toString()
