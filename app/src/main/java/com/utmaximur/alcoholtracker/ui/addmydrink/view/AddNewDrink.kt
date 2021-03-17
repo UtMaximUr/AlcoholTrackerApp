@@ -166,19 +166,20 @@ class AddNewDrink : Fragment(), BottomDialogListener,
 
     private fun setArguments() {
         val drink: Drink? = requireArguments().getParcelable("editDrink")
+        viewModel.id = drink?.id!!
 
-        if (drink?.photo != "") {
-            Glide.with(requireContext()).load(drink?.photo).into(photo)
+        if (drink.photo != "") {
+            Glide.with(requireContext()).load(drink.photo).into(photo)
         }
-        nameDrink.setText(drink?.drink)
+        nameDrink.setText(drink.drink)
         Glide.with(requireContext()).load(
             requireContext().resources.getIdentifier(
-                drink?.icon,
+                drink.icon,
                 "raw",
                 requireContext().packageName
             )
         ).into(iconDrink)
-        rangeDegree.setCurrentRangeMin(drink?.degree?.first()?.toDouble()?.toFloat()!!)
+        rangeDegree.setCurrentRangeMin(drink.degree.first()?.toDouble()?.toFloat()!!)
         rangeDegree.setCurrentRangeMax(drink.degree.last()?.toDouble()?.toFloat()!!)
         minValueDegree.text = drink.degree.first()
         maxValueDegree.text = drink.degree.last()
