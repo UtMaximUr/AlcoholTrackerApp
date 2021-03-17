@@ -190,6 +190,7 @@ class AddNewDrink : Fragment(), BottomDialogListener,
         val drink: Drink? = requireArguments().getParcelable("editDrink")
         viewModel.id = drink?.id!!
         viewModel.volumeList = drink.volume
+        viewModel.icon = drink.icon
 
         if (drink.photo != "") {
             Glide.with(requireContext()).load(drink.photo).into(photo)
