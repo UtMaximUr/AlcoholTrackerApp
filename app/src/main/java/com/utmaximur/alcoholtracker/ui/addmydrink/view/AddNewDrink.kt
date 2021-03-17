@@ -104,7 +104,7 @@ class AddNewDrink : Fragment(), BottomDialogListener,
         toolbar.setOnMenuItemClickListener {
             viewModel.onSaveButtonClick(
                 Drink(
-                    "",
+                    getIdDrink(),
                     getName(),
                     getDegree(),
                     getVolume(),
@@ -167,6 +167,7 @@ class AddNewDrink : Fragment(), BottomDialogListener,
     private fun setArguments() {
         val drink: Drink? = requireArguments().getParcelable("editDrink")
         viewModel.id = drink?.id!!
+        viewModel.volumeList = drink.volume
 
         if (drink.photo != "") {
             Glide.with(requireContext()).load(drink.photo).into(photo)
@@ -207,6 +208,10 @@ class AddNewDrink : Fragment(), BottomDialogListener,
     override fun selectIcon(icon: Int) {
         Glide.with(requireContext()).load(icon).into(iconDrink)
         viewModel.icon = requireContext().resources.getResourceName(icon)
+    }
+
+    private fun getIdDrink(): String {
+        return viewModel.id
     }
 
     private fun getName(): String {

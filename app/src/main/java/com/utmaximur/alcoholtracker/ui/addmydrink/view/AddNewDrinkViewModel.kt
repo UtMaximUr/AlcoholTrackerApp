@@ -9,9 +9,11 @@ import kotlin.collections.ArrayList
 class AddNewDrinkViewModel(private var drinkRepository: DrinkRepository): ViewModel() {
 
     var id: String = ""
+    var drink: String = ""
+    var volumeList: List<String?> = ArrayList()
+    var degreeList: List<String?> = ArrayList()
     var icon: String = ""
     var photo: String = ""
-    var volumeList: List<String> = ArrayList()
 
     fun onSaveButtonClick(drink: Drink){
         if (id == "") {
