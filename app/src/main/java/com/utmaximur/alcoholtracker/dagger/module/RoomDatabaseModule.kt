@@ -9,7 +9,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.utmaximur.alcoholtracker.data.AlcoholTrackDatabase
-import com.utmaximur.alcoholtracker.data.assets.Assets
+import com.utmaximur.alcoholtracker.data.resources.IconRaw
 import com.utmaximur.alcoholtracker.data.model.Drink
 import dagger.Module
 import dagger.Provides
@@ -74,7 +74,7 @@ class RoomDatabaseModule(private var application: Application) {
     fun providesDrinkDAO(alcoholTrackDatabase: AlcoholTrackDatabase) = alcoholTrackDatabase.getDrinkDao()
 
     @Provides
-    fun provideAssets(): Assets {
-        return Assets(application.applicationContext.assets)
+    fun provideIcons(): IconRaw {
+        return IconRaw()
     }
 }
