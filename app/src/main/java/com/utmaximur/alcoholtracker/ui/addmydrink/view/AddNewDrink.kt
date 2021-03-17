@@ -3,9 +3,12 @@ package com.utmaximur.alcoholtracker.ui.addmydrink.view
 import android.content.Context
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -98,10 +101,12 @@ class AddNewDrink : Fragment(), BottomDialogListener,
         findViewById(view)
 
         toolbar.setNavigationOnClickListener {
+            hideKeyboard()
             addNewFragmentListener?.closeFragment()
         }
 
         toolbar.setOnMenuItemClickListener {
+            hideKeyboard()
             viewModel.onSaveButtonClick(
                 Drink(
                     getIdDrink(),
@@ -117,6 +122,7 @@ class AddNewDrink : Fragment(), BottomDialogListener,
         }
 
         photo.setOnClickListener {
+            hideKeyboard()
             val addPhotoBottomDialogFragment =
                 AddPhotoBottomDialogFragment()
             addPhotoBottomDialogFragment.setListener(this)
@@ -126,7 +132,16 @@ class AddNewDrink : Fragment(), BottomDialogListener,
             )
         }
 
+        nameDrink.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, event ->
+            if ((actionId == EditorInfo.IME_ACTION_DONE) || ((event.keyCode == KeyEvent.KEYCODE_ENTER) && (event.action == KeyEvent.ACTION_DOWN))) {
+                hideKeyboard()
+                return@OnEditorActionListener true
+            }
+            true
+        })
+
         addIcon.setOnClickListener {
+            hideKeyboard()
             val addIconDrinkDialogFragment =
                 AddIconDrinkDialogFragment()
             addIconDrinkDialogFragment.setListener(this)
@@ -162,6 +177,13 @@ class AddNewDrink : Fragment(), BottomDialogListener,
         if (arguments != null) {
             setArguments()
         }
+    }
+
+    private fun hideKeyboard() {
+        val imm: InputMethodManager = nameDrink.context
+            .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(nameDrink.windowToken, 0)
+        nameDrink.clearFocus()
     }
 
     private fun setArguments() {
