@@ -50,6 +50,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         fun onHideNavigationBar()
         fun onShowNavigationBar()
         fun onShowAddNewDrinkFragment()
+        fun onShowEditNewDrinkFragment(bundle: Bundle)
         fun closeFragment()
     }
 
@@ -460,6 +461,8 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
     }
 
     override fun editDrink(drink: Drink) {
-
+        val bundle = Bundle()
+        bundle.putParcelable("editDrink", drink)
+        addFragmentListener?.onShowEditNewDrinkFragment(bundle)
     }
 }
