@@ -92,6 +92,8 @@
     <string name="cd_show_panel">Move left</string>
     <string name="cd_image_drink">Image of a drink</string>
     <string name="cd_choice_theme">Selected theme</string>
+    <string name="cd_icon_drink">Icon of a drink</string>
+    <string name="cd_take_photo">Take photo</string>
 
     <!--regex-->
     <string name="only_number_regex" tools:ignore="TypographyDashes">[^0-9, .]</string>

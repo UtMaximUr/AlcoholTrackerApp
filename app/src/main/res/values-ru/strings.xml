@@ -92,6 +92,8 @@
     <string name="cd_show_panel">Сдвинуть в влево</string>
     <string name="cd_image_drink">Изображение напитка</string>
     <string name="cd_choice_theme">Выбранная тема</string>
+    <string name="cd_icon_drink">Иконка напитка</string>
+    <string name="cd_take_photo">Добавить изображение</string>
 
     <!--regex-->
     <string name="only_number_regex" tools:ignore="TypographyDashes">[^0-9, .]</string>
