@@ -64,4 +64,8 @@ class MainActivity : AppCompatActivity(),
     override fun onShowAddNewDrinkFragment() {
         navController.navigate(R.id.addNewDrinkFragment)
     }
+
+    override fun onShowEditNewDrinkFragment(bundle: Bundle) {
+        navController.navigate(R.id.addNewDrinkFragment, bundle)
+    }
 }
