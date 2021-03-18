@@ -1,7 +1,6 @@
 package com.utmaximur.alcoholtracker.ui.addmydrink.view
 
 import android.content.Context
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.LayoutInflater
@@ -217,9 +216,10 @@ class AddNewDrink : Fragment(), BottomDialogListener,
         addNewFragmentListener = context as AddNewFragmentListener
     }
 
-    override fun setImageViewPhoto(bitmap: Bitmap) {
-        photo.setImageBitmap(bitmap)
+    override fun setImageViewPhoto(path: String) {
+        Glide.with(requireContext()).load(path).into(photo)
         photo.scaleType = ImageView.ScaleType.CENTER_CROP
+        viewModel.photo = path
     }
 
     override fun deleteImageViewPhoto() {
