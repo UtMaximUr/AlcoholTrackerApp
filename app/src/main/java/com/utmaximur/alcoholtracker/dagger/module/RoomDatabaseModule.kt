@@ -11,6 +11,7 @@ import com.google.gson.reflect.TypeToken
 import com.utmaximur.alcoholtracker.data.AlcoholTrackDatabase
 import com.utmaximur.alcoholtracker.data.resources.IconRaw
 import com.utmaximur.alcoholtracker.data.model.Drink
+import com.utmaximur.alcoholtracker.domain.FileGenerator
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.CoroutineScope
@@ -76,5 +77,10 @@ class RoomDatabaseModule(private var application: Application) {
     @Provides
     fun provideIcons(): IconRaw {
         return IconRaw()
+    }
+
+    @Provides
+    fun provideFile(): FileGenerator {
+        return FileGenerator()
     }
 }
