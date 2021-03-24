@@ -1,13 +1,15 @@
 package com.utmaximur.alcoholtracker.data.resources
 
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.data.model.Icon
 
 
 class IconRaw {
 
-    fun getIconsList(): List<Icon> {
+    fun getIconsList(): LiveData<List<Icon>> {
         val iconList: ArrayList<Icon> = ArrayList()
 
         iconList.add(Icon(R.raw.ic_add_drink_0))
@@ -26,6 +28,6 @@ class IconRaw {
         iconList.add(Icon(R.raw.ic_add_drink_13))
         iconList.add(Icon(R.raw.ic_add_drink_14))
 
-        return iconList
+        return MutableLiveData(iconList)
     }
 }
