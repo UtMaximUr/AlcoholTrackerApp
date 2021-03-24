@@ -17,23 +17,23 @@ import kotlin.math.roundToInt
 
 
 private val density by lazy { Resources.getSystem().displayMetrics.density }
-private val densityDpi by lazy { Resources.getSystem().displayMetrics.densityDpi }
+//private val densityDpi by lazy { Resources.getSystem().displayMetrics.densityDpi }
 
 fun Int.dpToPx(): Int {
     return (this * density).roundToInt()
 }
 
-fun Int.pxToDp(): Float {
-    return this / (densityDpi / 160f)
-}
-
-fun Float.dpToPx(): Int {
-    return (this * density).roundToInt()
-}
-
-fun Float.pxToDp(): Float {
-    return this / (densityDpi / 160f)
-}
+//fun Int.pxToDp(): Float {
+//    return this / (densityDpi / 160f)
+//}
+//
+//fun Float.dpToPx(): Int {
+//    return (this * density).roundToInt()
+//}
+//
+//fun Float.pxToDp(): Float {
+//    return this / (densityDpi / 160f)
+//}
 
 fun View.alphaView(context: Context) {
     val animation: Animation = AnimationUtils.loadAnimation(context, R.anim.alpha)
@@ -52,8 +52,4 @@ fun Context.getDisplayWidth(): Int {
         windowManager.defaultDisplay.getMetrics(displayMetrics)
         displayMetrics.widthPixels
     }
-//    val displayMetrics = DisplayMetrics()
-//    val windowManager = this.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-//    windowManager.defaultDisplay.getMetrics(displayMetrics)
-//    return displayMetrics.widthPixels
 }

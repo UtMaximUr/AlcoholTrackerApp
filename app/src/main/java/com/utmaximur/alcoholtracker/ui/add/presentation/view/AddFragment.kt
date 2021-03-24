@@ -21,7 +21,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.google.android.material.tabs.TabLayout
@@ -182,7 +181,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         }
 
 
-        viewModel.getAllDrink().observe(viewLifecycleOwner, Observer { list ->
+        viewModel.getAllDrink().observe(viewLifecycleOwner, { list ->
             //Градус
             // устанавливаем по умолчанию первый напиток
             degreeNumberPicker.displayedValues = null
@@ -409,7 +408,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
     }
 
     private fun setDrinksList() {
-        viewModel.getAllDrink().observe(viewLifecycleOwner, Observer { list ->
+        viewModel.getAllDrink().observe(viewLifecycleOwner, { list ->
             viewModel.drinks = list
             val adapter = DrinkViewPagerAdapter(getDrinksList(), requireContext())
             adapter.setListener(this)
