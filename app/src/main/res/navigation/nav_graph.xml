@@ -8,10 +8,6 @@
         android:name="com.utmaximur.alcoholtracker.ui.add.presentation.view.AddFragment"
         android:label="AddFragment" />
     <fragment
-        android:id="@+id/addNewDrinkFragment"
-        android:name="com.utmaximur.alcoholtracker.ui.addmydrink.view.AddNewDrink"
-        android:label="AddNewDrinkFragment" />
-    <fragment
         android:id="@+id/calendarFragment"
         android:name="com.utmaximur.alcoholtracker.ui.calendar.presentation.view.CalendarFragment"
         android:label="CalendarFragment" />

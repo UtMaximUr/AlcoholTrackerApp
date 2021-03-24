@@ -1,6 +1,8 @@
 package com.utmaximur.alcoholtracker.ui.add.presentation.view
 
 import android.content.Context
+import android.view.View
+import android.widget.LinearLayout
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.utmaximur.alcoholtracker.R
@@ -24,8 +26,9 @@ class AddViewModel(private var drinkRepository: DrinkRepository,
     var date: Long = 0L
     var icon: Int = 0
     var drinks: List<Drink> = ArrayList()
-    var volums: List<String?> = ArrayList()
+    var volums: List<String> = ArrayList()
     var degrees: List<String?> = ArrayList()
+    private var isShow = true
 
 
     fun onSaveButtonClick(alcoholTrack: AlcoholTrack){
@@ -63,23 +66,28 @@ class AddViewModel(private var drinkRepository: DrinkRepository,
         return String.format("%s", sdf.format(date))
     }
 
+     fun getFloatDegree(): Array<String?> {
+        val nums: Array<String?> = arrayOfNulls(11)
+        var double = 3.5
+        for (i in 0..10) {
+            double += 0.5
+            val format: String = String.format("%.1f", double)
+            nums[i] = format
+        }
+        return nums
+    }
+
     fun getFormatString(context: Context, date: Long): String{
         val sdf = SimpleDateFormat(context.resources.getString(R.string.date_format_pattern), Locale.getDefault())
         return String.format("%s", sdf.format(Date(date)))
     }
 
-    fun deleteDrink(drink: Drink) {
-        drinkRepository.deleteDrink(drink)
+    fun showCalculator(calculatorFragment: LinearLayout) {
+        if (isShow) {
+            calculatorFragment.visibility = View.VISIBLE
+        } else {
+            calculatorFragment.visibility = View.GONE
+        }
+        isShow = !isShow
     }
-
-//    fun expandView(view: View) {
-//        view.visibility = View.VISIBLE
-//        val parms: LinearLayout.LayoutParams = view.layoutParams as LinearLayout.LayoutParams
-//        val width: Int = view.width - parms.leftMargin - parms.rightMargin
-//        view.measure(
-//            View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.AT_MOST),
-//            View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
-//        )
-//        heightCalculator = view.measuredHeight
-//    }
 }

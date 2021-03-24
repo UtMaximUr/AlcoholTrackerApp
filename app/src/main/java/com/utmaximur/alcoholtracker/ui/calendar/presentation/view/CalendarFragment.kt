@@ -19,15 +19,12 @@ import com.utmaximur.alcoholtracker.dagger.component.AlcoholTrackComponent
 import com.utmaximur.alcoholtracker.dagger.factory.CalendarViewModelFactory
 import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
 import com.utmaximur.alcoholtracker.ui.calendar.presentation.view.adapter.DrinksListAdapter
-import com.utmaximur.alcoholtracker.ui.dialog.adddrink.AddDrinkDialogFragment
-import com.utmaximur.alcoholtracker.util.alphaView
 import java.util.*
 import javax.inject.Inject
 
 
 class CalendarFragment : Fragment(),
-    DrinksListAdapter.OnDrinkAdapterListener,
-    AddDrinkDialogFragment.AddDrinkDialogListener {
+    DrinksListAdapter.OnDrinkAdapterListener {
 
     @Inject
     lateinit var calendarViewModelFactory: CalendarViewModelFactory
@@ -36,7 +33,7 @@ class CalendarFragment : Fragment(),
 
     interface CalendarFragmentListener {
         fun showEditAlcoholTrackerFragment(bundle: Bundle)
-        fun showAddAlcoholTrackerFragment(bundle: Bundle?)
+        fun showAddAlcoholTrackerFragment()
     }
 
     private lateinit var viewModel: CalendarViewModel
@@ -92,19 +89,11 @@ class CalendarFragment : Fragment(),
         findViewById(view)
 
         addButton.setOnClickListener {
-            if (viewModel.getSelectDate() != 0L) {
-                val dialogFragment = AddDrinkDialogFragment()
-                dialogFragment.setListener(this)
-                val manager = requireActivity().supportFragmentManager
-                dialogFragment.show(manager, "myDialog")
-            } else {
-                calendarFragmentListener?.showAddAlcoholTrackerFragment(null)
-            }
+            calendarFragmentListener?.showAddAlcoholTrackerFragment()
         }
 
         calendarView.setOnDayClickListener { eventDay ->
             getAlcoholTrackByDay(eventDay.calendar.timeInMillis)
-            viewModel.setSelectDate(eventDay.calendar.timeInMillis)
         }
         initCalendar()
     }
@@ -124,13 +113,6 @@ class CalendarFragment : Fragment(),
     override fun onAttach(context: Context) {
         super.onAttach(context)
         calendarFragmentListener = context as CalendarFragmentListener
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if(viewModel.getSelectDate() != 0L) {
-            viewModel.setSelectDate(0L)
-        }
     }
 
     override fun onEdit(date: Long) {
@@ -172,16 +154,13 @@ class CalendarFragment : Fragment(),
                 this@CalendarFragment
             )
             recyclerView.adapter = drinksListAdapter
-            recyclerView.alphaView(requireContext())
             if (alcoholTrack.isNotEmpty()) {
                 emptyDrinkListText.visibility = View.INVISIBLE
             } else {
-                if (list.isEmpty()) {
+                if(list.isEmpty()){
                     addToStartText.visibility = View.VISIBLE
-                    addToStartText.alphaView(requireContext())
-                } else {
+                }else{
                     emptyDrinkListText.visibility = View.VISIBLE
-                    emptyDrinkListText.alphaView(requireContext())
                 }
             }
         })
@@ -195,28 +174,9 @@ class CalendarFragment : Fragment(),
             list.forEach {
                 val calendar = Calendar.getInstance()
                 calendar.timeInMillis = it.date
-                events.add(
-                    EventDay(
-                        calendar,
-                        requireContext().resources.getIdentifier(
-                            it.icon,
-                            "raw",
-                            requireContext().packageName
-                        )
-                    )
-                )
+                events.add(EventDay(calendar, it.icon))
             }
             calendarView.setEvents(events)
         })
-    }
-
-    override fun addDrinkDialogPositiveClick() {
-        val bundle = Bundle()
-        bundle.putLong("selectDate", viewModel.getSelectDate())
-        calendarFragmentListener?.showAddAlcoholTrackerFragment(bundle)
-    }
-
-    override fun addDrinkDialogNegativeClick() {
-        calendarFragmentListener?.showAddAlcoholTrackerFragment(null)
     }
 }

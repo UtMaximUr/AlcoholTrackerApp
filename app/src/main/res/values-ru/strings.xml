@@ -30,36 +30,12 @@
     <string name="add_save">Сохранить</string>
     <string name="enter_price">!Введите стоимость</string>
 
-    <!--add new drink-->
-    <string name="add_new_drink">Создать напиток</string>
-
     <!--edit-->
     <string name="edit_drink_title">Редактировать напиток</string>
 
     <!--create drink-->
     <string name="create_drink_title">Создать напиток</string>
     <string name="create_drink_hint">Введите Название</string>
-    <string name="dialog_create_drink_add">Добавить иконку</string>
-    <string name="select_icon">Выберите иконку</string>
-    <string name="dialog_create_drink_add_degree">Добавить крепость</string>
-    <string name="dialog_create_drink_add_volume">Добавить объем</string>
-    <string name="bottom_sheet_option_camera">Использовать камеру</string>
-    <string name="bottom_sheet_option_gallery">Загрузить из галлереи</string>
-    <string name="bottom_sheet_option_heading">Добавить фотографию</string>
-    <string name="bottom_sheet_option_remove_photo">Удалить фотографию</string>
-
-    <!--dialog select date-->
-    <string name="dialog_select_date_title">Использовать выбранную дату для добавления напитка?</string>
-    <string name="dialog_select_date_ok">Да</string>
-    <string name="dialog_select_date_no">Нет</string>
-
-    <!--dialog delete-->
-    <string name="dialog_delete_title">Вы действительно хотите удалить запись?</string>
-
-    <!--dialog add volume-->
-    <string name="dialog_add_volume_title">Выберите объем</string>
-    <string name="dialog_add_volume_ok">Готово</string>
-    <string name="dialog_add_volume_cancel">Отмена</string>
 
 
     <!--settings-->
@@ -92,8 +68,6 @@
     <string name="cd_show_panel">Сдвинуть в влево</string>
     <string name="cd_image_drink">Изображение напитка</string>
     <string name="cd_choice_theme">Выбранная тема</string>
-    <string name="cd_icon_drink">Иконка напитка</string>
-    <string name="cd_take_photo">Добавить изображение</string>
 
     <!--regex-->
     <string name="only_number_regex" tools:ignore="TypographyDashes">[^0-9, .]</string>
@@ -130,6 +104,151 @@
     <string name="enum_gin">Джин</string>
     <string name="enum_wine">Вино</string>
 
+    <string-array name="volume_beer_array">
+        <item>0.33 л</item>
+        <item>0.375 л</item>
+        <item>0.45 л</item>
+        <item>0.48 л</item>
+        <item>0.5 л</item>
+        <item>0.568 л</item>
+        <item>1 л</item>
+
+    </string-array>
+
+    <string-array name="volume_absent_array">
+        <item>20 мл</item>
+        <item>30 мл</item>
+        <item>40 мл</item>
+        <item>50 мл</item>
+
+    </string-array>
+
+    <string-array name="volume_brandy_array">
+        <item>0.05 л</item>
+        <item>0.3 л</item>
+        <item>0.4 л</item>
+        <item>0.5 л</item>
+        <item>0.7 л</item>
+        <item>1 л</item>
+
+    </string-array>
+
+    <string-array name="volume_champagne_array">
+        <item>0.125 л</item>
+        <item>0.175 л</item>
+        <item>0.375 л</item>
+        <item>0.750 л</item>
+
+    </string-array>
+
+    <string-array name="volume_cocktail_array">
+        <item>20 мл</item>
+        <item>35 мл</item>
+        <item>40 мл</item>
+        <item>50 мл</item>
+        <item>100 мл</item>
+        <item>150 мл</item>
+        <item>200 мл</item>
+        <item>220 мл</item>
+        <item>250 мл</item>
+
+    </string-array>
+
+    <string-array name="volume_cognac_array">
+        <item>0.05 л</item>
+        <item>0.3 л</item>
+        <item>0.4 л</item>
+        <item>0.5 л</item>
+        <item>0.7 л</item>
+        <item>1 л</item>
+
+    </string-array>
+
+    <string-array name="volume_liquor_array">
+        <item>20 мл</item>
+        <item>35 мл</item>
+        <item>40 мл</item>
+        <item>50 мл</item>
+
+    </string-array>
+
+    <string-array name="volume_tequila_array">
+        <item>20 мл</item>
+        <item>35 мл</item>
+        <item>40 мл</item>
+        <item>50 мл</item>
+
+    </string-array>
+
+
+    <string-array name="volume_vodka_array">
+        <item>0.05 л</item>
+        <item>0.3 л</item>
+        <item>0.4 л</item>
+        <item>0.5 л</item>
+        <item>0.7 л</item>
+        <item>1 л</item>
+
+    </string-array>
+
+    <string-array name="volume_whiskey_array">
+        <item>0.05 л</item>
+        <item>0.3 л</item>
+        <item>0.4 л</item>
+        <item>0.5 л</item>
+        <item>0.7 л</item>
+        <item>1 л</item>
+
+    </string-array>
+
+    <string-array name="volume_gin_array">
+        <item>0.05 л</item>
+        <item>0.3 л</item>
+        <item>0.4 л</item>
+        <item>0.5 л</item>
+        <item>0.7 л</item>
+        <item>1 л</item>
+
+    </string-array>
+
+    <string-array name="volume_wine_array">
+        <item>100 мл</item>
+        <item>125 мл</item>
+        <item>150 мл</item>
+        <item>175 мл</item>
+        <item>375 мл</item>
+        <item>750 мл</item>
+
+    </string-array>
+
+    <string-array name="volume_cider_array">
+        <item>0.33 л</item>
+        <item>0.375 л</item>
+        <item>0.45 л</item>
+        <item>0.48 л</item>
+        <item>0.5 л</item>
+        <item>0.568 л</item>
+        <item>1 л</item>
+
+    </string-array>
+
+    <string-array name="volume_shots_array">
+        <item>20 мл</item>
+        <item>35 мл</item>
+        <item>40 мл</item>
+        <item>50 мл</item>
+
+    </string-array>
+
+    <string-array name="volume_rum_array">
+        <item>0.05 л</item>
+        <item>0.3 л</item>
+        <item>0.4 л</item>
+        <item>0.5 л</item>
+        <item>0.7 л</item>
+        <item>1 л</item>
+
+    </string-array>
 
     <string name="material_calendar_monday">Пн</string>
     <string name="material_calendar_tuesday">Вт</string>

@@ -4,6 +4,7 @@
     <color name="purple_500">#FF000000</color>
     <color name="purple_700">#323232</color>
     <color name="teal_200">#FF000000</color>
+    <color name="teal_700">#FF018786</color>
     <color name="white">#FFFFFFFF</color>
     <color name="text_color_white">#FFFFFFFF</color>
     <color name="text_color_black">#FF000000</color>
@@ -15,8 +16,6 @@
     <color name="text_color">#FFFFFFFF</color>
     <color name="accent_color">#FFBB86FC</color>
     <color name="statistic_color">#FFBB86FC</color>
-    <color name="seekBarActiveColor">#FFBB86FC</color>
-    <color name="seekBarInactiveColor">#9B9B9B</color>
 
 
 </resources>

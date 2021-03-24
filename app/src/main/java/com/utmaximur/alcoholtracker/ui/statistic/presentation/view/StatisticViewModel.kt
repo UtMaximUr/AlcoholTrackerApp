@@ -71,11 +71,8 @@ class StatisticViewModel(private var drinkRepository: DrinkRepository,
                 }
             }
             yearPeriod -> {
-                cal.set(Calendar.DAY_OF_YEAR, 1)
                 alcoholTrackList.forEach {
-                    if (it.date > cal.timeInMillis) {
-                        sumPrice += it.quantity * it.price
-                    }
+                    sumPrice += it.quantity * it.price
                 }
             }
         }

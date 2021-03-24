@@ -46,7 +46,6 @@ class CalculatorFragment : Fragment() {
 
     interface CalculatorListener {
         fun getValueCalculating(value: String)
-        fun closeCalculator()
     }
 
     override fun onCreateView(
@@ -148,12 +147,10 @@ class CalculatorFragment : Fragment() {
             activity?.supportFragmentManager?.beginTransaction()
                 ?.remove(this)
                 ?.commit()
-            calculatorListener?.closeCalculator()
         }
 
         buttonAc.setOnClickListener {
             viewModel.acCalculation()
-            calculatorListener?.getValueCalculating(viewModel.getValue())
         }
 
         buttonPlus.setOnClickListener {
