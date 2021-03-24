@@ -4,13 +4,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
+import com.utmaximur.alcoholtracker.ui.dialog.delete.DeleteDialogFragment
 
 class DrinksListAdapter(
     private val alcoholTracks: MutableList<AlcoholTrack>,
-    private val listener: OnDrinkAdapterListener
+    private val listener: OnDrinkAdapterListener,
+    private val supportFragmentManager: FragmentManager
 ) :
     RecyclerView.Adapter<DrinksListAdapter.ViewHolder>() {
 
@@ -45,7 +48,8 @@ class DrinksListAdapter(
             alcoholTrack: AlcoholTrack,
             position: Int,
             listener: OnDrinkAdapterListener,
-            onDeleteDyList: OnDeleteDyList
+            onDeleteDyList: OnDeleteDyList,
+            supportFragmentManager: FragmentManager
         ) {
             val drinkTitle = alcoholTrack.drink + " " + String.format(
                 itemView.context.resources.getString(R.string.statistic_count_drink),
@@ -69,8 +73,14 @@ class DrinksListAdapter(
                 listener.onEdit(alcoholTrack.date)
             }
             deleteButton?.setOnClickListener {
-                listener.onDelete(alcoholTrack)
-                onDeleteDyList.removeAt(position)
+                val deleteFragment = DeleteDialogFragment()
+                deleteFragment.setListener(object : DeleteDialogFragment.DeleteDialogListener{
+                    override fun deleteDrink() {
+                        listener.onDelete(alcoholTrack)
+                        onDeleteDyList.removeAt(position)
+                    }
+                })
+                deleteFragment.show(supportFragmentManager, "deleteDialog")
             }
         }
     }
@@ -92,6 +102,6 @@ class DrinksListAdapter(
                 notifyItemRemoved(position)
                 notifyItemRangeChanged (position, itemCount)
             }
-        })
+        }, supportFragmentManager)
     }
 }

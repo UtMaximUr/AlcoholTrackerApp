@@ -117,7 +117,7 @@ class CalendarFragment : Fragment(),
 //                addToStartText.visibility = View.GONE
 //            }
 //        })
-        drinksListAdapter = DrinksListAdapter(getAlcoholTrackByDay(Date().time), this)
+        drinksListAdapter = DrinksListAdapter(getAlcoholTrackByDay(Date().time), this, requireActivity().supportFragmentManager)
         recyclerView.adapter = drinksListAdapter
     }
 
@@ -169,8 +169,8 @@ class CalendarFragment : Fragment(),
             }
             drinksListAdapter = DrinksListAdapter(
                 alcoholTrack,
-                this@CalendarFragment
-            )
+                this@CalendarFragment,
+                requireActivity().supportFragmentManager)
             recyclerView.adapter = drinksListAdapter
             recyclerView.alphaView(requireContext())
             if (alcoholTrack.isNotEmpty()) {
