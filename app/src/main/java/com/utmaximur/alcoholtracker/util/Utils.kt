@@ -52,8 +52,4 @@ fun Context.getDisplayWidth(): Int {
         windowManager.defaultDisplay.getMetrics(displayMetrics)
         displayMetrics.widthPixels
     }
-//    val displayMetrics = DisplayMetrics()
-//    val windowManager = this.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-//    windowManager.defaultDisplay.getMetrics(displayMetrics)
-//    return displayMetrics.widthPixels
 }
