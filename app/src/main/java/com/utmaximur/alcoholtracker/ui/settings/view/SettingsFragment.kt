@@ -24,6 +24,7 @@ import com.google.android.material.switchmaterial.SwitchMaterial
 import com.utmaximur.alcoholtracker.BuildConfig
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.ui.settings.view.adapter.ThemeListAdapter
+import com.utmaximur.alcoholtracker.util.dpToPx
 
 
 const val PREFS_NAME = "theme_prefs"
@@ -31,7 +32,7 @@ const val KEY_THEME = "prefs.theme"
 const val THEME_UNDEFINED = -1
 const val THEME_LIGHT = 0
 const val THEME_DARK = 1
-const val THEME_HEIGHT = 250
+const val THEME_HEIGHT = 100
 
 const val PRIVACY_POLICY = "https://alcohol-tracker.flycricket.io/privacy.html"
 const val TERMS_OF_USE = "https://alcohol-tracker.flycricket.io/terms.html"
@@ -103,7 +104,7 @@ class SettingsFragment : Fragment(), ThemeListAdapter.ThemeListener {
                 saveTheme(THEME_UNDEFINED)
                 animateViewHeight(themeList, 0)
             } else {
-                animateViewHeight(themeList, THEME_HEIGHT)
+                animateViewHeight(themeList, THEME_HEIGHT.dpToPx())//Convert.dpToPx(THEME_HEIGHT, requireContext()))
             }
         }
 
@@ -130,13 +131,13 @@ class SettingsFragment : Fragment(), ThemeListAdapter.ThemeListener {
             THEME_DARK -> {
                 themeSwitch.isChecked = false
                 val params = themeList.layoutParams
-                params.height = THEME_HEIGHT
+                params.height = THEME_HEIGHT.dpToPx()//Convert.dpToPx(THEME_HEIGHT, requireContext())
                 themeList.layoutParams = params
             }
             THEME_LIGHT -> {
                 themeSwitch.isChecked = false
                 val params = themeList.layoutParams
-                params.height = THEME_HEIGHT
+                params.height = THEME_HEIGHT.dpToPx()//Convert.dpToPx(THEME_HEIGHT, requireContext())
                 themeList.layoutParams = params
             }
             THEME_UNDEFINED -> {

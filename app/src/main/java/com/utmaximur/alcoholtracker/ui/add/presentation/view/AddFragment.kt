@@ -1,5 +1,8 @@
 package com.utmaximur.alcoholtracker.ui.add.presentation.view
 
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.content.Context
@@ -10,8 +13,12 @@ import android.view.View.GONE
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.EditorInfo
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.NumberPicker
+import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -25,18 +32,25 @@ import com.utmaximur.alcoholtracker.dagger.factory.AddViewModelFactory
 import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
 import com.utmaximur.alcoholtracker.data.model.Drink
 import com.utmaximur.alcoholtracker.ui.add.presentation.view.adapter.DrinkViewPagerAdapter
+import com.utmaximur.alcoholtracker.ui.add.presentation.view.adapter.DrinkViewPagerAdapter.AddDrinkListener
 import com.utmaximur.alcoholtracker.ui.calculator.view.CalculatorFragment
-import com.utmaximur.alcoholtracker.ui.calculator.view.CalculatorFragment.*
+import com.utmaximur.alcoholtracker.ui.calculator.view.CalculatorFragment.CalculatorListener
+import com.utmaximur.alcoholtracker.util.alphaView
+import com.utmaximur.alcoholtracker.util.dpToPx
+import java.lang.reflect.InvocationTargetException
+import java.lang.reflect.Method
 import java.util.*
 
 
-class AddFragment : Fragment(), CalculatorListener {
+class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
 
     private var addFragmentListener: AddFragmentListener? = null
 
     interface AddFragmentListener {
         fun onHideNavigationBar()
         fun onShowNavigationBar()
+        fun onShowAddNewDrinkFragment()
+        fun onShowEditNewDrinkFragment(bundle: Bundle)
         fun closeFragment()
     }
 
@@ -59,7 +73,7 @@ class AddFragment : Fragment(), CalculatorListener {
     private lateinit var drinksPager: ViewPager
     private lateinit var dotsIndicator: TabLayout
 
-    private lateinit var calculatorFragment: LinearLayout
+    private lateinit var containerFragment: ConstraintLayout
 
     private var dateAndTime = Calendar.getInstance()
 
@@ -107,7 +121,7 @@ class AddFragment : Fragment(), CalculatorListener {
         drinksPager = view.findViewById(R.id.view_pager_drinks)
         dotsIndicator = view.findViewById(R.id.view_pager_indicator)
 
-        calculatorFragment = view.findViewById(R.id.calculator_layout)
+        containerFragment = view.findViewById(R.id.container_calculator)
     }
 
     private fun initUi(view: View) {
@@ -123,7 +137,7 @@ class AddFragment : Fragment(), CalculatorListener {
                     AlcoholTrack(
                         getIdDrink(),
                         getDrink(),
-                        getVolume(),
+                        getVolume()!!,
                         getQuantity(),
                         getDegree(),
                         getPrice(),
@@ -140,7 +154,6 @@ class AddFragment : Fragment(), CalculatorListener {
         }
 
         // выбор напитков
-//        drinksPager.adapter = DrinkViewPagerAdapter(getDrinksList(), requireContext())
         dotsIndicator.setupWithViewPager(drinksPager, true)
         drinksPager.addOnPageChangeListener(object : OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {}
@@ -152,8 +165,10 @@ class AddFragment : Fragment(), CalculatorListener {
             }
 
             override fun onPageSelected(position: Int) {
-                setDrinkDegreeArray(position)
-                setDrinkVolumeArray(position)
+                if (getDrinksList().size != position) {
+                    setDrinkDegreeArray(position)
+                    setDrinkVolumeArray(position)
+                }
             }
         })
 
@@ -166,23 +181,30 @@ class AddFragment : Fragment(), CalculatorListener {
             }
         }
 
-        //Градус
-        // устанавливаем по умолчанию первый напиток
-        degreeNumberPicker.minValue = 1
-        degreeNumberPicker.maxValue =
-            requireContext().resources.getStringArray(R.array.volume_beer_array).size - 1
-        degreeNumberPicker.displayedValues = viewModel.getFloatDegree()
 
-        //Объем
-        // устанавливаем по умолчанию первый напиток
-        volumeNumberPicker.value = 1
-        volumeNumberPicker.maxValue =
-            requireContext().resources.getStringArray(R.array.volume_beer_array).size - 1
-        volumeNumberPicker.displayedValues =
-            requireContext().resources.getStringArray(R.array.volume_beer_array)
-        setVolume(requireContext().resources.getStringArray(R.array.volume_beer_array).toList())
+        viewModel.getAllDrink().observe(viewLifecycleOwner, Observer { list ->
+            //Градус
+            // устанавливаем по умолчанию первый напиток
+            degreeNumberPicker.displayedValues = null
+            degreeNumberPicker.maxValue = list.first().degree.size - 1
+            degreeNumberPicker.displayedValues = list.first().degree.toTypedArray()
+            degreeNumberPicker.value = 1
+            changeValueByOne(degreeNumberPicker)
+
+            //Объем
+            // устанавливаем по умолчанию первый напиток
+            volumeNumberPicker.displayedValues = null
+            volumeNumberPicker.maxValue = list.first().volume.size - 1
+            volumeNumberPicker.displayedValues = list.first().volume.toTypedArray()
+            volumeNumberPicker.value = 1
+            changeValueByOne(volumeNumberPicker)
+            setVolume(list.first().volume.toList())
+        })
 
         addDateButton.setOnClickListener {
+            if (viewModel.date != 0L) {
+                dateAndTime.timeInMillis = viewModel.date
+            }
             datePecker = DatePickerDialog(
                 this.requireContext(), onDateSetListener,
                 dateAndTime.get(Calendar.YEAR),
@@ -203,12 +225,15 @@ class AddFragment : Fragment(), CalculatorListener {
 
 
         priceEditText.setOnClickListener {
-//           viewModel.showCalculator(calculatorFragment)
-            val calculatorFragment = CalculatorFragment()
-            calculatorFragment.setListener(this)
-            activity?.supportFragmentManager?.beginTransaction()
-                ?.add(R.id.container_calculator, calculatorFragment)
-                ?.commit()
+            if (containerFragment.height == 0) {
+                val calculatorFragment = CalculatorFragment()
+                calculatorFragment.setListener(this@AddFragment)
+                activity?.supportFragmentManager?.beginTransaction()
+                    ?.add(R.id.container_calculator, calculatorFragment)
+                    ?.setCustomAnimations(R.anim.fragment_open_enter, R.anim.fragment_close_exit)
+                    ?.commit()
+                animateViewHeight(containerFragment, 245.dpToPx())
+            }
         }
 
         priceEditText.setOnEditorActionListener { _, i, _ ->
@@ -233,22 +258,50 @@ class AddFragment : Fragment(), CalculatorListener {
         }
     }
 
+    @SuppressLint("DiscouragedPrivateApi")
+    private fun changeValueByOne(numberPicker: NumberPicker) {
+        try {
+            val method: Method = numberPicker.javaClass
+                .getDeclaredMethod("changeValueByOne", Boolean::class.javaPrimitiveType)
+            method.isAccessible = true
+            method.invoke(numberPicker, true)
+        } catch (e: NoSuchMethodException) {
+            e.printStackTrace()
+        } catch (e: IllegalArgumentException) {
+            e.printStackTrace()
+        } catch (e: IllegalAccessException) {
+            e.printStackTrace()
+        } catch (e: InvocationTargetException) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun animateViewHeight(view: ConstraintLayout, targetHeight: Int) {
+        val animator: ValueAnimator = ObjectAnimator.ofInt(view.height, targetHeight)
+        animator.addUpdateListener { animation ->
+            val params = view.layoutParams
+            params.height = animation.animatedValue as Int
+            view.layoutParams = params
+        }
+        animator.start()
+    }
+
     private fun setDrinkDegreeArray(position: Int) {
         val drink: Drink = getDrinksList()[position]
-
-        degreeNumberPicker.value = 0
-        degreeNumberPicker.maxValue = drink.alcoholStrength.size - 1
-        degreeNumberPicker.displayedValues = drink.alcoholStrength.toTypedArray()
+        degreeNumberPicker.displayedValues = null
         degreeNumberPicker.value = 1
-        setDegreeList(drink.alcoholStrength)
+        degreeNumberPicker.maxValue = drink.degree.size - 1
+        degreeNumberPicker.displayedValues = drink.degree.toTypedArray()
+        setDegreeList(drink.degree)
     }
 
     private fun setDrinkVolumeArray(position: Int) {
         val drink: Drink = getDrinksList()[position]
+        volumeNumberPicker.displayedValues = null
         volumeNumberPicker.value = 1
-        volumeNumberPicker.maxValue = resources.getStringArray(drink.alcoholVolume).size - 1
-        volumeNumberPicker.displayedValues = resources.getStringArray(drink.alcoholVolume)
-        setVolume(resources.getStringArray(drink.alcoholVolume).toList())
+        volumeNumberPicker.maxValue = drink.volume.size - 1
+        volumeNumberPicker.displayedValues = drink.volume.toTypedArray()
+        setVolume(drink.volume)
     }
 
     private fun setEditArguments() {
@@ -265,9 +318,9 @@ class AddFragment : Fragment(), CalculatorListener {
                 quantityNumberPicker.value = alcoholTrack.quantity
                 setDrinkVolumeArray(position)
                 volumeNumberPicker.value =
-                    resources.getStringArray(it.alcoholVolume).indexOf(alcoholTrack.volume)
+                    it.volume.indexOf(alcoholTrack.volume)
                 setDrinkDegreeArray(position)
-                degreeNumberPicker.value = it.alcoholStrength.indexOf(alcoholTrack.degree) + 1
+                degreeNumberPicker.value = it.degree.indexOf(alcoholTrack.degree) + 1
                 dotsIndicator.getTabAt(position)?.select()
             }
         }
@@ -335,11 +388,11 @@ class AddFragment : Fragment(), CalculatorListener {
         return viewModel.date
     }
 
-    private fun getVolume(): String {
+    private fun getVolume(): String? {
         return getVolumeList()[volumeNumberPicker.value]
     }
 
-    private fun setVolume(volume: List<String>) {
+    private fun setVolume(volume: List<String?>) {
         viewModel.volums = volume
     }
 
@@ -347,20 +400,32 @@ class AddFragment : Fragment(), CalculatorListener {
         viewModel.degrees = degree
     }
 
-    private fun getVolumeList(): List<String> {
+    private fun getVolumeList(): List<String?> {
         return viewModel.volums
     }
 
-    private fun getIcon(): Int {
+    private fun getIcon(): String {
         return getDrinksList()[drinksPager.currentItem].icon
     }
 
     private fun setDrinksList() {
         viewModel.getAllDrink().observe(viewLifecycleOwner, Observer { list ->
             viewModel.drinks = list
-            drinksPager.adapter = DrinkViewPagerAdapter(getDrinksList(), requireContext())
+            val adapter = DrinkViewPagerAdapter(getDrinksList(), requireContext())
+            adapter.setListener(this)
+            drinksPager.adapter = adapter
+            drinksPager.alphaView(requireContext())
             if (arguments != null) {
-                setEditArguments()
+                if (arguments?.containsKey("selectDate")!! && arguments?.getLong("selectDate") != 0L) {
+                    addDateButton.text = viewModel.setDateOnButton(
+                        requireContext(),
+                        Date(requireArguments().getLong("selectDate"))
+                    )
+                    viewModel.date = requireArguments().getLong("selectDate")
+                    todayButton.visibility = GONE
+                } else {
+                    setEditArguments()
+                }
             }
         })
     }
@@ -381,5 +446,23 @@ class AddFragment : Fragment(), CalculatorListener {
 
     override fun getValueCalculating(value: String) {
         priceEditText.setText(value)
+    }
+
+    override fun closeCalculator() {
+        animateViewHeight(containerFragment, 0)
+    }
+
+    override fun addNewDrink() {
+        addFragmentListener?.onShowAddNewDrinkFragment()
+    }
+
+    override fun deleteDrink(drink: Drink) {
+        viewModel.deleteDrink(drink)
+    }
+
+    override fun editDrink(drink: Drink) {
+        val bundle = Bundle()
+        bundle.putParcelable("editDrink", drink)
+        addFragmentListener?.onShowEditNewDrinkFragment(bundle)
     }
 }

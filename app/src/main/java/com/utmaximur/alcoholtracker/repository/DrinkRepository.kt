@@ -21,4 +21,16 @@ class DrinkRepository(alcoholTrackDatabase: AlcoholTrackDatabase) {
             drinkDao.addDrink(drink)
         }
     }
+
+    fun updateDrink(drink: Drink) {
+        CoroutineScope(Dispatchers.IO).launch {
+            drinkDao.updateDrink(drink)
+        }
+    }
+
+    fun deleteDrink(drink: Drink) {
+        CoroutineScope(Dispatchers.IO).launch {
+            drinkDao.deleteDrink(drink)
+        }
+    }
 }

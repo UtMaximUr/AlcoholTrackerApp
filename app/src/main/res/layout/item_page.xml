@@ -33,5 +33,43 @@
             android:textSize="24sp" />
     </androidx.cardview.widget.CardView>
 
+    <ImageButton
+        android:id="@+id/item_drink_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_delete"
+        android:padding="24dp"
+        android:visibility="gone"
+        android:background="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/cd_delete_button" />
+
+    <ImageButton
+        android:id="@+id/item_drink_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_edit"
+        android:padding="24dp"
+        android:visibility="gone"
+        android:background="@android:color/transparent"
+        app:layout_constraintEnd_toStartOf="@id/item_drink_delete"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/cd_edit_button" />
+
+    <ImageButton
+        android:id="@+id/item_drink_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add_drink"
+        android:visibility="gone"
+        android:padding="@dimen/dp_4"
+        android:background="@drawable/circle_mask"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/add_drink_title" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

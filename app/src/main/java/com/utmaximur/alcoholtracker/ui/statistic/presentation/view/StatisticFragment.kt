@@ -18,6 +18,7 @@ import com.utmaximur.alcoholtracker.dagger.component.AlcoholTrackComponent
 import com.utmaximur.alcoholtracker.dagger.factory.StatisticViewModelFactory
 import com.utmaximur.alcoholtracker.ui.statistic.presentation.view.adapter.StatisticViewPagerAdapter
 import com.utmaximur.alcoholtracker.ui.statistic.presentation.view.adapter.TopDrinkAdapter
+import com.utmaximur.alcoholtracker.util.alphaView
 
 class StatisticFragment :
     Fragment() {
@@ -66,6 +67,7 @@ class StatisticFragment :
     }
 
     private fun initUI() {
+        topDrinkList.alphaView(requireContext())
         topDrinkList.layoutManager = GridLayoutManager(context, 4)
         viewModel.getAllDrink().observe(viewLifecycleOwner, Observer { list ->
             topDrinkList.adapter = TopDrinkAdapter(viewModel.getDrinksDrunkByMe())
