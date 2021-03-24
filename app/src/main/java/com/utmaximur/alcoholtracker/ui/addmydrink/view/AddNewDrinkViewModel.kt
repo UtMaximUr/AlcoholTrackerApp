@@ -1,12 +1,15 @@
 package com.utmaximur.alcoholtracker.ui.addmydrink.view
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.utmaximur.alcoholtracker.data.model.Drink
+import com.utmaximur.alcoholtracker.data.model.Icon
 import com.utmaximur.alcoholtracker.repository.DrinkRepository
+import com.utmaximur.alcoholtracker.repository.IconRepository
 import java.util.*
 import kotlin.collections.ArrayList
 
-class AddNewDrinkViewModel(private var drinkRepository: DrinkRepository): ViewModel() {
+class AddNewDrinkViewModel(private var drinkRepository: DrinkRepository, private var iconRepository: IconRepository): ViewModel() {
 
     var id: String = ""
     var volumeList: List<String?> = ArrayList()
@@ -20,6 +23,10 @@ class AddNewDrinkViewModel(private var drinkRepository: DrinkRepository): ViewMo
         } else {
             drinkRepository.updateDrink(drink)
         }
+    }
+
+    fun getIcons(): LiveData<List<Icon>> {
+        return iconRepository.getIcons()
     }
 
     private fun getDrinkId(): String = UUID.randomUUID().toString()

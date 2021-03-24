@@ -2,6 +2,7 @@ package com.utmaximur.alcoholtracker.ui.addmydrink.view
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -15,15 +16,17 @@ import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.ConcatAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.dagger.component.AlcoholTrackComponent
 import com.utmaximur.alcoholtracker.dagger.factory.AddNewDrinkViewModelFactory
 import com.utmaximur.alcoholtracker.data.model.Drink
+import com.utmaximur.alcoholtracker.data.model.Icon
+import com.utmaximur.alcoholtracker.ui.addmydrink.view.adapter.SelectIconAdapter
 import com.utmaximur.alcoholtracker.ui.customview.RangeSeekBar
-import com.utmaximur.alcoholtracker.ui.dialog.addicon.AddIconDrinkDialogFragment
-import com.utmaximur.alcoholtracker.ui.dialog.addicon.AddIconDrinkDialogFragment.*
 import com.utmaximur.alcoholtracker.ui.dialog.addphoto.AddPhotoBottomDialogFragment
 import com.utmaximur.alcoholtracker.ui.dialog.addphoto.AddPhotoBottomDialogFragment.BottomDialogListener
 import com.utmaximur.alcoholtracker.ui.dialog.addvolume.AddVolumeDrinkDialogFragment
@@ -31,7 +34,6 @@ import com.utmaximur.alcoholtracker.ui.dialog.addvolume.AddVolumeDrinkDialogFrag
 
 
 class AddNewDrink : Fragment(), BottomDialogListener,
-    SelectIconListener,
     SelectVolumeListener {
 
     private var addNewFragmentListener: AddNewFragmentListener? = null
@@ -43,8 +45,9 @@ class AddNewDrink : Fragment(), BottomDialogListener,
     private lateinit var toolbar: Toolbar
     private lateinit var photo: ImageView
     private lateinit var nameDrink: EditText
-    private lateinit var addIcon: LinearLayout
-    private lateinit var iconDrink: ImageView
+    private lateinit var iconsList: RecyclerView//LinearLayout
+
+    //    private lateinit var iconDrink: ImageView
     private lateinit var minValueDegree: TextView
     private lateinit var maxValueDegree: TextView
     private lateinit var rangeDegree: RangeSeekBar
@@ -74,8 +77,9 @@ class AddNewDrink : Fragment(), BottomDialogListener,
         val dependencyFactory: AlcoholTrackComponent =
             (requireActivity().application as App).alcoholTrackComponent
         val drinkRepository = dependencyFactory.provideDrinkRepository()
+        val iconRepository = dependencyFactory.provideIconRepository()
         val viewModel: AddNewDrinkViewModel by viewModels {
-            AddNewDrinkViewModelFactory(drinkRepository)
+            AddNewDrinkViewModelFactory(drinkRepository, iconRepository)
         }
         this.viewModel = viewModel
     }
@@ -85,8 +89,8 @@ class AddNewDrink : Fragment(), BottomDialogListener,
         toolbar = view.findViewById(R.id.toolbar)
         photo = view.findViewById(R.id.photo_drink)
         nameDrink = view.findViewById(R.id.drink_name_text)
-        addIcon = view.findViewById(R.id.drink_add_icon)
-        iconDrink = view.findViewById(R.id.drink_icon_image)
+        iconsList = view.findViewById(R.id.drink_add_icon)
+//        iconDrink = view.findViewById(R.id.drink_icon_image)
         minValueDegree = view.findViewById(R.id.left_range_degree)
         maxValueDegree = view.findViewById(R.id.right_range_degree)
         rangeDegree = view.findViewById(R.id.range_seek_bar_degree)
@@ -139,16 +143,18 @@ class AddNewDrink : Fragment(), BottomDialogListener,
             true
         })
 
-        addIcon.setOnClickListener {
-            hideKeyboard()
-            val addIconDrinkDialogFragment =
-                AddIconDrinkDialogFragment()
-            addIconDrinkDialogFragment.setListener(this)
-            addIconDrinkDialogFragment.show(
-                requireActivity().supportFragmentManager,
-                "add_icon_dialog_fragment"
-            )
-        }
+//        iconList.layoutManager = GridLayoutManager(context, 5)
+        val selectIconAdapter = SelectIconAdapter { icon -> adapterOnClick(icon) }
+        val concatAdapter = ConcatAdapter(selectIconAdapter)
+        iconsList.adapter = concatAdapter
+//        (iconsList.adapter as SelectIconAdapter).setIcons(viewModel.getIcons())
+//        (iconsList.adapter as SelectIconDrinkAdapter).setListener(this)
+
+        viewModel.getIcons().observe(viewLifecycleOwner, {
+            it?.let {
+                selectIconAdapter.submitList(it as MutableList<Icon>)
+            }
+        })
 
         minValueDegree.text = rangeDegree.getMin().toString()
         maxValueDegree.text = rangeDegree.getMax().toString()
@@ -195,13 +201,13 @@ class AddNewDrink : Fragment(), BottomDialogListener,
             Glide.with(requireContext()).load(drink.photo).into(photo)
         }
         nameDrink.setText(drink.drink)
-        Glide.with(requireContext()).load(
-            requireContext().resources.getIdentifier(
-                drink.icon,
-                "raw",
-                requireContext().packageName
-            )
-        ).into(iconDrink)
+//        Glide.with(requireContext()).load(
+//            requireContext().resources.getIdentifier(
+//                drink.icon,
+//                "raw",
+//                requireContext().packageName
+//            )
+//        ).into(iconDrink)
         rangeDegree.setCurrentRangeMin(drink.degree.first()?.toDouble()?.toFloat()!!)
         rangeDegree.setCurrentRangeMax(drink.degree.last()?.toDouble()?.toFloat()!!)
         minValueDegree.text = drink.degree.first()
@@ -228,9 +234,9 @@ class AddNewDrink : Fragment(), BottomDialogListener,
         photo.scaleType = ImageView.ScaleType.CENTER
     }
 
-    override fun selectIcon(icon: Int) {
-        Glide.with(requireContext()).load(icon).into(iconDrink)
-        viewModel.icon = requireContext().resources.getResourceName(icon)
+    private fun adapterOnClick(icon: Icon) {
+        hideKeyboard()
+        viewModel.icon = requireContext().resources.getResourceName(icon.icon)
     }
 
     private fun getIdDrink(): String {
