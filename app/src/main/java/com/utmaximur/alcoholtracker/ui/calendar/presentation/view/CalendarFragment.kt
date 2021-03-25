@@ -9,7 +9,6 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.applandeo.materialcalendarview.EventDay
@@ -21,6 +20,7 @@ import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
 import com.utmaximur.alcoholtracker.ui.calendar.presentation.view.adapter.DrinksListAdapter
 import com.utmaximur.alcoholtracker.ui.dialog.adddrink.AddDrinkDialogFragment
 import com.utmaximur.alcoholtracker.util.alphaView
+import com.utmaximur.alcoholtracker.util.getIdRaw
 import java.util.*
 import javax.inject.Inject
 
@@ -112,11 +112,6 @@ class CalendarFragment : Fragment(),
     private fun initCalendar() {
         // добавление иконок алкоголя в календарь
         setIconOnDate()
-//        viewModel.getTracks().observe(viewLifecycleOwner, Observer { list ->
-//            if (list.isNotEmpty()) {
-//                addToStartText.visibility = View.GONE
-//            }
-//        })
         drinksListAdapter = DrinksListAdapter(getAlcoholTrackByDay(Date().time), this, requireActivity().supportFragmentManager)
         recyclerView.adapter = drinksListAdapter
     }
@@ -135,7 +130,7 @@ class CalendarFragment : Fragment(),
 
     override fun onEdit(date: Long) {
         val bundle = Bundle()
-        viewModel.getTrack(date).observe(viewLifecycleOwner, Observer { track ->
+        viewModel.getTrack(date).observe(viewLifecycleOwner, { track ->
             bundle.putParcelable("drink", track)
             calendarFragmentListener?.showEditAlcoholTrackerFragment(bundle)
         })
@@ -157,7 +152,7 @@ class CalendarFragment : Fragment(),
         val startTimeDay: Int = calendar.get(Calendar.DAY_OF_MONTH)
         val endTimeDay: Int = startTimeDay + 1
         val month: Int = calendar.get(Calendar.MONTH)
-        viewModel.getTracks().observe(viewLifecycleOwner, Observer { list ->
+        viewModel.getTracks().observe(viewLifecycleOwner, { list ->
             list.forEach {
                 calendar.timeInMillis = it.date
                 if (calendar.get(Calendar.DAY_OF_MONTH) in startTimeDay until endTimeDay && calendar.get(
@@ -190,7 +185,7 @@ class CalendarFragment : Fragment(),
 
     private fun setIconOnDate() {
         val events: MutableList<EventDay> = ArrayList()
-        viewModel.getTracks().observe(viewLifecycleOwner, Observer { list ->
+        viewModel.getTracks().observe(viewLifecycleOwner, { list ->
             events.clear()
             list.forEach {
                 val calendar = Calendar.getInstance()
@@ -198,11 +193,7 @@ class CalendarFragment : Fragment(),
                 events.add(
                     EventDay(
                         calendar,
-                        requireContext().resources.getIdentifier(
-                            it.icon,
-                            "raw",
-                            requireContext().packageName
-                        )
+                        it.icon.getIdRaw(requireContext())!!
                     )
                 )
             }
