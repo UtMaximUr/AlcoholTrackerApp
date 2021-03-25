@@ -46,6 +46,11 @@ class AddNewDrink : Fragment(), BottomDialogListener{
     private lateinit var iconsList: RecyclerView
     private lateinit var volumeList: RecyclerView
 
+    private var selectIconAdapter: SelectIconAdapter? = null
+    private var iconConcatAdapter: ConcatAdapter? = null
+    private var selectVolumeAdapter: SelectVolumeAdapter? = null
+    private var volumeConcatAdapter: ConcatAdapter? = null
+
     private lateinit var minValueDegree: TextView
     private lateinit var maxValueDegree: TextView
     private lateinit var rangeDegree: RangeSeekBar
@@ -135,19 +140,8 @@ class AddNewDrink : Fragment(), BottomDialogListener{
             true
         })
 
-        val selectIconAdapter = SelectIconAdapter { icon -> adapterIconOnClick(icon) }
-        val iconConcatAdapter = ConcatAdapter(selectIconAdapter)
-        iconsList.adapter = iconConcatAdapter
-        viewModel.getIcons().observe(viewLifecycleOwner, {
-            it?.let {
-                selectIconAdapter.submitList(it as MutableList<Icon>)
-            }
-        })
-
-        val selectVolumeAdapter = SelectVolumeAdapter { volume -> adapterVolumeOnClick(volume) }
-        val volumeConcatAdapter = ConcatAdapter(selectVolumeAdapter)
-        volumeList.adapter = volumeConcatAdapter
-        selectVolumeAdapter.submitList(viewModel.getVolumes(requireContext()))
+        setIconAdapter(null)
+        setVolumeAdapter(null)
 
         minValueDegree.text = rangeDegree.getMin().toString()
         maxValueDegree.text = rangeDegree.getMax().toString()
@@ -184,18 +178,35 @@ class AddNewDrink : Fragment(), BottomDialogListener{
             Glide.with(requireContext()).load(drink.photo).into(photo)
         }
         nameDrink.setText(drink.drink)
-//        Glide.with(requireContext()).load(
-//            requireContext().resources.getIdentifier(
-//                drink.icon,
-//                "raw",
-//                requireContext().packageName
-//            )
-//        ).into(iconDrink)
+        setIconAdapter(Icon(requireContext().resources.getIdentifier(
+            drink.icon,
+            "raw",
+            requireContext().packageName
+        )))
         rangeDegree.setCurrentRangeMin(drink.degree.first()?.toDouble()?.toFloat()!!)
         rangeDegree.setCurrentRangeMax(drink.degree.last()?.toDouble()?.toFloat()!!)
         minValueDegree.text = drink.degree.first()
         maxValueDegree.text = drink.degree.last()
 
+        setVolumeAdapter(drink.volume)
+    }
+
+    private fun setIconAdapter(icon: Icon?) {
+        selectIconAdapter = SelectIconAdapter(this::adapterIconOnClick, icon)
+        iconConcatAdapter = ConcatAdapter(selectIconAdapter)
+        iconsList.adapter = iconConcatAdapter
+        viewModel.getIcons().observe(viewLifecycleOwner, {
+            it?.let {
+                selectIconAdapter?.submitList(it as MutableList<Icon>)
+            }
+        })
+    }
+
+    private fun setVolumeAdapter(volumes: List<String?>?){
+        selectVolumeAdapter = SelectVolumeAdapter(this::adapterVolumeOnClick, volumes)
+        volumeConcatAdapter = ConcatAdapter(selectVolumeAdapter)
+        volumeList.adapter = volumeConcatAdapter
+        selectVolumeAdapter?.submitList(viewModel.getVolumes(requireContext()))
     }
 
     override fun onAttach(context: Context) {

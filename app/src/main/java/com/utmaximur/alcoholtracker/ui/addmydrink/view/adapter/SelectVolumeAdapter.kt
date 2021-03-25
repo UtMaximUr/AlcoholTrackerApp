@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.utmaximur.alcoholtracker.R
 
 
-class SelectVolumeAdapter(private val onClick: (String?) -> Unit) :
+class SelectVolumeAdapter(private val onClick: (String?) -> Unit, private val volumes: List<String?>?) :
     ListAdapter<String?, SelectVolumeAdapter.ViewHolder>(VolumeDiffCallback) {
 
     class ViewHolder(itemView: View, val onClick: (String?) -> Unit) :
@@ -28,12 +28,12 @@ class SelectVolumeAdapter(private val onClick: (String?) -> Unit) :
             }
         }
 
-        fun bind(volume: String?) {
-            if (currentVolume != volume) {
-                volumeCheckedTextView.isChecked = false
-            }
+        fun bind(volume: String?, volumes: List<String?>?) {
             currentVolume = volume
             volumeCheckedTextView.text = volume
+            if(volumes?.contains(volume)!!){
+                volumeCheckedTextView.isChecked = true
+            }
         }
     }
 
@@ -45,7 +45,7 @@ class SelectVolumeAdapter(private val onClick: (String?) -> Unit) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val volume = getItem(position)
-        holder.bind(volume)
+        holder.bind(volume, volumes)
     }
 
     override fun getItemId(position: Int): Long {

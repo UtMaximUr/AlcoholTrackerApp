@@ -13,10 +13,10 @@ import com.utmaximur.alcoholtracker.data.model.Icon
 import com.utmaximur.alcoholtracker.util.dpToPx
 
 
-class SelectIconAdapter(private val onClick: (Icon) -> Unit) :
+class SelectIconAdapter(private val onClick: (Icon) -> Unit, private var selectedIcon: Icon?) :
     ListAdapter<Icon, SelectIconAdapter.ViewHolder>(IconDiffCallback) {
 
-    private var selectedIcon: Icon? = null
+//    private var selectedIcon: Icon? = null
 
     interface SelectIconListener {
         fun selectIcon(icon: Icon)
