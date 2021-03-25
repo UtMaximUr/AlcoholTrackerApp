@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.data.model.Drink
+import com.utmaximur.alcoholtracker.util.getIdRaw
 
 class TopDrinkAdapter(private var drinksDrunkByMe: Map<String, Int>) :
     RecyclerView.Adapter<TopDrinkAdapter.ViewHolder>() {
@@ -36,11 +37,7 @@ class TopDrinkAdapter(private var drinksDrunkByMe: Map<String, Int>) :
         fun bind(drink: Drink, drinksDrunkByMe: Map<String, Int>) {
             drinkText?.text = drink.drink
             Glide.with(itemView).load(
-                itemView.context.resources.getIdentifier(
-                    drink.icon,
-                    "raw",
-                    itemView.context.packageName
-                )
+                drink.icon.getIdRaw(itemView.context)
             ).into(drinkImage!!)
             drinksDrunkByMe.forEach {
                 if (it.key == drink.drink) {
