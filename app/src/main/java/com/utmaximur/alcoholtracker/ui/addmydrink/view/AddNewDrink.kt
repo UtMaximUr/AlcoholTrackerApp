@@ -29,6 +29,7 @@ import com.utmaximur.alcoholtracker.ui.addmydrink.view.adapter.SelectVolumeAdapt
 import com.utmaximur.alcoholtracker.ui.customview.RangeSeekBar
 import com.utmaximur.alcoholtracker.ui.dialog.addphoto.AddPhotoBottomDialogFragment
 import com.utmaximur.alcoholtracker.ui.dialog.addphoto.AddPhotoBottomDialogFragment.BottomDialogListener
+import com.utmaximur.alcoholtracker.util.getIdRaw
 import java.util.ArrayList
 
 
@@ -178,11 +179,7 @@ class AddNewDrink : Fragment(), BottomDialogListener{
             Glide.with(requireContext()).load(drink.photo).into(photo)
         }
         nameDrink.setText(drink.drink)
-        setIconAdapter(Icon(requireContext().resources.getIdentifier(
-            drink.icon,
-            "raw",
-            requireContext().packageName
-        )))
+        setIconAdapter(drink.icon.getIdRaw(requireContext())?.let { Icon(it) })
         rangeDegree.setCurrentRangeMin(drink.degree.first()?.toDouble()?.toFloat()!!)
         rangeDegree.setCurrentRangeMax(drink.degree.last()?.toDouble()?.toFloat()!!)
         minValueDegree.text = drink.degree.first()
