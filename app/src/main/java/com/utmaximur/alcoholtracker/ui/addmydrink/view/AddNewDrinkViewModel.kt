@@ -9,7 +9,6 @@ import com.utmaximur.alcoholtracker.data.model.Icon
 import com.utmaximur.alcoholtracker.repository.DrinkRepository
 import com.utmaximur.alcoholtracker.repository.IconRepository
 import java.util.*
-import kotlin.collections.HashSet
 
 class AddNewDrinkViewModel(private var drinkRepository: DrinkRepository, private var iconRepository: IconRepository): ViewModel() {
 
