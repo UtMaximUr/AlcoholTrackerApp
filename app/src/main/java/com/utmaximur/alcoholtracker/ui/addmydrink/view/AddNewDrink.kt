@@ -1,5 +1,6 @@
 package com.utmaximur.alcoholtracker.ui.addmydrink.view
 
+
 import android.content.Context
 import android.os.Bundle
 import android.view.KeyEvent
@@ -10,7 +11,6 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -25,15 +25,14 @@ import com.utmaximur.alcoholtracker.dagger.factory.AddNewDrinkViewModelFactory
 import com.utmaximur.alcoholtracker.data.model.Drink
 import com.utmaximur.alcoholtracker.data.model.Icon
 import com.utmaximur.alcoholtracker.ui.addmydrink.view.adapter.SelectIconAdapter
+import com.utmaximur.alcoholtracker.ui.addmydrink.view.adapter.SelectVolumeAdapter
 import com.utmaximur.alcoholtracker.ui.customview.RangeSeekBar
 import com.utmaximur.alcoholtracker.ui.dialog.addphoto.AddPhotoBottomDialogFragment
 import com.utmaximur.alcoholtracker.ui.dialog.addphoto.AddPhotoBottomDialogFragment.BottomDialogListener
-import com.utmaximur.alcoholtracker.ui.dialog.addvolume.AddVolumeDrinkDialogFragment
-import com.utmaximur.alcoholtracker.ui.dialog.addvolume.AddVolumeDrinkDialogFragment.*
+import java.util.ArrayList
 
 
-class AddNewDrink : Fragment(), BottomDialogListener,
-    SelectVolumeListener {
+class AddNewDrink : Fragment(), BottomDialogListener{
 
     private var addNewFragmentListener: AddNewFragmentListener? = null
 
@@ -44,15 +43,12 @@ class AddNewDrink : Fragment(), BottomDialogListener,
     private lateinit var toolbar: Toolbar
     private lateinit var photo: ImageView
     private lateinit var nameDrink: EditText
-    private lateinit var iconsList: RecyclerView//LinearLayout
+    private lateinit var iconsList: RecyclerView
+    private lateinit var volumeList: RecyclerView
 
-    //    private lateinit var iconDrink: ImageView
     private lateinit var minValueDegree: TextView
     private lateinit var maxValueDegree: TextView
     private lateinit var rangeDegree: RangeSeekBar
-    private lateinit var minValueVolume: TextView
-    private lateinit var maxValueVolume: TextView
-    private lateinit var addVolume: LinearLayout
 
     private lateinit var viewModel: AddNewDrinkViewModel
 
@@ -89,13 +85,10 @@ class AddNewDrink : Fragment(), BottomDialogListener,
         photo = view.findViewById(R.id.photo_drink)
         nameDrink = view.findViewById(R.id.drink_name_text)
         iconsList = view.findViewById(R.id.drink_add_icon)
-//        iconDrink = view.findViewById(R.id.drink_icon_image)
+        volumeList = view.findViewById(R.id.drink_add_volume)
         minValueDegree = view.findViewById(R.id.left_range_degree)
         maxValueDegree = view.findViewById(R.id.right_range_degree)
         rangeDegree = view.findViewById(R.id.range_seek_bar_degree)
-        minValueVolume = view.findViewById(R.id.left_range_volume)
-        maxValueVolume = view.findViewById(R.id.right_range_volume)
-        addVolume = view.findViewById(R.id.layout_volume)
 
     }
 
@@ -142,18 +135,19 @@ class AddNewDrink : Fragment(), BottomDialogListener,
             true
         })
 
-//        iconList.layoutManager = GridLayoutManager(context, 5)
-        val selectIconAdapter = SelectIconAdapter { icon -> adapterOnClick(icon) }
-        val concatAdapter = ConcatAdapter(selectIconAdapter)
-        iconsList.adapter = concatAdapter
-//        (iconsList.adapter as SelectIconAdapter).setIcons(viewModel.getIcons())
-//        (iconsList.adapter as SelectIconDrinkAdapter).setListener(this)
-
+        val selectIconAdapter = SelectIconAdapter { icon -> adapterIconOnClick(icon) }
+        val iconConcatAdapter = ConcatAdapter(selectIconAdapter)
+        iconsList.adapter = iconConcatAdapter
         viewModel.getIcons().observe(viewLifecycleOwner, {
             it?.let {
                 selectIconAdapter.submitList(it as MutableList<Icon>)
             }
         })
+
+        val selectVolumeAdapter = SelectVolumeAdapter { volume -> adapterVolumeOnClick(volume) }
+        val volumeConcatAdapter = ConcatAdapter(selectVolumeAdapter)
+        volumeList.adapter = volumeConcatAdapter
+        selectVolumeAdapter.submitList(viewModel.getVolumes(requireContext()))
 
         minValueDegree.text = rangeDegree.getMin().toString()
         maxValueDegree.text = rangeDegree.getMax().toString()
@@ -166,16 +160,6 @@ class AddNewDrink : Fragment(), BottomDialogListener,
         rangeDegree.addMinRangeChangeListener {
             val format: String = String.format("%.1f", it)
             minValueDegree.text = format
-        }
-
-        addVolume.setOnClickListener {
-            val addVolumeDrinkDialogFragment =
-                AddVolumeDrinkDialogFragment()
-            addVolumeDrinkDialogFragment.setListener(this)
-            addVolumeDrinkDialogFragment.show(
-                requireActivity().supportFragmentManager,
-                "add_volume_dialog_fragment"
-            )
         }
 
         if (arguments != null) {
@@ -192,8 +176,8 @@ class AddNewDrink : Fragment(), BottomDialogListener,
 
     private fun setArguments() {
         val drink: Drink? = requireArguments().getParcelable("editDrink")
-        viewModel.id = drink?.id!!
-        viewModel.volumeList = drink.volume
+        viewModel.id = drink?.id.toString()
+        viewModel.volumeList = drink?.volume as ArrayList<String?>
         viewModel.icon = drink.icon
 
         if (drink.photo != "") {
@@ -211,8 +195,6 @@ class AddNewDrink : Fragment(), BottomDialogListener,
         rangeDegree.setCurrentRangeMax(drink.degree.last()?.toDouble()?.toFloat()!!)
         minValueDegree.text = drink.degree.first()
         maxValueDegree.text = drink.degree.last()
-        minValueVolume.text = drink.volume.first()
-        maxValueVolume.text = drink.volume.last()
 
     }
 
@@ -233,9 +215,18 @@ class AddNewDrink : Fragment(), BottomDialogListener,
         photo.scaleType = ImageView.ScaleType.CENTER
     }
 
-    private fun adapterOnClick(icon: Icon) {
+    private fun adapterIconOnClick(icon: Icon) {
         hideKeyboard()
         viewModel.icon = requireContext().resources.getResourceName(icon.icon)
+    }
+
+    private fun adapterVolumeOnClick(volume: String?) {
+        hideKeyboard()
+        if (viewModel.volumeList.contains(volume)){
+            viewModel.volumeList.remove(volume)
+        } else {
+            viewModel.volumeList.add(volume)
+        }
     }
 
     private fun getIdDrink(): String {
@@ -263,11 +254,5 @@ class AddNewDrink : Fragment(), BottomDialogListener,
 
     private fun getPhoto(): String {
         return viewModel.photo
-    }
-
-    override fun selectVolumeList(volumeList: List<String>) {
-        viewModel.volumeList = volumeList
-        minValueVolume.text = volumeList.first()
-        maxValueVolume.text = volumeList.last()
     }
 }

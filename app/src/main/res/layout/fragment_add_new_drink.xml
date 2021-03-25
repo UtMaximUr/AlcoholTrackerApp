@@ -161,46 +161,30 @@
     <LinearLayout
         android:id="@+id/layout_volume"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/range_seek_bar_degree">
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:fontFamily="@font/roboto_condensed_regular"
             android:padding="@dimen/dp_24"
             android:text="@string/dialog_create_drink_add_volume"
             android:textColor="@color/text_color"
             android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/left_range_volume"
-            android:layout_width="wrap_content"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/drink_add_volume"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_condensed_regular"
-            android:text="@string/divide_value"
-            android:textColor="@color/text_color"
-            android:textSize="16sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_condensed_regular"
-            android:text="@string/divide_value"
-            android:textColor="@color/text_color"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/right_range_volume"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/dp_24"
-            android:fontFamily="@font/roboto_condensed_regular"
-            android:text="@string/divide_value"
-            android:textColor="@color/text_color"
-            android:textSize="16sp" />
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginBottom="@dimen/dp_8"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_select_icon" />
 
     </LinearLayout>
 
