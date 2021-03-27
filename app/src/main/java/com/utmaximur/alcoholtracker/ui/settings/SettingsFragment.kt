@@ -24,6 +24,8 @@ import com.utmaximur.alcoholtracker.BuildConfig
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.ui.settings.adapter.ThemeListAdapter
 import com.utmaximur.alcoholtracker.util.dpToPx
+import com.utmaximur.alcoholtracker.util.toGone
+import com.utmaximur.alcoholtracker.util.toVisible
 
 
 const val PREFS_NAME = "theme_prefs"
@@ -124,9 +126,9 @@ class SettingsFragment : Fragment(), ThemeListAdapter.ThemeListener {
 
     private fun initTheme() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            themeLayout.visibility = View.VISIBLE
+            themeLayout.toVisible()
         } else {
-            themeLayout.visibility = View.GONE
+            themeLayout.toGone()
         }
         when (getSavedTheme()) {
             THEME_DARK -> {

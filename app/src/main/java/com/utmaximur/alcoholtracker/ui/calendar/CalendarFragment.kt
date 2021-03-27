@@ -21,6 +21,8 @@ import com.utmaximur.alcoholtracker.ui.calendar.adapter.DrinksListAdapter
 import com.utmaximur.alcoholtracker.ui.dialog.adddrink.AddDrinkDialogFragment
 import com.utmaximur.alcoholtracker.util.alphaView
 import com.utmaximur.alcoholtracker.util.getIdRaw
+import com.utmaximur.alcoholtracker.util.toInvisible
+import com.utmaximur.alcoholtracker.util.toVisible
 import java.util.*
 import javax.inject.Inject
 
@@ -141,7 +143,7 @@ class CalendarFragment : Fragment(),
         getAlcoholTrackByDay(Date().time)
         setIconOnDate()
         if (getAlcoholTrackByDay(Date().time).isEmpty()) {
-            emptyDrinkListText.visibility = View.VISIBLE
+            emptyDrinkListText.toVisible()
         }
     }
 
@@ -169,13 +171,13 @@ class CalendarFragment : Fragment(),
             recyclerView.adapter = drinksListAdapter
             recyclerView.alphaView(requireContext())
             if (alcoholTrack.isNotEmpty()) {
-                emptyDrinkListText.visibility = View.INVISIBLE
+                emptyDrinkListText.toInvisible()
             } else {
                 if (list.isEmpty()) {
-                    addToStartText.visibility = View.VISIBLE
+                    addToStartText.toVisible()
                     addToStartText.alphaView(requireContext())
                 } else {
-                    emptyDrinkListText.visibility = View.VISIBLE
+                    emptyDrinkListText.toVisible()
                     emptyDrinkListText.alphaView(requireContext())
                 }
             }

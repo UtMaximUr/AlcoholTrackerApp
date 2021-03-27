@@ -9,7 +9,6 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.EditorInfo
@@ -37,6 +36,7 @@ import com.utmaximur.alcoholtracker.ui.calculator.CalculatorFragment.CalculatorL
 import com.utmaximur.alcoholtracker.util.alphaView
 import com.utmaximur.alcoholtracker.util.dpToPx
 import com.utmaximur.alcoholtracker.util.formatDate
+import com.utmaximur.alcoholtracker.util.toGone
 import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.Method
 import java.util.*
@@ -217,7 +217,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         todayButton.setOnClickListener {
             addDateButton.text = Date().time.formatDate(requireContext())
             viewModel.date = Date().time
-            todayButton.visibility = GONE
+            todayButton.toGone()
         }
 
 
@@ -324,7 +324,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
 
         priceEditText.setText(alcoholTrack.price.toString())
         addDateButton.text = alcoholTrack.date.formatDate(requireContext())
-        todayButton.visibility = GONE
+        todayButton.toGone()
 
         totalMoneyText.text =
             (alcoholTrack.price.times(alcoholTrack.quantity)).toString()
@@ -338,7 +338,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
             viewModel.date = dateAndTime.timeInMillis
             addDateButton.text = dateAndTime.timeInMillis.formatDate(requireContext())
             viewModel.date = Date(dateAndTime.timeInMillis).time
-            todayButton.visibility = GONE
+            todayButton.toGone()
         }
 
     override fun onStart() {
@@ -416,7 +416,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
                     val selectDate = requireArguments().getLong("selectDate")
                     addDateButton.text = selectDate.formatDate(requireContext())
                     viewModel.date = selectDate
-                    todayButton.visibility = GONE
+                    todayButton.toGone()
                 } else {
                     setEditArguments()
                 }

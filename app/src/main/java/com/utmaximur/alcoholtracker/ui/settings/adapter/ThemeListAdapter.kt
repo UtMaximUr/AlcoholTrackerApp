@@ -1,12 +1,12 @@
 package com.utmaximur.alcoholtracker.ui.settings.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.utmaximur.alcoholtracker.R
+import com.utmaximur.alcoholtracker.util.toVisible
 
 class ThemeListAdapter(private val themeList: List<String>, private val themeId: Int)  :
     RecyclerView.Adapter<ThemeListAdapter.ViewHolder>() {
@@ -37,7 +37,7 @@ class ThemeListAdapter(private val themeList: List<String>, private val themeId:
                 listener.saveTheme(position)
             }
             if(themeId == position){
-                themeChoice?.visibility = View.VISIBLE
+                themeChoice?.toVisible()
             }
         }
     }

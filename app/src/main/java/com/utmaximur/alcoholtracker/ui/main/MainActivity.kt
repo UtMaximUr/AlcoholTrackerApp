@@ -1,8 +1,6 @@
 package com.utmaximur.alcoholtracker.ui.main
 
 import android.os.Bundle
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -12,6 +10,8 @@ import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.ui.add.AddFragment
 import com.utmaximur.alcoholtracker.ui.addmydrink.AddNewDrink
 import com.utmaximur.alcoholtracker.ui.calendar.CalendarFragment
+import com.utmaximur.alcoholtracker.util.toGone
+import com.utmaximur.alcoholtracker.util.toVisible
 
 
 class MainActivity : AppCompatActivity(),
@@ -54,11 +54,11 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun onHideNavigationBar() {
-        menu.visibility = GONE
+        menu.toGone()
     }
 
     override fun onShowNavigationBar() {
-        menu.visibility = VISIBLE
+        menu.toVisible()
     }
 
     override fun onShowAddNewDrinkFragment() {

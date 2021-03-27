@@ -1,6 +1,7 @@
 package com.utmaximur.alcoholtracker.util
 
 
+import android.app.Service
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Insets
@@ -12,6 +13,7 @@ import android.view.WindowManager
 import android.view.WindowMetrics
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.view.inputmethod.InputMethodManager
 import com.utmaximur.alcoholtracker.R
 import java.text.SimpleDateFormat
 import java.util.*
@@ -77,4 +79,21 @@ fun String.formatVolume(context: Context, quantity: Int): String? {
         context.getString(R.string.only_text_regex).toRegex(),
         ""
     )
+}
+
+fun View.hideKeyboard() {
+    (this.context.getSystemService(Service.INPUT_METHOD_SERVICE) as? InputMethodManager)
+        ?.hideSoftInputFromWindow(this.windowToken, 0)
+}
+
+fun View.toVisible() {
+    this.visibility = View.VISIBLE
+}
+
+fun View.toGone() {
+    this.visibility = View.GONE
+}
+
+fun View.toInvisible() {
+    this.visibility = View.GONE
 }

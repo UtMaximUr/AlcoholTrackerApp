@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -31,7 +30,8 @@ import com.utmaximur.alcoholtracker.ui.dialog.addphoto.AddPhotoBottomDialogFragm
 import com.utmaximur.alcoholtracker.ui.dialog.addphoto.AddPhotoBottomDialogFragment.BottomDialogListener
 import com.utmaximur.alcoholtracker.util.format1f
 import com.utmaximur.alcoholtracker.util.getIdRaw
-import java.util.ArrayList
+import com.utmaximur.alcoholtracker.util.hideKeyboard
+import java.util.*
 
 
 class AddNewDrink : Fragment(), BottomDialogListener{
@@ -162,9 +162,7 @@ class AddNewDrink : Fragment(), BottomDialogListener{
     }
 
     private fun hideKeyboard() {
-        val imm: InputMethodManager = nameDrink.context
-            .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(nameDrink.windowToken, 0)
+        nameDrink.hideKeyboard()
         nameDrink.clearFocus()
     }
 
