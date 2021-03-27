@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.calendar.presentation.view
+package com.utmaximur.alcoholtracker.ui.calendar
 
 import android.content.Context
 import android.os.Bundle
@@ -17,7 +17,7 @@ import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.dagger.component.AlcoholTrackComponent
 import com.utmaximur.alcoholtracker.dagger.factory.CalendarViewModelFactory
 import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
-import com.utmaximur.alcoholtracker.ui.calendar.presentation.view.adapter.DrinksListAdapter
+import com.utmaximur.alcoholtracker.ui.calendar.adapter.DrinksListAdapter
 import com.utmaximur.alcoholtracker.ui.dialog.adddrink.AddDrinkDialogFragment
 import com.utmaximur.alcoholtracker.util.alphaView
 import com.utmaximur.alcoholtracker.util.getIdRaw

@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.add.presentation.view
+package com.utmaximur.alcoholtracker.ui.add
 
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
@@ -30,12 +30,13 @@ import com.utmaximur.alcoholtracker.dagger.component.AlcoholTrackComponent
 import com.utmaximur.alcoholtracker.dagger.factory.AddViewModelFactory
 import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
 import com.utmaximur.alcoholtracker.data.model.Drink
-import com.utmaximur.alcoholtracker.ui.add.presentation.view.adapter.DrinkViewPagerAdapter
-import com.utmaximur.alcoholtracker.ui.add.presentation.view.adapter.DrinkViewPagerAdapter.AddDrinkListener
-import com.utmaximur.alcoholtracker.ui.calculator.view.CalculatorFragment
-import com.utmaximur.alcoholtracker.ui.calculator.view.CalculatorFragment.CalculatorListener
+import com.utmaximur.alcoholtracker.ui.add.adapter.DrinkViewPagerAdapter
+import com.utmaximur.alcoholtracker.ui.add.adapter.DrinkViewPagerAdapter.AddDrinkListener
+import com.utmaximur.alcoholtracker.ui.calculator.CalculatorFragment
+import com.utmaximur.alcoholtracker.ui.calculator.CalculatorFragment.CalculatorListener
 import com.utmaximur.alcoholtracker.util.alphaView
 import com.utmaximur.alcoholtracker.util.dpToPx
+import com.utmaximur.alcoholtracker.util.formatDate
 import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.Method
 import java.util.*
@@ -214,10 +215,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         }
 
         todayButton.setOnClickListener {
-            addDateButton.text = viewModel.setDateOnButton(
-                requireContext(),
-                Date()
-            )
+            addDateButton.text = Date().time.formatDate(requireContext())
             viewModel.date = Date().time
             todayButton.visibility = GONE
         }
@@ -325,7 +323,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         }
 
         priceEditText.setText(alcoholTrack.price.toString())
-        addDateButton.text = viewModel.getFormatString(requireContext(), alcoholTrack.date)
+        addDateButton.text = alcoholTrack.date.formatDate(requireContext())
         todayButton.visibility = GONE
 
         totalMoneyText.text =
@@ -338,8 +336,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
             dateAndTime[Calendar.MONTH] = monthOfYear
             dateAndTime[Calendar.DAY_OF_MONTH] = dayOfMonth
             viewModel.date = dateAndTime.timeInMillis
-            addDateButton.text =
-                viewModel.setDateOnButton(requireContext(), Date(dateAndTime.timeInMillis))
+            addDateButton.text = dateAndTime.timeInMillis.formatDate(requireContext())
             viewModel.date = Date(dateAndTime.timeInMillis).time
             todayButton.visibility = GONE
         }
@@ -416,11 +413,9 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
             drinksPager.alphaView(requireContext())
             if (arguments != null) {
                 if (arguments?.containsKey("selectDate")!! && arguments?.getLong("selectDate") != 0L) {
-                    addDateButton.text = viewModel.setDateOnButton(
-                        requireContext(),
-                        Date(requireArguments().getLong("selectDate"))
-                    )
-                    viewModel.date = requireArguments().getLong("selectDate")
+                    val selectDate = requireArguments().getLong("selectDate")
+                    addDateButton.text = selectDate.formatDate(requireContext())
+                    viewModel.date = selectDate
                     todayButton.visibility = GONE
                 } else {
                     setEditArguments()

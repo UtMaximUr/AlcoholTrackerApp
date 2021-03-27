@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.addmydrink.view
+package com.utmaximur.alcoholtracker.ui.addmydrink
 
 import android.content.Context
 import androidx.lifecycle.LiveData
@@ -8,9 +8,11 @@ import com.utmaximur.alcoholtracker.data.model.Drink
 import com.utmaximur.alcoholtracker.data.model.Icon
 import com.utmaximur.alcoholtracker.repository.DrinkRepository
 import com.utmaximur.alcoholtracker.repository.IconRepository
+import com.utmaximur.alcoholtracker.util.format1f
+import com.utmaximur.alcoholtracker.util.formatDegree1f
 import java.util.*
 
-class AddNewDrinkViewModel(private var drinkRepository: DrinkRepository, private var iconRepository: IconRepository): ViewModel() {
+class  AddNewDrinkViewModel(private var drinkRepository: DrinkRepository, private var iconRepository: IconRepository): ViewModel() {
 
     var id: String = ""
     var volumeList: ArrayList<String?> = ArrayList()
@@ -42,8 +44,7 @@ class AddNewDrinkViewModel(private var drinkRepository: DrinkRepository, private
         var double = degree - 0.5
         for (i in 0 until size * 2) {
             double += 0.5
-            val format: String = String.format("%.1f", double)
-            degrees[i] = format.replace(",",".")
+            degrees[i] = double.formatDegree1f()
         }
         return degrees.toList()
     }

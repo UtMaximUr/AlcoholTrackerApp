@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.add.presentation.view.adapter
+package com.utmaximur.alcoholtracker.ui.add.adapter
 
 import android.content.Context
 import android.graphics.BitmapFactory
@@ -83,7 +83,7 @@ class DrinkViewPagerAdapter(private var drinksList: List<Drink>, private var con
     }
 
     override fun getCount(): Int =
-        drinksList.size + 1 // добавляем пустой item для добавления своего напитка
+        drinksList.size + 1 // add empty item for add my drink
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
         return view === `object`

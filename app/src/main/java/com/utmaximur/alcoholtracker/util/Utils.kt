@@ -13,6 +13,8 @@ import android.view.WindowMetrics
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import com.utmaximur.alcoholtracker.R
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.math.roundToInt
 
 
@@ -45,5 +47,34 @@ fun String.getIdRaw(context: Context): Int? {
     return context.resources.getIdentifier(
         this,
         "raw",
-        context.packageName)
+        context.packageName
+    )
+}
+
+fun Float.format1f(): String? {
+    return String.format("%.1f", this)
+}
+
+fun Double.formatDegree1f(): String? {
+    return String.format("%.1f", this).replace(",", ".")
+}
+
+fun Long.formatDate(context: Context): String? {
+    val sdf = SimpleDateFormat(
+        context.resources.getString(R.string.date_format_pattern),
+        Locale.getDefault()
+    )
+    return String.format("%s", sdf.format(Date(this)))
+}
+
+fun String.formatVolume(context: Context, quantity: Int): String? {
+    return ((
+            this.replace(
+                context.getString(R.string.only_number_regex).toRegex(),
+                ""
+            )
+            ).toDouble() * quantity).toString() + this.replace(
+        context.getString(R.string.only_text_regex).toRegex(),
+        ""
+    )
 }

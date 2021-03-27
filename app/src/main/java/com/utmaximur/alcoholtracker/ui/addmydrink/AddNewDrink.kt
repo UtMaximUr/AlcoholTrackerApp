@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.addmydrink.view
+package com.utmaximur.alcoholtracker.ui.addmydrink
 
 
 import android.content.Context
@@ -24,11 +24,12 @@ import com.utmaximur.alcoholtracker.dagger.component.AlcoholTrackComponent
 import com.utmaximur.alcoholtracker.dagger.factory.AddNewDrinkViewModelFactory
 import com.utmaximur.alcoholtracker.data.model.Drink
 import com.utmaximur.alcoholtracker.data.model.Icon
-import com.utmaximur.alcoholtracker.ui.addmydrink.view.adapter.SelectIconAdapter
-import com.utmaximur.alcoholtracker.ui.addmydrink.view.adapter.SelectVolumeAdapter
+import com.utmaximur.alcoholtracker.ui.addmydrink.adapter.SelectIconAdapter
+import com.utmaximur.alcoholtracker.ui.addmydrink.adapter.SelectVolumeAdapter
 import com.utmaximur.alcoholtracker.ui.customview.RangeSeekBar
 import com.utmaximur.alcoholtracker.ui.dialog.addphoto.AddPhotoBottomDialogFragment
 import com.utmaximur.alcoholtracker.ui.dialog.addphoto.AddPhotoBottomDialogFragment.BottomDialogListener
+import com.utmaximur.alcoholtracker.util.format1f
 import com.utmaximur.alcoholtracker.util.getIdRaw
 import java.util.ArrayList
 
@@ -148,13 +149,11 @@ class AddNewDrink : Fragment(), BottomDialogListener{
         maxValueDegree.text = rangeDegree.getMax().toString()
 
         rangeDegree.addMaxRangeChangeListener {
-            val format: String = String.format("%.1f", it)
-            maxValueDegree.text = format
+            maxValueDegree.text = it.format1f()
         }
 
         rangeDegree.addMinRangeChangeListener {
-            val format: String = String.format("%.1f", it)
-            minValueDegree.text = format
+            minValueDegree.text = it.format1f()
         }
 
         if (arguments != null) {

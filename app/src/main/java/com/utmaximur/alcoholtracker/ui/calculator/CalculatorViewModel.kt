@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.calculator.view
+package com.utmaximur.alcoholtracker.ui.calculator
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -51,7 +51,6 @@ class CalculatorViewModel : ViewModel() {
             }
         }
         currentValue = valueCalculating.toString()
-        Log.e("calculating", "valueCalculating: $valueCalculating")
     }
 
     fun acCalculation() {

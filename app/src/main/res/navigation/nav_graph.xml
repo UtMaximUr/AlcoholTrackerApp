@@ -5,22 +5,22 @@
     app:startDestination="@id/calendarFragment">
     <fragment
         android:id="@+id/addFragment"
-        android:name="com.utmaximur.alcoholtracker.ui.add.presentation.view.AddFragment"
+        android:name="com.utmaximur.alcoholtracker.ui.add.AddFragment"
         android:label="AddFragment" />
     <fragment
         android:id="@+id/addNewDrinkFragment"
-        android:name="com.utmaximur.alcoholtracker.ui.addmydrink.view.AddNewDrink"
+        android:name="com.utmaximur.alcoholtracker.ui.addmydrink.AddNewDrink"
         android:label="AddNewDrinkFragment" />
     <fragment
         android:id="@+id/calendarFragment"
-        android:name="com.utmaximur.alcoholtracker.ui.calendar.presentation.view.CalendarFragment"
+        android:name="com.utmaximur.alcoholtracker.ui.calendar.CalendarFragment"
         android:label="CalendarFragment" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.utmaximur.alcoholtracker.ui.settings.view.SettingsFragment"
+        android:name="com.utmaximur.alcoholtracker.ui.settings.SettingsFragment"
         android:label="SettingsFragment" />
     <fragment
         android:id="@+id/statisticFragment"
-        android:name="com.utmaximur.alcoholtracker.ui.statistic.presentation.view.StatisticFragment"
+        android:name="com.utmaximur.alcoholtracker.ui.statistic.StatisticFragment"
         android:label="StatisticFragment" />
 </navigation>

@@ -1,14 +1,11 @@
-package com.utmaximur.alcoholtracker.ui.add.presentation.view
+package com.utmaximur.alcoholtracker.ui.add
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
 import com.utmaximur.alcoholtracker.data.model.Drink
 import com.utmaximur.alcoholtracker.repository.DrinkRepository
 import com.utmaximur.alcoholtracker.repository.TrackRepository
-import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -55,31 +52,7 @@ class AddViewModel(private var drinkRepository: DrinkRepository,
         return (quantity * price.toString().toDouble()).toString()
     }
 
-     fun setDateOnButton(context: Context, date: Date): String {
-        val sdf = SimpleDateFormat(
-            context.resources.getString(R.string.date_format_pattern),
-            Locale.getDefault()
-        )
-        return String.format("%s", sdf.format(date))
-    }
-
-    fun getFormatString(context: Context, date: Long): String{
-        val sdf = SimpleDateFormat(context.resources.getString(R.string.date_format_pattern), Locale.getDefault())
-        return String.format("%s", sdf.format(Date(date)))
-    }
-
     fun deleteDrink(drink: Drink) {
         drinkRepository.deleteDrink(drink)
     }
-
-//    fun expandView(view: View) {
-//        view.visibility = View.VISIBLE
-//        val parms: LinearLayout.LayoutParams = view.layoutParams as LinearLayout.LayoutParams
-//        val width: Int = view.width - parms.leftMargin - parms.rightMargin
-//        view.measure(
-//            View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.AT_MOST),
-//            View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
-//        )
-//        heightCalculator = view.measuredHeight
-//    }
 }
