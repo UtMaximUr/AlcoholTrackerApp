@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.statistic.presentation.view
+package com.utmaximur.alcoholtracker.ui.statistic
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
@@ -16,8 +15,8 @@ import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.dagger.component.AlcoholTrackComponent
 import com.utmaximur.alcoholtracker.dagger.factory.StatisticViewModelFactory
-import com.utmaximur.alcoholtracker.ui.statistic.presentation.view.adapter.StatisticViewPagerAdapter
-import com.utmaximur.alcoholtracker.ui.statistic.presentation.view.adapter.TopDrinkAdapter
+import com.utmaximur.alcoholtracker.ui.statistic.adapter.StatisticViewPagerAdapter
+import com.utmaximur.alcoholtracker.ui.statistic.adapter.TopDrinkAdapter
 import com.utmaximur.alcoholtracker.util.alphaView
 
 class StatisticFragment :
@@ -69,7 +68,7 @@ class StatisticFragment :
     private fun initUI() {
         topDrinkList.alphaView(requireContext())
         topDrinkList.layoutManager = GridLayoutManager(context, 4)
-        viewModel.getAllDrink().observe(viewLifecycleOwner, Observer { list ->
+        viewModel.getAllDrink().observe(viewLifecycleOwner, { list ->
             topDrinkList.adapter = TopDrinkAdapter(viewModel.getDrinksDrunkByMe())
             (topDrinkList.adapter as TopDrinkAdapter).setDrinkList(list)
         })
@@ -81,7 +80,7 @@ class StatisticFragment :
     }
 
     private fun initStatistic(){
-        viewModel.getAllTrack().observe(viewLifecycleOwner, Observer { list ->
+        viewModel.getAllTrack().observe(viewLifecycleOwner, { list ->
             viewModel.loadTrackList(list)
             initUI()
         })

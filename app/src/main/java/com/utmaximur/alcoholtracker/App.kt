@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.utmaximur.alcoholtracker.dagger.component.AlcoholTrackComponent
 import com.utmaximur.alcoholtracker.dagger.component.DaggerAlcoholTrackComponent
 import com.utmaximur.alcoholtracker.dagger.module.RoomDatabaseModule
-import com.utmaximur.alcoholtracker.ui.settings.view.*
+import com.utmaximur.alcoholtracker.ui.settings.*
 
 open class App : Application() {
 

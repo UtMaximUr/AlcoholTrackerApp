@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.addmydrink.view
+package com.utmaximur.alcoholtracker.ui.addmydrink
 
 
 import android.content.Context
@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -24,16 +23,18 @@ import com.utmaximur.alcoholtracker.dagger.component.AlcoholTrackComponent
 import com.utmaximur.alcoholtracker.dagger.factory.AddNewDrinkViewModelFactory
 import com.utmaximur.alcoholtracker.data.model.Drink
 import com.utmaximur.alcoholtracker.data.model.Icon
-import com.utmaximur.alcoholtracker.ui.addmydrink.view.adapter.SelectIconAdapter
-import com.utmaximur.alcoholtracker.ui.addmydrink.view.adapter.SelectVolumeAdapter
+import com.utmaximur.alcoholtracker.ui.addmydrink.adapter.SelectIconAdapter
+import com.utmaximur.alcoholtracker.ui.addmydrink.adapter.SelectVolumeAdapter
 import com.utmaximur.alcoholtracker.ui.customview.RangeSeekBar
 import com.utmaximur.alcoholtracker.ui.dialog.addphoto.AddPhotoBottomDialogFragment
 import com.utmaximur.alcoholtracker.ui.dialog.addphoto.AddPhotoBottomDialogFragment.BottomDialogListener
+import com.utmaximur.alcoholtracker.util.format1f
 import com.utmaximur.alcoholtracker.util.getIdRaw
-import java.util.ArrayList
+import com.utmaximur.alcoholtracker.util.hideKeyboard
+import java.util.*
 
 
-class AddNewDrink : Fragment(), BottomDialogListener{
+class AddNewDrink : Fragment(), BottomDialogListener {
 
     private var addNewFragmentListener: AddNewFragmentListener? = null
 
@@ -148,13 +149,11 @@ class AddNewDrink : Fragment(), BottomDialogListener{
         maxValueDegree.text = rangeDegree.getMax().toString()
 
         rangeDegree.addMaxRangeChangeListener {
-            val format: String = String.format("%.1f", it)
-            maxValueDegree.text = format
+            maxValueDegree.text = it.format1f()
         }
 
         rangeDegree.addMinRangeChangeListener {
-            val format: String = String.format("%.1f", it)
-            minValueDegree.text = format
+            minValueDegree.text = it.format1f()
         }
 
         if (arguments != null) {
@@ -163,9 +162,7 @@ class AddNewDrink : Fragment(), BottomDialogListener{
     }
 
     private fun hideKeyboard() {
-        val imm: InputMethodManager = nameDrink.context
-            .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(nameDrink.windowToken, 0)
+        nameDrink.hideKeyboard()
         nameDrink.clearFocus()
     }
 
@@ -199,7 +196,7 @@ class AddNewDrink : Fragment(), BottomDialogListener{
         })
     }
 
-    private fun setVolumeAdapter(volumes: List<String?>?){
+    private fun setVolumeAdapter(volumes: List<String?>?) {
         selectVolumeAdapter = SelectVolumeAdapter(this::adapterVolumeOnClick, volumes)
         volumeConcatAdapter = ConcatAdapter(selectVolumeAdapter)
         volumeList.adapter = volumeConcatAdapter
@@ -230,7 +227,7 @@ class AddNewDrink : Fragment(), BottomDialogListener{
 
     private fun adapterVolumeOnClick(volume: String?) {
         hideKeyboard()
-        if (viewModel.volumeList.contains(volume)){
+        if (viewModel.volumeList.contains(volume)) {
             viewModel.volumeList.remove(volume)
         } else {
             viewModel.volumeList.add(volume)

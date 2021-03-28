@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.settings.view
+package com.utmaximur.alcoholtracker.ui.settings
 
 
 import android.animation.ObjectAnimator
@@ -10,7 +10,6 @@ import android.content.res.Configuration
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,8 +22,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.utmaximur.alcoholtracker.BuildConfig
 import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.ui.settings.view.adapter.ThemeListAdapter
+import com.utmaximur.alcoholtracker.ui.settings.adapter.ThemeListAdapter
 import com.utmaximur.alcoholtracker.util.dpToPx
+import com.utmaximur.alcoholtracker.util.toGone
+import com.utmaximur.alcoholtracker.util.toVisible
 
 
 const val PREFS_NAME = "theme_prefs"
@@ -33,6 +34,9 @@ const val THEME_UNDEFINED = -1
 const val THEME_LIGHT = 0
 const val THEME_DARK = 1
 const val THEME_HEIGHT = 100
+
+const val MARKET_APP = "market://details?id="
+const val HTTPS_APP = "https://play.google.com/store/apps/details?id="
 
 const val PRIVACY_POLICY = "https://alcohol-tracker.flycricket.io/privacy.html"
 const val TERMS_OF_USE = "https://alcohol-tracker.flycricket.io/terms.html"
@@ -99,12 +103,11 @@ class SettingsFragment : Fragment(), ThemeListAdapter.ThemeListener {
 
         themeSwitch.setOnCheckedChangeListener { _, b ->
             if (b) {
-                Log.e("fix", " getDefaultNightMode() ${AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM}")
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.getDefaultNightMode())
                 saveTheme(THEME_UNDEFINED)
                 animateViewHeight(themeList, 0)
             } else {
-                animateViewHeight(themeList, THEME_HEIGHT.dpToPx())//Convert.dpToPx(THEME_HEIGHT, requireContext()))
+                animateViewHeight(themeList, THEME_HEIGHT.dpToPx())
             }
         }
 
@@ -123,21 +126,21 @@ class SettingsFragment : Fragment(), ThemeListAdapter.ThemeListener {
 
     private fun initTheme() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            themeLayout.visibility = View.VISIBLE
+            themeLayout.toVisible()
         } else {
-            themeLayout.visibility = View.GONE
+            themeLayout.toGone()
         }
         when (getSavedTheme()) {
             THEME_DARK -> {
                 themeSwitch.isChecked = false
                 val params = themeList.layoutParams
-                params.height = THEME_HEIGHT.dpToPx()//Convert.dpToPx(THEME_HEIGHT, requireContext())
+                params.height = THEME_HEIGHT.dpToPx()
                 themeList.layoutParams = params
             }
             THEME_LIGHT -> {
                 themeSwitch.isChecked = false
                 val params = themeList.layoutParams
-                params.height = THEME_HEIGHT.dpToPx()//Convert.dpToPx(THEME_HEIGHT, requireContext())
+                params.height = THEME_HEIGHT.dpToPx()
                 themeList.layoutParams = params
             }
             THEME_UNDEFINED -> {
@@ -188,14 +191,18 @@ class SettingsFragment : Fragment(), ThemeListAdapter.ThemeListener {
             startActivity(
                 Intent(
                     Intent.ACTION_VIEW,
-                    Uri.parse("market://details?id=$appPackageName")
+                    Uri.parse(
+                        MARKET_APP + appPackageName
+                    )
                 )
             )
         } catch (e: ActivityNotFoundException) {
             startActivity(
                 Intent(
                     Intent.ACTION_VIEW,
-                    Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")
+                    Uri.parse(
+                        HTTPS_APP + appPackageName
+                    )
                 )
             )
         }

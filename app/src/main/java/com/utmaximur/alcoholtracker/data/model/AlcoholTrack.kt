@@ -1,10 +1,11 @@
 package com.utmaximur.alcoholtracker.data.model
 
-import android.os.Parcel
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @Entity(tableName = "track_database")
 data class AlcoholTrack(
 
@@ -18,39 +19,4 @@ data class AlcoholTrack(
     val date: Long,
     var icon: String
 
-) : Parcelable {
-    constructor(parcel: Parcel) : this(
-        parcel.readString().toString(),
-        parcel.readString().toString(),
-        parcel.readString().toString(),
-        parcel.readInt(),
-        parcel.readString().toString(),
-        parcel.readFloat(),
-        parcel.readLong(),
-        parcel.readString().toString()
-    )
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    override fun writeToParcel(p0: Parcel?, p1: Int) {
-        p0?.writeStringArray(
-            arrayOf(
-                id, drink, volume, quantity.toString(), degree, price.toString(),
-                date.toString(),
-                icon
-            )
-        )
-    }
-
-    companion object CREATOR : Parcelable.Creator<AlcoholTrack> {
-        override fun createFromParcel(parcel: Parcel): AlcoholTrack {
-            return AlcoholTrack(parcel)
-        }
-
-        override fun newArray(size: Int): Array<AlcoholTrack?> {
-            return arrayOfNulls(size)
-        }
-    }
-}
+) : Parcelable

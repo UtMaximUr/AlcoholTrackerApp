@@ -6,11 +6,11 @@ import com.utmaximur.alcoholtracker.repository.DrinkRepository
 import com.utmaximur.alcoholtracker.repository.FileRepository
 import com.utmaximur.alcoholtracker.repository.IconRepository
 import com.utmaximur.alcoholtracker.repository.TrackRepository
-import com.utmaximur.alcoholtracker.ui.add.presentation.view.AddFragment
-import com.utmaximur.alcoholtracker.ui.addmydrink.view.AddNewDrink
-import com.utmaximur.alcoholtracker.ui.calculator.view.CalculatorFragment
-import com.utmaximur.alcoholtracker.ui.calendar.presentation.view.CalendarFragment
-import com.utmaximur.alcoholtracker.ui.statistic.presentation.view.StatisticFragment
+import com.utmaximur.alcoholtracker.ui.add.AddFragment
+import com.utmaximur.alcoholtracker.ui.addmydrink.AddNewDrink
+import com.utmaximur.alcoholtracker.ui.calculator.CalculatorFragment
+import com.utmaximur.alcoholtracker.ui.calendar.CalendarFragment
+import com.utmaximur.alcoholtracker.ui.statistic.StatisticFragment
 import dagger.Component
 import javax.inject.Singleton
 

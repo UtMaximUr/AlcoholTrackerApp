@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.addmydrink.view.adapter
+package com.utmaximur.alcoholtracker.ui.addmydrink.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -31,7 +31,7 @@ class SelectVolumeAdapter(private val onClick: (String?) -> Unit, private val vo
         fun bind(volume: String?, volumes: List<String?>?) {
             currentVolume = volume
             volumeCheckedTextView.text = volume
-            if(volumes?.contains(volume)!!){
+            if(volumes != null && volumes.contains(volume)){
                 volumeCheckedTextView.isChecked = true
             }
         }

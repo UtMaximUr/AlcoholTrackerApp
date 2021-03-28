@@ -11,6 +11,7 @@
     <string name="calendar_add_press">Чтобы начать, добавьте напиток</string>
     <string name="calendar_empty">В этот день не выпито ни грамма!:)</string>
     <string name="calendar_date">Дата</string>
+    <string name="calendar_count_drink" translatable="false">%s x %d</string>
 
     <!--add-->
     <string name="add_drink_title">Добавить напиток</string>
@@ -39,7 +40,7 @@
 
     <!--create drink-->
     <string name="create_drink_title">Создать напиток</string>
-    <string name="create_drink_hint">Название напитка</string>
+    <string name="create_drink_hint">Название</string>
     <string name="dialog_create_drink_add">Добавить иконку</string>
     <string name="dialog_create_drink_add_degree">Добавить крепость</string>
     <string name="dialog_create_drink_add_volume">Добавить объем</string>

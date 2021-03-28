@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.calendar.presentation.view.adapter
+package com.utmaximur.alcoholtracker.ui.calendar.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
 import com.utmaximur.alcoholtracker.ui.dialog.delete.DeleteDialogFragment
+import com.utmaximur.alcoholtracker.util.formatVolume
 
 class DrinksListAdapter(
     private val alcoholTracks: MutableList<AlcoholTrack>,
@@ -51,22 +52,12 @@ class DrinksListAdapter(
             onDeleteDyList: OnDeleteDyList,
             supportFragmentManager: FragmentManager
         ) {
-            val drinkTitle = alcoholTrack.drink + " " + String.format(
-                itemView.context.resources.getString(R.string.statistic_count_drink),
-                alcoholTrack.quantity
+            volumeText?.text =
+                alcoholTrack.volume.formatVolume(itemView.context, alcoholTrack.quantity)
+            drinkText?.text = String.format(
+                itemView.context.resources.getString(R.string.calendar_count_drink),
+                alcoholTrack.drink, alcoholTrack.quantity
             )
-            val mlOrL = alcoholTrack.volume.replace(
-                itemView.context.getString(R.string.only_text_regex).toRegex(),
-                ""
-            )
-            val volume = ((
-                alcoholTrack.volume.replace(
-                    itemView.context.getString(R.string.only_number_regex).toRegex(),
-                    ""
-                )
-            ).toDouble() * alcoholTrack.quantity).toString() + mlOrL
-            volumeText?.text = volume
-            drinkText?.text = drinkTitle
             degreeText?.text = alcoholTrack.degree
             priceText?.text = (alcoholTrack.price * alcoholTrack.quantity).toString()
             editButton?.setOnClickListener {
@@ -74,7 +65,7 @@ class DrinksListAdapter(
             }
             deleteButton?.setOnClickListener {
                 val deleteFragment = DeleteDialogFragment()
-                deleteFragment.setListener(object : DeleteDialogFragment.DeleteDialogListener{
+                deleteFragment.setListener(object : DeleteDialogFragment.DeleteDialogListener {
                     override fun deleteDrink() {
                         listener.onDelete(alcoholTrack)
                         onDeleteDyList.removeAt(position)
@@ -100,7 +91,7 @@ class DrinksListAdapter(
             override fun removeAt(position: Int) {
                 alcoholTracks.removeAt(position)
                 notifyItemRemoved(position)
-                notifyItemRangeChanged (position, itemCount)
+                notifyItemRangeChanged(position, itemCount)
             }
         }, supportFragmentManager)
     }

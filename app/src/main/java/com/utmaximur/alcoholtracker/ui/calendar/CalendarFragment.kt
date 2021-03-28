@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.calendar.presentation.view
+package com.utmaximur.alcoholtracker.ui.calendar
 
 import android.content.Context
 import android.os.Bundle
@@ -17,10 +17,12 @@ import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.dagger.component.AlcoholTrackComponent
 import com.utmaximur.alcoholtracker.dagger.factory.CalendarViewModelFactory
 import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
-import com.utmaximur.alcoholtracker.ui.calendar.presentation.view.adapter.DrinksListAdapter
+import com.utmaximur.alcoholtracker.ui.calendar.adapter.DrinksListAdapter
 import com.utmaximur.alcoholtracker.ui.dialog.adddrink.AddDrinkDialogFragment
 import com.utmaximur.alcoholtracker.util.alphaView
 import com.utmaximur.alcoholtracker.util.getIdRaw
+import com.utmaximur.alcoholtracker.util.toInvisible
+import com.utmaximur.alcoholtracker.util.toVisible
 import java.util.*
 import javax.inject.Inject
 
@@ -141,7 +143,7 @@ class CalendarFragment : Fragment(),
         getAlcoholTrackByDay(Date().time)
         setIconOnDate()
         if (getAlcoholTrackByDay(Date().time).isEmpty()) {
-            emptyDrinkListText.visibility = View.VISIBLE
+            emptyDrinkListText.toVisible()
         }
     }
 
@@ -169,13 +171,13 @@ class CalendarFragment : Fragment(),
             recyclerView.adapter = drinksListAdapter
             recyclerView.alphaView(requireContext())
             if (alcoholTrack.isNotEmpty()) {
-                emptyDrinkListText.visibility = View.INVISIBLE
+                emptyDrinkListText.toInvisible()
             } else {
                 if (list.isEmpty()) {
-                    addToStartText.visibility = View.VISIBLE
+                    addToStartText.toVisible()
                     addToStartText.alphaView(requireContext())
                 } else {
-                    emptyDrinkListText.visibility = View.VISIBLE
+                    emptyDrinkListText.toVisible()
                     emptyDrinkListText.alphaView(requireContext())
                 }
             }

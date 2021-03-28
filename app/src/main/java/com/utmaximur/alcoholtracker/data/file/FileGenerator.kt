@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.domain
+package com.utmaximur.alcoholtracker.data.file
 
 import android.content.ContentResolver
 import android.content.Context

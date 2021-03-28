@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.utmaximur.alcoholtracker.repository.DrinkRepository
 import com.utmaximur.alcoholtracker.repository.IconRepository
-import com.utmaximur.alcoholtracker.ui.addmydrink.view.AddNewDrinkViewModel
+import com.utmaximur.alcoholtracker.ui.addmydrink.AddNewDrinkViewModel
 import javax.inject.Inject
 import javax.inject.Singleton
 

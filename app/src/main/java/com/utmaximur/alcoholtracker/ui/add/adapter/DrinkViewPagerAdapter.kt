@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.add.presentation.view.adapter
+package com.utmaximur.alcoholtracker.ui.add.adapter
 
 import android.content.Context
 import android.graphics.BitmapFactory
@@ -12,6 +12,7 @@ import androidx.viewpager.widget.PagerAdapter
 import com.bumptech.glide.Glide
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.data.model.Drink
+import com.utmaximur.alcoholtracker.util.toVisible
 import java.io.InputStream
 
 
@@ -54,7 +55,7 @@ class DrinkViewPagerAdapter(private var drinksList: List<Drink>, private var con
             val imageStream: InputStream = itemView.context.resources.openRawResource(R.raw.createdrink)
             val bitmap = BitmapFactory.decodeStream(imageStream)
             drinkImage.setImageBitmap(bitmap)
-            drinkAdd.visibility = View.VISIBLE
+            drinkAdd.toVisible()
             drinkName.text = itemView.context.getText(R.string.add_new_drink)
         } else {
             Glide.with(itemView).load(drinksList[position].photo).into(drinkImage)
@@ -62,8 +63,8 @@ class DrinkViewPagerAdapter(private var drinksList: List<Drink>, private var con
         }
 
         if (position < drinksList.size && drinksList[position].id.length > 2) {
-            drinkDelete.visibility = View.VISIBLE
-            drinkEdit.visibility = View.VISIBLE
+            drinkDelete.toVisible()
+            drinkEdit.toVisible()
         }
 
         drinkAdd.setOnClickListener {
@@ -83,7 +84,7 @@ class DrinkViewPagerAdapter(private var drinksList: List<Drink>, private var con
     }
 
     override fun getCount(): Int =
-        drinksList.size + 1 // добавляем пустой item для добавления своего напитка
+        drinksList.size + 1 // add empty item for add my drink
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
         return view === `object`

@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AlcoholTracker">
         <activity
-            android:name=".ui.main.presentation.view.MainActivity"
+            android:name=".ui.main.MainActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
