@@ -53,6 +53,21 @@ fun String.getIdRaw(context: Context): Int? {
     )
 }
 
+fun String.getResString(context: Context): String? {
+    val resIdString =
+        context.resources.getIdentifier(
+            this,
+            "string",
+            context.packageName
+        )
+
+    return if (resIdString != 0) {
+        context.getString(resIdString)
+    } else {
+        this
+    }
+}
+
 fun Float.format1f(): String? {
     return String.format("%.1f", this)
 }

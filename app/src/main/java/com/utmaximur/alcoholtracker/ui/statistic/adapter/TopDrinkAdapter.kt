@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.data.model.Drink
 import com.utmaximur.alcoholtracker.util.getIdRaw
+import com.utmaximur.alcoholtracker.util.getResString
 
 class TopDrinkAdapter(private var drinksDrunkByMe: Map<String, Int>) :
     RecyclerView.Adapter<TopDrinkAdapter.ViewHolder>() {
@@ -35,7 +36,7 @@ class TopDrinkAdapter(private var drinksDrunkByMe: Map<String, Int>) :
         }
 
         fun bind(drink: Drink, drinksDrunkByMe: Map<String, Int>) {
-            drinkText?.text = drink.drink
+            drinkText?.text = drink.drink.getResString(itemView.context)
             Glide.with(itemView).load(
                 drink.icon.getIdRaw(itemView.context)
             ).into(drinkImage!!)

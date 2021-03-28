@@ -114,21 +114,21 @@
     </string-array>
 
     <!--enum-->
-    <string name="enum_absent">Абсент</string>
-    <string name="enum_beer">Пиво</string>
-    <string name="enum_brandy">Бренди</string>
-    <string name="enum_champagne">Шампанское</string>
-    <string name="enum_cider">Сидр</string>
-    <string name="enum_cocktail">Коктейль</string>
-    <string name="enum_cognac">Коньяк</string>
-    <string name="enum_liqueur">Ликер</string>
-    <string name="enum_shot">Шоты</string>
-    <string name="enum_tequila">Текила</string>
-    <string name="enum_vodka">Водка</string>
-    <string name="enum_whiskey">Виски</string>
-    <string name="enum_rum">Ром</string>
-    <string name="enum_gin">Джин</string>
-    <string name="enum_wine">Вино</string>
+    <string name="absent">Абсент</string>
+    <string name="beer">Пиво</string>
+    <string name="brandy">Бренди</string>
+    <string name="champagne">Шампанское</string>
+    <string name="cider">Сидр</string>
+    <string name="cocktail">Коктейль</string>
+    <string name="cognac">Коньяк</string>
+    <string name="liqueur">Ликер</string>
+    <string name="shot">Шоты</string>
+    <string name="tequila">Текила</string>
+    <string name="vodka">Водка</string>
+    <string name="whiskey">Виски</string>
+    <string name="rum">Ром</string>
+    <string name="gin">Джин</string>
+    <string name="wine">Вино</string>
 
 
     <string name="material_calendar_monday">Пн</string>
@@ -153,5 +153,25 @@
         <item>Ноябрь</item>
         <item>Декабрь</item>
     </array>
+
+    <string-array name="volume_array">
+
+        <item>0.02 л</item>
+        <item>0.05 л</item>
+        <item>0.125 л</item>
+        <item>0.175 л</item>
+        <item>0.3 л</item>
+        <item>0.33 л</item>
+        <item>0.375 л</item>
+        <item>0.4 л</item>
+        <item>0.45 л</item>
+        <item>0.48 л</item>
+        <item>0.5 л</item>
+        <item>0.568 л</item>
+        <item>0.7 л</item>
+        <item>0.750 л</item>
+        <item>1 л</item>
+
+    </string-array>
 
 </resources>
