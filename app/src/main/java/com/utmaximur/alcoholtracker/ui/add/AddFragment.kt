@@ -11,7 +11,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
 import android.widget.NumberPicker
@@ -230,27 +229,6 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
                 animateViewHeight(containerFragment, 245.dpToPx())
             }
         }
-
-        priceEditText.setOnEditorActionListener { _, i, _ ->
-            if (i == EditorInfo.IME_ACTION_DONE) {
-                if (viewModel.checkIsEmptyFieldPrice(getPrice())) {
-                    if (priceEditText.text.isNotEmpty()) {
-                        totalMoneyText.text = viewModel.getTotalMoney(getQuantity(), getPrice())
-                        viewModel.price = priceEditText.text.toString().toFloat()
-                    } else {
-                        totalMoneyText.text = getText(R.string.add_empty)
-                    }
-                    priceEditText.clearFocus()
-                }
-            }
-            false
-        }
-
-        priceEditText.setOnFocusChangeListener { _, b ->
-            if (b) {
-                priceEditText.hint = ""
-            }
-        }
     }
 
     @SuppressLint("DiscouragedPrivateApi")
@@ -307,19 +285,21 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         viewModel.id = alcoholTrack?.id.toString()
         viewModel.date = alcoholTrack?.date!!
 
-        getDrinksList().forEach {
-            if (it.drink == alcoholTrack.drink) {
-                val position = getDrinksList().indexOf(it)
-                drinksPager.currentItem = position
-                quantityNumberPicker.value = alcoholTrack.quantity
-                setDrinkVolumeArray(position)
-                volumeNumberPicker.value =
-                    it.volume.indexOf(alcoholTrack.volume)
-                setDrinkDegreeArray(position)
-                degreeNumberPicker.value = it.degree.indexOf(alcoholTrack.degree) + 1
-                dotsIndicator.getTabAt(position)?.select()
+        viewModel.getAllDrink().observe(viewLifecycleOwner, { list ->
+            list.forEach {
+                if (it.drink == alcoholTrack.drink) {
+                    val position = list.indexOf(it)
+                    drinksPager.currentItem = position
+                    quantityNumberPicker.value = alcoholTrack.quantity
+                    setDrinkVolumeArray(position)
+                    volumeNumberPicker.value =
+                        it.volume.indexOf(alcoholTrack.volume) - 1
+                    setDrinkDegreeArray(position)
+                    degreeNumberPicker.value = it.degree.indexOf(alcoholTrack.degree) - 1
+                    dotsIndicator.getTabAt(position)?.select()
+                }
             }
-        }
+        })
 
         priceEditText.setText(alcoholTrack.price.toString())
         addDateButton.text = alcoholTrack.date.formatDate(requireContext())
@@ -368,7 +348,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
     }
 
     private fun getDegree(): String {
-        return degreeNumberPicker.displayedValues[degreeNumberPicker.value - 1].toString()
+        return degreeNumberPicker.displayedValues[degreeNumberPicker.value].toString()
     }
 
     private fun getPrice(): Float {
@@ -406,7 +386,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
     private fun setDrinksList() {
         viewModel.getAllDrink().observe(viewLifecycleOwner, { list ->
             viewModel.drinks = list
-            val adapter = DrinkViewPagerAdapter(getDrinksList(), requireContext())
+            val adapter = DrinkViewPagerAdapter(list, requireContext())
             adapter.setListener(this)
             drinksPager.adapter = adapter
             drinksPager.alphaView(requireContext())
@@ -439,6 +419,11 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
 
     override fun getValueCalculating(value: String) {
         priceEditText.setText(value)
+        if (value != "") {
+            totalMoneyText.text = (quantityNumberPicker.value * value.toInt()).toString()
+        } else {
+            totalMoneyText.text = "0"
+        }
     }
 
     override fun closeCalculator() {
