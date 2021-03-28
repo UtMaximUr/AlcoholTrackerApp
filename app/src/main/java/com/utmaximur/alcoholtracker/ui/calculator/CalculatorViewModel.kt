@@ -1,5 +1,6 @@
 package com.utmaximur.alcoholtracker.ui.calculator
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 
 const val ADDITION = '+'
@@ -18,6 +19,9 @@ class CalculatorViewModel : ViewModel() {
 
     fun setValue(value: Int) {
         currentValue += value.toString()
+        if (valueOne != "") {
+            computeCalculation()
+        }
     }
 
     fun setCurrentAction(action: Char) {
@@ -47,10 +51,8 @@ class CalculatorViewModel : ViewModel() {
                 }
 
                 DIVISION -> {
-                    valueCalculating = if (valueTwo.toInt() != 0) {
-                        valueOne.toInt() / valueTwo.toInt()
-                    } else {
-                        0
+                    if (valueTwo.toInt() != 0) {
+                        valueCalculating = valueOne.toInt() / valueTwo.toInt()
                     }
                 }
             }
