@@ -31,7 +31,7 @@ class SelectVolumeAdapter(private val onClick: (String?) -> Unit, private val vo
         fun bind(volume: String?, volumes: List<String?>?) {
             currentVolume = volume
             volumeCheckedTextView.text = volume
-            if(volumes?.contains(volume)!!){
+            if(volumes != null && volumes.contains(volume)){
                 volumeCheckedTextView.isChecked = true
             }
         }
