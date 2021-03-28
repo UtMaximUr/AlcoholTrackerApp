@@ -165,7 +165,6 @@ class CalendarFragment : Fragment(),
                 requireActivity().supportFragmentManager
             )
             alcoholTrackList.adapter = alcoholTrackListAdapter
-//            alcoholTrackList.submitList(alcoholTrack)
             alcoholTrackList.alphaView(requireContext())
             if (alcoholTrack.isNotEmpty()) {
                 emptyDrinkListText.toInvisible()
