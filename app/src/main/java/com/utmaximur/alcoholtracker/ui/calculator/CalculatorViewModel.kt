@@ -1,6 +1,6 @@
 package com.utmaximur.alcoholtracker.ui.calculator
 
-import android.util.Log
+
 import androidx.lifecycle.ViewModel
 
 const val ADDITION = '+'
