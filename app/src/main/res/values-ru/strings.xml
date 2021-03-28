@@ -26,9 +26,10 @@
     <string name="add_total_money">Итого</string>
     <string name="add_empty">0</string>
     <string name="add_currency">RUR</string>
-    <string name="add_litres">л</string>
     <string name="add_save">Сохранить</string>
     <string name="enter_price">!Введите стоимость</string>
+    <string name="unit_ml">%s мл</string>
+    <string name="unit_l">%s л</string>
 
     <!--add new drink-->
     <string name="add_new_drink">Создать напиток</string>
@@ -114,21 +115,21 @@
     </string-array>
 
     <!--enum-->
-    <string name="enum_absent">Абсент</string>
-    <string name="enum_beer">Пиво</string>
-    <string name="enum_brandy">Бренди</string>
-    <string name="enum_champagne">Шампанское</string>
-    <string name="enum_cider">Сидр</string>
-    <string name="enum_cocktail">Коктейль</string>
-    <string name="enum_cognac">Коньяк</string>
-    <string name="enum_liqueur">Ликер</string>
-    <string name="enum_shot">Шоты</string>
-    <string name="enum_tequila">Текила</string>
-    <string name="enum_vodka">Водка</string>
-    <string name="enum_whiskey">Виски</string>
-    <string name="enum_rum">Ром</string>
-    <string name="enum_gin">Джин</string>
-    <string name="enum_wine">Вино</string>
+    <string name="absent">Абсент</string>
+    <string name="beer">Пиво</string>
+    <string name="brandy">Бренди</string>
+    <string name="champagne">Шампанское</string>
+    <string name="cider">Сидр</string>
+    <string name="cocktail">Коктейль</string>
+    <string name="cognac">Коньяк</string>
+    <string name="liqueur">Ликер</string>
+    <string name="shot">Шоты</string>
+    <string name="tequila">Текила</string>
+    <string name="vodka">Водка</string>
+    <string name="whiskey">Виски</string>
+    <string name="rum">Ром</string>
+    <string name="gin">Джин</string>
+    <string name="wine">Вино</string>
 
 
     <string name="material_calendar_monday">Пн</string>

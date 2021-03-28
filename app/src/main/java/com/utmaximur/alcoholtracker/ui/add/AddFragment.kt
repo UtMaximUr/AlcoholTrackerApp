@@ -33,10 +33,7 @@ import com.utmaximur.alcoholtracker.ui.add.adapter.DrinkViewPagerAdapter
 import com.utmaximur.alcoholtracker.ui.add.adapter.DrinkViewPagerAdapter.AddDrinkListener
 import com.utmaximur.alcoholtracker.ui.calculator.CalculatorFragment
 import com.utmaximur.alcoholtracker.ui.calculator.CalculatorFragment.CalculatorListener
-import com.utmaximur.alcoholtracker.util.alphaView
-import com.utmaximur.alcoholtracker.util.dpToPx
-import com.utmaximur.alcoholtracker.util.formatDate
-import com.utmaximur.alcoholtracker.util.toGone
+import com.utmaximur.alcoholtracker.util.*
 import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.Method
 import java.util.*
@@ -195,7 +192,8 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
             // устанавливаем по умолчанию первый напиток
             volumeNumberPicker.displayedValues = null
             volumeNumberPicker.maxValue = list.first().volume.size - 1
-            volumeNumberPicker.displayedValues = list.first().volume.toTypedArray()
+            volumeNumberPicker.displayedValues =
+                list.first().volume.setVolumeUnit(requireContext()).toTypedArray()
             volumeNumberPicker.value = 1
             changeValueByOne(volumeNumberPicker)
             setVolume(list.first().volume.toList())
@@ -297,7 +295,8 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         volumeNumberPicker.displayedValues = null
         volumeNumberPicker.value = 1
         volumeNumberPicker.maxValue = drink.volume.size - 1
-        volumeNumberPicker.displayedValues = drink.volume.toTypedArray()
+        volumeNumberPicker.displayedValues =
+            drink.volume.setVolumeUnit(requireContext()).toTypedArray()
         setVolume(drink.volume)
     }
 

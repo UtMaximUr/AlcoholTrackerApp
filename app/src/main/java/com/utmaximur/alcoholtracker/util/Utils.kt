@@ -17,6 +17,7 @@ import android.view.inputmethod.InputMethodManager
 import com.utmaximur.alcoholtracker.R
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.math.roundToInt
 
 
@@ -53,6 +54,35 @@ fun String.getIdRaw(context: Context): Int? {
     )
 }
 
+fun String.getResString(context: Context): String? {
+    val resIdString =
+        context.resources.getIdentifier(
+            this,
+            "string",
+            context.packageName
+        )
+
+    return if (resIdString != 0) {
+        context.getString(resIdString)
+    } else {
+        this
+    }
+}
+
+fun List<String?>.setVolumeUnit(context: Context): List<String?> {
+    val volumeListUnit: ArrayList<String?> = ArrayList()
+    if (this.first()?.contains(".")!!) {
+        this.forEach {
+            volumeListUnit.add(String.format(context.getString(R.string.unit_l), it))
+        }
+    } else {
+        this.forEach {
+            volumeListUnit.add(String.format(context.getString(R.string.unit_ml), it))
+        }
+    }
+    return volumeListUnit
+}
+
 fun Float.format1f(): String? {
     return String.format("%.1f", this)
 }
@@ -70,15 +100,11 @@ fun Long.formatDate(context: Context): String? {
 }
 
 fun String.formatVolume(context: Context, quantity: Int): String? {
-    return ((
-            this.replace(
-                context.getString(R.string.only_number_regex).toRegex(),
-                ""
-            )
-            ).toDouble() * quantity).toString() + this.replace(
-        context.getString(R.string.only_text_regex).toRegex(),
-        ""
-    )
+    return if (this.contains(".")) {
+        String.format(context.getString(R.string.unit_l), this.toDouble() * quantity)
+    } else {
+        String.format(context.getString(R.string.unit_ml), this.toInt() * quantity)
+    }
 }
 
 fun View.hideKeyboard() {

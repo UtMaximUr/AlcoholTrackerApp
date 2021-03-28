@@ -12,6 +12,7 @@ import androidx.viewpager.widget.PagerAdapter
 import com.bumptech.glide.Glide
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.data.model.Drink
+import com.utmaximur.alcoholtracker.util.getResString
 import com.utmaximur.alcoholtracker.util.toVisible
 import java.io.InputStream
 
@@ -59,7 +60,7 @@ class DrinkViewPagerAdapter(private var drinksList: List<Drink>, private var con
             drinkName.text = itemView.context.getText(R.string.add_new_drink)
         } else {
             Glide.with(itemView).load(drinksList[position].photo).into(drinkImage)
-            drinkName.text = drinksList[position].drink
+            drinkName.text = drinksList[position].drink.getResString(itemView.context)
         }
 
         if (position < drinksList.size && drinksList[position].id.length > 2) {

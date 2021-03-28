@@ -2,100 +2,102 @@
     <string name="app_name">Трекер Алкоголя</string>
 
     <!--menu-->
-    <string name="add">Добавить</string>
-    <string name="calendar">Календарь</string>
-    <string name="statistic">Статистика</string>
-    <string name="settings">Настройки</string>
+    <string name="add">Add drink</string>
+    <string name="calendar">Сalendar</string>
+    <string name="statistic">Statistics</string>
+    <string name="settings">Settings</string>
 
     <!--calendar-->
-    <string name="calendar_add_press">Чтобы начать, добавьте напиток</string>
-    <string name="calendar_empty">В этот день не выпито ни грамма!:)</string>
-    <string name="calendar_date">Дата</string>
+    <string name="calendar_add_press">Add a drink to get started</string>
+    <string name="calendar_empty">Not a single gram was drunk on this day!:)</string>
+    <string name="calendar_date">Date</string>
     <string name="calendar_count_drink" translatable="false">%s x %d</string>
 
     <!--add-->
-    <string name="add_drink_title">Добавить напиток</string>
+    <string name="add_drink_title">Add drink</string>
     <string name="date_format_pattern">dd/MM/yyyy</string>
-    <string name="add_drink">Напиток</string>
-    <string name="add_volume">Объем</string>
-    <string name="add_quantity">Количество</string>
-    <string name="add_degree">Градус</string>
-    <string name="add_price">Стоимость одного напитка</string>
-    <string name="add_date">Выбрать дату</string>
-    <string name="add_today">Сегодня</string>
-    <string name="add_total_litres">Количество</string>
-    <string name="add_total_money">Итого</string>
+    <string name="add_drink">Drink</string>
+    <string name="add_volume">Volume</string>
+    <string name="add_quantity">Quantity</string>
+    <string name="add_degree">Degree</string>
+    <string name="add_price">Cost of one drink</string>
+    <string name="add_date">Select date</string>
+    <string name="add_today">Today</string>
+    <string name="add_total_litres">Quantity</string>
+    <string name="add_total_money">Total</string>
     <string name="add_empty">0</string>
-    <string name="add_currency">RUR</string>
-    <string name="add_litres">л</string>
+    <string name="add_currency">USD</string>
+    <string name="add_save">Save</string>
+    <string name="enter_price">!Enter the cost</string>
     <string name="add_degree_s" translatable="false">°</string>
-    <string name="add_save">Сохранить</string>
-    <string name="enter_price">!Введите стоимость</string>
+    <string name="unit_ml">%s ml</string>
+    <string name="unit_l">%s l</string>
+
 
     <!--add new drink-->
-    <string name="add_new_drink">Создать напиток</string>
+    <string name="add_new_drink">Create drink</string>
 
     <!--edit-->
-    <string name="edit_drink_title">Редактировать напиток</string>
+    <string name="edit_drink_title">Edit drink</string>
 
     <!--create drink-->
-    <string name="create_drink_title">Создать напиток</string>
-    <string name="create_drink_hint">Название</string>
-    <string name="dialog_create_drink_add">Добавить иконку</string>
-    <string name="dialog_create_drink_add_degree">Добавить крепость</string>
-    <string name="dialog_create_drink_add_volume">Добавить объем</string>
-    <string name="select_icon">Выберите иконку</string>
-    <string name="bottom_sheet_option_camera">Использовать камеру</string>
-    <string name="bottom_sheet_option_gallery">Загрузить из галлереи</string>
-    <string name="bottom_sheet_option_heading">Добавить фотографию</string>
-    <string name="bottom_sheet_option_remove_photo">Удалить фотографию</string>
+    <string name="create_drink_title">Create a drink</string>
+    <string name="create_drink_hint">Enter the title</string>
+    <string name="dialog_create_drink_add">Add icon drink</string>
+    <string name="select_icon">Select an icon</string>
+    <string name="dialog_create_drink_add_degree">Add the strength of the drink</string>
+    <string name="dialog_create_drink_add_volume">Add drink volume</string>
+    <string name="bottom_sheet_option_camera">Use Camera</string>
+    <string name="bottom_sheet_option_gallery">Upload from Gallery</string>
+    <string name="bottom_sheet_option_heading">Add Photo</string>
+    <string name="bottom_sheet_option_remove_photo">Remove Photo</string>
 
     <!--dialog select date-->
-    <string name="dialog_select_date_title">Использовать выбранную дату для добавления напитка?</string>
-    <string name="dialog_select_date_ok">Да</string>
-    <string name="dialog_select_date_no">Нет</string>
+    <string name="dialog_select_date_title">Use the selected date to add a drink?</string>
+    <string name="dialog_select_date_ok">OK</string>
+    <string name="dialog_select_date_no">NO</string>
 
     <!--dialog delete-->
-    <string name="dialog_delete_title">Вы действительно хотите удалить запись?</string>
+    <string name="dialog_delete_title">Are you sure you want to delete the entry?</string>
 
     <!--dialog add volume-->
-    <string name="dialog_add_volume_title">Выберите объем</string>
-    <string name="dialog_add_volume_ok">Готово</string>
-    <string name="dialog_add_volume_cancel">Отмена</string>
+    <string name="dialog_add_volume_title">Select the volume of the drink</string>
+    <string name="dialog_add_volume_ok">OK</string>
+    <string name="dialog_add_volume_cancel">Cancel</string>
 
 
     <!--settings-->
-    <string name="privacy_policy">Политика конфиденциальности</string>
-    <string name="terms_of_use">Пользовательское соглашение</string>
-    <string name="settings_version">Версия</string>
-    <string name="rate_app">Оценить приложение</string>
-    <string name="default_theme">Использовать системную тему</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="terms_of_use">Terms of use</string>
+    <string name="settings_version">Version</string>
+    <string name="rate_app">Rate app</string>
+    <string name="default_theme">Use system theme</string>
 
     <string-array name="theme_array">
-        <item>Светлая тема</item>
-        <item>Темная тема</item>
+        <item>Light theme</item>
+        <item>Dark theme</item>
 
     </string-array>
 
     <!--statistic-->
-    <string name="statistic_week_days">Неделю</string>
-    <string name="statistic_month_days">Месяц</string>
-    <string name="statistic_year_days">Год</string>
-    <string name="statistic_count_days">Я пил %s из %d дней</string>
+    <string name="statistic_week_days">Week</string>
+    <string name="statistic_month_days">Month</string>
+    <string name="statistic_year_days">Year</string>
+    <string name="statistic_count_days">I drank %s from %d days</string>
     <string name="statistic_count_drink">x %d</string>
-    <string name="statistic_drinks">Напитки выпитые мною</string>
-    <string name="statistic_spent">Мною потрачено за</string>
+    <string name="statistic_drinks">The drinks I drank</string>
+    <string name="statistic_spent">I spent in a</string>
     <string name="statistic_drink_count">x 0</string>
 
     <!--content description-->
-    <string name="cd_icon_app">Иконка приложения</string>
-    <string name="cd_edit_button">Редактировать</string>
-    <string name="cd_delete_button">Удалить</string>
-    <string name="cd_show_panel">Сдвинуть в влево</string>
-    <string name="cd_image_drink">Изображение напитка</string>
-    <string name="cd_choice_theme">Выбранная тема</string>
-    <string name="cd_icon_drink">Иконка напитка</string>
-    <string name="cd_take_photo">Добавить изображение</string>
+    <string name="cd_icon_app">Application Icon</string>
+    <string name="cd_edit_button">Edit</string>
+    <string name="cd_delete_button">Delete</string>
+    <string name="cd_show_panel">Move left</string>
+    <string name="cd_image_drink">Image of a drink</string>
+    <string name="cd_choice_theme">Selected theme</string>
+    <string name="cd_icon_drink">Icon of a drink</string>
+    <string name="cd_take_photo">Take photo</string>
 
     <!--regex-->
     <string name="only_number_regex" tools:ignore="TypographyDashes">[^0-9, .]</string>
@@ -103,35 +105,57 @@
     <string name="divide_value" translatable="false"> - </string>
 
     <plurals name="plurals_day">
-        <item quantity="one">%1$d день</item>
-        <item quantity="few">%1$d дня</item>
-        <item quantity="many">%1$d дней</item>
-        <item quantity="other">%1$d дней</item>
+        <item quantity="one">%1$d day</item>
+        <item quantity="other">%1$d days</item>
     </plurals>
 
     <string-array name="statistic_period_array">
-        <item>Неделю</item>
-        <item>Месяц</item>
-        <item>Год</item>
+        <item>Week</item>
+        <item>Month</item>
+        <item>Year</item>
 
     </string-array>
 
     <!--enum-->
-    <string name="enum_absent">Абсент</string>
-    <string name="enum_beer">Пиво</string>
-    <string name="enum_brandy">Бренди</string>
-    <string name="enum_champagne">Шампанское</string>
-    <string name="enum_cider">Сидр</string>
-    <string name="enum_cocktail">Коктейль</string>
-    <string name="enum_cognac">Коньяк</string>
-    <string name="enum_liqueur">Ликер</string>
-    <string name="enum_shot">Шоты</string>
-    <string name="enum_tequila">Текила</string>
-    <string name="enum_vodka">Водка</string>
-    <string name="enum_whiskey">Виски</string>
-    <string name="enum_rum">Ром</string>
-    <string name="enum_gin">Джин</string>
-    <string name="enum_wine">Вино</string>
+    <string name="absent">Absinthe</string>
+    <string name="beer">Beer</string>
+    <string name="brandy">Brandy</string>
+    <string name="champagne">Champagne</string>
+    <string name="cider">Cider</string>
+    <string name="cocktail">Cocktail</string>
+    <string name="cognac">Cognac</string>
+    <string name="liqueur">Liquor</string>
+    <string name="shot">Shots</string>
+    <string name="tequila">Tequila</string>
+    <string name="vodka">Vodka</string>
+    <string name="whiskey">Whiskey</string>
+    <string name="rum">Rum</string>
+    <string name="gin">Gin</string>
+    <string name="wine">Wine</string>
+
+
+    <string name="material_calendar_monday">Mon</string>
+    <string name="material_calendar_tuesday">Tue</string>
+    <string name="material_calendar_wednesday">Wed</string>
+    <string name="material_calendar_thursday">Thu</string>
+    <string name="material_calendar_friday">Fri</string>
+    <string name="material_calendar_saturday">Sat</string>
+    <string name="material_calendar_sunday">Sun</string>
+
+    <array name="material_calendar_months_array">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </array>
 
     <!--calculator-->
     <string name="calc_ac" translatable="false">AC</string>
@@ -152,47 +176,23 @@
     <string name="calc_equally" translatable="false">=</string>
     <string name="calc_plus" translatable="false">+</string>
 
-
-    <string name="material_calendar_monday">Пн</string>
-    <string name="material_calendar_tuesday">Вт</string>
-    <string name="material_calendar_wednesday">Ср</string>
-    <string name="material_calendar_thursday">Чт</string>
-    <string name="material_calendar_friday">Пт</string>
-    <string name="material_calendar_saturday">Сб</string>
-    <string name="material_calendar_sunday">Вс</string>
-
-    <array name="material_calendar_months_array">
-        <item>Январь</item>
-        <item>Февраль</item>
-        <item>Март</item>
-        <item>Апрель</item>
-        <item>Май</item>
-        <item>Июнь</item>
-        <item>Июль</item>
-        <item>Август</item>
-        <item>Сентябрь</item>
-        <item>Октябрь</item>
-        <item>Ноябрь</item>
-        <item>Декабрь</item>
-    </array>
-
     <string-array name="volume_array">
 
-        <item>0.02 л</item>
-        <item>0.05 л</item>
-        <item>0.125 л</item>
-        <item>0.175 л</item>
-        <item>0.3 л</item>
-        <item>0.33 л</item>
-        <item>0.375 л</item>
-        <item>0.4 л</item>
-        <item>0.45 л</item>
-        <item>0.48 л</item>
-        <item>0.5 л</item>
-        <item>0.568 л</item>
-        <item>0.7 л</item>
-        <item>0.750 л</item>
-        <item>1 л</item>
+        <item>0.02</item>
+        <item>0.05</item>
+        <item>0.125</item>
+        <item>0.175</item>
+        <item>0.3</item>
+        <item>0.33</item>
+        <item>0.375</item>
+        <item>0.4</item>
+        <item>0.45</item>
+        <item>0.48</item>
+        <item>0.5</item>
+        <item>0.568</item>
+        <item>0.7</item>
+        <item>0.750</item>
+        <item>1</item>
 
     </string-array>
 
