@@ -9,7 +9,6 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.applandeo.materialcalendarview.EventDay
 import com.utmaximur.alcoholtracker.App
@@ -44,8 +43,8 @@ class CalendarFragment : Fragment(),
     private lateinit var viewModel: CalendarViewModel
     private lateinit var calendarView: com.applandeo.materialcalendarview.CalendarView
 
-    private lateinit var recyclerView: RecyclerView
-    private var drinksListAdapter: RecyclerView.Adapter<*>? = null
+    private lateinit var alcoholTrackList: RecyclerView
+    private var alcoholTrackListAdapter: RecyclerView.Adapter<*>? = null
     private lateinit var addToStartText: TextView
     private lateinit var emptyDrinkListText: TextView
     private lateinit var addButton: Button
@@ -85,9 +84,8 @@ class CalendarFragment : Fragment(),
         addButton = view.findViewById(R.id.add_button)
         addToStartText = view.findViewById(R.id.add_to_start)
         emptyDrinkListText = view.findViewById(R.id.empty_drink_list)
-        recyclerView = view.findViewById(R.id.drinks_list)
-        recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        alcoholTrackList = view.findViewById(R.id.drinks_list)
+        alcoholTrackList.setHasFixedSize(true)
     }
 
     private fun initUI(view: View) {
@@ -114,8 +112,7 @@ class CalendarFragment : Fragment(),
     private fun initCalendar() {
         // добавление иконок алкоголя в календарь
         setIconOnDate()
-        drinksListAdapter = DrinksListAdapter(getAlcoholTrackByDay(Date().time), this, requireActivity().supportFragmentManager)
-        recyclerView.adapter = drinksListAdapter
+        getAlcoholTrackByDay(Date().time)
     }
 
     override fun onAttach(context: Context) {
@@ -125,7 +122,7 @@ class CalendarFragment : Fragment(),
 
     override fun onResume() {
         super.onResume()
-        if(viewModel.getSelectDate() != 0L) {
+        if (viewModel.getSelectDate() != 0L) {
             viewModel.setSelectDate(0L)
         }
     }
@@ -140,11 +137,8 @@ class CalendarFragment : Fragment(),
 
     override fun onDelete(alcoholTrack: AlcoholTrack) {
         viewModel.deleteDrink(alcoholTrack)
-        getAlcoholTrackByDay(Date().time)
         setIconOnDate()
-        if (getAlcoholTrackByDay(Date().time).isEmpty()) {
-            emptyDrinkListText.toVisible()
-        }
+        getAlcoholTrackByDay(alcoholTrack.date)
     }
 
     private fun getAlcoholTrackByDay(eventDay: Long): MutableList<AlcoholTrack> {
@@ -155,6 +149,7 @@ class CalendarFragment : Fragment(),
         val endTimeDay: Int = startTimeDay + 1
         val month: Int = calendar.get(Calendar.MONTH)
         viewModel.getTracks().observe(viewLifecycleOwner, { list ->
+            alcoholTrack.clear()
             list.forEach {
                 calendar.timeInMillis = it.date
                 if (calendar.get(Calendar.DAY_OF_MONTH) in startTimeDay until endTimeDay && calendar.get(
@@ -164,12 +159,14 @@ class CalendarFragment : Fragment(),
                     alcoholTrack.add(it)
                 }
             }
-            drinksListAdapter = DrinksListAdapter(
+            alcoholTrackListAdapter = DrinksListAdapter(
                 alcoholTrack,
                 this@CalendarFragment,
-                requireActivity().supportFragmentManager)
-            recyclerView.adapter = drinksListAdapter
-            recyclerView.alphaView(requireContext())
+                requireActivity().supportFragmentManager
+            )
+            alcoholTrackList.adapter = alcoholTrackListAdapter
+//            alcoholTrackList.submitList(alcoholTrack)
+            alcoholTrackList.alphaView(requireContext())
             if (alcoholTrack.isNotEmpty()) {
                 emptyDrinkListText.toInvisible()
             } else {
