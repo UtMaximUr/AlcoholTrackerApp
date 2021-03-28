@@ -221,6 +221,9 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         priceEditText.setOnClickListener {
             if (containerFragment.height == 0) {
                 val calculatorFragment = CalculatorFragment()
+                val bundle = Bundle()
+                bundle.putString("price_drink", priceEditText.text.toString())
+                calculatorFragment.arguments = bundle
                 calculatorFragment.setListener(this@AddFragment)
                 activity?.supportFragmentManager?.beginTransaction()
                     ?.add(R.id.container_calculator, calculatorFragment)

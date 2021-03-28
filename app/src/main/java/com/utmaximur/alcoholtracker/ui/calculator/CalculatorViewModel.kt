@@ -1,6 +1,6 @@
 package com.utmaximur.alcoholtracker.ui.calculator
 
-import android.util.Log
+
 import androidx.lifecycle.ViewModel
 
 const val ADDITION = '+'
@@ -19,6 +19,9 @@ class CalculatorViewModel : ViewModel() {
 
     fun setValue(value: Int) {
         currentValue += value.toString()
+        if (valueOne != "") {
+            computeCalculation()
+        }
     }
 
     fun setCurrentAction(action: Char) {
@@ -32,25 +35,29 @@ class CalculatorViewModel : ViewModel() {
     }
 
     fun computeCalculation() {
-        valueTwo = currentValue
-        when (currentAction) {
-            ADDITION -> {
-                valueCalculating = valueOne.toInt() + valueTwo.toInt()
-            }
+        if (currentValue != "") {
+            valueTwo = currentValue
+            when (currentAction) {
+                ADDITION -> {
+                    valueCalculating = valueOne.toInt() + valueTwo.toInt()
+                }
 
-            SUBTRACTION -> {
-                valueCalculating = valueOne.toInt() - valueTwo.toInt()
-            }
+                SUBTRACTION -> {
+                    valueCalculating = valueOne.toInt() - valueTwo.toInt()
+                }
 
-            MULTIPLICATION -> {
-                valueCalculating = valueOne.toInt() * valueTwo.toInt()
-            }
+                MULTIPLICATION -> {
+                    valueCalculating = valueOne.toInt() * valueTwo.toInt()
+                }
 
-            DIVISION -> {
-                valueCalculating = valueOne.toInt() / valueTwo.toInt()
+                DIVISION -> {
+                    if (valueTwo.toInt() != 0) {
+                        valueCalculating = valueOne.toInt() / valueTwo.toInt()
+                    }
+                }
             }
+            currentValue = valueCalculating.toString()
         }
-        currentValue = valueCalculating.toString()
     }
 
     fun acCalculation() {
