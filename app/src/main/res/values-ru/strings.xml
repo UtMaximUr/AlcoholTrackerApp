@@ -26,10 +26,8 @@
     <string name="add_total_money">Итого</string>
     <string name="add_empty">0</string>
     <string name="add_currency">RUR</string>
-    <string name="add_litres">л</string>
     <string name="add_save">Сохранить</string>
     <string name="enter_price">!Введите стоимость</string>
-    <string name="add_l">%s л</string>
     <string name="unit_ml">%s мл</string>
     <string name="unit_l">%s л</string>
 

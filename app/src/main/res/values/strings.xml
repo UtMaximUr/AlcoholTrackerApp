@@ -27,11 +27,9 @@
     <string name="add_total_money">Total</string>
     <string name="add_empty">0</string>
     <string name="add_currency">USD</string>
-    <string name="add_litres">l</string>
     <string name="add_save">Save</string>
     <string name="enter_price">!Enter the cost</string>
     <string name="add_degree_s" translatable="false">°</string>
-    <string name="add_l">%s l</string>
     <string name="unit_ml">%s ml</string>
     <string name="unit_l">%s l</string>
 
