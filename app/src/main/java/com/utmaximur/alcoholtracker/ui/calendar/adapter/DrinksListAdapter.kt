@@ -10,6 +10,7 @@ import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
 import com.utmaximur.alcoholtracker.ui.dialog.delete.DeleteDialogFragment
 import com.utmaximur.alcoholtracker.util.formatVolume
+import com.utmaximur.alcoholtracker.util.getResString
 
 class DrinksListAdapter(
     private val alcoholTracks: MutableList<AlcoholTrack>,
@@ -56,7 +57,7 @@ class DrinksListAdapter(
                 alcoholTrack.volume.formatVolume(itemView.context, alcoholTrack.quantity)
             drinkText?.text = String.format(
                 itemView.context.resources.getString(R.string.calendar_count_drink),
-                alcoholTrack.drink, alcoholTrack.quantity
+                alcoholTrack.drink.getResString(itemView.context), alcoholTrack.quantity
             )
             degreeText?.text = alcoholTrack.degree
             priceText?.text = (alcoholTrack.price * alcoholTrack.quantity).toString()

@@ -29,6 +29,9 @@
     <string name="add_litres">л</string>
     <string name="add_save">Сохранить</string>
     <string name="enter_price">!Введите стоимость</string>
+    <string name="add_l">%s л</string>
+    <string name="unit_ml">%s мл</string>
+    <string name="unit_l">%s л</string>
 
     <!--add new drink-->
     <string name="add_new_drink">Создать напиток</string>
@@ -153,25 +156,5 @@
         <item>Ноябрь</item>
         <item>Декабрь</item>
     </array>
-
-    <string-array name="volume_array">
-
-        <item>0.02 л</item>
-        <item>0.05 л</item>
-        <item>0.125 л</item>
-        <item>0.175 л</item>
-        <item>0.3 л</item>
-        <item>0.33 л</item>
-        <item>0.375 л</item>
-        <item>0.4 л</item>
-        <item>0.45 л</item>
-        <item>0.48 л</item>
-        <item>0.5 л</item>
-        <item>0.568 л</item>
-        <item>0.7 л</item>
-        <item>0.750 л</item>
-        <item>1 л</item>
-
-    </string-array>
 
 </resources>

@@ -31,6 +31,9 @@
     <string name="add_save">Save</string>
     <string name="enter_price">!Enter the cost</string>
     <string name="add_degree_s" translatable="false">°</string>
+    <string name="add_l">%s l</string>
+    <string name="unit_ml">%s ml</string>
+    <string name="unit_l">%s l</string>
 
 
     <!--add new drink-->
@@ -177,21 +180,21 @@
 
     <string-array name="volume_array">
 
-        <item>0.02 l</item>
-        <item>0.05 l</item>
-        <item>0.125 l</item>
-        <item>0.175 l</item>
-        <item>0.3 l</item>
-        <item>0.33 l</item>
-        <item>0.375 l</item>
-        <item>0.4 l</item>
-        <item>0.45 l</item>
-        <item>0.48 l</item>
-        <item>0.5 l</item>
-        <item>0.568 l</item>
-        <item>0.7 l</item>
-        <item>0.750 l</item>
-        <item>1 l</item>
+        <item>0.02</item>
+        <item>0.05</item>
+        <item>0.125</item>
+        <item>0.175</item>
+        <item>0.3</item>
+        <item>0.33</item>
+        <item>0.375</item>
+        <item>0.4</item>
+        <item>0.45</item>
+        <item>0.48</item>
+        <item>0.5</item>
+        <item>0.568</item>
+        <item>0.7</item>
+        <item>0.750</item>
+        <item>1</item>
 
     </string-array>
 
