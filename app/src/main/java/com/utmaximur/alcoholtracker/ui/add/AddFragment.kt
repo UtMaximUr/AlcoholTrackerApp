@@ -11,7 +11,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
 import android.widget.NumberPicker
@@ -230,27 +229,6 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
                 animateViewHeight(containerFragment, 245.dpToPx())
             }
         }
-
-        priceEditText.setOnEditorActionListener { _, i, _ ->
-            if (i == EditorInfo.IME_ACTION_DONE) {
-                if (viewModel.checkIsEmptyFieldPrice(getPrice())) {
-                    if (priceEditText.text.isNotEmpty()) {
-                        totalMoneyText.text = viewModel.getTotalMoney(getQuantity(), getPrice())
-                        viewModel.price = priceEditText.text.toString().toFloat()
-                    } else {
-                        totalMoneyText.text = getText(R.string.add_empty)
-                    }
-                    priceEditText.clearFocus()
-                }
-            }
-            false
-        }
-
-        priceEditText.setOnFocusChangeListener { _, b ->
-            if (b) {
-                priceEditText.hint = ""
-            }
-        }
     }
 
     @SuppressLint("DiscouragedPrivateApi")
@@ -439,6 +417,11 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
 
     override fun getValueCalculating(value: String) {
         priceEditText.setText(value)
+        if (value != "") {
+            totalMoneyText.text = (quantityNumberPicker.value * value.toInt()).toString()
+        } else {
+            totalMoneyText.text = "0"
+        }
     }
 
     override fun closeCalculator() {
