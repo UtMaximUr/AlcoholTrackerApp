@@ -38,7 +38,7 @@
 
     <!--create drink-->
     <string name="create_drink_title">Создать напиток</string>
-    <string name="create_drink_hint">Введите Название</string>
+    <string name="create_drink_hint">Название</string>
     <string name="dialog_create_drink_add">Добавить иконку</string>
     <string name="select_icon">Выберите иконку</string>
     <string name="dialog_create_drink_add_degree">Добавить крепость</string>

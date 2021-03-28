@@ -40,7 +40,7 @@
 
     <!--create drink-->
     <string name="create_drink_title">Создать напиток</string>
-    <string name="create_drink_hint">Название напитка</string>
+    <string name="create_drink_hint">Название</string>
     <string name="dialog_create_drink_add">Добавить иконку</string>
     <string name="dialog_create_drink_add_degree">Добавить крепость</string>
     <string name="dialog_create_drink_add_volume">Добавить объем</string>
