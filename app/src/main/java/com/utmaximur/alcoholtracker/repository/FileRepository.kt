@@ -2,7 +2,7 @@ package com.utmaximur.alcoholtracker.repository
 
 import android.content.Context
 import android.net.Uri
-import com.utmaximur.alcoholtracker.domain.FileGenerator
+import com.utmaximur.alcoholtracker.data.file.FileGenerator
 import java.io.File
 
 class FileRepository(private val fileGenerator: FileGenerator) {
