@@ -47,7 +47,11 @@ class CalculatorViewModel : ViewModel() {
                 }
 
                 DIVISION -> {
-                    valueCalculating = valueOne.toInt() / valueTwo.toInt()
+                    valueCalculating = if (valueTwo.toInt() != 0) {
+                        valueOne.toInt() / valueTwo.toInt()
+                    } else {
+                        0
+                    }
                 }
             }
             currentValue = valueCalculating.toString()

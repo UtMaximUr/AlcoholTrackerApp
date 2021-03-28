@@ -176,5 +176,13 @@ class CalculatorFragment : Fragment() {
         buttonMultiply.setOnClickListener {
             viewModel.setCurrentAction(MULTIPLICATION)
         }
+
+        getPriceDrink()
+    }
+
+    private fun getPriceDrink() {
+        if (arguments?.getString("price_drink") != "") {
+            arguments?.getString("price_drink")?.toInt()?.let { viewModel.setValue(it) }
+        }
     }
 }
