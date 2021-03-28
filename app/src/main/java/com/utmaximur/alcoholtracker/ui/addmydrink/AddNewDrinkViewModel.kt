@@ -8,18 +8,20 @@ import com.utmaximur.alcoholtracker.data.model.Drink
 import com.utmaximur.alcoholtracker.data.model.Icon
 import com.utmaximur.alcoholtracker.repository.DrinkRepository
 import com.utmaximur.alcoholtracker.repository.IconRepository
-import com.utmaximur.alcoholtracker.util.format1f
 import com.utmaximur.alcoholtracker.util.formatDegree1f
 import java.util.*
 
-class  AddNewDrinkViewModel(private var drinkRepository: DrinkRepository, private var iconRepository: IconRepository): ViewModel() {
+class AddNewDrinkViewModel(
+    private var drinkRepository: DrinkRepository,
+    private var iconRepository: IconRepository
+) : ViewModel() {
 
     var id: String = ""
     var volumeList: ArrayList<String?> = ArrayList()
     var icon: String = ""
     var photo: String = ""
 
-    fun onSaveButtonClick(drink: Drink){
+    fun onSaveButtonClick(drink: Drink) {
         if (id == "") {
             drink.id = getDrinkId()
             drinkRepository.insertDrink(drink)
@@ -32,7 +34,7 @@ class  AddNewDrinkViewModel(private var drinkRepository: DrinkRepository, privat
         return iconRepository.getIcons()
     }
 
-    fun getVolumes(context: Context): List<String?>{
+    fun getVolumes(context: Context): List<String?> {
         val volume = context.resources.getStringArray(R.array.volume_array)
         return volume.toList()
     }

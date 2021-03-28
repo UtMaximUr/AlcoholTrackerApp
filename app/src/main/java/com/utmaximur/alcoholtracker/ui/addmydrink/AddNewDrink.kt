@@ -34,7 +34,7 @@ import com.utmaximur.alcoholtracker.util.hideKeyboard
 import java.util.*
 
 
-class AddNewDrink : Fragment(), BottomDialogListener{
+class AddNewDrink : Fragment(), BottomDialogListener {
 
     private var addNewFragmentListener: AddNewFragmentListener? = null
 
@@ -196,7 +196,7 @@ class AddNewDrink : Fragment(), BottomDialogListener{
         })
     }
 
-    private fun setVolumeAdapter(volumes: List<String?>?){
+    private fun setVolumeAdapter(volumes: List<String?>?) {
         selectVolumeAdapter = SelectVolumeAdapter(this::adapterVolumeOnClick, volumes)
         volumeConcatAdapter = ConcatAdapter(selectVolumeAdapter)
         volumeList.adapter = volumeConcatAdapter
@@ -227,7 +227,7 @@ class AddNewDrink : Fragment(), BottomDialogListener{
 
     private fun adapterVolumeOnClick(volume: String?) {
         hideKeyboard()
-        if (viewModel.volumeList.contains(volume)){
+        if (viewModel.volumeList.contains(volume)) {
             viewModel.volumeList.remove(volume)
         } else {
             viewModel.volumeList.add(volume)
