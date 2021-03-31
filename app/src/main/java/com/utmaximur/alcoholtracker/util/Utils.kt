@@ -14,6 +14,7 @@ import android.view.WindowMetrics
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
+import androidx.core.text.isDigitsOnly
 import com.utmaximur.alcoholtracker.R
 import java.text.SimpleDateFormat
 import java.util.*
@@ -101,9 +102,23 @@ fun Long.formatDate(context: Context): String? {
 
 fun String.formatVolume(context: Context, quantity: Int): String? {
     return if (this.contains(".")) {
-        String.format(context.getString(R.string.unit_l), this.toDouble() * quantity)
+        if (this.isDigitsOnly()) {
+            String.format(context.getString(R.string.unit_l), this.toDouble() * quantity)
+        } else {
+            //after migration it contains numbers and letters,
+            //this method is needed to get only numbers from a string
+            val digit: String =
+                this.replace(context.getString(R.string.only_number_regex).toRegex(), "").trim()
+            String.format(context.getString(R.string.unit_l), digit.toDouble() * quantity)
+        }
     } else {
-        String.format(context.getString(R.string.unit_ml), this.toInt() * quantity)
+        if (this.isDigitsOnly()) {
+            String.format(context.getString(R.string.unit_ml), this.toInt() * quantity)
+        } else {
+            val digit: String =
+                this.replace(context.getString(R.string.only_number_regex).toRegex(), "").trim()
+            String.format(context.getString(R.string.unit_ml), digit.toInt() * quantity)
+        }
     }
 }
 
