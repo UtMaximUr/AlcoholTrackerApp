@@ -5,13 +5,14 @@ import android.content.Context
 import android.content.res.AssetManager
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.utmaximur.alcoholtracker.data.AlcoholTrackDatabase
-import com.utmaximur.alcoholtracker.data.resources.IconRaw
-import com.utmaximur.alcoholtracker.data.model.Drink
 import com.utmaximur.alcoholtracker.data.file.FileGenerator
+import com.utmaximur.alcoholtracker.data.model.Drink
+import com.utmaximur.alcoholtracker.data.resources.IconRaw
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.CoroutineScope
@@ -24,6 +25,42 @@ import javax.inject.Singleton
 class RoomDatabaseModule(private var application: Application) {
 
     private lateinit var alcoholTrackDatabase: AlcoholTrackDatabase
+
+    @Singleton
+    @Provides
+    fun providesRoomDatabase(): AlcoholTrackDatabase {
+        alcoholTrackDatabase =
+            Room.databaseBuilder(application, AlcoholTrackDatabase::class.java, "app_database")
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
+                .addCallback(databaseCallback)
+                .build()
+        return alcoholTrackDatabase
+    }
+
+    @Singleton
+    @Provides
+    fun providesTrackDAO(alcoholTrackDatabase: AlcoholTrackDatabase) =
+        alcoholTrackDatabase.getTrackDao()
+
+    @Singleton
+    @Provides
+    fun providesDrinkDAO(alcoholTrackDatabase: AlcoholTrackDatabase) =
+        alcoholTrackDatabase.getDrinkDao()
+
+    @Provides
+    fun provideIcons(): IconRaw {
+        return IconRaw()
+    }
+
+    @Provides
+    fun provideFile(): FileGenerator {
+        return FileGenerator()
+    }
+
+
+    /**
+     * init database
+     */
 
     private val databaseCallback = object : RoomDatabase.Callback() {
         override fun onCreate(db: SupportSQLiteDatabase) {
@@ -56,31 +93,54 @@ class RoomDatabaseModule(private var application: Application) {
         return jsonString
     }
 
-    @Singleton
-    @Provides
-    fun providesRoomDatabase(): AlcoholTrackDatabase {
-        alcoholTrackDatabase = Room.databaseBuilder(application, AlcoholTrackDatabase::class.java, "app_database")
-            .fallbackToDestructiveMigration()
-            .addCallback(databaseCallback)
-            .build()
-        return alcoholTrackDatabase
+    /**
+     * migration database
+     */
+
+    private val MIGRATION_1_2: Migration = object : Migration(1, 2) {
+        override fun migrate(database: SupportSQLiteDatabase) {
+
+            database.execSQL(
+                "CREATE TABLE track_database_new (id TEXT NOT NULL," +
+                        " drink TEXT NOT NULL," +
+                        " volume TEXT NOT NULL," +
+                        " quantity INTEGER NOT NULL," +
+                        " degree TEXT NOT NULL," +
+                        " price REAL NOT NULL," +
+                        " date INTEGER NOT NULL," +
+                        " icon TEXT NOT NULL," +
+                        " PRIMARY KEY(id))"
+            )
+            database.execSQL(
+                "INSERT INTO track_database_new (id, drink, volume, quantity, degree, price, date, icon) " +
+                        "SELECT id, drink, volume, quantity, degree, price, date, icon FROM track_database"
+            )
+            database.execSQL("DROP TABLE track_database")
+            database.execSQL("ALTER TABLE track_database_new RENAME TO track_database")
+        }
     }
 
-    @Singleton
-    @Provides
-    fun providesTrackDAO(alcoholTrackDatabase: AlcoholTrackDatabase) = alcoholTrackDatabase.getTrackDao()
+    private val MIGRATION_2_3: Migration = object : Migration(2, 3) {
+        override fun migrate(database: SupportSQLiteDatabase) {
 
-    @Singleton
-    @Provides
-    fun providesDrinkDAO(alcoholTrackDatabase: AlcoholTrackDatabase) = alcoholTrackDatabase.getDrinkDao()
+            database.execSQL(
+                "CREATE TABLE drink_database_new (id TEXT NOT NULL," +
+                        " drink TEXT NOT NULL," +
+                        " degree TEXT NOT NULL," +
+                        " volume TEXT NOT NULL," +
+                        " icon TEXT NOT NULL," +
+                        " photo TEXT NOT NULL," +
+                        " PRIMARY KEY(id))"
+            )
 
-    @Provides
-    fun provideIcons(): IconRaw {
-        return IconRaw()
-    }
+            database.execSQL("DROP TABLE drink_database")
+            database.execSQL("ALTER TABLE drink_database_new RENAME TO drink_database")
 
-    @Provides
-    fun provideFile(): FileGenerator {
-        return FileGenerator()
+            CoroutineScope(Dispatchers.IO).launch {
+                getDrinkList(application).forEach {
+                    alcoholTrackDatabase.getDrinkDao().addDrink(it)
+                }
+            }
+        }
     }
 }
