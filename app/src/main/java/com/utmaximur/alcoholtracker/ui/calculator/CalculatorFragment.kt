@@ -182,7 +182,7 @@ class CalculatorFragment : Fragment() {
 
     private fun getPriceDrink() {
         if (arguments?.getString("price_drink") != "") {
-            arguments?.getString("price_drink")?.toInt()?.let { viewModel.setValue(it) }
+            arguments?.getString("price_drink")?.toDouble()?.toInt()?.let { viewModel.setValue(it) }
         }
     }
 }
