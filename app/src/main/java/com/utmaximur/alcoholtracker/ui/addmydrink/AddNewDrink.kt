@@ -3,7 +3,6 @@ package com.utmaximur.alcoholtracker.ui.addmydrink
 
 import android.content.Context
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -134,8 +133,8 @@ class AddNewDrink : Fragment(), BottomDialogListener {
             )
         }
 
-        nameDrink.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, event ->
-            if ((actionId == EditorInfo.IME_ACTION_DONE) || ((event.keyCode == KeyEvent.KEYCODE_ENTER) && (event.action == KeyEvent.ACTION_DOWN))) {
+        nameDrink.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
                 hideKeyboard()
                 return@OnEditorActionListener true
             }
