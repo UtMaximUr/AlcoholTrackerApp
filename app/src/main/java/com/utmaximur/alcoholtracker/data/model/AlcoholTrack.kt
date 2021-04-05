@@ -11,12 +11,12 @@ data class AlcoholTrack(
 
     @PrimaryKey
     var id: String,
-    val drink: String,
-    val volume: String,
-    val quantity: Int,
-    val degree: String,
-    val price: Float,
-    val date: Long,
+    var drink: String,
+    var volume: String,
+    var quantity: Int,
+    var degree: String,
+    var price: Float,
+    var date: Long,
     var icon: String
 
 ) : Parcelable

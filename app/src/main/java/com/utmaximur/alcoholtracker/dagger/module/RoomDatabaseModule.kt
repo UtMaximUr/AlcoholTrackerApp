@@ -1,8 +1,12 @@
+@file:Suppress("PrivatePropertyName")
+
 package com.utmaximur.alcoholtracker.dagger.module
 
 import android.app.Application
 import android.content.Context
 import android.content.res.AssetManager
+import android.os.Handler
+import android.os.Looper
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
@@ -13,10 +17,12 @@ import com.utmaximur.alcoholtracker.data.AlcoholTrackDatabase
 import com.utmaximur.alcoholtracker.data.file.FileGenerator
 import com.utmaximur.alcoholtracker.data.model.Drink
 import com.utmaximur.alcoholtracker.data.resources.IconRaw
+import com.utmaximur.alcoholtracker.util.convertMigrationModel
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.io.IOException
 import javax.inject.Singleton
@@ -117,6 +123,8 @@ class RoomDatabaseModule(private var application: Application) {
             )
             database.execSQL("DROP TABLE track_database")
             database.execSQL("ALTER TABLE track_database_new RENAME TO track_database")
+
+            updateTrackDb()
         }
     }
 
@@ -136,9 +144,32 @@ class RoomDatabaseModule(private var application: Application) {
             database.execSQL("DROP TABLE drink_database")
             database.execSQL("ALTER TABLE drink_database_new RENAME TO drink_database")
 
-            CoroutineScope(Dispatchers.IO).launch {
-                getDrinkList(application).forEach {
-                    alcoholTrackDatabase.getDrinkDao().addDrink(it)
+            updateDrinkDb()
+        }
+    }
+
+    private fun updateDrinkDb() {
+        CoroutineScope(Dispatchers.IO).launch {
+            getDrinkList(application).forEach {
+                alcoholTrackDatabase.getDrinkDao().addDrink(it)
+            }
+        }
+    }
+
+    private fun updateTrackDb() {
+        val list = alcoholTrackDatabase.getTrackDao().getTracks()
+        var coroutineScope: Job?
+        Handler(Looper.getMainLooper()).post {
+            list.observeForever { newData ->
+                newData.forEach {
+                    it.convertMigrationModel(application)?.let { it1 ->
+                        coroutineScope = CoroutineScope(Dispatchers.IO).launch {
+                            alcoholTrackDatabase.getTrackDao().insertTrack(
+                                it1
+                            )
+                        }
+                        coroutineScope?.cancel()
+                    }
                 }
             }
         }
