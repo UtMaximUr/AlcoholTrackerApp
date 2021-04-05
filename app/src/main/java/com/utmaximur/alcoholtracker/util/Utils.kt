@@ -146,8 +146,8 @@ fun View.toInvisible() {
  */
 fun AlcoholTrack.convertMigrationModel(context: Context): AlcoholTrack? {
 
-    degree.replace(",", ".").toDouble().formatDegree1f()
-    volume.formatVolume(context, 1).toString()
+    val convertDegree = this.degree.replace(",", ".").toDouble().formatDegree1f()
+    val convertVolume = this.volume.replace(context.getString(R.string.only_number_regex).toRegex(), "").trim()
 
     when(this.drink) {
         context.getString(R.string.absent) -> {
@@ -211,5 +211,8 @@ fun AlcoholTrack.convertMigrationModel(context: Context): AlcoholTrack? {
             icon = "ic_wine"
         }
     }
-    return AlcoholTrack(this.id, drink, volume, this.quantity, degree, this.price, this.date, icon)
+    return convertDegree?.let {
+        AlcoholTrack(this.id, drink, convertVolume, this.quantity,
+            it, this.price, this.date, icon)
+    }
 }
