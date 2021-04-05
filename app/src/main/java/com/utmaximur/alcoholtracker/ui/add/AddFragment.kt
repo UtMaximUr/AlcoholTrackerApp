@@ -2,7 +2,6 @@ package com.utmaximur.alcoholtracker.ui.add
 
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
-import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.content.Context
@@ -11,12 +10,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.widget.Button
-import android.widget.EditText
-import android.widget.NumberPicker
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.viewpager.widget.ViewPager
@@ -33,8 +30,6 @@ import com.utmaximur.alcoholtracker.ui.add.adapter.DrinkViewPagerAdapter.AddDrin
 import com.utmaximur.alcoholtracker.ui.calculator.CalculatorFragment
 import com.utmaximur.alcoholtracker.ui.calculator.CalculatorFragment.CalculatorListener
 import com.utmaximur.alcoholtracker.util.*
-import java.lang.reflect.InvocationTargetException
-import java.lang.reflect.Method
 import java.util.*
 
 
@@ -149,7 +144,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
             true
         }
 
-        // выбор напитков
+        // select drink
         dotsIndicator.setupWithViewPager(drinksPager, true)
         drinksPager.addOnPageChangeListener(object : OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {}
@@ -168,7 +163,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
             }
         })
 
-        //Количество
+        // Quantity
         quantityNumberPicker.maxValue = 10
         quantityNumberPicker.minValue = 1
         quantityNumberPicker.setOnScrollListener { _, _ ->
@@ -179,22 +174,22 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
 
 
         viewModel.getAllDrink().observe(viewLifecycleOwner, { list ->
-            //Градус
-            // устанавливаем по умолчанию первый напиток
+            // Degree
+            // set default first drink
+            initNumberPicker(degreeNumberPicker)
             degreeNumberPicker.displayedValues = null
             degreeNumberPicker.maxValue = list.first().degree.size - 1
             degreeNumberPicker.displayedValues = list.first().degree.toTypedArray()
             degreeNumberPicker.value = 1
-            changeValueByOne(degreeNumberPicker)
 
-            //Объем
-            // устанавливаем по умолчанию первый напиток
+            // Volume
+            // set default first drink
+            initNumberPicker(volumeNumberPicker)
             volumeNumberPicker.displayedValues = null
             volumeNumberPicker.maxValue = list.first().volume.size - 1
             volumeNumberPicker.displayedValues =
                 list.first().volume.setVolumeUnit(requireContext()).toTypedArray()
             volumeNumberPicker.value = 1
-            changeValueByOne(volumeNumberPicker)
             setVolume(list.first().volume.toList())
         })
 
@@ -234,24 +229,6 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         }
     }
 
-    @SuppressLint("DiscouragedPrivateApi")
-    private fun changeValueByOne(numberPicker: NumberPicker) {
-        try {
-            val method: Method = numberPicker.javaClass
-                .getDeclaredMethod("changeValueByOne", Boolean::class.javaPrimitiveType)
-            method.isAccessible = true
-            method.invoke(numberPicker, true)
-        } catch (e: NoSuchMethodException) {
-            e.printStackTrace()
-        } catch (e: IllegalArgumentException) {
-            e.printStackTrace()
-        } catch (e: IllegalAccessException) {
-            e.printStackTrace()
-        } catch (e: InvocationTargetException) {
-            e.printStackTrace()
-        }
-    }
-
     private fun animateViewHeight(view: ConstraintLayout, targetHeight: Int) {
         val animator: ValueAnimator = ObjectAnimator.ofInt(view.height, targetHeight)
         animator.addUpdateListener { animation ->
@@ -265,6 +242,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
     private fun setDrinkDegreeArray(position: Int) {
         val drink: Drink = getDrinksList()[position]
         degreeNumberPicker.displayedValues = null
+        degreeNumberPicker.minValue = 0
         degreeNumberPicker.value = 1
         degreeNumberPicker.maxValue = drink.degree.size - 1
         degreeNumberPicker.displayedValues = drink.degree.toTypedArray()
@@ -274,6 +252,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
     private fun setDrinkVolumeArray(position: Int) {
         val drink: Drink = getDrinksList()[position]
         volumeNumberPicker.displayedValues = null
+        volumeNumberPicker.minValue = 0
         volumeNumberPicker.value = 1
         volumeNumberPicker.maxValue = drink.volume.size - 1
         volumeNumberPicker.displayedValues =
@@ -289,17 +268,22 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         viewModel.date = alcoholTrack?.date!!
 
         viewModel.getAllDrink().observe(viewLifecycleOwner, { list ->
-            list.forEach {
-                if (it.drink == alcoholTrack.drink) {
-                    val position = list.indexOf(it)
+            list.forEach {drink ->
+                if (drink.drink == alcoholTrack.drink) {
+                    val position = list.indexOf(drink)
+                    // set position view pager
                     drinksPager.currentItem = position
-                    quantityNumberPicker.value = alcoholTrack.quantity
-                    setDrinkVolumeArray(position)
-                    volumeNumberPicker.value =
-                        it.volume.indexOf(alcoholTrack.volume) - 1
-                    setDrinkDegreeArray(position)
-                    degreeNumberPicker.value = it.degree.indexOf(alcoholTrack.degree) - 1
                     dotsIndicator.getTabAt(position)?.select()
+                    // set quantity drink
+                    quantityNumberPicker.value = alcoholTrack.quantity
+                    // set volume drink
+                    setDrinkVolumeArray(position)
+                    volumeNumberPicker.value = drink.volume.indexOf(alcoholTrack.volume)
+                    initNumberPicker(volumeNumberPicker)
+                    // set degree drink
+                    setDrinkDegreeArray(position)
+                    degreeNumberPicker.value = drink.degree.indexOf(alcoholTrack.degree)
+                    initNumberPicker(degreeNumberPicker)
                 }
             }
         })
@@ -310,6 +294,12 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
 
         totalMoneyText.text =
             (alcoholTrack.price.times(alcoholTrack.quantity)).toString()
+    }
+
+    private fun initNumberPicker(numberPicker: NumberPicker) {
+        numberPicker.children.iterator().forEach {
+            if (it is EditText) it.width = LinearLayout.LayoutParams.WRAP_CONTENT
+        }
     }
 
     private var onDateSetListener =
