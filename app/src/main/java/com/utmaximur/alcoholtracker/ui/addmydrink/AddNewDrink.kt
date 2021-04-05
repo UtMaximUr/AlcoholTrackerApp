@@ -95,7 +95,6 @@ class AddNewDrink : Fragment(), BottomDialogListener {
         minValueDegree = view.findViewById(R.id.left_range_degree)
         maxValueDegree = view.findViewById(R.id.right_range_degree)
         rangeDegree = view.findViewById(R.id.range_seek_bar_degree)
-
     }
 
     private fun initUi(view: View) {
