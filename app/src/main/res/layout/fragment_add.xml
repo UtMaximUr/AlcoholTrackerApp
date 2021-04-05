@@ -101,6 +101,7 @@
                         android:id="@+id/quantity_number_picker"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:descendantFocusability="blocksDescendants"
                         android:layout_gravity="center"
                         android:orientation="vertical"
                         android:theme="@style/AppTheme.Picker" />
@@ -126,6 +127,7 @@
                         android:id="@+id/volume_number_picker"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:descendantFocusability="blocksDescendants"
                         android:layout_gravity="center"
                         android:orientation="vertical"
                         android:theme="@style/AppTheme.Picker" />
@@ -152,6 +154,7 @@
                         android:id="@+id/degree_number_picker"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:descendantFocusability="blocksDescendants"
                         android:layout_gravity="center"
                         android:orientation="vertical"
                         android:theme="@style/AppTheme.Picker" />
