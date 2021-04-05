@@ -4,15 +4,15 @@
     <group android:checkableBehavior="single">
 
         <item android:id="@+id/calendarFragment"
-            android:icon="@drawable/ic_calendar"
+            android:icon="@drawable/ic_calendar_24dp"
             android:title="@string/calendar"/>
 
         <item android:id="@+id/statisticFragment"
-            android:icon="@drawable/ic_statistic"
+            android:icon="@drawable/ic_statistic_24dp"
             android:title="@string/statistic"/>
 
         <item android:id="@+id/settingsFragment"
-            android:icon="@drawable/ic_settings"
+            android:icon="@drawable/ic_settings_24dp"
             android:title="@string/settings"/>
 
     </group>
