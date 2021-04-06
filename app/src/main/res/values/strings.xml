@@ -51,6 +51,11 @@
     <string name="bottom_sheet_option_gallery">Upload from Gallery</string>
     <string name="bottom_sheet_option_heading">Add Photo</string>
     <string name="bottom_sheet_option_remove_photo">Remove Photo</string>
+    <string name="empty_field_photo">Take a photo or choose from the gallery</string>
+    <string name="empty_field_name">Enter the name of the drink</string>
+    <string name="empty_field_icon">Select the drink icon</string>
+    <string name="empty_field_degree">Select the strength of the drink</string>
+    <string name="empty_field_volume">Select the volume of the drink</string>
 
     <!--dialog select date-->
     <string name="dialog_select_date_title">Use the selected date to add a drink?</string>
