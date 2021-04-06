@@ -18,7 +18,7 @@ class AddViewModel(private var drinkRepository: DrinkRepository,
     val quantity: Int = 0
     var degree: String = ""
     var price: Float = 0.0f
-    var date: Long = 0L
+    var date: Long = Date().time
     var icon: Int = 0
     var drinks: List<Drink> = ArrayList()
     var volumes: List<String?> = ArrayList()
@@ -40,9 +40,9 @@ class AddViewModel(private var drinkRepository: DrinkRepository,
 
     private fun getTrackId(): String = UUID.randomUUID().toString()
 
-     fun checkIsEmptyField(price: Float, date: Long): Boolean {
-        return !(price == 0.0f || date == 0L)
-    }
+//     fun checkIsEmptyField(price: Float, date: Long): Boolean {
+//        return !(price == 0.0f || date == 0L)
+//    }
 
      fun checkIsEmptyFieldPrice(price: Float): Boolean {
         return price != 0.0f

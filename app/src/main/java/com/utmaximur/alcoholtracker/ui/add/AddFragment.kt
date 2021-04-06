@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -123,24 +122,20 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         }
 
         toolbar.setOnMenuItemClickListener {
-            if (viewModel.checkIsEmptyField(getPrice(), getDate())) {
-                viewModel.onSaveButtonClick(
-                    AlcoholTrack(
-                        getIdDrink(),
-                        getDrink(),
-                        getVolume()!!,
-                        getQuantity(),
-                        getDegree(),
-                        getPrice(),
-                        getDate(),
-                        getIcon()
-                    )
+            viewModel.onSaveButtonClick(
+                AlcoholTrack(
+                    getIdDrink(),
+                    getDrink(),
+                    getVolume()!!,
+                    getQuantity(),
+                    getDegree(),
+                    getPrice(),
+                    getDate(),
+                    getIcon()
                 )
-                addFragmentListener?.closeFragment()
-                addFragmentListener!!.onShowNavigationBar()
-            } else {
-                showWarningEmptyField()
-            }
+            )
+            addFragmentListener?.closeFragment()
+            addFragmentListener!!.onShowNavigationBar()
             true
         }
 
@@ -268,7 +263,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         viewModel.date = alcoholTrack?.date!!
 
         viewModel.getAllDrink().observe(viewLifecycleOwner, { list ->
-            list.forEach {drink ->
+            list.forEach { drink ->
                 if (drink.drink == alcoholTrack.drink) {
                     val position = list.indexOf(drink)
                     // set position view pager
@@ -398,16 +393,6 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
 
     private fun getDrinksList(): List<Drink> {
         return viewModel.drinks
-    }
-
-    private fun showWarningEmptyField() {
-        if (viewModel.price == 0.0f) {
-            priceEditText.hint = getText(R.string.enter_price)
-        } else if (viewModel.date == 0L) {
-            val buttonAnimation =
-                AnimationUtils.loadAnimation(context, R.anim.button_animation)
-            addDateButton.startAnimation(buttonAnimation)
-        }
     }
 
     override fun getValueCalculating(value: String) {
