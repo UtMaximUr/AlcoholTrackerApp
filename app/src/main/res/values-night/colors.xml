@@ -6,7 +6,6 @@
     <color name="teal_200">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="text_color_white">#FFFFFFFF</color>
-    <color name="text_color_black">#FF000000</color>
     <color name="button_stroke_color">#FF000000</color>
     <color name="text_warning_color">#D50000</color>
     <color name="background_color">#373737</color>
