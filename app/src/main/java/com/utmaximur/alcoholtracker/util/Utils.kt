@@ -15,6 +15,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import androidx.core.text.isDigitsOnly
+import com.google.android.material.snackbar.Snackbar
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
 import java.text.SimpleDateFormat
@@ -139,6 +140,10 @@ fun View.toGone() {
 
 fun View.toInvisible() {
     this.visibility = View.GONE
+}
+
+fun View.snackBar(message: String){
+    Snackbar.make(this, message, Snackbar.LENGTH_LONG).show()
 }
 
 /**
