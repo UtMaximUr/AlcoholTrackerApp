@@ -21,7 +21,7 @@ class AddViewModel(private var drinkRepository: DrinkRepository,
     var date: Long = 0L
     var icon: Int = 0
     var drinks: List<Drink> = ArrayList()
-    var volums: List<String?> = ArrayList()
+    var volumes: List<String?> = ArrayList()
     var degrees: List<String?> = ArrayList()
 
 

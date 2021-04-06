@@ -361,7 +361,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
     }
 
     private fun setVolume(volume: List<String?>) {
-        viewModel.volums = volume
+        viewModel.volumes = volume
     }
 
     private fun setDegreeList(degree: List<String?>) {
@@ -369,7 +369,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
     }
 
     private fun getVolumeList(): List<String?> {
-        return viewModel.volums
+        return viewModel.volumes
     }
 
     private fun getIcon(): String {

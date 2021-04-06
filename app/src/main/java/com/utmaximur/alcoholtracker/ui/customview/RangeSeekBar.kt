@@ -195,14 +195,6 @@ class RangeSeekBar @JvmOverloads constructor(
         }
     }
 
-    fun setMaxRange(maxRange: Float) {
-        this.maxRange = maxRange
-    }
-
-    fun setMinRange(minRange: Float) {
-        this.minRange = minRange
-    }
-
     fun getMax(): Float {
         return maxRange
     }
@@ -232,22 +224,6 @@ class RangeSeekBar @JvmOverloads constructor(
             maxRange
         } else minRange + (rightX - seekBarStart) / (seekBarEnd - seekBarStart) * (maxRange - minRange)
     }
-
-    fun setActiveLineColor(@ColorRes color: Int) {
-        activeLineColor = ContextCompat.getColor(context,color)
-    }
-
-    fun setInActiveLineColor(@ColorRes color: Int) {
-        inActiveLineColor = ContextCompat.getColor(context,color)
-    }
-
-    fun setCircleColor(@ColorRes color: Int) {
-        circleColor = ContextCompat.getColor(context,color)
-    }
-
-    fun getActiveLineColor() = activeLineColor
-    fun getInActiveLineColor() = inActiveLineColor
-    fun getCircleColor() = circleColor
 
     fun addMaxRangeChangeListener(maxChangeListener: (Float) -> Unit) {
         onRightRangeChanged = maxChangeListener

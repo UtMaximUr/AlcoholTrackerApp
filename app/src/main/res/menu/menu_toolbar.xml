@@ -1,11 +1,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_done"
         android:icon="@drawable/ic_save_24dp"
         android:orderInCategory="100"
         app:showAsAction="always|withText"
-        android:title="Save" />
+        android:title="@string/cd_save_drink" />
 
 </menu>
