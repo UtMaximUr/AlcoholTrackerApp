@@ -19,7 +19,8 @@
             android:id="@+id/item_top_drink_image"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:contentDescription="@string/cd_icon_drink" />
 
         <TextView
             android:id="@+id/item_top_drink_count"

@@ -7,7 +7,6 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
-import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.util.dpToPx
