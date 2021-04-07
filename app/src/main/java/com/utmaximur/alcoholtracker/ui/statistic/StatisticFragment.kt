@@ -34,7 +34,7 @@ class StatisticFragment :
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val view: View = inflater.inflate(R.layout.fragment_statistic, container, false)
         injectDagger()
         initViewModel()

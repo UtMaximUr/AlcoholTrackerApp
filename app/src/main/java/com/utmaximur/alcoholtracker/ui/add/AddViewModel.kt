@@ -40,15 +40,12 @@ class AddViewModel(private var drinkRepository: DrinkRepository,
 
     private fun getTrackId(): String = UUID.randomUUID().toString()
 
-//     fun checkIsEmptyField(price: Float, date: Long): Boolean {
-//        return !(price == 0.0f || date == 0L)
-//    }
 
      fun checkIsEmptyFieldPrice(price: Float): Boolean {
         return price != 0.0f
     }
 
-     fun getTotalMoney(quantity: Int, price: Float): String? {
+     fun getTotalMoney(quantity: Int, price: Float): String {
         return (quantity * price.toString().toDouble()).toString()
     }
 
