@@ -71,7 +71,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val view: View = inflater.inflate(R.layout.fragment_add, container, false)
         injectDagger()
         initViewModel()
@@ -122,18 +122,20 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         }
 
         toolbar.setOnMenuItemClickListener {
-            viewModel.onSaveButtonClick(
-                AlcoholTrack(
-                    getIdDrink(),
-                    getDrink(),
-                    getVolume()!!,
-                    getQuantity(),
-                    getDegree(),
-                    getPrice(),
-                    getDate(),
-                    getIcon()
+            if (drinksPager.currentItem != getDrinksList().size) {
+                viewModel.onSaveButtonClick(
+                    AlcoholTrack(
+                        getIdDrink(),
+                        getDrink(),
+                        getVolume()!!,
+                        getQuantity(),
+                        getDegree(),
+                        getPrice(),
+                        getDate(),
+                        getIcon()
+                    )
                 )
-            )
+            }
             addFragmentListener?.closeFragment()
             addFragmentListener!!.onShowNavigationBar()
             true
@@ -239,7 +241,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         degreeNumberPicker.displayedValues = null
         degreeNumberPicker.minValue = 0
         degreeNumberPicker.value = 1
-        degreeNumberPicker.maxValue = drink.degree.size - 1
+        degreeNumberPicker.maxValue = drink.degree.indexOf(drink.degree.last())
         degreeNumberPicker.displayedValues = drink.degree.toTypedArray()
         setDegreeList(drink.degree)
     }
@@ -249,7 +251,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         volumeNumberPicker.displayedValues = null
         volumeNumberPicker.minValue = 0
         volumeNumberPicker.value = 1
-        volumeNumberPicker.maxValue = drink.volume.size - 1
+        volumeNumberPicker.maxValue = drink.volume.indexOf(drink.volume.last())
         volumeNumberPicker.displayedValues =
             drink.volume.setVolumeUnit(requireContext()).toTypedArray()
         setVolume(drink.volume)
