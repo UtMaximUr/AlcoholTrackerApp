@@ -30,6 +30,7 @@ import com.utmaximur.alcoholtracker.ui.dialog.addphoto.AddPhotoBottomDialogFragm
 import com.utmaximur.alcoholtracker.util.format1f
 import com.utmaximur.alcoholtracker.util.getIdRaw
 import com.utmaximur.alcoholtracker.util.hideKeyboard
+import com.utmaximur.alcoholtracker.util.snackBar
 import java.util.*
 
 
@@ -62,7 +63,7 @@ class AddNewDrink : Fragment(), BottomDialogListener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val view: View = inflater.inflate(R.layout.fragment_add_new_drink, container, false)
         injectDagger()
         initViewModel()
@@ -106,18 +107,22 @@ class AddNewDrink : Fragment(), BottomDialogListener {
         }
 
         toolbar.setOnMenuItemClickListener {
-            hideKeyboard()
-            viewModel.onSaveButtonClick(
-                Drink(
-                    getIdDrink(),
-                    getName(),
-                    getDegree(),
-                    getVolume(),
-                    getIcon(),
-                    getPhoto()
+            if (viewModel.checkEmptyField(requireContext()).isEmpty()) {
+                hideKeyboard()
+                viewModel.onSaveButtonClick(
+                    Drink(
+                        getIdDrink(),
+                        getName(),
+                        getDegree(),
+                        getVolume(),
+                        getIcon(),
+                        getPhoto()
+                    )
                 )
-            )
-            addNewFragmentListener?.closeFragment()
+                addNewFragmentListener?.closeFragment()
+            } else {
+                getView()?.snackBar(viewModel.checkEmptyField(requireContext()))
+            }
             true
         }
 
@@ -132,7 +137,8 @@ class AddNewDrink : Fragment(), BottomDialogListener {
             )
         }
 
-        nameDrink.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, _ ->
+        nameDrink.setOnEditorActionListener(TextView.OnEditorActionListener { text, actionId, _ ->
+            viewModel.nameDrink = text.text.toString()
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 hideKeyboard()
                 return@OnEditorActionListener true
@@ -148,10 +154,12 @@ class AddNewDrink : Fragment(), BottomDialogListener {
 
         rangeDegree.addMaxRangeChangeListener {
             maxValueDegree.text = it.format1f()
+            getDegree()
         }
 
         rangeDegree.addMinRangeChangeListener {
             minValueDegree.text = it.format1f()
+            getDegree()
         }
 
         if (arguments != null) {
@@ -167,7 +175,10 @@ class AddNewDrink : Fragment(), BottomDialogListener {
     private fun setArguments() {
         val drink: Drink? = requireArguments().getParcelable("editDrink")
         viewModel.id = drink?.id.toString()
-        viewModel.volumeList = drink?.volume as ArrayList<String?>
+        viewModel.photo = drink?.photo.toString()
+        viewModel.nameDrink = drink?.drink.toString()
+        viewModel.degreeList = drink?.degree as ArrayList<String?>
+        viewModel.volumeList = drink.volume as ArrayList<String?>
         viewModel.icon = drink.icon
 
         if (drink.photo != "") {

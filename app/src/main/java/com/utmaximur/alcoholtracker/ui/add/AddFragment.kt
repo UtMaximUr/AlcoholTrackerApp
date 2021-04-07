@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -29,6 +28,7 @@ import com.utmaximur.alcoholtracker.ui.add.adapter.DrinkViewPagerAdapter
 import com.utmaximur.alcoholtracker.ui.add.adapter.DrinkViewPagerAdapter.AddDrinkListener
 import com.utmaximur.alcoholtracker.ui.calculator.CalculatorFragment
 import com.utmaximur.alcoholtracker.ui.calculator.CalculatorFragment.CalculatorListener
+import com.utmaximur.alcoholtracker.ui.dialog.delete.DeleteDialogFragment
 import com.utmaximur.alcoholtracker.util.*
 import java.util.*
 
@@ -72,7 +72,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val view: View = inflater.inflate(R.layout.fragment_add, container, false)
         injectDagger()
         initViewModel()
@@ -123,7 +123,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         }
 
         toolbar.setOnMenuItemClickListener {
-            if (viewModel.checkIsEmptyField(getPrice(), getDate())) {
+            if (drinksPager.currentItem != getDrinksList().size) {
                 viewModel.onSaveButtonClick(
                     AlcoholTrack(
                         getIdDrink(),
@@ -136,11 +136,9 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
                         getIcon()
                     )
                 )
-                addFragmentListener?.closeFragment()
-                addFragmentListener!!.onShowNavigationBar()
-            } else {
-                showWarningEmptyField()
             }
+            addFragmentListener?.closeFragment()
+            addFragmentListener!!.onShowNavigationBar()
             true
         }
 
@@ -244,7 +242,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         degreeNumberPicker.displayedValues = null
         degreeNumberPicker.minValue = 0
         degreeNumberPicker.value = 1
-        degreeNumberPicker.maxValue = drink.degree.size - 1
+        degreeNumberPicker.maxValue = drink.degree.indexOf(drink.degree.last())
         degreeNumberPicker.displayedValues = drink.degree.toTypedArray()
         setDegreeList(drink.degree)
     }
@@ -254,7 +252,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         volumeNumberPicker.displayedValues = null
         volumeNumberPicker.minValue = 0
         volumeNumberPicker.value = 1
-        volumeNumberPicker.maxValue = drink.volume.size - 1
+        volumeNumberPicker.maxValue = drink.volume.indexOf(drink.volume.last())
         volumeNumberPicker.displayedValues =
             drink.volume.setVolumeUnit(requireContext()).toTypedArray()
         setVolume(drink.volume)
@@ -268,7 +266,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         viewModel.date = alcoholTrack?.date!!
 
         viewModel.getAllDrink().observe(viewLifecycleOwner, { list ->
-            list.forEach {drink ->
+            list.forEach { drink ->
                 if (drink.drink == alcoholTrack.drink) {
                     val position = list.indexOf(drink)
                     // set position view pager
@@ -400,16 +398,6 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         return viewModel.drinks
     }
 
-    private fun showWarningEmptyField() {
-        if (viewModel.price == 0.0f) {
-            priceEditText.hint = getText(R.string.enter_price)
-        } else if (viewModel.date == 0L) {
-            val buttonAnimation =
-                AnimationUtils.loadAnimation(context, R.anim.button_animation)
-            addDateButton.startAnimation(buttonAnimation)
-        }
-    }
-
     override fun getValueCalculating(value: String) {
         priceEditText.setText(value)
         if (value != "") {
@@ -428,7 +416,13 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
     }
 
     override fun deleteDrink(drink: Drink) {
-        viewModel.deleteDrink(drink)
+        val deleteFragment = DeleteDialogFragment()
+        deleteFragment.setListener(object : DeleteDialogFragment.DeleteDialogListener {
+            override fun deleteDrink() {
+                viewModel.deleteDrink(drink)
+            }
+        })
+        deleteFragment.show(requireActivity().supportFragmentManager, "deleteDialog")
     }
 
     override fun editDrink(drink: Drink) {

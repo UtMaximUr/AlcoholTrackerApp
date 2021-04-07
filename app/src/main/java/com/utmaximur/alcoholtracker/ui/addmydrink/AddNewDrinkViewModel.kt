@@ -17,9 +17,11 @@ class AddNewDrinkViewModel(
 ) : ViewModel() {
 
     var id: String = ""
-    var volumeList: ArrayList<String?> = ArrayList()
-    var icon: String = ""
     var photo: String = ""
+    var nameDrink: String = ""
+    var icon: String = ""
+    var degreeList: ArrayList<String?> = ArrayList()
+    var volumeList: ArrayList<String?> = ArrayList()
 
     fun onSaveButtonClick(drink: Drink) {
         if (id == "") {
@@ -42,12 +44,36 @@ class AddNewDrinkViewModel(
     private fun getDrinkId(): String = UUID.randomUUID().toString()
 
     fun getDoubleDegree(degree: Double, size: Int): List<String?> {
-        val degrees: Array<String?> = arrayOfNulls(size * 2)
-        var double = degree - 0.5
+        degreeList.clear()
+        var double = degree
         for (i in 0 until size * 2) {
+            degreeList.add(double.formatDegree1f())
             double += 0.5
-            degrees[i] = double.formatDegree1f()
         }
-        return degrees.toList()
+        if (size == 0) {
+            degreeList.add(double.formatDegree1f())
+        }
+        return degreeList
+    }
+
+    fun checkEmptyField(context: Context): String {
+        when {
+            photo.isEmpty() -> {
+                return context.getString(R.string.empty_field_photo)
+            }
+            nameDrink.isEmpty() -> {
+                return context.getString(R.string.empty_field_name)
+            }
+            icon.isEmpty() -> {
+                return context.getString(R.string.empty_field_icon)
+            }
+            degreeList.isEmpty() -> {
+                return context.getString(R.string.empty_field_degree)
+            }
+            volumeList.isEmpty() -> {
+                return context.getString(R.string.empty_field_volume)
+            }
+        }
+        return ""
     }
 }

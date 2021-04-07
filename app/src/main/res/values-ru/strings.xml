@@ -48,6 +48,11 @@
     <string name="bottom_sheet_option_gallery">Загрузить из галлереи</string>
     <string name="bottom_sheet_option_heading">Добавить фотографию</string>
     <string name="bottom_sheet_option_remove_photo">Удалить фотографию</string>
+    <string name="empty_field_photo">Сделайте фотографию или выберите из галлереи</string>
+    <string name="empty_field_name">Введите название напитка</string>
+    <string name="empty_field_icon">Выберите иконку напитка</string>
+    <string name="empty_field_degree">Выберите крепость напитка</string>
+    <string name="empty_field_volume">Выберите объем напитка</string>
 
     <!--dialog select date-->
     <string name="dialog_select_date_title">Использовать выбранную дату для добавления напитка?</string>
