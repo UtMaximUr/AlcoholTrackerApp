@@ -50,7 +50,7 @@ fun Context.getDisplayWidth(): Int {
     }
 }
 
-fun String.getIdRaw(context: Context): Int? {
+fun String.getIdRaw(context: Context): Int {
     return context.resources.getIdentifier(
         this,
         "raw",
@@ -58,7 +58,7 @@ fun String.getIdRaw(context: Context): Int? {
     )
 }
 
-fun String.getResString(context: Context): String? {
+fun String.getResString(context: Context): String {
     val resIdString =
         context.resources.getIdentifier(
             this,
@@ -87,15 +87,15 @@ fun List<String?>.setVolumeUnit(context: Context): List<String?> {
     return volumeListUnit
 }
 
-fun Float.format1f(): String? {
+fun Float.format1f(): String {
     return String.format("%.1f", this)
 }
 
-fun Double.formatDegree1f(): String? {
+fun Double.formatDegree1f(): String {
     return String.format("%.1f", this).replace(",", ".")
 }
 
-fun Long.formatDate(context: Context): String? {
+fun Long.formatDate(context: Context): String {
     val sdf = SimpleDateFormat(
         context.resources.getString(R.string.date_format_pattern),
         Locale.getDefault()
@@ -103,7 +103,7 @@ fun Long.formatDate(context: Context): String? {
     return String.format("%s", sdf.format(Date(this)))
 }
 
-fun String.formatVolume(context: Context, quantity: Int): String? {
+fun String.formatVolume(context: Context, quantity: Int): String {
     return if (this.contains(".")) {
         if (this.isDigitsOnly()) {
             String.format(context.getString(R.string.unit_l), this.toDouble() * quantity)
@@ -149,7 +149,7 @@ fun View.snackBar(message: String){
 /**
  *  converts old data into new data on migration
  */
-fun AlcoholTrack.convertMigrationModel(context: Context): AlcoholTrack? {
+fun AlcoholTrack.convertMigrationModel(context: Context): AlcoholTrack {
 
     val convertDegree = this.degree.replace(",", ".").toDouble().formatDegree1f()
     val convertVolume = this.volume.replace(context.getString(R.string.only_number_regex).toRegex(), "").trim()
@@ -184,7 +184,7 @@ fun AlcoholTrack.convertMigrationModel(context: Context): AlcoholTrack? {
             icon = "ic_cognac"
         }
         context.getString(R.string.liqueur) -> {
-            drink = "liquor"
+            drink = "liqueur"
             icon = "ic_liqueur"
         }
         context.getString(R.string.shots) -> {
@@ -216,8 +216,6 @@ fun AlcoholTrack.convertMigrationModel(context: Context): AlcoholTrack? {
             icon = "ic_wine"
         }
     }
-    return convertDegree?.let {
-        AlcoholTrack(this.id, drink, convertVolume, this.quantity,
-            it, this.price, this.date, icon)
-    }
+    return AlcoholTrack(this.id, drink, convertVolume, this.quantity,
+        convertDegree, this.price, this.date, icon)
 }
