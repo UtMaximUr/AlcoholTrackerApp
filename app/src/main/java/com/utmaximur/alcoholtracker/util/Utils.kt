@@ -151,6 +151,8 @@ fun View.snackBar(message: String){
  */
 fun AlcoholTrack.convertMigrationModel(context: Context): AlcoholTrack {
 
+    var drink = this.drink
+    var icon = this.icon
     val convertDegree = this.degree.replace(",", ".").toDouble().formatDegree1f()
     val convertVolume = this.volume.replace(context.getString(R.string.only_number_regex).toRegex(), "").trim()
 
@@ -160,7 +162,7 @@ fun AlcoholTrack.convertMigrationModel(context: Context): AlcoholTrack {
             icon = "ic_absent"
         }
         context.getString(R.string.beer) -> {
-            this.drink = "beer"
+            drink = "beer"
             icon = "ic_beer"
         }
         context.getString(R.string.brandy) -> {
