@@ -54,7 +54,7 @@ class CalendarFragment : Fragment(),
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val view: View = inflater.inflate(R.layout.fragment_calendar, container, false)
 
         injectDagger()

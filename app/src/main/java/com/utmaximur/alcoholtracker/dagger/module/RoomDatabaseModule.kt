@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.res.AssetManager
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
@@ -26,6 +27,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.io.IOException
 import javax.inject.Singleton
+
 
 @Module
 class RoomDatabaseModule(private var application: Application) {
@@ -157,21 +159,21 @@ class RoomDatabaseModule(private var application: Application) {
     }
 
     private fun updateTrackDb() {
-        val list = alcoholTrackDatabase.getTrackDao().getTracks()
         var coroutineScope: Job?
-        Handler(Looper.getMainLooper()).post {
-            list.observeForever { newData ->
-                newData.forEach {
-                    it.convertMigrationModel(application)?.let { it1 ->
-                        coroutineScope = CoroutineScope(Dispatchers.IO).launch {
-                            alcoholTrackDatabase.getTrackDao().insertTrack(
-                                it1
-                            )
-                        }
-                        coroutineScope?.cancel()
+        val handler = Handler(Looper.getMainLooper())
+        val runnable = Runnable {
+            alcoholTrackDatabase.getTrackDao().getTracks().observeForever { alcoholTrackList ->
+                coroutineScope = CoroutineScope(Dispatchers.IO).launch {
+                    alcoholTrackList.forEach { alcoholTrack ->
+                        alcoholTrackDatabase.getTrackDao().updateTrack(
+                            alcoholTrack.convertMigrationModel(application)
+                        )
+                        Log.e("fix_migration", alcoholTrack.drink)
                     }
                 }
+                coroutineScope?.cancel()
             }
         }
+        handler.post(runnable)
     }
 }
