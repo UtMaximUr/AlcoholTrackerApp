@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Alkohol Tracker</string>
+
+    <!--menu-->
+    <string name="add">Getränk hinzufügen</string>
+    <string name="calendar">Kalender</string>
+    <string name="statistic">Statistiken</string>
+    <string name="settings">die Einstellungen</string>
+
+    <!--calendar-->
+    <string name="calendar_add_press">Fügen Sie ein Getränk hinzu, um loszulegen</string>
+    <string name="calendar_empty">An diesem Tag wurde kein einziges Gramm getrunken! :)</string>
+    <string name="calendar_date">Datum</string>
+
+    <!--add-->
+    <string name="add_drink_title">Getränk hinzufügen</string>
+    <string name="add_drink">Trinken</string>
+    <string name="add_volume">Volumen</string>
+    <string name="add_quantity">Menge</string>
+    <string name="add_degree">Grad</string>
+    <string name="add_price">Kosten für ein Getränk</string>
+    <string name="add_date">Datum auswählen</string>
+    <string name="add_today">Heute</string>
+    <string name="add_total_litres">Menge</string>
+    <string name="add_total_money">Gesamt</string>
+    <string name="add_currency">EUR</string>
+    <string name="add_save">speichern</string>
+    <string name="unit_ml">%s ml</string>
+    <string name="unit_l">%s l</string>
+
+
+    <!--add new drink-->
+    <string name="add_new_drink">Getränk kreieren</string>
+
+    <!--edit-->
+    <string name="edit_drink_title">Getränk bearbeiten</string>
+
+    <!--create drink-->
+    <string name="create_drink_title">Erstellen Sie ein Getränk</string>
+    <string name="create_drink_hint">Geben Sie den Titel ein</string>
+    <string name="dialog_create_drink_add">Icon Drink hinzufügen</string>
+    <string name="select_icon">Wählen Sie ein Symbol</string>
+    <string name="dialog_create_drink_add_degree">Fügen Sie die Stärke des Getränks hinzu</string>
+    <string name="dialog_create_drink_add_volume">Getränkevolumen hinzufügen</string>
+    <string name="bottom_sheet_option_camera">Kamera verwenden</string>
+    <string name="bottom_sheet_option_gallery">Hochladen aus der Galerie</string>
+    <string name="bottom_sheet_option_heading">Foto hinzufügen</string>
+    <string name="bottom_sheet_option_remove_photo">Foto entfernen</string>
+    <string name="empty_field_photo">Machen Sie ein Foto oder wählen Sie aus der Galerie</string>
+    <string name="empty_field_name">Geben Sie den Namen des Getränks ein</string>
+    <string name="empty_field_icon">Wählen Sie das Getränkesymbol</string>
+    <string name="empty_field_degree">Wählen Sie die Stärke des Getränks</string>
+    <string name="empty_field_volume">Wählen Sie die Lautstärke des Getränks</string>
+
+    <!--dialog select date-->
+    <string name="dialog_select_date_title">Verwenden Sie das ausgewählte Datum, um ein Getränk hinzuzufügen?</string>
+    <string name="dialog_select_date_ok">OK</string>
+    <string name="dialog_select_date_no">NEIN</string>
+
+    <!--dialog delete-->
+    <string name="dialog_delete_title">Möchten Sie den Eintrag wirklich löschen?</string>
+
+    <!--dialog add volume-->
+    <string name="dialog_add_volume_title">Wählen Sie die Lautstärke des Getränks</string>
+    <string name="dialog_add_volume_ok">OK</string>
+    <string name="dialog_add_volume_cancel">Abbrechen</string>
+
+
+    <!--settings-->
+    <string name="privacy_policy">Datenschutzpolitik</string>
+    <string name="terms_of_use">Abonnementsbedingungen</string>
+    <string name="settings_version">Ausführung</string>
+    <string name="rate_app">Bewertungs App</string>
+    <string name="default_theme">Verwenden Sie das Systemthema</string>
+
+    <string-array name="theme_array">
+        <item>Lichtthema</item>
+        <item>Dunkles Thema</item>
+
+    </string-array>
+
+    <!--statistic-->
+    <string name="statistic_week_days">Woche</string>
+    <string name="statistic_month_days">Monat</string>
+    <string name="statistic_year_days">Jahr</string>
+    <string name="statistic_count_days">Ich habe% s von% d Tagen getrunken</string>
+    <string name="statistic_drinks">Die Getränke, die ich getrunken habe</string>
+    <string name="statistic_spent">Ich verbrachte in einem</string>
+
+    <!--content description-->
+    <string name="cd_icon_app">Anwendungssymbol</string>
+    <string name="cd_edit_button">Bearbeiten</string>
+    <string name="cd_delete_button">Löschen</string>
+    <string name="cd_show_panel">Geh nach links</string>
+    <string name="cd_image_drink">Bild eines Getränks</string>
+    <string name="cd_choice_theme">Ausgewähltes Thema</string>
+    <string name="cd_icon_drink">Ikone eines Getränks</string>
+    <string name="cd_take_photo">Foto machen</string>
+    <string name="cd_save_drink">Getränk sparen</string>
+
+    <!--regex-->
+
+    <plurals name="plurals_day">
+        <item quantity="one">%1$d Tag</item>
+        <item quantity="other">%1$d Tage</item>
+    </plurals>
+
+    <string-array name="statistic_period_array">
+        <item>Woche</item>
+        <item>Monat</item>
+        <item>Jahr</item>
+
+    </string-array>
+
+    <!--enum-->
+    <string name="absent">Absinth</string>
+    <string name="beer">Bier</string>
+    <string name="brandy">Brandy</string>
+    <string name="champagne">Champagner</string>
+    <string name="cider">Apfelwein</string>
+    <string name="cocktail">Cocktail</string>
+    <string name="cognac">Cognac</string>
+    <string name="liqueur">Alkohol</string>
+    <string name="shots">Schüsse</string>
+    <string name="tequila">Tequila</string>
+    <string name="vodka">Wodka</string>
+    <string name="whiskey">Whiskey</string>
+    <string name="rum">Rum</string>
+    <string name="gin">Gin</string>
+    <string name="wine">Wein</string>
+
+
+    <string name="material_calendar_monday">Mon</string>
+    <string name="material_calendar_tuesday">Die</string>
+    <string name="material_calendar_wednesday">Mit</string>
+    <string name="material_calendar_thursday">Don</string>
+    <string name="material_calendar_friday">Fre</string>
+    <string name="material_calendar_saturday">Sam</string>
+    <string name="material_calendar_sunday">Son</string>
+
+    <array name="material_calendar_months_array">
+        <item>Januar</item>
+        <item>Februar</item>
+        <item>März</item>
+        <item>April</item>
+        <item>Mai</item>
+        <item>Juni</item>
+        <item>Juli</item>
+        <item>August</item>
+        <item>September</item>
+        <item>Oktober</item>
+        <item>November</item>
+        <item>Dezember</item>
+    </array>
+
+</resources>

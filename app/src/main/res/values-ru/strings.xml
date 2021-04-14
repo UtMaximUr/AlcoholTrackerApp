@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">Трекер Алкоголя</string>
 
     <!--menu-->
@@ -14,7 +14,6 @@
 
     <!--add-->
     <string name="add_drink_title">Добавить напиток</string>
-    <string name="date_format_pattern">dd/MM/yyyy</string>
     <string name="add_drink">Напиток</string>
     <string name="add_volume">Объем</string>
     <string name="add_quantity">Количество</string>
@@ -24,10 +23,8 @@
     <string name="add_today">Сегодня</string>
     <string name="add_total_litres">Количество</string>
     <string name="add_total_money">Итого</string>
-    <string name="add_empty">0</string>
     <string name="add_currency">RUR</string>
     <string name="add_save">Сохранить</string>
-    <string name="enter_price">!Введите стоимость</string>
     <string name="unit_ml">%s мл</string>
     <string name="unit_l">%s л</string>
 
@@ -86,10 +83,8 @@
     <string name="statistic_month_days">Месяц</string>
     <string name="statistic_year_days">Год</string>
     <string name="statistic_count_days">Я пил %s из %d дней</string>
-    <string name="statistic_count_drink">x %d</string>
     <string name="statistic_drinks">Напитки выпитые мною</string>
     <string name="statistic_spent">Мною потрачено за</string>
-    <string name="statistic_drink_count">x 0</string>
 
     <!--content description-->
     <string name="cd_icon_app">Иконка приложения</string>
@@ -103,8 +98,6 @@
     <string name="cd_save_drink">Сохранить напиток</string>
 
     <!--regex-->
-    <string name="only_number_regex" tools:ignore="TypographyDashes">[^0-9, .]</string>
-    <string name="only_text_regex">[^A–z, А-я]</string>
 
     <plurals name="plurals_day">
         <item quantity="one">%1$d день</item>
