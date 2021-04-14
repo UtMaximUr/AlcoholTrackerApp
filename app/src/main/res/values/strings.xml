@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">Трекер Алкоголя</string>
+    <string name="app_name">Alcohol Tracker</string>
 
     <!--menu-->
     <string name="add">Add drink</string>
@@ -15,7 +15,7 @@
 
     <!--add-->
     <string name="add_drink_title">Add drink</string>
-    <string name="date_format_pattern">dd/MM/yyyy</string>
+    <string name="date_format_pattern" translatable="false">dd/MM/yyyy</string>
     <string name="add_drink">Drink</string>
     <string name="add_volume">Volume</string>
     <string name="add_quantity">Quantity</string>
@@ -25,10 +25,9 @@
     <string name="add_today">Today</string>
     <string name="add_total_litres">Quantity</string>
     <string name="add_total_money">Total</string>
-    <string name="add_empty">0</string>
+    <string name="add_empty" translatable="false">0</string>
     <string name="add_currency">USD</string>
     <string name="add_save">Save</string>
-    <string name="enter_price">!Enter the cost</string>
     <string name="add_degree_s" translatable="false">°</string>
     <string name="unit_ml">%s ml</string>
     <string name="unit_l">%s l</string>
@@ -89,10 +88,10 @@
     <string name="statistic_month_days">Month</string>
     <string name="statistic_year_days">Year</string>
     <string name="statistic_count_days">I drank %s from %d days</string>
-    <string name="statistic_count_drink">x %d</string>
+    <string name="statistic_count_drink" translatable="false">x %d</string>
     <string name="statistic_drinks">The drinks I drank</string>
     <string name="statistic_spent">I spent in a</string>
-    <string name="statistic_drink_count">x 0</string>
+    <string name="statistic_drink_count" translatable="false">x 0</string>
 
     <!--content description-->
     <string name="cd_icon_app">Application Icon</string>
@@ -106,8 +105,8 @@
     <string name="cd_save_drink">Save drink</string>
 
     <!--regex-->
-    <string name="only_number_regex" tools:ignore="TypographyDashes">[^0-9, .]</string>
-    <string name="only_text_regex">[^A–z, А-я]</string>
+    <string name="only_number_regex" tools:ignore="TypographyDashes" translatable="false">[^0-9, .]</string>
+    <string name="only_text_regex" translatable="false">[^A–z, А-я]</string>
     <string name="divide_value" translatable="false"> - </string>
 
     <plurals name="plurals_day">
