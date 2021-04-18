@@ -40,7 +40,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:id="@+id/linearLayout"
+            android:id="@+id/drink_linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:fontFamily="@font/roboto_condensed_regular"
-                android:textColor="@android:color/white"
+                android:textColor="@color/text_color_white"
                 android:textSize="18sp"
                 tools:text="Beer" />
 
@@ -70,7 +70,7 @@
                     android:layout_marginStart="8dp"
                     android:fontFamily="@font/roboto_condensed_regular"
                     android:text="@string/add_volume"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@color/text_color_white" />
 
 
                 <TextView
@@ -79,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:fontFamily="@font/roboto_condensed_regular"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/text_color_white"
                     tools:text="0.5" />
 
                 <TextView
@@ -88,7 +88,7 @@
                     android:layout_marginStart="8dp"
                     android:fontFamily="@font/roboto_condensed_regular"
                     android:text="@string/add_degree"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@color/text_color_white" />
 
                 <TextView
                     android:id="@+id/item_degree_text"
@@ -96,7 +96,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:fontFamily="@font/roboto_condensed_regular"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/text_color_white"
                     tools:text="4.4%" />
 
                 <TextView
@@ -105,7 +105,7 @@
                     android:layout_marginStart="8dp"
                     android:fontFamily="@font/roboto_condensed_regular"
                     android:text="@string/add_currency"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@color/text_color_white" />
 
                 <TextView
                     android:id="@+id/item_price_text"
@@ -113,18 +113,42 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:fontFamily="@font/roboto_condensed_regular"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/text_color_white"
                     tools:text="9.99" />
 
             </LinearLayout>
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/event_linearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/event_text"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/dp_16"
+                android:gravity="center"
+                android:fontFamily="@font/roboto_condensed_regular"
+                android:textSize="18sp"
+                tools:text="event"
+                android:textColor="@color/text_color_white" />
+
+        </LinearLayout>
+
+
         <ImageButton
             android:id="@+id/event_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
+            android:padding="@dimen/dp_8"
             android:background="@drawable/background_transparent"
             android:clickable="true"
             android:focusable="true"
