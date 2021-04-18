@@ -18,10 +18,7 @@ import com.utmaximur.alcoholtracker.dagger.factory.CalendarViewModelFactory
 import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
 import com.utmaximur.alcoholtracker.ui.calendar.adapter.DrinksListAdapter
 import com.utmaximur.alcoholtracker.ui.dialog.adddrink.AddDrinkDialogFragment
-import com.utmaximur.alcoholtracker.util.alphaView
-import com.utmaximur.alcoholtracker.util.getIdRaw
-import com.utmaximur.alcoholtracker.util.toInvisible
-import com.utmaximur.alcoholtracker.util.toVisible
+import com.utmaximur.alcoholtracker.util.*
 import java.util.*
 import javax.inject.Inject
 
@@ -165,16 +162,16 @@ class CalendarFragment : Fragment(),
                 requireActivity().supportFragmentManager
             )
             alcoholTrackList.adapter = alcoholTrackListAdapter
-            alcoholTrackList.alphaView(requireContext())
+            alcoholTrackList.alphaView()
             if (alcoholTrack.isNotEmpty()) {
-                emptyDrinkListText.toInvisible()
+                emptyDrinkListText.toGone()
             } else {
                 if (list.isEmpty()) {
                     addToStartText.toVisible()
-                    addToStartText.alphaView(requireContext())
+                    addToStartText.alphaView()
                 } else {
                     emptyDrinkListText.toVisible()
-                    emptyDrinkListText.alphaView(requireContext())
+                    emptyDrinkListText.alphaView()
                 }
             }
         })
@@ -191,7 +188,7 @@ class CalendarFragment : Fragment(),
                 events.add(
                     EventDay(
                         calendar,
-                        it.icon.getIdRaw(requireContext())!!
+                        it.icon.getIdRaw(requireContext())
                     )
                 )
             }

@@ -30,8 +30,18 @@ fun Int.dpToPx(): Int {
     return (this * density).roundToInt()
 }
 
-fun View.alphaView(context: Context) {
-    val animation: Animation = AnimationUtils.loadAnimation(context, R.anim.alpha)
+fun View.alphaView() {
+    val animation: Animation = AnimationUtils.loadAnimation(this.context, R.anim.alpha_1000)
+    this.startAnimation(animation)
+}
+
+fun View.alphaViewIn() {
+    val animation: Animation = AnimationUtils.loadAnimation(this.context, R.anim.alpha_in)
+    this.startAnimation(animation)
+}
+
+fun View.alphaViewOut() {
+    val animation: Animation = AnimationUtils.loadAnimation(this.context, R.anim.alpha_out)
     this.startAnimation(animation)
 }
 
@@ -128,6 +138,7 @@ fun String.formatVolume(context: Context, quantity: Int): String {
 fun View.hideKeyboard() {
     (this.context.getSystemService(Service.INPUT_METHOD_SERVICE) as? InputMethodManager)
         ?.hideSoftInputFromWindow(this.windowToken, 0)
+    this.clearFocus()
 }
 
 fun View.toVisible() {
@@ -139,7 +150,7 @@ fun View.toGone() {
 }
 
 fun View.toInvisible() {
-    this.visibility = View.GONE
+    this.visibility = View.INVISIBLE
 }
 
 fun View.snackBar(message: String) {
@@ -222,7 +233,14 @@ fun AlcoholTrack.convertMigrationModel(context: Context): AlcoholTrack {
         }
     }
     return AlcoholTrack(
-        this.id, drink, convertVolume, this.quantity,
-        convertDegree, this.price, this.date, icon
+        this.id,
+        drink,
+        convertVolume,
+        this.quantity,
+        convertDegree,
+        this.event,
+        this.price,
+        this.date,
+        icon
     )
 }

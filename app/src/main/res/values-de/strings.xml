@@ -157,5 +157,6 @@
     <string name="update_later">Später</string>
     <string name="update_restart">Jetzt</string>
     <string name="update_title">Der Download des Updates ist abgeschlossen. Aktualisieren?</string>
+    <string name="add_event">Veranstaltung</string>
 
 </resources>

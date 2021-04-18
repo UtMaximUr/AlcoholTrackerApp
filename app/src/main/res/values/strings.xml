@@ -184,6 +184,7 @@
     <string name="update_restart">Now</string>
     <string name="update_later">Later</string>
     <string name="check_for_updates">Check for updates</string>
+    <string name="add_event">Event</string>
 
     <string-array name="volume_array">
 
