@@ -157,5 +157,6 @@
     <string name="update_restart">Сейчас</string>
     <string name="update_later">Позже</string>
     <string name="check_for_updates">Проверить обновления</string>
+    <string name="add_event">Событие</string>
 
 </resources>
