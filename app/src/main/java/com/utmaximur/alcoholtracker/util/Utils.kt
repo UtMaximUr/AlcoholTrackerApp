@@ -140,7 +140,7 @@ fun View.toGone() {
 }
 
 fun View.toInvisible() {
-    this.visibility = View.GONE
+    this.visibility = View.INVISIBLE
 }
 
 fun View.snackBar(message: String) {
