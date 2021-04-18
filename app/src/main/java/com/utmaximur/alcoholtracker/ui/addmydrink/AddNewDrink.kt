@@ -169,7 +169,6 @@ class AddNewDrink : Fragment(), BottomDialogListener {
 
     private fun hideKeyboard() {
         nameDrink.hideKeyboard()
-        nameDrink.clearFocus()
     }
 
     private fun setArguments() {
@@ -185,7 +184,7 @@ class AddNewDrink : Fragment(), BottomDialogListener {
             Glide.with(requireContext()).load(drink.photo).into(photo)
         }
         nameDrink.setText(drink.drink)
-        setIconAdapter(drink.icon.getIdRaw(requireContext())?.let { Icon(it) })
+        setIconAdapter(drink.icon.getIdRaw(requireContext()).let { Icon(it) })
         rangeDegree.setCurrentRangeMin(drink.degree.first()?.toDouble()?.toFloat()!!)
         rangeDegree.setCurrentRangeMax(drink.degree.last()?.toDouble()?.toFloat()!!)
         minValueDegree.text = drink.degree.first()
