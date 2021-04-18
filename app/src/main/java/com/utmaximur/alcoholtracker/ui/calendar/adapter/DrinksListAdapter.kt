@@ -11,6 +11,7 @@ import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
 import com.utmaximur.alcoholtracker.ui.dialog.delete.DeleteDialogFragment
 import com.utmaximur.alcoholtracker.util.formatVolume
 import com.utmaximur.alcoholtracker.util.getResString
+import com.utmaximur.alcoholtracker.util.toGone
 
 class DrinksListAdapter(
     private val alcoholTracks: MutableList<AlcoholTrack>,
@@ -34,6 +35,7 @@ class DrinksListAdapter(
         private var volumeText: TextView? = null
         private var degreeText: TextView? = null
         private var priceText: TextView? = null
+        private var eventButton: ImageButton? = null
         private var editButton: ImageButton? = null
         private var deleteButton: ImageButton? = null
 
@@ -42,6 +44,7 @@ class DrinksListAdapter(
             volumeText = itemView.findViewById(R.id.item_volume_text)
             degreeText = itemView.findViewById(R.id.item_degree_text)
             priceText = itemView.findViewById(R.id.item_price_text)
+            eventButton = itemView.findViewById(R.id.event_button)
             editButton = itemView.findViewById(R.id.edit_button)
             deleteButton = itemView.findViewById(R.id.delete_button)
         }
@@ -73,6 +76,10 @@ class DrinksListAdapter(
                     }
                 })
                 deleteFragment.show(supportFragmentManager, "deleteDialog")
+            }
+
+            if(alcoholTrack.event.isEmpty()) {
+                eventButton?.toGone()
             }
         }
     }
