@@ -128,6 +128,7 @@ fun String.formatVolume(context: Context, quantity: Int): String {
 fun View.hideKeyboard() {
     (this.context.getSystemService(Service.INPUT_METHOD_SERVICE) as? InputMethodManager)
         ?.hideSoftInputFromWindow(this.windowToken, 0)
+    this.clearFocus()
 }
 
 fun View.toVisible() {
