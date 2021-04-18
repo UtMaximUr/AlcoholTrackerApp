@@ -142,7 +142,7 @@ fun View.toInvisible() {
     this.visibility = View.GONE
 }
 
-fun View.snackBar(message: String){
+fun View.snackBar(message: String) {
     Snackbar.make(this, message, Snackbar.LENGTH_LONG).show()
 }
 
@@ -154,9 +154,12 @@ fun AlcoholTrack.convertMigrationModel(context: Context): AlcoholTrack {
     var drink = this.drink
     var icon = this.icon
     val convertDegree = this.degree.replace(",", ".").toDouble().formatDegree1f()
-    val convertVolume = this.volume.replace(context.getString(R.string.only_number_regex).toRegex(), "").trim()
+    val convertVolume = this.volume.replace(
+        context.getString(R.string.only_number_regex).toRegex(),
+        ""
+    ).trim()
 
-    when(this.drink) {
+    when (this.drink) {
         context.getString(R.string.absent) -> {
             drink = "absent"
             icon = "ic_absent"
@@ -218,6 +221,8 @@ fun AlcoholTrack.convertMigrationModel(context: Context): AlcoholTrack {
             icon = "ic_wine"
         }
     }
-    return AlcoholTrack(this.id, drink, convertVolume, this.quantity,
-        convertDegree, this.price, this.date, icon)
+    return AlcoholTrack(
+        this.id, drink, convertVolume, this.quantity,
+        convertDegree, this.price, this.date, icon
+    )
 }
