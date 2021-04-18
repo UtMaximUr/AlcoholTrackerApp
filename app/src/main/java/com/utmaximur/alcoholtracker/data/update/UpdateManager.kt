@@ -18,7 +18,7 @@ import com.utmaximur.alcoholtracker.util.UPDATE_REQUEST_CODE
 class UpdateManager {
 
     interface UpdateListener {
-        fun onShowSnackBar()
+        fun onShowUpdateDialog()
     }
 
     private var appUpdateManager: AppUpdateManager? = null
@@ -39,7 +39,7 @@ class UpdateManager {
         appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
             if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
                 if (updateListener != null) {
-                    updateListener?.onShowSnackBar()
+                    updateListener?.onShowUpdateDialog()
                 }
             } else if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
                 && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)
@@ -86,7 +86,7 @@ class UpdateManager {
         if (appUpdateManager == null) return
         appUpdateManager?.unregisterListener(listener)
         if (updateListener != null) {
-            updateListener?.onShowSnackBar()
+            updateListener?.onShowUpdateDialog()
         } else {
             appUpdateManager?.completeUpdate()
         }
