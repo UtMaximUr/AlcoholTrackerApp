@@ -402,7 +402,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
             val adapter = DrinkViewPagerAdapter(list, requireContext())
             adapter.setListener(this)
             drinksPager.adapter = adapter
-            drinksPager.alphaView(requireContext())
+            drinksPager.alphaView()
             if (arguments != null) {
                 if (arguments?.containsKey("selectDate")!! && arguments?.getLong("selectDate") != 0L) {
                     val selectDate = requireArguments().getLong("selectDate")

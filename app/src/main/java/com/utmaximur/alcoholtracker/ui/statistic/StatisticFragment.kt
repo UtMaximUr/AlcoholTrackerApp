@@ -66,7 +66,7 @@ class StatisticFragment :
     }
 
     private fun initUI() {
-        topDrinkList.alphaView(requireContext())
+        topDrinkList.alphaView()
         topDrinkList.layoutManager = GridLayoutManager(context, 4)
         viewModel.getAllDrink().observe(viewLifecycleOwner, { list ->
             topDrinkList.adapter = TopDrinkAdapter(viewModel.getDrinksDrunkByMe())

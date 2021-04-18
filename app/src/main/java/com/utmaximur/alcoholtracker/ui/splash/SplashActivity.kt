@@ -17,8 +17,8 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash_layout)
-        findViewById<ImageView>(R.id.splash_image).alphaView(this)
-        findViewById<TextView>(R.id.splash_text).alphaView(this)
+        findViewById<ImageView>(R.id.splash_image).alphaView()
+        findViewById<TextView>(R.id.splash_text).alphaView()
         navigateToMainScreen()
     }
 

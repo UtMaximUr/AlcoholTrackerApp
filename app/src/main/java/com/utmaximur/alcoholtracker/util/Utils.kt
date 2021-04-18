@@ -30,8 +30,18 @@ fun Int.dpToPx(): Int {
     return (this * density).roundToInt()
 }
 
-fun View.alphaView(context: Context) {
-    val animation: Animation = AnimationUtils.loadAnimation(context, R.anim.alpha)
+fun View.alphaView() {
+    val animation: Animation = AnimationUtils.loadAnimation(this.context, R.anim.alpha_1000)
+    this.startAnimation(animation)
+}
+
+fun View.alphaViewIn() {
+    val animation: Animation = AnimationUtils.loadAnimation(this.context, R.anim.alpha_in)
+    this.startAnimation(animation)
+}
+
+fun View.alphaViewOut() {
+    val animation: Animation = AnimationUtils.loadAnimation(this.context, R.anim.alpha_out)
     this.startAnimation(animation)
 }
 
