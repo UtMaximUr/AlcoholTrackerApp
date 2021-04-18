@@ -250,7 +250,7 @@
                         android:labelFor="@id/price_text"
                         android:textColorHint="@color/text_warning_color"
                         android:imeOptions="actionDone"
-                        android:inputType="textShortMessage"
+                        android:inputType="text"
                         android:textColor="@color/text_color"
                         tools:ignore="LabelFor"
                         android:importantForAutofill="no" />

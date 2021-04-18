@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.*
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -121,6 +122,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         findViewById(view)
 
         toolbar.setNavigationOnClickListener {
+            hideKeyboard()
             addFragmentListener?.closeFragment()
         }
 
@@ -154,6 +156,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
                 positionOffset: Float,
                 positionOffsetPixels: Int
             ) {
+                hideKeyboard()
             }
 
             override fun onPageSelected(position: Int) {
@@ -213,6 +216,13 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
             todayButton.toGone()
         }
 
+        eventEditText.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                hideKeyboard()
+                return@OnEditorActionListener true
+            }
+            true
+        })
 
         priceEditText.setOnClickListener {
             if (containerFragment.height == 0) {
@@ -238,6 +248,10 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
             view.layoutParams = params
         }
         animator.start()
+    }
+
+    private fun hideKeyboard(){
+        eventEditText.hideKeyboard()
     }
 
     private fun setDrinkDegreeArray(position: Int) {
