@@ -7,7 +7,6 @@ import android.content.Context
 import android.content.res.AssetManager
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
@@ -39,7 +38,7 @@ class RoomDatabaseModule(private var application: Application) {
     fun providesRoomDatabase(): AlcoholTrackDatabase {
         alcoholTrackDatabase =
             Room.databaseBuilder(application, AlcoholTrackDatabase::class.java, "app_database")
-                .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
                 .addCallback(databaseCallback)
                 .build()
         return alcoholTrackDatabase
@@ -150,6 +149,14 @@ class RoomDatabaseModule(private var application: Application) {
         }
     }
 
+    private val MIGRATION_3_4: Migration = object : Migration(3, 4) {
+        override fun migrate(database: SupportSQLiteDatabase) {
+            database.execSQL(
+                "ALTER TABLE track_database ADD COLUMN event TEXT NOT NULL DEFAULT ''"
+            )
+        }
+    }
+
     private fun updateDrinkDb() {
         CoroutineScope(Dispatchers.IO).launch {
             getDrinkList(application).forEach {
@@ -168,7 +175,6 @@ class RoomDatabaseModule(private var application: Application) {
                         alcoholTrackDatabase.getTrackDao().updateTrack(
                             alcoholTrack.convertMigrationModel(application)
                         )
-                        Log.e("fix_migration", alcoholTrack.drink)
                     }
                 }
                 coroutineScope?.cancel()
