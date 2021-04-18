@@ -50,6 +50,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
     private lateinit var viewModel: AddViewModel
 
     private lateinit var totalMoneyText: TextView
+    private lateinit var eventEditText: EditText
     private lateinit var priceEditText: EditText
 
     private lateinit var degreeNumberPicker: NumberPicker
@@ -103,6 +104,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         addDateButton = view.findViewById(R.id.add_date_button)
         todayButton = view.findViewById(R.id.today_button)
         totalMoneyText = view.findViewById(R.id.total_money_text)
+        eventEditText = view.findViewById(R.id.event_edit_text)
         priceEditText = view.findViewById(R.id.price_edit_text)
 
         degreeNumberPicker = view.findViewById(R.id.degree_number_picker)
@@ -131,6 +133,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
                         getVolume()!!,
                         getQuantity(),
                         getDegree(),
+                        getEvent(),
                         getPrice(),
                         getDate(),
                         getIcon()
@@ -286,6 +289,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
             }
         })
 
+        eventEditText.setText(alcoholTrack.event)
         priceEditText.setText(alcoholTrack.price.toString())
         addDateButton.text = alcoholTrack.date.formatDate(requireContext())
         todayButton.toGone()
@@ -340,6 +344,10 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
 
     private fun getDegree(): String {
         return degreeNumberPicker.displayedValues[degreeNumberPicker.value].toString()
+    }
+
+    private fun getEvent(): String {
+        return eventEditText.text.toString()
     }
 
     private fun getPrice(): Float {

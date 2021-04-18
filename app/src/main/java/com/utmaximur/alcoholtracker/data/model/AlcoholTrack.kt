@@ -15,6 +15,7 @@ data class AlcoholTrack(
     var volume: String,
     var quantity: Int,
     var degree: String,
+    var event: String,
     var price: Float,
     var date: Long,
     var icon: String

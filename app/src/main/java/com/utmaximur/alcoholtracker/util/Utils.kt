@@ -222,7 +222,14 @@ fun AlcoholTrack.convertMigrationModel(context: Context): AlcoholTrack {
         }
     }
     return AlcoholTrack(
-        this.id, drink, convertVolume, this.quantity,
-        convertDegree, this.price, this.date, icon
+        this.id,
+        drink,
+        convertVolume,
+        this.quantity,
+        convertDegree,
+        this.event,
+        this.price,
+        this.date,
+        icon
     )
 }
