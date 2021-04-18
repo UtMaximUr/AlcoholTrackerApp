@@ -30,10 +30,12 @@ import com.utmaximur.alcoholtracker.util.toVisible
 
 const val PREFS_NAME = "theme_prefs"
 const val KEY_THEME = "prefs.theme"
+const val KEY_UPDATE = "prefs.update"
 const val THEME_UNDEFINED = -1
 const val THEME_LIGHT = 0
 const val THEME_DARK = 1
 const val THEME_HEIGHT = 100
+const val UPDATE_UNDEFINED = false
 
 const val MARKET_APP = "market://details?id="
 const val HTTPS_APP = "https://play.google.com/store/apps/details?id="
@@ -48,6 +50,7 @@ class SettingsFragment : Fragment(), ThemeListAdapter.ThemeListener {
     private lateinit var rateUsButton: Button
     private lateinit var versionApp: TextView
     private lateinit var themeSwitch: SwitchMaterial
+    private lateinit var updateSwitch: SwitchMaterial
     private lateinit var themeLayout: LinearLayout
     private lateinit var themeList: RecyclerView
 
@@ -62,7 +65,7 @@ class SettingsFragment : Fragment(), ThemeListAdapter.ThemeListener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val view: View = inflater.inflate(R.layout.fragment_settings, container, false)
         initUi(view)
         return view
@@ -74,6 +77,7 @@ class SettingsFragment : Fragment(), ThemeListAdapter.ThemeListener {
         rateUsButton = view.findViewById(R.id.rate_app_button)
         versionApp = view.findViewById(R.id.version_app)
         themeSwitch = view.findViewById(R.id.theme_switch)
+        updateSwitch = view.findViewById(R.id.update_switch)
         themeLayout = view.findViewById(R.id.theme_layout)
         themeList = view.findViewById(R.id.theme_list)
     }
@@ -81,7 +85,7 @@ class SettingsFragment : Fragment(), ThemeListAdapter.ThemeListener {
 
     private fun initUi(view: View) {
         findViewById(view)
-        initTheme()
+        initSettings()
 
         privacyPolicyLayout.setOnClickListener {
             goToUrl(PRIVACY_POLICY)
@@ -111,6 +115,10 @@ class SettingsFragment : Fragment(), ThemeListAdapter.ThemeListener {
             }
         }
 
+        updateSwitch.setOnCheckedChangeListener { _, b ->
+            sharedPrefs?.edit()?.putBoolean(KEY_UPDATE, b)?.apply()
+        }
+
         versionApp.text = BuildConfig.VERSION_NAME
     }
 
@@ -124,7 +132,7 @@ class SettingsFragment : Fragment(), ThemeListAdapter.ThemeListener {
         animator.start()
     }
 
-    private fun initTheme() {
+    private fun initSettings() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             themeLayout.toVisible()
         } else {
@@ -147,6 +155,8 @@ class SettingsFragment : Fragment(), ThemeListAdapter.ThemeListener {
                 themeSwitch.isChecked = true
             }
         }
+
+        updateSwitch.isChecked = getSavedUpdate()!!
     }
 
     override fun saveTheme(theme: Int) {
@@ -165,6 +175,8 @@ class SettingsFragment : Fragment(), ThemeListAdapter.ThemeListener {
     }
 
     private fun getSavedTheme() = sharedPrefs?.getInt(KEY_THEME, THEME_UNDEFINED)
+
+    private fun getSavedUpdate() = sharedPrefs?.getBoolean(KEY_UPDATE, UPDATE_UNDEFINED)
 
     private fun getTheme(): Int {
         return if (resources.configuration.uiMode and

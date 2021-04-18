@@ -153,5 +153,9 @@
         <item>November</item>
         <item>Dezember</item>
     </array>
+    <string name="check_for_updates">Auf Updates prüfen</string>
+    <string name="update_later">Später</string>
+    <string name="update_restart">Jetzt</string>
+    <string name="update_title">Der Download des Updates ist abgeschlossen. Aktualisieren?</string>
 
 </resources>

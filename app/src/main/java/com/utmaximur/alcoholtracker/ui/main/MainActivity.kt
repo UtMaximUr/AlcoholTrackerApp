@@ -1,15 +1,23 @@
 package com.utmaximur.alcoholtracker.ui.main
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.utmaximur.alcoholtracker.R
+import com.utmaximur.alcoholtracker.data.update.UpdateManager
+import com.utmaximur.alcoholtracker.data.update.UpdateManager.Companion.getInstance
 import com.utmaximur.alcoholtracker.ui.add.AddFragment
 import com.utmaximur.alcoholtracker.ui.addmydrink.AddNewDrink
 import com.utmaximur.alcoholtracker.ui.calendar.CalendarFragment
+import com.utmaximur.alcoholtracker.ui.dialog.update.UpdateBottomDialogFragment
+import com.utmaximur.alcoholtracker.ui.settings.*
+import com.utmaximur.alcoholtracker.util.UPDATE_REQUEST_CODE
 import com.utmaximur.alcoholtracker.util.toGone
 import com.utmaximur.alcoholtracker.util.toVisible
 
@@ -17,7 +25,8 @@ import com.utmaximur.alcoholtracker.util.toVisible
 class MainActivity : AppCompatActivity(),
     AddFragment.AddFragmentListener,
     AddNewDrink.AddNewFragmentListener,
-    CalendarFragment.CalendarFragmentListener {
+    CalendarFragment.CalendarFragmentListener,
+    UpdateManager.UpdateListener {
 
     private lateinit var menu: BottomNavigationView
     private lateinit var navHostFragment: NavHostFragment
@@ -68,4 +77,35 @@ class MainActivity : AppCompatActivity(),
     override fun onShowEditNewDrinkFragment(bundle: Bundle) {
         navController.navigate(R.id.addNewDrinkFragment, bundle)
     }
+
+    override fun onStart() {
+        super.onStart()
+        if (getSavedUpdate()!!) {
+            getInstance().registerListener()
+            getInstance().attachUpdateListener(this)
+            getInstance().checkForUpdate(this)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, @Nullable data: Intent?) {
+        if (requestCode == UPDATE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                onShowUpdateDialog()
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    override fun onShowUpdateDialog() {
+        val updateBottomDialogFragment =
+            UpdateBottomDialogFragment()
+        updateBottomDialogFragment.show(
+            supportFragmentManager,
+            updateBottomDialogFragment.tag
+        )
+    }
+
+    private val sharedPrefs by lazy { getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE) }
+
+    private fun getSavedUpdate() = sharedPrefs?.getBoolean(KEY_UPDATE, UPDATE_UNDEFINED)
 }
