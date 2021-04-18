@@ -153,5 +153,9 @@
         <item>Ноябрь</item>
         <item>Декабрь</item>
     </array>
+    <string name="update_title">Загрузка обновления завершено. Обновить?</string>
+    <string name="update_restart">Сейчас</string>
+    <string name="update_later">Позже</string>
+    <string name="check_for_updates">Проверить обновления</string>
 
 </resources>

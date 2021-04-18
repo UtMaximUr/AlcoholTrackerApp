@@ -180,6 +180,10 @@
     <string name="calc_0" translatable="false">0</string>
     <string name="calc_equally" translatable="false">=</string>
     <string name="calc_plus" translatable="false">+</string>
+    <string name="update_title">The update download is complete. Update?</string>
+    <string name="update_restart">Now</string>
+    <string name="update_later">Later</string>
+    <string name="check_for_updates">Check for updates</string>
 
     <string-array name="volume_array">
 
