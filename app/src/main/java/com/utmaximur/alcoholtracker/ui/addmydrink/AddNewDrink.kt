@@ -15,7 +15,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.dagger.component.AlcoholTrackComponent
@@ -178,7 +177,7 @@ class AddNewDrink : Fragment(), BottomDialogListener {
         viewModel.icon = drink.icon
 
         if (drink.photo.isNotEmpty()) {
-            Glide.with(requireContext()).load(drink.photo).into(photo)
+            photo.setImagePath(drink.photo)
         }
         nameDrink.setText(drink.drink)
         setIconAdapter(drink.icon.getIdRaw(requireContext()).let { Icon(it) })
@@ -214,7 +213,7 @@ class AddNewDrink : Fragment(), BottomDialogListener {
     }
 
     override fun setImageViewPhoto(path: String) {
-        Glide.with(requireContext()).load(path).into(photo)
+        photo.setImagePath(path)
         photo.scaleType = ImageView.ScaleType.CENTER_CROP
         viewModel.photo = path
     }

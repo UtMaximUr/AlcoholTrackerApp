@@ -7,10 +7,9 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.data.model.Icon
-import com.utmaximur.alcoholtracker.util.dpToPx
+import com.utmaximur.alcoholtracker.util.setImage
 
 
 class SelectIconAdapter(private val onClick: (Icon) -> Unit, private var selectedIcon: Icon?) :
@@ -35,9 +34,7 @@ class SelectIconAdapter(private val onClick: (Icon) -> Unit, private var selecte
         fun bind(icon: Icon, onSelectedIcon: (Icon) -> Unit) {
             currentIcon = icon
             this.onSelectedIcon = onSelectedIcon
-            Glide.with(itemView).load(icon.icon).override(45.dpToPx(), 45.dpToPx()).into(
-                iconImageView
-            )
+            iconImageView.setImage(icon.icon)
         }
     }
 
