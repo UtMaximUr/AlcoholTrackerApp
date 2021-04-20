@@ -177,7 +177,7 @@ class AddNewDrink : Fragment(), BottomDialogListener {
         viewModel.volumeList = drink.volume as ArrayList<String?>
         viewModel.icon = drink.icon
 
-        if (drink.photo != "") {
+        if (drink.photo.isNotEmpty()) {
             Glide.with(requireContext()).load(drink.photo).into(photo)
         }
         nameDrink.setText(drink.drink)
