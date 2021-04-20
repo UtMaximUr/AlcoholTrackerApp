@@ -93,7 +93,7 @@ class CalendarFragment : Fragment(),
                 val dialogFragment = AddDrinkDialogFragment()
                 dialogFragment.setListener(this)
                 val manager = requireActivity().supportFragmentManager
-                dialogFragment.show(manager, "myDialog")
+                dialogFragment.show(manager, dialogFragment.tag)
             } else {
                 calendarFragmentListener?.showAddAlcoholTrackerFragment(null)
             }
@@ -127,7 +127,7 @@ class CalendarFragment : Fragment(),
     override fun onEdit(date: Long) {
         val bundle = Bundle()
         viewModel.getTrack(date).observe(viewLifecycleOwner, { track ->
-            bundle.putParcelable("drink", track)
+            bundle.putParcelable(DRINK, track)
             calendarFragmentListener?.showEditAlcoholTrackerFragment(bundle)
         })
     }
@@ -198,7 +198,7 @@ class CalendarFragment : Fragment(),
 
     override fun addDrinkDialogPositiveClick() {
         val bundle = Bundle()
-        bundle.putLong("selectDate", viewModel.getSelectDate())
+        bundle.putLong(SELECT_DAY, viewModel.getSelectDate())
         calendarFragmentListener?.showAddAlcoholTrackerFragment(bundle)
     }
 
