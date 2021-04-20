@@ -22,12 +22,9 @@ import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.dagger.component.AlcoholTrackComponent
 import com.utmaximur.alcoholtracker.dagger.factory.AddPhotoViewModelFactory
+import com.utmaximur.alcoholtracker.util.*
 import java.io.*
 import java.util.*
-
-
-const val REQUEST_PHOTO = 1000
-const val REQUEST_GALLERY = 1001
 
 class AddPhotoBottomDialogFragment : BottomSheetDialogFragment() {
 
@@ -52,7 +49,7 @@ class AddPhotoBottomDialogFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         val view: View = inflater.inflate(
             R.layout.dialog_bottom_sheet, container,
@@ -146,7 +143,7 @@ class AddPhotoBottomDialogFragment : BottomSheetDialogFragment() {
         when (requestCode) {
             REQUEST_PHOTO -> {
                 if (resultCode == Activity.RESULT_OK && data !== null) {
-                    val bitmap = data.extras?.get("data") as Bitmap
+                    val bitmap = data.extras?.get(DATA) as Bitmap
                     bottomDialogListener?.setImageViewPhoto(savePhoto(bitmap))
                     dialog?.dismiss()
                 }
@@ -175,7 +172,7 @@ class AddPhotoBottomDialogFragment : BottomSheetDialogFragment() {
     }
 
     private fun savePhoto(bitmap: Bitmap): String {
-        val file = File(requireContext().filesDir, Date().time.toString() + ".jpeg")
+        val file = File(requireContext().filesDir, Date().time.toString() + FORMAT_IMAGE)
         try {
             var fos: FileOutputStream? = null
             try {
@@ -208,7 +205,7 @@ class AddPhotoBottomDialogFragment : BottomSheetDialogFragment() {
             if (viewModel.photoFile != null) {
                 viewModel.photoURI = FileProvider.getUriForFile(
                     requireContext(),
-                    requireContext().packageName + ".fileprovider",
+                    requireContext().packageName + FILE_PROVIDER,
                     viewModel.photoFile!!
                 )
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, viewModel.photoURI)
