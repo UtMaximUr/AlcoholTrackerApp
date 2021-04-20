@@ -18,6 +18,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.utmaximur.alcoholtracker.BuildConfig
@@ -26,7 +27,7 @@ import com.utmaximur.alcoholtracker.ui.settings.adapter.ThemeListAdapter
 import com.utmaximur.alcoholtracker.util.*
 
 
-class SettingsFragment : Fragment(), ThemeListAdapter.ThemeListener {
+class SettingsFragment : Fragment() {
 
     private lateinit var privacyPolicyLayout: Button
     private lateinit var termsOfUseLayout: Button
@@ -36,6 +37,8 @@ class SettingsFragment : Fragment(), ThemeListAdapter.ThemeListener {
     private lateinit var updateSwitch: SwitchMaterial
     private lateinit var themeLayout: LinearLayout
     private lateinit var themeList: RecyclerView
+    private lateinit var themeListAdapter: ThemeListAdapter
+    private lateinit var themeConcatAdapter: ConcatAdapter
 
     private val sharedPrefs by lazy {
         activity?.getSharedPreferences(
@@ -82,11 +85,13 @@ class SettingsFragment : Fragment(), ThemeListAdapter.ThemeListener {
             rateUs()
         }
 
-        themeList.adapter = ThemeListAdapter(
+        themeListAdapter = ThemeListAdapter(
+            this::saveTheme,
             requireContext().resources.getStringArray(R.array.theme_array).toList(),
             getTheme()
         )
-        (themeList.adapter as ThemeListAdapter).setListener(this)
+        themeConcatAdapter = ConcatAdapter(themeListAdapter)
+        themeList.adapter = themeConcatAdapter
 
         themeSwitch.setOnCheckedChangeListener { _, b ->
             if (b) {
@@ -142,7 +147,7 @@ class SettingsFragment : Fragment(), ThemeListAdapter.ThemeListener {
         updateSwitch.isChecked = getSavedUpdate()!!
     }
 
-    override fun saveTheme(theme: Int) {
+    private fun saveTheme(theme: Int) {
         sharedPrefs?.edit()?.putInt(KEY_THEME, theme)?.apply()
         when (theme) {
             THEME_DARK -> {
