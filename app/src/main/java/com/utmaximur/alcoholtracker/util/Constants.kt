@@ -13,6 +13,22 @@ const val DATA = "data"
 const val FORMAT_IMAGE = ".jpeg"
 const val FILE_PROVIDER = ".fileprovider"
 
+// Settings Fragment
+const val PREFS_NAME = "theme_prefs"
+const val KEY_THEME = "prefs.theme"
+const val KEY_UPDATE = "prefs.update"
+const val THEME_UNDEFINED = -1
+const val THEME_LIGHT = 0
+const val THEME_DARK = 1
+const val THEME_HEIGHT = 100
+const val UPDATE_UNDEFINED = false
+
+const val MARKET_APP = "market://details?id="
+const val HTTPS_APP = "https://play.google.com/store/apps/details?id="
+
+const val PRIVACY_POLICY = "https://alcohol-tracker.flycricket.io/privacy.html"
+const val TERMS_OF_USE = "https://alcohol-tracker.flycricket.io/terms.html"
+
 // bundle
 const val PRICE_DRINK = "price_drink"
 const val DRINK = "drink"
