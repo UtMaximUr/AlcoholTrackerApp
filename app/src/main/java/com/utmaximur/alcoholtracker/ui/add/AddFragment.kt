@@ -228,14 +228,14 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
             if (containerFragment.height == 0) {
                 val calculatorFragment = CalculatorFragment()
                 val bundle = Bundle()
-                bundle.putString("price_drink", priceEditText.text.toString())
+                bundle.putString(PRICE_DRINK, priceEditText.text.toString())
                 calculatorFragment.arguments = bundle
                 calculatorFragment.setListener(this@AddFragment)
                 activity?.supportFragmentManager?.beginTransaction()
                     ?.add(R.id.container_calculator, calculatorFragment)
                     ?.setCustomAnimations(R.anim.fragment_open_enter, R.anim.fragment_close_exit)
                     ?.commit()
-                animateViewHeight(containerFragment, 245.dpToPx())
+                animateViewHeight(containerFragment, ANIMATE_HEIGHT.dpToPx())
             }
         }
     }
@@ -277,7 +277,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
 
     private fun setEditArguments() {
 
-        val alcoholTrack: AlcoholTrack? = requireArguments().getParcelable("drink")
+        val alcoholTrack: AlcoholTrack? = requireArguments().getParcelable(DRINK)
         toolbar.title = getString(R.string.edit_drink_title)
         viewModel.id = alcoholTrack?.id.toString()
         viewModel.date = alcoholTrack?.date!!
@@ -404,8 +404,8 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
             drinksPager.adapter = adapter
             drinksPager.alphaView()
             if (arguments != null) {
-                if (arguments?.containsKey("selectDate")!! && arguments?.getLong("selectDate") != 0L) {
-                    val selectDate = requireArguments().getLong("selectDate")
+                if (arguments?.containsKey(SELECT_DAY)!! && arguments?.getLong(SELECT_DAY) != 0L) {
+                    val selectDate = requireArguments().getLong(SELECT_DAY)
                     addDateButton.text = selectDate.formatDate(requireContext())
                     viewModel.date = selectDate
                     todayButton.toGone()
@@ -444,12 +444,12 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
                 viewModel.deleteDrink(drink)
             }
         })
-        deleteFragment.show(requireActivity().supportFragmentManager, "deleteDialog")
+        deleteFragment.show(requireActivity().supportFragmentManager, deleteFragment.tag)
     }
 
     override fun editDrink(drink: Drink) {
         val bundle = Bundle()
-        bundle.putParcelable("editDrink", drink)
+        bundle.putParcelable(EDIT_DRINK, drink)
         addFragmentListener?.onShowEditNewDrinkFragment(bundle)
     }
 }

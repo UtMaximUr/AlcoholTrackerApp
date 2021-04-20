@@ -82,7 +82,7 @@ class DrinksListAdapter(
                         onDeleteDyList.removeAt(position)
                     }
                 })
-                deleteFragment.show(supportFragmentManager, "deleteDialog")
+                deleteFragment.show(supportFragmentManager, deleteFragment.tag)
             }
 
             if(alcoholTrack.event.isEmpty()) {
