@@ -25,6 +25,7 @@ import com.utmaximur.alcoholtracker.dagger.component.AlcoholTrackComponent
 import com.utmaximur.alcoholtracker.dagger.factory.AddViewModelFactory
 import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
 import com.utmaximur.alcoholtracker.data.model.Drink
+import com.utmaximur.alcoholtracker.data.model.Icon
 import com.utmaximur.alcoholtracker.ui.add.adapter.DrinkViewPagerAdapter
 import com.utmaximur.alcoholtracker.ui.add.adapter.DrinkViewPagerAdapter.AddDrinkListener
 import com.utmaximur.alcoholtracker.ui.calculator.CalculatorFragment
@@ -438,12 +439,9 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
     }
 
     override fun deleteDrink(drink: Drink) {
-        val deleteFragment = DeleteDialogFragment()
-        deleteFragment.setListener(object : DeleteDialogFragment.DeleteDialogListener {
-            override fun deleteDrink() {
-                viewModel.deleteDrink(drink)
-            }
-        })
+        val deleteFragment = DeleteDialogFragment {
+            viewModel.deleteDrink(drink)
+        }
         deleteFragment.show(requireActivity().supportFragmentManager, deleteFragment.tag)
     }
 

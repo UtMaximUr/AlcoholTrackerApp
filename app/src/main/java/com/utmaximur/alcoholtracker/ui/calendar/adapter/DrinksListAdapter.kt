@@ -75,24 +75,21 @@ class DrinksListAdapter(
                 listener.onEdit(alcoholTrack.date)
             }
             deleteButton?.setOnClickListener {
-                val deleteFragment = DeleteDialogFragment()
-                deleteFragment.setListener(object : DeleteDialogFragment.DeleteDialogListener {
-                    override fun deleteDrink() {
-                        listener.onDelete(alcoholTrack)
-                        onDeleteDyList.removeAt(position)
-                    }
-                })
+                val deleteFragment = DeleteDialogFragment {
+                    listener.onDelete(alcoholTrack)
+                    onDeleteDyList.removeAt(position)
+                }
                 deleteFragment.show(supportFragmentManager, deleteFragment.tag)
             }
 
-            if(alcoholTrack.event.isEmpty()) {
+            if (alcoholTrack.event.isEmpty()) {
                 eventButton?.toGone()
             }
 
             eventText?.text = alcoholTrack.event
 
             eventButton?.setOnClickListener {
-                if ( drinkLayout?.visibility == View.VISIBLE) {
+                if (drinkLayout?.visibility == View.VISIBLE) {
                     drinkLayout?.toInvisible()
                     eventLayout?.toVisible()
                     drinkLayout?.alphaViewOut()

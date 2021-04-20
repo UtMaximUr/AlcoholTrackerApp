@@ -5,26 +5,17 @@ import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.utmaximur.alcoholtracker.R
+import com.utmaximur.alcoholtracker.data.model.Icon
 
 
-class DeleteDialogFragment : DialogFragment() {
-
-    private var deleteDialogListener: DeleteDialogListener? = null
-
-    interface DeleteDialogListener {
-        fun deleteDrink()
-    }
-
-    fun setListener(deleteDialogListener: DeleteDialogListener) {
-        this.deleteDialogListener = deleteDialogListener
-    }
+class DeleteDialogFragment(private val onClick: () -> Unit) : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             val builder = AlertDialog.Builder(it)
             builder.setTitle(getText(R.string.dialog_delete_title))
                 .setPositiveButton(getText(R.string.dialog_select_date_ok)) { dialog, _ ->
-                    deleteDialogListener?.deleteDrink()
+                    onClick
                     dialog.cancel()
                 }
                 .setNegativeButton(getText(R.string.dialog_select_date_no)) {
