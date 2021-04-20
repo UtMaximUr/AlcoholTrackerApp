@@ -4,6 +4,7 @@ import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
 import android.os.Environment
+import com.utmaximur.alcoholtracker.util.FORMAT_IMAGE
 import java.io.*
 import java.util.*
 
@@ -32,7 +33,7 @@ class FileGenerator {
         val storageDir: File = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
         return File.createTempFile(
             Date().time.toString(),
-            ".jpg",
+            FORMAT_IMAGE,
             storageDir
         )
     }
@@ -45,7 +46,7 @@ class FileGenerator {
         try {
             file = File.createTempFile(
                 prefix,
-                "." + "jpg",
+                FORMAT_IMAGE,
                 dir
             )
         } catch (ignored: IOException) {
