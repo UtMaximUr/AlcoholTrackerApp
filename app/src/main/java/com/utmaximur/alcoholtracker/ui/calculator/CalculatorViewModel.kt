@@ -2,11 +2,10 @@ package com.utmaximur.alcoholtracker.ui.calculator
 
 
 import androidx.lifecycle.ViewModel
-
-const val ADDITION = '+'
-const val SUBTRACTION = '-'
-const val MULTIPLICATION = '*'
-const val DIVISION = '/'
+import com.utmaximur.alcoholtracker.util.ADDITION
+import com.utmaximur.alcoholtracker.util.DIVISION
+import com.utmaximur.alcoholtracker.util.MULTIPLICATION
+import com.utmaximur.alcoholtracker.util.SUBTRACTION
 
 class CalculatorViewModel : ViewModel() {
 

@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.dagger.factory.CalculatorViewModelFactory
+import com.utmaximur.alcoholtracker.util.*
 import javax.inject.Inject
 
 class CalculatorFragment : Fragment() {
@@ -53,7 +54,7 @@ class CalculatorFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val view: View = inflater.inflate(R.layout.fragment_calculator, container, false)
 
         injectDagger()
@@ -95,52 +96,52 @@ class CalculatorFragment : Fragment() {
         buttonMultiply = view.findViewById(R.id.calculator_button_multiply)
 
         button0.setOnClickListener {
-            viewModel.setValue(0)
+            viewModel.setValue(KEY_0)
             calculatorListener?.getValueCalculating(viewModel.getValue())
         }
 
         button1.setOnClickListener {
-            viewModel.setValue(1)
+            viewModel.setValue(KEY_1)
             calculatorListener?.getValueCalculating(viewModel.getValue())
         }
 
         button2.setOnClickListener {
-            viewModel.setValue(2)
+            viewModel.setValue(KEY_2)
             calculatorListener?.getValueCalculating(viewModel.getValue())
         }
 
         button3.setOnClickListener {
-            viewModel.setValue(3)
+            viewModel.setValue(KEY_3)
             calculatorListener?.getValueCalculating(viewModel.getValue())
         }
 
         button4.setOnClickListener {
-            viewModel.setValue(4)
+            viewModel.setValue(KEY_4)
             calculatorListener?.getValueCalculating(viewModel.getValue())
         }
 
         button5.setOnClickListener {
-            viewModel.setValue(5)
+            viewModel.setValue(KEY_5)
             calculatorListener?.getValueCalculating(viewModel.getValue())
         }
 
         button6.setOnClickListener {
-            viewModel.setValue(6)
+            viewModel.setValue(KEY_6)
             calculatorListener?.getValueCalculating(viewModel.getValue())
         }
 
         button7.setOnClickListener {
-            viewModel.setValue(7)
+            viewModel.setValue(KEY_7)
             calculatorListener?.getValueCalculating(viewModel.getValue())
         }
 
         button8.setOnClickListener {
-            viewModel.setValue(8)
+            viewModel.setValue(KEY_8)
             calculatorListener?.getValueCalculating(viewModel.getValue())
         }
 
         button9.setOnClickListener {
-            viewModel.setValue(9)
+            viewModel.setValue(KEY_9)
             calculatorListener?.getValueCalculating(viewModel.getValue())
         }
 
@@ -181,8 +182,8 @@ class CalculatorFragment : Fragment() {
     }
 
     private fun getPriceDrink() {
-        if (arguments?.getString("price_drink") != "") {
-            arguments?.getString("price_drink")?.toDouble()?.toInt()?.let { viewModel.setValue(it) }
+        if (arguments?.getString(PRICE_DRINK) != "") {
+            arguments?.getString(PRICE_DRINK)?.toDouble()?.toInt()?.let { viewModel.setValue(it) }
         }
     }
 }
