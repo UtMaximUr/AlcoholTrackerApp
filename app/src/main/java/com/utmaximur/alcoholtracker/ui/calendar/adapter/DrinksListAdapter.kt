@@ -26,10 +26,6 @@ class DrinksListAdapter(
         fun onDelete(alcoholTrack: AlcoholTrack)
     }
 
-    interface OnDeleteDyList {
-        fun removeAt(position: Int)
-    }
-
     class ViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         RecyclerView.ViewHolder(inflater.inflate(R.layout.item_drink, parent, false)) {
         private var drinkText: TextView? = null
@@ -60,8 +56,8 @@ class DrinksListAdapter(
             alcoholTrack: AlcoholTrack,
             position: Int,
             listener: OnDrinkAdapterListener,
-            onDeleteDyList: OnDeleteDyList,
-            supportFragmentManager: FragmentManager
+            supportFragmentManager: FragmentManager,
+            onClick: (Int) -> Unit
         ) {
             volumeText?.text =
                 alcoholTrack.volume.formatVolume(itemView.context, alcoholTrack.quantity)
@@ -75,9 +71,11 @@ class DrinksListAdapter(
                 listener.onEdit(alcoholTrack.date)
             }
             deleteButton?.setOnClickListener {
+                listener.onDelete(alcoholTrack)
+                onClick(position)
                 val deleteFragment = DeleteDialogFragment {
                     listener.onDelete(alcoholTrack)
-                    onDeleteDyList.removeAt(position)
+                    onClick(position)
                 }
                 deleteFragment.show(supportFragmentManager, deleteFragment.tag)
             }
@@ -117,12 +115,10 @@ class DrinksListAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val alcoholTrack: AlcoholTrack = alcoholTracks[position]
-        holder.bind(alcoholTrack, position, listener, object : OnDeleteDyList {
-            override fun removeAt(position: Int) {
-                alcoholTracks.removeAt(position)
-                notifyItemRemoved(position)
-                notifyItemRangeChanged(position, itemCount)
-            }
-        }, supportFragmentManager)
+        holder.bind(alcoholTrack, position, listener, supportFragmentManager) {
+            alcoholTracks.removeAt(it)
+            notifyItemRemoved(it)
+            notifyItemRangeChanged(it, itemCount)
+        }
     }
 }
