@@ -27,10 +27,7 @@ import com.utmaximur.alcoholtracker.ui.addmydrink.adapter.SelectVolumeAdapter
 import com.utmaximur.alcoholtracker.ui.customview.RangeSeekBar
 import com.utmaximur.alcoholtracker.ui.dialog.addphoto.AddPhotoBottomDialogFragment
 import com.utmaximur.alcoholtracker.ui.dialog.addphoto.AddPhotoBottomDialogFragment.BottomDialogListener
-import com.utmaximur.alcoholtracker.util.format1f
-import com.utmaximur.alcoholtracker.util.getIdRaw
-import com.utmaximur.alcoholtracker.util.hideKeyboard
-import com.utmaximur.alcoholtracker.util.snackBar
+import com.utmaximur.alcoholtracker.util.*
 import java.util.*
 
 
@@ -133,7 +130,7 @@ class AddNewDrink : Fragment(), BottomDialogListener {
             addPhotoBottomDialogFragment.setListener(this)
             addPhotoBottomDialogFragment.show(
                 requireActivity().supportFragmentManager,
-                "add_photo_dialog_fragment"
+                addPhotoBottomDialogFragment.tag
             )
         }
 
@@ -172,7 +169,7 @@ class AddNewDrink : Fragment(), BottomDialogListener {
     }
 
     private fun setArguments() {
-        val drink: Drink? = requireArguments().getParcelable("editDrink")
+        val drink: Drink? = requireArguments().getParcelable(EDIT_DRINK)
         viewModel.id = drink?.id.toString()
         viewModel.photo = drink?.photo.toString()
         viewModel.nameDrink = drink?.drink.toString()
