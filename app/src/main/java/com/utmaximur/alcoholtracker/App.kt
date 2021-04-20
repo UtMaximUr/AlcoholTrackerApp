@@ -7,6 +7,7 @@ import com.utmaximur.alcoholtracker.dagger.component.AlcoholTrackComponent
 import com.utmaximur.alcoholtracker.dagger.component.DaggerAlcoholTrackComponent
 import com.utmaximur.alcoholtracker.dagger.module.RoomDatabaseModule
 import com.utmaximur.alcoholtracker.ui.settings.*
+import com.utmaximur.alcoholtracker.util.*
 
 open class App : Application() {
 
