@@ -17,9 +17,7 @@ import com.utmaximur.alcoholtracker.ui.addmydrink.AddNewDrink
 import com.utmaximur.alcoholtracker.ui.calendar.CalendarFragment
 import com.utmaximur.alcoholtracker.ui.dialog.update.UpdateBottomDialogFragment
 import com.utmaximur.alcoholtracker.ui.settings.*
-import com.utmaximur.alcoholtracker.util.UPDATE_REQUEST_CODE
-import com.utmaximur.alcoholtracker.util.toGone
-import com.utmaximur.alcoholtracker.util.toVisible
+import com.utmaximur.alcoholtracker.util.*
 
 
 class MainActivity : AppCompatActivity(),
