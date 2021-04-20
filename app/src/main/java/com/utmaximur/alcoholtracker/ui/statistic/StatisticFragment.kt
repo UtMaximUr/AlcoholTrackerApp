@@ -69,8 +69,7 @@ class StatisticFragment :
         topDrinkList.alphaView()
         topDrinkList.layoutManager = GridLayoutManager(context, 4)
         viewModel.getAllDrink().observe(viewLifecycleOwner, { list ->
-            topDrinkList.adapter = TopDrinkAdapter(viewModel.getDrinksDrunkByMe())
-            (topDrinkList.adapter as TopDrinkAdapter).setDrinkList(list)
+            topDrinkList.adapter = TopDrinkAdapter(list, viewModel.getDrinksDrunkByMe())
         })
 
         statisticPager.adapter = StatisticViewPagerAdapter(viewModel.getPriceListByPeriod(), requireContext())

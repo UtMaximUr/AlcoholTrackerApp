@@ -12,14 +12,8 @@ import com.utmaximur.alcoholtracker.data.model.Drink
 import com.utmaximur.alcoholtracker.util.getIdRaw
 import com.utmaximur.alcoholtracker.util.getResString
 
-class TopDrinkAdapter(private var drinksDrunkByMe: Map<String, Int>) :
+class TopDrinkAdapter(private var drinkList: List<Drink>, private var drinksDrunkByMe: Map<String, Int>) :
     RecyclerView.Adapter<TopDrinkAdapter.ViewHolder>() {
-
-    private var drinkList: List<Drink>? = null
-
-    fun setDrinkList(drinkList: List<Drink>) {
-        this.drinkList = drinkList
-    }
 
     class ViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         RecyclerView.ViewHolder(inflater.inflate(R.layout.item_top_drink, parent, false)) {
@@ -57,11 +51,11 @@ class TopDrinkAdapter(private var drinksDrunkByMe: Map<String, Int>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val drink: Drink = drinkList!![position]
+        val drink: Drink = drinkList[position]
         holder.bind(drink, drinksDrunkByMe)
     }
 
     override fun getItemCount(): Int {
-        return drinkList?.size!!
+        return drinkList.size
     }
 }
