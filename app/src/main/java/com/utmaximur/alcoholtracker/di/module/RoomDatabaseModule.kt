@@ -14,7 +14,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.utmaximur.alcoholtracker.data.AlcoholTrackDatabase
-import com.utmaximur.alcoholtracker.data.file.FileGenerator
+import com.utmaximur.alcoholtracker.data.file.FileManager
 import com.utmaximur.alcoholtracker.data.model.Drink
 import com.utmaximur.alcoholtracker.data.resources.IconRaw
 import com.utmaximur.alcoholtracker.util.convertMigrationModel
@@ -60,8 +60,8 @@ class RoomDatabaseModule(private var application: Application) {
     }
 
     @Provides
-    fun provideFile(): FileGenerator {
-        return FileGenerator()
+    fun provideFile(): FileManager {
+        return FileManager()
     }
 
 

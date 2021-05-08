@@ -8,7 +8,7 @@ import com.utmaximur.alcoholtracker.util.FORMAT_IMAGE
 import java.io.*
 import java.util.*
 
-class FileGenerator {
+class FileManager {
 
     private val sEOF = -1
     private val bufferSize = 1024 * 4
