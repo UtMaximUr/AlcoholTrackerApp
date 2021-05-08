@@ -5,7 +5,7 @@ import android.content.Context
 fun String.getIdRaw(context: Context): Int {
     return context.resources.getIdentifier(
         this,
-        "raw",
+        RES_RAW,
         context.packageName
     )
 }
@@ -14,7 +14,7 @@ fun String.getResString(context: Context): String {
     val resIdString =
         context.resources.getIdentifier(
             this,
-            "string",
+            RES_STRINGS,
             context.packageName
         )
 

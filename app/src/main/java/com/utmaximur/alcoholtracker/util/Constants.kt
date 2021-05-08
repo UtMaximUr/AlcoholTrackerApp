@@ -35,6 +35,10 @@ const val DRINK = "drink"
 const val SELECT_DAY = "selectDate"
 const val EDIT_DRINK = "editDrink"
 
+// Utils
+const val RES_RAW = "raw"
+const val RES_STRINGS = "string"
+
 
 // Calculator Fragment
 const val KEY_0 = 0
