@@ -1,7 +1,7 @@
-package com.utmaximur.alcoholtracker.dagger.component
+package com.utmaximur.alcoholtracker.di.component
 
-import com.utmaximur.alcoholtracker.dagger.module.AlcoholTrackModule
-import com.utmaximur.alcoholtracker.dagger.module.RoomDatabaseModule
+import com.utmaximur.alcoholtracker.di.module.AlcoholTrackModule
+import com.utmaximur.alcoholtracker.di.module.RoomDatabaseModule
 import com.utmaximur.alcoholtracker.repository.DrinkRepository
 import com.utmaximur.alcoholtracker.repository.FileRepository
 import com.utmaximur.alcoholtracker.repository.IconRepository

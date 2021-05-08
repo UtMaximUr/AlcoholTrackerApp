@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.dagger.factory.CalculatorViewModelFactory
+import com.utmaximur.alcoholtracker.di.factory.CalculatorViewModelFactory
 import com.utmaximur.alcoholtracker.util.*
 import javax.inject.Inject
 

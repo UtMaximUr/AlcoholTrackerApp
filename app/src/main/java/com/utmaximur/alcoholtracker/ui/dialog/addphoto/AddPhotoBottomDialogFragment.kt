@@ -20,8 +20,8 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.dagger.component.AlcoholTrackComponent
-import com.utmaximur.alcoholtracker.dagger.factory.AddPhotoViewModelFactory
+import com.utmaximur.alcoholtracker.di.component.AlcoholTrackComponent
+import com.utmaximur.alcoholtracker.di.factory.AddPhotoViewModelFactory
 import com.utmaximur.alcoholtracker.util.*
 import java.io.*
 import java.util.*

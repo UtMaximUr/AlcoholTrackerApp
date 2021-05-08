@@ -17,8 +17,8 @@ import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.dagger.component.AlcoholTrackComponent
-import com.utmaximur.alcoholtracker.dagger.factory.AddNewDrinkViewModelFactory
+import com.utmaximur.alcoholtracker.di.component.AlcoholTrackComponent
+import com.utmaximur.alcoholtracker.di.factory.AddNewDrinkViewModelFactory
 import com.utmaximur.alcoholtracker.data.model.Drink
 import com.utmaximur.alcoholtracker.data.model.Icon
 import com.utmaximur.alcoholtracker.ui.addmydrink.adapter.SelectIconAdapter

@@ -3,10 +3,9 @@ package com.utmaximur.alcoholtracker
 import android.app.Application
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
-import com.utmaximur.alcoholtracker.dagger.component.AlcoholTrackComponent
-import com.utmaximur.alcoholtracker.dagger.component.DaggerAlcoholTrackComponent
-import com.utmaximur.alcoholtracker.dagger.module.RoomDatabaseModule
-import com.utmaximur.alcoholtracker.ui.settings.*
+import com.utmaximur.alcoholtracker.di.component.AlcoholTrackComponent
+import com.utmaximur.alcoholtracker.di.component.DaggerAlcoholTrackComponent
+import com.utmaximur.alcoholtracker.di.module.RoomDatabaseModule
 import com.utmaximur.alcoholtracker.util.*
 
 open class App : Application() {

@@ -21,8 +21,8 @@ import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.google.android.material.tabs.TabLayout
 import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.dagger.component.AlcoholTrackComponent
-import com.utmaximur.alcoholtracker.dagger.factory.AddViewModelFactory
+import com.utmaximur.alcoholtracker.di.component.AlcoholTrackComponent
+import com.utmaximur.alcoholtracker.di.factory.AddViewModelFactory
 import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
 import com.utmaximur.alcoholtracker.data.model.Drink
 import com.utmaximur.alcoholtracker.ui.add.adapter.DrinkViewPagerAdapter

@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.dagger.factory
+package com.utmaximur.alcoholtracker.di.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

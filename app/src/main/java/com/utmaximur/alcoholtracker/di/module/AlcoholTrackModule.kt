@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.dagger.module
+package com.utmaximur.alcoholtracker.di.module
 
 import com.utmaximur.alcoholtracker.data.AlcoholTrackDatabase
 import com.utmaximur.alcoholtracker.data.resources.IconRaw

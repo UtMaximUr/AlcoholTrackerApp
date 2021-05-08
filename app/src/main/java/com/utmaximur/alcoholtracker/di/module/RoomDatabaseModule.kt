@@ -1,6 +1,6 @@
 @file:Suppress("PrivatePropertyName")
 
-package com.utmaximur.alcoholtracker.dagger.module
+package com.utmaximur.alcoholtracker.di.module
 
 import android.app.Application
 import android.content.Context
