@@ -7,30 +7,21 @@ import androidx.fragment.app.DialogFragment
 import com.utmaximur.alcoholtracker.R
 
 
-class AddDrinkDialogFragment : DialogFragment() {
-
-    private var addDrinkDialogListener: AddDrinkDialogListener? = null
-
-    interface AddDrinkDialogListener {
-        fun addDrinkDialogPositiveClick()
-        fun addDrinkDialogNegativeClick()
-    }
-
-    fun setListener(addDrinkDialogListener: AddDrinkDialogListener) {
-        this.addDrinkDialogListener = addDrinkDialogListener
-    }
+class AddDrinkDialogFragment(
+    private val addDrinkDialogPositiveClick: () -> Unit,
+    private val addDrinkDialogNegativeClick: () -> Unit
+) : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             val builder = AlertDialog.Builder(it)
             builder.setTitle(getText(R.string.dialog_select_date_title))
                 .setPositiveButton(getText(R.string.dialog_select_date_ok)) { dialog, _ ->
-                    addDrinkDialogListener?.addDrinkDialogPositiveClick()
+                    addDrinkDialogPositiveClick()
                     dialog.cancel()
                 }
-                .setNegativeButton(getText(R.string.dialog_select_date_no)) {
-                        dialog, _ ->
-                    addDrinkDialogListener?.addDrinkDialogNegativeClick()
+                .setNegativeButton(getText(R.string.dialog_select_date_no)) { dialog, _ ->
+                    addDrinkDialogNegativeClick()
                     dialog.cancel()
                 }
             builder.create()

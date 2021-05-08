@@ -24,8 +24,7 @@ import javax.inject.Inject
 
 
 class CalendarFragment : Fragment(),
-    DrinksListAdapter.OnDrinkAdapterListener,
-    AddDrinkDialogFragment.AddDrinkDialogListener {
+    DrinksListAdapter.OnDrinkAdapterListener {
 
     @Inject
     lateinit var calendarViewModelFactory: CalendarViewModelFactory
@@ -90,8 +89,10 @@ class CalendarFragment : Fragment(),
 
         addButton.setOnClickListener {
             if (viewModel.getSelectDate() != 0L) {
-                val dialogFragment = AddDrinkDialogFragment()
-                dialogFragment.setListener(this)
+                val dialogFragment = AddDrinkDialogFragment(
+                    this::addDrinkDialogPositiveClick,
+                    this::addDrinkDialogNegativeClick
+                )
                 val manager = requireActivity().supportFragmentManager
                 dialogFragment.show(manager, dialogFragment.tag)
             } else {
@@ -196,13 +197,13 @@ class CalendarFragment : Fragment(),
         })
     }
 
-    override fun addDrinkDialogPositiveClick() {
+    private fun addDrinkDialogPositiveClick() {
         val bundle = Bundle()
         bundle.putLong(SELECT_DAY, viewModel.getSelectDate())
         calendarFragmentListener?.showAddAlcoholTrackerFragment(bundle)
     }
 
-    override fun addDrinkDialogNegativeClick() {
+    private fun addDrinkDialogNegativeClick() {
         calendarFragmentListener?.showAddAlcoholTrackerFragment(null)
     }
 }

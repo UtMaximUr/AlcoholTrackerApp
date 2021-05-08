@@ -25,12 +25,11 @@ import com.utmaximur.alcoholtracker.ui.addmydrink.adapter.SelectIconAdapter
 import com.utmaximur.alcoholtracker.ui.addmydrink.adapter.SelectVolumeAdapter
 import com.utmaximur.alcoholtracker.ui.customview.RangeSeekBar
 import com.utmaximur.alcoholtracker.ui.dialog.addphoto.AddPhotoBottomDialogFragment
-import com.utmaximur.alcoholtracker.ui.dialog.addphoto.AddPhotoBottomDialogFragment.BottomDialogListener
 import com.utmaximur.alcoholtracker.util.*
 import java.util.*
 
 
-class AddNewDrink : Fragment(), BottomDialogListener {
+class AddNewDrink : Fragment() {
 
     private var addNewFragmentListener: AddNewFragmentListener? = null
 
@@ -125,8 +124,7 @@ class AddNewDrink : Fragment(), BottomDialogListener {
         photo.setOnClickListener {
             hideKeyboard()
             val addPhotoBottomDialogFragment =
-                AddPhotoBottomDialogFragment()
-            addPhotoBottomDialogFragment.setListener(this)
+                AddPhotoBottomDialogFragment(this::setImageViewPhoto, this::deleteImageViewPhoto)
             addPhotoBottomDialogFragment.show(
                 requireActivity().supportFragmentManager,
                 addPhotoBottomDialogFragment.tag
@@ -212,13 +210,13 @@ class AddNewDrink : Fragment(), BottomDialogListener {
         addNewFragmentListener = context as AddNewFragmentListener
     }
 
-    override fun setImageViewPhoto(path: String) {
+    private fun setImageViewPhoto(path: String) {
         photo.setImagePath(path)
         photo.scaleType = ImageView.ScaleType.CENTER_CROP
         viewModel.photo = path
     }
 
-    override fun deleteImageViewPhoto() {
+    private fun deleteImageViewPhoto() {
         photo.setImageBitmap(null)
         photo.setImageResource(R.drawable.ic_camera)
         photo.scaleType = ImageView.ScaleType.CENTER
