@@ -71,8 +71,6 @@ class DrinksListAdapter(
                 listener.onEdit(alcoholTrack.date)
             }
             deleteButton?.setOnClickListener {
-                listener.onDelete(alcoholTrack)
-                onClick(position)
                 val deleteFragment = DeleteDialogFragment {
                     listener.onDelete(alcoholTrack)
                     onClick(position)
