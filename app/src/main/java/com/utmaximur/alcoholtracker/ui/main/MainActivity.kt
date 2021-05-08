@@ -16,7 +16,6 @@ import com.utmaximur.alcoholtracker.ui.add.AddFragment
 import com.utmaximur.alcoholtracker.ui.addmydrink.AddNewDrink
 import com.utmaximur.alcoholtracker.ui.calendar.CalendarFragment
 import com.utmaximur.alcoholtracker.ui.dialog.update.UpdateBottomDialogFragment
-import com.utmaximur.alcoholtracker.ui.settings.*
 import com.utmaximur.alcoholtracker.util.*
 
 
