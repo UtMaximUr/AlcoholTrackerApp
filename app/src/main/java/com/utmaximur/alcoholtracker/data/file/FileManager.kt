@@ -2,6 +2,7 @@ package com.utmaximur.alcoholtracker.data.file
 
 import android.content.ContentResolver
 import android.content.Context
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Environment
 import com.utmaximur.alcoholtracker.util.FORMAT_IMAGE
@@ -36,6 +37,22 @@ class FileManager {
             FORMAT_IMAGE,
             storageDir
         )
+    }
+
+    fun savePhoto(context: Context, bitmap: Bitmap): String {
+        val file = File(context.filesDir, Date().time.toString() + FORMAT_IMAGE)
+        try {
+            var fos: FileOutputStream? = null
+            try {
+                fos = FileOutputStream(file)
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 80, fos)
+            } finally {
+                fos?.close()
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return file.absolutePath
     }
 
 
