@@ -67,11 +67,8 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun showAddAlcoholTrackerFragment(bundle: Bundle?) {
-        navController.navigate(R.id.action_calendarFragment_to_addFragment, bundle)
-    }
-
-    override fun onSelectedDateDialog() {
-        navController.navigate(R.id.action_calendarFragment_to_addDrinkDialogFragment)
+//        navController.navigate(R.id.action_calendarFragment_to_addFragment, bundle)
+        navController.navigate(R.id.addFragment, bundle)
     }
 
     override fun closeFragment() {

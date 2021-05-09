@@ -59,5 +59,8 @@ const val DIVISION = '/'
 // delete dialog
 const val KEY_CALENDAR = "KEY_CALENDAR"
 const val KEY_CALENDAR_OK = "KEY_CALENDAR_OK"
+const val KEY_CALENDAR_DATA = "KEY_CALENDAR_DATA"
+const val KEY_CALENDAR_DATA_OK = "KEY_CALENDAR_DATA_OK"
+const val KEY_CALENDAR_DATA_NO = "KEY_CALENDAR_DATA_NO"
 const val KEY_ADD = "KEY_ADD"
 const val KEY_ADD_OK = "KEY_ADD_OK"

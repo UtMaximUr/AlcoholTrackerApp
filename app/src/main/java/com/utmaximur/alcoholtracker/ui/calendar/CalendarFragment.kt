@@ -33,7 +33,6 @@ class CalendarFragment : Fragment(),
     interface CalendarFragmentListener {
         fun showEditAlcoholTrackerFragment(bundle: Bundle)
         fun showAddAlcoholTrackerFragment(bundle: Bundle?)
-        fun onSelectedDateDialog()
     }
 
     private lateinit var viewModel: CalendarViewModel
@@ -71,13 +70,21 @@ class CalendarFragment : Fragment(),
     private fun initUI() {
         binding.addButton.setOnClickListener {
             if (viewModel.getSelectDate() != 0L) {
-                calendarFragmentListener?.onSelectedDateDialog()
-//                val dialogFragment = AddDrinkDialogFragment(
-//                    this::addDrinkDialogPositiveClick,
-//                    this::addDrinkDialogNegativeClick
-//                )
-//                val manager = requireActivity().supportFragmentManager
-//                dialogFragment.show(manager, dialogFragment.tag)
+                val navController = findNavController()
+                navController.currentBackStackEntry?.savedStateHandle?.getLiveData<String>(
+                    KEY_CALENDAR_DATA)?.observe(
+                    viewLifecycleOwner) { result ->
+                    if (result == KEY_CALENDAR_DATA_OK) {
+                        val bundle = Bundle()
+                        bundle.putLong(SELECT_DAY, viewModel.getSelectDate())
+                        navController.currentBackStackEntry?.savedStateHandle?.remove<String>(KEY_CALENDAR_DATA)
+                        calendarFragmentListener?.showAddAlcoholTrackerFragment(bundle)
+                    } else {
+                        navController.currentBackStackEntry?.savedStateHandle?.remove<String>(KEY_CALENDAR_DATA)
+                        calendarFragmentListener?.showAddAlcoholTrackerFragment(null)
+                    }
+                }
+                navController.navigate(R.id.action_calendarFragment_to_addDrinkDialogFragment)
             } else {
                 calendarFragmentListener?.showAddAlcoholTrackerFragment(null)
             }
@@ -186,15 +193,5 @@ class CalendarFragment : Fragment(),
             }
             binding.calendarView.setEvents(events)
         })
-    }
-
-    private fun addDrinkDialogPositiveClick() {
-        val bundle = Bundle()
-        bundle.putLong(SELECT_DAY, viewModel.getSelectDate())
-        calendarFragmentListener?.showAddAlcoholTrackerFragment(bundle)
-    }
-
-    private fun addDrinkDialogNegativeClick() {
-        calendarFragmentListener?.showAddAlcoholTrackerFragment(null)
     }
 }
