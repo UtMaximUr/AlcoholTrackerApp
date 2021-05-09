@@ -54,10 +54,6 @@ class MainActivity : AppCompatActivity(),
         navController.navigate(R.id.action_addFragment_to_addNewDrinkFragment)
     }
 
-    override fun addFragmentToDeleteDialog() {
-        navController.navigate(R.id.action_addFragment_to_deleteDialogFragment)
-    }
-
     override fun onShowEditNewDrinkFragment(bundle: Bundle) {
         navController.navigate(R.id.addNewDrinkFragment, bundle)
     }
@@ -72,10 +68,6 @@ class MainActivity : AppCompatActivity(),
 
     override fun showAddAlcoholTrackerFragment(bundle: Bundle?) {
         navController.navigate(R.id.action_calendarFragment_to_addFragment, bundle)
-    }
-
-    override fun calendarFragmentToDeleteDialog() {
-        navController.navigate(R.id.action_calendarFragment_to_deleteDialogFragment)
     }
 
     override fun onSelectedDateDialog() {

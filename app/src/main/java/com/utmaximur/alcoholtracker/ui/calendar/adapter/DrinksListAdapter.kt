@@ -6,18 +6,15 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
-import com.utmaximur.alcoholtracker.ui.dialog.delete.DeleteDialogFragment
 import com.utmaximur.alcoholtracker.util.*
 
 
 class DrinksListAdapter(
     private val alcoholTracks: MutableList<AlcoholTrack>,
-    private val listener: OnDrinkAdapterListener,
-    private val supportFragmentManager: FragmentManager
+    private val listener: OnDrinkAdapterListener
 ) :
     RecyclerView.Adapter<DrinksListAdapter.ViewHolder>() {
 
@@ -54,10 +51,7 @@ class DrinksListAdapter(
 
         fun bind(
             alcoholTrack: AlcoholTrack,
-            position: Int,
-            listener: OnDrinkAdapterListener,
-            supportFragmentManager: FragmentManager,
-            onClick: (Int) -> Unit
+            listener: OnDrinkAdapterListener
         ) {
             volumeText?.text =
                 alcoholTrack.volume.formatVolume(itemView.context, alcoholTrack.quantity)
@@ -71,11 +65,7 @@ class DrinksListAdapter(
                 listener.onEdit(alcoholTrack.date)
             }
             deleteButton?.setOnClickListener {
-                val deleteFragment = DeleteDialogFragment {
-                    listener.onDelete(alcoholTrack)
-                    onClick(position)
-                }
-                deleteFragment.show(supportFragmentManager, deleteFragment.tag)
+                listener.onDelete(alcoholTrack)
             }
 
             if (alcoholTrack.event.isEmpty()) {
@@ -113,10 +103,6 @@ class DrinksListAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val alcoholTrack: AlcoholTrack = alcoholTracks[position]
-        holder.bind(alcoholTrack, position, listener, supportFragmentManager) {
-            alcoholTracks.removeAt(it)
-            notifyItemRemoved(it)
-            notifyItemRangeChanged(it, itemCount)
-        }
+        holder.bind(alcoholTrack, listener)
     }
 }

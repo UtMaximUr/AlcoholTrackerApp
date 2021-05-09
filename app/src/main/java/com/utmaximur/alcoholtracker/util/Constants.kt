@@ -55,3 +55,9 @@ const val ADDITION = '+'
 const val SUBTRACTION = '-'
 const val MULTIPLICATION = '*'
 const val DIVISION = '/'
+
+// delete dialog
+const val KEY_CALENDAR = "KEY_CALENDAR"
+const val KEY_CALENDAR_OK = "KEY_CALENDAR_OK"
+const val KEY_ADD = "KEY_ADD"
+const val KEY_ADD_OK = "KEY_ADD_OK"
