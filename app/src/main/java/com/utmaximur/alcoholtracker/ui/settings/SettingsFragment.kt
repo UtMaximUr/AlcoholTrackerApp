@@ -13,32 +13,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.switchmaterial.SwitchMaterial
 import com.utmaximur.alcoholtracker.BuildConfig
 import com.utmaximur.alcoholtracker.R
+import com.utmaximur.alcoholtracker.databinding.FragmentSettingsBinding
 import com.utmaximur.alcoholtracker.ui.settings.adapter.ThemeListAdapter
 import com.utmaximur.alcoholtracker.util.*
 
 
 class SettingsFragment : Fragment() {
 
-    private lateinit var privacyPolicyLayout: Button
-    private lateinit var termsOfUseLayout: Button
-    private lateinit var rateUsButton: Button
-    private lateinit var versionApp: TextView
-    private lateinit var themeSwitch: SwitchMaterial
-    private lateinit var updateSwitch: SwitchMaterial
-    private lateinit var themeLayout: LinearLayout
-    private lateinit var themeList: RecyclerView
     private lateinit var themeListAdapter: ThemeListAdapter
     private lateinit var themeConcatAdapter: ConcatAdapter
+
+    private lateinit var binding: FragmentSettingsBinding
 
     private val sharedPrefs by lazy {
         activity?.getSharedPreferences(
@@ -52,36 +43,23 @@ class SettingsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view: View = inflater.inflate(R.layout.fragment_settings, container, false)
-        initUi(view)
-        return view
+        binding = FragmentSettingsBinding.inflate(layoutInflater)
+        initUi()
+        return binding.root
     }
 
-    private fun findViewById(view: View) {
-        privacyPolicyLayout = view.findViewById(R.id.privacy_policy_button)
-        termsOfUseLayout = view.findViewById(R.id.terms_of_use_button)
-        rateUsButton = view.findViewById(R.id.rate_app_button)
-        versionApp = view.findViewById(R.id.version_app)
-        themeSwitch = view.findViewById(R.id.theme_switch)
-        updateSwitch = view.findViewById(R.id.update_switch)
-        themeLayout = view.findViewById(R.id.theme_layout)
-        themeList = view.findViewById(R.id.theme_list)
-    }
-
-
-    private fun initUi(view: View) {
-        findViewById(view)
+    private fun initUi() {
         initSettings()
 
-        privacyPolicyLayout.setOnClickListener {
+        binding.privacyPolicyButton.setOnClickListener {
             goToUrl(PRIVACY_POLICY)
         }
 
-        termsOfUseLayout.setOnClickListener {
+        binding.termsOfUseButton.setOnClickListener {
             goToUrl(TERMS_OF_USE)
         }
 
-        rateUsButton.setOnClickListener {
+        binding.rateAppButton.setOnClickListener {
             rateUs()
         }
 
@@ -91,23 +69,23 @@ class SettingsFragment : Fragment() {
             getTheme()
         )
         themeConcatAdapter = ConcatAdapter(themeListAdapter)
-        themeList.adapter = themeConcatAdapter
+        binding.themeList.adapter = themeConcatAdapter
 
-        themeSwitch.setOnCheckedChangeListener { _, b ->
+        binding.themeSwitch.setOnCheckedChangeListener { _, b ->
             if (b) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.getDefaultNightMode())
                 saveTheme(THEME_UNDEFINED)
-                animateViewHeight(themeList, 0)
+                animateViewHeight(binding.themeList, 0)
             } else {
-                animateViewHeight(themeList, THEME_HEIGHT.dpToPx())
+                animateViewHeight(binding.themeList, THEME_HEIGHT.dpToPx())
             }
         }
 
-        updateSwitch.setOnCheckedChangeListener { _, b ->
+        binding.updateSwitch.setOnCheckedChangeListener { _, b ->
             sharedPrefs?.edit()?.putBoolean(KEY_UPDATE, b)?.apply()
         }
 
-        versionApp.text = BuildConfig.VERSION_NAME
+        binding.versionApp.text = BuildConfig.VERSION_NAME
     }
 
     private fun animateViewHeight(view: RecyclerView, targetHeight: Int) {
@@ -122,29 +100,29 @@ class SettingsFragment : Fragment() {
 
     private fun initSettings() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            themeLayout.toVisible()
+            binding.themeLayout.toVisible()
         } else {
-            themeLayout.toGone()
+            binding.themeLayout.toGone()
         }
         when (getSavedTheme()) {
             THEME_DARK -> {
-                themeSwitch.isChecked = false
-                val params = themeList.layoutParams
+                binding.themeSwitch.isChecked = false
+                val params = binding.themeList.layoutParams
                 params.height = THEME_HEIGHT.dpToPx()
-                themeList.layoutParams = params
+                binding.themeList.layoutParams = params
             }
             THEME_LIGHT -> {
-                themeSwitch.isChecked = false
-                val params = themeList.layoutParams
+                binding.themeSwitch.isChecked = false
+                val params = binding.themeList.layoutParams
                 params.height = THEME_HEIGHT.dpToPx()
-                themeList.layoutParams = params
+                binding.themeList.layoutParams = params
             }
             THEME_UNDEFINED -> {
-                themeSwitch.isChecked = true
+                binding.themeSwitch.isChecked = true
             }
         }
 
-        updateSwitch.isChecked = getSavedUpdate()!!
+        binding.updateSwitch.isChecked = getSavedUpdate()!!
     }
 
     private fun saveTheme(theme: Int) {
