@@ -7,24 +7,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.di.component.AlcoholTrackComponent
-import com.utmaximur.alcoholtracker.di.factory.AddNewDrinkViewModelFactory
 import com.utmaximur.alcoholtracker.data.model.Drink
 import com.utmaximur.alcoholtracker.data.model.Icon
+import com.utmaximur.alcoholtracker.databinding.FragmentAddNewDrinkBinding
+import com.utmaximur.alcoholtracker.di.component.AlcoholTrackComponent
+import com.utmaximur.alcoholtracker.di.factory.AddNewDrinkViewModelFactory
 import com.utmaximur.alcoholtracker.ui.addmydrink.adapter.SelectIconAdapter
 import com.utmaximur.alcoholtracker.ui.addmydrink.adapter.SelectVolumeAdapter
-import com.utmaximur.alcoholtracker.ui.customview.RangeSeekBar
-import com.utmaximur.alcoholtracker.ui.dialog.addphoto.AddPhotoBottomDialogFragment
 import com.utmaximur.alcoholtracker.util.*
 import java.util.*
 
@@ -37,20 +34,12 @@ class AddNewDrink : Fragment() {
         fun closeFragment()
     }
 
-    private lateinit var toolbar: Toolbar
-    private lateinit var photo: ImageView
-    private lateinit var nameDrink: EditText
-    private lateinit var iconsList: RecyclerView
-    private lateinit var volumeList: RecyclerView
+    private lateinit var binding: FragmentAddNewDrinkBinding
 
     private var selectIconAdapter: SelectIconAdapter? = null
     private var iconConcatAdapter: ConcatAdapter? = null
     private var selectVolumeAdapter: SelectVolumeAdapter? = null
     private var volumeConcatAdapter: ConcatAdapter? = null
-
-    private lateinit var minValueDegree: TextView
-    private lateinit var maxValueDegree: TextView
-    private lateinit var rangeDegree: RangeSeekBar
 
     private lateinit var viewModel: AddNewDrinkViewModel
 
@@ -59,11 +48,11 @@ class AddNewDrink : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view: View = inflater.inflate(R.layout.fragment_add_new_drink, container, false)
+        binding = FragmentAddNewDrinkBinding.inflate(layoutInflater)
         injectDagger()
         initViewModel()
-        initUi(view)
-        return view
+        initUi()
+        return binding.root
     }
 
     private fun injectDagger() {
@@ -81,27 +70,13 @@ class AddNewDrink : Fragment() {
         this.viewModel = viewModel
     }
 
-    private fun findViewById(view: View) {
-
-        toolbar = view.findViewById(R.id.toolbar)
-        photo = view.findViewById(R.id.photo_drink)
-        nameDrink = view.findViewById(R.id.drink_name_text)
-        iconsList = view.findViewById(R.id.drink_add_icon)
-        volumeList = view.findViewById(R.id.drink_add_volume)
-        minValueDegree = view.findViewById(R.id.left_range_degree)
-        maxValueDegree = view.findViewById(R.id.right_range_degree)
-        rangeDegree = view.findViewById(R.id.range_seek_bar_degree)
-    }
-
-    private fun initUi(view: View) {
-        findViewById(view)
-
-        toolbar.setNavigationOnClickListener {
+    private fun initUi() {
+        binding.toolbar.setNavigationOnClickListener {
             hideKeyboard()
             addNewFragmentListener?.closeFragment()
         }
 
-        toolbar.setOnMenuItemClickListener {
+        binding.toolbar.setOnMenuItemClickListener {
             if (viewModel.checkEmptyField(requireContext()).isEmpty()) {
                 hideKeyboard()
                 viewModel.onSaveButtonClick(
@@ -116,22 +91,31 @@ class AddNewDrink : Fragment() {
                 )
                 addNewFragmentListener?.closeFragment()
             } else {
-                getView()?.snackBar(viewModel.checkEmptyField(requireContext()))
+                view?.snackBar(viewModel.checkEmptyField(requireContext()))
             }
             true
         }
 
-        photo.setOnClickListener {
+        binding.photoDrink.setOnClickListener {
             hideKeyboard()
-            val addPhotoBottomDialogFragment =
-                AddPhotoBottomDialogFragment(this::setImageViewPhoto, this::deleteImageViewPhoto)
-            addPhotoBottomDialogFragment.show(
-                requireActivity().supportFragmentManager,
-                addPhotoBottomDialogFragment.tag
-            )
+            val navController = findNavController()
+            navController.currentBackStackEntry?.savedStateHandle?.getLiveData<String>(KEY_CREATE_DRINK)?.observe(
+                viewLifecycleOwner) { result ->
+                if (result == KEY_CREATE_DRINK_DELETE) {
+                    binding.photoDrink.setImageBitmap(null)
+                    binding.photoDrink.setImageResource(R.drawable.ic_camera)
+                    binding.photoDrink.scaleType = ImageView.ScaleType.CENTER
+                } else {
+                    binding.photoDrink.setImagePath(result)
+                    binding.photoDrink.scaleType = ImageView.ScaleType.CENTER_CROP
+                    viewModel.photo = result
+                }
+                navController.currentBackStackEntry?.savedStateHandle?.remove<String>(KEY_CREATE_DRINK)
+            }
+            navController.navigate(R.id.action_addNewDrinkFragment_to_addPhotoBottomDialogFragment)
         }
 
-        nameDrink.setOnEditorActionListener(TextView.OnEditorActionListener { text, actionId, _ ->
+        binding.drinkName.setOnEditorActionListener(TextView.OnEditorActionListener { text, actionId, _ ->
             viewModel.nameDrink = text.text.toString()
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 hideKeyboard()
@@ -143,16 +127,16 @@ class AddNewDrink : Fragment() {
         setIconAdapter(null)
         setVolumeAdapter(null)
 
-        minValueDegree.text = rangeDegree.getMin().toString()
-        maxValueDegree.text = rangeDegree.getMax().toString()
+        binding.minRangeDegree.text = binding.rangeDegree.getMin().toString()
+        binding.maxRangeDegree.text = binding.rangeDegree.getMax().toString()
 
-        rangeDegree.addMaxRangeChangeListener {
-            maxValueDegree.text = it.format1f()
+        binding.rangeDegree.addMaxRangeChangeListener {
+            binding.maxRangeDegree.text = it.format1f()
             getDegree()
         }
 
-        rangeDegree.addMinRangeChangeListener {
-            minValueDegree.text = it.format1f()
+        binding.rangeDegree.addMinRangeChangeListener {
+            binding.minRangeDegree.text = it.format1f()
             getDegree()
         }
 
@@ -162,7 +146,7 @@ class AddNewDrink : Fragment() {
     }
 
     private fun hideKeyboard() {
-        nameDrink.hideKeyboard()
+        binding.drinkName.hideKeyboard()
     }
 
     private fun setArguments() {
@@ -175,14 +159,14 @@ class AddNewDrink : Fragment() {
         viewModel.icon = drink.icon
 
         if (drink.photo.isNotEmpty()) {
-            photo.setImagePath(drink.photo)
+            binding.photoDrink.setImagePath(drink.photo)
         }
-        nameDrink.setText(drink.drink)
+        binding.drinkName.setText(drink.drink)
         setIconAdapter(drink.icon.getIdRaw(requireContext()).let { Icon(it) })
-        rangeDegree.setCurrentRangeMin(drink.degree.first()?.toDouble()?.toFloat()!!)
-        rangeDegree.setCurrentRangeMax(drink.degree.last()?.toDouble()?.toFloat()!!)
-        minValueDegree.text = drink.degree.first()
-        maxValueDegree.text = drink.degree.last()
+        binding.rangeDegree.setCurrentRangeMin(drink.degree.first()?.toDouble()?.toFloat()!!)
+        binding.rangeDegree.setCurrentRangeMax(drink.degree.last()?.toDouble()?.toFloat()!!)
+        binding.minRangeDegree.text = drink.degree.first()
+        binding.maxRangeDegree.text = drink.degree.last()
 
         setVolumeAdapter(drink.volume)
     }
@@ -190,7 +174,7 @@ class AddNewDrink : Fragment() {
     private fun setIconAdapter(icon: Icon?) {
         selectIconAdapter = SelectIconAdapter(this::adapterIconOnClick, icon)
         iconConcatAdapter = ConcatAdapter(selectIconAdapter)
-        iconsList.adapter = iconConcatAdapter
+        binding.drinkAddIcon.adapter = iconConcatAdapter
         viewModel.getIcons().observe(viewLifecycleOwner, {
             it?.let {
                 selectIconAdapter?.submitList(it as MutableList<Icon>)
@@ -201,25 +185,13 @@ class AddNewDrink : Fragment() {
     private fun setVolumeAdapter(volumes: List<String?>?) {
         selectVolumeAdapter = SelectVolumeAdapter(this::adapterVolumeOnClick, volumes)
         volumeConcatAdapter = ConcatAdapter(selectVolumeAdapter)
-        volumeList.adapter = volumeConcatAdapter
+        binding.drinkAddVolume.adapter = volumeConcatAdapter
         selectVolumeAdapter?.submitList(viewModel.getVolumes(requireContext()))
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         addNewFragmentListener = context as AddNewFragmentListener
-    }
-
-    private fun setImageViewPhoto(path: String) {
-        photo.setImagePath(path)
-        photo.scaleType = ImageView.ScaleType.CENTER_CROP
-        viewModel.photo = path
-    }
-
-    private fun deleteImageViewPhoto() {
-        photo.setImageBitmap(null)
-        photo.setImageResource(R.drawable.ic_camera)
-        photo.scaleType = ImageView.ScaleType.CENTER
     }
 
     private fun adapterIconOnClick(icon: Icon) {
@@ -241,13 +213,13 @@ class AddNewDrink : Fragment() {
     }
 
     private fun getName(): String {
-        return nameDrink.text.toString()
+        return binding.drinkName.text.toString()
     }
 
     private fun getDegree(): List<String?> {
         return viewModel.getDoubleDegree(
-            rangeDegree.getCurrentRangeMin().toDouble(),
-            rangeDegree.getCurrentRangeMax().toInt() - rangeDegree.getCurrentRangeMin().toInt()
+            binding.rangeDegree.getCurrentRangeMin().toDouble(),
+            binding.rangeDegree.getCurrentRangeMax().toInt() - binding.rangeDegree.getCurrentRangeMin().toInt()
         )
     }
 

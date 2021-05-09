@@ -62,10 +62,6 @@ class MainActivity : AppCompatActivity(),
         navController.navigate(R.id.updateBottomDialogFragment)
     }
 
-    override fun onShowAddPhotoDialog() {
-        navController.navigate(R.id.action_addNewDrinkFragment_to_addPhotoBottomDialogFragment)
-    }
-
     override fun showAddAlcoholTrackerFragment(bundle: Bundle?) {
 //        navController.navigate(R.id.action_calendarFragment_to_addFragment, bundle)
         navController.navigate(R.id.addFragment, bundle)
