@@ -17,7 +17,6 @@ import com.utmaximur.alcoholtracker.data.AlcoholTrackDatabase
 import com.utmaximur.alcoholtracker.data.assets.AssetsModule
 import com.utmaximur.alcoholtracker.data.file.FileManager
 import com.utmaximur.alcoholtracker.data.model.Drink
-import com.utmaximur.alcoholtracker.data.resources.IconRaw
 import com.utmaximur.alcoholtracker.util.convertMigrationModel
 import dagger.Module
 import dagger.Provides
