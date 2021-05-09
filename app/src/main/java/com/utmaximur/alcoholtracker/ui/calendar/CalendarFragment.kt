@@ -5,27 +5,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.applandeo.materialcalendarview.EventDay
 import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.dagger.component.AlcoholTrackComponent
-import com.utmaximur.alcoholtracker.dagger.factory.CalendarViewModelFactory
 import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
+import com.utmaximur.alcoholtracker.databinding.FragmentCalendarBinding
+import com.utmaximur.alcoholtracker.di.component.AlcoholTrackComponent
+import com.utmaximur.alcoholtracker.di.factory.CalendarViewModelFactory
 import com.utmaximur.alcoholtracker.ui.calendar.adapter.DrinksListAdapter
-import com.utmaximur.alcoholtracker.ui.dialog.adddrink.AddDrinkDialogFragment
 import com.utmaximur.alcoholtracker.util.*
 import java.util.*
 import javax.inject.Inject
 
 
 class CalendarFragment : Fragment(),
-    DrinksListAdapter.OnDrinkAdapterListener,
-    AddDrinkDialogFragment.AddDrinkDialogListener {
+    DrinksListAdapter.OnDrinkAdapterListener {
 
     @Inject
     lateinit var calendarViewModelFactory: CalendarViewModelFactory
@@ -38,13 +36,8 @@ class CalendarFragment : Fragment(),
     }
 
     private lateinit var viewModel: CalendarViewModel
-    private lateinit var calendarView: com.applandeo.materialcalendarview.CalendarView
-
-    private lateinit var alcoholTrackList: RecyclerView
+    private lateinit var binding: FragmentCalendarBinding
     private var alcoholTrackListAdapter: RecyclerView.Adapter<*>? = null
-    private lateinit var addToStartText: TextView
-    private lateinit var emptyDrinkListText: TextView
-    private lateinit var addButton: Button
 
 
     override fun onCreateView(
@@ -52,13 +45,11 @@ class CalendarFragment : Fragment(),
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view: View = inflater.inflate(R.layout.fragment_calendar, container, false)
-
+        binding = FragmentCalendarBinding.inflate(layoutInflater)
         injectDagger()
         initViewModel()
-        initUI(view)
-
-        return view
+        initUI()
+        return binding.root
     }
 
     private fun injectDagger() {
@@ -76,30 +67,30 @@ class CalendarFragment : Fragment(),
         this.viewModel = viewModel
     }
 
-    private fun findViewById(view: View) {
-        calendarView = view.findViewById(R.id.calendar_view)
-        addButton = view.findViewById(R.id.add_button)
-        addToStartText = view.findViewById(R.id.add_to_start)
-        emptyDrinkListText = view.findViewById(R.id.empty_drink_list)
-        alcoholTrackList = view.findViewById(R.id.drinks_list)
-        alcoholTrackList.setHasFixedSize(true)
-    }
-
-    private fun initUI(view: View) {
-        findViewById(view)
-
-        addButton.setOnClickListener {
+    private fun initUI() {
+        binding.addButton.setOnClickListener {
             if (viewModel.getSelectDate() != 0L) {
-                val dialogFragment = AddDrinkDialogFragment()
-                dialogFragment.setListener(this)
-                val manager = requireActivity().supportFragmentManager
-                dialogFragment.show(manager, "myDialog")
+                val navController = findNavController()
+                navController.currentBackStackEntry?.savedStateHandle?.getLiveData<String>(
+                    KEY_CALENDAR_DATA)?.observe(
+                    viewLifecycleOwner) { result ->
+                    if (result == KEY_CALENDAR_DATA_OK) {
+                        val bundle = Bundle()
+                        bundle.putLong(SELECT_DAY, viewModel.getSelectDate())
+                        navController.currentBackStackEntry?.savedStateHandle?.remove<String>(KEY_CALENDAR_DATA)
+                        calendarFragmentListener?.showAddAlcoholTrackerFragment(bundle)
+                    } else {
+                        navController.currentBackStackEntry?.savedStateHandle?.remove<String>(KEY_CALENDAR_DATA)
+                        calendarFragmentListener?.showAddAlcoholTrackerFragment(null)
+                    }
+                }
+                navController.navigate(R.id.action_calendarFragment_to_addDrinkDialogFragment)
             } else {
                 calendarFragmentListener?.showAddAlcoholTrackerFragment(null)
             }
         }
 
-        calendarView.setOnDayClickListener { eventDay ->
+        binding.calendarView.setOnDayClickListener { eventDay ->
             getAlcoholTrackByDay(eventDay.calendar.timeInMillis)
             viewModel.setSelectDate(eventDay.calendar.timeInMillis)
         }
@@ -127,15 +118,24 @@ class CalendarFragment : Fragment(),
     override fun onEdit(date: Long) {
         val bundle = Bundle()
         viewModel.getTrack(date).observe(viewLifecycleOwner, { track ->
-            bundle.putParcelable("drink", track)
+            bundle.putParcelable(DRINK, track)
             calendarFragmentListener?.showEditAlcoholTrackerFragment(bundle)
         })
     }
 
     override fun onDelete(alcoholTrack: AlcoholTrack) {
-        viewModel.deleteDrink(alcoholTrack)
-        setIconOnDate()
-        getAlcoholTrackByDay(alcoholTrack.date)
+        val navController = findNavController()
+        navController.currentBackStackEntry?.savedStateHandle?.getLiveData<String>(KEY_CALENDAR)?.observe(
+            viewLifecycleOwner) { result ->
+            if (result == KEY_CALENDAR_OK) {
+                viewModel.deleteDrink(alcoholTrack)
+                alcoholTrackListAdapter?.notifyDataSetChanged()
+                setIconOnDate()
+                getAlcoholTrackByDay(alcoholTrack.date)
+                navController.currentBackStackEntry?.savedStateHandle?.remove<String>(KEY_CALENDAR)
+            }
+        }
+        navController.navigate(R.id.action_calendarFragment_to_deleteDialogFragment)
     }
 
     private fun getAlcoholTrackByDay(eventDay: Long): MutableList<AlcoholTrack> {
@@ -158,20 +158,19 @@ class CalendarFragment : Fragment(),
             }
             alcoholTrackListAdapter = DrinksListAdapter(
                 alcoholTrack,
-                this@CalendarFragment,
-                requireActivity().supportFragmentManager
+                this@CalendarFragment
             )
-            alcoholTrackList.adapter = alcoholTrackListAdapter
-            alcoholTrackList.alphaView()
+            binding.drinksList.adapter = alcoholTrackListAdapter
+            binding.drinksList.alphaView()
             if (alcoholTrack.isNotEmpty()) {
-                emptyDrinkListText.toGone()
+                binding.emptyDrinkList.toGone()
             } else {
                 if (list.isEmpty()) {
-                    addToStartText.toVisible()
-                    addToStartText.alphaView()
+                    binding.addToStart.toVisible()
+                    binding.addToStart.alphaView()
                 } else {
-                    emptyDrinkListText.toVisible()
-                    emptyDrinkListText.alphaView()
+                    binding.emptyDrinkList.toVisible()
+                    binding.emptyDrinkList.alphaView()
                 }
             }
         })
@@ -192,17 +191,7 @@ class CalendarFragment : Fragment(),
                     )
                 )
             }
-            calendarView.setEvents(events)
+            binding.calendarView.setEvents(events)
         })
-    }
-
-    override fun addDrinkDialogPositiveClick() {
-        val bundle = Bundle()
-        bundle.putLong("selectDate", viewModel.getSelectDate())
-        calendarFragmentListener?.showAddAlcoholTrackerFragment(bundle)
-    }
-
-    override fun addDrinkDialogNegativeClick() {
-        calendarFragmentListener?.showAddAlcoholTrackerFragment(null)
     }
 }

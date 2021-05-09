@@ -15,11 +15,7 @@ import com.utmaximur.alcoholtracker.data.update.UpdateManager.Companion.getInsta
 import com.utmaximur.alcoholtracker.ui.add.AddFragment
 import com.utmaximur.alcoholtracker.ui.addmydrink.AddNewDrink
 import com.utmaximur.alcoholtracker.ui.calendar.CalendarFragment
-import com.utmaximur.alcoholtracker.ui.dialog.update.UpdateBottomDialogFragment
-import com.utmaximur.alcoholtracker.ui.settings.*
-import com.utmaximur.alcoholtracker.util.UPDATE_REQUEST_CODE
-import com.utmaximur.alcoholtracker.util.toGone
-import com.utmaximur.alcoholtracker.util.toVisible
+import com.utmaximur.alcoholtracker.util.*
 
 
 class MainActivity : AppCompatActivity(),
@@ -35,7 +31,7 @@ class MainActivity : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initUi()
+        initView()
     }
 
     private fun findViewById() {
@@ -44,22 +40,35 @@ class MainActivity : AppCompatActivity(),
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
     }
 
-    private fun initUi() {
+    private fun initView() {
         findViewById()
         navController = navHostFragment.navController
         menu.setupWithNavController(navController)
     }
 
-    override fun closeFragment() {
-        navController.popBackStack()
+    override fun showEditAlcoholTrackerFragment(bundle: Bundle) {
+        navController.navigate(R.id.addFragment, bundle)
+    }
+
+    override fun onShowAddNewDrinkFragment() {
+        navController.navigate(R.id.action_addFragment_to_addNewDrinkFragment)
+    }
+
+    override fun onShowEditNewDrinkFragment(bundle: Bundle) {
+        navController.navigate(R.id.addNewDrinkFragment, bundle)
+    }
+
+    override fun onShowUpdateDialog() {
+        navController.navigate(R.id.updateBottomDialogFragment)
     }
 
     override fun showAddAlcoholTrackerFragment(bundle: Bundle?) {
+//        navController.navigate(R.id.action_calendarFragment_to_addFragment, bundle)
         navController.navigate(R.id.addFragment, bundle)
     }
 
-    override fun showEditAlcoholTrackerFragment(bundle: Bundle) {
-        navController.navigate(R.id.addFragment, bundle)
+    override fun closeFragment() {
+        navController.popBackStack()
     }
 
     override fun onHideNavigationBar() {
@@ -68,14 +77,6 @@ class MainActivity : AppCompatActivity(),
 
     override fun onShowNavigationBar() {
         menu.toVisible()
-    }
-
-    override fun onShowAddNewDrinkFragment() {
-        navController.navigate(R.id.addNewDrinkFragment)
-    }
-
-    override fun onShowEditNewDrinkFragment(bundle: Bundle) {
-        navController.navigate(R.id.addNewDrinkFragment, bundle)
     }
 
     override fun onStart() {
@@ -94,15 +95,6 @@ class MainActivity : AppCompatActivity(),
             }
         }
         super.onActivityResult(requestCode, resultCode, data)
-    }
-
-    override fun onShowUpdateDialog() {
-        val updateBottomDialogFragment =
-            UpdateBottomDialogFragment()
-        updateBottomDialogFragment.show(
-            supportFragmentManager,
-            updateBottomDialogFragment.tag
-        )
     }
 
     private val sharedPrefs by lazy { getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE) }

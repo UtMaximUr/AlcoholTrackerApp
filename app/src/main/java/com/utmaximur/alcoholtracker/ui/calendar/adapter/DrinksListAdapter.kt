@@ -6,28 +6,21 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
-import com.utmaximur.alcoholtracker.ui.dialog.delete.DeleteDialogFragment
 import com.utmaximur.alcoholtracker.util.*
 
 
 class DrinksListAdapter(
     private val alcoholTracks: MutableList<AlcoholTrack>,
-    private val listener: OnDrinkAdapterListener,
-    private val supportFragmentManager: FragmentManager
+    private val listener: OnDrinkAdapterListener
 ) :
     RecyclerView.Adapter<DrinksListAdapter.ViewHolder>() {
 
     interface OnDrinkAdapterListener {
         fun onEdit(date: Long)
         fun onDelete(alcoholTrack: AlcoholTrack)
-    }
-
-    interface OnDeleteDyList {
-        fun removeAt(position: Int)
     }
 
     class ViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
@@ -58,10 +51,7 @@ class DrinksListAdapter(
 
         fun bind(
             alcoholTrack: AlcoholTrack,
-            position: Int,
-            listener: OnDrinkAdapterListener,
-            onDeleteDyList: OnDeleteDyList,
-            supportFragmentManager: FragmentManager
+            listener: OnDrinkAdapterListener
         ) {
             volumeText?.text =
                 alcoholTrack.volume.formatVolume(itemView.context, alcoholTrack.quantity)
@@ -75,24 +65,17 @@ class DrinksListAdapter(
                 listener.onEdit(alcoholTrack.date)
             }
             deleteButton?.setOnClickListener {
-                val deleteFragment = DeleteDialogFragment()
-                deleteFragment.setListener(object : DeleteDialogFragment.DeleteDialogListener {
-                    override fun deleteDrink() {
-                        listener.onDelete(alcoholTrack)
-                        onDeleteDyList.removeAt(position)
-                    }
-                })
-                deleteFragment.show(supportFragmentManager, "deleteDialog")
+                listener.onDelete(alcoholTrack)
             }
 
-            if(alcoholTrack.event.isEmpty()) {
+            if (alcoholTrack.event.isEmpty()) {
                 eventButton?.toGone()
             }
 
             eventText?.text = alcoholTrack.event
 
             eventButton?.setOnClickListener {
-                if ( drinkLayout?.visibility == View.VISIBLE) {
+                if (drinkLayout?.visibility == View.VISIBLE) {
                     drinkLayout?.toInvisible()
                     eventLayout?.toVisible()
                     drinkLayout?.alphaViewOut()
@@ -120,12 +103,6 @@ class DrinksListAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val alcoholTrack: AlcoholTrack = alcoholTracks[position]
-        holder.bind(alcoholTrack, position, listener, object : OnDeleteDyList {
-            override fun removeAt(position: Int) {
-                alcoholTracks.removeAt(position)
-                notifyItemRemoved(position)
-                notifyItemRangeChanged(position, itemCount)
-            }
-        }, supportFragmentManager)
+        holder.bind(alcoholTrack, listener)
     }
 }

@@ -13,54 +13,35 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.utmaximur.alcoholtracker.App
-import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.dagger.component.AlcoholTrackComponent
-import com.utmaximur.alcoholtracker.dagger.factory.AddPhotoViewModelFactory
-import java.io.*
-import java.util.*
-
-
-const val REQUEST_PHOTO = 1000
-const val REQUEST_GALLERY = 1001
+import com.utmaximur.alcoholtracker.databinding.DialogBottomSheetBinding
+import com.utmaximur.alcoholtracker.di.component.AlcoholTrackComponent
+import com.utmaximur.alcoholtracker.di.factory.AddPhotoViewModelFactory
+import com.utmaximur.alcoholtracker.util.*
+import java.io.File
+import java.io.FileNotFoundException
+import java.io.IOException
+import java.io.InputStream
 
 class AddPhotoBottomDialogFragment : BottomSheetDialogFragment() {
 
-    private lateinit var useCamera: TextView
-    private lateinit var loadGallery: TextView
-    private lateinit var deletePhoto: TextView
-
     private lateinit var viewModel: AddPhotoViewModel
-
-    private var bottomDialogListener: BottomDialogListener? = null
-
-    interface BottomDialogListener {
-        fun setImageViewPhoto(path: String)
-        fun deleteImageViewPhoto()
-    }
-
-    fun setListener(bottomDialogListener: BottomDialogListener) {
-        this.bottomDialogListener = bottomDialogListener
-    }
+    private lateinit var binding: DialogBottomSheetBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
-        val view: View = inflater.inflate(
-            R.layout.dialog_bottom_sheet, container,
-            false
-        )
+    ): View {
+        binding = DialogBottomSheetBinding.inflate(inflater)
         initViewModel()
-        initUi(view)
-        return view
+        initUi()
+        return binding.root
     }
 
     private fun initViewModel() {
@@ -73,25 +54,20 @@ class AddPhotoBottomDialogFragment : BottomSheetDialogFragment() {
         this.viewModel = viewModel
     }
 
-    private fun findViewById(view: View) {
-        useCamera = view.findViewById(R.id.tv_btn_add_photo_camera)
-        loadGallery = view.findViewById(R.id.tv_btn_add_photo_gallery)
-        deletePhoto = view.findViewById(R.id.tv_btn_remove_photo)
-    }
-
-    private fun initUi(view: View) {
-        findViewById(view)
-
-        useCamera.setOnClickListener {
+    private fun initUi() {
+        binding.useCamera.setOnClickListener {
             checkPermissionsPhoto()
         }
 
-        loadGallery.setOnClickListener {
+        binding.loadGallery.setOnClickListener {
             checkPermissionsGallery()
         }
 
-        deletePhoto.setOnClickListener {
-            bottomDialogListener?.deleteImageViewPhoto()
+        binding.deletePhoto.setOnClickListener {
+            findNavController().previousBackStackEntry?.savedStateHandle?.set(
+                KEY_CREATE_DRINK,
+                KEY_CREATE_DRINK_DELETE
+            )
             dialog?.dismiss()
         }
     }
@@ -146,12 +122,18 @@ class AddPhotoBottomDialogFragment : BottomSheetDialogFragment() {
         when (requestCode) {
             REQUEST_PHOTO -> {
                 if (resultCode == Activity.RESULT_OK && data !== null) {
-                    val bitmap = data.extras?.get("data") as Bitmap
-                    bottomDialogListener?.setImageViewPhoto(savePhoto(bitmap))
+                    val bitmap = data.extras?.get(DATA) as Bitmap
+                    findNavController().previousBackStackEntry?.savedStateHandle?.set(
+                        KEY_CREATE_DRINK,
+                        viewModel.savePhoto(requireContext(), bitmap)
+                    )
                     dialog?.dismiss()
                 }
                 val file: File = viewModel.getFile(requireContext(), viewModel.photoURI)!!
-                bottomDialogListener?.setImageViewPhoto(file.absolutePath)
+                findNavController().previousBackStackEntry?.savedStateHandle?.set(
+                    KEY_CREATE_DRINK,
+                    file.absolutePath
+                )
                 dialog?.dismiss()
                 if (viewModel.photoFile!!.exists()) {
                     viewModel.photoFile!!.delete()
@@ -164,7 +146,10 @@ class AddPhotoBottomDialogFragment : BottomSheetDialogFragment() {
                         val imageStream: InputStream =
                             requireActivity().contentResolver.openInputStream(imageUri)!!
                         val selectedImage = BitmapFactory.decodeStream(imageStream)
-                        bottomDialogListener?.setImageViewPhoto(savePhoto(selectedImage))
+                        findNavController().previousBackStackEntry?.savedStateHandle?.set(
+                            KEY_CREATE_DRINK,
+                            viewModel.savePhoto(requireContext(), selectedImage)
+                        )
                         dialog?.dismiss()
                     } catch (e: FileNotFoundException) {
                         e.printStackTrace()
@@ -172,22 +157,6 @@ class AddPhotoBottomDialogFragment : BottomSheetDialogFragment() {
                 }
             }
         }
-    }
-
-    private fun savePhoto(bitmap: Bitmap): String {
-        val file = File(requireContext().filesDir, Date().time.toString() + ".jpeg")
-        try {
-            var fos: FileOutputStream? = null
-            try {
-                fos = FileOutputStream(file)
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 80, fos)
-            } finally {
-                fos?.close()
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        return file.absolutePath
     }
 
     private fun openGallery() {
@@ -208,7 +177,7 @@ class AddPhotoBottomDialogFragment : BottomSheetDialogFragment() {
             if (viewModel.photoFile != null) {
                 viewModel.photoURI = FileProvider.getUriForFile(
                     requireContext(),
-                    requireContext().packageName + ".fileprovider",
+                    requireContext().packageName + FILE_PROVIDER,
                     viewModel.photoFile!!
                 )
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, viewModel.photoURI)

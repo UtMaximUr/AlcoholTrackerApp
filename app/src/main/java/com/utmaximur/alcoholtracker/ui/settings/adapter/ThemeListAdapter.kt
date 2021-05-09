@@ -1,6 +1,7 @@
 package com.utmaximur.alcoholtracker.ui.settings.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -8,21 +9,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.util.toVisible
 
-class ThemeListAdapter(private val themeList: List<String>, private val themeId: Int)  :
+class ThemeListAdapter(
+    private val onClick: (Int) -> Unit,
+    private val themeList: List<String>,
+    private val themeId: Int
+) :
     RecyclerView.Adapter<ThemeListAdapter.ViewHolder>() {
 
-    interface ThemeListener {
-        fun saveTheme(theme: Int)
-    }
-
-    private lateinit var listener: ThemeListener
-
-    fun setListener(listener: ThemeListener){
-        this.listener = listener
-    }
-
-    class ViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
-        RecyclerView.ViewHolder(inflater.inflate(R.layout.item_theme, parent, false)) {
+    class ViewHolder(itemView: View, val onClick: (Int) -> Unit) :
+        RecyclerView.ViewHolder(itemView) {
         private var themeText: TextView? = null
         private var themeChoice: ImageView? = null
 
@@ -31,12 +26,12 @@ class ThemeListAdapter(private val themeList: List<String>, private val themeId:
             themeChoice = itemView.findViewById(R.id.item_theme_choice)
         }
 
-        fun bind(theme: String, themeId: Int, position: Int, listener: ThemeListener) {
+        fun bind(theme: String, themeId: Int, position: Int) {
             themeText?.text = theme
             themeText?.setOnClickListener {
-                listener.saveTheme(position)
+                onClick(position)
             }
-            if(themeId == position){
+            if (themeId == position) {
                 themeChoice?.toVisible()
             }
         }
@@ -44,7 +39,8 @@ class ThemeListAdapter(private val themeList: List<String>, private val themeId:
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-        return ViewHolder(view, parent)
+            .inflate(R.layout.item_theme, parent, false)
+        return ViewHolder(view, onClick)
     }
 
     override fun getItemCount(): Int {
@@ -52,8 +48,7 @@ class ThemeListAdapter(private val themeList: List<String>, private val themeId:
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
         val theme: String = themeList[position]
-        holder.bind(theme, themeId, position, listener)
+        holder.bind(theme, themeId, position)
     }
 }

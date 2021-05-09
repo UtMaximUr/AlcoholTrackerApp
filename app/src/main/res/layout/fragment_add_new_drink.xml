@@ -65,7 +65,7 @@
         app:layout_constraintTop_toTopOf="@+id/bottom_image">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/drink_name_text"
+            android:id="@+id/drink_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
@@ -111,7 +111,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/left_range_degree"
+            android:id="@+id/min_range_degree"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_condensed_regular"
@@ -127,7 +127,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/right_range_degree"
+            android:id="@+id/max_range_degree"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/dp_4"
@@ -148,7 +148,7 @@
 
 
     <com.utmaximur.alcoholtracker.ui.customview.RangeSeekBar
-        android:id="@+id/range_seek_bar_degree"
+        android:id="@+id/range_degree"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_24"
@@ -165,7 +165,7 @@
         android:layout_height="0dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/range_seek_bar_degree">
+        app:layout_constraintTop_toBottomOf="@+id/range_degree">
 
         <TextView
             android:layout_width="match_parent"

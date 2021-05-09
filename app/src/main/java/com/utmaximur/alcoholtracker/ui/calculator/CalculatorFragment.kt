@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.utmaximur.alcoholtracker.App
-import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.dagger.factory.CalculatorViewModelFactory
+import com.utmaximur.alcoholtracker.databinding.FragmentCalculatorBinding
+import com.utmaximur.alcoholtracker.di.factory.CalculatorViewModelFactory
+import com.utmaximur.alcoholtracker.util.*
 import javax.inject.Inject
 
 class CalculatorFragment : Fragment() {
@@ -18,25 +18,7 @@ class CalculatorFragment : Fragment() {
     lateinit var calculatorViewModelFactory: CalculatorViewModelFactory
 
     private lateinit var viewModel: CalculatorViewModel
-
-    private lateinit var button0: Button
-    private lateinit var button1: Button
-    private lateinit var button2: Button
-    private lateinit var button3: Button
-    private lateinit var button4: Button
-    private lateinit var button5: Button
-    private lateinit var button6: Button
-    private lateinit var button7: Button
-    private lateinit var button8: Button
-    private lateinit var button9: Button
-
-    private lateinit var buttonOk: Button
-    private lateinit var buttonAc: Button
-    private lateinit var buttonPlus: Button
-    private lateinit var buttonMinus: Button
-    private lateinit var buttonEqually: Button
-    private lateinit var buttonDivide: Button
-    private lateinit var buttonMultiply: Button
+    private lateinit var binding: FragmentCalculatorBinding
 
     private var calculatorListener: CalculatorListener? = null
 
@@ -53,14 +35,12 @@ class CalculatorFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view: View = inflater.inflate(R.layout.fragment_calculator, container, false)
-
+    ): View {
+        binding = FragmentCalculatorBinding.inflate(layoutInflater)
         injectDagger()
         initViewModel()
-        initUI(view)
-
-        return view
+        initUI()
+        return binding.root
     }
 
     private fun injectDagger() {
@@ -74,106 +54,87 @@ class CalculatorFragment : Fragment() {
         this.viewModel = viewModel
     }
 
-    private fun initUI(view: View) {
-        button0 = view.findViewById(R.id.calculator_button_0)
-        button1 = view.findViewById(R.id.calculator_button_1)
-        button2 = view.findViewById(R.id.calculator_button_2)
-        button3 = view.findViewById(R.id.calculator_button_3)
-        button4 = view.findViewById(R.id.calculator_button_4)
-        button5 = view.findViewById(R.id.calculator_button_5)
-        button6 = view.findViewById(R.id.calculator_button_6)
-        button7 = view.findViewById(R.id.calculator_button_7)
-        button8 = view.findViewById(R.id.calculator_button_8)
-        button9 = view.findViewById(R.id.calculator_button_9)
-
-        buttonOk = view.findViewById(R.id.calculator_button_ok)
-        buttonAc = view.findViewById(R.id.calculator_button_ac)
-        buttonPlus = view.findViewById(R.id.calculator_button_plus)
-        buttonMinus = view.findViewById(R.id.calculator_button_minus)
-        buttonEqually = view.findViewById(R.id.calculator_button_equally)
-        buttonDivide = view.findViewById(R.id.calculator_button_divide)
-        buttonMultiply = view.findViewById(R.id.calculator_button_multiply)
-
-        button0.setOnClickListener {
-            viewModel.setValue(0)
+    private fun initUI() {
+        binding.calculatorButton0.setOnClickListener {
+            viewModel.setValue(KEY_0)
             calculatorListener?.getValueCalculating(viewModel.getValue())
         }
 
-        button1.setOnClickListener {
-            viewModel.setValue(1)
+        binding.calculatorButton1.setOnClickListener {
+            viewModel.setValue(KEY_1)
             calculatorListener?.getValueCalculating(viewModel.getValue())
         }
 
-        button2.setOnClickListener {
-            viewModel.setValue(2)
+        binding.calculatorButton2.setOnClickListener {
+            viewModel.setValue(KEY_2)
             calculatorListener?.getValueCalculating(viewModel.getValue())
         }
 
-        button3.setOnClickListener {
-            viewModel.setValue(3)
+        binding.calculatorButton3.setOnClickListener {
+            viewModel.setValue(KEY_3)
             calculatorListener?.getValueCalculating(viewModel.getValue())
         }
 
-        button4.setOnClickListener {
-            viewModel.setValue(4)
+        binding.calculatorButton4.setOnClickListener {
+            viewModel.setValue(KEY_4)
             calculatorListener?.getValueCalculating(viewModel.getValue())
         }
 
-        button5.setOnClickListener {
-            viewModel.setValue(5)
+        binding.calculatorButton5.setOnClickListener {
+            viewModel.setValue(KEY_5)
             calculatorListener?.getValueCalculating(viewModel.getValue())
         }
 
-        button6.setOnClickListener {
-            viewModel.setValue(6)
+        binding.calculatorButton6.setOnClickListener {
+            viewModel.setValue(KEY_6)
             calculatorListener?.getValueCalculating(viewModel.getValue())
         }
 
-        button7.setOnClickListener {
-            viewModel.setValue(7)
+        binding.calculatorButton7.setOnClickListener {
+            viewModel.setValue(KEY_7)
             calculatorListener?.getValueCalculating(viewModel.getValue())
         }
 
-        button8.setOnClickListener {
-            viewModel.setValue(8)
+        binding.calculatorButton8.setOnClickListener {
+            viewModel.setValue(KEY_8)
             calculatorListener?.getValueCalculating(viewModel.getValue())
         }
 
-        button9.setOnClickListener {
-            viewModel.setValue(9)
+        binding.calculatorButton9.setOnClickListener {
+            viewModel.setValue(KEY_9)
             calculatorListener?.getValueCalculating(viewModel.getValue())
         }
 
-        buttonOk.setOnClickListener {
+        binding.calculatorButtonOk.setOnClickListener {
             activity?.supportFragmentManager?.beginTransaction()
                 ?.remove(this)
                 ?.commit()
             calculatorListener?.closeCalculator()
         }
 
-        buttonAc.setOnClickListener {
+        binding.calculatorButtonAc.setOnClickListener {
             viewModel.acCalculation()
             calculatorListener?.getValueCalculating(viewModel.getValue())
         }
 
-        buttonPlus.setOnClickListener {
+        binding.calculatorButtonPlus.setOnClickListener {
             viewModel.setCurrentAction(ADDITION)
         }
 
-        buttonMinus.setOnClickListener {
+        binding.calculatorButtonMinus.setOnClickListener {
             viewModel.setCurrentAction(SUBTRACTION)
         }
 
-        buttonEqually.setOnClickListener {
+        binding.calculatorButtonEqually.setOnClickListener {
             viewModel.computeCalculation()
             calculatorListener?.getValueCalculating(viewModel.getValue())
         }
 
-        buttonDivide.setOnClickListener {
+        binding.calculatorButtonDivide.setOnClickListener {
             viewModel.setCurrentAction(DIVISION)
         }
 
-        buttonMultiply.setOnClickListener {
+        binding.calculatorButtonMultiply.setOnClickListener {
             viewModel.setCurrentAction(MULTIPLICATION)
         }
 
@@ -181,8 +142,8 @@ class CalculatorFragment : Fragment() {
     }
 
     private fun getPriceDrink() {
-        if (arguments?.getString("price_drink") != "") {
-            arguments?.getString("price_drink")?.toDouble()?.toInt()?.let { viewModel.setValue(it) }
+        if (arguments?.getString(PRICE_DRINK) != "") {
+            arguments?.getString(PRICE_DRINK)?.toDouble()?.toInt()?.let { viewModel.setValue(it) }
         }
     }
 }

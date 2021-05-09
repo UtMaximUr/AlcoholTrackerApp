@@ -1,22 +1,17 @@
 @file:Suppress("PrivatePropertyName")
 
-package com.utmaximur.alcoholtracker.dagger.module
+package com.utmaximur.alcoholtracker.di.module
 
 import android.app.Application
-import android.content.Context
-import android.content.res.AssetManager
 import android.os.Handler
 import android.os.Looper
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.utmaximur.alcoholtracker.data.AlcoholTrackDatabase
-import com.utmaximur.alcoholtracker.data.file.FileGenerator
-import com.utmaximur.alcoholtracker.data.model.Drink
-import com.utmaximur.alcoholtracker.data.resources.IconRaw
+import com.utmaximur.alcoholtracker.data.assets.AssetsModule
+import com.utmaximur.alcoholtracker.data.file.FileManager
 import com.utmaximur.alcoholtracker.util.convertMigrationModel
 import dagger.Module
 import dagger.Provides
@@ -24,7 +19,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import java.io.IOException
 import javax.inject.Singleton
 
 
@@ -55,15 +49,14 @@ class RoomDatabaseModule(private var application: Application) {
         alcoholTrackDatabase.getDrinkDao()
 
     @Provides
-    fun provideIcons(): IconRaw {
-        return IconRaw()
+    fun provideAssets(): AssetsModule {
+        return AssetsModule(application.assets)
     }
 
     @Provides
-    fun provideFile(): FileGenerator {
-        return FileGenerator()
+    fun provideFile(): FileManager {
+        return FileManager()
     }
-
 
     /**
      * init database
@@ -73,31 +66,11 @@ class RoomDatabaseModule(private var application: Application) {
         override fun onCreate(db: SupportSQLiteDatabase) {
             super.onCreate(db)
             CoroutineScope(Dispatchers.IO).launch {
-                getDrinkList(application).forEach {
+                provideAssets().getDrinkList().forEach {
                     alcoholTrackDatabase.getDrinkDao().addDrink(it)
                 }
             }
         }
-    }
-
-    fun getDrinkList(context: Context): List<Drink> {
-        val json = getJsonFromAssets(context.assets, "drink_list.json")
-        val turnsType = object : TypeToken<List<Drink>>() {}.type
-        return Gson().fromJson(json, turnsType)
-    }
-
-    private fun getJsonFromAssets(assetManager: AssetManager, fileName: String): String {
-        var jsonString = ""
-        try {
-            val inputStream = assetManager.open(fileName)
-            val size = inputStream.available()
-            val buffer = ByteArray(size)
-            inputStream.read(buffer)
-            inputStream.close()
-            jsonString = String(buffer, Charsets.UTF_8)
-        } catch (e: IOException) {
-        }
-        return jsonString
     }
 
     /**
@@ -159,7 +132,7 @@ class RoomDatabaseModule(private var application: Application) {
 
     private fun updateDrinkDb() {
         CoroutineScope(Dispatchers.IO).launch {
-            getDrinkList(application).forEach {
+            provideAssets().getDrinkList().forEach {
                 alcoholTrackDatabase.getDrinkDao().addDrink(it)
             }
         }

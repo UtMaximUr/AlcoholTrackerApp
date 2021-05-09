@@ -4,17 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager.widget.ViewPager
-import com.google.android.material.tabs.TabLayout
 import com.utmaximur.alcoholtracker.App
-import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.dagger.component.AlcoholTrackComponent
-import com.utmaximur.alcoholtracker.dagger.factory.StatisticViewModelFactory
+import com.utmaximur.alcoholtracker.databinding.FragmentStatisticBinding
+import com.utmaximur.alcoholtracker.di.component.AlcoholTrackComponent
+import com.utmaximur.alcoholtracker.di.factory.StatisticViewModelFactory
 import com.utmaximur.alcoholtracker.ui.statistic.adapter.StatisticViewPagerAdapter
 import com.utmaximur.alcoholtracker.ui.statistic.adapter.TopDrinkAdapter
 import com.utmaximur.alcoholtracker.util.alphaView
@@ -24,23 +20,18 @@ class StatisticFragment :
 
     private lateinit var viewModel: StatisticViewModel
 
-    private lateinit var topDrinkList: RecyclerView
-    private lateinit var statisticPager: ViewPager
-    private lateinit var statisticIndicator: TabLayout
-
-    private lateinit var statisticCountsDays: TextView
+    private lateinit var binding: FragmentStatisticBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view: View = inflater.inflate(R.layout.fragment_statistic, container, false)
         injectDagger()
         initViewModel()
-        findViewById(view)
+        binding = FragmentStatisticBinding.inflate(layoutInflater)
         initStatistic()
-        return view
+        return binding.root
     }
 
     private fun injectDagger() {
@@ -58,25 +49,17 @@ class StatisticFragment :
         this.viewModel = viewModel
     }
 
-    private fun findViewById(view: View) {
-        topDrinkList = view.findViewById(R.id.top_drinks_list)
-        statisticPager = view.findViewById(R.id.statistic_view_pager)
-        statisticIndicator = view.findViewById(R.id.view_pager_indicator)
-        statisticCountsDays = view.findViewById(R.id.count_days_text)
-    }
-
     private fun initUI() {
-        topDrinkList.alphaView()
-        topDrinkList.layoutManager = GridLayoutManager(context, 4)
+        binding.topDrinksList.alphaView()
+        binding.topDrinksList.layoutManager = GridLayoutManager(context, 4)
         viewModel.getAllDrink().observe(viewLifecycleOwner, { list ->
-            topDrinkList.adapter = TopDrinkAdapter(viewModel.getDrinksDrunkByMe())
-            (topDrinkList.adapter as TopDrinkAdapter).setDrinkList(list)
+            binding.topDrinksList.adapter = TopDrinkAdapter(list, viewModel.getDrinksDrunkByMe())
         })
 
-        statisticPager.adapter = StatisticViewPagerAdapter(viewModel.getPriceListByPeriod(), requireContext())
-        statisticIndicator.setupWithViewPager(statisticPager, true)
+        binding.statisticViewPager.adapter = StatisticViewPagerAdapter(viewModel.getPriceListByPeriod(), requireContext())
+        binding.viewPagerIndicator.setupWithViewPager(binding.statisticViewPager, true)
 
-        statisticCountsDays.text = viewModel.getCountDayOffYear(requireContext())
+        binding.countDaysText.text = viewModel.getCountDayOffYear(requireContext())
     }
 
     private fun initStatistic(){

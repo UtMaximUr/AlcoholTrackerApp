@@ -9,10 +9,10 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.viewpager.widget.PagerAdapter
-import com.bumptech.glide.Glide
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.data.model.Drink
 import com.utmaximur.alcoholtracker.util.getResString
+import com.utmaximur.alcoholtracker.util.setImagePath
 import com.utmaximur.alcoholtracker.util.toVisible
 import java.io.InputStream
 
@@ -59,7 +59,7 @@ class DrinkViewPagerAdapter(private var drinksList: List<Drink>, private var con
             drinkAdd.toVisible()
             drinkName.text = itemView.context.getText(R.string.add_new_drink)
         } else {
-            Glide.with(itemView).load(drinksList[position].photo).into(drinkImage)
+            drinkImage.setImagePath(drinksList[position].photo)
             drinkName.text = drinksList[position].drink.getResString(itemView.context)
         }
 
