@@ -1,7 +1,6 @@
 package com.utmaximur.alcoholtracker.ui.addmydrink
 
 import android.content.Context
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.data.model.Drink
@@ -32,7 +31,7 @@ class AddNewDrinkViewModel(
         }
     }
 
-    fun getIcons(): LiveData<List<Icon>> {
+    fun getIcons(): List<Icon> {
         return iconRepository.getIcons()
     }
 

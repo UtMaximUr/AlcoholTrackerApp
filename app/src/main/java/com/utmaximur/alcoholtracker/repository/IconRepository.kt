@@ -1,12 +1,11 @@
 package com.utmaximur.alcoholtracker.repository
 
-import androidx.lifecycle.LiveData
-import com.utmaximur.alcoholtracker.data.resources.IconRaw
+import com.utmaximur.alcoholtracker.data.assets.AssetsModule
 import com.utmaximur.alcoholtracker.data.model.Icon
 
-class IconRepository(private var iconRaw: IconRaw) {
+class IconRepository(private var assetsModule: AssetsModule) {
 
-    fun getIcons(): LiveData<List<Icon>> {
-        return iconRaw.getIconsList()
+    fun getIcons(): List<Icon> {
+        return assetsModule.getIconsList()
     }
 }

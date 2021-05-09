@@ -10,8 +10,8 @@ fun ImageView.setImage(icon: String) {
     ).into(this)
 }
 
-fun ImageView.setImage(icon: Int) {
-    Glide.with(this).load(icon)
+fun ImageView.setImageOverrideSize(icon: String) {
+    Glide.with(this).load(icon.getIdRaw(context))
         .override(45.dpToPx(), 45.dpToPx()).into(
             this
         )

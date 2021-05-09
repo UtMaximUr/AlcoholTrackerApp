@@ -162,7 +162,8 @@ class AddNewDrink : Fragment() {
             binding.photoDrink.setImagePath(drink.photo)
         }
         binding.drinkName.setText(drink.drink)
-        setIconAdapter(drink.icon.getIdRaw(requireContext()).let { Icon(it) })
+//        setIconAdapter(drink.icon.getIdRaw(requireContext()).let { Icon(it) })
+        setIconAdapter(Icon(drink.icon))
         binding.rangeDegree.setCurrentRangeMin(drink.degree.first()?.toDouble()?.toFloat()!!)
         binding.rangeDegree.setCurrentRangeMax(drink.degree.last()?.toDouble()?.toFloat()!!)
         binding.minRangeDegree.text = drink.degree.first()
@@ -175,11 +176,7 @@ class AddNewDrink : Fragment() {
         selectIconAdapter = SelectIconAdapter(this::adapterIconOnClick, icon)
         iconConcatAdapter = ConcatAdapter(selectIconAdapter)
         binding.drinkAddIcon.adapter = iconConcatAdapter
-        viewModel.getIcons().observe(viewLifecycleOwner, {
-            it?.let {
-                selectIconAdapter?.submitList(it as MutableList<Icon>)
-            }
-        })
+        selectIconAdapter?.submitList(viewModel.getIcons())
     }
 
     private fun setVolumeAdapter(volumes: List<String?>?) {
@@ -196,7 +193,7 @@ class AddNewDrink : Fragment() {
 
     private fun adapterIconOnClick(icon: Icon) {
         hideKeyboard()
-        viewModel.icon = requireContext().resources.getResourceName(icon.icon)
+        viewModel.icon = icon.icon
     }
 
     private fun adapterVolumeOnClick(volume: String?) {

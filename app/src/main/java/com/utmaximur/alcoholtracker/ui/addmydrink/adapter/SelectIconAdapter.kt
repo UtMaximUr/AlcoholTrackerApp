@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.data.model.Icon
-import com.utmaximur.alcoholtracker.util.setImage
+import com.utmaximur.alcoholtracker.util.setImageOverrideSize
 
 
 class SelectIconAdapter(private val onClick: (Icon) -> Unit, private var selectedIcon: Icon?) :
@@ -34,7 +34,7 @@ class SelectIconAdapter(private val onClick: (Icon) -> Unit, private var selecte
         fun bind(icon: Icon, onSelectedIcon: (Icon) -> Unit) {
             currentIcon = icon
             this.onSelectedIcon = onSelectedIcon
-            iconImageView.setImage(icon.icon)
+            iconImageView.setImageOverrideSize(icon.icon)
         }
     }
 
