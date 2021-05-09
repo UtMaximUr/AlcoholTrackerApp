@@ -63,7 +63,7 @@ class AddNewDrink : Fragment() {
         val dependencyFactory: AlcoholTrackComponent =
             (requireActivity().application as App).alcoholTrackComponent
         val drinkRepository = dependencyFactory.provideDrinkRepository()
-        val iconRepository = dependencyFactory.provideIconRepository()
+        val iconRepository = dependencyFactory.provideAssetsRepository()
         val viewModel: AddNewDrinkViewModel by viewModels {
             AddNewDrinkViewModelFactory(drinkRepository, iconRepository)
         }

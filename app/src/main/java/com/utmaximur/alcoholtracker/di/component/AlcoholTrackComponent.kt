@@ -22,7 +22,7 @@ interface AlcoholTrackComponent {
 
     fun provideDrinkRepository(): DrinkRepository
 
-    fun provideIconRepository(): AssetsRepository
+    fun provideAssetsRepository(): AssetsRepository
 
     fun provideFileRepository(): FileRepository
 
