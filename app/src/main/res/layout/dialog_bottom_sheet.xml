@@ -9,7 +9,6 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/tv_bottom_sheet_heading"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/dp_56"
         android:layout_marginEnd="@dimen/dp_16"
@@ -20,7 +19,7 @@
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/tv_btn_add_photo_camera"
+        android:id="@+id/use_camera"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_48"
         android:layout_marginEnd="@dimen/dp_16"
@@ -35,7 +34,7 @@
         app:drawableTint="@color/text_color" />
 
     <TextView
-        android:id="@+id/tv_btn_add_photo_gallery"
+        android:id="@+id/load_gallery"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginEnd="@dimen/dp_16"
@@ -57,7 +56,7 @@
         android:background="@android:color/darker_gray" />
 
     <TextView
-        android:id="@+id/tv_btn_remove_photo"
+        android:id="@+id/delete_photo"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_48"
         android:layout_marginEnd="@dimen/dp_16"
