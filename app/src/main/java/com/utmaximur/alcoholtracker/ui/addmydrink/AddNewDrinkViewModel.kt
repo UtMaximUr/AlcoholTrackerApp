@@ -6,13 +6,13 @@ import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.data.model.Drink
 import com.utmaximur.alcoholtracker.data.model.Icon
 import com.utmaximur.alcoholtracker.repository.DrinkRepository
-import com.utmaximur.alcoholtracker.repository.IconRepository
+import com.utmaximur.alcoholtracker.repository.AssetsRepository
 import com.utmaximur.alcoholtracker.util.formatDegree1f
 import java.util.*
 
 class AddNewDrinkViewModel(
     private var drinkRepository: DrinkRepository,
-    private var iconRepository: IconRepository
+    private var assetsRepository: AssetsRepository
 ) : ViewModel() {
 
     var id: String = ""
@@ -32,7 +32,7 @@ class AddNewDrinkViewModel(
     }
 
     fun getIcons(): List<Icon> {
-        return iconRepository.getIcons()
+        return assetsRepository.getIcons()
     }
 
     fun getVolumes(context: Context): List<String?> {

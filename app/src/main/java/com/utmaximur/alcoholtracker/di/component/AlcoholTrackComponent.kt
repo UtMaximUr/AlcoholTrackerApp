@@ -4,7 +4,7 @@ import com.utmaximur.alcoholtracker.di.module.AlcoholTrackModule
 import com.utmaximur.alcoholtracker.di.module.RoomDatabaseModule
 import com.utmaximur.alcoholtracker.repository.DrinkRepository
 import com.utmaximur.alcoholtracker.repository.FileRepository
-import com.utmaximur.alcoholtracker.repository.IconRepository
+import com.utmaximur.alcoholtracker.repository.AssetsRepository
 import com.utmaximur.alcoholtracker.repository.TrackRepository
 import com.utmaximur.alcoholtracker.ui.add.AddFragment
 import com.utmaximur.alcoholtracker.ui.addmydrink.AddNewDrink
@@ -22,7 +22,7 @@ interface AlcoholTrackComponent {
 
     fun provideDrinkRepository(): DrinkRepository
 
-    fun provideIconRepository(): IconRepository
+    fun provideIconRepository(): AssetsRepository
 
     fun provideFileRepository(): FileRepository
 

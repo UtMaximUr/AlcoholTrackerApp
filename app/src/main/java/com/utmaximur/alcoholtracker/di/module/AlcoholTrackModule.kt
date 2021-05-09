@@ -2,11 +2,10 @@ package com.utmaximur.alcoholtracker.di.module
 
 import com.utmaximur.alcoholtracker.data.AlcoholTrackDatabase
 import com.utmaximur.alcoholtracker.data.assets.AssetsModule
-import com.utmaximur.alcoholtracker.data.resources.IconRaw
 import com.utmaximur.alcoholtracker.data.file.FileManager
 import com.utmaximur.alcoholtracker.repository.DrinkRepository
 import com.utmaximur.alcoholtracker.repository.FileRepository
-import com.utmaximur.alcoholtracker.repository.IconRepository
+import com.utmaximur.alcoholtracker.repository.AssetsRepository
 import com.utmaximur.alcoholtracker.repository.TrackRepository
 import dagger.Module
 import dagger.Provides
@@ -29,8 +28,8 @@ class AlcoholTrackModule {
 
     @Singleton
     @Provides
-    fun providesIconRepository(assetsModule: AssetsModule): IconRepository {
-        return IconRepository(assetsModule)
+    fun providesAssetsRepository(assetsModule: AssetsModule): AssetsRepository {
+        return AssetsRepository(assetsModule)
     }
 
     @Singleton
