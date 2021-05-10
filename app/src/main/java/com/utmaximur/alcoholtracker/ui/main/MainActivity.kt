@@ -63,7 +63,6 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun showAddAlcoholTrackerFragment(bundle: Bundle?) {
-//        navController.navigate(R.id.action_calendarFragment_to_addFragment, bundle)
         navController.navigate(R.id.addFragment, bundle)
     }
 
