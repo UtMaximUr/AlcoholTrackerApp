@@ -17,7 +17,6 @@ import com.utmaximur.alcoholtracker.ui.addmydrink.AddNewDrink
 import com.utmaximur.alcoholtracker.ui.calendar.CalendarFragment
 import com.utmaximur.alcoholtracker.util.*
 
-
 class MainActivity : AppCompatActivity(),
     AddFragment.AddFragmentListener,
     AddNewDrink.AddNewFragmentListener,
