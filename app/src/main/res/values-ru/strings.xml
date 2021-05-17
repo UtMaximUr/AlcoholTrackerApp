@@ -83,6 +83,7 @@
     <string name="statistic_month_days">Месяц</string>
     <string name="statistic_year_days">Год</string>
     <string name="statistic_count_days">Я пил %s из %d дней</string>
+    <string name="statistic_count_days_no_drink">Не пью %s!:)</string>
     <string name="statistic_drinks">Напитки выпитые мною</string>
     <string name="statistic_spent">Мною потрачено за</string>
 

@@ -88,6 +88,7 @@
     <string name="statistic_month_days">Month</string>
     <string name="statistic_year_days">Year</string>
     <string name="statistic_count_days">I drank %s from %d days</string>
+    <string name="statistic_count_days_no_drink">I don\'t drink %s!:)</string>
     <string name="statistic_count_drink" translatable="false">x %d</string>
     <string name="statistic_drinks">The drinks I drank</string>
     <string name="statistic_spent">I spent in a</string>

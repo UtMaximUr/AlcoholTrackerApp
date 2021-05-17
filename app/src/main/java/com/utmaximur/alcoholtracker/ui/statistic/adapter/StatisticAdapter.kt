@@ -9,7 +9,7 @@ import androidx.viewpager.widget.PagerAdapter
 import com.utmaximur.alcoholtracker.R
 
 
-class StatisticViewPagerAdapter(private var commonPrice: List<String>, private var context: Context) : PagerAdapter() {
+class StatisticAdapter(private var commonPrice: List<String>, private var context: Context) : PagerAdapter() {
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val period: TextView
