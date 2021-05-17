@@ -72,8 +72,10 @@ class CalendarFragment : Fragment(),
             if (viewModel.getSelectDate() != 0L) {
                 val navController = findNavController()
                 navController.currentBackStackEntry?.savedStateHandle?.getLiveData<String>(
-                    KEY_CALENDAR_DATA)?.observe(
-                    viewLifecycleOwner) { result ->
+                    KEY_CALENDAR_DATA
+                )?.observe(
+                    viewLifecycleOwner
+                ) { result ->
                     if (result == KEY_CALENDAR_DATA_OK) {
                         val bundle = Bundle()
                         bundle.putLong(SELECT_DAY, viewModel.getSelectDate())
@@ -123,15 +125,17 @@ class CalendarFragment : Fragment(),
 
     override fun onDelete(alcoholTrack: AlcoholTrack) {
         val navController = findNavController()
-        navController.currentBackStackEntry?.savedStateHandle?.getLiveData<String>(KEY_CALENDAR)?.observe(
-            viewLifecycleOwner) { result ->
-            if (result == KEY_CALENDAR_OK) {
-                viewModel.deleteDrink(alcoholTrack)
-                alcoholTrackListAdapter?.notifyDataSetChanged()
-                setIconOnDate()
-                getAlcoholTrackByDay(alcoholTrack.date)
+        navController.currentBackStackEntry?.savedStateHandle?.getLiveData<String>(KEY_CALENDAR)
+            ?.observe(
+                viewLifecycleOwner
+            ) { result ->
+                if (result == KEY_CALENDAR_OK) {
+                    viewModel.deleteDrink(alcoholTrack)
+                    alcoholTrackListAdapter?.notifyDataSetChanged()
+                    setIconOnDate()
+                    getAlcoholTrackByDay(alcoholTrack.date)
+                }
             }
-        }
         navController.navigate(R.id.deleteDialogFragment)
     }
 
