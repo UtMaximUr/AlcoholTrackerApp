@@ -15,7 +15,7 @@ import kotlin.collections.ArrayList
 class StatisticViewModel(
     private var drinkRepository: DrinkRepository,
     private var trackRepository: TrackRepository
-): ViewModel() {
+) : ViewModel() {
 
     private var weekPeriod = "week"
     private var monthPeriod = "month"
@@ -24,19 +24,19 @@ class StatisticViewModel(
     private var allAlcoholTrackList: ArrayList<AlcoholTrack>? = ArrayList()
 
     fun getAllDrink(): LiveData<MutableList<Drink>> {
-        return  drinkRepository.getDrinks()
+        return drinkRepository.getDrinks()
     }
 
     fun getAllTrack(): LiveData<MutableList<AlcoholTrack>> {
-        return  trackRepository.getTracks()
+        return trackRepository.getTracks()
     }
 
-    fun loadTrackList(list: List<AlcoholTrack>?){
+    fun loadTrackList(list: List<AlcoholTrack>?) {
         allAlcoholTrackList?.addAll(list!!)
     }
 
-    private fun getTrackList(): ArrayList<AlcoholTrack>?{
-       return allAlcoholTrackList
+    private fun getTrackList(): ArrayList<AlcoholTrack>? {
+        return allAlcoholTrackList
     }
 
     fun getPriceListByPeriod(): List<String> {
@@ -101,7 +101,9 @@ class StatisticViewModel(
 
     fun getStatisticCountDays(context: Context): List<String> {
         val statisticCountDays: ArrayList<String> = ArrayList()
-        statisticCountDays.add(getNumberOfDaysSinceTheLastDrink(context))
+        if (getNumberOfDaysSinceTheLastDrink(context) != null) {
+            statisticCountDays.add(getNumberOfDaysSinceTheLastDrink(context)!!)
+        }
         statisticCountDays.add(getCountDayOffYear(context))
 
         return statisticCountDays
@@ -125,29 +127,33 @@ class StatisticViewModel(
         )
     }
 
-    private fun getNumberOfDaysSinceTheLastDrink(context: Context): String {
+    private fun getNumberOfDaysSinceTheLastDrink(context: Context): String? {
         val countDays: HashSet<Int> = HashSet()
         val cal = Calendar.getInstance()
         val currentDay = cal.time.time
         var lastDrinkDay = 0L
-        allAlcoholTrackList?.forEach {
-            if (it.date > lastDrinkDay) {
-                lastDrinkDay = it.date
+        if (allAlcoholTrackList?.isEmpty()!!) {
+            return null
+        } else {
+            allAlcoholTrackList?.forEach {
+                if (it.date > lastDrinkDay) {
+                    lastDrinkDay = it.date
+                }
             }
-        }
 
-        val count = TimeUnit.DAYS.convert(currentDay - lastDrinkDay, TimeUnit.MILLISECONDS)
-        countDays.add(count.toInt())
+            val count = TimeUnit.DAYS.convert(currentDay - lastDrinkDay, TimeUnit.MILLISECONDS)
+            countDays.add(count.toInt())
 
-        TimeUnit.DAYS.convert(currentDay - lastDrinkDay, TimeUnit.MILLISECONDS)
+            TimeUnit.DAYS.convert(currentDay - lastDrinkDay, TimeUnit.MILLISECONDS)
 
-        return String.format(
-            context.resources.getString(R.string.statistic_count_days_no_drink),
-            context.resources.getQuantityString(
-                R.plurals.plurals_day,
-                countDays.first(),
-                countDays.first()
+            return String.format(
+                context.resources.getString(R.string.statistic_count_days_no_drink),
+                context.resources.getQuantityString(
+                    R.plurals.plurals_day,
+                    countDays.first(),
+                    countDays.first()
+                )
             )
-        )
+        }
     }
 }
