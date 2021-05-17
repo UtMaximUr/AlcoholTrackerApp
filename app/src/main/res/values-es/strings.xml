@@ -158,5 +158,6 @@
     <string name="update_later">Mas tarde</string>
     <string name="check_for_updates">Buscar actualizaciones</string>
     <string name="add_event">Evento</string>
+    <string name="statistic_count_days_no_drink">¡No bebo %s! :)</string>
 
 </resources>

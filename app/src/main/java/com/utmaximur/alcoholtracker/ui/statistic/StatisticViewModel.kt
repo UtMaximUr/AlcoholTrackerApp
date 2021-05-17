@@ -9,10 +9,12 @@ import com.utmaximur.alcoholtracker.data.model.Drink
 import com.utmaximur.alcoholtracker.repository.DrinkRepository
 import com.utmaximur.alcoholtracker.repository.TrackRepository
 import java.util.*
+import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
 
-class StatisticViewModel(private var drinkRepository: DrinkRepository,
-                         private var trackRepository: TrackRepository
+class StatisticViewModel(
+    private var drinkRepository: DrinkRepository,
+    private var trackRepository: TrackRepository
 ): ViewModel() {
 
     private var weekPeriod = "week"
@@ -97,7 +99,15 @@ class StatisticViewModel(private var drinkRepository: DrinkRepository,
         return drinksDrunkByMe
     }
 
-    fun getCountDayOffYear(context: Context): String {
+    fun getStatisticCountDays(context: Context): List<String> {
+        val statisticCountDays: ArrayList<String> = ArrayList()
+        statisticCountDays.add(getNumberOfDaysSinceTheLastDrink(context))
+        statisticCountDays.add(getCountDayOffYear(context))
+
+        return statisticCountDays
+    }
+
+    private fun getCountDayOffYear(context: Context): String {
         val countDays: HashSet<Int> = HashSet()
         val cal = Calendar.getInstance()
         allAlcoholTrackList?.forEach {
@@ -112,6 +122,32 @@ class StatisticViewModel(private var drinkRepository: DrinkRepository,
                 countDays.size
             ),
             Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_YEAR)
+        )
+    }
+
+    private fun getNumberOfDaysSinceTheLastDrink(context: Context): String {
+        val countDays: HashSet<Int> = HashSet()
+        val cal = Calendar.getInstance()
+        val currentDay = cal.time.time
+        var lastDrinkDay = 0L
+        allAlcoholTrackList?.forEach {
+            if (it.date > lastDrinkDay) {
+                lastDrinkDay = it.date
+            }
+        }
+
+        val count = TimeUnit.DAYS.convert(currentDay - lastDrinkDay, TimeUnit.MILLISECONDS)
+        countDays.add(count.toInt())
+
+        TimeUnit.DAYS.convert(currentDay - lastDrinkDay, TimeUnit.MILLISECONDS)
+
+        return String.format(
+            context.resources.getString(R.string.statistic_count_days_no_drink),
+            context.resources.getQuantityString(
+                R.plurals.plurals_day,
+                countDays.first(),
+                countDays.first()
+            )
         )
     }
 }

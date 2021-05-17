@@ -157,5 +157,6 @@
     <string name="update_later">之后</string>
     <string name="check_for_updates">检查更新</string>
     <string name="add_event">事件</string>
+    <string name="statistic_count_days_no_drink">我不喝酒%s！:)</string>
 
 </resources>

@@ -11,7 +11,8 @@ import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.databinding.FragmentStatisticBinding
 import com.utmaximur.alcoholtracker.di.component.AlcoholTrackComponent
 import com.utmaximur.alcoholtracker.di.factory.StatisticViewModelFactory
-import com.utmaximur.alcoholtracker.ui.statistic.adapter.StatisticViewPagerAdapter
+import com.utmaximur.alcoholtracker.ui.statistic.adapter.CountDaysAdapter
+import com.utmaximur.alcoholtracker.ui.statistic.adapter.StatisticAdapter
 import com.utmaximur.alcoholtracker.ui.statistic.adapter.TopDrinkAdapter
 import com.utmaximur.alcoholtracker.util.alphaView
 
@@ -56,13 +57,18 @@ class StatisticFragment :
             binding.topDrinksList.adapter = TopDrinkAdapter(list, viewModel.getDrinksDrunkByMe())
         })
 
-        binding.statisticViewPager.adapter = StatisticViewPagerAdapter(viewModel.getPriceListByPeriod(), requireContext())
-        binding.viewPagerIndicator.setupWithViewPager(binding.statisticViewPager, true)
+        binding.statisticViewPager.adapter =
+            StatisticAdapter(viewModel.getPriceListByPeriod(), requireContext())
+        binding.indicatorStatistic.setupWithViewPager(binding.statisticViewPager, true)
 
-        binding.countDaysText.text = viewModel.getCountDayOffYear(requireContext())
+        binding.countDayViewPager.adapter = CountDaysAdapter(
+            viewModel.getStatisticCountDays(requireContext()),
+            requireContext()
+        )
+        binding.indicatorCountDay.setupWithViewPager(binding.countDayViewPager, true)
     }
 
-    private fun initStatistic(){
+    private fun initStatistic() {
         viewModel.getAllTrack().observe(viewLifecycleOwner, { list ->
             viewModel.loadTrackList(list)
             initUI()
