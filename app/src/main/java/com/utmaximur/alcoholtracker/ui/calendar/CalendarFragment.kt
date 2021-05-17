@@ -77,14 +77,12 @@ class CalendarFragment : Fragment(),
                     if (result == KEY_CALENDAR_DATA_OK) {
                         val bundle = Bundle()
                         bundle.putLong(SELECT_DAY, viewModel.getSelectDate())
-                        navController.currentBackStackEntry?.savedStateHandle?.remove<String>(KEY_CALENDAR_DATA)
                         calendarFragmentListener?.showAddAlcoholTrackerFragment(bundle)
                     } else {
-                        navController.currentBackStackEntry?.savedStateHandle?.remove<String>(KEY_CALENDAR_DATA)
                         calendarFragmentListener?.showAddAlcoholTrackerFragment(null)
                     }
                 }
-                navController.navigate(R.id.action_calendarFragment_to_addDrinkDialogFragment)
+                navController.navigate(R.id.addDrinkDialogFragment)
             } else {
                 calendarFragmentListener?.showAddAlcoholTrackerFragment(null)
             }
@@ -132,10 +130,9 @@ class CalendarFragment : Fragment(),
                 alcoholTrackListAdapter?.notifyDataSetChanged()
                 setIconOnDate()
                 getAlcoholTrackByDay(alcoholTrack.date)
-                navController.currentBackStackEntry?.savedStateHandle?.remove<String>(KEY_CALENDAR)
             }
         }
-        navController.navigate(R.id.action_calendarFragment_to_deleteDialogFragment)
+        navController.navigate(R.id.deleteDialogFragment)
     }
 
     private fun getAlcoholTrackByDay(eventDay: Long): MutableList<AlcoholTrack> {

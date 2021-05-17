@@ -8,34 +8,16 @@
         android:id="@+id/addFragment"
         android:name="com.utmaximur.alcoholtracker.ui.add.AddFragment"
         android:label="AddFragment">
-        <action
-            android:id="@+id/action_addFragment_to_deleteDialogFragment"
-            app:destination="@id/deleteDialogFragment" />
-        <action
-            android:id="@+id/action_addFragment_to_addNewDrinkFragment"
-            app:destination="@id/addNewDrinkFragment" />
     </fragment>
     <fragment
         android:id="@+id/addNewDrinkFragment"
         android:name="com.utmaximur.alcoholtracker.ui.addmydrink.AddNewDrink"
         android:label="AddNewDrinkFragment">
-        <action
-            android:id="@+id/action_addNewDrinkFragment_to_addPhotoBottomDialogFragment"
-            app:destination="@id/addPhotoBottomDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/calendarFragment"
         android:name="com.utmaximur.alcoholtracker.ui.calendar.CalendarFragment"
         android:label="CalendarFragment">
-        <action
-            android:id="@+id/action_calendarFragment_to_addDrinkDialogFragment"
-            app:destination="@id/addDrinkDialogFragment" />
-        <action
-            android:id="@+id/action_calendarFragment_to_deleteDialogFragment"
-            app:destination="@id/deleteDialogFragment" />
-        <action
-            android:id="@+id/action_calendarFragment_to_addFragment"
-            app:destination="@id/addFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"

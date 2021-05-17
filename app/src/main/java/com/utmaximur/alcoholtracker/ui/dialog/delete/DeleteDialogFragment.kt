@@ -18,6 +18,8 @@ class DeleteDialogFragment: DialogFragment() {
                 .setPositiveButton(getText(R.string.dialog_select_date_ok)) { dialog, _ ->
                     findNavController().previousBackStackEntry?.savedStateHandle?.set(KEY_CALENDAR, KEY_CALENDAR_OK)
                     findNavController().previousBackStackEntry?.savedStateHandle?.set(KEY_ADD, KEY_ADD_OK)
+                    findNavController().previousBackStackEntry?.savedStateHandle?.remove<String>(KEY_CALENDAR)
+                    findNavController().previousBackStackEntry?.savedStateHandle?.remove<String>(KEY_ADD)
                     dialog.cancel()
                 }
                 .setNegativeButton(getText(R.string.dialog_select_date_no)) {

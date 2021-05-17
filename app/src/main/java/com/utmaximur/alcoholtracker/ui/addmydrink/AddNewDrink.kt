@@ -112,7 +112,7 @@ class AddNewDrink : Fragment() {
                 }
                 navController.currentBackStackEntry?.savedStateHandle?.remove<String>(KEY_CREATE_DRINK)
             }
-            navController.navigate(R.id.action_addNewDrinkFragment_to_addPhotoBottomDialogFragment)
+            navController.navigate(R.id.addPhotoBottomDialogFragment)
         }
 
         binding.drinkName.setOnEditorActionListener(TextView.OnEditorActionListener { text, actionId, _ ->

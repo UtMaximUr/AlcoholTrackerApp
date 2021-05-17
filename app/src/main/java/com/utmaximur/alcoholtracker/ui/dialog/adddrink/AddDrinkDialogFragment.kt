@@ -19,12 +19,14 @@ class AddDrinkDialogFragment : DialogFragment() {
                     findNavController().previousBackStackEntry?.savedStateHandle?.set(
                         KEY_CALENDAR_DATA, KEY_CALENDAR_DATA_OK
                     )
+                    findNavController().previousBackStackEntry?.savedStateHandle?.remove<String>(KEY_CALENDAR_DATA)
                     dialog.cancel()
                 }
                 .setNegativeButton(getText(R.string.dialog_select_date_no)) { dialog, _ ->
                     findNavController().previousBackStackEntry?.savedStateHandle?.set(
                         KEY_CALENDAR_DATA, KEY_CALENDAR_DATA_NO
                     )
+                    findNavController().previousBackStackEntry?.savedStateHandle?.remove<String>(KEY_CALENDAR_DATA)
                     dialog.cancel()
                 }
             builder.create()

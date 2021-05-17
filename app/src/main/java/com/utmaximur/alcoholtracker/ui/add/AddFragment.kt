@@ -400,10 +400,9 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
             viewLifecycleOwner) { result ->
             if (result == KEY_ADD_OK) {
                 viewModel.deleteDrink(drink)
-                navController.currentBackStackEntry?.savedStateHandle?.remove<String>(KEY_ADD)
             }
         }
-        navController.navigate(R.id.action_addFragment_to_deleteDialogFragment)
+        navController.navigate(R.id.deleteDialogFragment)
     }
 
     override fun editDrink(drink: Drink) {

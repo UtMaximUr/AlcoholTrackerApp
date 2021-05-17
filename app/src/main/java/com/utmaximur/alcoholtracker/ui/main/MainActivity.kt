@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun onShowAddNewDrinkFragment() {
-        navController.navigate(R.id.action_addFragment_to_addNewDrinkFragment)
+        navController.navigate(R.id.addNewDrinkFragment)
     }
 
     override fun onShowEditNewDrinkFragment(bundle: Bundle) {
@@ -63,7 +63,6 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun showAddAlcoholTrackerFragment(bundle: Bundle?) {
-//        navController.navigate(R.id.action_calendarFragment_to_addFragment, bundle)
         navController.navigate(R.id.addFragment, bundle)
     }
 
