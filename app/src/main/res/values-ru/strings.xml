@@ -27,6 +27,8 @@
     <string name="add_save">Сохранить</string>
     <string name="unit_ml">%s мл</string>
     <string name="unit_l">%s л</string>
+    <string name="safe_dose">%s %% от безопасной дозы*</string>
+    <string name="safe_dose_note">*безопасная доза равна 100 мл этилового спирта\nсогласно исследованию Кембриджского университета</string>
 
     <!--add new drink-->
     <string name="add_new_drink">Создать напиток</string>

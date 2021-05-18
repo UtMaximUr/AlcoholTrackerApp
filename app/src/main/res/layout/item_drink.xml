@@ -45,6 +45,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="8dp"
+            tools:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -143,6 +144,54 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/info_linearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:visibility="invisible"
+            tools:visibility="visible"
+            android:gravity="center_vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/info_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_16"
+                android:gravity="center"
+                android:fontFamily="@font/roboto_condensed_regular"
+                android:textSize="18sp"
+                tools:text="@string/safe_dose"
+                android:textColor="@color/text_color_white" />
+
+            <TextView
+                android:id="@+id/info_note_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_16"
+                android:fontFamily="@font/roboto_condensed_regular"
+                android:textSize="12sp"
+                android:text="@string/safe_dose_note"
+                android:textColor="@color/text_color_white" />
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/info_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_8"
+            android:background="@drawable/background_transparent"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_info_24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/event_button"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/cd_show_panel" />
 
         <ImageButton
             android:id="@+id/event_button"

@@ -158,5 +158,7 @@
     <string name="check_for_updates">检查更新</string>
     <string name="add_event">事件</string>
     <string name="statistic_count_days_no_drink">我不喝酒%s！:)</string>
+    <string name="safe_dose">安全剂量的%s %%*</string>
+    <string name="safe_dose_note">*根据剑桥大学的一项研究，\n安全剂量为100毫升的乙醇</string>
 
 </resources>
