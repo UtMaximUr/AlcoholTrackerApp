@@ -43,11 +43,13 @@ fun View.alphaView() {
 }
 
 fun View.alphaViewIn() {
+    this.toVisible()
     val animation: Animation = AnimationUtils.loadAnimation(this.context, R.anim.alpha_in)
     this.startAnimation(animation)
 }
 
 fun View.alphaViewOut() {
+    this.toInvisible()
     val animation: Animation = AnimationUtils.loadAnimation(this.context, R.anim.alpha_out)
     this.startAnimation(animation)
 }
