@@ -159,5 +159,7 @@
     <string name="update_title">Der Download des Updates ist abgeschlossen. Aktualisieren?</string>
     <string name="add_event">Veranstaltung</string>
     <string name="statistic_count_days_no_drink">Ich trinke nicht %s! :)</string>
+    <string name="safe_dose">%s %% der sicheren Dosis *</string>
+    <string name="safe_dose_note">* eine sichere Dosis von 100 ml Ethylalkohol gemäß \neiner Studie der Universität von Cambridge</string>
 
 </resources>

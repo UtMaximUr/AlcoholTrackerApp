@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.ToggleButton
 import androidx.recyclerview.widget.RecyclerView
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
@@ -30,23 +31,29 @@ class DrinksListAdapter(
         private var degreeText: TextView? = null
         private var priceText: TextView? = null
         private var eventText: TextView? = null
-        private var eventButton: ImageButton? = null
+        private var infoText: TextView? = null
+        private var infoButton: ToggleButton? = null
+        private var eventButton: ToggleButton? = null
         private var editButton: ImageButton? = null
         private var deleteButton: ImageButton? = null
         private var drinkLayout: LinearLayout? = null
         private var eventLayout: LinearLayout? = null
+        private var infoLayout: LinearLayout? = null
 
         init {
             drinkText = itemView.findViewById(R.id.item_drink_text)
             volumeText = itemView.findViewById(R.id.item_volume_text)
             degreeText = itemView.findViewById(R.id.item_degree_text)
             priceText = itemView.findViewById(R.id.item_price_text)
+            infoButton = itemView.findViewById(R.id.info_button)
             eventButton = itemView.findViewById(R.id.event_button)
             editButton = itemView.findViewById(R.id.edit_button)
             eventText = itemView.findViewById(R.id.event_text)
+            infoText = itemView.findViewById(R.id.info_text)
             deleteButton = itemView.findViewById(R.id.delete_button)
             drinkLayout = itemView.findViewById(R.id.drink_linearLayout)
             eventLayout = itemView.findViewById(R.id.event_linearLayout)
+            infoLayout = itemView.findViewById(R.id.info_linearLayout)
         }
 
         fun bind(
@@ -73,20 +80,35 @@ class DrinksListAdapter(
             }
 
             eventText?.text = alcoholTrack.event
+            infoText?.text = alcoholTrack.getSafeDoseOfAlcohol(itemView.context)
 
-            eventButton?.setOnClickListener {
+            eventButton?.setOnCheckedChangeListener { _, b ->
+                showLayout(b, eventLayout, infoLayout, infoButton)
+            }
+
+            infoButton?.setOnCheckedChangeListener { _, b ->
+                showLayout(b, infoLayout, eventLayout, eventButton)
+            }
+        }
+
+        private fun showLayout(
+            b: Boolean,
+            l1: LinearLayout?,
+            l2: LinearLayout?,
+            button: ToggleButton?
+        ) {
+            if (b) {
                 if (drinkLayout?.visibility == View.VISIBLE) {
-                    drinkLayout?.toInvisible()
-                    eventLayout?.toVisible()
                     drinkLayout?.alphaViewOut()
-                    eventLayout?.alphaViewIn()
-                    eventButton?.setImageResource(R.drawable.ic_drink_24dp)
-                } else {
-                    drinkLayout?.toVisible()
-                    eventLayout?.toInvisible()
+                }
+                l1?.alphaViewIn()
+                if (button?.isChecked!!) {
+                    button.isChecked = false
+                }
+            } else {
+                l1?.alphaViewOut()
+                if (l2?.visibility != View.VISIBLE) {
                     drinkLayout?.alphaViewIn()
-                    eventLayout?.alphaViewOut()
-                    eventButton?.setImageResource(R.drawable.ic_event_24dp)
                 }
             }
         }

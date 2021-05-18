@@ -159,5 +159,7 @@
     <string name="check_for_updates">Verifique se há atualizações</string>
     <string name="add_event">Evento</string>
     <string name="statistic_count_days_no_drink">Eu não bebo %s! :)</string>
+    <string name="safe_dose_note">* uma dose segura de 100 ml de álcool etílico \nde acordo com um estudo da Universidade de Cambridge</string>
+    <string name="safe_dose">%s %% da dose segura *</string>
 
 </resources>

@@ -31,6 +31,8 @@
     <string name="add_degree_s" translatable="false">°</string>
     <string name="unit_ml">%s ml</string>
     <string name="unit_l">%s l</string>
+    <string name="safe_dose">%s %% of the safe dose*</string>
+    <string name="safe_dose_note">*a safe dose of 100 ml of ethyl alcohol according\nto a study by the University of Cambridge</string>
 
 
     <!--add new drink-->
