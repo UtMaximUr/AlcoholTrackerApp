@@ -1,40 +1,29 @@
 package com.utmaximur.alcoholtracker.ui.statistic.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.data.model.Drink
+import com.utmaximur.alcoholtracker.databinding.ItemTopDrinkBinding
 import com.utmaximur.alcoholtracker.util.getResString
 import com.utmaximur.alcoholtracker.util.setImage
 
-class TopDrinkAdapter(private var drinkList: List<Drink>, private var drinksDrunkByMe: Map<String, Int>) :
+class TopDrinkAdapter(
+    private var drinkList: List<Drink>,
+    private var drinksDrunkByMe: Map<String, Int>
+) :
     RecyclerView.Adapter<TopDrinkAdapter.ViewHolder>() {
 
-    class ViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
-        RecyclerView.ViewHolder(inflater.inflate(R.layout.item_top_drink, parent, false)) {
-        private var drinkText: TextView? = null
-        private var drinkCountText: TextView? = null
-        private var drinkImage: ImageView? = null
-        private var context: Context? = null
-
-        init {
-            drinkText = itemView.findViewById(R.id.item_top_drink_text)
-            drinkCountText = itemView.findViewById(R.id.item_top_drink_count)
-            drinkImage = itemView.findViewById(R.id.item_top_drink_image)
-            context = parent.context
-        }
-
+    class ViewHolder(private val binding: ItemTopDrinkBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(drink: Drink, drinksDrunkByMe: Map<String, Int>) {
-            drinkText?.text = drink.drink.getResString(itemView.context)
-            drinkImage?.setImage(drink.icon)
+            binding.itemTopDrinkText.text = drink.drink.getResString(itemView.context)
+            binding.itemTopDrinkImage.setImage(drink.icon)
             drinksDrunkByMe.forEach {
                 if (it.key == drink.drink) {
-                    drinkCountText?.text = String.format(
-                        context!!.resources.getString(R.string.statistic_count_drink),
+                    binding.itemTopDrinkCount.text = String.format(
+                        binding.root.context!!.resources.getString(R.string.statistic_count_drink),
                         it.value
                     )
                 }
@@ -43,8 +32,9 @@ class TopDrinkAdapter(private var drinkList: List<Drink>, private var drinksDrun
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-        return ViewHolder(view, parent)
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = ItemTopDrinkBinding.inflate(layoutInflater)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
