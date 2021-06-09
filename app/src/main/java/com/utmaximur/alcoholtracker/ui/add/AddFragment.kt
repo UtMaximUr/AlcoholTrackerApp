@@ -382,11 +382,11 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
 
     override fun getValueCalculating(value: String) {
         binding.priceEditText.setText(value)
-        if (value != "") {
+        if (value.isNotEmpty()) {
             binding.totalMoneyText.text =
                 (binding.quantityNumberPicker.value * value.toInt()).toString()
         } else {
-            binding.totalMoneyText.text = "0"
+            binding.totalMoneyText.text = getString(R.string.add_empty)
         }
     }
 
