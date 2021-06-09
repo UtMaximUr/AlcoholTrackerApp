@@ -21,23 +21,6 @@ class SwipeRecyclerView(context: Context?, @Nullable attrs: AttributeSet?, defSt
     constructor(context: Context?) : this(context, null)
     constructor(context: Context?, @Nullable attrs: AttributeSet?) : this(context, attrs, 0)
 
-    //    @Override
-    //    public boolean dispatchTouchEvent(MotionEvent e) {
-    //
-    //        switch (e.getAction()) {
-    //            case MotionEvent.ACTION_DOWN:
-    //
-    //
-    //                break;
-    //            case MotionEvent.ACTION_MOVE:
-    //
-    //                break;
-    //            case MotionEvent.ACTION_UP:
-    //                break;
-    //        }
-    //
-    //        return super.dispatchTouchEvent(e);
-    //    }
     private var downX = 0f
     private var downY = 0f
     override fun onInterceptTouchEvent(e: MotionEvent): Boolean {
@@ -50,7 +33,7 @@ class SwipeRecyclerView(context: Context?, @Nullable attrs: AttributeSet?, defSt
                 if (count > position) {
                     val positionView: View = getChildAt(position)
                     if (positionView is SwipeLayout) {
-                        if (positionView.isOpen()) { //不拦截
+                        if (positionView.isOpen()) {
                             return super.onInterceptTouchEvent(e)
                         }
                     }
@@ -63,7 +46,7 @@ class SwipeRecyclerView(context: Context?, @Nullable attrs: AttributeSet?, defSt
             MotionEvent.ACTION_MOVE -> {
                 val dy = e.y - downY
                 val dx = e.x - downX
-                if (abs(dx) > abs(dy) && abs(dx) > mTouchSlop) { //横向滑动
+                if (abs(dx) > abs(dy) && abs(dx) > mTouchSlop) {
                     return false
                 }
             }
