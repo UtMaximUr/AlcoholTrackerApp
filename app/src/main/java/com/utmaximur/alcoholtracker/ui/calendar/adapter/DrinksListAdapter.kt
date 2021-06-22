@@ -62,9 +62,9 @@ class DrinksListAdapter(
             binding.infoButton.setOnCheckedChangeListener { _, b ->
                 showLayout(
                     b,
-                    binding.eventLinearLayout,
                     binding.infoLinearLayout,
-                    binding.infoButton
+                    binding.eventLinearLayout,
+                    binding.eventButton
                 )
             }
         }

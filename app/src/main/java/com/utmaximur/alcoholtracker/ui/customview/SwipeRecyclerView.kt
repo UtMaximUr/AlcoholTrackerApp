@@ -31,10 +31,12 @@ class SwipeRecyclerView(context: Context?, @Nullable attrs: AttributeSet?, defSt
                 val position = pointToPosition(e.x.toInt(), e.y.toInt())
                 val count = childCount
                 if (count > position) {
-                    val positionView: View = getChildAt(position)
-                    if (positionView is SwipeLayout) {
-                        if (positionView.isOpen()) {
-                            return super.onInterceptTouchEvent(e)
+                    if (getChildAt(position) != null) {
+                        val positionView: View = getChildAt(position)
+                        if (positionView is SwipeLayout) {
+                            if (positionView.isOpen()) {
+                                return super.onInterceptTouchEvent(e)
+                            }
                         }
                     }
                 }
