@@ -94,7 +94,7 @@ class DrinksListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = ItemDrinkBinding.inflate(layoutInflater)
+        val binding = ItemDrinkBinding.inflate(layoutInflater, parent, false)
         return ViewHolder(binding)
     }
 
