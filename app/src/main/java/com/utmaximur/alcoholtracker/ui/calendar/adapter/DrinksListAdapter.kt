@@ -19,7 +19,7 @@ class DrinksListAdapter(
 
     interface OnDrinkAdapterListener {
         fun onEdit(date: Long)
-        fun onDelete(alcoholTrack: AlcoholTrack)
+        fun onDelete(alcoholTrack: AlcoholTrack, position: Int)
     }
 
     class ViewHolder(private val binding: ItemDrinkBinding) :
@@ -34,13 +34,13 @@ class DrinksListAdapter(
                 itemView.context.resources.getString(R.string.calendar_count_drink),
                 alcoholTrack.drink.getResString(itemView.context), alcoholTrack.quantity
             )
-            binding.itemDrinkText.text = alcoholTrack.degree
+            binding.itemDegreeText.text = alcoholTrack.degree
             binding.itemPriceText.text = (alcoholTrack.price * alcoholTrack.quantity).toString()
             binding.editButton.setOnClickListener {
                 listener.onEdit(alcoholTrack.date)
             }
             binding.deleteButton.setOnClickListener {
-                listener.onDelete(alcoholTrack)
+                listener.onDelete(alcoholTrack, layoutPosition)
             }
 
             if (alcoholTrack.event.isEmpty()) {
