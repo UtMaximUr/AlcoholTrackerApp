@@ -84,7 +84,7 @@
     <string name="statistic_week_days">Semana</string>
     <string name="statistic_month_days">Mes</string>
     <string name="statistic_year_days">Año</string>
-    <string name="statistic_count_days">Bebí% s de% d días</string>
+    <string name="statistic_count_days">Bebí %s de %d días</string>
     <string name="statistic_drinks">Las bebidas que bebí</string>
     <string name="statistic_spent">Pasé en un</string>
 

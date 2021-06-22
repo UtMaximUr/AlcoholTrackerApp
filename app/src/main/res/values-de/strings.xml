@@ -84,7 +84,7 @@
     <string name="statistic_week_days">Woche</string>
     <string name="statistic_month_days">Monat</string>
     <string name="statistic_year_days">Jahr</string>
-    <string name="statistic_count_days">Ich habe% s von% d Tagen getrunken</string>
+    <string name="statistic_count_days">Ich habe %s von %d Tagen getrunken</string>
     <string name="statistic_drinks">Die Getränke, die ich getrunken habe</string>
     <string name="statistic_spent">Ich verbrachte in einem</string>
 

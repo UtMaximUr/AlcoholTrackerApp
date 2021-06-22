@@ -190,7 +190,10 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
                 calculatorFragment.setListener(this@AddFragment)
                 activity?.supportFragmentManager?.beginTransaction()
                     ?.add(R.id.container_calculator, calculatorFragment)
-                    ?.setCustomAnimations(R.anim.fragment_open_enter, R.anim.fragment_close_exit)
+                    ?.setCustomAnimations(
+                        R.anim.nav_default_enter_anim,
+                        R.anim.nav_default_exit_anim
+                    )
                     ?.commit()
                 animateViewHeight(binding.containerCalculator, ANIMATE_HEIGHT.dpToPx())
             }
@@ -207,7 +210,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         animator.start()
     }
 
-    private fun hideKeyboard(){
+    private fun hideKeyboard() {
         binding.eventEditText.hideKeyboard()
     }
 
@@ -379,10 +382,11 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
 
     override fun getValueCalculating(value: String) {
         binding.priceEditText.setText(value)
-        if (value != "") {
-            binding.totalMoneyText.text = (binding.quantityNumberPicker.value * value.toInt()).toString()
+        if (value.isNotEmpty()) {
+            binding.totalMoneyText.text =
+                (binding.quantityNumberPicker.value * value.toInt()).toString()
         } else {
-            binding.totalMoneyText.text = "0"
+            binding.totalMoneyText.text = getString(R.string.add_empty)
         }
     }
 
@@ -396,12 +400,14 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
 
     override fun deleteDrink(drink: Drink) {
         val navController = findNavController()
-        navController.currentBackStackEntry?.savedStateHandle?.getLiveData<String>(KEY_ADD)?.observe(
-            viewLifecycleOwner) { result ->
-            if (result == KEY_ADD_OK) {
-                viewModel.deleteDrink(drink)
+        navController.currentBackStackEntry?.savedStateHandle?.getLiveData<String>(KEY_ADD)
+            ?.observe(
+                viewLifecycleOwner
+            ) { result ->
+                if (result == KEY_ADD_OK) {
+                    viewModel.deleteDrink(drink)
+                }
             }
-        }
         navController.navigate(R.id.deleteDialogFragment)
     }
 

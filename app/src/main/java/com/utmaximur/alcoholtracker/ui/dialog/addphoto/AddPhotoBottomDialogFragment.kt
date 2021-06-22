@@ -146,10 +146,12 @@ class AddPhotoBottomDialogFragment : BottomSheetDialogFragment() {
                         val imageStream: InputStream =
                             requireActivity().contentResolver.openInputStream(imageUri)!!
                         val selectedImage = BitmapFactory.decodeStream(imageStream)
-                        findNavController().previousBackStackEntry?.savedStateHandle?.set(
-                            KEY_CREATE_DRINK,
-                            viewModel.savePhoto(requireContext(), selectedImage)
-                        )
+                        if (selectedImage != null) {
+                            findNavController().previousBackStackEntry?.savedStateHandle?.set(
+                                KEY_CREATE_DRINK,
+                                viewModel.savePhoto(requireContext(), selectedImage)
+                            )
+                        }
                         dialog?.dismiss()
                     } catch (e: FileNotFoundException) {
                         e.printStackTrace()

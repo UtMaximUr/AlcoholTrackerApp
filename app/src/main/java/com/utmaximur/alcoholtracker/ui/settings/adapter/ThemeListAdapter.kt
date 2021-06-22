@@ -1,12 +1,9 @@
 package com.utmaximur.alcoholtracker.ui.settings.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.utmaximur.alcoholtracker.R
+import com.utmaximur.alcoholtracker.databinding.ItemThemeBinding
 import com.utmaximur.alcoholtracker.util.toVisible
 
 class ThemeListAdapter(
@@ -16,31 +13,23 @@ class ThemeListAdapter(
 ) :
     RecyclerView.Adapter<ThemeListAdapter.ViewHolder>() {
 
-    class ViewHolder(itemView: View, val onClick: (Int) -> Unit) :
-        RecyclerView.ViewHolder(itemView) {
-        private var themeText: TextView? = null
-        private var themeChoice: ImageView? = null
-
-        init {
-            themeText = itemView.findViewById(R.id.item_theme_text)
-            themeChoice = itemView.findViewById(R.id.item_theme_choice)
-        }
-
+    class ViewHolder(private val binding: ItemThemeBinding, val onClick: (Int) -> Unit) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(theme: String, themeId: Int, position: Int) {
-            themeText?.text = theme
-            themeText?.setOnClickListener {
+            binding.itemThemeText.text = theme
+            binding.itemThemeText.setOnClickListener {
                 onClick(position)
             }
             if (themeId == position) {
-                themeChoice?.toVisible()
+                binding.itemThemeChoice.toVisible()
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_theme, parent, false)
-        return ViewHolder(view, onClick)
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = ItemThemeBinding.inflate(layoutInflater, parent, false)
+        return ViewHolder(binding, onClick)
     }
 
     override fun getItemCount(): Int {
