@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.statistic.adapter
+package com.utmaximur.alcoholtracker.presantation.statistic.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
