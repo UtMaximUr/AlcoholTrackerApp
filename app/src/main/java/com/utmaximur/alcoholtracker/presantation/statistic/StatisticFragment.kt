@@ -8,13 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.utmaximur.alcoholtracker.App
-import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.databinding.FragmentStatisticBinding
 import com.utmaximur.alcoholtracker.presantation.base.BaseViewModelFactory
 import com.utmaximur.alcoholtracker.presantation.statistic.adapter.CountDaysAdapter
 import com.utmaximur.alcoholtracker.presantation.statistic.adapter.StatisticAdapter
 import com.utmaximur.alcoholtracker.presantation.statistic.adapter.TopDrinkAdapter
-import java.util.*
 import javax.inject.Inject
 
 class StatisticFragment :
