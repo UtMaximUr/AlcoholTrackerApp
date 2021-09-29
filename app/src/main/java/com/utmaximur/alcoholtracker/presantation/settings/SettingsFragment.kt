@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.settings
+package com.utmaximur.alcoholtracker.presantation.settings
 
 
 import android.animation.ObjectAnimator
@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.utmaximur.alcoholtracker.BuildConfig
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.databinding.FragmentSettingsBinding
-import com.utmaximur.alcoholtracker.ui.settings.adapter.ThemeListAdapter
+import com.utmaximur.alcoholtracker.presantation.settings.adapter.ThemeListAdapter
 import com.utmaximur.alcoholtracker.util.*
 
 
@@ -29,7 +29,8 @@ class SettingsFragment : Fragment() {
     private lateinit var themeListAdapter: ThemeListAdapter
     private lateinit var themeConcatAdapter: ConcatAdapter
 
-    private lateinit var binding: FragmentSettingsBinding
+    private var _binding: FragmentSettingsBinding? = null
+    private val binding get() = _binding!!
 
     private val sharedPrefs by lazy {
         activity?.getSharedPreferences(
@@ -43,7 +44,7 @@ class SettingsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSettingsBinding.inflate(layoutInflater)
+        _binding = FragmentSettingsBinding.inflate(layoutInflater)
         initUi()
         return binding.root
     }
@@ -184,5 +185,10 @@ class SettingsFragment : Fragment() {
                 )
             )
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
