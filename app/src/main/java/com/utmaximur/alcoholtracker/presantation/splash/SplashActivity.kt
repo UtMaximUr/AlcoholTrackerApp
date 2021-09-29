@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.splash
+package com.utmaximur.alcoholtracker.presantation.splash
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.ui.main.MainActivity
+import com.utmaximur.alcoholtracker.presantation.main.MainActivity
 import com.utmaximur.alcoholtracker.util.alphaView
 
 
