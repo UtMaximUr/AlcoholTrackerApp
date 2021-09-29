@@ -2,12 +2,12 @@ package com.utmaximur.alcoholtracker.util
 
 import android.content.Context
 import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
+import com.utmaximur.alcoholtracker.data.dbo.TrackDBO
 
 /**
  *  converts old data into new data on migration
  */
-fun AlcoholTrack.convertMigrationModel(context: Context): AlcoholTrack {
+fun TrackDBO.convertMigrationModel(context: Context): TrackDBO {
 
     var drink = this.drink
     var icon = this.icon
@@ -79,7 +79,7 @@ fun AlcoholTrack.convertMigrationModel(context: Context): AlcoholTrack {
             icon = "ic_wine"
         }
     }
-    return AlcoholTrack(
+    return TrackDBO(
         this.id,
         drink,
         convertVolume,
