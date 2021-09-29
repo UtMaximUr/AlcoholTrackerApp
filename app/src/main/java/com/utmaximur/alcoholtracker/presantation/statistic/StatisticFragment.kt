@@ -68,17 +68,7 @@ class StatisticFragment :
 
         viewModel.statisticsCountDays.observe(viewLifecycleOwner, { statistics ->
             binding.countDayViewPager.adapter = CountDaysAdapter(
-                statistics.map {
-                    String.format(
-                        requireContext().resources.getString(R.string.statistic_count_days),
-                        requireContext().resources.getQuantityString(
-                            R.plurals.plurals_day,
-                            statistics.size,
-                            statistics.size
-                        ),
-                        Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_YEAR)
-                    )
-                },
+                statistics,
                 requireContext()
             )
             binding.indicatorCountDay.setupWithViewPager(binding.countDayViewPager, true)

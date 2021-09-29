@@ -86,11 +86,10 @@ class StatisticsMapper @Inject constructor() {
 
     fun mapStatisticCountDays(trackDBOList: List<TrackDBO>): List<Int> {
         val statisticCountDays: ArrayList<Int> = ArrayList()
-        if (mapNumberOfDaysSinceTheLastDrink(trackDBOList) != 0) { //null) {
+        statisticCountDays.add(mapCountDayOffYear(trackDBOList))
+        if (mapNumberOfDaysSinceTheLastDrink(trackDBOList) != 0) {
             statisticCountDays.add(mapNumberOfDaysSinceTheLastDrink(trackDBOList))
         }
-        statisticCountDays.add(mapCountDayOffYear(trackDBOList))
-
         return statisticCountDays
     }
 
@@ -101,15 +100,6 @@ class StatisticsMapper @Inject constructor() {
             cal.timeInMillis = it.date
             countDays.add(cal.get(Calendar.DAY_OF_MONTH))
         }
-//        return String.format(
-//            context.resources.getString(R.string.statistic_count_days),
-//            context.resources.getQuantityString(
-//                R.plurals.plurals_day,
-//                countDays.size,
-//                countDays.size
-//            ),
-//            Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_YEAR)
-//        )
         return countDays.size
     }
 
@@ -118,8 +108,8 @@ class StatisticsMapper @Inject constructor() {
         val cal = Calendar.getInstance()
         val currentDay = cal.time.time
         var lastDrinkDay = 0L
-        if (trackDBOList.isEmpty()) {
-            return 0//null
+        return if (trackDBOList.isEmpty()) {
+            0
         } else {
             trackDBOList.forEach {
                 if (it.date > lastDrinkDay) {
@@ -131,16 +121,7 @@ class StatisticsMapper @Inject constructor() {
             countDays.add(count.toInt())
 
             TimeUnit.DAYS.convert(currentDay - lastDrinkDay, TimeUnit.MILLISECONDS)
-
-//            return String.format(
-//                context.resources.getString(R.string.statistic_count_days_no_drink),
-//                context.resources.getQuantityString(
-//                    R.plurals.plurals_day,
-//                    countDays.first(),
-//                    countDays.first()
-//                )
-//            )
-            return countDays.first()
+            countDays.first()
         }
     }
 }

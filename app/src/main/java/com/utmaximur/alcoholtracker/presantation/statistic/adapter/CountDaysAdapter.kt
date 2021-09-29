@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.viewpager.widget.PagerAdapter
 import com.utmaximur.alcoholtracker.R
+import java.util.*
 
 
-class CountDaysAdapter(private var statisticCountDays: List<String>, private var context: Context) : PagerAdapter() {
+class CountDaysAdapter(private var statisticCountDays: List<Int>, private var context: Context) :
+    PagerAdapter() {
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val statistic: TextView
@@ -21,7 +23,26 @@ class CountDaysAdapter(private var statisticCountDays: List<String>, private var
             false
         )
         statistic = itemView.findViewById(R.id.item_count_days_text)
-        statistic.text = statisticCountDays[position]
+        if (position == 0) {
+            statistic.text = String.format(
+                context.resources.getString(R.string.statistic_count_days),
+                context.resources.getQuantityString(
+                    R.plurals.plurals_day,
+                    statisticCountDays.first(),
+                    statisticCountDays.first()
+                ),
+                Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_YEAR)
+            )
+        } else {
+            statistic.text = String.format(
+                context.resources.getString(R.string.statistic_count_days_no_drink),
+                context.resources.getQuantityString(
+                    R.plurals.plurals_day,
+                    statisticCountDays.last(),
+                    statisticCountDays.last()
+                )
+            )
+        }
 
         container.addView(itemView)
         return itemView
