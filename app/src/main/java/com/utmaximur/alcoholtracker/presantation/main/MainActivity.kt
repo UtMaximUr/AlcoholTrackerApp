@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.main
+package com.utmaximur.alcoholtracker.presantation.main
 
 import android.content.Context
 import android.content.Intent
@@ -12,9 +12,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.data.update.UpdateManager
 import com.utmaximur.alcoholtracker.data.update.UpdateManager.Companion.getInstance
-import com.utmaximur.alcoholtracker.ui.add.AddFragment
-import com.utmaximur.alcoholtracker.ui.addmydrink.AddNewDrink
-import com.utmaximur.alcoholtracker.ui.calendar.CalendarFragment
+import com.utmaximur.alcoholtracker.presantation.add.AddFragment
+import com.utmaximur.alcoholtracker.presantation.addmydrink.AddNewDrink
+import com.utmaximur.alcoholtracker.presantation.calendar.CalendarFragment
 import com.utmaximur.alcoholtracker.util.*
 
 
