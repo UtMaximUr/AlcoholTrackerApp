@@ -1,6 +1,5 @@
 package com.utmaximur.alcoholtracker.domain.interactor
 
-import com.utmaximur.alcoholtracker.data.mapper.TrackMapper
 import com.utmaximur.alcoholtracker.data.repository.DrinkRepository
 import com.utmaximur.alcoholtracker.data.repository.TrackRepository
 import com.utmaximur.alcoholtracker.domain.entity.DrinkStatistic
@@ -15,18 +14,18 @@ class StatisticInteractor @Inject constructor(
 
     suspend fun loadDrinksList(): List<DrinkStatistic> {
         return statisticsMapper.mapDrinks(
-            trackRepository.getTracksList().map { TrackMapper().map(it) },
-            drinkRepository.getDrinksList()
+            trackRepository.getTracks(),
+            drinkRepository.getDrinks()
         )
     }
 
     suspend fun loadStatisticsPriceByPeriod(): List<String> {
         return statisticsMapper.mapPriceListByPeriod(
-            trackRepository.getTracksList().map { TrackMapper().map(it) })
+            trackRepository.getTracks())
     }
 
     suspend fun loadStatisticsCountDays(): List<Int> {
         return statisticsMapper.mapStatisticCountDays(
-            trackRepository.getTracksList().map { TrackMapper().map(it) })
+            trackRepository.getTracks())
     }
 }
