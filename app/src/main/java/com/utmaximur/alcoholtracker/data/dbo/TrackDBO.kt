@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.data.model
+package com.utmaximur.alcoholtracker.data.dbo
 
 import android.os.Parcelable
 import androidx.room.Entity
@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 @Entity(tableName = "track_database")
-data class AlcoholTrack(
+data class TrackDBO(
 
     @PrimaryKey
     var id: String,
