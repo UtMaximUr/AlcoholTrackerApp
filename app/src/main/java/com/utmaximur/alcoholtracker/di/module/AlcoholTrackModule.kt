@@ -3,10 +3,10 @@ package com.utmaximur.alcoholtracker.di.module
 import com.utmaximur.alcoholtracker.data.AlcoholTrackDatabase
 import com.utmaximur.alcoholtracker.data.assets.AssetsModule
 import com.utmaximur.alcoholtracker.data.file.FileManager
-import com.utmaximur.alcoholtracker.repository.DrinkRepository
-import com.utmaximur.alcoholtracker.repository.FileRepository
-import com.utmaximur.alcoholtracker.repository.AssetsRepository
-import com.utmaximur.alcoholtracker.repository.TrackRepository
+import com.utmaximur.alcoholtracker.data.repository.DrinkRepository
+import com.utmaximur.alcoholtracker.data.repository.FileRepository
+import com.utmaximur.alcoholtracker.data.repository.AssetsRepository
+import com.utmaximur.alcoholtracker.data.repository.TrackRepository
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

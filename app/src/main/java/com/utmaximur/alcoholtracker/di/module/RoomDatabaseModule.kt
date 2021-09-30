@@ -3,8 +3,6 @@
 package com.utmaximur.alcoholtracker.di.module
 
 import android.app.Application
-import android.os.Handler
-import android.os.Looper
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
@@ -17,7 +15,6 @@ import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Singleton
 
@@ -139,20 +136,13 @@ class RoomDatabaseModule(private var application: Application) {
     }
 
     private fun updateTrackDb() {
-        var coroutineScope: Job?
-        val handler = Handler(Looper.getMainLooper())
-        val runnable = Runnable {
-            alcoholTrackDatabase.getTrackDao().getTracks().observeForever { alcoholTrackList ->
-                coroutineScope = CoroutineScope(Dispatchers.IO).launch {
-                    alcoholTrackList.forEach { alcoholTrack ->
-                        alcoholTrackDatabase.getTrackDao().updateTrack(
-                            alcoholTrack.convertMigrationModel(application)
-                        )
-                    }
-                }
-                coroutineScope?.cancel()
+        val coroutineScope = CoroutineScope(Dispatchers.IO).launch {
+            alcoholTrackDatabase.getTrackDao().getTracks().forEach { alcoholTrack ->
+                alcoholTrackDatabase.getTrackDao().updateTrack(
+                    alcoholTrack.convertMigrationModel(application)
+                )
             }
         }
-        handler.post(runnable)
+        coroutineScope.cancel()
     }
 }
