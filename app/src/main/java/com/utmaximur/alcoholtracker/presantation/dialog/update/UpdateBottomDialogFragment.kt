@@ -1,12 +1,10 @@
-package com.utmaximur.alcoholtracker.ui.dialog.update
+package com.utmaximur.alcoholtracker.presantation.dialog.update
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.data.update.UpdateManager
 import com.utmaximur.alcoholtracker.databinding.DialogUpdateBottomSheetBinding
 

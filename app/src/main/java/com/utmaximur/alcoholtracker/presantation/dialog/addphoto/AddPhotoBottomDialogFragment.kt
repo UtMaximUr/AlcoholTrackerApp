@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.dialog.addphoto
+package com.utmaximur.alcoholtracker.presantation.dialog.addphoto
 
 import android.Manifest
 import android.annotation.SuppressLint

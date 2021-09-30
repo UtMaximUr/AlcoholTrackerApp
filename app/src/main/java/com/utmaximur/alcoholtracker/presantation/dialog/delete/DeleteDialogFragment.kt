@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.dialog.delete
+package com.utmaximur.alcoholtracker.presantation.dialog.delete
 
 import android.app.Dialog
 import android.os.Bundle

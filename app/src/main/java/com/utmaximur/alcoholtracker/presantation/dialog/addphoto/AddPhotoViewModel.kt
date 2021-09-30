@@ -1,10 +1,10 @@
-package com.utmaximur.alcoholtracker.ui.dialog.addphoto
+package com.utmaximur.alcoholtracker.presantation.dialog.addphoto
 
 import android.content.Context
 import android.graphics.Bitmap
 import android.net.Uri
 import androidx.lifecycle.ViewModel
-import com.utmaximur.alcoholtracker.repository.FileRepository
+import com.utmaximur.alcoholtracker.data.repository.FileRepository
 import java.io.File
 
 class AddPhotoViewModel(private var fileRepository: FileRepository) : ViewModel() {
