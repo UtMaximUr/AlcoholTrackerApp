@@ -10,17 +10,17 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.databinding.ItemDrinkBinding
-import com.utmaximur.alcoholtracker.domain.entity.TrackCalendar
+import com.utmaximur.alcoholtracker.domain.entity.Track
 import com.utmaximur.alcoholtracker.util.*
 
 
 class DrinksListAdapter(
     private val listener: OnDrinkAdapterListener
-) : ListAdapter<TrackCalendar, DrinksListAdapter.ViewHolder>(DrinksDiffCallback()) {
+) : ListAdapter<Track, DrinksListAdapter.ViewHolder>(DrinksDiffCallback()) {
 
     interface OnDrinkAdapterListener {
         fun onEdit(date: Long)
-        fun onDelete(track: TrackCalendar, position: Int)
+        fun onDelete(track: Track, position: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -59,7 +59,7 @@ class DrinksListAdapter(
         }
 
         fun bind(
-            track: TrackCalendar
+            track: Track
         ) {
             binding.itemVolumeText.text =
                 track.volume.formatVolume(itemView.context, track.quantity)

@@ -1,7 +1,7 @@
 package com.utmaximur.alcoholtracker.domain.interactor
 
 import com.utmaximur.alcoholtracker.data.repository.TrackRepository
-import com.utmaximur.alcoholtracker.domain.entity.TrackCalendar
+import com.utmaximur.alcoholtracker.domain.entity.Track
 import com.utmaximur.alcoholtracker.domain.mapper.CalendarMapper
 import javax.inject.Inject
 
@@ -10,19 +10,19 @@ class CalendarInteractor @Inject constructor(
     private val calendarMapper: CalendarMapper
 ) {
 
-    suspend fun getTrack(date: Long): TrackCalendar {
-        return calendarMapper.map(trackRepository.getTrack(date))
+    suspend fun getTrack(date: Long): Track {
+        return trackRepository.getTrack(date)
     }
 
-    suspend fun getTracks(): List<TrackCalendar> {
+    suspend fun getTracks(): List<Track> {
         return calendarMapper.mapList(trackRepository.getTracks())
     }
 
-    suspend fun deleteTrack(trackCalendar: TrackCalendar) {
-        trackRepository.deleteTrack(calendarMapper.map(trackCalendar))
+    suspend fun deleteTrack(trackCalendar: Track) {
+        trackRepository.deleteTrack(trackCalendar)
     }
 
-    suspend fun getAlcoholTrackByDay(eventDay: Long): List<TrackCalendar> {
+    suspend fun getAlcoholTrackByDay(eventDay: Long): List<Track> {
         return calendarMapper.getAlcoholTrackByDay(trackRepository.getTracks(), eventDay)
     }
 }

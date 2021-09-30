@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.res.Resources
 import androidx.core.text.isDigitsOnly
 import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.domain.entity.TrackCalendar
+import com.utmaximur.alcoholtracker.domain.entity.Track
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -70,7 +70,7 @@ fun String.formatVolume(context: Context, quantity: Int): String {
     }
 }
 
-fun TrackCalendar.getSafeDoseOfAlcohol(context: Context): String {
+fun Track.getSafeDoseOfAlcohol(context: Context): String {
     return if (volume.contains(".")) {
         // convert ml to l
         val volume = volume.toDouble() * 1000

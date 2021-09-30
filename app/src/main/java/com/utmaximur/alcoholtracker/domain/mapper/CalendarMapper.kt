@@ -2,7 +2,6 @@ package com.utmaximur.alcoholtracker.domain.mapper
 
 
 import com.utmaximur.alcoholtracker.domain.entity.Track
-import com.utmaximur.alcoholtracker.domain.entity.TrackCalendar
 import java.util.*
 import javax.inject.Inject
 
@@ -11,9 +10,9 @@ class CalendarMapper @Inject constructor() {
     fun getAlcoholTrackByDay(
         tracksList: List<Track>,
         eventDay: Long
-    ): List<TrackCalendar> {
+    ): List<Track> {
 
-        val tracks: ArrayList<TrackCalendar> = ArrayList()
+        val tracks: ArrayList<Track> = ArrayList()
 
         val calendar: Calendar = Calendar.getInstance()
         calendar.timeInMillis = eventDay
@@ -28,42 +27,14 @@ class CalendarMapper @Inject constructor() {
                     Calendar.MONTH
                 ) == month
             ) {
-                tracks.add(map(it))
+                tracks.add(it)
             }
         }
 
         return tracks
     }
 
-    fun map(domain: TrackCalendar): Track {
-        return Track(
-            id = domain.id,
-            drink = domain.drink,
-            volume = domain.volume,
-            quantity = domain.quantity,
-            degree = domain.degree,
-            event = domain.event,
-            price = domain.price,
-            date = domain.date,
-            icon = domain.icon
-        )
-    }
-
-    fun map(domain: Track): TrackCalendar {
-        return TrackCalendar(
-            id = domain.id,
-            drink = domain.drink,
-            volume = domain.volume,
-            quantity = domain.quantity,
-            degree = domain.degree,
-            event = domain.event,
-            price = domain.price,
-            date = domain.date,
-            icon = domain.icon
-        )
-    }
-
-    fun mapList(tracksList: List<Track>): List<TrackCalendar> {
-        return tracksList.map { map(it) }
+    fun mapList(tracksList: List<Track>): List<Track> {
+        return tracksList
     }
 }

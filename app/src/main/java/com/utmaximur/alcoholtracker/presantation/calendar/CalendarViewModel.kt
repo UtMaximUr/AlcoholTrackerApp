@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.utmaximur.alcoholtracker.domain.entity.TrackCalendar
+import com.utmaximur.alcoholtracker.domain.entity.Track
 import com.utmaximur.alcoholtracker.domain.interactor.CalendarInteractor
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -22,7 +22,7 @@ open class CalendarViewModel @Inject constructor( private var calendarInteractor
         return selectDate
     }
 
-    val tracks: LiveData<List<TrackCalendar>> by lazy {
+    val tracks: LiveData<List<Track>> by lazy {
         MutableLiveData()
     }
 
@@ -33,21 +33,21 @@ open class CalendarViewModel @Inject constructor( private var calendarInteractor
 
     }
 
-    suspend fun getTrack(date: Long): TrackCalendar {
+    suspend fun getTrack(date: Long): Track {
         return calendarInteractor.getTrack(date)
     }
 
-    private suspend fun getTracks(): List<TrackCalendar> {
+    private suspend fun getTracks(): List<Track> {
         return calendarInteractor.getTracks()
     }
 
-    suspend fun deleteDrink(trackCalendar: TrackCalendar) {
+    suspend fun deleteDrink(trackCalendar: Track) {
         calendarInteractor.deleteTrack(trackCalendar)
     }
 
     suspend fun getAlcoholTrackByDay(
         eventDay: Long
-    ): List<TrackCalendar> {
+    ): List<Track> {
         return calendarInteractor.getAlcoholTrackByDay(eventDay)
     }
 }

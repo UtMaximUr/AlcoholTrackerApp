@@ -15,7 +15,7 @@ import com.applandeo.materialcalendarview.EventDay
 import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.databinding.FragmentCalendarBinding
-import com.utmaximur.alcoholtracker.domain.entity.TrackCalendar
+import com.utmaximur.alcoholtracker.domain.entity.Track
 import com.utmaximur.alcoholtracker.presantation.base.BaseViewModelFactory
 import com.utmaximur.alcoholtracker.presantation.calendar.adapter.DrinksListAdapter
 import com.utmaximur.alcoholtracker.util.*
@@ -143,7 +143,7 @@ class CalendarFragment : Fragment(),
         }
     }
 
-    override fun onDelete(track: TrackCalendar, position: Int) {
+    override fun onDelete(track: Track, position: Int) {
         val navController = findNavController()
         navController.currentBackStackEntry?.savedStateHandle?.getLiveData<String>(KEY_CALENDAR)
             ?.observe(
