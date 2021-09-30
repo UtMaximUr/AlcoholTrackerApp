@@ -2,15 +2,15 @@ package com.utmaximur.alcoholtracker.di.component
 
 import com.utmaximur.alcoholtracker.di.module.AlcoholTrackModule
 import com.utmaximur.alcoholtracker.di.module.RoomDatabaseModule
-import com.utmaximur.alcoholtracker.repository.DrinkRepository
-import com.utmaximur.alcoholtracker.repository.FileRepository
-import com.utmaximur.alcoholtracker.repository.AssetsRepository
-import com.utmaximur.alcoholtracker.repository.TrackRepository
-import com.utmaximur.alcoholtracker.ui.add.AddFragment
-import com.utmaximur.alcoholtracker.ui.addmydrink.AddNewDrink
-import com.utmaximur.alcoholtracker.ui.calculator.CalculatorFragment
-import com.utmaximur.alcoholtracker.ui.calendar.CalendarFragment
-import com.utmaximur.alcoholtracker.ui.statistic.StatisticFragment
+import com.utmaximur.alcoholtracker.data.repository.DrinkRepository
+import com.utmaximur.alcoholtracker.data.repository.FileRepository
+import com.utmaximur.alcoholtracker.data.repository.AssetsRepository
+import com.utmaximur.alcoholtracker.data.repository.TrackRepository
+import com.utmaximur.alcoholtracker.presantation.add.AddFragment
+import com.utmaximur.alcoholtracker.presantation.addmydrink.AddNewDrink
+import com.utmaximur.alcoholtracker.presantation.calculator.CalculatorFragment
+import com.utmaximur.alcoholtracker.presantation.calendar.CalendarFragment
+import com.utmaximur.alcoholtracker.presantation.statistic.StatisticFragment
 import dagger.Component
 import javax.inject.Singleton
 
