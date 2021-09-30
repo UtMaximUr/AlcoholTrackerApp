@@ -2,9 +2,10 @@ package com.utmaximur.alcoholtracker.data.mapper
 
 import com.utmaximur.alcoholtracker.data.dbo.DrinkDBO
 import com.utmaximur.alcoholtracker.domain.entity.Drink
+import javax.inject.Inject
 
 
-class DrinkMapper {
+class DrinkMapper @Inject constructor() {
 
     fun map(dbo: DrinkDBO): Drink {
         return Drink(
