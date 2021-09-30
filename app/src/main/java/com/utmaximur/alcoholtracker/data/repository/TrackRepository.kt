@@ -2,19 +2,18 @@ package com.utmaximur.alcoholtracker.data.repository
 
 import com.utmaximur.alcoholtracker.data.AlcoholTrackDatabase
 import com.utmaximur.alcoholtracker.data.dao.AlcoholTrackDao
-import com.utmaximur.alcoholtracker.data.dbo.TrackDBO
 import com.utmaximur.alcoholtracker.data.mapper.TrackMapper
 import com.utmaximur.alcoholtracker.domain.entity.Track
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class TrackRepository(alcoholTrackDatabase: AlcoholTrackDatabase) {
+class TrackRepository(alcoholTrackDatabase: AlcoholTrackDatabase, private val trackMapper: TrackMapper) {
 
     private var trackDao: AlcoholTrackDao = alcoholTrackDatabase.getTrackDao()
 
-    suspend fun getTrack(date: Long): TrackDBO {
-        return trackDao.getTrack(date)
+    suspend fun getTrack(date: Long): Track {
+        return trackMapper.map(trackDao.getTrack(date))
     }
 
     suspend fun getTracks(): List<Track> {
@@ -23,19 +22,19 @@ class TrackRepository(alcoholTrackDatabase: AlcoholTrackDatabase) {
         }
     }
 
-    fun insertTrack(trackDBO: TrackDBO) {
+    fun insertTrack(track: Track) {
         CoroutineScope(Dispatchers.IO).launch {
-            trackDao.insertTrack(trackDBO)
+            trackDao.insertTrack(trackMapper.map(track))
         }
     }
 
-    suspend fun deleteTrack(trackDBO: TrackDBO) {
-        trackDao.deleteTrack(trackDBO)
+    suspend fun deleteTrack(track: Track) {
+        trackDao.deleteTrack(trackMapper.map(track))
     }
 
-    fun updateTrack(trackDBO: TrackDBO) {
+    fun updateTrack(track: Track) {
         CoroutineScope(Dispatchers.IO).launch {
-            trackDao.updateTrack(trackDBO)
+            trackDao.updateTrack(trackMapper.map(track))
         }
     }
 }
