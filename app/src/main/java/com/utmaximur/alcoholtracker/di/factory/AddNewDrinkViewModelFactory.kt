@@ -2,9 +2,9 @@ package com.utmaximur.alcoholtracker.di.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.utmaximur.alcoholtracker.repository.DrinkRepository
-import com.utmaximur.alcoholtracker.repository.AssetsRepository
-import com.utmaximur.alcoholtracker.ui.addmydrink.AddNewDrinkViewModel
+import com.utmaximur.alcoholtracker.data.repository.DrinkRepository
+import com.utmaximur.alcoholtracker.data.repository.AssetsRepository
+import com.utmaximur.alcoholtracker.presantation.addmydrink.AddNewDrinkViewModel
 import javax.inject.Inject
 import javax.inject.Singleton
 

@@ -2,8 +2,8 @@ package com.utmaximur.alcoholtracker.di.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.utmaximur.alcoholtracker.repository.FileRepository
-import com.utmaximur.alcoholtracker.ui.dialog.addphoto.AddPhotoViewModel
+import com.utmaximur.alcoholtracker.data.repository.FileRepository
+import com.utmaximur.alcoholtracker.presantation.dialog.addphoto.AddPhotoViewModel
 import javax.inject.Inject
 import javax.inject.Singleton
 
