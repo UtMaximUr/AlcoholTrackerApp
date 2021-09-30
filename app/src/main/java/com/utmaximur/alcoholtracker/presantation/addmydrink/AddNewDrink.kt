@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.addmydrink
+package com.utmaximur.alcoholtracker.presantation.addmydrink
 
 
 import android.content.Context
@@ -15,15 +15,15 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.data.model.Drink
-import com.utmaximur.alcoholtracker.data.model.Icon
 import com.utmaximur.alcoholtracker.databinding.FragmentAddNewDrinkBinding
-import com.utmaximur.alcoholtracker.di.component.AlcoholTrackComponent
-import com.utmaximur.alcoholtracker.di.factory.AddNewDrinkViewModelFactory
-import com.utmaximur.alcoholtracker.ui.addmydrink.adapter.SelectIconAdapter
-import com.utmaximur.alcoholtracker.ui.addmydrink.adapter.SelectVolumeAdapter
+import com.utmaximur.alcoholtracker.domain.entity.Drink
+import com.utmaximur.alcoholtracker.domain.entity.Icon
+import com.utmaximur.alcoholtracker.presantation.addmydrink.adapter.SelectIconAdapter
+import com.utmaximur.alcoholtracker.presantation.addmydrink.adapter.SelectVolumeAdapter
+import com.utmaximur.alcoholtracker.presantation.base.BaseViewModelFactory
 import com.utmaximur.alcoholtracker.util.*
 import java.util.*
+import javax.inject.Inject
 
 
 class AddNewDrink : Fragment() {
@@ -34,40 +34,34 @@ class AddNewDrink : Fragment() {
         fun closeFragment()
     }
 
-    private lateinit var binding: FragmentAddNewDrinkBinding
+    @Inject
+    lateinit var viewModelFactory: BaseViewModelFactory<AddNewDrinkViewModel>
+
+    private val viewModel: AddNewDrinkViewModel by viewModels(
+        factoryProducer = { viewModelFactory }
+    )
+
+    private var _binding: FragmentAddNewDrinkBinding? = null
+    private val binding get() = _binding!!
 
     private var selectIconAdapter: SelectIconAdapter? = null
     private var iconConcatAdapter: ConcatAdapter? = null
     private var selectVolumeAdapter: SelectVolumeAdapter? = null
     private var volumeConcatAdapter: ConcatAdapter? = null
 
-    private lateinit var viewModel: AddNewDrinkViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentAddNewDrinkBinding.inflate(layoutInflater)
+        _binding = FragmentAddNewDrinkBinding.inflate(layoutInflater)
         injectDagger()
-        initViewModel()
         initUi()
         return binding.root
     }
 
     private fun injectDagger() {
         App.instance.alcoholTrackComponent.inject(this)
-    }
-
-    private fun initViewModel() {
-        val dependencyFactory: AlcoholTrackComponent =
-            (requireActivity().application as App).alcoholTrackComponent
-        val drinkRepository = dependencyFactory.provideDrinkRepository()
-        val iconRepository = dependencyFactory.provideAssetsRepository()
-        val viewModel: AddNewDrinkViewModel by viewModels {
-            AddNewDrinkViewModelFactory(drinkRepository, iconRepository)
-        }
-        this.viewModel = viewModel
     }
 
     private fun initUi() {
@@ -230,5 +224,10 @@ class AddNewDrink : Fragment() {
 
     private fun getPhoto(): String {
         return viewModel.photo
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

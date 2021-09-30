@@ -1,18 +1,19 @@
-package com.utmaximur.alcoholtracker.ui.addmydrink
+package com.utmaximur.alcoholtracker.presantation.addmydrink
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.data.model.Drink
-import com.utmaximur.alcoholtracker.data.model.Icon
-import com.utmaximur.alcoholtracker.repository.DrinkRepository
-import com.utmaximur.alcoholtracker.repository.AssetsRepository
+import com.utmaximur.alcoholtracker.domain.entity.Drink
+import com.utmaximur.alcoholtracker.domain.entity.Icon
+import com.utmaximur.alcoholtracker.domain.interactor.AddNewDrinkInteractor
 import com.utmaximur.alcoholtracker.util.formatDegree1f
+import kotlinx.coroutines.launch
 import java.util.*
+import javax.inject.Inject
 
-class AddNewDrinkViewModel(
-    private var drinkRepository: DrinkRepository,
-    private var assetsRepository: AssetsRepository
+class AddNewDrinkViewModel @Inject constructor(
+    private var addNewDrinkInteractor: AddNewDrinkInteractor
 ) : ViewModel() {
 
     var id: String = ""
@@ -23,16 +24,19 @@ class AddNewDrinkViewModel(
     var volumeList: ArrayList<String?> = ArrayList()
 
     fun onSaveButtonClick(drink: Drink) {
-        if (id == "") {
-            drink.id = getDrinkId()
-            drinkRepository.insertDrink(drink)
-        } else {
-            drinkRepository.updateDrink(drink)
+        viewModelScope.launch {
+            if (id == "") {
+//                drink.id = getDrinkId()
+                addNewDrinkInteractor.insertDrink(drink)
+
+            } else {
+                addNewDrinkInteractor.updateDrink(drink)
+            }
         }
     }
 
     fun getIcons(): List<Icon> {
-        return assetsRepository.getIcons()
+        return addNewDrinkInteractor.getIcons()
     }
 
     fun getVolumes(context: Context): List<String?> {

@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.addmydrink.adapter
+package com.utmaximur.alcoholtracker.presantation.addmydrink.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,33 +8,33 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.data.model.Icon
+import com.utmaximur.alcoholtracker.domain.entity.Icon
 import com.utmaximur.alcoholtracker.util.setImageOverrideSize
 
 
-class SelectIconAdapter(private val onClick: (Icon) -> Unit, private var selectedIcon: Icon?) :
+class SelectIconAdapter(private val onClick: (Icon) -> Unit, private var selectedIconDBO: Icon?) :
     ListAdapter<Icon, SelectIconAdapter.ViewHolder>(IconDiffCallback) {
 
 
     class ViewHolder(itemView: View, val onClick: (Icon) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
         private val iconImageView: ImageView = itemView.findViewById(R.id.item_icon)
-        private var currentIcon: Icon? = null
+        private var currentIconDBO: Icon? = null
         private var onSelectedIcon: ((Icon) -> Unit?)? = null
 
         init {
             itemView.setOnClickListener {
-                currentIcon?.let { icon ->
+                currentIconDBO?.let { icon ->
                     onClick(icon)
                     onSelectedIcon?.let { onClick -> onClick(icon) }
                 }
             }
         }
 
-        fun bind(icon: Icon, onSelectedIcon: (Icon) -> Unit) {
-            currentIcon = icon
+        fun bind(iconDBO: Icon, onSelectedIcon: (Icon) -> Unit) {
+            currentIconDBO = iconDBO
             this.onSelectedIcon = onSelectedIcon
-            iconImageView.setImageOverrideSize(icon.icon)
+            iconImageView.setImageOverrideSize(iconDBO.icon)
         }
     }
 
@@ -46,9 +46,9 @@ class SelectIconAdapter(private val onClick: (Icon) -> Unit, private var selecte
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val icon = getItem(position)
-        holder.itemView.alpha = if (selectedIcon == null || icon == selectedIcon) 1f else 0.2f
+        holder.itemView.alpha = if (selectedIconDBO == null || icon == selectedIconDBO) 1f else 0.2f
         holder.bind(icon) { selectIcon ->
-            selectedIcon = selectIcon
+            selectedIconDBO = selectIcon
             notifyDataSetChanged()
         }
     }
