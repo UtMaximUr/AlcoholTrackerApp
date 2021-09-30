@@ -1,9 +1,10 @@
 package com.utmaximur.alcoholtracker.domain.mapper
 
 
-import com.utmaximur.alcoholtracker.data.dbo.DrinkDBO
-import com.utmaximur.alcoholtracker.data.dbo.TrackDBO
+
+import com.utmaximur.alcoholtracker.domain.entity.Drink
 import com.utmaximur.alcoholtracker.domain.entity.DrinkStatistic
+import com.utmaximur.alcoholtracker.domain.entity.Track
 import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -14,13 +15,13 @@ class StatisticsMapper @Inject constructor() {
     private var monthPeriod = "month"
     private var yearPeriod = "year"
 
-    fun mapDrinks(trackDBOList: List<TrackDBO>, drinks: List<DrinkDBO>): List<DrinkStatistic> {
+    fun mapDrinks(trackDBOList: List<Track>, drinks: List<Drink>): List<DrinkStatistic> {
         return drinks.map {
             DrinkStatistic(it.drink, it.icon, mapDrinksDrunkByMe(trackDBOList, it))
         }
     }
 
-    fun mapPriceListByPeriod(trackDBOList: List<TrackDBO>): List<String> {
+    fun mapPriceListByPeriod(trackDBOList: List<Track>): List<String> {
         val priceList: ArrayList<String> = ArrayList()
 
         priceList.add(mapSumPriceByPeriod(weekPeriod, trackDBOList))
@@ -30,7 +31,7 @@ class StatisticsMapper @Inject constructor() {
         return priceList
     }
 
-    private fun mapSumPriceByPeriod(period: String, trackDBOList: List<TrackDBO>): String {
+    private fun mapSumPriceByPeriod(period: String, trackDBOList: List<Track>): String {
         val timezone = TimeZone.getDefault()
         val cal = Calendar.getInstance(timezone)
         var sumPrice = 0f
@@ -65,7 +66,7 @@ class StatisticsMapper @Inject constructor() {
         return sumPrice.toString()
     }
 
-    private fun mapDrinksDrunkByMe(trackDBOList: List<TrackDBO>, drink: DrinkDBO): Int {
+    private fun mapDrinksDrunkByMe(trackDBOList: List<Track>, drink: Drink): Int {
         val drinksDrunkByMe: HashMap<String, Int> = HashMap()
         var count: Int
         trackDBOList.forEach {
@@ -84,7 +85,7 @@ class StatisticsMapper @Inject constructor() {
         }
     }
 
-    fun mapStatisticCountDays(trackDBOList: List<TrackDBO>): List<Int> {
+    fun mapStatisticCountDays(trackDBOList: List<Track>): List<Int> {
         val statisticCountDays: ArrayList<Int> = ArrayList()
         statisticCountDays.add(mapCountDayOffYear(trackDBOList))
         if (mapNumberOfDaysSinceTheLastDrink(trackDBOList) != 0) {
@@ -93,7 +94,7 @@ class StatisticsMapper @Inject constructor() {
         return statisticCountDays
     }
 
-    private fun mapCountDayOffYear(trackDBOList: List<TrackDBO>): Int {
+    private fun mapCountDayOffYear(trackDBOList: List<Track>): Int {
         val countDays: HashSet<Int> = HashSet()
         val cal = Calendar.getInstance()
         trackDBOList.forEach {
@@ -103,7 +104,7 @@ class StatisticsMapper @Inject constructor() {
         return countDays.size
     }
 
-    private fun mapNumberOfDaysSinceTheLastDrink(trackDBOList: List<TrackDBO>): Int {
+    private fun mapNumberOfDaysSinceTheLastDrink(trackDBOList: List<Track>): Int {
         val countDays: HashSet<Int> = HashSet()
         val cal = Calendar.getInstance()
         val currentDay = cal.time.time
