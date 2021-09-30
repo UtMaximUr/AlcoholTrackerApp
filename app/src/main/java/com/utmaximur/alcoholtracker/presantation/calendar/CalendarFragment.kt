@@ -1,23 +1,25 @@
-package com.utmaximur.alcoholtracker.ui.calendar
+package com.utmaximur.alcoholtracker.presantation.calendar
 
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.TransitionManager
 import com.applandeo.materialcalendarview.EventDay
 import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
 import com.utmaximur.alcoholtracker.databinding.FragmentCalendarBinding
-import com.utmaximur.alcoholtracker.di.component.AlcoholTrackComponent
-import com.utmaximur.alcoholtracker.di.factory.CalendarViewModelFactory
-import com.utmaximur.alcoholtracker.ui.calendar.adapter.DrinksListAdapter
+import com.utmaximur.alcoholtracker.domain.entity.TrackCalendar
+import com.utmaximur.alcoholtracker.presantation.base.BaseViewModelFactory
+import com.utmaximur.alcoholtracker.presantation.calendar.adapter.DrinksListAdapter
 import com.utmaximur.alcoholtracker.util.*
+import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
@@ -26,7 +28,11 @@ class CalendarFragment : Fragment(),
     DrinksListAdapter.OnDrinkAdapterListener {
 
     @Inject
-    lateinit var calendarViewModelFactory: CalendarViewModelFactory
+    lateinit var viewModelFactory: BaseViewModelFactory<CalendarViewModel>
+
+    private val viewModel: CalendarViewModel by viewModels(
+        factoryProducer = { viewModelFactory }
+    )
 
     private var calendarFragmentListener: CalendarFragmentListener? = null
 
@@ -35,9 +41,9 @@ class CalendarFragment : Fragment(),
         fun showAddAlcoholTrackerFragment(bundle: Bundle?)
     }
 
-    private lateinit var viewModel: CalendarViewModel
-    private lateinit var binding: FragmentCalendarBinding
-    private var alcoholTrackListAdapter: RecyclerView.Adapter<*>? = null
+    private var _binding: FragmentCalendarBinding? = null
+    private val binding get() = _binding!!
+    private var alcoholTrackListAdapter: DrinksListAdapter? = null
 
 
     override fun onCreateView(
@@ -45,35 +51,30 @@ class CalendarFragment : Fragment(),
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCalendarBinding.inflate(layoutInflater)
-        injectDagger()
-        initViewModel()
-        initUI()
+        _binding = FragmentCalendarBinding.inflate(layoutInflater)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        injectDagger()
+        initUI()
     }
 
     private fun injectDagger() {
         App.instance.alcoholTrackComponent.inject(this)
     }
 
-    private fun initViewModel() {
-        val dependencyFactory: AlcoholTrackComponent =
-            (requireActivity().application as App).alcoholTrackComponent
-        val trackRepository = dependencyFactory.provideTrackRepository()
-
-        val viewModel: CalendarViewModel by viewModels {
-            CalendarViewModelFactory(trackRepository)
-        }
-        this.viewModel = viewModel
-    }
-
     private fun initUI() {
+        viewModel.initTracks()
         binding.addButton.setOnClickListener {
             if (viewModel.getSelectDate() != 0L) {
                 val navController = findNavController()
                 navController.currentBackStackEntry?.savedStateHandle?.getLiveData<String>(
-                    KEY_CALENDAR_DATA)?.observe(
-                    viewLifecycleOwner) { result ->
+                    KEY_CALENDAR_DATA
+                )?.observe(
+                    viewLifecycleOwner
+                ) { result ->
                     if (result == KEY_CALENDAR_DATA_OK) {
                         val bundle = Bundle()
                         bundle.putLong(SELECT_DAY, viewModel.getSelectDate())
@@ -88,11 +89,32 @@ class CalendarFragment : Fragment(),
             }
         }
 
+        binding.openDrinkList.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                changeConstraints(ConstraintSet.TOP)
+            } else {
+                changeConstraints(ConstraintSet.BOTTOM)
+            }
+        }
+
         binding.calendarView.setOnDayClickListener { eventDay ->
             getAlcoholTrackByDay(eventDay.calendar.timeInMillis)
             viewModel.setSelectDate(eventDay.calendar.timeInMillis)
         }
         initCalendar()
+    }
+
+    private fun changeConstraints(constraintSet: Int) {
+        val set = ConstraintSet()
+        set.clone(binding.calendarFragment)
+        set.connect(
+            binding.parentDrinkList.id,
+            ConstraintSet.TOP,
+            binding.calendarView.id,
+            constraintSet
+        )
+        TransitionManager.beginDelayedTransition(binding.calendarFragment)
+        set.applyTo(binding.calendarFragment)
     }
 
     private fun initCalendar() {
@@ -115,70 +137,56 @@ class CalendarFragment : Fragment(),
 
     override fun onEdit(date: Long) {
         val bundle = Bundle()
-        viewModel.getTrack(date).observe(viewLifecycleOwner, { track ->
-            bundle.putParcelable(DRINK, track)
+        lifecycleScope.launch {
+            bundle.putParcelable(DRINK, viewModel.getTrack(date))
             calendarFragmentListener?.showEditAlcoholTrackerFragment(bundle)
-        })
+        }
     }
 
-    override fun onDelete(alcoholTrack: AlcoholTrack) {
+    override fun onDelete(track: TrackCalendar, position: Int) {
         val navController = findNavController()
         navController.currentBackStackEntry?.savedStateHandle?.getLiveData<String>(KEY_CALENDAR)
             ?.observe(
                 viewLifecycleOwner
             ) { result ->
                 if (result == KEY_CALENDAR_OK) {
-                    viewModel.deleteDrink(alcoholTrack)
-                    alcoholTrackListAdapter?.notifyDataSetChanged()
+                    lifecycleScope.launch {
+                        viewModel.deleteDrink(track)
+                    }
+                    alcoholTrackListAdapter?.notifyItemRemoved(position)
                     setIconOnDate()
-                    getAlcoholTrackByDay(alcoholTrack.date)
                 }
             }
         navController.navigate(R.id.deleteDialogFragment)
     }
 
-    private fun getAlcoholTrackByDay(eventDay: Long): MutableList<AlcoholTrack> {
-        val alcoholTrack: ArrayList<AlcoholTrack> = ArrayList()
-        val calendar: Calendar = Calendar.getInstance()
-        calendar.timeInMillis = eventDay
-        val startTimeDay: Int = calendar.get(Calendar.DAY_OF_MONTH)
-        val endTimeDay: Int = startTimeDay + 1
-        val month: Int = calendar.get(Calendar.MONTH)
-        viewModel.getTracks().observe(viewLifecycleOwner, { list ->
-            alcoholTrack.clear()
-            list.forEach {
-                calendar.timeInMillis = it.date
-                if (calendar.get(Calendar.DAY_OF_MONTH) in startTimeDay until endTimeDay && calendar.get(
-                        Calendar.MONTH
-                    ) == month
-                ) {
-                    alcoholTrack.add(it)
-                }
-            }
-            alcoholTrackListAdapter = DrinksListAdapter(
-                alcoholTrack,
-                this@CalendarFragment
-            )
-            binding.drinksList.adapter = alcoholTrackListAdapter
-            binding.drinksList.alphaView()
-            if (alcoholTrack.isNotEmpty()) {
+    private fun getAlcoholTrackByDay(eventDay: Long) {
+
+        alcoholTrackListAdapter = DrinksListAdapter(
+            this@CalendarFragment
+        )
+        binding.drinksList.adapter = alcoholTrackListAdapter
+        lifecycleScope.launch {
+            val tracks = viewModel.getAlcoholTrackByDay(eventDay)
+            alcoholTrackListAdapter?.submitList(tracks)
+//            alcoholTrackListAdapter?.notifyDataSetChanged()
+
+            if (tracks.isNotEmpty()) {
                 binding.emptyDrinkList.toGone()
             } else {
-                if (list.isEmpty()) {
+                if (tracks.isEmpty()) {
                     binding.addToStart.toVisible()
-                    binding.addToStart.alphaView()
                 } else {
                     binding.emptyDrinkList.toVisible()
-                    binding.emptyDrinkList.alphaView()
                 }
             }
-        })
-        return alcoholTrack
+            binding.progressBar.toGone()
+        }
     }
 
     private fun setIconOnDate() {
         val events: MutableList<EventDay> = ArrayList()
-        viewModel.getTracks().observe(viewLifecycleOwner, { list ->
+        viewModel.tracks.observe(viewLifecycleOwner, { list ->
             events.clear()
             list.forEach {
                 val calendar = Calendar.getInstance()
@@ -192,5 +200,10 @@ class CalendarFragment : Fragment(),
             }
             binding.calendarView.setEvents(events)
         })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

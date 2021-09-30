@@ -1,55 +1,44 @@
-package com.utmaximur.alcoholtracker.ui.calendar.adapter
+package com.utmaximur.alcoholtracker.presantation.calendar.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.LinearLayout
+import android.widget.ToggleButton
+import androidx.recyclerview.widget.ListAdapter
+
 import androidx.recyclerview.widget.RecyclerView
 import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
 import com.utmaximur.alcoholtracker.databinding.ItemDrinkBinding
+import com.utmaximur.alcoholtracker.domain.entity.TrackCalendar
 import com.utmaximur.alcoholtracker.util.*
 
 
 class DrinksListAdapter(
-    private val alcoholTracks: MutableList<AlcoholTrack>,
     private val listener: OnDrinkAdapterListener
-) :
-    RecyclerView.Adapter<DrinksListAdapter.ViewHolder>() {
+) : ListAdapter<TrackCalendar, DrinksListAdapter.ViewHolder>(DrinksDiffCallback()) {
 
     interface OnDrinkAdapterListener {
         fun onEdit(date: Long)
-        fun onDelete(alcoholTrack: AlcoholTrack, position: Int)
+        fun onDelete(track: TrackCalendar, position: Int)
     }
 
-    class ViewHolder(private val binding: ItemDrinkBinding) :
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = ItemDrinkBinding.inflate(layoutInflater, parent, false)
+        return ViewHolder(binding)
+    }
+
+    inner class ViewHolder(private val binding: ItemDrinkBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(
-            alcoholTrack: AlcoholTrack,
-            listener: OnDrinkAdapterListener
-        ) {
-            binding.itemVolumeText.text =
-                alcoholTrack.volume.formatVolume(itemView.context, alcoholTrack.quantity)
-            binding.itemDrinkText.text = String.format(
-                itemView.context.resources.getString(R.string.calendar_count_drink),
-                alcoholTrack.drink.getResString(itemView.context), alcoholTrack.quantity
-            )
-            binding.itemDegreeText.text = alcoholTrack.degree
-            binding.itemPriceText.text = (alcoholTrack.price * alcoholTrack.quantity).toString()
+
+        init {
             binding.editButton.setOnClickListener {
-                listener.onEdit(alcoholTrack.date)
+                listener.onEdit(getItem(layoutPosition).date)
             }
             binding.deleteButton.setOnClickListener {
-                listener.onDelete(alcoholTrack, layoutPosition)
+                listener.onDelete(getItem(layoutPosition), layoutPosition)
             }
-
-            if (alcoholTrack.event.isEmpty()) {
-                binding.eventButton.toGone()
-            }
-
-            binding.eventText.text = alcoholTrack.event
-            binding.infoText.text = alcoholTrack.getSafeDoseOfAlcohol(itemView.context)
-
             binding.eventButton.setOnCheckedChangeListener { _, b ->
                 showLayout(
                     b,
@@ -67,6 +56,26 @@ class DrinksListAdapter(
                     binding.eventButton
                 )
             }
+        }
+
+        fun bind(
+            track: TrackCalendar
+        ) {
+            binding.itemVolumeText.text =
+                track.volume.formatVolume(itemView.context, track.quantity)
+            binding.itemDrinkText.text = String.format(
+                itemView.context.resources.getString(R.string.calendar_count_drink),
+                track.drink.getResString(itemView.context), track.quantity
+            )
+            binding.itemDegreeText.text = track.degree
+            binding.itemPriceText.text = (track.price * track.quantity).toString()
+
+            if (track.event.isEmpty()) {
+                binding.eventButton.toGone()
+            }
+
+            binding.eventText.text = track.event
+            binding.infoText.text = track.getSafeDoseOfAlcohol(itemView.context)
         }
 
         private fun showLayout(
@@ -92,18 +101,8 @@ class DrinksListAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = ItemDrinkBinding.inflate(layoutInflater, parent, false)
-        return ViewHolder(binding)
-    }
-
-    override fun getItemCount(): Int {
-        return alcoholTracks.size
-    }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val alcoholTrack: AlcoholTrack = alcoholTracks[position]
-        holder.bind(alcoholTrack, listener)
+        val item = getItem(position)
+        holder.bind(item)
     }
 }
