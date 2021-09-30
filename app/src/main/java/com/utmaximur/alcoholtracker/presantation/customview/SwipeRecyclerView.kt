@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.customview
+package com.utmaximur.alcoholtracker.presantation.customview
 
 import android.content.Context
 import android.graphics.Rect
