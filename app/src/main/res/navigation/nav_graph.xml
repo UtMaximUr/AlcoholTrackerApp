@@ -6,54 +6,60 @@
     app:startDestination="@id/calendarFragment">
     <fragment
         android:id="@+id/addFragment"
-        android:name="com.utmaximur.alcoholtracker.ui.add.AddFragment"
-        android:label="AddFragment">
-    </fragment>
+        android:name="com.utmaximur.alcoholtracker.presantation.add.AddFragment"
+        android:label="AddFragment"
+        tools:layout="@layout/fragment_add" />
     <fragment
         android:id="@+id/addNewDrinkFragment"
-        android:name="com.utmaximur.alcoholtracker.ui.addmydrink.AddNewDrink"
-        android:label="AddNewDrinkFragment">
-    </fragment>
+        android:name="com.utmaximur.alcoholtracker.presantation.addmydrink.AddNewDrink"
+        android:label="AddNewDrinkFragment"
+        tools:layout="@layout/fragment_add_new_drink" />
     <fragment
         android:id="@+id/calendarFragment"
-        android:name="com.utmaximur.alcoholtracker.ui.calendar.CalendarFragment"
-        android:label="CalendarFragment">
-    </fragment>
+        android:name="com.utmaximur.alcoholtracker.presantation.calendar.CalendarFragment"
+        android:label="CalendarFragment"
+        tools:layout="@layout/fragment_calendar" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.utmaximur.alcoholtracker.ui.settings.SettingsFragment"
-        android:label="SettingsFragment" />
+        android:name="com.utmaximur.alcoholtracker.presantation.settings.SettingsFragment"
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/statisticFragment"
-        android:name="com.utmaximur.alcoholtracker.ui.statistic.StatisticFragment"
-        android:label="StatisticFragment" />
+        android:name="com.utmaximur.alcoholtracker.presantation.statistic.StatisticFragment"
+        android:label="StatisticFragment"
+        tools:layout="@layout/fragment_statistic" />
     <dialog
         android:id="@+id/addPhotoBottomDialogFragment"
-        android:name="com.utmaximur.alcoholtracker.ui.dialog.addphoto.AddPhotoBottomDialogFragment"
-        android:label="AddPhotoBottomDialogFragment" />
+        android:name="com.utmaximur.alcoholtracker.presantation.dialog.addphoto.AddPhotoBottomDialogFragment"
+        android:label="AddPhotoBottomDialogFragment"
+        tools:layout="@layout/dialog_bottom_sheet" />
     <dialog
         android:id="@+id/addDrinkDialogFragment"
-        android:name="com.utmaximur.alcoholtracker.ui.dialog.adddrink.AddDrinkDialogFragment"
+        android:name="com.utmaximur.alcoholtracker.presantation.dialog.adddrink.AddDrinkDialogFragment"
         android:label="AddDrinkDialogFragment" />
     <dialog
         android:id="@+id/updateBottomDialogFragment"
-        android:name="com.utmaximur.alcoholtracker.ui.dialog.update.UpdateBottomDialogFragment"
-        android:label="UpdateBottomDialogFragment" />
+        android:name="com.utmaximur.alcoholtracker.presantation.dialog.update.UpdateBottomDialogFragment"
+        android:label="UpdateBottomDialogFragment"
+        tools:layout="@layout/dialog_update_bottom_sheet" />
     <dialog
         android:id="@+id/deleteDialogFragment"
-        android:name="com.utmaximur.alcoholtracker.ui.dialog.delete.DeleteDialogFragment"
+        android:name="com.utmaximur.alcoholtracker.presantation.dialog.delete.DeleteDialogFragment"
         android:label="DeleteDialogFragment" />
     <activity
         android:id="@+id/mainActivity"
-        android:name="com.utmaximur.alcoholtracker.ui.main.MainActivity"
+        android:name="com.utmaximur.alcoholtracker.presantation.main.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
     <activity
         android:id="@+id/splashActivity"
-        android:name="com.utmaximur.alcoholtracker.ui.splash.SplashActivity"
-        android:label="SplashActivity" />
+        android:name="com.utmaximur.alcoholtracker.presantation.splash.SplashActivity"
+        android:label="SplashActivity"
+        tools:layout="@layout/splash_layout" />
     <fragment
         android:id="@+id/calculatorFragment"
-        android:name="com.utmaximur.alcoholtracker.ui.calculator.CalculatorFragment"
-        android:label="CalculatorFragment" />
+        android:name="com.utmaximur.alcoholtracker.presantation.calculator.CalculatorFragment"
+        android:label="CalculatorFragment"
+        tools:layout="@layout/fragment_calculator" />
 </navigation>

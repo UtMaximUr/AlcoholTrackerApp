@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_arrow_drop_up_black_24dp.xml" value="0.37083333333333335" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/toggle_info.xml" value="0.37083333333333335" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/toggle_open_drink_list.xml" value="0.37083333333333335" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/layout/activity_main.xml" value="0.3546875" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/layout/fragment_add.xml" value="0.3546875" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/layout/fragment_calendar.xml" value="0.5" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/layout/fragment_statistic.xml" value="0.3546875" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/layout/item_drink.xml" value="0.3546875" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
