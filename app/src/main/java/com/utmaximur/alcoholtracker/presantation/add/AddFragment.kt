@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.add
+package com.utmaximur.alcoholtracker.presantation.add
 
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
@@ -15,26 +15,35 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.data.model.AlcoholTrack
-import com.utmaximur.alcoholtracker.data.model.Drink
 import com.utmaximur.alcoholtracker.databinding.FragmentAddBinding
-import com.utmaximur.alcoholtracker.di.component.AlcoholTrackComponent
-import com.utmaximur.alcoholtracker.di.factory.AddViewModelFactory
-import com.utmaximur.alcoholtracker.ui.add.adapter.DrinkViewPagerAdapter
-import com.utmaximur.alcoholtracker.ui.add.adapter.DrinkViewPagerAdapter.AddDrinkListener
-import com.utmaximur.alcoholtracker.ui.calculator.CalculatorFragment
-import com.utmaximur.alcoholtracker.ui.calculator.CalculatorFragment.CalculatorListener
+import com.utmaximur.alcoholtracker.domain.entity.Drink
+import com.utmaximur.alcoholtracker.domain.entity.Track
+import com.utmaximur.alcoholtracker.presantation.add.adapter.DrinkViewPagerAdapter
+import com.utmaximur.alcoholtracker.presantation.add.adapter.DrinkViewPagerAdapter.AddDrinkListener
+import com.utmaximur.alcoholtracker.presantation.base.BaseViewModelFactory
+import com.utmaximur.alcoholtracker.presantation.calculator.CalculatorFragment
+import com.utmaximur.alcoholtracker.presantation.calculator.CalculatorFragment.CalculatorListener
 import com.utmaximur.alcoholtracker.util.*
+import kotlinx.coroutines.launch
 import java.util.*
+import javax.inject.Inject
 
 
 class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
 
     private var addFragmentListener: AddFragmentListener? = null
+
+    @Inject
+    lateinit var viewModelFactory: BaseViewModelFactory<AddViewModel>
+
+    private val viewModel: AddViewModel by viewModels(
+        factoryProducer = { viewModelFactory }
+    )
 
     interface AddFragmentListener {
         fun onHideNavigationBar()
@@ -44,8 +53,8 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         fun closeFragment()
     }
 
-    private lateinit var viewModel: AddViewModel
-    private lateinit var binding: FragmentAddBinding
+    private var _binding: FragmentAddBinding? = null
+    private val binding get() = _binding!!
     private lateinit var datePecker: DatePickerDialog
     private var dateAndTime = Calendar.getInstance()
 
@@ -54,9 +63,8 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentAddBinding.inflate(layoutInflater)
+        _binding = FragmentAddBinding.inflate(layoutInflater)
         injectDagger()
-        initViewModel()
         setDrinksList()
         initUi()
         return binding.root
@@ -64,17 +72,6 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
 
     private fun injectDagger() {
         App.instance.alcoholTrackComponent.inject(this)
-    }
-
-    private fun initViewModel() {
-        val dependencyFactory: AlcoholTrackComponent =
-            (requireActivity().application as App).alcoholTrackComponent
-        val drinkRepository = dependencyFactory.provideDrinkRepository()
-        val trackRepository = dependencyFactory.provideTrackRepository()
-        val viewModel: AddViewModel by viewModels {
-            AddViewModelFactory(drinkRepository, trackRepository)
-        }
-        this.viewModel = viewModel
     }
 
     private fun initUi() {
@@ -86,7 +83,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         binding.toolbar.setOnMenuItemClickListener {
             if (binding.viewPagerDrinks.currentItem != getDrinksList().size) {
                 viewModel.onSaveButtonClick(
-                    AlcoholTrack(
+                    Track(
                         getIdDrink(),
                         getDrink(),
                         getVolume()!!,
@@ -134,7 +131,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         }
 
 
-        viewModel.getAllDrink().observe(viewLifecycleOwner, { list ->
+        viewModel.drinksList.observe(viewLifecycleOwner, { list ->
             // Degree
             // set default first drink
             initNumberPicker(binding.degreeNumberPicker)
@@ -237,39 +234,39 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
 
     private fun setEditArguments() {
 
-        val alcoholTrack: AlcoholTrack? = requireArguments().getParcelable(DRINK)
+        val track: Track? = requireArguments().getParcelable(DRINK)
         binding.toolbar.title = getString(R.string.edit_drink_title)
-        viewModel.id = alcoholTrack?.id.toString()
-        viewModel.date = alcoholTrack?.date!!
+        viewModel.id = track?.id.toString()
+        viewModel.date = track?.date!!
 
-        viewModel.getAllDrink().observe(viewLifecycleOwner, { list ->
+        viewModel.drinksList.observe(viewLifecycleOwner, { list ->
             list.forEach { drink ->
-                if (drink.drink == alcoholTrack.drink) {
+                if (drink.drink == track.drink) {
                     val position = list.indexOf(drink)
                     // set position view pager
                     binding.viewPagerDrinks.currentItem = position
                     binding.viewPagerIndicator.getTabAt(position)?.select()
                     // set quantity drink
-                    binding.quantityNumberPicker.value = alcoholTrack.quantity
+                    binding.quantityNumberPicker.value = track.quantity
                     // set volume drink
                     setDrinkVolumeArray(position)
-                    binding.volumeNumberPicker.value = drink.volume.indexOf(alcoholTrack.volume)
+                    binding.volumeNumberPicker.value = drink.volume.indexOf(track.volume)
                     initNumberPicker(binding.volumeNumberPicker)
                     // set degree drink
                     setDrinkDegreeArray(position)
-                    binding.degreeNumberPicker.value = drink.degree.indexOf(alcoholTrack.degree)
+                    binding.degreeNumberPicker.value = drink.degree.indexOf(track.degree)
                     initNumberPicker(binding.degreeNumberPicker)
                 }
             }
         })
 
-        binding.eventEditText.setText(alcoholTrack.event)
-        binding.priceEditText.setText(alcoholTrack.price.toString())
-        binding.addDateButton.text = alcoholTrack.date.formatDate(requireContext())
+        binding.eventEditText.setText(track.event)
+        binding.priceEditText.setText(track.price.toString())
+        binding.addDateButton.text = track.date.formatDate(requireContext())
         binding.todayButton.toGone()
 
         binding.totalMoneyText.text =
-            (alcoholTrack.price.times(alcoholTrack.quantity)).toString()
+            (track.price.times(track.quantity)).toString()
     }
 
     private fun initNumberPicker(numberPicker: NumberPicker) {
@@ -357,8 +354,8 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
     }
 
     private fun setDrinksList() {
-        viewModel.getAllDrink().observe(viewLifecycleOwner, { list ->
-            viewModel.drinks = list
+        viewModel.drinksList.observe(viewLifecycleOwner, { list ->
+            viewModel.drinkDBOS = list
             val adapter = DrinkViewPagerAdapter(list, requireContext())
             adapter.setListener(this)
             binding.viewPagerDrinks.adapter = adapter
@@ -377,7 +374,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
     }
 
     private fun getDrinksList(): List<Drink> {
-        return viewModel.drinks
+        return viewModel.drinkDBOS
     }
 
     override fun getValueCalculating(value: String) {
@@ -405,7 +402,9 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
                 viewLifecycleOwner
             ) { result ->
                 if (result == KEY_ADD_OK) {
-                    viewModel.deleteDrink(drink)
+                    lifecycleScope.launch {
+                        viewModel.deleteDrink(drink)
+                    }
                 }
             }
         navController.navigate(R.id.deleteDialogFragment)
@@ -415,5 +414,10 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         val bundle = Bundle()
         bundle.putParcelable(EDIT_DRINK, drink)
         addFragmentListener?.onShowEditNewDrinkFragment(bundle)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

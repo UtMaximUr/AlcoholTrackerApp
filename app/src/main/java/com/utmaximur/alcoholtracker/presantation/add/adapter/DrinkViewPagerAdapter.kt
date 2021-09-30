@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.add.adapter
+package com.utmaximur.alcoholtracker.presantation.add.adapter
 
 import android.content.Context
 import android.graphics.BitmapFactory
@@ -10,7 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.viewpager.widget.PagerAdapter
 import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.data.model.Drink
+import com.utmaximur.alcoholtracker.domain.entity.Drink
 import com.utmaximur.alcoholtracker.util.getResString
 import com.utmaximur.alcoholtracker.util.setImagePath
 import com.utmaximur.alcoholtracker.util.toVisible
