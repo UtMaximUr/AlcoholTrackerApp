@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.repository
+package com.utmaximur.alcoholtracker.data.repository
 
 import android.content.Context
 import android.graphics.Bitmap
