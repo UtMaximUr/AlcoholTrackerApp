@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.calculator
+package com.utmaximur.alcoholtracker.presantation.calculator
 
 import android.os.Bundle
 import android.view.LayoutInflater

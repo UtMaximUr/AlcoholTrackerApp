@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.ui.calculator
+package com.utmaximur.alcoholtracker.presantation.calculator
 
 
 import androidx.lifecycle.ViewModel
