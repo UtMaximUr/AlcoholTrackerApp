@@ -32,6 +32,5 @@ class TrackRepository(
 
     suspend fun updateTrack(track: Track) {
         trackDao.updateTrack(trackMapper.map(track))
-
     }
 }
