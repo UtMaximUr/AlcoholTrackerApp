@@ -15,7 +15,7 @@ import kotlin.collections.ArrayList
 class AddViewModel @Inject constructor(private var addTrackInteractor: AddTrackInteractor) :
     ViewModel() {
 
-    var id: String = ""
+    var id: String = getTrackId()
     var drink: String = ""
     var volume: String = ""
     val quantity: Int = 0
@@ -33,16 +33,13 @@ class AddViewModel @Inject constructor(private var addTrackInteractor: AddTrackI
 
     init {
         viewModelScope.launch {
-
             val dataDrinksList = getAllDrink()
             (drinksList as MutableLiveData).value = dataDrinksList
-
         }
     }
 
     fun onSaveButtonClick(track: Track) {
-        if (track.id == "") {
-//            track.id = getTrackId()
+        if (track.id == id) {
             viewModelScope.launch {
                 addTrackInteractor.insertTrack(track)
             }

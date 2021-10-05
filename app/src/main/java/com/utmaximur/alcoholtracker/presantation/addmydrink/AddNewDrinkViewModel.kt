@@ -16,7 +16,7 @@ class AddNewDrinkViewModel @Inject constructor(
     private var addNewDrinkInteractor: AddNewDrinkInteractor
 ) : ViewModel() {
 
-    var id: String = ""
+    var id: String = getDrinkId()
     var photo: String = ""
     var nameDrink: String = ""
     var icon: String = ""
@@ -25,8 +25,7 @@ class AddNewDrinkViewModel @Inject constructor(
 
     fun onSaveButtonClick(drink: Drink) {
         viewModelScope.launch {
-            if (id == "") {
-//                drink.id = getDrinkId()
+            if (id == drink.id) {
                 addNewDrinkInteractor.insertDrink(drink)
 
             } else {
