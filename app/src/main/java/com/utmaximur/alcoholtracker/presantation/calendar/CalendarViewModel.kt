@@ -26,11 +26,28 @@ open class CalendarViewModel @Inject constructor( private var calendarInteractor
         MutableLiveData()
     }
 
-    fun initTracks() = viewModelScope.launch {
+    val tracksByDay: LiveData<List<Track>> by lazy {
+        MutableLiveData()
+    }
 
+    fun initTracks() = viewModelScope.launch {
         val dataTracks = getTracks()
         (tracks as MutableLiveData).value = dataTracks
+    }
 
+    fun initTracksByDay(date: Long) = viewModelScope.launch {
+        val dataTracks = getAlcoholTrackByDay(date)
+        (tracksByDay as MutableLiveData).value = dataTracks
+    }
+
+    private fun updateTracks() = viewModelScope.launch {
+        val dataTracks = getTracks()
+        (tracks as MutableLiveData).value = dataTracks
+    }
+
+    private fun updateTracksByDay(eventDay: Long) = viewModelScope.launch {
+        val dataTracks = getAlcoholTrackByDay(eventDay)
+        (tracksByDay as MutableLiveData).value = dataTracks
     }
 
     suspend fun getTrack(date: Long): Track {
@@ -43,9 +60,11 @@ open class CalendarViewModel @Inject constructor( private var calendarInteractor
 
     suspend fun deleteDrink(trackCalendar: Track) {
         calendarInteractor.deleteTrack(trackCalendar)
+        updateTracks()
+        updateTracksByDay(trackCalendar.date)
     }
 
-    suspend fun getAlcoholTrackByDay(
+    private suspend fun getAlcoholTrackByDay(
         eventDay: Long
     ): List<Track> {
         return calendarInteractor.getAlcoholTrackByDay(eventDay)

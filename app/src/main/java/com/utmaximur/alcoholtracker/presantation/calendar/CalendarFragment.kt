@@ -169,13 +169,14 @@ class CalendarFragment : Fragment(),
     }
 
     private fun getAlcoholTrackByDay(eventDay: Long) {
+        viewModel.initTracksByDay(eventDay)
 
         alcoholTrackListAdapter = DrinksListAdapter(
             this@CalendarFragment
         )
         binding.drinksList.adapter = alcoholTrackListAdapter
-        lifecycleScope.launch {
-            val tracks = viewModel.getAlcoholTrackByDay(eventDay)
+
+        viewModel.tracksByDay.observe(viewLifecycleOwner, { tracks ->
             alcoholTrackListAdapter?.submitList(tracks)
             if (tracks.isNotEmpty()) {
                 binding.emptyDrinkList.toGone()
@@ -184,7 +185,7 @@ class CalendarFragment : Fragment(),
                 binding.emptyDrinkList.toVisible()
             }
             binding.progressBar.toGone()
-        }
+        })
     }
 
     private fun setIconOnDate() {
