@@ -101,6 +101,14 @@ class CalendarFragment : Fragment(),
             getAlcoholTrackByDay(eventDay.calendar.timeInMillis)
             viewModel.setSelectDate(eventDay.calendar.timeInMillis)
         }
+        viewModel.tracks.observe(viewLifecycleOwner, { tracks ->
+            if (tracks.isNotEmpty()) {
+                binding.emptyDrinkList.toVisible()
+            } else {
+                binding.addToStart.toGone()
+                binding.emptyDrinkList.toVisible()
+            }
+        })
         initCalendar()
     }
 
@@ -169,16 +177,11 @@ class CalendarFragment : Fragment(),
         lifecycleScope.launch {
             val tracks = viewModel.getAlcoholTrackByDay(eventDay)
             alcoholTrackListAdapter?.submitList(tracks)
-//            alcoholTrackListAdapter?.notifyDataSetChanged()
-
             if (tracks.isNotEmpty()) {
                 binding.emptyDrinkList.toGone()
+                binding.addToStart.toGone()
             } else {
-                if (tracks.isEmpty()) {
-                    binding.addToStart.toVisible()
-                } else {
-                    binding.emptyDrinkList.toVisible()
-                }
+                binding.emptyDrinkList.toVisible()
             }
             binding.progressBar.toGone()
         }
