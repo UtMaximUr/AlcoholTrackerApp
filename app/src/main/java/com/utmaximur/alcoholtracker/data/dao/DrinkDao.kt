@@ -1,21 +1,20 @@
 package com.utmaximur.alcoholtracker.data.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.utmaximur.alcoholtracker.data.model.Drink
+import com.utmaximur.alcoholtracker.data.dbo.DrinkDBO
 
 @Dao
 interface DrinkDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addDrink(drink: Drink)
+    suspend fun addDrink(drinkDBO: DrinkDBO)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    fun updateDrink(drink: Drink)
+    suspend fun updateDrink(drinkDBO: DrinkDBO)
 
     @Query("SELECT * FROM drink_database")
-    fun getDrinks(): LiveData<MutableList<Drink>>
+    suspend fun getDrinks(): List<DrinkDBO>
 
     @Delete
-    fun deleteDrink(drink: Drink)
+    suspend fun deleteDrink(drinkDBO: DrinkDBO)
 }

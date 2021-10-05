@@ -3,21 +3,21 @@ package com.utmaximur.alcoholtracker.data.assets
 import android.content.res.AssetManager
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.utmaximur.alcoholtracker.data.model.Drink
-import com.utmaximur.alcoholtracker.data.model.Icon
+import com.utmaximur.alcoholtracker.data.dbo.DrinkDBO
+import com.utmaximur.alcoholtracker.data.dbo.IconDBO
 import java.io.IOException
 
 class AssetsModule(private val assetManager: AssetManager) {
 
-    fun getIconsList(): List<Icon> {
+    fun getIconsList(): List<IconDBO> {
         val json = getJsonFromAssets(assetManager, "icons_list.json")
-        val turnsType = object : TypeToken<List<Icon>>() {}.type
+        val turnsType = object : TypeToken<List<IconDBO>>() {}.type
         return Gson().fromJson(json, turnsType)
     }
 
-    fun getDrinkList(): List<Drink> {
+    fun getDrinkList(): List<DrinkDBO> {
         val json = getJsonFromAssets(assetManager, "drink_list.json")
-        val turnsType = object : TypeToken<List<Drink>>() {}.type
+        val turnsType = object : TypeToken<List<DrinkDBO>>() {}.type
         return Gson().fromJson(json, turnsType)
     }
 

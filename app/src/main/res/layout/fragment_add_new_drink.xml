@@ -147,7 +147,7 @@
     </LinearLayout>
 
 
-    <com.utmaximur.alcoholtracker.ui.customview.RangeSeekBar
+    <com.utmaximur.alcoholtracker.presantation.customview.RangeSeekBar
         android:id="@+id/range_degree"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
