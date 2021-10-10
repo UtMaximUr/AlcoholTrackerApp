@@ -13,7 +13,8 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.ActivityCompat
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -56,11 +57,15 @@ class AddPhotoBottomDialogFragment : BottomSheetDialogFragment() {
 
     private fun initUi() {
         binding.useCamera.setOnClickListener {
-            checkPermissionsPhoto()
+            if (checkPermissionsPhoto()) {
+                openCamera()
+            }
         }
 
         binding.loadGallery.setOnClickListener {
-            checkPermissionsGallery()
+            if (checkPermissionsGallery()) {
+                openGallery()
+            }
         }
 
         binding.deletePhoto.setOnClickListener {
@@ -72,100 +77,121 @@ class AddPhotoBottomDialogFragment : BottomSheetDialogFragment() {
         }
     }
 
-    private fun checkPermissionsPhoto() {
-        if (ActivityCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.CAMERA
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            openCamera()
-        } else {
-            requestPermissions(
+    private fun checkPermissionsPhoto(): Boolean {
+        if (requireContext().let {
+                ContextCompat.checkSelfPermission(
+                    it,
+                    Manifest.permission.CAMERA
+                )
+            } != PackageManager.PERMISSION_GRANTED) {
+            requestCameraPermissions.launch(
                 arrayOf(
                     Manifest.permission.CAMERA,
                     Manifest.permission.READ_EXTERNAL_STORAGE
-                ),
-                REQUEST_PHOTO
+                )
             )
-        }
-    }
-
-    private fun checkPermissionsGallery() {
-        if (ActivityCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            openGallery()
         } else {
-            requestPermissions(
-                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-                REQUEST_GALLERY
+            return true
+        }
+        return false
+    }
+
+    private val requestCameraPermissions =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+            if (permissions[Manifest.permission.CAMERA] == true
+            ) {
+                openCamera()
+            }
+        }
+
+    private fun checkPermissionsGallery(): Boolean {
+        if (requireContext().let {
+                ContextCompat.checkSelfPermission(
+                    it,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                )
+            } != PackageManager.PERMISSION_GRANTED) {
+            requestGalleryPermissions.launch(
+                arrayOf(
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                )
             )
+        } else {
+            return true
         }
+        return false
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String?>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        when (requestCode) {
-            REQUEST_PHOTO -> openCamera()
-            REQUEST_GALLERY -> openGallery()
+    private val requestGalleryPermissions =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+            if (permissions[Manifest.permission.CAMERA] == true
+            ) {
+                openGallery()
+            }
         }
-    }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        when (requestCode) {
-            REQUEST_PHOTO -> {
-                if (resultCode == Activity.RESULT_OK && data !== null) {
-                    val bitmap = data.extras?.get(DATA) as Bitmap
-                    findNavController().previousBackStackEntry?.savedStateHandle?.set(
-                        KEY_CREATE_DRINK,
-                        viewModel.savePhoto(requireContext(), bitmap)
-                    )
+    private val getResultGallery =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) {
+            val data = it.data
+            val resultCode = it.resultCode
+
+            if (resultCode == Activity.RESULT_OK && data !== null) {
+                try {
+                    val imageUri: Uri = data.data!!
+                    val imageStream: InputStream =
+                        requireActivity().contentResolver.openInputStream(imageUri)!!
+                    val selectedImage = BitmapFactory.decodeStream(imageStream)
+                    if (selectedImage != null) {
+                        findNavController().previousBackStackEntry?.savedStateHandle?.set(
+                            KEY_CREATE_DRINK,
+                            viewModel.savePhoto(requireContext(), selectedImage)
+                        )
+                    }
                     dialog?.dismiss()
+                } catch (e: FileNotFoundException) {
+                    e.printStackTrace()
                 }
-                val file: File = viewModel.getFile(requireContext(), viewModel.photoURI)!!
+            }
+        }
+
+    private val getResultCamera =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) {
+            val data = it.data
+            val resultCode = it.resultCode
+
+            if (resultCode == Activity.RESULT_OK && data !== null) {
+                val bitmap = data.extras?.get(DATA) as Bitmap
                 findNavController().previousBackStackEntry?.savedStateHandle?.set(
                     KEY_CREATE_DRINK,
-                    file.absolutePath
+                    viewModel.savePhoto(requireContext(), bitmap)
                 )
                 dialog?.dismiss()
-                if (viewModel.photoFile!!.exists()) {
-                    viewModel.photoFile!!.delete()
-                }
             }
-            REQUEST_GALLERY -> {
-                if (resultCode == Activity.RESULT_OK && data !== null) {
-                    try {
-                        val imageUri: Uri = data.data!!
-                        val imageStream: InputStream =
-                            requireActivity().contentResolver.openInputStream(imageUri)!!
-                        val selectedImage = BitmapFactory.decodeStream(imageStream)
-                        if (selectedImage != null) {
-                            findNavController().previousBackStackEntry?.savedStateHandle?.set(
-                                KEY_CREATE_DRINK,
-                                viewModel.savePhoto(requireContext(), selectedImage)
-                            )
-                        }
-                        dialog?.dismiss()
-                    } catch (e: FileNotFoundException) {
-                        e.printStackTrace()
-                    }
-                }
+            val file: File = viewModel.getFile(requireContext(), viewModel.photoURI)!!
+            findNavController().previousBackStackEntry?.savedStateHandle?.set(
+                KEY_CREATE_DRINK,
+                file.absolutePath
+            )
+            dialog?.dismiss()
+            if (viewModel.photoFile!!.exists()) {
+                viewModel.photoFile!!.delete()
             }
         }
-    }
+
 
     private fun openGallery() {
-        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        val intent = Intent(
+            Intent.ACTION_PICK,
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        )
         intent.type = "image/"
-        startActivityForResult(intent, REQUEST_GALLERY)
+        getResultGallery.launch(intent)
     }
+
 
     @SuppressLint("QueryPermissionsNeeded")
     private fun openCamera() {
@@ -183,7 +209,7 @@ class AddPhotoBottomDialogFragment : BottomSheetDialogFragment() {
                     viewModel.photoFile!!
                 )
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, viewModel.photoURI)
-                startActivityForResult(takePictureIntent, REQUEST_PHOTO)
+                getResultCamera.launch(takePictureIntent)
                 viewModel.photoFile?.deleteOnExit()
             }
         }
