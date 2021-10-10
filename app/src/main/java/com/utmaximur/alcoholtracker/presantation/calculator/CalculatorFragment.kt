@@ -8,17 +8,21 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.databinding.FragmentCalculatorBinding
-import com.utmaximur.alcoholtracker.di.factory.CalculatorViewModelFactory
+import com.utmaximur.alcoholtracker.presantation.base.BaseViewModelFactory
 import com.utmaximur.alcoholtracker.util.*
 import javax.inject.Inject
 
 class CalculatorFragment : Fragment() {
 
     @Inject
-    lateinit var calculatorViewModelFactory: CalculatorViewModelFactory
+    lateinit var viewModelFactory: BaseViewModelFactory<CalculatorViewModel>
 
-    private lateinit var viewModel: CalculatorViewModel
-    private lateinit var binding: FragmentCalculatorBinding
+    private val viewModel: CalculatorViewModel by viewModels(
+        factoryProducer = { viewModelFactory }
+    )
+
+    private var _binding: FragmentCalculatorBinding? = null
+    private val binding get() = _binding!!
 
     private var calculatorListener: CalculatorListener? = null
 
@@ -36,22 +40,18 @@ class CalculatorFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCalculatorBinding.inflate(layoutInflater)
-        injectDagger()
-        initViewModel()
-        initUI()
+        _binding = FragmentCalculatorBinding.inflate(layoutInflater)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        injectDagger()
+        initUI()
     }
 
     private fun injectDagger() {
         App.instance.alcoholTrackComponent.inject(this)
-    }
-
-    private fun initViewModel() {
-        val viewModel: CalculatorViewModel by viewModels {
-            CalculatorViewModelFactory()
-        }
-        this.viewModel = viewModel
     }
 
     private fun initUI() {
@@ -145,5 +145,10 @@ class CalculatorFragment : Fragment() {
         if (arguments?.getString(PRICE_DRINK) != "") {
             arguments?.getString(PRICE_DRINK)?.toDouble()?.toInt()?.let { viewModel.setValue(it) }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

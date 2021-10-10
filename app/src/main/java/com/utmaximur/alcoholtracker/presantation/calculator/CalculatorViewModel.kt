@@ -6,8 +6,9 @@ import com.utmaximur.alcoholtracker.util.ADDITION
 import com.utmaximur.alcoholtracker.util.DIVISION
 import com.utmaximur.alcoholtracker.util.MULTIPLICATION
 import com.utmaximur.alcoholtracker.util.SUBTRACTION
+import javax.inject.Inject
 
-class CalculatorViewModel : ViewModel() {
+class CalculatorViewModel @Inject constructor() : ViewModel() {
 
     private var valueOne = ""
     private var valueTwo = ""
