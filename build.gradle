@@ -23,10 +23,19 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven {url ' https://jitpack.io ' }
+        maven { url ' https://jitpack.io ' }
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext {
+    calendar = '1.7.0'
+    dagger = '2.38'
+    glide = '4.12.0'
+    json = '2.8.6'
+    firebase = '26.1.1'
+    in_app_updates = '1.10.2'
 }
