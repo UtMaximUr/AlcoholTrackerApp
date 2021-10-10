@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="245dp"
     android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:padding="@dimen/dp_16"
+        android:textColor="@color/text_color"
+        tools:text="1000" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,10 +24,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
-            android:text="@string/calc_ac"
-            android:backgroundTint="@color/background_color"
-            android:textColor="@color/text_color"
             android:layout_weight="1"
+            android:backgroundTint="@color/background_color"
+            android:text="@string/calc_ac"
+            android:textColor="@color/text_color"
             tools:ignore="ButtonStyle" />
 
         <Button
@@ -27,10 +35,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="@string/calc_ok"
-            android:backgroundTint="@color/cardview_dark_background"
             android:layout_marginStart="6dp"
             android:layout_marginEnd="6dp"
+            android:backgroundTint="@color/cardview_dark_background"
+            android:text="@string/calc_ok"
             tools:ignore="ButtonStyle" />
 
     </LinearLayout>
@@ -44,12 +52,12 @@
             android:id="@+id/calculator_button_7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/calc_7"
-            android:backgroundTint="@color/background_color"
-            android:textColor="@color/text_color"
             android:layout_marginStart="6dp"
             android:layout_marginEnd="6dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/background_color"
+            android:text="@string/calc_7"
+            android:textColor="@color/text_color"
             tools:ignore="ButtonStyle" />
 
         <Button
@@ -59,20 +67,20 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:backgroundTint="@color/background_color"
-            android:textColor="@color/text_color"
             android:text="@string/calc_8"
+            android:textColor="@color/text_color"
             tools:ignore="ButtonStyle" />
 
         <Button
             android:id="@+id/calculator_button_9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/calc_9"
-            android:backgroundTint="@color/background_color"
-            android:textColor="@color/text_color"
             android:layout_marginStart="6dp"
             android:layout_marginEnd="6dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/background_color"
+            android:text="@string/calc_9"
+            android:textColor="@color/text_color"
             tools:ignore="ButtonStyle" />
 
         <Button
@@ -80,9 +88,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="@string/calc_divide"
-            android:backgroundTint="@color/cardview_dark_background"
             android:layout_marginEnd="6dp"
+            android:backgroundTint="@color/cardview_dark_background"
+            android:text="@string/calc_divide"
             tools:ignore="ButtonStyle" />
 
     </LinearLayout>
@@ -96,35 +104,35 @@
             android:id="@+id/calculator_button_4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/calc_4"
-            android:backgroundTint="@color/background_color"
-            android:textColor="@color/text_color"
             android:layout_marginStart="6dp"
             android:layout_marginEnd="6dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/background_color"
+            android:text="@string/calc_4"
+            android:textColor="@color/text_color"
             tools:ignore="ButtonStyle" />
 
         <Button
             android:id="@+id/calculator_button_5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/calc_5"
-            android:backgroundTint="@color/background_color"
-            android:textColor="@color/text_color"
             android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:backgroundTint="@color/background_color"
+            android:text="@string/calc_5"
+            android:textColor="@color/text_color"
             tools:ignore="ButtonStyle" />
 
         <Button
             android:id="@+id/calculator_button_6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/calc_6"
-            android:backgroundTint="@color/background_color"
-            android:textColor="@color/text_color"
             android:layout_marginStart="6dp"
             android:layout_marginEnd="6dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/background_color"
+            android:text="@string/calc_6"
+            android:textColor="@color/text_color"
             tools:ignore="ButtonStyle" />
 
         <Button
@@ -132,9 +140,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="@string/calc_multiply"
-            android:backgroundTint="@color/cardview_dark_background"
             android:layout_marginEnd="6dp"
+            android:backgroundTint="@color/cardview_dark_background"
+            android:text="@string/calc_multiply"
             tools:ignore="ButtonStyle" />
 
     </LinearLayout>
@@ -148,35 +156,35 @@
             android:id="@+id/calculator_button_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/calc_1"
-            android:backgroundTint="@color/background_color"
-            android:textColor="@color/text_color"
             android:layout_marginStart="6dp"
             android:layout_marginEnd="6dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/background_color"
+            android:text="@string/calc_1"
+            android:textColor="@color/text_color"
             tools:ignore="ButtonStyle" />
 
         <Button
             android:id="@+id/calculator_button_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/calc_2"
-            android:backgroundTint="@color/background_color"
-            android:textColor="@color/text_color"
             android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:backgroundTint="@color/background_color"
+            android:text="@string/calc_2"
+            android:textColor="@color/text_color"
             tools:ignore="ButtonStyle" />
 
         <Button
             android:id="@+id/calculator_button_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/calc_3"
-            android:backgroundTint="@color/background_color"
-            android:textColor="@color/text_color"
             android:layout_marginStart="6dp"
             android:layout_marginEnd="6dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/background_color"
+            android:text="@string/calc_3"
+            android:textColor="@color/text_color"
             tools:ignore="ButtonStyle" />
 
         <Button
@@ -184,9 +192,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="@string/calc_minus"
-            android:backgroundTint="@color/cardview_dark_background"
             android:layout_marginEnd="6dp"
+            android:backgroundTint="@color/cardview_dark_background"
+            android:text="@string/calc_minus"
             tools:ignore="ButtonStyle" />
 
     </LinearLayout>
@@ -201,31 +209,31 @@
             android:id="@+id/calculator_button_0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/calc_0"
-            android:backgroundTint="@color/background_color"
-            android:textColor="@color/text_color"
             android:layout_marginStart="6dp"
             android:layout_marginEnd="6dp"
+            android:backgroundTint="@color/background_color"
+            android:text="@string/calc_0"
+            android:textColor="@color/text_color"
             tools:ignore="ButtonStyle" />
 
         <Button
             android:id="@+id/calculator_button_equally"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/calc_equally"
-            android:backgroundTint="@color/cardview_dark_background"
             android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:backgroundTint="@color/cardview_dark_background"
+            android:text="@string/calc_equally"
             tools:ignore="ButtonStyle" />
 
         <Button
             android:id="@+id/calculator_button_plus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/calc_plus"
-            android:backgroundTint="@color/cardview_dark_background"
             android:layout_marginStart="6dp"
             android:layout_marginEnd="6dp"
+            android:backgroundTint="@color/cardview_dark_background"
+            android:text="@string/calc_plus"
             tools:ignore="ButtonStyle" />
 
     </LinearLayout>
