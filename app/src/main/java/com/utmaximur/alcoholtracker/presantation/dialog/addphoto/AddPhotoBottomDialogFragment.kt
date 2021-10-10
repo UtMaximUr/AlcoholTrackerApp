@@ -18,6 +18,7 @@ import androidx.core.content.FileProvider
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.databinding.DialogBottomSheetBinding
 import com.utmaximur.alcoholtracker.presantation.base.BaseViewModelFactory
 import com.utmaximur.alcoholtracker.util.DATA
@@ -53,7 +54,12 @@ class AddPhotoBottomDialogFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        injectDagger()
         initUi()
+    }
+
+    private fun injectDagger() {
+        App.instance.alcoholTrackComponent.inject(this)
     }
 
     private fun initUi() {
