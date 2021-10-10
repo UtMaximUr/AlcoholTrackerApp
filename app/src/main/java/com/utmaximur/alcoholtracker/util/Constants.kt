@@ -7,8 +7,6 @@ const val UPDATE_REQUEST_CODE = 8
 const val ANIMATE_HEIGHT = 245
 
 // AddPhotoFragment
-const val REQUEST_PHOTO = 1000
-const val REQUEST_GALLERY = 1001
 const val DATA = "data"
 const val FORMAT_IMAGE = ".jpeg"
 const val FILE_PROVIDER = ".fileprovider"
