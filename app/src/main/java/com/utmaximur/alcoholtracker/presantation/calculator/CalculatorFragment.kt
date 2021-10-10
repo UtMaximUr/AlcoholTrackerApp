@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.databinding.FragmentCalculatorBinding
@@ -12,7 +12,7 @@ import com.utmaximur.alcoholtracker.presantation.base.BaseViewModelFactory
 import com.utmaximur.alcoholtracker.util.*
 import javax.inject.Inject
 
-class CalculatorFragment : Fragment() {
+class CalculatorFragment : DialogFragment() {
 
     @Inject
     lateinit var viewModelFactory: BaseViewModelFactory<CalculatorViewModel>
@@ -32,7 +32,6 @@ class CalculatorFragment : Fragment() {
 
     interface CalculatorListener {
         fun getValueCalculating(value: String)
-        fun closeCalculator()
     }
 
     override fun onCreateView(
@@ -55,66 +54,57 @@ class CalculatorFragment : Fragment() {
     }
 
     private fun initUI() {
+        viewModel.currentValue.observe(viewLifecycleOwner, { value ->
+            binding.result.text = value
+            calculatorListener?.getValueCalculating(value)
+        })
+
         binding.calculatorButton0.setOnClickListener {
             viewModel.setValue(KEY_0)
-            calculatorListener?.getValueCalculating(viewModel.getValue())
         }
 
         binding.calculatorButton1.setOnClickListener {
             viewModel.setValue(KEY_1)
-            calculatorListener?.getValueCalculating(viewModel.getValue())
         }
 
         binding.calculatorButton2.setOnClickListener {
             viewModel.setValue(KEY_2)
-            calculatorListener?.getValueCalculating(viewModel.getValue())
         }
 
         binding.calculatorButton3.setOnClickListener {
             viewModel.setValue(KEY_3)
-            calculatorListener?.getValueCalculating(viewModel.getValue())
         }
 
         binding.calculatorButton4.setOnClickListener {
             viewModel.setValue(KEY_4)
-            calculatorListener?.getValueCalculating(viewModel.getValue())
         }
 
         binding.calculatorButton5.setOnClickListener {
             viewModel.setValue(KEY_5)
-            calculatorListener?.getValueCalculating(viewModel.getValue())
         }
 
         binding.calculatorButton6.setOnClickListener {
             viewModel.setValue(KEY_6)
-            calculatorListener?.getValueCalculating(viewModel.getValue())
         }
 
         binding.calculatorButton7.setOnClickListener {
             viewModel.setValue(KEY_7)
-            calculatorListener?.getValueCalculating(viewModel.getValue())
         }
 
         binding.calculatorButton8.setOnClickListener {
             viewModel.setValue(KEY_8)
-            calculatorListener?.getValueCalculating(viewModel.getValue())
         }
 
         binding.calculatorButton9.setOnClickListener {
             viewModel.setValue(KEY_9)
-            calculatorListener?.getValueCalculating(viewModel.getValue())
         }
 
         binding.calculatorButtonOk.setOnClickListener {
-            activity?.supportFragmentManager?.beginTransaction()
-                ?.remove(this)
-                ?.commit()
-            calculatorListener?.closeCalculator()
+            dismiss()
         }
 
         binding.calculatorButtonAc.setOnClickListener {
             viewModel.acCalculation()
-            calculatorListener?.getValueCalculating(viewModel.getValue())
         }
 
         binding.calculatorButtonPlus.setOnClickListener {
@@ -127,7 +117,6 @@ class CalculatorFragment : Fragment() {
 
         binding.calculatorButtonEqually.setOnClickListener {
             viewModel.computeCalculation()
-            calculatorListener?.getValueCalculating(viewModel.getValue())
         }
 
         binding.calculatorButtonDivide.setOnClickListener {
@@ -136,14 +125,6 @@ class CalculatorFragment : Fragment() {
 
         binding.calculatorButtonMultiply.setOnClickListener {
             viewModel.setCurrentAction(MULTIPLICATION)
-        }
-
-        getPriceDrink()
-    }
-
-    private fun getPriceDrink() {
-        if (arguments?.getString(PRICE_DRINK) != "") {
-            arguments?.getString(PRICE_DRINK)?.toDouble()?.toInt()?.let { viewModel.setValue(it) }
         }
     }
 
