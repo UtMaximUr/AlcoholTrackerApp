@@ -6,8 +6,10 @@ import android.net.Uri
 import androidx.lifecycle.ViewModel
 import com.utmaximur.alcoholtracker.data.repository.FileRepository
 import java.io.File
+import javax.inject.Inject
 
-class AddPhotoViewModel(private var fileRepository: FileRepository) : ViewModel() {
+class AddPhotoViewModel @Inject constructor(private var fileRepository: FileRepository) :
+    ViewModel() {
 
     var photoURI: Uri? = null
     var photoFile: File? = null

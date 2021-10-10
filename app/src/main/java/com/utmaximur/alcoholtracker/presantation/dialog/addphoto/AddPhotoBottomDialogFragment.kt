@@ -1,7 +1,6 @@
 package com.utmaximur.alcoholtracker.presantation.dialog.addphoto
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -19,40 +18,42 @@ import androidx.core.content.FileProvider
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.databinding.DialogBottomSheetBinding
-import com.utmaximur.alcoholtracker.di.component.AlcoholTrackComponent
-import com.utmaximur.alcoholtracker.di.factory.AddPhotoViewModelFactory
-import com.utmaximur.alcoholtracker.util.*
+import com.utmaximur.alcoholtracker.presantation.base.BaseViewModelFactory
+import com.utmaximur.alcoholtracker.util.DATA
+import com.utmaximur.alcoholtracker.util.FILE_PROVIDER
+import com.utmaximur.alcoholtracker.util.KEY_CREATE_DRINK
+import com.utmaximur.alcoholtracker.util.KEY_CREATE_DRINK_DELETE
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.IOException
 import java.io.InputStream
+import javax.inject.Inject
 
 class AddPhotoBottomDialogFragment : BottomSheetDialogFragment() {
 
-    private lateinit var viewModel: AddPhotoViewModel
-    private lateinit var binding: DialogBottomSheetBinding
+    @Inject
+    lateinit var viewModelFactory: BaseViewModelFactory<AddPhotoViewModel>
+
+    private val viewModel: AddPhotoViewModel by viewModels(
+        factoryProducer = { viewModelFactory }
+    )
+
+    private var _binding: DialogBottomSheetBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DialogBottomSheetBinding.inflate(inflater)
-        initViewModel()
-        initUi()
+        _binding = DialogBottomSheetBinding.inflate(inflater)
         return binding.root
     }
 
-    private fun initViewModel() {
-        val dependencyFactory: AlcoholTrackComponent =
-            (requireActivity().application as App).alcoholTrackComponent
-        val fileRepository = dependencyFactory.provideFileRepository()
-        val viewModel: AddPhotoViewModel by viewModels {
-            AddPhotoViewModelFactory(fileRepository)
-        }
-        this.viewModel = viewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initUi()
     }
 
     private fun initUi() {
@@ -193,7 +194,6 @@ class AddPhotoBottomDialogFragment : BottomSheetDialogFragment() {
     }
 
 
-    @SuppressLint("QueryPermissionsNeeded")
     private fun openCamera() {
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         if (takePictureIntent.resolveActivity(requireContext().packageManager) != null) {
@@ -213,5 +213,10 @@ class AddPhotoBottomDialogFragment : BottomSheetDialogFragment() {
                 viewModel.photoFile?.deleteOnExit()
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
