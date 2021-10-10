@@ -153,7 +153,7 @@ class AddPhotoBottomDialogFragment : BottomSheetDialogFragment() {
                     if (selectedImage != null) {
                         findNavController().previousBackStackEntry?.savedStateHandle?.set(
                             KEY_CREATE_DRINK,
-                            viewModel.savePhoto(requireContext(), selectedImage)
+                            viewModel.savePhoto(selectedImage)
                         )
                     }
                     dialog?.dismiss()
@@ -174,11 +174,11 @@ class AddPhotoBottomDialogFragment : BottomSheetDialogFragment() {
                 val bitmap = data.extras?.get(DATA) as Bitmap
                 findNavController().previousBackStackEntry?.savedStateHandle?.set(
                     KEY_CREATE_DRINK,
-                    viewModel.savePhoto(requireContext(), bitmap)
+                    viewModel.savePhoto(bitmap)
                 )
                 dialog?.dismiss()
             }
-            val file: File = viewModel.getFile(requireContext(), viewModel.photoURI)!!
+            val file: File = viewModel.getFile(viewModel.photoURI)!!
             findNavController().previousBackStackEntry?.savedStateHandle?.set(
                 KEY_CREATE_DRINK,
                 file.absolutePath
@@ -205,7 +205,7 @@ class AddPhotoBottomDialogFragment : BottomSheetDialogFragment() {
         if (takePictureIntent.resolveActivity(requireContext().packageManager) != null) {
             viewModel.photoFile = null
             try {
-                viewModel.photoFile = viewModel.getImageFile(requireContext())
+                viewModel.photoFile = viewModel.getImageFile()
             } catch (ex: IOException) {
             }
             if (viewModel.photoFile != null) {

@@ -52,7 +52,7 @@ class RoomDatabaseModule(private var application: Application) {
 
     @Provides
     fun provideFile(): FileManager {
-        return FileManager()
+        return FileManager(application.applicationContext)
     }
 
     /**

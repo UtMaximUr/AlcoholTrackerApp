@@ -1,6 +1,5 @@
 package com.utmaximur.alcoholtracker.presantation.dialog.addphoto
 
-import android.content.Context
 import android.graphics.Bitmap
 import android.net.Uri
 import androidx.lifecycle.ViewModel
@@ -14,15 +13,15 @@ class AddPhotoViewModel @Inject constructor(private var fileRepository: FileRepo
     var photoURI: Uri? = null
     var photoFile: File? = null
 
-    fun getFile(context: Context, uri: Uri?): File? {
-        return fileRepository.createFile(context, uri)
+    fun getFile(uri: Uri?): File? {
+        return fileRepository.createFile(uri)
     }
 
-    fun getImageFile(context: Context): File? {
-        return fileRepository.createImageFile(context)
+    fun getImageFile(): File? {
+        return fileRepository.createImageFile()
     }
 
-    fun savePhoto(context: Context, bitmap: Bitmap): String {
-        return fileRepository.savePhoto(context, bitmap)
+    fun savePhoto(bitmap: Bitmap): String {
+        return fileRepository.savePhoto(bitmap)
     }
 }
