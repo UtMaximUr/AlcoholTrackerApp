@@ -7,6 +7,7 @@ import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.domain.entity.Drink
 import com.utmaximur.alcoholtracker.domain.entity.Icon
 import com.utmaximur.alcoholtracker.domain.interactor.AddNewDrinkInteractor
+import com.utmaximur.alcoholtracker.util.extension.empty
 import com.utmaximur.alcoholtracker.util.formatDegree1f
 import kotlinx.coroutines.launch
 import java.util.*
@@ -17,9 +18,9 @@ class AddNewDrinkViewModel @Inject constructor(
 ) : ViewModel() {
 
     var id: String = getDrinkId()
-    var photo: String = ""
-    var nameDrink: String = ""
-    var icon: String = ""
+    var photo: String = String.empty()
+    var nameDrink: String = String.empty()
+    var icon: String = String.empty()
     var degreeList: ArrayList<String?> = ArrayList()
     var volumeList: ArrayList<String?> = ArrayList()
 
