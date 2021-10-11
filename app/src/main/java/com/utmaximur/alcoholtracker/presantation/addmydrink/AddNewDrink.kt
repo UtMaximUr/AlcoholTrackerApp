@@ -83,8 +83,11 @@ class AddNewDrink : Fragment() {
         binding.photoDrink.setOnClickListener {
             hideKeyboard()
             val navController = findNavController()
-            navController.currentBackStackEntry?.savedStateHandle?.getLiveData<String>(KEY_CREATE_DRINK)?.observe(
-                viewLifecycleOwner) { result ->
+            navController.currentBackStackEntry?.savedStateHandle?.getLiveData<String>(
+                KEY_CREATE_DRINK
+            )?.observe(
+                viewLifecycleOwner
+            ) { result ->
                 if (result == KEY_CREATE_DRINK_DELETE) {
                     binding.photoDrink.setImageBitmap(null)
                     binding.photoDrink.setImageResource(R.drawable.ic_camera)
@@ -92,15 +95,17 @@ class AddNewDrink : Fragment() {
                 } else {
                     binding.photoDrink.setImagePath(result)
                     binding.photoDrink.scaleType = ImageView.ScaleType.CENTER_CROP
-                    viewModel.photo = result
+                    viewModel.setPhoto(result)
                 }
-                navController.currentBackStackEntry?.savedStateHandle?.remove<String>(KEY_CREATE_DRINK)
+                navController.currentBackStackEntry?.savedStateHandle?.remove<String>(
+                    KEY_CREATE_DRINK
+                )
             }
             navController.navigate(R.id.addPhotoBottomDialogFragment)
         }
 
         binding.drinkName.setOnEditorActionListener(TextView.OnEditorActionListener { text, actionId, _ ->
-            viewModel.nameDrink = text.text.toString()
+            viewModel.setNameDrink(text.text.toString())
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 hideKeyboard()
                 return@OnEditorActionListener true
@@ -172,22 +177,23 @@ class AddNewDrink : Fragment() {
 
     private fun adapterIconOnClick(icon: Icon) {
         hideKeyboard()
-        viewModel.icon = icon.icon
+        viewModel.setIcon(icon.icon)
     }
 
     private fun adapterVolumeOnClick(volume: String?) {
         hideKeyboard()
-        if (viewModel.volumeList.contains(volume)) {
-            viewModel.volumeList.remove(volume)
+        if (viewModel.getVolumeList().contains(volume)) {
+            viewModel.removeVolumeList(volume)
         } else {
-            viewModel.volumeList.add(volume)
+            viewModel.addVolumeList(volume)
         }
     }
 
     private fun getDegree(): List<String?> {
         return viewModel.getDoubleDegree(
             binding.rangeDegree.getCurrentRangeMin().toDouble(),
-            binding.rangeDegree.getCurrentRangeMax().toInt() - binding.rangeDegree.getCurrentRangeMin().toInt()
+            binding.rangeDegree.getCurrentRangeMax()
+                .toInt() - binding.rangeDegree.getCurrentRangeMin().toInt()
         )
     }
 

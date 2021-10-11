@@ -20,11 +20,11 @@ class AddNewDrinkViewModel @Inject constructor(
 ) : ViewModel() {
 
     private var id: String = String.empty()
-    var photo: String = String.empty()
-    var nameDrink: String = String.empty()
-    var icon: String = String.empty()
-    var degreeList: ArrayList<String?> = ArrayList()
-    var volumeList: ArrayList<String?> = ArrayList()
+    private var photo: String = String.empty()
+    private var name: String = String.empty()
+    private var icon: String = String.empty()
+    private var degreeList: ArrayList<String?> = ArrayList()
+    private var volumeList: ArrayList<String?> = ArrayList()
 
     val drink: LiveData<Drink> by lazy {
         MutableLiveData()
@@ -34,7 +34,7 @@ class AddNewDrinkViewModel @Inject constructor(
         viewModelScope.launch {
             val drink = Drink(
                 id,
-                nameDrink,
+                name,
                 degreeList,
                 volumeList,
                 icon,
@@ -78,7 +78,7 @@ class AddNewDrinkViewModel @Inject constructor(
             photo.isEmpty() -> {
                 return context.getString(R.string.empty_field_photo)
             }
-            nameDrink.isEmpty() -> {
+            name.isEmpty() -> {
                 return context.getString(R.string.empty_field_name)
             }
             icon.isEmpty() -> {
@@ -101,9 +101,31 @@ class AddNewDrinkViewModel @Inject constructor(
 
         id = drink?.id.toString()
         photo = drink?.photo.toString()
-        nameDrink = drink?.drink.toString()
+        name = drink?.drink.toString()
         degreeList = drink?.degree as ArrayList<String?>
         volumeList = drink.volume as ArrayList<String?>
         icon = drink.icon
+    }
+
+    fun setPhoto(photo: String) {
+        this.photo = photo
+    }
+
+    fun setNameDrink(name: String) {
+        this.name = name
+    }
+
+    fun setIcon(icon: String) {
+        this.icon = icon
+    }
+
+    fun getVolumeList() = volumeList
+
+    fun removeVolumeList(volume: String?) {
+        volumeList.remove(volume)
+    }
+
+    fun addVolumeList(volume: String?) {
+        volumeList.add(volume)
     }
 }
