@@ -1,6 +1,7 @@
 package com.utmaximur.alcoholtracker.presantation.calculator
 
 
+import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -39,9 +40,13 @@ class CalculatorViewModel @Inject constructor() : ViewModel() {
             if (currentValue.value != String.empty() && currentValue.value?.toFloat()!! > Float.MIN_VALUE
                 && currentValue.value?.toFloat()!! < Float.MAX_VALUE
             ) {
-                _currentValue.value += value.toString()
+                if (value.toString().isDigitsOnly()) {
+                    _currentValue.value += value.toString()
+                }
             } else {
-                _currentValue.value += value.toString()
+                if (value.toString().isDigitsOnly()) {
+                    _currentValue.value += value.toString()
+                }
             }
         }
     }
