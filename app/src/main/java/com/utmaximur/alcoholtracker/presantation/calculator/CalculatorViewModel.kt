@@ -13,9 +13,9 @@ import javax.inject.Inject
 
 class CalculatorViewModel @Inject constructor() : ViewModel() {
 
-    private var valueOne = Int.empty()
-    private var valueTwo = Int.empty()
-    private var valueCalculating = Int.empty()
+    private var valueOne = Float.empty()
+    private var valueTwo = Float.empty()
+    private var valueCalculating = Float.empty()
 
     private var isActionSelect = false
 
@@ -33,7 +33,17 @@ class CalculatorViewModel @Inject constructor() : ViewModel() {
             clearValue()
             isActionSelect = !isActionSelect
         }
-        _currentValue.value += value.toString()
+        // check zero
+        if (currentValue.value != Int.empty().toString()) {
+            // check max and min value
+            if (currentValue.value != String.empty() && currentValue.value?.toFloat()!! > Float.MIN_VALUE
+                && currentValue.value?.toFloat()!! < Float.MAX_VALUE
+            ) {
+                _currentValue.value += value.toString()
+            } else {
+                _currentValue.value += value.toString()
+            }
+        }
     }
 
     private fun clearValue() {
@@ -45,13 +55,13 @@ class CalculatorViewModel @Inject constructor() : ViewModel() {
             computeCalculation()
         }
         currentAction = action
-        valueOne = currentValue.value?.toInt()!!
+        valueOne = currentValue.value?.toFloat()!!
         isActionSelect = !isActionSelect
     }
 
     fun computeCalculation() {
         if (currentValue.value != String.empty()) {
-            valueTwo = currentValue.value?.toInt()!!
+            valueTwo = currentValue.value?.toFloat()!!
         }
         when (currentAction) {
             ADDITION -> {
@@ -67,7 +77,7 @@ class CalculatorViewModel @Inject constructor() : ViewModel() {
             }
 
             DIVISION -> {
-                if (valueTwo != Int.empty()) {
+                if (valueTwo != Float.empty()) {
                     valueCalculating = valueOne / valueTwo
                 }
             }
@@ -77,9 +87,9 @@ class CalculatorViewModel @Inject constructor() : ViewModel() {
     }
 
     fun acCalculation() {
-        valueOne = Int.empty()
-        valueTwo = Int.empty()
-        valueCalculating = Int.empty()
+        valueOne = Float.empty()
+        valueTwo = Float.empty()
+        valueCalculating = Float.empty()
         _currentValue.value = String.empty()
         currentAction = Char.empty()
     }

@@ -371,7 +371,7 @@ class AddFragment : Fragment(), AddDrinkListener {
         binding.priceEditText.setText(value)
         if (value.isNotEmpty()) {
             binding.totalMoneyText.text =
-                (binding.quantityNumberPicker.value * value.toInt()).toString()
+                (binding.quantityNumberPicker.value * value.toFloat()).toString()
         } else {
             binding.totalMoneyText.text = getString(R.string.add_empty)
         }
