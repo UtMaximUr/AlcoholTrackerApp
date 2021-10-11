@@ -156,7 +156,6 @@ class AddNewDrink : Fragment() {
             binding.photoDrink.setImagePath(drink.photo)
         }
         binding.drinkName.setText(drink.drink)
-//        setIconAdapter(drink.icon.getIdRaw(requireContext()).let { Icon(it) })
         setIconAdapter(Icon(drink.icon))
         binding.rangeDegree.setCurrentRangeMin(drink.degree.first()?.toDouble()?.toFloat()!!)
         binding.rangeDegree.setCurrentRangeMax(drink.degree.last()?.toDouble()?.toFloat()!!)
