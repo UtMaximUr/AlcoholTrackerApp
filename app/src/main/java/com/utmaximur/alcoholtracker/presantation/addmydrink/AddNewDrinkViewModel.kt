@@ -1,6 +1,8 @@
 package com.utmaximur.alcoholtracker.presantation.addmydrink
 
 import android.content.Context
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.utmaximur.alcoholtracker.R
@@ -17,13 +19,16 @@ class AddNewDrinkViewModel @Inject constructor(
     private var addNewDrinkInteractor: AddNewDrinkInteractor
 ) : ViewModel() {
 
-    var id: String = String.empty()
+    private var id: String = String.empty()
     var photo: String = String.empty()
     var nameDrink: String = String.empty()
     var icon: String = String.empty()
     var degreeList: ArrayList<String?> = ArrayList()
     var volumeList: ArrayList<String?> = ArrayList()
 
+    val drink: LiveData<Drink> by lazy {
+        MutableLiveData()
+    }
 
     fun onSaveButtonClick() {
         viewModelScope.launch {
@@ -87,5 +92,18 @@ class AddNewDrinkViewModel @Inject constructor(
             }
         }
         return ""
+    }
+
+    fun setDrink(drink: Drink?) {
+
+        val dataDrinks = drink
+        (this.drink as MutableLiveData).value = dataDrinks
+
+        id = drink?.id.toString()
+        photo = drink?.photo.toString()
+        nameDrink = drink?.drink.toString()
+        degreeList = drink?.degree as ArrayList<String?>
+        volumeList = drink.volume as ArrayList<String?>
+        icon = drink.icon
     }
 }

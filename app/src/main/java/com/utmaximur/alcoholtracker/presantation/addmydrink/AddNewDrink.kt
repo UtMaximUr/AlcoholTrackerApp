@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.ConcatAdapter
 import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.databinding.FragmentAddNewDrinkBinding
-import com.utmaximur.alcoholtracker.domain.entity.Drink
 import com.utmaximur.alcoholtracker.domain.entity.Icon
 import com.utmaximur.alcoholtracker.presantation.addmydrink.adapter.SelectIconAdapter
 import com.utmaximur.alcoholtracker.presantation.addmydrink.adapter.SelectVolumeAdapter
@@ -135,25 +134,21 @@ class AddNewDrink : Fragment() {
     }
 
     private fun setArguments() {
-        val drink: Drink? = requireArguments().getParcelable(EDIT_DRINK)
-        viewModel.id = drink?.id.toString()
-        viewModel.photo = drink?.photo.toString()
-        viewModel.nameDrink = drink?.drink.toString()
-        viewModel.degreeList = drink?.degree as ArrayList<String?>
-        viewModel.volumeList = drink.volume as ArrayList<String?>
-        viewModel.icon = drink.icon
+        viewModel.setDrink(requireArguments().getParcelable(EDIT_DRINK))
 
-        if (drink.photo.isNotEmpty()) {
-            binding.photoDrink.setImagePath(drink.photo)
-        }
-        binding.drinkName.setText(drink.drink)
-        setIconAdapter(Icon(drink.icon))
-        binding.rangeDegree.setCurrentRangeMin(drink.degree.first()?.toDouble()?.toFloat()!!)
-        binding.rangeDegree.setCurrentRangeMax(drink.degree.last()?.toDouble()?.toFloat()!!)
-        binding.minRangeDegree.text = drink.degree.first()
-        binding.maxRangeDegree.text = drink.degree.last()
+        viewModel.drink.observe(viewLifecycleOwner, { drink ->
+            if (drink?.photo?.isNotEmpty()!!) {
+                binding.photoDrink.setImagePath(drink.photo)
+            }
+            binding.drinkName.setText(drink.drink)
+            setIconAdapter(Icon(drink.icon))
+            binding.rangeDegree.setCurrentRangeMin(drink.degree.first()?.toDouble()?.toFloat()!!)
+            binding.rangeDegree.setCurrentRangeMax(drink.degree.last()?.toDouble()?.toFloat()!!)
+            binding.minRangeDegree.text = drink.degree.first()
+            binding.maxRangeDegree.text = drink.degree.last()
 
-        setVolumeAdapter(drink.volume)
+            setVolumeAdapter(drink.volume)
+        })
     }
 
     private fun setIconAdapter(icon: Icon?) {
