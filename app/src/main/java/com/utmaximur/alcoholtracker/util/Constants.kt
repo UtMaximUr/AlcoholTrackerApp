@@ -3,9 +3,6 @@ package com.utmaximur.alcoholtracker.util
 const val UPDATE_REQUEST_CODE = 8
 
 
-// AddFragment
-const val ANIMATE_HEIGHT = 245
-
 // AddPhotoFragment
 const val DATA = "data"
 const val FORMAT_IMAGE = ".jpeg"
@@ -31,6 +28,7 @@ const val TERMS_OF_USE = "https://alcohol-tracker.flycricket.io/terms.html"
 const val DRINK = "drink"
 const val SELECT_DAY = "selectDate"
 const val EDIT_DRINK = "editDrink"
+const val PRICE_DRINK = "priceDrink"
 
 // Utils
 const val RES_RAW = "raw"

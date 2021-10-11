@@ -1,7 +1,5 @@
 package com.utmaximur.alcoholtracker.presantation.add
 
-import android.animation.ObjectAnimator
-import android.animation.ValueAnimator
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.content.Context
@@ -11,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.*
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -55,6 +52,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
 
     private var _binding: FragmentAddBinding? = null
     private val binding get() = _binding!!
+
     private lateinit var datePecker: DatePickerDialog
     private var dateAndTime = Calendar.getInstance()
 
@@ -64,10 +62,14 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAddBinding.inflate(layoutInflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         injectDagger()
         setDrinksList()
         initUi()
-        return binding.root
     }
 
     private fun injectDagger() {
@@ -179,32 +181,13 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         })
 
         binding.priceEditText.setOnClickListener {
-            if (binding.containerCalculator.height == 0) {
-                val calculatorFragment = CalculatorFragment()
-                val bundle = Bundle()
-                bundle.putString(PRICE_DRINK, binding.priceEditText.text.toString())
-                calculatorFragment.arguments = bundle
-                calculatorFragment.setListener(this@AddFragment)
-                activity?.supportFragmentManager?.beginTransaction()
-                    ?.add(R.id.container_calculator, calculatorFragment)
-                    ?.setCustomAnimations(
-                        R.anim.nav_default_enter_anim,
-                        R.anim.nav_default_exit_anim
-                    )
-                    ?.commit()
-                animateViewHeight(binding.containerCalculator, ANIMATE_HEIGHT.dpToPx())
-            }
+            val calculatorFragment = CalculatorFragment()
+            val bundle = Bundle()
+            bundle.putString(PRICE_DRINK, binding.priceEditText.text.toString())
+            calculatorFragment.arguments = bundle
+            calculatorFragment.setListener(this@AddFragment)
+            calculatorFragment.show(parentFragmentManager, calculatorFragment.tag)
         }
-    }
-
-    private fun animateViewHeight(view: ConstraintLayout, targetHeight: Int) {
-        val animator: ValueAnimator = ObjectAnimator.ofInt(view.height, targetHeight)
-        animator.addUpdateListener { animation ->
-            val params = view.layoutParams
-            params.height = animation.animatedValue as Int
-            view.layoutParams = params
-        }
-        animator.start()
     }
 
     private fun hideKeyboard() {
@@ -385,10 +368,6 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         } else {
             binding.totalMoneyText.text = getString(R.string.add_empty)
         }
-    }
-
-    override fun closeCalculator() {
-        animateViewHeight(binding.containerCalculator, 0)
     }
 
     override fun addNewDrink() {

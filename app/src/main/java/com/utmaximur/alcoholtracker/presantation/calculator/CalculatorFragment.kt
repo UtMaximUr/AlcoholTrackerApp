@@ -10,6 +10,7 @@ import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.databinding.FragmentCalculatorBinding
 import com.utmaximur.alcoholtracker.presantation.base.BaseViewModelFactory
 import com.utmaximur.alcoholtracker.util.*
+import com.utmaximur.alcoholtracker.util.extension.empty
 import javax.inject.Inject
 
 class CalculatorFragment : DialogFragment() {
@@ -47,6 +48,7 @@ class CalculatorFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         injectDagger()
         initUI()
+        getPriceValue()
     }
 
     private fun injectDagger() {
@@ -125,6 +127,12 @@ class CalculatorFragment : DialogFragment() {
 
         binding.calculatorButtonMultiply.setOnClickListener {
             viewModel.setCurrentAction(MULTIPLICATION)
+        }
+    }
+
+    private fun getPriceValue() {
+        if (arguments?.getString(PRICE_DRINK) != String.empty()) {
+            viewModel.setValue(arguments?.getString(PRICE_DRINK)?.toInt()!!)
         }
     }
 
