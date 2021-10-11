@@ -93,7 +93,9 @@ class CalculatorFragment : DialogFragment() {
         }
 
         binding.calculatorButtonOk.setOnClickListener {
-            findNavController().previousBackStackEntry?.savedStateHandle?.remove<String>(KEY_CALCULATOR)
+            findNavController().previousBackStackEntry?.savedStateHandle?.remove<String>(
+                KEY_CALCULATOR
+            )
             dismiss()
         }
 
@@ -124,7 +126,7 @@ class CalculatorFragment : DialogFragment() {
 
     private fun getPriceValue() {
         if (arguments?.getString(PRICE_DRINK) != String.empty()) {
-            viewModel.setValue(arguments?.getString(PRICE_DRINK)?.toInt()!!)
+            viewModel.setValue(arguments?.getString(PRICE_DRINK)?.toFloat()?.toInt()!!)
         }
     }
 

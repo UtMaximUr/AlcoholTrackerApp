@@ -51,12 +51,14 @@ class CalculatorViewModel @Inject constructor() : ViewModel() {
     }
 
     fun setCurrentAction(action: Char) {
-        if (currentAction != Char.empty()) {
-            computeCalculation()
+        if (currentValue.value != String.empty()) {
+            if (currentAction != Char.empty()) {
+                computeCalculation()
+            }
+            currentAction = action
+            valueOne = currentValue.value?.toFloat()!!
+            isActionSelect = !isActionSelect
         }
-        currentAction = action
-        valueOne = currentValue.value?.toFloat()!!
-        isActionSelect = !isActionSelect
     }
 
     fun computeCalculation() {
