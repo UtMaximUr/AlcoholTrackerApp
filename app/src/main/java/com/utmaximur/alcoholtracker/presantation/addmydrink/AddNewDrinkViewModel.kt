@@ -17,18 +17,27 @@ class AddNewDrinkViewModel @Inject constructor(
     private var addNewDrinkInteractor: AddNewDrinkInteractor
 ) : ViewModel() {
 
-    var id: String = getDrinkId()
+    var id: String = String.empty()
     var photo: String = String.empty()
     var nameDrink: String = String.empty()
     var icon: String = String.empty()
     var degreeList: ArrayList<String?> = ArrayList()
     var volumeList: ArrayList<String?> = ArrayList()
 
-    fun onSaveButtonClick(drink: Drink) {
-        viewModelScope.launch {
-            if (id == drink.id) {
-                addNewDrinkInteractor.insertDrink(drink)
 
+    fun onSaveButtonClick() {
+        viewModelScope.launch {
+            val drink = Drink(
+                id,
+                nameDrink,
+                degreeList,
+                volumeList,
+                icon,
+                photo
+            )
+            if (id == String.empty()) {
+                val newDrink = drink.copy(id = getDrinkId())
+                addNewDrinkInteractor.insertDrink(newDrink)
             } else {
                 addNewDrinkInteractor.updateDrink(drink)
             }

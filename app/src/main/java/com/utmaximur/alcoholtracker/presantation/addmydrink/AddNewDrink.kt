@@ -73,16 +73,7 @@ class AddNewDrink : Fragment() {
         binding.toolbar.setOnMenuItemClickListener {
             if (viewModel.checkEmptyField(requireContext()).isEmpty()) {
                 hideKeyboard()
-                viewModel.onSaveButtonClick(
-                    Drink(
-                        getIdDrink(),
-                        getName(),
-                        getDegree(),
-                        getVolume(),
-                        getIcon(),
-                        getPhoto()
-                    )
-                )
+                viewModel.onSaveButtonClick()
                 addNewFragmentListener?.closeFragment()
             } else {
                 view?.snackBar(viewModel.checkEmptyField(requireContext()))
@@ -198,31 +189,11 @@ class AddNewDrink : Fragment() {
         }
     }
 
-    private fun getIdDrink(): String {
-        return viewModel.id
-    }
-
-    private fun getName(): String {
-        return binding.drinkName.text.toString()
-    }
-
     private fun getDegree(): List<String?> {
         return viewModel.getDoubleDegree(
             binding.rangeDegree.getCurrentRangeMin().toDouble(),
             binding.rangeDegree.getCurrentRangeMax().toInt() - binding.rangeDegree.getCurrentRangeMin().toInt()
         )
-    }
-
-    private fun getVolume(): List<String?> {
-        return viewModel.volumeList
-    }
-
-    private fun getIcon(): String {
-        return viewModel.icon
-    }
-
-    private fun getPhoto(): String {
-        return viewModel.photo
     }
 
     override fun onDestroyView() {
