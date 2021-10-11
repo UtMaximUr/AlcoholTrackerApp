@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.databinding.FragmentCalculatorBinding
 import com.utmaximur.alcoholtracker.presantation.base.BaseViewModelFactory
@@ -24,16 +25,6 @@ class CalculatorFragment : DialogFragment() {
 
     private var _binding: FragmentCalculatorBinding? = null
     private val binding get() = _binding!!
-
-    private var calculatorListener: CalculatorListener? = null
-
-    fun setListener(calculatorListener: CalculatorListener) {
-        this.calculatorListener = calculatorListener
-    }
-
-    interface CalculatorListener {
-        fun getValueCalculating(value: String)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,7 +49,7 @@ class CalculatorFragment : DialogFragment() {
     private fun initUI() {
         viewModel.currentValue.observe(viewLifecycleOwner, { value ->
             binding.result.text = value
-            calculatorListener?.getValueCalculating(value)
+            findNavController().previousBackStackEntry?.savedStateHandle?.set(KEY_CALCULATOR, value)
         })
 
         binding.calculatorButton0.setOnClickListener {
@@ -102,6 +93,7 @@ class CalculatorFragment : DialogFragment() {
         }
 
         binding.calculatorButtonOk.setOnClickListener {
+            findNavController().previousBackStackEntry?.savedStateHandle?.remove<String>(KEY_CALCULATOR)
             dismiss()
         }
 

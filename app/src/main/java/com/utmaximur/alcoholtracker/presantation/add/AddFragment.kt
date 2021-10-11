@@ -23,15 +23,13 @@ import com.utmaximur.alcoholtracker.domain.entity.Track
 import com.utmaximur.alcoholtracker.presantation.add.adapter.DrinkViewPagerAdapter
 import com.utmaximur.alcoholtracker.presantation.add.adapter.DrinkViewPagerAdapter.AddDrinkListener
 import com.utmaximur.alcoholtracker.presantation.base.BaseViewModelFactory
-import com.utmaximur.alcoholtracker.presantation.calculator.CalculatorFragment
-import com.utmaximur.alcoholtracker.presantation.calculator.CalculatorFragment.CalculatorListener
 import com.utmaximur.alcoholtracker.util.*
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
 
-class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
+class AddFragment : Fragment(), AddDrinkListener {
 
     private var addFragmentListener: AddFragmentListener? = null
 
@@ -77,6 +75,8 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
     }
 
     private fun initUi() {
+        val navController = findNavController()
+
         binding.toolbar.setNavigationOnClickListener {
             hideKeyboard()
             addFragmentListener?.closeFragment()
@@ -181,12 +181,19 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         })
 
         binding.priceEditText.setOnClickListener {
-            val calculatorFragment = CalculatorFragment()
             val bundle = Bundle()
             bundle.putString(PRICE_DRINK, binding.priceEditText.text.toString())
-            calculatorFragment.arguments = bundle
-            calculatorFragment.setListener(this@AddFragment)
-            calculatorFragment.show(parentFragmentManager, calculatorFragment.tag)
+            navController.currentBackStackEntry?.savedStateHandle?.getLiveData<String>(
+                KEY_CALCULATOR
+            )
+                ?.observe(
+                    viewLifecycleOwner
+                ) { result ->
+                    lifecycleScope.launch {
+                        getValueCalculating(result)
+                    }
+                }
+            navController.navigate(R.id.calculatorFragment, bundle)
         }
     }
 
@@ -360,7 +367,7 @@ class AddFragment : Fragment(), CalculatorListener, AddDrinkListener {
         return viewModel.drinkDBOS
     }
 
-    override fun getValueCalculating(value: String) {
+    private fun getValueCalculating(value: String) {
         binding.priceEditText.setText(value)
         if (value.isNotEmpty()) {
             binding.totalMoneyText.text =
