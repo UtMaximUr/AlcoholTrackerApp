@@ -11,6 +11,8 @@
         android:layout_height="wrap_content"
         android:gravity="right"
         android:padding="@dimen/dp_16"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:textColor="@color/text_color"
         tools:text="1000" />
 
