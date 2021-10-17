@@ -49,44 +49,44 @@ class SettingsFragment : Fragment() {
         return binding.root
     }
 
-    private fun initUi() {
+    private fun initUi() = with(binding) {
         initSettings()
 
-        binding.privacyPolicyButton.setOnClickListener {
+        privacyPolicyButton.setOnClickListener {
             goToUrl(PRIVACY_POLICY)
         }
 
-        binding.termsOfUseButton.setOnClickListener {
+        termsOfUseButton.setOnClickListener {
             goToUrl(TERMS_OF_USE)
         }
 
-        binding.rateAppButton.setOnClickListener {
+        rateAppButton.setOnClickListener {
             rateUs()
         }
 
         themeListAdapter = ThemeListAdapter(
-            this::saveTheme,
+            this@SettingsFragment::saveTheme,
             requireContext().resources.getStringArray(R.array.theme_array).toList(),
             getTheme()
         )
         themeConcatAdapter = ConcatAdapter(themeListAdapter)
-        binding.themeList.adapter = themeConcatAdapter
+        themeList.adapter = themeConcatAdapter
 
-        binding.themeSwitch.setOnCheckedChangeListener { _, b ->
+        themeSwitch.setOnCheckedChangeListener { _, b ->
             if (b) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.getDefaultNightMode())
                 saveTheme(THEME_UNDEFINED)
-                animateViewHeight(binding.themeList, 0)
+                animateViewHeight(themeList, 0)
             } else {
-                animateViewHeight(binding.themeList, THEME_HEIGHT.dpToPx())
+                animateViewHeight(themeList, THEME_HEIGHT.dpToPx())
             }
         }
 
-        binding.updateSwitch.setOnCheckedChangeListener { _, b ->
+        updateSwitch.setOnCheckedChangeListener { _, b ->
             sharedPrefs?.edit()?.putBoolean(KEY_UPDATE, b)?.apply()
         }
 
-        binding.versionApp.text = BuildConfig.VERSION_NAME
+        versionApp.text = BuildConfig.VERSION_NAME
     }
 
     private fun animateViewHeight(view: RecyclerView, targetHeight: Int) {
@@ -99,31 +99,31 @@ class SettingsFragment : Fragment() {
         animator.start()
     }
 
-    private fun initSettings() {
+    private fun initSettings() = with(binding) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            binding.themeLayout.toVisible()
+            themeLayout.toVisible()
         } else {
-            binding.themeLayout.toGone()
+            themeLayout.toGone()
         }
         when (getSavedTheme()) {
             THEME_DARK -> {
-                binding.themeSwitch.isChecked = false
-                val params = binding.themeList.layoutParams
+                themeSwitch.isChecked = false
+                val params = themeList.layoutParams
                 params.height = THEME_HEIGHT.dpToPx()
-                binding.themeList.layoutParams = params
+                themeList.layoutParams = params
             }
             THEME_LIGHT -> {
-                binding.themeSwitch.isChecked = false
-                val params = binding.themeList.layoutParams
+                themeSwitch.isChecked = false
+                val params = themeList.layoutParams
                 params.height = THEME_HEIGHT.dpToPx()
-                binding.themeList.layoutParams = params
+                themeList.layoutParams = params
             }
             THEME_UNDEFINED -> {
-                binding.themeSwitch.isChecked = true
+                themeSwitch.isChecked = true
             }
         }
 
-        binding.updateSwitch.isChecked = getSavedUpdate()!!
+        updateSwitch.isChecked = getSavedUpdate()!!
     }
 
     private fun saveTheme(theme: Int) {
