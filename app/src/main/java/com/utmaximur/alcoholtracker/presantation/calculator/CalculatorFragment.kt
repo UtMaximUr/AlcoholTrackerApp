@@ -46,80 +46,80 @@ class CalculatorFragment : DialogFragment() {
         App.instance.alcoholTrackComponent.inject(this)
     }
 
-    private fun initUI() {
+    private fun initUI() = with(binding) {
         viewModel.currentValue.observe(viewLifecycleOwner, { value ->
-            binding.result.text = value
+            result.text = value
             findNavController().previousBackStackEntry?.savedStateHandle?.set(KEY_CALCULATOR, value)
         })
 
-        binding.calculatorButton0.setOnClickListener {
+        calculatorButton0.setOnClickListener {
             viewModel.setValue(KEY_0)
         }
 
-        binding.calculatorButton1.setOnClickListener {
+        calculatorButton1.setOnClickListener {
             viewModel.setValue(KEY_1)
         }
 
-        binding.calculatorButton2.setOnClickListener {
+        calculatorButton2.setOnClickListener {
             viewModel.setValue(KEY_2)
         }
 
-        binding.calculatorButton3.setOnClickListener {
+        calculatorButton3.setOnClickListener {
             viewModel.setValue(KEY_3)
         }
 
-        binding.calculatorButton4.setOnClickListener {
+        calculatorButton4.setOnClickListener {
             viewModel.setValue(KEY_4)
         }
 
-        binding.calculatorButton5.setOnClickListener {
+        calculatorButton5.setOnClickListener {
             viewModel.setValue(KEY_5)
         }
 
-        binding.calculatorButton6.setOnClickListener {
+        calculatorButton6.setOnClickListener {
             viewModel.setValue(KEY_6)
         }
 
-        binding.calculatorButton7.setOnClickListener {
+        calculatorButton7.setOnClickListener {
             viewModel.setValue(KEY_7)
         }
 
-        binding.calculatorButton8.setOnClickListener {
+        calculatorButton8.setOnClickListener {
             viewModel.setValue(KEY_8)
         }
 
-        binding.calculatorButton9.setOnClickListener {
+        calculatorButton9.setOnClickListener {
             viewModel.setValue(KEY_9)
         }
 
-        binding.calculatorButtonOk.setOnClickListener {
+        calculatorButtonOk.setOnClickListener {
             findNavController().previousBackStackEntry?.savedStateHandle?.remove<String>(
                 KEY_CALCULATOR
             )
             dismiss()
         }
 
-        binding.calculatorButtonAc.setOnClickListener {
+        calculatorButtonAc.setOnClickListener {
             viewModel.acCalculation()
         }
 
-        binding.calculatorButtonPlus.setOnClickListener {
+        calculatorButtonPlus.setOnClickListener {
             viewModel.setCurrentAction(ADDITION)
         }
 
-        binding.calculatorButtonMinus.setOnClickListener {
+        calculatorButtonMinus.setOnClickListener {
             viewModel.setCurrentAction(SUBTRACTION)
         }
 
-        binding.calculatorButtonEqually.setOnClickListener {
+        calculatorButtonEqually.setOnClickListener {
             viewModel.computeCalculation()
         }
 
-        binding.calculatorButtonDivide.setOnClickListener {
+        calculatorButtonDivide.setOnClickListener {
             viewModel.setCurrentAction(DIVISION)
         }
 
-        binding.calculatorButtonMultiply.setOnClickListener {
+        calculatorButtonMultiply.setOnClickListener {
             viewModel.setCurrentAction(MULTIPLICATION)
         }
     }
