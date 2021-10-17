@@ -59,7 +59,7 @@ class AddViewModel @Inject constructor(private var addTrackInteractor: AddTrackI
         volume = drinkList.first().volume.first().toString()
         quantity = Int.first()
         degree = drinkList.first().degree.first().toString()
-        icon = drinkList.first().icon.first().toString()
+        icon = drinkList.first().icon
     }
 
     fun onSaveButtonClick() {
