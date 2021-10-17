@@ -47,29 +47,29 @@ class StatisticFragment :
         App.instance.alcoholTrackComponent.inject(this)
     }
 
-    private fun initUI() {
+    private fun initUI() = with(binding) {
         viewModel.getStatistics()
 
-        binding.topDrinksList.layoutManager = GridLayoutManager(context, 4)
+        topDrinksList.layoutManager = GridLayoutManager(context, 4)
         val adapter =  TopDrinkAdapter()
-        binding.topDrinksList.adapter = adapter
+        topDrinksList.adapter = adapter
 
         viewModel.statisticsDrinksList.observe(viewLifecycleOwner, { drinksList ->
             adapter.submitList(drinksList)
         })
 
         viewModel.statisticsPriceByPeriod.observe(viewLifecycleOwner, { statistics ->
-            binding.statisticViewPager.adapter =
+            statisticViewPager.adapter =
                 StatisticAdapter(statistics, requireContext())
-            binding.indicatorStatistic.setupWithViewPager(binding.statisticViewPager, true)
+            indicatorStatistic.setupWithViewPager(statisticViewPager, true)
         })
 
         viewModel.statisticsCountDays.observe(viewLifecycleOwner, { statistics ->
-            binding.countDayViewPager.adapter = CountDaysAdapter(
+            countDayViewPager.adapter = CountDaysAdapter(
                 statistics,
                 requireContext()
             )
-            binding.indicatorCountDay.setupWithViewPager(binding.countDayViewPager, true)
+            indicatorCountDay.setupWithViewPager(countDayViewPager, true)
         })
     }
 
