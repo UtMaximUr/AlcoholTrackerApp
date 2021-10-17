@@ -8,6 +8,7 @@ import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.databinding.ItemTopDrinkBinding
 import com.utmaximur.alcoholtracker.domain.entity.DrinkStatistic
 import com.utmaximur.alcoholtracker.util.getResString
+import com.utmaximur.alcoholtracker.util.setImage
 
 class TopDrinkAdapter :
     ListAdapter<DrinkStatistic, TopDrinkAdapter.TopDrinkViewHolder>(TopDrinkDiffCallback()) {

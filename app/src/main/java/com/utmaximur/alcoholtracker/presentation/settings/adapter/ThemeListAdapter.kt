@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.utmaximur.alcoholtracker.databinding.ItemThemeBinding
+import com.utmaximur.alcoholtracker.util.toVisible
 
 class ThemeListAdapter(
     private val onClick: (Int) -> Unit,

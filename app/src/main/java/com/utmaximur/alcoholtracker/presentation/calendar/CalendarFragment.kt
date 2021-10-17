@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.transition.TransitionManager
 import com.applandeo.materialcalendarview.EventDay
 import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.R

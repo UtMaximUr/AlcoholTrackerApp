@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.databinding.FragmentCalculatorBinding
 import com.utmaximur.alcoholtracker.presentation.base.BaseViewModelFactory

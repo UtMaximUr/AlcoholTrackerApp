@@ -24,6 +24,7 @@ import com.utmaximur.alcoholtracker.presentation.base.BaseViewModelFactory
 import com.utmaximur.alcoholtracker.util.DATA
 import com.utmaximur.alcoholtracker.util.FILE_PROVIDER
 import com.utmaximur.alcoholtracker.util.KEY_CREATE_DRINK
+import com.utmaximur.alcoholtracker.util.KEY_CREATE_DRINK_DELETE
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.IOException
