@@ -11,7 +11,6 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.R
@@ -49,7 +48,6 @@ class AddFragment : Fragment(), AddDrinkListener {
 
     private lateinit var datePicker: DatePickerDialog
     private var dateAndTime = Calendar.getInstance()
-    private var navController: NavController? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -73,8 +71,6 @@ class AddFragment : Fragment(), AddDrinkListener {
     }
 
     private fun initUi() = with(binding) {
-        navController = findNavController()
-
         toolbar.setNavigationOnClickListener {
             hideKeyboard()
             addFragmentListener?.closeFragment()
@@ -184,7 +180,7 @@ class AddFragment : Fragment(), AddDrinkListener {
     private fun onShowCalculate() {
         val bundle = Bundle()
         bundle.putString(PRICE_DRINK, binding.priceEditText.text.toString())
-        navController?.currentBackStackEntry?.savedStateHandle?.getLiveData<String>(
+        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>(
             KEY_CALCULATOR
         )
             ?.observe(
@@ -194,7 +190,7 @@ class AddFragment : Fragment(), AddDrinkListener {
                     viewModel.onValueCalculating(result)
                 }
             }
-        navController?.navigate(R.id.calculatorFragment, bundle)
+        findNavController().navigate(R.id.calculatorFragment, bundle)
     }
 
     private fun hideKeyboard() = with(binding) {
@@ -286,7 +282,7 @@ class AddFragment : Fragment(), AddDrinkListener {
     }
 
     override fun deleteDrink(drink: Drink) {
-        navController?.currentBackStackEntry?.savedStateHandle?.getLiveData<String>(KEY_ADD)
+        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>(KEY_ADD)
             ?.observe(
                 viewLifecycleOwner
             ) { result ->
@@ -296,7 +292,7 @@ class AddFragment : Fragment(), AddDrinkListener {
                     }
                 }
             }
-        navController?.navigate(R.id.deleteDialogFragment)
+        findNavController().navigate(R.id.deleteDialogFragment)
     }
 
     override fun editDrink(drink: Drink) {
