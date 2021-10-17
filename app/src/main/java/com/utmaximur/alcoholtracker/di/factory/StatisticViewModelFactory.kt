@@ -3,7 +3,7 @@ package com.utmaximur.alcoholtracker.di.factory
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.utmaximur.alcoholtracker.domain.interactor.StatisticInteractor
-import com.utmaximur.alcoholtracker.presantation.statistic.StatisticViewModel
+import com.utmaximur.alcoholtracker.presentation.statistic.StatisticViewModel
 import javax.inject.Inject
 import javax.inject.Singleton
 

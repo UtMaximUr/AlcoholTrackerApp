@@ -6,60 +6,60 @@
     app:startDestination="@id/calendarFragment">
     <fragment
         android:id="@+id/addFragment"
-        android:name="com.utmaximur.alcoholtracker.presantation.add.AddFragment"
+        android:name="com.utmaximur.alcoholtracker.presentation.add.AddFragment"
         android:label="AddFragment"
         tools:layout="@layout/fragment_add" />
     <fragment
         android:id="@+id/addNewDrinkFragment"
-        android:name="com.utmaximur.alcoholtracker.presantation.addmydrink.AddNewDrink"
+        android:name="com.utmaximur.alcoholtracker.presentation.addmydrink.AddNewDrink"
         android:label="AddNewDrinkFragment"
         tools:layout="@layout/fragment_add_new_drink" />
     <fragment
         android:id="@+id/calendarFragment"
-        android:name="com.utmaximur.alcoholtracker.presantation.calendar.CalendarFragment"
+        android:name="com.utmaximur.alcoholtracker.presentation.calendar.CalendarFragment"
         android:label="CalendarFragment"
         tools:layout="@layout/fragment_calendar" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.utmaximur.alcoholtracker.presantation.settings.SettingsFragment"
+        android:name="com.utmaximur.alcoholtracker.presentation.settings.SettingsFragment"
         android:label="SettingsFragment"
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/statisticFragment"
-        android:name="com.utmaximur.alcoholtracker.presantation.statistic.StatisticFragment"
+        android:name="com.utmaximur.alcoholtracker.presentation.statistic.StatisticFragment"
         android:label="StatisticFragment"
         tools:layout="@layout/fragment_statistic" />
     <dialog
         android:id="@+id/addPhotoBottomDialogFragment"
-        android:name="com.utmaximur.alcoholtracker.presantation.dialog.addphoto.AddPhotoBottomDialogFragment"
+        android:name="com.utmaximur.alcoholtracker.presentation.dialog.addphoto.AddPhotoBottomDialogFragment"
         android:label="AddPhotoBottomDialogFragment"
         tools:layout="@layout/dialog_bottom_sheet" />
     <dialog
         android:id="@+id/addDrinkDialogFragment"
-        android:name="com.utmaximur.alcoholtracker.presantation.dialog.adddrink.AddDrinkDialogFragment"
+        android:name="com.utmaximur.alcoholtracker.presentation.dialog.adddrink.AddDrinkDialogFragment"
         android:label="AddDrinkDialogFragment" />
     <dialog
         android:id="@+id/updateBottomDialogFragment"
-        android:name="com.utmaximur.alcoholtracker.presantation.dialog.update.UpdateBottomDialogFragment"
+        android:name="com.utmaximur.alcoholtracker.presentation.dialog.update.UpdateBottomDialogFragment"
         android:label="UpdateBottomDialogFragment"
         tools:layout="@layout/dialog_update_bottom_sheet" />
     <dialog
         android:id="@+id/deleteDialogFragment"
-        android:name="com.utmaximur.alcoholtracker.presantation.dialog.delete.DeleteDialogFragment"
+        android:name="com.utmaximur.alcoholtracker.presentation.dialog.delete.DeleteDialogFragment"
         android:label="DeleteDialogFragment" />
     <activity
         android:id="@+id/mainActivity"
-        android:name="com.utmaximur.alcoholtracker.presantation.main.MainActivity"
+        android:name="com.utmaximur.alcoholtracker.presentation.main.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
     <activity
         android:id="@+id/splashActivity"
-        android:name="com.utmaximur.alcoholtracker.presantation.splash.SplashActivity"
+        android:name="com.utmaximur.alcoholtracker.presentation.splash.SplashActivity"
         android:label="SplashActivity"
         tools:layout="@layout/splash_layout" />
     <dialog
         android:id="@+id/calculatorFragment"
-        android:name="com.utmaximur.alcoholtracker.presantation.calculator.CalculatorFragment"
+        android:name="com.utmaximur.alcoholtracker.presentation.calculator.CalculatorFragment"
         android:label="CalculatorFragment"
         tools:layout="@layout/fragment_calculator" />
 </navigation>

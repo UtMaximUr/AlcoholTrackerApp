@@ -16,7 +16,7 @@
         android:theme="@style/Theme.AlcoholTracker"
         tools:ignore="AllowBackup">
         <activity
-            android:name=".presantation.splash.SplashActivity"
+            android:name=".presentation.splash.SplashActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan"
             android:exported="true"
@@ -28,7 +28,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presantation.main.MainActivity"
+            android:name=".presentation.main.MainActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan"
             android:exported="true"
