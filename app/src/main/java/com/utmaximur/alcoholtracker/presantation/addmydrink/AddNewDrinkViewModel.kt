@@ -60,19 +60,6 @@ class AddNewDrinkViewModel @Inject constructor(
 
     private fun getDrinkId(): String = UUID.randomUUID().toString()
 
-    fun getDoubleDegree(degree: Double, size: Int): List<String?> {
-        degreeList.clear()
-        var double = degree
-        for (i in 0 until size * 2) {
-            degreeList.add(double.formatDegree1f())
-            double += 0.5
-        }
-        if (size == 0) {
-            degreeList.add(double.formatDegree1f())
-        }
-        return degreeList
-    }
-
     fun checkEmptyField(context: Context): String {
         when {
             photo.isEmpty() -> {
@@ -94,7 +81,7 @@ class AddNewDrinkViewModel @Inject constructor(
         return ""
     }
 
-    fun setDrink(drink: Drink?) {
+    fun onDrinkChange(drink: Drink?) {
 
         val dataDrinks = drink
         (this.drink as MutableLiveData).value = dataDrinks
@@ -107,25 +94,36 @@ class AddNewDrinkViewModel @Inject constructor(
         icon = drink.icon
     }
 
-    fun setPhoto(photo: String) {
+    fun onPhotoChange(photo: String) {
         this.photo = photo
     }
 
-    fun setNameDrink(name: String) {
+    fun onNameDrinkChange(name: String) {
         this.name = name
     }
 
-    fun setIcon(icon: String) {
+    fun onIconChange(icon: String) {
         this.icon = icon
     }
 
-    fun getVolumeList() = volumeList
-
-    fun removeVolumeList(volume: String?) {
-        volumeList.remove(volume)
+    fun onDegreeChange(min: Float, max: Float) {
+        val size = (max - min).toInt()
+        degreeList.clear()
+        var doubleMin = min.toDouble()
+        for (i in 0 until size * 2) {
+            degreeList.add(doubleMin.formatDegree1f())
+            doubleMin += 0.5
+        }
+        if (size == 0) {
+            degreeList.add(doubleMin.formatDegree1f())
+        }
     }
 
-    fun addVolumeList(volume: String?) {
-        volumeList.add(volume)
+    fun onVolumeChange(volume: String?) {
+        if (volumeList.contains(volume)) {
+            volumeList.remove(volume)
+        } else {
+            volumeList.add(volume)
+        }
     }
 }
