@@ -33,7 +33,7 @@ open class CalendarViewModel @Inject constructor(private var calendarInteractor:
         (tracksByDay as MutableLiveData).value = dataTracks
     }
 
-    private fun updateTracks() = viewModelScope.launch {
+    fun updateTracks() = viewModelScope.launch {
         val dataTracks = dataTracks()
         (tracks as MutableLiveData).value = dataTracks
     }

@@ -70,14 +70,11 @@ class CalendarFragment : Fragment(),
         addButton.setOnClickListener { onClickAddTrack() }
         openDrinkList.setOnCheckedChangeListener { _, checked -> onClickShowDrinks(checked) }
         calendarView.setOnDayClickListener { eventDay -> onClickCalendar(eventDay) }
-        viewModel.tracks.observe(viewLifecycleOwner, { tracks ->
-            if (tracks.isNotEmpty()) {
-                emptyDrinkList.toVisible()
-            } else {
-                addToStart.toGone()
-                emptyDrinkList.toVisible()
-            }
-        })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.updateTracks()
     }
 
     private fun onClickAddTrack() = with(binding) {
@@ -145,7 +142,9 @@ class CalendarFragment : Fragment(),
     }
 
     override fun onClickDelete(track: Track, position: Int) {
-        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>(KEY_CALENDAR)
+        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>(
+            KEY_CALENDAR
+        )
             ?.observe(
                 viewLifecycleOwner
             ) { result ->
@@ -195,6 +194,12 @@ class CalendarFragment : Fragment(),
                 )
             }
             calendarView.setEvents(events)
+            if (list.isNotEmpty()) {
+                emptyDrinkList.toInvisible()
+            } else {
+                addToStart.toGone()
+                emptyDrinkList.toVisible()
+            }
         })
     }
 
