@@ -89,3 +89,7 @@ fun Track.getSafeDoseOfAlcohol(context: Context): String {
         )
     }
 }
+
+fun isDateEqual(timeInMillis: Long, context: Context): Boolean {
+    return timeInMillis.formatDate(context) != Date().time.formatDate(context)
+}

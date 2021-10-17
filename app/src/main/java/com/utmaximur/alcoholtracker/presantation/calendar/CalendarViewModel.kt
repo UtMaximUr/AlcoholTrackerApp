@@ -10,17 +10,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
-open class CalendarViewModel @Inject constructor( private var calendarInteractor: CalendarInteractor) : ViewModel() {
-
-    private var selectDate = 0L
-
-    fun setSelectDate(selectDate: Long) {
-        this.selectDate = selectDate
-    }
-
-    fun getSelectDate(): Long {
-        return selectDate
-    }
+open class CalendarViewModel @Inject constructor(private var calendarInteractor: CalendarInteractor) :
+    ViewModel() {
 
     val tracks: LiveData<List<Track>> by lazy {
         MutableLiveData()
@@ -30,41 +21,43 @@ open class CalendarViewModel @Inject constructor( private var calendarInteractor
         MutableLiveData()
     }
 
-    fun initTracks() = viewModelScope.launch {
-        val dataTracks = getTracks()
-        (tracks as MutableLiveData).value = dataTracks
+    init {
+        viewModelScope.launch {
+            val dataTracks = dataTracks()
+            (tracks as MutableLiveData).value = dataTracks
+        }
     }
 
     fun initTracksByDay(date: Long) = viewModelScope.launch {
-        val dataTracks = getAlcoholTrackByDay(date)
+        val dataTracks = dataAlcoholTrackByDay(date)
         (tracksByDay as MutableLiveData).value = dataTracks
     }
 
     private fun updateTracks() = viewModelScope.launch {
-        val dataTracks = getTracks()
+        val dataTracks = dataTracks()
         (tracks as MutableLiveData).value = dataTracks
     }
 
     private fun updateTracksByDay(eventDay: Long) = viewModelScope.launch {
-        val dataTracks = getAlcoholTrackByDay(eventDay)
+        val dataTracks = dataAlcoholTrackByDay(eventDay)
         (tracksByDay as MutableLiveData).value = dataTracks
     }
 
-    suspend fun getTrack(date: Long): Track {
+    suspend fun dataTrack(date: Long): Track {
         return calendarInteractor.getTrack(date)
     }
 
-    private suspend fun getTracks(): List<Track> {
+    private suspend fun dataTracks(): List<Track> {
         return calendarInteractor.getTracks()
     }
 
-    suspend fun deleteDrink(trackCalendar: Track) {
+    suspend fun onDeleteDrink(trackCalendar: Track) {
         calendarInteractor.deleteTrack(trackCalendar)
         updateTracks()
         updateTracksByDay(trackCalendar.date)
     }
 
-    private suspend fun getAlcoholTrackByDay(
+    private suspend fun dataAlcoholTrackByDay(
         eventDay: Long
     ): List<Track> {
         return calendarInteractor.getAlcoholTrackByDay(eventDay)
