@@ -8,6 +8,7 @@ import com.utmaximur.alcoholtracker.domain.entity.Drink
 import com.utmaximur.alcoholtracker.domain.entity.Track
 import com.utmaximur.alcoholtracker.domain.interactor.AddTrackInteractor
 import com.utmaximur.alcoholtracker.util.extension.empty
+import com.utmaximur.alcoholtracker.util.extension.first
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
@@ -50,7 +51,15 @@ class AddViewModel @Inject constructor(private var addTrackInteractor: AddTrackI
             drinkList = dataDrinksList
             (drinksList as MutableLiveData).value = dataDrinksList
             onViewPagerPositionChange(0)
+            initDefaultValue()
         }
+    }
+
+    private fun initDefaultValue() {
+        volume = drinkList.first().volume.first().toString()
+        quantity = Int.first()
+        degree = drinkList.first().degree.first().toString()
+        icon = drinkList.first().icon.first().toString()
     }
 
     fun onSaveButtonClick() {
