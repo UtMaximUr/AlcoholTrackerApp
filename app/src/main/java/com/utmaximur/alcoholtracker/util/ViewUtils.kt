@@ -74,7 +74,7 @@ fun Context.getDisplayWidth(): Int {
     }
 }
 
-fun NumberPicker.initNumberPicker() {
+private fun NumberPicker.initNumberPicker() {
     this.children.iterator().forEach {
         if (it is EditText) it.width = LinearLayout.LayoutParams.WRAP_CONTENT
     }
@@ -89,6 +89,7 @@ fun NumberPicker.settingsNumberPicker(maxValue: Int, displayedValues: Array<Stri
     this.displayedValues = null
     this.maxValue = maxValue - 1
     this.displayedValues = displayedValues
+    this.initNumberPicker()
 }
 
 fun NumberPicker.resetSettingsNumberPicker(maxValue: Int, displayedValues: Array<String?>) {
