@@ -78,4 +78,10 @@ class FileManager(private val context: Context) {
             output.write(buffer, 0, n)
         }
     }
+
+    fun deleteFile(file: File) {
+        if (file.exists()) {
+            file.deleteOnExit()
+        }
+    }
 }

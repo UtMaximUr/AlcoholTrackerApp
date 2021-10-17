@@ -62,20 +62,20 @@ class AddPhotoBottomDialogFragment : BottomSheetDialogFragment() {
         App.instance.alcoholTrackComponent.inject(this)
     }
 
-    private fun initUi() {
-        binding.useCamera.setOnClickListener {
+    private fun initUi() = with(binding) {
+        useCamera.setOnClickListener {
             if (checkPermissionsPhoto()) {
                 openCamera()
             }
         }
 
-        binding.loadGallery.setOnClickListener {
+        loadGallery.setOnClickListener {
             if (checkPermissionsGallery()) {
                 openGallery()
             }
         }
 
-        binding.deletePhoto.setOnClickListener {
+        deletePhoto.setOnClickListener {
             findNavController().previousBackStackEntry?.savedStateHandle?.set(
                 KEY_CREATE_DRINK,
                 KEY_CREATE_DRINK_DELETE
@@ -178,15 +178,15 @@ class AddPhotoBottomDialogFragment : BottomSheetDialogFragment() {
                 )
                 dialog?.dismiss()
             }
-            val file: File = viewModel.getFile(viewModel.photoURI)!!
-            findNavController().previousBackStackEntry?.savedStateHandle?.set(
-                KEY_CREATE_DRINK,
-                file.absolutePath
-            )
-            dialog?.dismiss()
-            if (viewModel.photoFile!!.exists()) {
-                viewModel.photoFile!!.delete()
-            }
+            viewModel.photoURI.observe(viewLifecycleOwner, { uri ->
+                val file: File = viewModel.getFile(uri)!!
+                findNavController().previousBackStackEntry?.savedStateHandle?.set(
+                    KEY_CREATE_DRINK,
+                    file.absolutePath
+                )
+                dialog?.dismiss()
+                viewModel.deleteFile()
+            })
         }
 
 
@@ -195,7 +195,6 @@ class AddPhotoBottomDialogFragment : BottomSheetDialogFragment() {
             Intent.ACTION_PICK,
             MediaStore.Images.Media.EXTERNAL_CONTENT_URI
         )
-        intent.type = "image/"
         getResultGallery.launch(intent)
     }
 
@@ -203,21 +202,25 @@ class AddPhotoBottomDialogFragment : BottomSheetDialogFragment() {
     private fun openCamera() {
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         if (takePictureIntent.resolveActivity(requireContext().packageManager) != null) {
-            viewModel.photoFile = null
+            viewModel.clearFile()
             try {
-                viewModel.photoFile = viewModel.getImageFile()
+                viewModel.updateImageFile()
             } catch (ex: IOException) {
             }
-            if (viewModel.photoFile != null) {
-                viewModel.photoURI = FileProvider.getUriForFile(
-                    requireContext(),
-                    requireContext().packageName + FILE_PROVIDER,
-                    viewModel.photoFile!!
+            viewModel.photoFile.observe(viewLifecycleOwner, { file ->
+                viewModel.updatePhotoUri(
+                    FileProvider.getUriForFile(
+                        requireContext(),
+                        requireContext().packageName + FILE_PROVIDER,
+                        file
+                    )
                 )
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, viewModel.photoURI)
+            })
+            viewModel.photoURI.observe(viewLifecycleOwner, { uri ->
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
                 getResultCamera.launch(takePictureIntent)
-                viewModel.photoFile?.deleteOnExit()
-            }
+                viewModel.deleteFile()
+            })
         }
     }
 

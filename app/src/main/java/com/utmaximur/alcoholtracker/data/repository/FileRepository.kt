@@ -1,6 +1,5 @@
 package com.utmaximur.alcoholtracker.data.repository
 
-import android.content.Context
 import android.graphics.Bitmap
 import android.net.Uri
 import com.utmaximur.alcoholtracker.data.file.FileManager
@@ -18,5 +17,9 @@ class FileRepository(private val fileManager: FileManager) {
 
     fun savePhoto(bitmap: Bitmap): String {
         return fileManager.savePhoto(bitmap)
+    }
+
+    fun deleteFile(file: File) {
+        fileManager.deleteFile(file)
     }
 }
