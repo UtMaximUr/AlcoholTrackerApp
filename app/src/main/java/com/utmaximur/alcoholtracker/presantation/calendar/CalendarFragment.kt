@@ -9,7 +9,6 @@ import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.transition.TransitionManager
 import com.applandeo.materialcalendarview.EventDay
@@ -36,7 +35,7 @@ class CalendarFragment : Fragment(),
     )
 
     private var calendarFragmentListener: CalendarFragmentListener? = null
-    private var navController: NavController? = null
+//    private var navController: NavController? = null
 
     interface CalendarFragmentListener {
         fun showEditAlcoholTrackerFragment(bundle: Bundle)
@@ -69,7 +68,6 @@ class CalendarFragment : Fragment(),
     }
 
     private fun initUI() = with(binding) {
-        navController = findNavController()
         addButton.setOnClickListener { onClickAddTrack() }
         openDrinkList.setOnCheckedChangeListener { _, checked -> onClickShowDrinks(checked) }
         calendarView.setOnDayClickListener { eventDay -> onClickCalendar(eventDay) }
@@ -85,7 +83,7 @@ class CalendarFragment : Fragment(),
 
     private fun onClickAddTrack() = with(binding) {
         if (isDateEqual(calendarView.firstSelectedDate.timeInMillis, requireContext())) {
-            navController?.currentBackStackEntry?.savedStateHandle?.getLiveData<String>(
+            findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>(
                 KEY_CALENDAR_DATA
             )?.observe(
                 viewLifecycleOwner
@@ -98,7 +96,7 @@ class CalendarFragment : Fragment(),
                     calendarFragmentListener?.showAddAlcoholTrackerFragment(null)
                 }
             }
-            navController?.navigate(R.id.addDrinkDialogFragment)
+            findNavController().navigate(R.id.addDrinkDialogFragment)
         } else {
             calendarFragmentListener?.showAddAlcoholTrackerFragment(null)
         }
@@ -148,7 +146,7 @@ class CalendarFragment : Fragment(),
     }
 
     override fun onClickDelete(track: Track, position: Int) {
-        navController?.currentBackStackEntry?.savedStateHandle?.getLiveData<String>(KEY_CALENDAR)
+        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>(KEY_CALENDAR)
             ?.observe(
                 viewLifecycleOwner
             ) { result ->
@@ -160,7 +158,7 @@ class CalendarFragment : Fragment(),
                     initIconOnDate()
                 }
             }
-        navController?.navigate(R.id.deleteDialogFragment)
+        findNavController().navigate(R.id.deleteDialogFragment)
     }
 
     private fun initAlcoholTrackByDay(eventDay: Long) = with(binding) {
