@@ -35,7 +35,6 @@ class CalendarFragment : Fragment(),
     )
 
     private var calendarFragmentListener: CalendarFragmentListener? = null
-//    private var navController: NavController? = null
 
     interface CalendarFragmentListener {
         fun showEditAlcoholTrackerFragment(bundle: Bundle)
