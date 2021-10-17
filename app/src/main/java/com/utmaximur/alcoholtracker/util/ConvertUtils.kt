@@ -32,6 +32,10 @@ fun List<String?>.setVolumeUnit(context: Context): List<String?> {
     return volumeListUnit
 }
 
+fun String.digitOnly(context: Context): String {
+    return this.replace(context.getString(R.string.only_number_regex).toRegex(), "").trim()
+}
+
 fun Float.format1f(): String {
     return String.format("%.1f", this)
 }
