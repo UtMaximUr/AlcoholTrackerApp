@@ -1,25 +1,22 @@
 package com.utmaximur.alcoholtracker.presantation.add
 
 import android.app.DatePickerDialog
-import android.app.DatePickerDialog.OnDateSetListener
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
 import android.widget.*
-import androidx.core.view.children
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
-import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.databinding.FragmentAddBinding
 import com.utmaximur.alcoholtracker.domain.entity.Drink
-import com.utmaximur.alcoholtracker.domain.entity.Track
 import com.utmaximur.alcoholtracker.presantation.add.adapter.DrinkViewPagerAdapter
 import com.utmaximur.alcoholtracker.presantation.add.adapter.DrinkViewPagerAdapter.AddDrinkListener
 import com.utmaximur.alcoholtracker.presantation.base.BaseViewModelFactory
@@ -27,7 +24,6 @@ import com.utmaximur.alcoholtracker.util.*
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
-
 
 class AddFragment : Fragment(), AddDrinkListener {
 
@@ -51,8 +47,9 @@ class AddFragment : Fragment(), AddDrinkListener {
     private var _binding: FragmentAddBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var datePecker: DatePickerDialog
+    private lateinit var datePicker: DatePickerDialog
     private var dateAndTime = Calendar.getInstance()
+    private var navController: NavController? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -66,215 +63,247 @@ class AddFragment : Fragment(), AddDrinkListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         injectDagger()
-        setDrinksList()
         initUi()
+        initDrinksList()
+        initTrackArguments()
     }
 
     private fun injectDagger() {
         App.instance.alcoholTrackComponent.inject(this)
     }
 
-    private fun initUi() {
-        val navController = findNavController()
+    private fun initUi() = with(binding) {
+        navController = findNavController()
 
-        binding.toolbar.setNavigationOnClickListener {
+        toolbar.setNavigationOnClickListener {
             hideKeyboard()
             addFragmentListener?.closeFragment()
         }
 
-        binding.toolbar.setOnMenuItemClickListener {
-            if (binding.viewPagerDrinks.currentItem != getDrinksList().size) {
-                viewModel.onSaveButtonClick(
-                    Track(
-                        getIdDrink(),
-                        getDrink(),
-                        getVolume()!!,
-                        getQuantity(),
-                        getDegree(),
-                        getEvent(),
-                        getPrice(),
-                        getDate(),
-                        getIcon()
-                    )
-                )
+        toolbar.setOnMenuItemClickListener {
+            if (viewPagerDrinks.currentItem != viewModel.getDrinkList().size) {
+                viewModel.onSaveButtonClick()
             }
             addFragmentListener?.closeFragment()
-            addFragmentListener!!.onShowNavigationBar()
             true
         }
 
         // select drink
-        binding.viewPagerIndicator.setupWithViewPager(binding.viewPagerDrinks, true)
-        binding.viewPagerDrinks.addOnPageChangeListener(object : OnPageChangeListener {
-            override fun onPageScrollStateChanged(state: Int) {}
-            override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
-            ) {
-                hideKeyboard()
+        viewPagerIndicator.setupWithViewPager(viewPagerDrinks, true)
+        viewPagerDrinks.addOnPageChangeListener({ position ->
+            if (viewModel.getDrinkList().size != position) {
+                onDrinkDegreeArrayChange(position)
+                onDrinkVolumeArrayChange(position)
+                viewModel.onViewPagerPositionChange(position)
             }
-
-            override fun onPageSelected(position: Int) {
-                if (getDrinksList().size != position) {
-                    setDrinkDegreeArray(position)
-                    setDrinkVolumeArray(position)
-                }
-            }
+        }, {
+            hideKeyboard()
         })
 
         // Quantity
-        binding.quantityNumberPicker.maxValue = 10
-        binding.quantityNumberPicker.minValue = 1
-        binding.quantityNumberPicker.setOnScrollListener { _, _ ->
-            if (viewModel.checkIsEmptyFieldPrice(getPrice())) {
-                binding.totalMoneyText.text = viewModel.getTotalMoney(getQuantity(), getPrice())
+        quantityNumberPicker.settingsNumberPicker()
+        quantityNumberPicker.setOnScrollListener { _, _ ->
+            if (viewModel.checkIsEmptyFieldPrice(viewModel.getPrice())) {
+                viewModel.getTotalMoney(viewModel.getQuantity(), viewModel.getPrice())
             }
         }
-
+        viewModel.totalMoney.observe(viewLifecycleOwner, { total ->
+            totalMoneyText.text = total
+        })
+        quantityNumberPicker.setOnValueChangedListener { numberPicker, _, _ ->
+            viewModel.onQuantityChange(numberPicker.value)
+        }
 
         viewModel.drinksList.observe(viewLifecycleOwner, { list ->
             // Degree
             // set default first drink
-            initNumberPicker(binding.degreeNumberPicker)
-            binding.degreeNumberPicker.displayedValues = null
-            binding.degreeNumberPicker.maxValue = list.first().degree.size - 1
-            binding.degreeNumberPicker.displayedValues = list.first().degree.toTypedArray()
-            binding.degreeNumberPicker.value = 1
+            degreeNumberPicker.settingsNumberPicker(
+                list.first().degree.size,
+                list.first().degree.toTypedArray()
+            )
+            degreeNumberPicker.setOnValueChangedListener { numberPicker, _, i ->
+                viewModel.onDegreeChange(numberPicker.displayedValues[i].toString())
+            }
 
             // Volume
             // set default first drink
-            initNumberPicker(binding.volumeNumberPicker)
-            binding.volumeNumberPicker.displayedValues = null
-            binding.volumeNumberPicker.maxValue = list.first().volume.size - 1
-            binding.volumeNumberPicker.displayedValues =
+            volumeNumberPicker.settingsNumberPicker(
+                list.first().volume.size,
                 list.first().volume.setVolumeUnit(requireContext()).toTypedArray()
-            binding.volumeNumberPicker.value = 1
-            setVolume(list.first().volume.toList())
+            )
+            volumeNumberPicker.setOnValueChangedListener { numberPicker, _, i ->
+                viewModel.onVolumeChange(numberPicker.displayedValues[i].digitOnly(requireContext()))
+            }
         })
 
-        binding.addDateButton.setOnClickListener {
-            if (viewModel.date != 0L) {
-                dateAndTime.timeInMillis = viewModel.date
-            }
-            datePecker = DatePickerDialog(
-                this.requireContext(), onDateSetListener,
-                dateAndTime.get(Calendar.YEAR),
-                dateAndTime.get(Calendar.MONTH),
-                dateAndTime.get(Calendar.DAY_OF_MONTH)
-            )
-            datePecker.show()
-        }
+        addDateButton.setOnClickListener { onShowDatePicker() }
+        todayButton.setOnClickListener { onSelectDate() }
 
-        binding.todayButton.setOnClickListener {
-            binding.addDateButton.text = Date().time.formatDate(requireContext())
-            viewModel.date = Date().time
-            binding.todayButton.toGone()
-        }
+        eventEditText.onEditorActionListener { hideKeyboard() }
+        eventEditText.doAfterTextChanged { viewModel.onEventChange(it?.toString()!!) }
 
-        binding.eventEditText.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                hideKeyboard()
-                return@OnEditorActionListener true
+        priceEditText.setOnClickListener { onShowCalculate() }
+
+        priceEditText.doAfterTextChanged {
+            if (it?.toString()?.isNotEmpty()!!) {
+                viewModel.onPriceChange(it.toString().toFloat())
             }
-            true
+        }
+        viewModel.valueCalculating.observe(viewLifecycleOwner, { value ->
+            priceEditText.setText(value)
         })
+    }
 
-        binding.priceEditText.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putString(PRICE_DRINK, binding.priceEditText.text.toString())
-            navController.currentBackStackEntry?.savedStateHandle?.getLiveData<String>(
-                KEY_CALCULATOR
+    private fun onShowDatePicker() = with(binding) {
+        if (viewModel.getDate() != 0L) {
+            dateAndTime.timeInMillis = viewModel.getDate()
+        }
+        datePicker = DatePickerDialog(
+            requireContext(), { _, year, monthOfYear, dayOfMonth ->
+                dateAndTime[Calendar.YEAR] = year
+                dateAndTime[Calendar.MONTH] = monthOfYear
+                dateAndTime[Calendar.DAY_OF_MONTH] = dayOfMonth
+                viewModel.onDateChange(dateAndTime.timeInMillis)
+                addDateButton.text = dateAndTime.timeInMillis.formatDate(requireContext())
+                viewModel.onDateChange(Date(dateAndTime.timeInMillis).time)
+                todayButton.toGone()
+            },
+            dateAndTime.get(Calendar.YEAR),
+            dateAndTime.get(Calendar.MONTH),
+            dateAndTime.get(Calendar.DAY_OF_MONTH)
+        )
+        datePicker.show()
+    }
+
+    private fun onSelectDate() = with(binding) {
+        addDateButton.text = Date().time.formatDate(requireContext())
+        viewModel.onDateChange(Date().time)
+        todayButton.toGone()
+    }
+
+    private fun onShowCalculate() {
+        val bundle = Bundle()
+        bundle.putString(PRICE_DRINK, binding.priceEditText.text.toString())
+        navController?.currentBackStackEntry?.savedStateHandle?.getLiveData<String>(
+            KEY_CALCULATOR
+        )
+            ?.observe(
+                viewLifecycleOwner
+            ) { result ->
+                lifecycleScope.launch {
+                    viewModel.onValueCalculating(result)
+                }
+            }
+        navController?.navigate(R.id.calculatorFragment, bundle)
+    }
+
+    private fun hideKeyboard() = with(binding) {
+        eventEditText.hideKeyboard()
+    }
+
+    private fun onDrinkDegreeArrayChange(position: Int) = with(binding) {
+        viewModel.drinksList.observe(viewLifecycleOwner, { drinks ->
+            val drink = drinks[position]
+            degreeNumberPicker.resetSettingsNumberPicker(
+                drink.degree.indexOf(drink.degree.last()),
+                drink.degree.toTypedArray()
             )
-                ?.observe(
-                    viewLifecycleOwner
-                ) { result ->
-                    lifecycleScope.launch {
-                        getValueCalculating(result)
+            viewModel.setDegreeList(drink.degree)
+        })
+    }
+
+    private fun onDrinkVolumeArrayChange(position: Int) = with(binding) {
+        viewModel.drinksList.observe(viewLifecycleOwner, { drinks ->
+            val drink = drinks[position]
+            volumeNumberPicker.resetSettingsNumberPicker(
+                drink.volume.indexOf(drink.volume.last()),
+                drink.volume.setVolumeUnit(requireContext()).toTypedArray()
+            )
+        })
+    }
+
+    private fun initTrackArguments() = with(binding) {
+        if (arguments != null) {
+            if (requireArguments().containsKey(SELECT_DAY) && requireArguments().getLong(SELECT_DAY) != 0L) {
+                val selectDate = requireArguments().getLong(SELECT_DAY)
+                addDateButton.text = selectDate.formatDate(requireContext())
+                viewModel.onDateChange(selectDate)
+                todayButton.toGone()
+            } else {
+                setEditArguments()
+            }
+        }
+    }
+
+    private fun setEditArguments() = with(binding) {
+        toolbar.title = getString(R.string.edit_drink_title)
+        viewModel.onTrackChange(requireArguments().getParcelable(DRINK))
+
+        viewModel.track.observe(viewLifecycleOwner, { track ->
+            viewModel.drinksList.observe(viewLifecycleOwner, { list ->
+                list.forEach { drink ->
+                    if (drink.drink == track.drink) {
+                        val position = list.indexOf(drink)
+                        // set position view pager
+                        viewPagerDrinks.currentItem = position
+                        viewPagerIndicator.getTabAt(position)?.select()
+                        // set quantity drink
+                        quantityNumberPicker.value = track.quantity
+                        // set volume drink
+                        volumeNumberPicker.resetSettingsNumberPicker(
+                            drink.volume.indexOf(drink.volume.last()),
+                            drink.volume.setVolumeUnit(requireContext()).toTypedArray()
+                        )
+                        volumeNumberPicker.value = drink.volume.indexOf(track.volume)
+                        // set degree drink
+                        degreeNumberPicker.resetSettingsNumberPicker(
+                            drink.degree.indexOf(drink.degree.last()),
+                            drink.degree.toTypedArray()
+                        )
+                        degreeNumberPicker.value = drink.degree.indexOf(track.degree)
                     }
                 }
-            navController.navigate(R.id.calculatorFragment, bundle)
-        }
+            })
+
+            eventEditText.setText(track.event)
+            priceEditText.setText(track.price.toString())
+            addDateButton.text = track.date.formatDate(requireContext())
+            todayButton.toGone()
+        })
     }
 
-    private fun hideKeyboard() {
-        binding.eventEditText.hideKeyboard()
-    }
-
-    private fun setDrinkDegreeArray(position: Int) {
-        val drink: Drink = getDrinksList()[position]
-        binding.degreeNumberPicker.displayedValues = null
-        binding.degreeNumberPicker.minValue = 0
-        binding.degreeNumberPicker.value = 1
-        binding.degreeNumberPicker.maxValue = drink.degree.indexOf(drink.degree.last())
-        binding.degreeNumberPicker.displayedValues = drink.degree.toTypedArray()
-        setDegreeList(drink.degree)
-    }
-
-    private fun setDrinkVolumeArray(position: Int) {
-        val drink: Drink = getDrinksList()[position]
-        binding.volumeNumberPicker.displayedValues = null
-        binding.volumeNumberPicker.minValue = 0
-        binding.volumeNumberPicker.value = 1
-        binding.volumeNumberPicker.maxValue = drink.volume.indexOf(drink.volume.last())
-        binding.volumeNumberPicker.displayedValues =
-            drink.volume.setVolumeUnit(requireContext()).toTypedArray()
-        setVolume(drink.volume)
-    }
-
-    private fun setEditArguments() {
-
-        val track: Track? = requireArguments().getParcelable(DRINK)
-        binding.toolbar.title = getString(R.string.edit_drink_title)
-        viewModel.id = track?.id.toString()
-        viewModel.date = track?.date!!
-
+    private fun initDrinksList() = with(binding) {
         viewModel.drinksList.observe(viewLifecycleOwner, { list ->
-            list.forEach { drink ->
-                if (drink.drink == track.drink) {
-                    val position = list.indexOf(drink)
-                    // set position view pager
-                    binding.viewPagerDrinks.currentItem = position
-                    binding.viewPagerIndicator.getTabAt(position)?.select()
-                    // set quantity drink
-                    binding.quantityNumberPicker.value = track.quantity
-                    // set volume drink
-                    setDrinkVolumeArray(position)
-                    binding.volumeNumberPicker.value = drink.volume.indexOf(track.volume)
-                    initNumberPicker(binding.volumeNumberPicker)
-                    // set degree drink
-                    setDrinkDegreeArray(position)
-                    binding.degreeNumberPicker.value = drink.degree.indexOf(track.degree)
-                    initNumberPicker(binding.degreeNumberPicker)
+            val adapter = DrinkViewPagerAdapter(list, requireContext())
+            adapter.setListener(this@AddFragment)
+            viewPagerDrinks.adapter = adapter
+            viewPagerDrinks.alphaView()
+        })
+    }
+
+    override fun addNewDrink() {
+        addFragmentListener?.onShowAddNewDrinkFragment()
+    }
+
+    override fun deleteDrink(drink: Drink) {
+        navController?.currentBackStackEntry?.savedStateHandle?.getLiveData<String>(KEY_ADD)
+            ?.observe(
+                viewLifecycleOwner
+            ) { result ->
+                if (result == KEY_ADD_OK) {
+                    lifecycleScope.launch {
+                        viewModel.onDeleteDrink(drink)
+                    }
                 }
             }
-        })
-
-        binding.eventEditText.setText(track.event)
-        binding.priceEditText.setText(track.price.toString())
-        binding.addDateButton.text = track.date.formatDate(requireContext())
-        binding.todayButton.toGone()
-
-        binding.totalMoneyText.text =
-            (track.price.times(track.quantity)).toString()
+        navController?.navigate(R.id.deleteDialogFragment)
     }
 
-    private fun initNumberPicker(numberPicker: NumberPicker) {
-        numberPicker.children.iterator().forEach {
-            if (it is EditText) it.width = LinearLayout.LayoutParams.WRAP_CONTENT
-        }
+    override fun editDrink(drink: Drink) {
+        val bundle = Bundle()
+        bundle.putParcelable(EDIT_DRINK, drink)
+        addFragmentListener?.onShowEditNewDrinkFragment(bundle)
     }
-
-    private var onDateSetListener =
-        OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-            dateAndTime[Calendar.YEAR] = year
-            dateAndTime[Calendar.MONTH] = monthOfYear
-            dateAndTime[Calendar.DAY_OF_MONTH] = dayOfMonth
-            viewModel.date = dateAndTime.timeInMillis
-            binding.addDateButton.text = dateAndTime.timeInMillis.formatDate(requireContext())
-            viewModel.date = Date(dateAndTime.timeInMillis).time
-            binding.todayButton.toGone()
-        }
 
     override fun onStart() {
         super.onStart()
@@ -283,123 +312,12 @@ class AddFragment : Fragment(), AddDrinkListener {
 
     override fun onDestroy() {
         super.onDestroy()
-        addFragmentListener!!.onShowNavigationBar()
+        addFragmentListener?.onShowNavigationBar()
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         addFragmentListener = context as AddFragmentListener
-    }
-
-    private fun getIdDrink(): String {
-        return viewModel.id
-    }
-
-    private fun getDrink(): String {
-        return getDrinksList()[binding.viewPagerDrinks.currentItem].drink
-    }
-
-    private fun getQuantity(): Int {
-        return binding.quantityNumberPicker.value
-    }
-
-    private fun getDegree(): String {
-        return binding.degreeNumberPicker.displayedValues[binding.degreeNumberPicker.value].toString()
-    }
-
-    private fun getEvent(): String {
-        return binding.eventEditText.text.toString()
-    }
-
-    private fun getPrice(): Float {
-        return if (binding.priceEditText.text.toString().isEmpty()) {
-            viewModel.price
-        } else {
-            binding.priceEditText.text.toString().toFloat()
-        }
-    }
-
-    private fun getDate(): Long {
-        return viewModel.date
-    }
-
-    private fun getVolume(): String? {
-        return getVolumeList()[binding.volumeNumberPicker.value]
-    }
-
-    private fun setVolume(volume: List<String?>) {
-        viewModel.volumes = volume
-    }
-
-    private fun setDegreeList(degree: List<String?>) {
-        viewModel.degrees = degree
-    }
-
-    private fun getVolumeList(): List<String?> {
-        return viewModel.volumes
-    }
-
-    private fun getIcon(): String {
-        return getDrinksList()[binding.viewPagerDrinks.currentItem].icon
-    }
-
-    private fun setDrinksList() {
-        viewModel.drinksList.observe(viewLifecycleOwner, { list ->
-            viewModel.drinkDBOS = list
-            val adapter = DrinkViewPagerAdapter(list, requireContext())
-            adapter.setListener(this)
-            binding.viewPagerDrinks.adapter = adapter
-            binding.viewPagerDrinks.alphaView()
-            if (arguments != null) {
-                if (arguments?.containsKey(SELECT_DAY)!! && arguments?.getLong(SELECT_DAY) != 0L) {
-                    val selectDate = requireArguments().getLong(SELECT_DAY)
-                    binding.addDateButton.text = selectDate.formatDate(requireContext())
-                    viewModel.date = selectDate
-                    binding.todayButton.toGone()
-                } else {
-                    setEditArguments()
-                }
-            }
-        })
-    }
-
-    private fun getDrinksList(): List<Drink> {
-        return viewModel.drinkDBOS
-    }
-
-    private fun getValueCalculating(value: String) {
-        binding.priceEditText.setText(value)
-        if (value.isNotEmpty()) {
-            binding.totalMoneyText.text =
-                (binding.quantityNumberPicker.value * value.toFloat()).toString()
-        } else {
-            binding.totalMoneyText.text = getString(R.string.add_empty)
-        }
-    }
-
-    override fun addNewDrink() {
-        addFragmentListener?.onShowAddNewDrinkFragment()
-    }
-
-    override fun deleteDrink(drink: Drink) {
-        val navController = findNavController()
-        navController.currentBackStackEntry?.savedStateHandle?.getLiveData<String>(KEY_ADD)
-            ?.observe(
-                viewLifecycleOwner
-            ) { result ->
-                if (result == KEY_ADD_OK) {
-                    lifecycleScope.launch {
-                        viewModel.deleteDrink(drink)
-                    }
-                }
-            }
-        navController.navigate(R.id.deleteDialogFragment)
-    }
-
-    override fun editDrink(drink: Drink) {
-        val bundle = Bundle()
-        bundle.putParcelable(EDIT_DRINK, drink)
-        addFragmentListener?.onShowEditNewDrinkFragment(bundle)
     }
 
     override fun onDestroyView() {

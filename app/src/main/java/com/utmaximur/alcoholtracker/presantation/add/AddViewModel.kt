@@ -40,12 +40,16 @@ class AddViewModel @Inject constructor(private var addTrackInteractor: AddTrackI
         MutableLiveData()
     }
 
+    val valueCalculating: LiveData<String> by lazy {
+        MutableLiveData()
+    }
+
     init {
         viewModelScope.launch {
             val dataDrinksList = getAllDrink()
             drinkList = dataDrinksList
             (drinksList as MutableLiveData).value = dataDrinksList
-            setViewPagerPosition(0)
+            onViewPagerPositionChange(0)
         }
     }
 
@@ -93,8 +97,8 @@ class AddViewModel @Inject constructor(private var addTrackInteractor: AddTrackI
         val dataTrack = track
         (this.track as MutableLiveData).value = dataTrack
 
-        id = track?.id.toString()
-        drink = track?.drink!!
+        id = track?.id!!
+        drink = track.drink
         volume = track.volume
         quantity = track.quantity
         degree = track.degree
@@ -142,8 +146,19 @@ class AddViewModel @Inject constructor(private var addTrackInteractor: AddTrackI
 
     fun getDrinkList(): List<Drink> = drinkList
 
-    fun setViewPagerPosition(position: Int) {
-        icon = drinkList[position].icon
-        drink = drinkList[position].drink
+    fun onViewPagerPositionChange(position: Int) {
+        if (track.value == null) {
+            icon = drinkList[position].icon
+            drink = drinkList[position].drink
+        }
+    }
+
+    fun onValueCalculating(resultCalculating: String) {
+        var totalMoney = Int.empty().toString()
+        if (resultCalculating.isNotEmpty()) {
+            totalMoney = (quantity * resultCalculating.toFloat()).toString()
+        }
+        (this.totalMoney as MutableLiveData).value = totalMoney
+        (valueCalculating as MutableLiveData).value = resultCalculating
     }
 }
