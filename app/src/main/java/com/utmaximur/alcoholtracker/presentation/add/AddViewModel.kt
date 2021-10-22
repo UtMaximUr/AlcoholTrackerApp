@@ -159,6 +159,8 @@ class AddViewModel @Inject constructor(private var addTrackInteractor: AddTrackI
         if (track.value == null) {
             icon = drinkList[position].icon
             drink = drinkList[position].drink
+            volume = drinkList[position].volume.first()!!
+            degree = drinkList[position].degree.first()!!
         }
     }
 
