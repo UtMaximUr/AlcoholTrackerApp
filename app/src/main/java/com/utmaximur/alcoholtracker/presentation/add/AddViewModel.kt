@@ -20,7 +20,7 @@ class AddViewModel @Inject constructor(private var addTrackInteractor: AddTrackI
     private var id: String = String.empty()
     private var drink: String = String.empty()
     private var volume: String = String.empty()
-    private var quantity: Int = Int.empty()
+    private var quantity: Int = Int.first()
     private var degree: String = String.empty()
     private var price: Float = Float.empty()
     private var date: Long = Date().time
@@ -50,16 +50,17 @@ class AddViewModel @Inject constructor(private var addTrackInteractor: AddTrackI
             val dataDrinksList = getAllDrink()
             drinkList = dataDrinksList
             (drinksList as MutableLiveData).value = dataDrinksList
-            onViewPagerPositionChange(0)
             initDefaultValue()
         }
     }
 
     private fun initDefaultValue() {
-        volume = drinkList.first().volume.first().toString()
-        quantity = Int.first()
-        degree = drinkList.first().degree.first().toString()
-        icon = drinkList.first().icon
+        if (id == String.empty()) {
+            drink = drinkList.first().drink
+            volume = drinkList.first().volume.first().toString()
+            degree = drinkList.first().degree.first().toString()
+            icon = drinkList.first().icon
+        }
     }
 
     fun onSaveButtonClick() {
@@ -103,8 +104,7 @@ class AddViewModel @Inject constructor(private var addTrackInteractor: AddTrackI
     }
 
     fun onTrackChange(track: Track?) {
-        val dataTrack = track
-        (this.track as MutableLiveData).value = dataTrack
+        (this.track as MutableLiveData).value = track
 
         id = track?.id!!
         drink = track.drink
@@ -156,12 +156,10 @@ class AddViewModel @Inject constructor(private var addTrackInteractor: AddTrackI
     fun getDrinkList(): List<Drink> = drinkList
 
     fun onViewPagerPositionChange(position: Int) {
-        if (track.value == null) {
-            icon = drinkList[position].icon
-            drink = drinkList[position].drink
-            volume = drinkList[position].volume.first()!!
-            degree = drinkList[position].degree.first()!!
-        }
+        icon = drinkList[position].icon
+        drink = drinkList[position].drink
+        volume = drinkList[position].volume.first()!!
+        degree = drinkList[position].degree.first()!!
     }
 
     fun onValueCalculating(resultCalculating: String) {

@@ -61,7 +61,9 @@ fun String.formatVolume(context: Context, quantity: Int): String {
             //this method is needed to get only numbers from a string
             val digit: String =
                 this.replace(context.getString(R.string.only_number_regex).toRegex(), "").trim()
-            String.format(context.getString(R.string.unit_l), digit.toDouble() * quantity)
+
+            val volume = String.format("%.3f", digit.toDouble() * quantity)
+            String.format(context.getString(R.string.unit_l), volume)
         }
     } else {
         if (this.isDigitsOnly()) {
