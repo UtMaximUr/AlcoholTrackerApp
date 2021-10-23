@@ -51,6 +51,12 @@ class CalculatorViewModel @Inject constructor() : ViewModel() {
         }
     }
 
+    fun setPriceValue(price: Int) {
+        if (price != Int.empty()) {
+            _currentValue.value = price.toString()
+        }
+    }
+
     private fun clearValue() {
         _currentValue.value = String.empty()
     }

@@ -126,7 +126,7 @@ class CalculatorFragment : DialogFragment() {
 
     private fun getPriceValue() {
         if (arguments?.getString(PRICE_DRINK) != String.empty()) {
-            viewModel.setValue(arguments?.getString(PRICE_DRINK)?.toFloat()?.toInt()!!)
+            viewModel.setPriceValue(arguments?.getString(PRICE_DRINK)?.toFloat()?.toInt()!!)
         }
     }
 
