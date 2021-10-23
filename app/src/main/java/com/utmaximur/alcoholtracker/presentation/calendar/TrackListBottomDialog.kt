@@ -70,6 +70,9 @@ class TrackListBottomDialog : BottomSheetDialogFragment(),
         viewModel.tracksByDay.observe(viewLifecycleOwner, { tracks ->
             alcoholTrackListAdapter?.submitList(tracks)
             progressBar.toGone()
+            if (tracks.isEmpty()) {
+                dismiss()
+            }
         })
     }
 
