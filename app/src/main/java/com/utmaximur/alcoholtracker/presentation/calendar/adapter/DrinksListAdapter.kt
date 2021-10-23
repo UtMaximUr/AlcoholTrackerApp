@@ -33,7 +33,7 @@ class DrinksListAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         init {
-            binding.editButton.setOnClickListener {
+            binding.drinkImage.setOnClickListener {
                 listener.onClickEdit(getItem(layoutPosition).date)
             }
             binding.deleteButton.setOnClickListener {
