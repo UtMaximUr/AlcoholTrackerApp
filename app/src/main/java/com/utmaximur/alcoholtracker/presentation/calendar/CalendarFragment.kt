@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavArgument
 import androidx.navigation.fragment.findNavController
 import com.applandeo.materialcalendarview.EventDay
 import com.utmaximur.alcoholtracker.App
@@ -63,6 +64,10 @@ class CalendarFragment : Fragment() {
                 val bundle = Bundle()
                 bundle.putLong(SELECT_DAY, eventDay.calendar.timeInMillis)
                 findNavController().navigate(R.id.trackListBottomDialogFragment, bundle)
+            } else {
+                val argument = NavArgument.Builder().setDefaultValue(eventDay.calendar.timeInMillis).build()
+                findNavController().graph.findNode(R.id.addFragment)
+                    ?.addArgument(SELECT_DAY_ADD, argument)
             }
             onEventDayChange(eventDay.calendar.timeInMillis)
         }

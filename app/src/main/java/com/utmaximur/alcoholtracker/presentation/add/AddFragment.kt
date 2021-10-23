@@ -220,8 +220,8 @@ class AddFragment : Fragment(), AddDrinkListener {
 
     private fun initTrackArguments() = with(binding) {
         if (arguments != null) {
-            if (requireArguments().containsKey(SELECT_DAY) && requireArguments().getLong(SELECT_DAY) != 0L) {
-                val selectDate = requireArguments().getLong(SELECT_DAY)
+            if (requireArguments().containsKey(SELECT_DAY_ADD)) {
+                val selectDate: Long = requireArguments().get(SELECT_DAY_ADD) as Long
                 addDateButton.text = selectDate.formatDate(requireContext())
                 viewModel.onDateChange(selectDate)
                 todayButton.toGone()
