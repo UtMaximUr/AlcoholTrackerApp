@@ -26,6 +26,7 @@ class AddViewModel @Inject constructor(private var addTrackInteractor: AddTrackI
     private var date: Long = Date().time
     private var icon: String = String.empty()
     private var event: String = String.empty()
+    private var image: String = String.empty()
     private var drinkList: List<Drink> = ArrayList()
     private var degreeList: List<String?> = ArrayList()
 
@@ -60,6 +61,7 @@ class AddViewModel @Inject constructor(private var addTrackInteractor: AddTrackI
             volume = drinkList.first().volume.first().toString()
             degree = drinkList.first().degree.first().toString()
             icon = drinkList.first().icon
+            image = drinkList.first().photo
         }
     }
 
@@ -74,7 +76,8 @@ class AddViewModel @Inject constructor(private var addTrackInteractor: AddTrackI
                 event,
                 price,
                 date,
-                icon
+                icon,
+                ""
             )
             if (id == String.empty()) {
                 val newTrack = track.copy(id = getTrackId())
@@ -115,6 +118,7 @@ class AddViewModel @Inject constructor(private var addTrackInteractor: AddTrackI
         date = track.date
         price = track.price
         icon = track.icon
+        image = track.image
 
         (totalMoney as MutableLiveData).value = (track.price.times(track.quantity)).toString()
     }
@@ -160,6 +164,7 @@ class AddViewModel @Inject constructor(private var addTrackInteractor: AddTrackI
         drink = drinkList[position].drink
         volume = drinkList[position].volume.first()!!
         degree = drinkList[position].degree.first()!!
+        image = drinkList.first().photo
     }
 
     fun onValueCalculating(resultCalculating: String) {

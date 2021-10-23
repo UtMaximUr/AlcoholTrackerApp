@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 
 import androidx.recyclerview.widget.RecyclerView
 import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.databinding.ItemDrinkBinding
+import com.utmaximur.alcoholtracker.databinding.ItemTrackBinding
 import com.utmaximur.alcoholtracker.domain.entity.Track
 import com.utmaximur.alcoholtracker.util.*
 
@@ -25,11 +25,11 @@ class DrinksListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = ItemDrinkBinding.inflate(layoutInflater, parent, false)
+        val binding = ItemTrackBinding.inflate(layoutInflater, parent, false)
         return ViewHolder(binding)
     }
 
-    inner class ViewHolder(private val binding: ItemDrinkBinding) :
+    inner class ViewHolder(private val binding: ItemTrackBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         init {
@@ -61,6 +61,7 @@ class DrinksListAdapter(
         fun bind(
             track: Track
         ) {
+            binding.drinkImage.setImagePath(track.image)
             binding.itemVolumeText.text =
                 track.volume.formatVolume(itemView.context, track.quantity)
             binding.itemDrinkText.text = String.format(
