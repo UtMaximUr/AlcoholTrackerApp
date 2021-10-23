@@ -8,46 +8,40 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.data.update.UpdateManager
 import com.utmaximur.alcoholtracker.data.update.UpdateManager.Companion.getInstance
+import com.utmaximur.alcoholtracker.databinding.ActivityMainBinding
 import com.utmaximur.alcoholtracker.presentation.add.AddFragment
 import com.utmaximur.alcoholtracker.presentation.addmydrink.AddNewDrink
-import com.utmaximur.alcoholtracker.presentation.calendar.CalendarFragment
 import com.utmaximur.alcoholtracker.util.*
 
 
 class MainActivity : AppCompatActivity(),
     AddFragment.AddFragmentListener,
     AddNewDrink.AddNewFragmentListener,
-    CalendarFragment.CalendarFragmentListener,
     UpdateManager.UpdateListener {
 
-    private lateinit var menu: BottomNavigationView
     private lateinit var navHostFragment: NavHostFragment
     private lateinit var navController: NavController
 
+    private var _binding: ActivityMainBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        _binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         initView()
     }
 
-    private fun findViewById() {
-        menu = findViewById(R.id.bottom_navigation_view)
-        navHostFragment =
+    private fun initView() = with(binding) {
+        this@MainActivity.navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-    }
-
-    private fun initView() {
-        findViewById()
-        navController = navHostFragment.navController
-        menu.setupWithNavController(navController)
-    }
-
-    override fun showEditAlcoholTrackerFragment(bundle: Bundle) {
-        navController.navigate(R.id.addFragment, bundle)
+        navController = this@MainActivity.navHostFragment.navController
+        bottomNavigationView.setupWithNavController(navController)
+        bottomNavigationView.background = null
+        addTrack.setOnClickListener { navController.navigate(R.id.addFragment) }
     }
 
     override fun onShowAddNewDrinkFragment() {
@@ -62,20 +56,16 @@ class MainActivity : AppCompatActivity(),
         navController.navigate(R.id.updateBottomDialogFragment)
     }
 
-    override fun showAddAlcoholTrackerFragment(bundle: Bundle?) {
-        navController.navigate(R.id.addFragment, bundle)
-    }
-
     override fun closeFragment() {
         navController.popBackStack()
     }
 
-    override fun onHideNavigationBar() {
-        menu.toGone()
+    override fun onHideNavigationBar() = with(binding) {
+        coordinatorLayout.toGone()
     }
 
-    override fun onShowNavigationBar() {
-        menu.toVisible()
+    override fun onShowNavigationBar() = with(binding) {
+        coordinatorLayout.toVisible()
     }
 
     override fun onStart() {
