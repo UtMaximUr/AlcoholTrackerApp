@@ -62,4 +62,9 @@
         android:name="com.utmaximur.alcoholtracker.presentation.calculator.CalculatorFragment"
         android:label="CalculatorFragment"
         tools:layout="@layout/fragment_calculator" />
+    <dialog
+        android:id="@+id/trackListBottomDialogFragment"
+        android:name="com.utmaximur.alcoholtracker.presentation.calendar.TrackListBottomDialog"
+        android:label="TrackListBottomDialogFragment"
+        tools:layout="@layout/dialog_track_list" />
 </navigation>

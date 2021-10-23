@@ -11,6 +11,16 @@
             android:icon="@drawable/ic_statistic_24dp"
             android:title="@string/statistic"/>
 
+        <item
+            android:id="@+id/placeholder_first"
+            android:enabled="false"
+            android:title="" />
+
+        <item
+            android:id="@+id/placeholder_second"
+            android:enabled="false"
+            android:title="" />
+
         <item android:id="@+id/settingsFragment"
             android:icon="@drawable/ic_settings_24dp"
             android:title="@string/settings"/>
