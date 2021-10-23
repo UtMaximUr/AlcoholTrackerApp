@@ -33,8 +33,4 @@ class CalendarMapper @Inject constructor() {
 
         return tracks
     }
-
-    fun mapList(tracksList: List<Track>): List<Track> {
-        return tracksList
-    }
 }
