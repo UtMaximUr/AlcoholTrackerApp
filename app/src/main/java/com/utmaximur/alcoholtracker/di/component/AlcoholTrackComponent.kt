@@ -11,6 +11,7 @@ import com.utmaximur.alcoholtracker.presentation.addmydrink.AddNewDrink
 import com.utmaximur.alcoholtracker.presentation.calculator.CalculatorFragment
 import com.utmaximur.alcoholtracker.presentation.calendar.CalendarFragment
 import com.utmaximur.alcoholtracker.presentation.dialog.addphoto.AddPhotoBottomDialogFragment
+import com.utmaximur.alcoholtracker.presentation.calendar.TrackListBottomDialog
 import com.utmaximur.alcoholtracker.presentation.statistic.StatisticFragment
 import dagger.Component
 import javax.inject.Singleton
@@ -38,4 +39,6 @@ interface AlcoholTrackComponent {
     fun inject(calculatorFragment: CalculatorFragment)
 
     fun inject(statisticFragment: StatisticFragment)
+
+    fun inject(trackListBottomDialogFragment: TrackListBottomDialog)
 }
