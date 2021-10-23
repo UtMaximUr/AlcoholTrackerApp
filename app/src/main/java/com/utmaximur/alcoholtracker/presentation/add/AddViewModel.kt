@@ -77,7 +77,7 @@ class AddViewModel @Inject constructor(private var addTrackInteractor: AddTrackI
                 price,
                 date,
                 icon,
-                ""
+                image
             )
             if (id == String.empty()) {
                 val newTrack = track.copy(id = getTrackId())
@@ -164,7 +164,7 @@ class AddViewModel @Inject constructor(private var addTrackInteractor: AddTrackI
         drink = drinkList[position].drink
         volume = drinkList[position].volume.first()!!
         degree = drinkList[position].degree.first()!!
-        image = drinkList.first().photo
+        image = drinkList[position].photo
     }
 
     fun onValueCalculating(resultCalculating: String) {
