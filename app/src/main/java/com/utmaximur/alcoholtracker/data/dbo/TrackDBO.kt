@@ -18,6 +18,7 @@ data class TrackDBO(
     var event: String,
     var price: Float,
     var date: Long,
-    var icon: String
+    var icon: String,
+    var image: String
 
 ) : Parcelable

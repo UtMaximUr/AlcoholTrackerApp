@@ -14,6 +14,7 @@ data class Track(
     val event: String,
     val price: Float,
     val date: Long,
-    val icon: String
+    val icon: String,
+    val image: String
 
 ) : Parcelable

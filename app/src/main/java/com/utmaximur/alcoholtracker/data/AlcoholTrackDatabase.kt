@@ -9,7 +9,7 @@ import com.utmaximur.alcoholtracker.data.dbo.DrinkDBO
 import com.utmaximur.alcoholtracker.data.dao.AlcoholTrackDao
 import com.utmaximur.alcoholtracker.data.dao.DrinkDao
 
-@Database(entities = [DrinkDBO::class, TrackDBO::class], version = 4)
+@Database(entities = [DrinkDBO::class, TrackDBO::class], version = 5)
 @TypeConverters(Converters::class)
 abstract class AlcoholTrackDatabase: RoomDatabase(){
     abstract fun getDrinkDao(): DrinkDao

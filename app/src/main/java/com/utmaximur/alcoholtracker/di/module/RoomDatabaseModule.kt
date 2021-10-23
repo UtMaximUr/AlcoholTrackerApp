@@ -10,6 +10,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.utmaximur.alcoholtracker.data.AlcoholTrackDatabase
 import com.utmaximur.alcoholtracker.data.assets.AssetsModule
 import com.utmaximur.alcoholtracker.data.file.FileManager
+import com.utmaximur.alcoholtracker.util.addImageField
 import com.utmaximur.alcoholtracker.util.convertMigrationModel
 import dagger.Module
 import dagger.Provides
@@ -29,7 +30,7 @@ class RoomDatabaseModule(private var application: Application) {
     fun providesRoomDatabase(): AlcoholTrackDatabase {
         alcoholTrackDatabase =
             Room.databaseBuilder(application, AlcoholTrackDatabase::class.java, "app_database")
-                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5)
                 .addCallback(databaseCallback)
                 .build()
         return alcoholTrackDatabase
@@ -127,6 +128,15 @@ class RoomDatabaseModule(private var application: Application) {
         }
     }
 
+    private val MIGRATION_4_5: Migration = object : Migration(4, 5) {
+        override fun migrate(database: SupportSQLiteDatabase) {
+            database.execSQL(
+                "ALTER TABLE track_database ADD COLUMN image TEXT NOT NULL DEFAULT ''"
+            )
+            updateTrackDbAddImageField()
+        }
+    }
+
     private fun updateDrinkDb() {
         CoroutineScope(Dispatchers.IO).launch {
             provideAssets().getDrinkList().forEach {
@@ -144,5 +154,15 @@ class RoomDatabaseModule(private var application: Application) {
             }
         }
         coroutineScope.cancel()
+    }
+
+    private fun updateTrackDbAddImageField() {
+        CoroutineScope(Dispatchers.IO).launch {
+            alcoholTrackDatabase.getTrackDao().singleRequestTracks().forEach { alcoholTrack ->
+                alcoholTrackDatabase.getTrackDao().updateTrack(
+                    alcoholTrack.addImageField(application)
+                )
+            }
+        }
     }
 }
