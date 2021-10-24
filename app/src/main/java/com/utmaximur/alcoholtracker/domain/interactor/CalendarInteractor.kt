@@ -15,7 +15,7 @@ class CalendarInteractor @Inject constructor(
     }
 
     suspend fun getTracks(): List<Track> {
-        return calendarMapper.mapList(trackRepository.getTracks())
+        return trackRepository.getTracks()
     }
 
     suspend fun deleteTrack(trackCalendar: Track) {

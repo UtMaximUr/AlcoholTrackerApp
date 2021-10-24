@@ -16,7 +16,8 @@ class TrackMapper @Inject constructor() {
             event = dbo.event,
             price = dbo.price,
             date = dbo.date,
-            icon = dbo.icon
+            icon = dbo.icon,
+            image = dbo.image
         )
     }
 
@@ -30,7 +31,8 @@ class TrackMapper @Inject constructor() {
             event = domain.event,
             price = domain.price,
             date = domain.date,
-            icon = domain.icon
+            icon = domain.icon,
+            image = domain.image
         )
     }
 }

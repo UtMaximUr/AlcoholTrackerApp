@@ -9,16 +9,16 @@ import com.utmaximur.alcoholtracker.util.FORMAT_IMAGE
 import java.io.*
 import java.util.*
 
-class FileManager {
+class FileManager(private val context: Context) {
 
     private val sEOF = -1
     private val bufferSize = 1024 * 4
 
-    fun createFile(context: Context, uri: Uri?): File? {
+    fun createFile(uri: Uri?): File? {
         if (uri == null) return null
         val contentResolver: ContentResolver = context.contentResolver
         val inputStream: InputStream = contentResolver.openInputStream(uri)!!
-        val file: File = createCacheFile(context)!!
+        val file: File = createCacheFile()!!
         var out: FileOutputStream? = null
         try {
             out = FileOutputStream(file)
@@ -30,7 +30,7 @@ class FileManager {
         return file
     }
 
-    fun createImageFile(context: Context): File? {
+    fun createImageFile(): File? {
         val storageDir: File = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
         return File.createTempFile(
             Date().time.toString(),
@@ -39,7 +39,7 @@ class FileManager {
         )
     }
 
-    fun savePhoto(context: Context, bitmap: Bitmap): String {
+    fun savePhoto(bitmap: Bitmap): String {
         val file = File(context.filesDir, Date().time.toString() + FORMAT_IMAGE)
         try {
             var fos: FileOutputStream? = null
@@ -56,7 +56,7 @@ class FileManager {
     }
 
 
-    private fun createCacheFile(context: Context): File? {
+    private fun createCacheFile(): File? {
         val prefix = "temp"
         val dir = context.filesDir
         var file: File? = null
@@ -76,6 +76,12 @@ class FileManager {
         val buffer = ByteArray(bufferSize)
         while (sEOF != input.read(buffer).also { n = it }) {
             output.write(buffer, 0, n)
+        }
+    }
+
+    fun deleteFile(file: File) {
+        if (file.exists()) {
+            file.deleteOnExit()
         }
     }
 }

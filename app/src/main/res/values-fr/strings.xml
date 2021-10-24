@@ -11,6 +11,7 @@
     <!--calendar-->
     <string name="calendar_add_press">Ajoutez un verre pour commencer</string>
     <string name="calendar_empty">Pas un gramme n\'a été bu ce jour-là! :)</string>
+    <string name="calendar_select_date">Choisissez une date</string>
     <string name="calendar_date">Date</string>
 
     <!--add-->

@@ -11,6 +11,7 @@
     <!--calendar-->
     <string name="calendar_add_press">Fügen Sie ein Getränk hinzu, um loszulegen</string>
     <string name="calendar_empty">An diesem Tag wurde kein einziges Gramm getrunken! :)</string>
+    <string name="calendar_select_date">Wählen Sie ein Datum</string>
     <string name="calendar_date">Datum</string>
 
     <!--add-->

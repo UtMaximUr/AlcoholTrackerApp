@@ -6,60 +6,97 @@
     app:startDestination="@id/calendarFragment">
     <fragment
         android:id="@+id/addFragment"
-        android:name="com.utmaximur.alcoholtracker.presantation.add.AddFragment"
+        android:name="com.utmaximur.alcoholtracker.presentation.create_track.CreateTrackFragment"
         android:label="AddFragment"
-        tools:layout="@layout/fragment_add" />
+        tools:layout="@layout/fragment_add_track" >
+        <action
+            android:id="@+id/action_addFragment_to_calculatorFragment"
+            app:destination="@id/calculatorFragment" />
+        <action
+            android:id="@+id/action_addFragment_to_addNewDrinkFragment"
+            app:destination="@id/addNewDrinkFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addNewDrinkFragment"
-        android:name="com.utmaximur.alcoholtracker.presantation.addmydrink.AddNewDrink"
+        android:name="com.utmaximur.alcoholtracker.presentation.create_my_drink.CreateMyDrink"
         android:label="AddNewDrinkFragment"
-        tools:layout="@layout/fragment_add_new_drink" />
+        tools:layout="@layout/fragment_create_drink" >
+        <action
+            android:id="@+id/action_addNewDrinkFragment_to_addPhotoBottomDialogFragment"
+            app:destination="@id/addPhotoBottomDialogFragment" />
+    </fragment>
     <fragment
         android:id="@+id/calendarFragment"
-        android:name="com.utmaximur.alcoholtracker.presantation.calendar.CalendarFragment"
+        android:name="com.utmaximur.alcoholtracker.presentation.calendar.CalendarFragment"
         android:label="CalendarFragment"
-        tools:layout="@layout/fragment_calendar" />
+        tools:layout="@layout/fragment_calendar" >
+        <action
+            android:id="@+id/action_calendarFragment_to_addDrinkDialogFragment"
+            app:destination="@id/addDrinkDialogFragment" />
+        <action
+            android:id="@+id/action_calendarFragment_to_addFragment"
+            app:destination="@id/addFragment" />
+        <action
+            android:id="@+id/action_calendarFragment_to_trackListBottomDialogFragment"
+            app:destination="@id/trackListBottomDialogFragment" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.utmaximur.alcoholtracker.presantation.settings.SettingsFragment"
+        android:name="com.utmaximur.alcoholtracker.presentation.settings.SettingsFragment"
         android:label="SettingsFragment"
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/statisticFragment"
-        android:name="com.utmaximur.alcoholtracker.presantation.statistic.StatisticFragment"
+        android:name="com.utmaximur.alcoholtracker.presentation.statistic.StatisticFragment"
         android:label="StatisticFragment"
         tools:layout="@layout/fragment_statistic" />
     <dialog
         android:id="@+id/addPhotoBottomDialogFragment"
-        android:name="com.utmaximur.alcoholtracker.presantation.dialog.addphoto.AddPhotoBottomDialogFragment"
+        android:name="com.utmaximur.alcoholtracker.presentation.dialog.add_photo.AddPhotoBottomDialogFragment"
         android:label="AddPhotoBottomDialogFragment"
-        tools:layout="@layout/dialog_bottom_sheet" />
+        tools:layout="@layout/dialog_add_photo" />
     <dialog
         android:id="@+id/addDrinkDialogFragment"
-        android:name="com.utmaximur.alcoholtracker.presantation.dialog.adddrink.AddDrinkDialogFragment"
-        android:label="AddDrinkDialogFragment" />
+        android:name="com.utmaximur.alcoholtracker.presentation.dialog.select_day.SelectDayDialogFragment"
+        android:label="AddDrinkDialogFragment" >
+        <action
+            android:id="@+id/action_addDrinkDialogFragment_to_addFragment"
+            app:destination="@id/addFragment" />
+    </dialog>
     <dialog
         android:id="@+id/updateBottomDialogFragment"
-        android:name="com.utmaximur.alcoholtracker.presantation.dialog.update.UpdateBottomDialogFragment"
+        android:name="com.utmaximur.alcoholtracker.presentation.dialog.update.UpdateBottomDialogFragment"
         android:label="UpdateBottomDialogFragment"
-        tools:layout="@layout/dialog_update_bottom_sheet" />
+        tools:layout="@layout/dialog_update" />
     <dialog
         android:id="@+id/deleteDialogFragment"
-        android:name="com.utmaximur.alcoholtracker.presantation.dialog.delete.DeleteDialogFragment"
+        android:name="com.utmaximur.alcoholtracker.presentation.dialog.delete.DeleteDialogFragment"
         android:label="DeleteDialogFragment" />
     <activity
         android:id="@+id/mainActivity"
-        android:name="com.utmaximur.alcoholtracker.presantation.main.MainActivity"
+        android:name="com.utmaximur.alcoholtracker.presentation.main.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
     <activity
         android:id="@+id/splashActivity"
-        android:name="com.utmaximur.alcoholtracker.presantation.splash.SplashActivity"
+        android:name="com.utmaximur.alcoholtracker.presentation.splash.SplashActivity"
         android:label="SplashActivity"
         tools:layout="@layout/splash_layout" />
-    <fragment
+    <dialog
         android:id="@+id/calculatorFragment"
-        android:name="com.utmaximur.alcoholtracker.presantation.calculator.CalculatorFragment"
+        android:name="com.utmaximur.alcoholtracker.presentation.calculator.CalculatorFragment"
         android:label="CalculatorFragment"
         tools:layout="@layout/fragment_calculator" />
+    <dialog
+        android:id="@+id/trackListBottomDialogFragment"
+        android:name="com.utmaximur.alcoholtracker.presentation.calendar.TrackListBottomDialog"
+        android:label="TrackListBottomDialogFragment"
+        tools:layout="@layout/dialog_track_list" >
+        <action
+            android:id="@+id/action_trackListBottomDialogFragment_to_deleteDialogFragment"
+            app:destination="@id/deleteDialogFragment" />
+        <action
+            android:id="@+id/action_trackListBottomDialogFragment_to_addFragment"
+            app:destination="@id/addFragment" />
+    </dialog>
 </navigation>

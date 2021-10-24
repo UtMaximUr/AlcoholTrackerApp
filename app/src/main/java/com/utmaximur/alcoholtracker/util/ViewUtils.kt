@@ -11,9 +11,14 @@ import android.view.WindowManager
 import android.view.WindowMetrics
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import android.widget.*
+import androidx.core.view.children
+import androidx.viewpager.widget.ViewPager
 import com.google.android.material.snackbar.Snackbar
 import com.utmaximur.alcoholtracker.R
+import java.util.*
 
 fun View.hideKeyboard() {
     (this.context.getSystemService(Service.INPUT_METHOD_SERVICE) as? InputMethodManager)
@@ -67,4 +72,62 @@ fun Context.getDisplayWidth(): Int {
         windowManager.defaultDisplay.getMetrics(displayMetrics)
         displayMetrics.widthPixels
     }
+}
+
+private fun NumberPicker.initNumberPicker() {
+    this.children.iterator().forEach {
+        if (it is EditText) it.width = LinearLayout.LayoutParams.WRAP_CONTENT
+    }
+}
+
+fun NumberPicker.settingsNumberPicker() {
+    this.maxValue = 10
+    this.minValue = 1
+}
+
+fun NumberPicker.settingsNumberPicker(maxValue: Int, displayedValues: Array<String?>) {
+    this.displayedValues = null
+    this.maxValue = maxValue - 1
+    this.displayedValues = displayedValues
+    this.initNumberPicker()
+}
+
+fun NumberPicker.resetSettingsNumberPicker(maxValue: Int, displayedValues: Array<String?>) {
+    this.displayedValues = null
+    this.minValue = 0
+    this.maxValue = maxValue
+    this.displayedValues = displayedValues
+}
+
+fun ViewPager.addOnPageChangeListener(func: (Int) -> Unit, hide: () -> Unit) {
+    this.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        override fun onPageScrollStateChanged(state: Int) {}
+        override fun onPageScrolled(
+            position: Int,
+            positionOffset: Float,
+            positionOffsetPixels: Int
+        ) {
+            hide()
+        }
+
+        override fun onPageSelected(position: Int) {
+            func(position)
+        }
+    })
+}
+
+fun EditText.onEditorActionListener(hide: () -> Unit) {
+    this.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, _ ->
+        if (actionId == EditorInfo.IME_ACTION_DONE) {
+            hide()
+            return@OnEditorActionListener true
+        }
+        true
+    })
+}
+
+fun View.setupFullHeight() {
+    val layoutParams = this.layoutParams
+    layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT
+    this.layoutParams = layoutParams
 }

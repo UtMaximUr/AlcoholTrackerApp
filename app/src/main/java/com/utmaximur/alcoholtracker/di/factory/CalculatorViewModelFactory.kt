@@ -2,7 +2,7 @@ package com.utmaximur.alcoholtracker.di.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.utmaximur.alcoholtracker.presantation.calculator.CalculatorViewModel
+import com.utmaximur.alcoholtracker.presentation.calculator.CalculatorViewModel
 import javax.inject.Inject
 import javax.inject.Singleton
 

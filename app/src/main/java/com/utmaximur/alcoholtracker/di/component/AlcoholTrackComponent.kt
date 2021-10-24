@@ -6,11 +6,13 @@ import com.utmaximur.alcoholtracker.data.repository.DrinkRepository
 import com.utmaximur.alcoholtracker.data.repository.FileRepository
 import com.utmaximur.alcoholtracker.data.repository.AssetsRepository
 import com.utmaximur.alcoholtracker.data.repository.TrackRepository
-import com.utmaximur.alcoholtracker.presantation.add.AddFragment
-import com.utmaximur.alcoholtracker.presantation.addmydrink.AddNewDrink
-import com.utmaximur.alcoholtracker.presantation.calculator.CalculatorFragment
-import com.utmaximur.alcoholtracker.presantation.calendar.CalendarFragment
-import com.utmaximur.alcoholtracker.presantation.statistic.StatisticFragment
+import com.utmaximur.alcoholtracker.presentation.create_track.CreateTrackFragment
+import com.utmaximur.alcoholtracker.presentation.create_my_drink.CreateMyDrink
+import com.utmaximur.alcoholtracker.presentation.calculator.CalculatorFragment
+import com.utmaximur.alcoholtracker.presentation.calendar.CalendarFragment
+import com.utmaximur.alcoholtracker.presentation.dialog.add_photo.AddPhotoBottomDialogFragment
+import com.utmaximur.alcoholtracker.presentation.calendar.TrackListBottomDialog
+import com.utmaximur.alcoholtracker.presentation.statistic.StatisticFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -28,11 +30,15 @@ interface AlcoholTrackComponent {
 
     fun inject(calendarFragment: CalendarFragment)
 
-    fun inject(addFragment: AddFragment)
+    fun inject(createTrackFragment: CreateTrackFragment)
 
-    fun inject(addNewDrink: AddNewDrink)
+    fun inject(createMyDrink: CreateMyDrink)
+
+    fun inject(addPhotoBottomDialogFragment: AddPhotoBottomDialogFragment)
 
     fun inject(calculatorFragment: CalculatorFragment)
 
     fun inject(statisticFragment: StatisticFragment)
+
+    fun inject(trackListBottomDialogFragment: TrackListBottomDialog)
 }
