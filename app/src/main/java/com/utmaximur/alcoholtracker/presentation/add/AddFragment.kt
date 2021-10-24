@@ -323,5 +323,6 @@ class AddFragment : Fragment(), AddDrinkListener {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        findNavController().graph.findNode(R.id.addFragment)?.removeArgument(SELECT_DAY_ADD)
     }
 }
