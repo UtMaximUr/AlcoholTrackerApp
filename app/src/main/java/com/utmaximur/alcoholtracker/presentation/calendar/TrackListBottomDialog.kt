@@ -1,5 +1,7 @@
 package com.utmaximur.alcoholtracker.presentation.calendar
 
+
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.R
@@ -34,6 +37,17 @@ class TrackListBottomDialog : BottomSheetDialogFragment(),
     private val binding get() = _binding!!
 
     private var alcoholTrackListAdapter: DrinksListAdapter? = null
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val dialog = BottomSheetDialog(requireContext(), theme)
+        dialog.setOnShowListener { dialogInterface ->
+            val bottomSheetDialog = dialogInterface as BottomSheetDialog
+            val parentLayout =
+                bottomSheetDialog.findViewById<View>(R.id.design_bottom_sheet)
+            parentLayout?.setupFullHeight()
+        }
+        return dialog
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

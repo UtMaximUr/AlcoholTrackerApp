@@ -125,3 +125,9 @@ fun EditText.onEditorActionListener(hide: () -> Unit) {
         true
     })
 }
+
+fun View.setupFullHeight() {
+    val layoutParams = this.layoutParams
+    layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT
+    this.layoutParams = layoutParams
+}
