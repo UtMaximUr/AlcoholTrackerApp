@@ -79,6 +79,10 @@ class AddFragment : Fragment(), AddDrinkListener {
         toolbar.setOnMenuItemClickListener {
             if (viewPagerDrinks.currentItem != viewModel.getDrinkList().size) {
                 viewModel.onSaveButtonClick()
+                findNavController().getBackStackEntry(R.id.calendarFragment).savedStateHandle.set(
+                    KEY_CALENDAR_UPDATE,
+                    KEY_CALENDAR_UPDATE_OK
+                )
             }
             addFragmentListener?.closeFragment()
             true

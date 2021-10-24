@@ -47,6 +47,7 @@ class CalendarFragment : Fragment() {
         initUI()
         initIconOnDate()
         onEventDayChange(null)
+        updateCalendar()
     }
 
     private fun injectDagger() {
@@ -57,6 +58,12 @@ class CalendarFragment : Fragment() {
         calendarView.setOnDayClickListener { eventDay -> onClickCalendar(eventDay) }
     }
 
+    private fun updateCalendar() {
+        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>(
+            KEY_CALENDAR_UPDATE
+        )?.observe(viewLifecycleOwner) { viewModel.updateTracks() }
+    }
+
     private fun onClickCalendar(eventDay: EventDay) {
         lifecycleScope.launch {
             val trackByDay = viewModel.dataAlcoholTrackByDay(eventDay.calendar.timeInMillis)
@@ -65,7 +72,8 @@ class CalendarFragment : Fragment() {
                 bundle.putLong(SELECT_DAY, eventDay.calendar.timeInMillis)
                 findNavController().navigate(R.id.trackListBottomDialogFragment, bundle)
             } else {
-                val argument = NavArgument.Builder().setDefaultValue(eventDay.calendar.timeInMillis).build()
+                val argument =
+                    NavArgument.Builder().setDefaultValue(eventDay.calendar.timeInMillis).build()
                 findNavController().graph.findNode(R.id.addFragment)
                     ?.addArgument(SELECT_DAY_ADD, argument)
             }
@@ -75,7 +83,7 @@ class CalendarFragment : Fragment() {
 
     private fun initIconOnDate() = with(binding) {
         val events: MutableList<EventDay> = ArrayList()
-        viewModel.dataTracks().observe(viewLifecycleOwner, { list ->
+        viewModel.tracks.observe(viewLifecycleOwner, { list ->
             events.clear()
             list.forEach {
                 val calendar = Calendar.getInstance()
@@ -94,7 +102,7 @@ class CalendarFragment : Fragment() {
     private fun onEventDayChange(eventDay: Long?) = with(binding) {
         lifecycleScope.launch {
             val trackByDay = viewModel.dataAlcoholTrackByDay(eventDay ?: Date().time)
-            viewModel.dataTracks().observe(viewLifecycleOwner, { list ->
+            viewModel.tracks.observe(viewLifecycleOwner, { list ->
                 if (list.isEmpty()) {
                     addToStart.toVisible()
                     selectDate.toGone()

@@ -17,8 +17,26 @@ open class CalendarViewModel @Inject constructor(private var calendarInteractor:
         MutableLiveData()
     }
 
-    fun dataTracks(): LiveData<List<Track>> {
+    val tracks: LiveData<List<Track>> by lazy {
+        MutableLiveData()
+    }
+
+    init {
+        viewModelScope.launch {
+            val dataTracks = dataTracks()
+            (tracks as MutableLiveData).value = dataTracks
+        }
+    }
+
+    private suspend fun dataTracks(): List<Track> {
         return calendarInteractor.getTracks()
+    }
+
+    fun updateTracks() {
+        viewModelScope.launch {
+            val dataTracks = dataTracks()
+            (tracks as MutableLiveData).value = dataTracks
+        }
     }
 
     suspend fun dataAlcoholTrackByDay(

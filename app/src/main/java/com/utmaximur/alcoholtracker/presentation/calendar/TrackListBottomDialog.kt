@@ -95,6 +95,10 @@ class TrackListBottomDialog : BottomSheetDialogFragment(),
                     lifecycleScope.launch {
                         viewModel.onDeleteDrink(track)
                         alcoholTrackListAdapter?.notifyItemRemoved(position)
+                        findNavController().getBackStackEntry(R.id.calendarFragment).savedStateHandle.set(
+                            KEY_CALENDAR_UPDATE,
+                            KEY_CALENDAR_UPDATE_OK
+                        )
                     }
                 }
             }
