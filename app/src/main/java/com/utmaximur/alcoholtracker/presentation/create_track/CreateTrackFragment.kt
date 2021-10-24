@@ -79,9 +79,10 @@ class CreateTrackFragment : Fragment(), AddDrinkListener {
         toolbar.setOnMenuItemClickListener {
             if (viewPagerDrinks.currentItem != viewModel.getDrinkList().size) {
                 viewModel.onSaveButtonClick()
-                findNavController().getBackStackEntry(R.id.calendarFragment).savedStateHandle.set(
+                this@CreateTrackFragment.setNavigationResult(
                     KEY_CALENDAR_UPDATE,
-                    KEY_CALENDAR_UPDATE_OK
+                    KEY_CALENDAR_UPDATE_OK,
+                    false
                 )
             }
             addFragmentListener?.closeFragment()
@@ -184,9 +185,7 @@ class CreateTrackFragment : Fragment(), AddDrinkListener {
     private fun onShowCalculate() {
         val bundle = Bundle()
         bundle.putString(PRICE_DRINK, binding.priceEditText.text.toString())
-        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>(
-            KEY_CALCULATOR
-        )
+        this@CreateTrackFragment.getNavigationResultLiveData<String>(KEY_CALCULATOR)
             ?.observe(
                 viewLifecycleOwner
             ) { result ->
@@ -286,7 +285,7 @@ class CreateTrackFragment : Fragment(), AddDrinkListener {
     }
 
     override fun deleteDrink(drink: Drink) {
-        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>(KEY_ADD)
+        this@CreateTrackFragment.getNavigationResultLiveData<String>(KEY_ADD)
             ?.observe(
                 viewLifecycleOwner
             ) { result ->

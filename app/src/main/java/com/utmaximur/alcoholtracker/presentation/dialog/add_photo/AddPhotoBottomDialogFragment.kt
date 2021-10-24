@@ -16,15 +16,11 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.databinding.DialogAddPhotoBinding
 import com.utmaximur.alcoholtracker.presentation.base.BaseViewModelFactory
-import com.utmaximur.alcoholtracker.util.DATA
-import com.utmaximur.alcoholtracker.util.FILE_PROVIDER
-import com.utmaximur.alcoholtracker.util.KEY_CREATE_DRINK
-import com.utmaximur.alcoholtracker.util.KEY_CREATE_DRINK_DELETE
+import com.utmaximur.alcoholtracker.util.*
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.IOException
@@ -76,10 +72,8 @@ class AddPhotoBottomDialogFragment : BottomSheetDialogFragment() {
         }
 
         deletePhoto.setOnClickListener {
-            findNavController().previousBackStackEntry?.savedStateHandle?.set(
-                KEY_CREATE_DRINK,
-                KEY_CREATE_DRINK_DELETE
-            )
+            this@AddPhotoBottomDialogFragment.setNavigationResult(KEY_CREATE_DRINK,
+                KEY_CREATE_DRINK_DELETE, false)
             dialog?.dismiss()
         }
     }
@@ -151,9 +145,9 @@ class AddPhotoBottomDialogFragment : BottomSheetDialogFragment() {
                         requireActivity().contentResolver.openInputStream(imageUri)!!
                     val selectedImage = BitmapFactory.decodeStream(imageStream)
                     if (selectedImage != null) {
-                        findNavController().previousBackStackEntry?.savedStateHandle?.set(
+                        this.setNavigationResult(
                             KEY_CREATE_DRINK,
-                            viewModel.savePhoto(selectedImage)
+                            viewModel.savePhoto(selectedImage), false
                         )
                     }
                     dialog?.dismiss()
@@ -172,17 +166,17 @@ class AddPhotoBottomDialogFragment : BottomSheetDialogFragment() {
 
             if (resultCode == Activity.RESULT_OK && data !== null) {
                 val bitmap = data.extras?.get(DATA) as Bitmap
-                findNavController().previousBackStackEntry?.savedStateHandle?.set(
+                this.setNavigationResult(
                     KEY_CREATE_DRINK,
-                    viewModel.savePhoto(bitmap)
+                    viewModel.savePhoto(bitmap), false
                 )
                 dialog?.dismiss()
             }
             viewModel.photoURI.observe(viewLifecycleOwner, { uri ->
                 val file: File = viewModel.getFile(uri)!!
-                findNavController().previousBackStackEntry?.savedStateHandle?.set(
+                this.setNavigationResult(
                     KEY_CREATE_DRINK,
-                    file.absolutePath
+                    file.absolutePath, false
                 )
                 dialog?.dismiss()
                 viewModel.deleteFile()

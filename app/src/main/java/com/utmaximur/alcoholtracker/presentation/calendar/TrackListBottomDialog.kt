@@ -97,9 +97,7 @@ class TrackListBottomDialog : BottomSheetDialogFragment(),
     }
 
     override fun onClickDelete(track: Track, position: Int) {
-        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>(
-            KEY_CALENDAR
-        )
+        this.getNavigationResultLiveData<String>(KEY_CALENDAR)
             ?.observe(
                 viewLifecycleOwner
             ) { result ->
@@ -107,9 +105,9 @@ class TrackListBottomDialog : BottomSheetDialogFragment(),
                     lifecycleScope.launch {
                         viewModel.onDeleteDrink(track)
                         alcoholTrackListAdapter?.notifyItemRemoved(position)
-                        findNavController().getBackStackEntry(R.id.calendarFragment).savedStateHandle.set(
+                        this@TrackListBottomDialog.setNavigationResult(
                             KEY_CALENDAR_UPDATE,
-                            KEY_CALENDAR_UPDATE_OK
+                            KEY_CALENDAR_UPDATE_OK, false
                         )
                     }
                 }

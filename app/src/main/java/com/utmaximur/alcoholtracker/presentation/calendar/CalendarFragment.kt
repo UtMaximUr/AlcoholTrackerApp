@@ -59,9 +59,8 @@ class CalendarFragment : Fragment() {
     }
 
     private fun updateCalendar() {
-        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>(
-            KEY_CALENDAR_UPDATE
-        )?.observe(viewLifecycleOwner) { viewModel.updateTracks() }
+        this.getNavigationResultLiveData<String>(KEY_CALENDAR_UPDATE)
+            ?.observe(viewLifecycleOwner) { viewModel.updateTracks() }
     }
 
     private fun onClickCalendar(eventDay: EventDay) {
