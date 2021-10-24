@@ -10,6 +10,7 @@
     <!--calendar-->
     <string name="calendar_add_press">Чтобы начать, добавьте напиток</string>
     <string name="calendar_empty">В этот день не выпито ни грамма!:)</string>
+    <string name="calendar_select_date">Выберите дату</string>
     <string name="calendar_date">Дата</string>
 
     <!--add-->

@@ -10,6 +10,7 @@
     <!--calendar-->
     <string name="calendar_add_press">Add a drink to get started</string>
     <string name="calendar_empty">Not a single gram was drunk on this day!:)</string>
+    <string name="calendar_select_date">Choose a date</string>
     <string name="calendar_date">Date</string>
     <string name="calendar_count_drink" translatable="false">%s x %d</string>
 
