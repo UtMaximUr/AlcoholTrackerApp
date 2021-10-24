@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -55,8 +54,7 @@ class TrackListBottomDialog : BottomSheetDialogFragment(),
         App.instance.alcoholTrackComponent.inject(this)
     }
 
-    private fun initUi() = with(binding) {
-        dialog?.window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+    private fun initUi() {
         initAlcoholTrackByDay()
     }
 
