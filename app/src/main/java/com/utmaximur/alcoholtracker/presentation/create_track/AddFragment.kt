@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.presentation.add
+package com.utmaximur.alcoholtracker.presentation.create_track
 
 import android.app.DatePickerDialog
 import android.content.Context
@@ -16,9 +16,9 @@ import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.databinding.FragmentAddTrackBinding
 import com.utmaximur.alcoholtracker.domain.entity.Drink
-import com.utmaximur.alcoholtracker.presentation.add.adapter.DrinkViewPagerAdapter
-import com.utmaximur.alcoholtracker.presentation.add.adapter.DrinkViewPagerAdapter.AddDrinkListener
+import com.utmaximur.alcoholtracker.presentation.create_track.adapter.DrinkViewPagerAdapter.AddDrinkListener
 import com.utmaximur.alcoholtracker.presentation.base.BaseViewModelFactory
+import com.utmaximur.alcoholtracker.presentation.create_track.adapter.DrinkViewPagerAdapter
 import com.utmaximur.alcoholtracker.util.*
 import kotlinx.coroutines.launch
 import java.util.*

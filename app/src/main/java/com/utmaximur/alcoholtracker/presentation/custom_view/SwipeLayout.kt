@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.presentation.customview
+package com.utmaximur.alcoholtracker.presentation.custom_view
 
 import android.annotation.SuppressLint
 import android.content.Context

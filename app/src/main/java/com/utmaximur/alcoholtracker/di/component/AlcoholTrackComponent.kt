@@ -6,11 +6,11 @@ import com.utmaximur.alcoholtracker.data.repository.DrinkRepository
 import com.utmaximur.alcoholtracker.data.repository.FileRepository
 import com.utmaximur.alcoholtracker.data.repository.AssetsRepository
 import com.utmaximur.alcoholtracker.data.repository.TrackRepository
-import com.utmaximur.alcoholtracker.presentation.add.AddFragment
-import com.utmaximur.alcoholtracker.presentation.addmydrink.AddNewDrink
+import com.utmaximur.alcoholtracker.presentation.create_track.AddFragment
+import com.utmaximur.alcoholtracker.presentation.create_my_drink.AddNewDrink
 import com.utmaximur.alcoholtracker.presentation.calculator.CalculatorFragment
 import com.utmaximur.alcoholtracker.presentation.calendar.CalendarFragment
-import com.utmaximur.alcoholtracker.presentation.dialog.addphoto.AddPhotoBottomDialogFragment
+import com.utmaximur.alcoholtracker.presentation.dialog.add_photo.AddPhotoBottomDialogFragment
 import com.utmaximur.alcoholtracker.presentation.calendar.TrackListBottomDialog
 import com.utmaximur.alcoholtracker.presentation.statistic.StatisticFragment
 import dagger.Component

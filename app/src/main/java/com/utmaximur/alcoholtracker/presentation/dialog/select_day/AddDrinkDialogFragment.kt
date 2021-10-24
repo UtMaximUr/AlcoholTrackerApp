@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.presentation.dialog.adddrink
+package com.utmaximur.alcoholtracker.presentation.dialog.select_day
 
 import android.app.Dialog
 import android.os.Bundle

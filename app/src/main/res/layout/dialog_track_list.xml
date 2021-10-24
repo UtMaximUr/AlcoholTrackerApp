@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />
 
-    <com.utmaximur.alcoholtracker.presentation.customview.SwipeRecyclerView
+    <com.utmaximur.alcoholtracker.presentation.custom_view.SwipeRecyclerView
         android:id="@+id/drinks_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"

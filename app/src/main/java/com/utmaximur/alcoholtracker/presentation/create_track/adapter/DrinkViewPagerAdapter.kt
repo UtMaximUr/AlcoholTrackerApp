@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.presentation.add.adapter
+package com.utmaximur.alcoholtracker.presentation.create_track.adapter
 
 import android.content.Context
 import android.graphics.BitmapFactory

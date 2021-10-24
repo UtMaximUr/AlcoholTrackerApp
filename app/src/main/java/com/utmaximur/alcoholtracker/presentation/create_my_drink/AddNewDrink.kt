@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.presentation.addmydrink
+package com.utmaximur.alcoholtracker.presentation.create_my_drink
 
 
 import android.content.Context
@@ -16,8 +16,8 @@ import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.databinding.FragmentCreateDrinkBinding
 import com.utmaximur.alcoholtracker.domain.entity.Icon
-import com.utmaximur.alcoholtracker.presentation.addmydrink.adapter.SelectIconAdapter
-import com.utmaximur.alcoholtracker.presentation.addmydrink.adapter.SelectVolumeAdapter
+import com.utmaximur.alcoholtracker.presentation.create_my_drink.adapter.SelectIconAdapter
+import com.utmaximur.alcoholtracker.presentation.create_my_drink.adapter.SelectVolumeAdapter
 import com.utmaximur.alcoholtracker.presentation.base.BaseViewModelFactory
 import com.utmaximur.alcoholtracker.util.*
 import java.util.*

@@ -12,8 +12,8 @@ import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.data.update.UpdateManager
 import com.utmaximur.alcoholtracker.data.update.UpdateManager.Companion.getInstance
 import com.utmaximur.alcoholtracker.databinding.ActivityMainBinding
-import com.utmaximur.alcoholtracker.presentation.add.AddFragment
-import com.utmaximur.alcoholtracker.presentation.addmydrink.AddNewDrink
+import com.utmaximur.alcoholtracker.presentation.create_track.AddFragment
+import com.utmaximur.alcoholtracker.presentation.create_my_drink.AddNewDrink
 import com.utmaximur.alcoholtracker.util.*
 
 

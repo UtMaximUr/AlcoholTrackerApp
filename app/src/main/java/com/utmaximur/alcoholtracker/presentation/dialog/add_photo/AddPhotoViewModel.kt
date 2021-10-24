@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.presentation.dialog.addphoto
+package com.utmaximur.alcoholtracker.presentation.dialog.add_photo
 
 import android.graphics.Bitmap
 import android.net.Uri

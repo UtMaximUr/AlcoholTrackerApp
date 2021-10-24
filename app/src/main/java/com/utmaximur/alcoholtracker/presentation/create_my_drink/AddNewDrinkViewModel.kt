@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.presentation.addmydrink
+package com.utmaximur.alcoholtracker.presentation.create_my_drink
 
 import android.content.Context
 import androidx.lifecycle.LiveData
