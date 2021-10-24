@@ -73,7 +73,7 @@ class AddPhotoBottomDialogFragment : BottomSheetDialogFragment() {
 
         deletePhoto.setOnClickListener {
             this@AddPhotoBottomDialogFragment.setNavigationResult(KEY_CREATE_DRINK,
-                KEY_CREATE_DRINK_DELETE, false)
+                KEY_CREATE_DRINK_DELETE, true)
             dialog?.dismiss()
         }
     }
@@ -147,7 +147,7 @@ class AddPhotoBottomDialogFragment : BottomSheetDialogFragment() {
                     if (selectedImage != null) {
                         this.setNavigationResult(
                             KEY_CREATE_DRINK,
-                            viewModel.savePhoto(selectedImage), false
+                            viewModel.savePhoto(selectedImage), true
                         )
                     }
                     dialog?.dismiss()
@@ -168,7 +168,7 @@ class AddPhotoBottomDialogFragment : BottomSheetDialogFragment() {
                 val bitmap = data.extras?.get(DATA) as Bitmap
                 this.setNavigationResult(
                     KEY_CREATE_DRINK,
-                    viewModel.savePhoto(bitmap), false
+                    viewModel.savePhoto(bitmap), true
                 )
                 dialog?.dismiss()
             }
@@ -176,7 +176,7 @@ class AddPhotoBottomDialogFragment : BottomSheetDialogFragment() {
                 val file: File = viewModel.getFile(uri)!!
                 this.setNavigationResult(
                     KEY_CREATE_DRINK,
-                    file.absolutePath, false
+                    file.absolutePath, true
                 )
                 dialog?.dismiss()
                 viewModel.deleteFile()

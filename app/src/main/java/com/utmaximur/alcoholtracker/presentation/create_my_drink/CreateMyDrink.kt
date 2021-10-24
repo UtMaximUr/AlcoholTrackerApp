@@ -81,10 +81,7 @@ class CreateMyDrink : Fragment() {
 
         photoDrink.setOnClickListener {
             hideKeyboard()
-            val navController = findNavController()
-            navController.currentBackStackEntry?.savedStateHandle?.getLiveData<String>(
-                KEY_CREATE_DRINK
-            )?.observe(
+            this@CreateMyDrink.getNavigationResultLiveData<String>(KEY_CREATE_DRINK)?.observe(
                 viewLifecycleOwner
             ) { result ->
                 if (result == KEY_CREATE_DRINK_DELETE) {
@@ -96,11 +93,8 @@ class CreateMyDrink : Fragment() {
                     photoDrink.scaleType = ImageView.ScaleType.CENTER_CROP
                     viewModel.onPhotoChange(result)
                 }
-                navController.currentBackStackEntry?.savedStateHandle?.remove<String>(
-                    KEY_CREATE_DRINK
-                )
             }
-            navController.navigate(R.id.addPhotoBottomDialogFragment)
+            findNavController().navigate(R.id.addPhotoBottomDialogFragment)
         }
 
         drinkName.setOnEditorActionListener(TextView.OnEditorActionListener { text, actionId, _ ->
