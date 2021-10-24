@@ -38,4 +38,6 @@ ext {
     json = '2.8.6'
     firebase = '26.1.1'
     in_app_updates = '1.10.2'
+    nav_version = "2.3.5"
+    room_version = "2.3.0"
 }
