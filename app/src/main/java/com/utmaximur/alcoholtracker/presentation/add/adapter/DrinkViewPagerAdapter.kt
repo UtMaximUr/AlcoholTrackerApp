@@ -43,7 +43,7 @@ class DrinkViewPagerAdapter(private var drinksList: List<Drink>, private var con
         val inflater = context
             .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val itemView: View = inflater.inflate(
-            R.layout.item_page, container,
+            R.layout.item_page_drink, container,
             false
         )
         drinkImage = itemView.findViewById(R.id.item_drink_image)

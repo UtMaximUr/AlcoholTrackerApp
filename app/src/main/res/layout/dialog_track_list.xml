@@ -31,7 +31,7 @@
         app:layout_constraintWidth_max="wrap"
         app:layout_constraintWidth_percent="0.4"
         tools:itemCount="1"
-        tools:listitem="@layout/item_drink" />
+        tools:listitem="@layout/item_track" />
 
     <ProgressBar
         android:id="@+id/progressBar"

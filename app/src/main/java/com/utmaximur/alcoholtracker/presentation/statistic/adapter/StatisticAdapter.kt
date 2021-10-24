@@ -18,7 +18,7 @@ class StatisticAdapter(private var commonPrice: List<String>, private var contex
         val inflater = context
             .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val itemView: View = inflater.inflate(
-            R.layout.item_statistic, container,
+            R.layout.item_statistic_price, container,
             false
         )
         period = itemView.findViewById(R.id.item_statistic_period)
