@@ -14,7 +14,7 @@ import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 
-class AddViewModel @Inject constructor(private var addTrackInteractor: AddTrackInteractor) :
+class CreateTrackViewModel @Inject constructor(private var addTrackInteractor: AddTrackInteractor) :
     ViewModel() {
 
     private var id: String = String.empty()

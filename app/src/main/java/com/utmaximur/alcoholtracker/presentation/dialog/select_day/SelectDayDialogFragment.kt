@@ -9,7 +9,7 @@ import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.util.*
 
 
-class AddDrinkDialogFragment : DialogFragment() {
+class SelectDayDialogFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {

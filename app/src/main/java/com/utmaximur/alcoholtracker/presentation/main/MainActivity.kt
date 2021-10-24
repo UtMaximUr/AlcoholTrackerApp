@@ -12,14 +12,14 @@ import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.data.update.UpdateManager
 import com.utmaximur.alcoholtracker.data.update.UpdateManager.Companion.getInstance
 import com.utmaximur.alcoholtracker.databinding.ActivityMainBinding
-import com.utmaximur.alcoholtracker.presentation.create_track.AddFragment
-import com.utmaximur.alcoholtracker.presentation.create_my_drink.AddNewDrink
+import com.utmaximur.alcoholtracker.presentation.create_track.CreateTrackFragment
+import com.utmaximur.alcoholtracker.presentation.create_my_drink.CreateMyDrink
 import com.utmaximur.alcoholtracker.util.*
 
 
 class MainActivity : AppCompatActivity(),
-    AddFragment.AddFragmentListener,
-    AddNewDrink.AddNewFragmentListener,
+    CreateTrackFragment.AddFragmentListener,
+    CreateMyDrink.AddNewFragmentListener,
     UpdateManager.UpdateListener {
 
     private lateinit var navHostFragment: NavHostFragment

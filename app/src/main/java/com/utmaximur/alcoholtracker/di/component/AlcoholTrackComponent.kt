@@ -6,8 +6,8 @@ import com.utmaximur.alcoholtracker.data.repository.DrinkRepository
 import com.utmaximur.alcoholtracker.data.repository.FileRepository
 import com.utmaximur.alcoholtracker.data.repository.AssetsRepository
 import com.utmaximur.alcoholtracker.data.repository.TrackRepository
-import com.utmaximur.alcoholtracker.presentation.create_track.AddFragment
-import com.utmaximur.alcoholtracker.presentation.create_my_drink.AddNewDrink
+import com.utmaximur.alcoholtracker.presentation.create_track.CreateTrackFragment
+import com.utmaximur.alcoholtracker.presentation.create_my_drink.CreateMyDrink
 import com.utmaximur.alcoholtracker.presentation.calculator.CalculatorFragment
 import com.utmaximur.alcoholtracker.presentation.calendar.CalendarFragment
 import com.utmaximur.alcoholtracker.presentation.dialog.add_photo.AddPhotoBottomDialogFragment
@@ -30,9 +30,9 @@ interface AlcoholTrackComponent {
 
     fun inject(calendarFragment: CalendarFragment)
 
-    fun inject(addFragment: AddFragment)
+    fun inject(createTrackFragment: CreateTrackFragment)
 
-    fun inject(addNewDrink: AddNewDrink)
+    fun inject(createMyDrink: CreateMyDrink)
 
     fun inject(addPhotoBottomDialogFragment: AddPhotoBottomDialogFragment)
 

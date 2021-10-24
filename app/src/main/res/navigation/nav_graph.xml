@@ -6,12 +6,12 @@
     app:startDestination="@id/calendarFragment">
     <fragment
         android:id="@+id/addFragment"
-        android:name="com.utmaximur.alcoholtracker.presentation.create_track.AddFragment"
+        android:name="com.utmaximur.alcoholtracker.presentation.create_track.CreateTrackFragment"
         android:label="AddFragment"
         tools:layout="@layout/fragment_add_track" />
     <fragment
         android:id="@+id/addNewDrinkFragment"
-        android:name="com.utmaximur.alcoholtracker.presentation.create_my_drink.AddNewDrink"
+        android:name="com.utmaximur.alcoholtracker.presentation.create_my_drink.CreateMyDrink"
         android:label="AddNewDrinkFragment"
         tools:layout="@layout/fragment_create_drink" />
     <fragment
@@ -36,7 +36,7 @@
         tools:layout="@layout/dialog_add_photo" />
     <dialog
         android:id="@+id/addDrinkDialogFragment"
-        android:name="com.utmaximur.alcoholtracker.presentation.dialog.select_day.AddDrinkDialogFragment"
+        android:name="com.utmaximur.alcoholtracker.presentation.dialog.select_day.SelectDayDialogFragment"
         android:label="AddDrinkDialogFragment" />
     <dialog
         android:id="@+id/updateBottomDialogFragment"

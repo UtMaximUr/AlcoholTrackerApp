@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
-class AddNewDrinkViewModel @Inject constructor(
+class CreateMyDrinkViewModel @Inject constructor(
     private var addNewDrinkInteractor: AddNewDrinkInteractor
 ) : ViewModel() {
 

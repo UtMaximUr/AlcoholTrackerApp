@@ -24,7 +24,7 @@ import java.util.*
 import javax.inject.Inject
 
 
-class AddNewDrink : Fragment() {
+class CreateMyDrink : Fragment() {
 
     private var addNewFragmentListener: AddNewFragmentListener? = null
 
@@ -33,9 +33,9 @@ class AddNewDrink : Fragment() {
     }
 
     @Inject
-    lateinit var viewModelFactory: BaseViewModelFactory<AddNewDrinkViewModel>
+    lateinit var viewModelFactory: BaseViewModelFactory<CreateMyDrinkViewModel>
 
-    private val viewModel: AddNewDrinkViewModel by viewModels(
+    private val viewModel: CreateMyDrinkViewModel by viewModels(
         factoryProducer = { viewModelFactory }
     )
 
@@ -153,13 +153,13 @@ class AddNewDrink : Fragment() {
     }
 
     private fun initIconAdapter(icon: Icon?) = with(binding) {
-        val selectIconAdapter = SelectIconAdapter(this@AddNewDrink::onClickIcon, icon)
+        val selectIconAdapter = SelectIconAdapter(this@CreateMyDrink::onClickIcon, icon)
         drinkAddIcon.adapter = selectIconAdapter
         selectIconAdapter.submitList(viewModel.getIcons())
     }
 
     private fun initVolumeAdapter(volumes: List<String?>?) = with(binding) {
-        val selectVolumeAdapter = SelectVolumeAdapter(this@AddNewDrink::onClickVolume, volumes)
+        val selectVolumeAdapter = SelectVolumeAdapter(this@CreateMyDrink::onClickVolume, volumes)
         drinkAddVolume.adapter = selectVolumeAdapter
         selectVolumeAdapter.submitList(viewModel.getVolumes(requireContext()))
     }

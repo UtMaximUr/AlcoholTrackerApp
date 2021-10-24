@@ -24,14 +24,14 @@ import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
-class AddFragment : Fragment(), AddDrinkListener {
+class CreateTrackFragment : Fragment(), AddDrinkListener {
 
     private var addFragmentListener: AddFragmentListener? = null
 
     @Inject
-    lateinit var viewModelFactory: BaseViewModelFactory<AddViewModel>
+    lateinit var viewModelFactory: BaseViewModelFactory<CreateTrackViewModel>
 
-    private val viewModel: AddViewModel by viewModels(
+    private val viewModel: CreateTrackViewModel by viewModels(
         factoryProducer = { viewModelFactory }
     )
 
@@ -275,7 +275,7 @@ class AddFragment : Fragment(), AddDrinkListener {
     private fun initDrinksList() = with(binding) {
         viewModel.drinksList.observe(viewLifecycleOwner, { list ->
             val adapter = DrinkViewPagerAdapter(list, requireContext())
-            adapter.setListener(this@AddFragment)
+            adapter.setListener(this@CreateTrackFragment)
             viewPagerDrinks.adapter = adapter
             viewPagerDrinks.alphaView()
         })
