@@ -14,7 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.databinding.FragmentAddNewDrinkBinding
+import com.utmaximur.alcoholtracker.databinding.FragmentCreateDrinkBinding
 import com.utmaximur.alcoholtracker.domain.entity.Icon
 import com.utmaximur.alcoholtracker.presentation.addmydrink.adapter.SelectIconAdapter
 import com.utmaximur.alcoholtracker.presentation.addmydrink.adapter.SelectVolumeAdapter
@@ -39,7 +39,7 @@ class AddNewDrink : Fragment() {
         factoryProducer = { viewModelFactory }
     )
 
-    private var _binding: FragmentAddNewDrinkBinding? = null
+    private var _binding: FragmentCreateDrinkBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -47,7 +47,7 @@ class AddNewDrink : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentAddNewDrinkBinding.inflate(layoutInflater)
+        _binding = FragmentCreateDrinkBinding.inflate(layoutInflater)
         return binding.root
     }
 

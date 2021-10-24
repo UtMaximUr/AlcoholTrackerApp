@@ -19,7 +19,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.utmaximur.alcoholtracker.App
-import com.utmaximur.alcoholtracker.databinding.DialogBottomSheetBinding
+import com.utmaximur.alcoholtracker.databinding.DialogAddPhotoBinding
 import com.utmaximur.alcoholtracker.presentation.base.BaseViewModelFactory
 import com.utmaximur.alcoholtracker.util.DATA
 import com.utmaximur.alcoholtracker.util.FILE_PROVIDER
@@ -40,7 +40,7 @@ class AddPhotoBottomDialogFragment : BottomSheetDialogFragment() {
         factoryProducer = { viewModelFactory }
     )
 
-    private var _binding: DialogBottomSheetBinding? = null
+    private var _binding: DialogAddPhotoBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -48,7 +48,7 @@ class AddPhotoBottomDialogFragment : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DialogBottomSheetBinding.inflate(inflater)
+        _binding = DialogAddPhotoBinding.inflate(inflater)
         return binding.root
     }
 

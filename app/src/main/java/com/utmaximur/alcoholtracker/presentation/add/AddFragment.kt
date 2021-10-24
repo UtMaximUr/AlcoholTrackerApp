@@ -14,7 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.databinding.FragmentAddBinding
+import com.utmaximur.alcoholtracker.databinding.FragmentAddTrackBinding
 import com.utmaximur.alcoholtracker.domain.entity.Drink
 import com.utmaximur.alcoholtracker.presentation.add.adapter.DrinkViewPagerAdapter
 import com.utmaximur.alcoholtracker.presentation.add.adapter.DrinkViewPagerAdapter.AddDrinkListener
@@ -43,7 +43,7 @@ class AddFragment : Fragment(), AddDrinkListener {
         fun closeFragment()
     }
 
-    private var _binding: FragmentAddBinding? = null
+    private var _binding: FragmentAddTrackBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var datePicker: DatePickerDialog
@@ -54,7 +54,7 @@ class AddFragment : Fragment(), AddDrinkListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentAddBinding.inflate(layoutInflater)
+        _binding = FragmentAddTrackBinding.inflate(layoutInflater)
         return binding.root
     }
 
