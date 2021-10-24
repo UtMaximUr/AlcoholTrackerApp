@@ -1,6 +1,5 @@
 package com.utmaximur.alcoholtracker.data.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.utmaximur.alcoholtracker.data.dbo.TrackDBO
 
@@ -20,9 +19,6 @@ interface AlcoholTrackDao {
     suspend fun getTrack(date: Long): TrackDBO
 
     @Query("SELECT * FROM track_database")
-    fun getTracks(): LiveData<List<TrackDBO>>
-
-    @Query("SELECT * FROM track_database")
-    suspend fun singleRequestTracks(): List<TrackDBO>
+    suspend fun getTracks(): List<TrackDBO>
 
 }

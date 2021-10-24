@@ -1,6 +1,5 @@
 package com.utmaximur.alcoholtracker.domain.interactor
 
-import androidx.lifecycle.LiveData
 import com.utmaximur.alcoholtracker.data.repository.TrackRepository
 import com.utmaximur.alcoholtracker.domain.entity.Track
 import com.utmaximur.alcoholtracker.domain.mapper.CalendarMapper
@@ -15,7 +14,7 @@ class CalendarInteractor @Inject constructor(
         return trackRepository.getTrack(date)
     }
 
-    fun getTracks(): LiveData<List<Track>> {
+    suspend fun getTracks(): List<Track> {
         return trackRepository.getTracks()
     }
 
@@ -24,6 +23,6 @@ class CalendarInteractor @Inject constructor(
     }
 
     suspend fun getAlcoholTrackByDay(eventDay: Long): List<Track> {
-        return calendarMapper.getAlcoholTrackByDay(trackRepository.singleRequestTracks(), eventDay)
+        return calendarMapper.getAlcoholTrackByDay(trackRepository.getTracks(), eventDay)
     }
 }

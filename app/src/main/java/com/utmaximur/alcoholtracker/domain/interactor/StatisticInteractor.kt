@@ -14,18 +14,18 @@ class StatisticInteractor @Inject constructor(
 
     suspend fun loadDrinksList(): List<DrinkStatistic> {
         return statisticsMapper.mapDrinks(
-            trackRepository.singleRequestTracks(),
+            trackRepository.getTracks(),
             drinkRepository.getDrinks()
         )
     }
 
     suspend fun loadStatisticsPriceByPeriod(): List<String> {
         return statisticsMapper.mapPriceListByPeriod(
-            trackRepository.singleRequestTracks())
+            trackRepository.getTracks())
     }
 
     suspend fun loadStatisticsCountDays(): List<Int> {
         return statisticsMapper.mapStatisticCountDays(
-            trackRepository.singleRequestTracks())
+            trackRepository.getTracks())
     }
 }

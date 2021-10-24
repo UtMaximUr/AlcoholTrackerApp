@@ -1,7 +1,5 @@
 package com.utmaximur.alcoholtracker.data.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
 import com.utmaximur.alcoholtracker.data.AlcoholTrackDatabase
 import com.utmaximur.alcoholtracker.data.dao.AlcoholTrackDao
 import com.utmaximur.alcoholtracker.data.mapper.TrackMapper
@@ -18,15 +16,9 @@ class TrackRepository(
         return trackMapper.map(trackDao.getTrack(date))
     }
 
-    suspend fun singleRequestTracks(): List<Track> {
-        return trackDao.singleRequestTracks().map { trackDBO ->
+    suspend fun getTracks(): List<Track> {
+        return trackDao.getTracks().map { trackDBO ->
             TrackMapper().map(trackDBO)
-        }
-    }
-
-    fun getTracks(): LiveData<List<Track>> {
-        return Transformations.map(trackDao.getTracks()) { list ->
-            list.map { trackDBO -> TrackMapper().map(trackDBO) }
         }
     }
 

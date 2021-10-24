@@ -147,7 +147,7 @@ class RoomDatabaseModule(private var application: Application) {
 
     private fun updateTrackDb() {
         val coroutineScope = CoroutineScope(Dispatchers.IO).launch {
-            alcoholTrackDatabase.getTrackDao().singleRequestTracks().forEach { alcoholTrack ->
+            alcoholTrackDatabase.getTrackDao().getTracks().forEach { alcoholTrack ->
                 alcoholTrackDatabase.getTrackDao().updateTrack(
                     alcoholTrack.convertMigrationModel(application)
                 )
@@ -158,7 +158,7 @@ class RoomDatabaseModule(private var application: Application) {
 
     private fun updateTrackDbAddImageField() {
         CoroutineScope(Dispatchers.IO).launch {
-            alcoholTrackDatabase.getTrackDao().singleRequestTracks().forEach { alcoholTrack ->
+            alcoholTrackDatabase.getTrackDao().getTracks().forEach { alcoholTrack ->
                 alcoholTrackDatabase.getTrackDao().updateTrack(
                     alcoholTrack.addImageField(application)
                 )
