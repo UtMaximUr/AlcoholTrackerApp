@@ -13,10 +13,13 @@ import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.presentation.main.MainActivity
 import com.utmaximur.alcoholtracker.util.alphaView
 import com.utmaximur.alcoholtracker.util.delayOnLifeCycle
+import kotlinx.coroutines.Job
 
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
+
+    private var job: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,11 +34,16 @@ class SplashActivity : AppCompatActivity() {
         context: Context,
         attrs: AttributeSet
     ): View? {
-        parent?.delayOnLifeCycle(1000) {
+        job = parent?.delayOnLifeCycle(1000) {
             val nextScreenIntent = Intent(this, MainActivity::class.java)
             startActivity(nextScreenIntent)
             finish()
         }
         return super.onCreateView(parent, name, context, attrs)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        job?.cancel()
     }
 }
