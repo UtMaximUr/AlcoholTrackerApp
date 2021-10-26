@@ -98,12 +98,21 @@ class CreateTrackViewModel @Inject constructor(private var addTrackInteractor: A
         (totalMoney as MutableLiveData).value = (quantity * price.toString().toDouble()).toString()
     }
 
+    fun updateDrinks() {
+        viewModelScope.launch {
+            val dataDrinksList = getAllDrink()
+            drinkList = dataDrinksList
+            (drinksList as MutableLiveData).value = dataDrinksList
+        }
+    }
+
     private suspend fun getAllDrink(): List<Drink> {
         return addTrackInteractor.getDrinks()
     }
 
     suspend fun onDeleteDrink(drink: Drink) {
         addTrackInteractor.deleteDrink(drink)
+        updateDrinks()
     }
 
     fun onTrackChange(track: Track?) {

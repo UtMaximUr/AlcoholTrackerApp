@@ -201,24 +201,20 @@ class CreateTrackFragment : Fragment(), AddDrinkListener {
     }
 
     private fun onDrinkDegreeArrayChange(position: Int) = with(binding) {
-        viewModel.drinksList.observe(viewLifecycleOwner, { drinks ->
-            val drink = drinks[position]
-            degreeNumberPicker.resetSettingsNumberPicker(
-                drink.degree.indexOf(drink.degree.last()),
-                drink.degree.toTypedArray()
-            )
-            viewModel.setDegreeList(drink.degree)
-        })
+        val drink = viewModel.getDrinkList()[position]
+        degreeNumberPicker.resetSettingsNumberPicker(
+            drink.degree.indexOf(drink.degree.last()),
+            drink.degree.toTypedArray()
+        )
+        viewModel.setDegreeList(drink.degree)
     }
 
     private fun onDrinkVolumeArrayChange(position: Int) = with(binding) {
-        viewModel.drinksList.observe(viewLifecycleOwner, { drinks ->
-            val drink = drinks[position]
-            volumeNumberPicker.resetSettingsNumberPicker(
-                drink.volume.indexOf(drink.volume.last()),
-                drink.volume.setVolumeUnit(requireContext()).toTypedArray()
-            )
-        })
+        val drink = viewModel.getDrinkList()[position]
+        volumeNumberPicker.resetSettingsNumberPicker(
+            drink.volume.indexOf(drink.volume.last()),
+            drink.volume.setVolumeUnit(requireContext()).toTypedArray()
+        )
     }
 
     private fun initTrackArguments() = with(binding) {
@@ -277,6 +273,7 @@ class CreateTrackFragment : Fragment(), AddDrinkListener {
             adapter.setListener(this@CreateTrackFragment)
             viewPagerDrinks.adapter = adapter
             viewPagerDrinks.alphaView()
+            adapter.notifyDataSetChanged()
         })
     }
 
@@ -284,7 +281,7 @@ class CreateTrackFragment : Fragment(), AddDrinkListener {
         addFragmentListener?.onShowAddNewDrinkFragment()
     }
 
-    override fun deleteDrink(drink: Drink) {
+    override fun deleteDrink(drink: Drink) = with(binding) {
         this@CreateTrackFragment.getNavigationResultLiveData<String>(KEY_ADD)
             ?.observe(
                 viewLifecycleOwner
@@ -292,6 +289,7 @@ class CreateTrackFragment : Fragment(), AddDrinkListener {
                 if (result == KEY_ADD_OK) {
                     lifecycleScope.launch {
                         viewModel.onDeleteDrink(drink)
+                        viewPagerDrinks.adapter?.notifyDataSetChanged()
                     }
                 }
             }
@@ -307,6 +305,11 @@ class CreateTrackFragment : Fragment(), AddDrinkListener {
     override fun onStart() {
         super.onStart()
         addFragmentListener!!.onHideNavigationBar()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.updateDrinks()
     }
 
     override fun onDestroy() {

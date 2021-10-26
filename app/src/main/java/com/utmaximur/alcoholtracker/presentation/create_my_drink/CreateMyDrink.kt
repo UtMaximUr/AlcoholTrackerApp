@@ -6,9 +6,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
 import android.widget.ImageView
-import android.widget.TextView
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -16,9 +15,9 @@ import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.databinding.FragmentCreateDrinkBinding
 import com.utmaximur.alcoholtracker.domain.entity.Icon
+import com.utmaximur.alcoholtracker.presentation.base.BaseViewModelFactory
 import com.utmaximur.alcoholtracker.presentation.create_my_drink.adapter.SelectIconAdapter
 import com.utmaximur.alcoholtracker.presentation.create_my_drink.adapter.SelectVolumeAdapter
-import com.utmaximur.alcoholtracker.presentation.base.BaseViewModelFactory
 import com.utmaximur.alcoholtracker.util.*
 import java.util.*
 import javax.inject.Inject
@@ -97,14 +96,8 @@ class CreateMyDrink : Fragment() {
             findNavController().navigate(R.id.addPhotoBottomDialogFragment)
         }
 
-        drinkName.setOnEditorActionListener(TextView.OnEditorActionListener { text, actionId, _ ->
-            viewModel.onNameDrinkChange(text.text.toString())
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                hideKeyboard()
-                return@OnEditorActionListener true
-            }
-            true
-        })
+        drinkName.doAfterTextChanged { viewModel.onNameDrinkChange(it.toString()) }
+        drinkName.onEditorActionListener { hideKeyboard() }
 
         initIconAdapter(null)
         initVolumeAdapter(null)

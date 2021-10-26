@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_addFragment_to_addNewDrinkFragment"
             app:destination="@id/addNewDrinkFragment" />
+        <action
+            android:id="@+id/action_addFragment_to_deleteDialogFragment"
+            app:destination="@id/deleteDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/addNewDrinkFragment"
