@@ -16,6 +16,10 @@ fun <T> Fragment.setNavigationResult(key: String = "result", result: T, isRemove
     }
 }
 
+fun <T> Fragment.setNavigationResult(id: Int, key: String = "result", result: T) {
+    findNavController().getBackStackEntry(id).savedStateHandle.set(key, result)
+}
+
 fun <T> Fragment.removeNavigationResult(key: String = "result") {
     findNavController().previousBackStackEntry?.savedStateHandle?.remove<T>(key)
 }

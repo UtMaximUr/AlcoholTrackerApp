@@ -106,8 +106,9 @@ class TrackListBottomDialog : BottomSheetDialogFragment(),
                         viewModel.onDeleteDrink(track)
                         alcoholTrackListAdapter?.notifyItemRemoved(position)
                         this@TrackListBottomDialog.setNavigationResult(
+                            R.id.calendarFragment,
                             KEY_CALENDAR_UPDATE,
-                            KEY_CALENDAR_UPDATE_OK, false
+                            KEY_CALENDAR_UPDATE_OK
                         )
                     }
                 }
