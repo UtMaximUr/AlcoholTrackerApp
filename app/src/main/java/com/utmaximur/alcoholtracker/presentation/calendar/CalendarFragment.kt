@@ -106,6 +106,7 @@ class CalendarFragment : Fragment() {
                     addToStart.toVisible()
                     selectDate.toGone()
                 } else {
+                    addToStart.toGone()
                     if (trackByDay.isNotEmpty()) {
                         emptyDrinkList.toGone()
                         selectDate.toVisible()
