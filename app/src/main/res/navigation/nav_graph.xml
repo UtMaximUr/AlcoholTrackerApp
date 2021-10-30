@@ -99,7 +99,16 @@
             android:id="@+id/action_trackListBottomDialogFragment_to_deleteDialogFragment"
             app:destination="@id/deleteDialogFragment" />
         <action
-            android:id="@+id/action_trackListBottomDialogFragment_to_addFragment"
-            app:destination="@id/addFragment" />
+            android:id="@+id/action_trackListBottomDialogFragment_to_viewTrackFragment"
+            app:destination="@id/viewTrackFragment" />
     </dialog>
+    <fragment
+        android:id="@+id/viewTrackFragment"
+        android:name="com.utmaximur.alcoholtracker.presentation.view_track.ViewTrackFragment"
+        android:label="ViewTrackFragment"
+        tools:layout="@layout/fragment_view_track">
+        <action
+            android:id="@+id/action_viewTrackFragment_to_addFragment"
+            app:destination="@id/addFragment" />
+    </fragment>
 </navigation>
