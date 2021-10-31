@@ -16,7 +16,7 @@ const val THEME_UNDEFINED = -1
 const val THEME_LIGHT = 0
 const val THEME_DARK = 1
 const val THEME_HEIGHT = 100
-const val UPDATE_UNDEFINED = false
+const val UPDATE_UNDEFINED = true
 
 const val MARKET_APP = "market://details?id="
 const val HTTPS_APP = "https://play.google.com/store/apps/details?id="
