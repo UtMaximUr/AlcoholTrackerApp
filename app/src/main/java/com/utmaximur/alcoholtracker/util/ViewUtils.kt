@@ -18,6 +18,7 @@ import androidx.core.view.children
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.snackbar.Snackbar
 import com.utmaximur.alcoholtracker.R
+import com.utmaximur.alcoholtracker.util.extension.empty
 import java.util.*
 
 fun View.hideKeyboard() {
@@ -130,4 +131,12 @@ fun View.setupFullHeight() {
     val layoutParams = this.layoutParams
     layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT
     this.layoutParams = layoutParams
+}
+
+fun View.setTextOrEmpty(view: TextView, text: Any) {
+    if (text == String.empty()) {
+        this.toGone()
+    } else {
+        view.text = text.toString()
+    }
 }

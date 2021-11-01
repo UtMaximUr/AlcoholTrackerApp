@@ -88,11 +88,11 @@ class TrackListBottomDialog : BottomSheetDialogFragment(),
         })
     }
 
-    override fun onClickEdit(date: Long) {
+    override fun onClickView(date: Long) {
         val bundle = Bundle()
         lifecycleScope.launch {
-            bundle.putParcelable(DRINK, viewModel.dataTrack(date))
-            findNavController().navigate(R.id.addFragment, bundle)
+            bundle.putParcelable(VIEW_DRINK, viewModel.dataTrack(date))
+            findNavController().navigate(R.id.viewTrackFragment, bundle)
         }
     }
 

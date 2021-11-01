@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/margin_start"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/margin_end"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ToolbarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/menu_toolbar_view_track"
+        app:navigationIcon="@drawable/ic_back"
+        app:titleTextColor="@color/text_color"
+        tools:title="Beer" />
+
+    <ImageView
+        android:id="@+id/image_track"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/cd_image_drink"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintWidth_percent="1"
+        tools:src="@drawable/test" />
+
+    <ImageView
+        android:id="@+id/some_images"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_24"
+        android:contentDescription="@string/cd_some_images"
+        android:src="@drawable/ic_awesome_24dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@id/image_track"
+        app:layout_constraintTop_toTopOf="@id/image_track" />
+
+    <TextView
+        android:id="@+id/volume"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="@dimen/dp_16"
+        android:fontFamily="@font/roboto_condensed_regular"
+        android:text="@string/add_volume"
+        android:textColor="@color/accent_color"
+        app:layout_constraintStart_toStartOf="@id/margin_start"
+        app:layout_constraintTop_toBottomOf="@id/image_track" />
+
+    <TextView
+        android:id="@+id/volume_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="@dimen/dp_16"
+        android:fontFamily="@font/roboto_condensed_regular"
+        android:textColor="@color/accent_color"
+        app:layout_constraintEnd_toStartOf="@+id/margin_end"
+        app:layout_constraintTop_toBottomOf="@id/image_track"
+        tools:text="0.5" />
+
+    <TextView
+        android:id="@+id/degree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="@dimen/dp_16"
+        android:fontFamily="@font/roboto_condensed_regular"
+        android:text="@string/add_degree"
+        android:textColor="@color/accent_color"
+        app:layout_constraintStart_toStartOf="@id/margin_start"
+        app:layout_constraintTop_toBottomOf="@id/volume" />
+
+    <TextView
+        android:id="@+id/degree_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="@dimen/dp_16"
+        android:fontFamily="@font/roboto_condensed_regular"
+        android:textColor="@color/accent_color"
+        app:layout_constraintEnd_toStartOf="@+id/margin_end"
+        app:layout_constraintTop_toBottomOf="@id/volume"
+        tools:text="4.4%" />
+
+    <TextView
+        android:id="@+id/quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="@dimen/dp_16"
+        android:fontFamily="@font/roboto_condensed_regular"
+        android:text="@string/add_quantity"
+        android:textColor="@color/accent_color"
+        app:layout_constraintStart_toStartOf="@id/margin_start"
+        app:layout_constraintTop_toBottomOf="@id/degree" />
+
+    <TextView
+        android:id="@+id/quantity_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="@dimen/dp_16"
+        android:fontFamily="@font/roboto_condensed_regular"
+        android:textColor="@color/accent_color"
+        app:layout_constraintEnd_toStartOf="@+id/margin_end"
+        app:layout_constraintTop_toBottomOf="@id/degree"
+        tools:text="9" />
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="@dimen/dp_16"
+        android:fontFamily="@font/roboto_condensed_regular"
+        android:text="@string/add_currency"
+        android:textColor="@color/accent_color"
+        app:layout_constraintStart_toStartOf="@id/margin_start"
+        app:layout_constraintTop_toBottomOf="@id/quantity" />
+
+    <TextView
+        android:id="@+id/price_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="@dimen/dp_16"
+        android:fontFamily="@font/roboto_condensed_regular"
+        android:textColor="@color/accent_color"
+        app:layout_constraintEnd_toStartOf="@+id/margin_end"
+        app:layout_constraintTop_toBottomOf="@id/quantity"
+        tools:text="9.99" />
+
+    <TextView
+        android:id="@+id/event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="@dimen/dp_16"
+        android:fontFamily="@font/roboto_condensed_regular"
+        android:text="@string/add_event"
+        android:textColor="@color/accent_color"
+        app:layout_constraintStart_toStartOf="@id/margin_start"
+        app:layout_constraintTop_toBottomOf="@id/price" />
+
+    <TextView
+        android:id="@+id/event_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="@dimen/dp_16"
+        android:fontFamily="@font/roboto_condensed_regular"
+        android:textColor="@color/accent_color"
+        app:layout_constraintEnd_toStartOf="@+id/margin_end"
+        app:layout_constraintTop_toBottomOf="@id/price"
+        tools:text="Halloween" />
+
+    <TextView
+        android:id="@+id/date_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_24"
+        android:layout_marginBottom="@dimen/dp_16"
+        android:fontFamily="@font/roboto_condensed_regular"
+        android:textColor="@color/text_color_white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/image_track"
+        app:layout_constraintEnd_toEndOf="@+id/image_track"
+        tools:text="20-10-2021" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

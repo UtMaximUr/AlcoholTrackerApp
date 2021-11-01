@@ -107,6 +107,7 @@
     <string name="cd_icon_drink">Icon of a drink</string>
     <string name="cd_take_photo">Take photo</string>
     <string name="cd_save_drink">Save drink</string>
+    <string name="cd_some_images">Some images</string>
 
     <!--regex-->
     <string name="only_number_regex" tools:ignore="TypographyDashes" translatable="false">[^0-9, .]</string>
