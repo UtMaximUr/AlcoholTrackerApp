@@ -11,7 +11,7 @@ import javax.inject.Singleton
 class StatisticViewModelFactory @Inject constructor(
     private var statisticInteractor: StatisticInteractor
 ) : ViewModelProvider.Factory {
-
+    @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return StatisticViewModel(statisticInteractor) as T
     }
