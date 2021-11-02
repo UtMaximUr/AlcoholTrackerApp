@@ -2,14 +2,12 @@ package com.utmaximur.alcoholtracker.di.module
 
 import com.utmaximur.alcoholtracker.data.AlcoholTrackDatabase
 import com.utmaximur.alcoholtracker.data.assets.AssetsModule
+import com.utmaximur.alcoholtracker.data.backup.BackupModule
 import com.utmaximur.alcoholtracker.data.file.FileManager
 import com.utmaximur.alcoholtracker.data.mapper.DrinkMapper
 import com.utmaximur.alcoholtracker.data.mapper.IconMapper
 import com.utmaximur.alcoholtracker.data.mapper.TrackMapper
-import com.utmaximur.alcoholtracker.data.repository.DrinkRepository
-import com.utmaximur.alcoholtracker.data.repository.FileRepository
-import com.utmaximur.alcoholtracker.data.repository.AssetsRepository
-import com.utmaximur.alcoholtracker.data.repository.TrackRepository
+import com.utmaximur.alcoholtracker.data.repository.*
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -49,5 +47,11 @@ class AlcoholTrackModule {
     @Provides
     fun providesFileRepository(fileManager: FileManager): FileRepository {
         return FileRepository(fileManager)
+    }
+
+    @Singleton
+    @Provides
+    fun providesDataRepository(backupModule: BackupModule): DataRepository {
+        return DataRepository(backupModule)
     }
 }

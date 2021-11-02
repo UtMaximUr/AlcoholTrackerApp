@@ -47,7 +47,11 @@
         android:id="@+id/settingsFragment"
         android:name="com.utmaximur.alcoholtracker.presentation.settings.SettingsFragment"
         android:label="SettingsFragment"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_dataFragment"
+            app:destination="@id/dataFragment" />
+    </fragment>
     <fragment
         android:id="@+id/statisticFragment"
         android:name="com.utmaximur.alcoholtracker.presentation.statistic.StatisticFragment"
@@ -111,4 +115,9 @@
             android:id="@+id/action_viewTrackFragment_to_addFragment"
             app:destination="@id/addFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/dataFragment"
+        android:name="com.utmaximur.alcoholtracker.presentation.settings.DataFragment"
+        android:label="DataFragment"
+        tools:layout="@layout/fragment_data"/>
 </navigation>

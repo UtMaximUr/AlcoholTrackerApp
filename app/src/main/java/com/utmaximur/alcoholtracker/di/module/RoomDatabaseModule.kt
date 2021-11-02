@@ -9,6 +9,7 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.utmaximur.alcoholtracker.data.AlcoholTrackDatabase
 import com.utmaximur.alcoholtracker.data.assets.AssetsModule
+import com.utmaximur.alcoholtracker.data.backup.BackupModule
 import com.utmaximur.alcoholtracker.data.file.FileManager
 import com.utmaximur.alcoholtracker.util.addImageField
 import com.utmaximur.alcoholtracker.util.convertMigrationModel
@@ -54,6 +55,11 @@ class RoomDatabaseModule(private var application: Application) {
     @Provides
     fun provideFile(): FileManager {
         return FileManager(application.applicationContext)
+    }
+
+    @Provides
+    fun provideBackup(): BackupModule {
+        return BackupModule(application)
     }
 
     /**

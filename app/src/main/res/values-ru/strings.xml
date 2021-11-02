@@ -162,5 +162,11 @@
     <string name="update_later">Позже</string>
     <string name="check_for_updates">Проверить обновления</string>
     <string name="add_event">Событие</string>
+    <string name="data">Данные</string>
+    <string name="backup">Сделать копию данных</string>
+    <string name="recover">Восстановить данные</string>
+    <string name="delete_all">Удалить все данные</string>
+    <string name="password">Установить пароль</string>
+    <string name="delete_password">Удалить пароль</string>
 
 </resources>

@@ -15,6 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.utmaximur.alcoholtracker.BuildConfig
@@ -51,6 +52,8 @@ class SettingsFragment : Fragment() {
 
     private fun initUi() = with(binding) {
         initSettings()
+
+        dataButton.setOnClickListener { findNavController().navigate(R.id.dataFragment) }
 
         privacyPolicyButton.setOnClickListener {
             goToUrl(PRIVACY_POLICY)
