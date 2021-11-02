@@ -19,7 +19,7 @@ class DrinksListAdapter(
 ) : ListAdapter<Track, DrinksListAdapter.ViewHolder>(DrinksDiffCallback()) {
 
     interface OnDrinkAdapterListener {
-        fun onClickView(date: Long)
+        fun onClickEdit(date: Long)
         fun onClickDelete(track: Track, position: Int)
     }
 
@@ -34,7 +34,7 @@ class DrinksListAdapter(
 
         init {
             binding.drinkImage.setOnClickListener {
-                listener.onClickView(getItem(layoutPosition).date)
+                listener.onClickEdit(getItem(layoutPosition).date)
             }
             binding.deleteButton.setOnClickListener {
                 listener.onClickDelete(getItem(layoutPosition), layoutPosition)

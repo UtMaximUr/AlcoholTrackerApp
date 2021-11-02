@@ -77,9 +77,11 @@ fun String.formatVolume(context: Context, quantity: Int): String {
 }
 
 fun Track.getSafeDoseOfAlcohol(context: Context): String {
+    val digitVolume: String =
+        volume.replace(context.getString(R.string.only_number_regex).toRegex(), "").trim()
     return if (volume.contains(".")) {
         // convert ml to l
-        val volume = volume.toDouble() * 1000
+        val volume = digitVolume.toDouble() * 1000
         String.format(
             context.getString(R.string.safe_dose),
             ((quantity * volume) / 100 * degree.toDouble()).formatDegree1f()
@@ -87,11 +89,7 @@ fun Track.getSafeDoseOfAlcohol(context: Context): String {
     } else {
         String.format(
             context.getString(R.string.safe_dose),
-            ((quantity * volume.toDouble()) / 100 * degree.toDouble()).formatDegree1f()
+            ((quantity * digitVolume.toDouble()) / 100 * degree.toDouble()).formatDegree1f()
         )
     }
-}
-
-fun isDateEqual(timeInMillis: Long, context: Context): Boolean {
-    return timeInMillis.formatDate(context) != Date().time.formatDate(context)
 }
