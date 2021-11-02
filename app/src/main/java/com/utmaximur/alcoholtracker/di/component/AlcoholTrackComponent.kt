@@ -41,4 +41,5 @@ interface AlcoholTrackComponent {
     fun inject(statisticFragment: StatisticFragment)
 
     fun inject(trackListBottomDialogFragment: TrackListBottomDialog)
+
 }
