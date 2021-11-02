@@ -1,0 +1,41 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.AlcoholTracker" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/accent_color</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/accent_color</item>
+        <item name="colorSecondaryVariant">@color/accent_color</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="android:navigationBarColor">@color/background_color</item>
+    </style>
+
+    <style name="AppTheme.Picker" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="android:textColorPrimary">@color/text_color</item>
+    </style>
+
+    <style name="CustomDialog" parent="android:Theme.Dialog">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="ToolbarTheme" parent="ThemeOverlay.MaterialComponents.Light">
+        <item name="android:fontFamily">@font/roboto_condensed_regular</item>
+    </style>
+
+    <style name="AlertDialogVolume" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:listChoiceIndicatorMultiple">@drawable/activated_checkbox</item>
+        <item name="android:background">@color/background_color</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:textColorAlertDialogListItem">@color/text_color</item>
+        <item name="android:fontFamily">@font/roboto_condensed_regular</item>
+    </style>
+
+</resources>

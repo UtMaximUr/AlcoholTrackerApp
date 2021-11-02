@@ -1,0 +1,166 @@
+<resources>
+    <string name="app_name">Трекер Алкоголя</string>
+
+    <!--menu-->
+    <string name="add">Добавить</string>
+    <string name="calendar">Календарь</string>
+    <string name="statistic">Статистика</string>
+    <string name="settings">Настройки</string>
+
+    <!--calendar-->
+    <string name="calendar_add_press">Чтобы начать, добавьте напиток</string>
+    <string name="calendar_empty">В этот день не выпито ни грамма!:)</string>
+    <string name="calendar_select_date">Выберите дату</string>
+    <string name="calendar_date">Дата</string>
+
+    <!--add-->
+    <string name="add_drink_title">Добавить напиток</string>
+    <string name="add_drink">Напиток</string>
+    <string name="add_volume">Объем</string>
+    <string name="add_quantity">Количество</string>
+    <string name="add_degree">Градус</string>
+    <string name="add_price">Стоимость одного напитка</string>
+    <string name="add_date">Выбрать дату</string>
+    <string name="add_today">Сегодня</string>
+    <string name="add_total_litres">Количество</string>
+    <string name="add_total_money">Итого</string>
+    <string name="add_currency">RUR</string>
+    <string name="add_save">Сохранить</string>
+    <string name="unit_ml">%s мл</string>
+    <string name="unit_l">%s л</string>
+    <string name="safe_dose">%s %% от безопасной дозы*</string>
+    <string name="safe_dose_note">*безопасная доза равна 100 мл этилового спирта\nсогласно исследованию Кембриджского университета</string>
+
+    <!--add new drink-->
+    <string name="add_new_drink">Создать напиток</string>
+
+    <!--edit-->
+    <string name="edit_drink_title">Редактировать напиток</string>
+
+    <!--create drink-->
+    <string name="create_drink_title">Создать напиток</string>
+    <string name="create_drink_hint">Название</string>
+    <string name="dialog_create_drink_add">Добавить иконку</string>
+    <string name="select_icon">Выберите иконку</string>
+    <string name="dialog_create_drink_add_degree">Добавить крепость</string>
+    <string name="dialog_create_drink_add_volume">Добавить объем</string>
+    <string name="bottom_sheet_option_camera">Использовать камеру</string>
+    <string name="bottom_sheet_option_gallery">Загрузить из галлереи</string>
+    <string name="bottom_sheet_option_heading">Добавить фотографию</string>
+    <string name="bottom_sheet_option_remove_photo">Удалить фотографию</string>
+    <string name="empty_field_photo">Сделайте фотографию или выберите из галлереи</string>
+    <string name="empty_field_name">Введите название напитка</string>
+    <string name="empty_field_icon">Выберите иконку напитка</string>
+    <string name="empty_field_degree">Выберите крепость напитка</string>
+    <string name="empty_field_volume">Выберите объем напитка</string>
+
+    <!--dialog select date-->
+    <string name="dialog_select_date_title">Использовать выбранную дату для добавления напитка?</string>
+    <string name="dialog_select_date_ok">Да</string>
+    <string name="dialog_select_date_no">Нет</string>
+
+    <!--dialog delete-->
+    <string name="dialog_delete_title">Вы действительно хотите удалить запись?</string>
+
+    <!--dialog add volume-->
+    <string name="dialog_add_volume_title">Выберите объем</string>
+    <string name="dialog_add_volume_ok">Готово</string>
+    <string name="dialog_add_volume_cancel">Отмена</string>
+
+
+    <!--settings-->
+    <string name="privacy_policy">Политика конфиденциальности</string>
+    <string name="terms_of_use">Пользовательское соглашение</string>
+    <string name="settings_version">Версия</string>
+    <string name="rate_app">Оценить приложение</string>
+    <string name="default_theme">Использовать системную тему</string>
+
+    <string-array name="theme_array">
+        <item>Светлая тема</item>
+        <item>Темная тема</item>
+
+    </string-array>
+
+    <!--statistic-->
+    <string name="statistic_week_days">Неделю</string>
+    <string name="statistic_month_days">Месяц</string>
+    <string name="statistic_year_days">Год</string>
+    <string name="statistic_count_days">Я пил %s из %d дней</string>
+    <string name="statistic_count_days_no_drink">Не пью %s!:)</string>
+    <string name="statistic_drinks">Напитки выпитые мною</string>
+    <string name="statistic_spent">Мною потрачено за</string>
+
+    <!--content description-->
+    <string name="cd_icon_app">Иконка приложения</string>
+    <string name="cd_edit_button">Редактировать</string>
+    <string name="cd_delete_button">Удалить</string>
+    <string name="cd_show_panel">Сдвинуть в влево</string>
+    <string name="cd_image_drink">Изображение напитка</string>
+    <string name="cd_choice_theme">Выбранная тема</string>
+    <string name="cd_icon_drink">Иконка напитка</string>
+    <string name="cd_take_photo">Добавить изображение</string>
+    <string name="cd_save_drink">Сохранить напиток</string>
+
+    <!--regex-->
+
+    <plurals name="plurals_day">
+        <item quantity="one">%1$d день</item>
+        <item quantity="few">%1$d дня</item>
+        <item quantity="many">%1$d дней</item>
+        <item quantity="other">%1$d дней</item>
+    </plurals>
+
+    <string-array name="statistic_period_array">
+        <item>Неделю</item>
+        <item>Месяц</item>
+        <item>Год</item>
+
+    </string-array>
+
+    <!--enum-->
+    <string name="absent">Абсент</string>
+    <string name="beer">Пиво</string>
+    <string name="brandy">Бренди</string>
+    <string name="champagne">Шампанское</string>
+    <string name="cider">Сидр</string>
+    <string name="cocktail">Коктейль</string>
+    <string name="cognac">Коньяк</string>
+    <string name="liqueur">Ликер</string>
+    <string name="shots">Шоты</string>
+    <string name="tequila">Текила</string>
+    <string name="vodka">Водка</string>
+    <string name="whiskey">Виски</string>
+    <string name="rum">Ром</string>
+    <string name="gin">Джин</string>
+    <string name="wine">Вино</string>
+
+
+    <string name="material_calendar_monday">Пн</string>
+    <string name="material_calendar_tuesday">Вт</string>
+    <string name="material_calendar_wednesday">Ср</string>
+    <string name="material_calendar_thursday">Чт</string>
+    <string name="material_calendar_friday">Пт</string>
+    <string name="material_calendar_saturday">Сб</string>
+    <string name="material_calendar_sunday">Вс</string>
+
+    <array name="material_calendar_months_array">
+        <item>Январь</item>
+        <item>Февраль</item>
+        <item>Март</item>
+        <item>Апрель</item>
+        <item>Май</item>
+        <item>Июнь</item>
+        <item>Июль</item>
+        <item>Август</item>
+        <item>Сентябрь</item>
+        <item>Октябрь</item>
+        <item>Ноябрь</item>
+        <item>Декабрь</item>
+    </array>
+    <string name="update_title">Загрузка обновления завершено. Обновить?</string>
+    <string name="update_restart">Сейчас</string>
+    <string name="update_later">Позже</string>
+    <string name="check_for_updates">Проверить обновления</string>
+    <string name="add_event">Событие</string>
+
+</resources>

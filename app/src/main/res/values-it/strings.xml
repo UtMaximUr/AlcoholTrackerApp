@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Tracker di alcol</string>
+
+    <!--menu-->
+    <string name="add">Aggiungi la bevanda</string>
+    <string name="calendar">Calendario</string>
+    <string name="statistic">Statistiche</string>
+    <string name="settings">impostazioni</string>
+
+    <!--calendar-->
+    <string name="calendar_add_press">Aggiungi un drink per iniziare</string>
+    <string name="calendar_empty">Non è stato bevuto un solo grammo in questo giorno! :)</string>
+    <string name="calendar_select_date">Scegli una data</string>
+    <string name="calendar_date">Data</string>
+
+    <!--add-->
+    <string name="add_drink_title">Aggiungi la bevanda</string>
+    <string name="add_drink">Bere</string>
+    <string name="add_volume">Volume</string>
+    <string name="add_quantity">Quantità</string>
+    <string name="add_degree">Grado</string>
+    <string name="add_price">Costo di una bevanda</string>
+    <string name="add_date">Seleziona la data</string>
+    <string name="add_today">Oggi</string>
+    <string name="add_total_litres">Quantità</string>
+    <string name="add_total_money">Totale</string>
+    <string name="add_currency">EUR</string>
+    <string name="add_save">Salva</string>
+    <string name="unit_ml">%s ml</string>
+    <string name="unit_l">%s l</string>
+
+
+    <!--add new drink-->
+    <string name="add_new_drink">Crea bevanda</string>
+
+    <!--edit-->
+    <string name="edit_drink_title">Modifica drink</string>
+
+    <!--create drink-->
+    <string name="create_drink_title">Prepara un drink</string>
+    <string name="create_drink_hint">Inserisci il titolo</string>
+    <string name="dialog_create_drink_add">Aggiungi icona bevanda</string>
+    <string name="select_icon">Seleziona un\'icona</string>
+    <string name="dialog_create_drink_add_degree">Aggiungi la forza della bevanda</string>
+    <string name="dialog_create_drink_add_volume">Aggiungi il volume della bevanda</string>
+    <string name="bottom_sheet_option_camera">Usa fotocamera</string>
+    <string name="bottom_sheet_option_gallery">Carica dalla galleria</string>
+    <string name="bottom_sheet_option_heading">Aggiungi foto</string>
+    <string name="bottom_sheet_option_remove_photo">Rimuovi foto</string>
+    <string name="empty_field_photo">Scatta una foto o scegli dalla galleria</string>
+    <string name="empty_field_name">Inserisci il nome della bevanda</string>
+    <string name="empty_field_icon">Seleziona l\'icona della bevanda</string>
+    <string name="empty_field_degree">Seleziona la forza della bevanda</string>
+    <string name="empty_field_volume">Seleziona il volume della bevanda</string>
+
+    <!--dialog select date-->
+    <string name="dialog_select_date_title">Usa la data selezionata per aggiungere un drink?</string>
+    <string name="dialog_select_date_ok">OK</string>
+    <string name="dialog_select_date_no">NO</string>
+
+    <!--dialog delete-->
+    <string name="dialog_delete_title">Sei sicuro di voler eliminare la voce?</string>
+
+    <!--dialog add volume-->
+    <string name="dialog_add_volume_title">Seleziona il volume della bevanda</string>
+    <string name="dialog_add_volume_ok">OK</string>
+    <string name="dialog_add_volume_cancel">Annulla</string>
+
+
+    <!--settings-->
+    <string name="privacy_policy">Politica sulla riservatezza</string>
+    <string name="terms_of_use">Termini di utilizzo</string>
+    <string name="settings_version">Versione</string>
+    <string name="rate_app">Valuta l\'app</string>
+    <string name="default_theme">Usa il tema di sistema</string>
+
+    <string-array name="theme_array">
+        <item>Tema chiaro</item>
+        <item>Tema scuro</item>
+
+    </string-array>
+
+    <!--statistic-->
+    <string name="statistic_week_days">Settimana</string>
+    <string name="statistic_month_days">Mese</string>
+    <string name="statistic_year_days">Anno</string>
+    <string name="statistic_count_days">Ho bevuto %s da %d giorni</string>
+    <string name="statistic_drinks">Le bevande che ho bevuto</string>
+    <string name="statistic_spent">Ho trascorso in a</string>
+
+    <!--content description-->
+    <string name="cd_icon_app">Icona dell\'applicazione</string>
+    <string name="cd_edit_button">modificare</string>
+    <string name="cd_delete_button">Elimina</string>
+    <string name="cd_show_panel">Muovere a sinistra</string>
+    <string name="cd_image_drink">Immagine di una bevanda</string>
+    <string name="cd_choice_theme">Tema selezionato</string>
+    <string name="cd_icon_drink">Icona di una bevanda</string>
+    <string name="cd_take_photo">Fare foto</string>
+    <string name="cd_save_drink">Risparmia drink</string>
+
+    <!--regex-->
+
+    <plurals name="plurals_day">
+        <item quantity="one">%1$d giorno</item>
+        <item quantity="other">%1$d giorni</item>
+    </plurals>
+
+    <string-array name="statistic_period_array">
+        <item>Settimana</item>
+        <item>Mese</item>
+        <item>Anno</item>
+
+    </string-array>
+
+    <!--enum-->
+    <string name="absent">Assenzio</string>
+    <string name="beer">Birra</string>
+    <string name="brandy">Brandy</string>
+    <string name="champagne">Champagne</string>
+    <string name="cider">Cedro</string>
+    <string name="cocktail">Cocktail</string>
+    <string name="cognac">Cognac</string>
+    <string name="liqueur">Liquore</string>
+    <string name="shots">Scatti</string>
+    <string name="tequila">Tequila</string>
+    <string name="vodka">Vodka</string>
+    <string name="whiskey">Whisky</string>
+    <string name="rum">Rum</string>
+    <string name="gin">Gin</string>
+    <string name="wine">Vino</string>
+
+
+    <string name="material_calendar_monday">Lun</string>
+    <string name="material_calendar_tuesday">Mar</string>
+    <string name="material_calendar_wednesday">Mer</string>
+    <string name="material_calendar_thursday">Gio</string>
+    <string name="material_calendar_friday">Ven</string>
+    <string name="material_calendar_saturday">Sab</string>
+    <string name="material_calendar_sunday">Dom</string>
+
+    <array name="material_calendar_months_array">
+        <item>gennaio</item>
+        <item>febbraio</item>
+        <item>marzo</item>
+        <item>aprile</item>
+        <item>maggio</item>
+        <item>giugno</item>
+        <item>luglio</item>
+        <item>agosto</item>
+        <item>settembre</item>
+        <item>ottobre</item>
+        <item>novembre</item>
+        <item>dicembre</item>
+    </array>
+    <string name="update_title">Il download dell\'aggiornamento è completo. Aggiornare?</string>
+    <string name="update_restart">Adesso</string>
+    <string name="update_later">Dopo</string>
+    <string name="check_for_updates">Controlla gli aggiornamenti</string>
+    <string name="add_event">Evento</string>
+    <string name="statistic_count_days_no_drink">Non bevo %s! :)</string>
+    <string name="safe_dose">%s %% della dose sicura *</string>
+    <string name="safe_dose_note">* una dose sicura di 100 ml di alcol etilico \nsecondo uno studio dell\'Università di Cambridge</string>
+
+</resources>

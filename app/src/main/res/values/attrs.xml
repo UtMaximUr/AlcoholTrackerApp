@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RangeSeekBar">
+        <attr name="activeLineColor" format="color" />
+        <attr name="inActiveLineColor" format="color" />
+        <attr name="circleColor" format="color" />
+        <attr name="maxRange" format="float" />
+        <attr name="minRange" format="float" />
+        <attr name="currentRangeMax" format="float" />
+        <attr name="currentRangeMin" format="float" />
+    </declare-styleable>
+</resources>
