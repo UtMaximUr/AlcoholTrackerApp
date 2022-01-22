@@ -1,10 +1,7 @@
 package com.utmaximur.alcoholtracker.presentation.calendar
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavArgument
@@ -13,6 +10,7 @@ import com.applandeo.materialcalendarview.EventDay
 import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.databinding.FragmentCalendarBinding
+import com.utmaximur.alcoholtracker.presentation.base.BaseFragment
 import com.utmaximur.alcoholtracker.presentation.base.BaseViewModelFactory
 import com.utmaximur.alcoholtracker.util.*
 import kotlinx.coroutines.launch
@@ -20,7 +18,7 @@ import java.util.*
 import javax.inject.Inject
 
 
-class CalendarFragment : Fragment() {
+class CalendarFragment : BaseFragment<FragmentCalendarBinding>(FragmentCalendarBinding::inflate) {
 
     @Inject
     lateinit var viewModelFactory: BaseViewModelFactory<CalendarViewModel>
@@ -28,18 +26,6 @@ class CalendarFragment : Fragment() {
     private val viewModel: CalendarViewModel by viewModels(
         factoryProducer = { viewModelFactory }
     )
-
-    private var _binding: FragmentCalendarBinding? = null
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentCalendarBinding.inflate(layoutInflater)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -117,10 +103,5 @@ class CalendarFragment : Fragment() {
                 }
             })
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

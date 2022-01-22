@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.utmaximur.alcoholtracker.domain.entity.Track
 import com.utmaximur.alcoholtracker.domain.interactor.CalendarInteractor
+import com.utmaximur.alcoholtracker.util.setValue
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -47,12 +48,12 @@ open class CalendarViewModel @Inject constructor(private var calendarInteractor:
 
     fun initTracksByDay(date: Long) = viewModelScope.launch {
         val dataTracks = dataAlcoholTrackByDay(date)
-        (tracksByDay as MutableLiveData).value = dataTracks
+        tracksByDay.setValue(dataTracks)
     }
 
     private fun updateTracksByDay(eventDay: Long) = viewModelScope.launch {
         val dataTracks = dataAlcoholTrackByDay(eventDay)
-        (tracksByDay as MutableLiveData).value = dataTracks
+        tracksByDay.setValue(dataTracks)
     }
 
     suspend fun dataTrack(date: Long): Track {
