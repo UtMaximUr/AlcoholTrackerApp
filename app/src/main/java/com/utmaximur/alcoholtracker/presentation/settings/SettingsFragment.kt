@@ -10,27 +10,22 @@ import android.content.res.Configuration
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.utmaximur.alcoholtracker.BuildConfig
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.databinding.FragmentSettingsBinding
+import com.utmaximur.alcoholtracker.presentation.base.BaseFragment
 import com.utmaximur.alcoholtracker.presentation.settings.adapter.ThemeListAdapter
 import com.utmaximur.alcoholtracker.util.*
 
 
-class SettingsFragment : Fragment() {
+class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsBinding::inflate) {
 
     private lateinit var themeListAdapter: ThemeListAdapter
     private lateinit var themeConcatAdapter: ConcatAdapter
-
-    private var _binding: FragmentSettingsBinding? = null
-    private val binding get() = _binding!!
 
     private val sharedPrefs by lazy {
         activity?.getSharedPreferences(
@@ -39,14 +34,9 @@ class SettingsFragment : Fragment() {
         )
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentSettingsBinding.inflate(layoutInflater)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initUi()
-        return binding.root
     }
 
     private fun initUi() = with(binding) {
@@ -185,10 +175,5 @@ class SettingsFragment : Fragment() {
                 )
             )
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

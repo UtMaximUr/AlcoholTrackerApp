@@ -1,14 +1,12 @@
 package com.utmaximur.alcoholtracker.presentation.statistic
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.databinding.FragmentStatisticBinding
+import com.utmaximur.alcoholtracker.presentation.base.BaseFragment
 import com.utmaximur.alcoholtracker.presentation.base.BaseViewModelFactory
 import com.utmaximur.alcoholtracker.presentation.statistic.adapter.CountDaysAdapter
 import com.utmaximur.alcoholtracker.presentation.statistic.adapter.StatisticAdapter
@@ -16,7 +14,7 @@ import com.utmaximur.alcoholtracker.presentation.statistic.adapter.TopDrinkAdapt
 import javax.inject.Inject
 
 class StatisticFragment :
-    Fragment() {
+    BaseFragment<FragmentStatisticBinding>(FragmentStatisticBinding::inflate) {
 
     @Inject
     lateinit var viewModelFactory: BaseViewModelFactory<StatisticViewModel>
@@ -24,18 +22,6 @@ class StatisticFragment :
     private val viewModel: StatisticViewModel by viewModels(
         factoryProducer = { viewModelFactory }
     )
-
-    private var _binding: FragmentStatisticBinding? = null
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentStatisticBinding.inflate(layoutInflater)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -71,10 +57,5 @@ class StatisticFragment :
             )
             indicatorCountDay.setupWithViewPager(countDayViewPager, true)
         })
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.utmaximur.alcoholtracker.domain.entity.DrinkStatistic
 import com.utmaximur.alcoholtracker.domain.interactor.StatisticInteractor
+import com.utmaximur.alcoholtracker.util.setValue
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -28,13 +29,13 @@ class StatisticViewModel @Inject constructor(
     fun getStatistics() = viewModelScope.launch {
 
         val dataDrinksList = loadDrinksList()
-        (statisticsDrinksList as MutableLiveData).value = dataDrinksList
+        statisticsDrinksList.setValue(dataDrinksList)
 
         val dataStatisticsPriceByPeriod = loadStatisticsPriceByPeriod()
-        (statisticsPriceByPeriod as MutableLiveData).value = dataStatisticsPriceByPeriod
+        statisticsPriceByPeriod.setValue(dataStatisticsPriceByPeriod)
 
         val dataStatisticsCountDays = loadStatisticsCountDays()
-        (statisticsCountDays as MutableLiveData).value = dataStatisticsCountDays
+        statisticsCountDays.setValue(dataStatisticsCountDays)
     }
 
     private suspend fun loadDrinksList(): List<DrinkStatistic> {

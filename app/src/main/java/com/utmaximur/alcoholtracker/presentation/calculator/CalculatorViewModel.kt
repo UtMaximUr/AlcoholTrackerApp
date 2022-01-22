@@ -5,10 +5,7 @@ import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.utmaximur.alcoholtracker.util.ADDITION
-import com.utmaximur.alcoholtracker.util.DIVISION
-import com.utmaximur.alcoholtracker.util.MULTIPLICATION
-import com.utmaximur.alcoholtracker.util.SUBTRACTION
+import com.utmaximur.alcoholtracker.util.*
 import com.utmaximur.alcoholtracker.util.extension.empty
 import javax.inject.Inject
 
@@ -22,11 +19,10 @@ class CalculatorViewModel @Inject constructor() : ViewModel() {
 
     private var currentAction = Char.empty()
 
-    private val _currentValue = MutableLiveData<String>()
-    val currentValue: LiveData<String> get() = _currentValue
+    val currentValue: LiveData<String> by lazy { MutableLiveData() }
 
     init {
-        _currentValue.value = String.empty()
+        currentValue.setValue(String.empty())
     }
 
     fun setValue(value: Int) {
@@ -41,11 +37,11 @@ class CalculatorViewModel @Inject constructor() : ViewModel() {
                 && currentValue.value?.toFloat()!! < Float.MAX_VALUE
             ) {
                 if (value.toString().isDigitsOnly()) {
-                    _currentValue.value += value.toString()
+                    (currentValue as MutableLiveData).value += value.toString()
                 }
             } else {
                 if (value.toString().isDigitsOnly()) {
-                    _currentValue.value += value.toString()
+                    (currentValue as MutableLiveData).value += value.toString()
                 }
             }
         }
@@ -53,12 +49,12 @@ class CalculatorViewModel @Inject constructor() : ViewModel() {
 
     fun setPriceValue(price: Int) {
         if (price != Int.empty()) {
-            _currentValue.value = price.toString()
+            currentValue.setValue(price.toString())
         }
     }
 
     private fun clearValue() {
-        _currentValue.value = String.empty()
+        currentValue.setValue(String.empty())
     }
 
     fun setCurrentAction(action: Char) {
@@ -95,7 +91,7 @@ class CalculatorViewModel @Inject constructor() : ViewModel() {
                 }
             }
         }
-        _currentValue.value = valueCalculating.toString()
+        currentValue.setValue(valueCalculating.toString())
         currentAction = Char.empty()
     }
 
@@ -103,7 +99,7 @@ class CalculatorViewModel @Inject constructor() : ViewModel() {
         valueOne = Float.empty()
         valueTwo = Float.empty()
         valueCalculating = Float.empty()
-        _currentValue.value = String.empty()
+        currentValue.setValue(String.empty())
         currentAction = Char.empty()
     }
 }

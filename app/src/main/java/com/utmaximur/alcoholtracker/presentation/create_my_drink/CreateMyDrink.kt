@@ -3,18 +3,16 @@ package com.utmaximur.alcoholtracker.presentation.create_my_drink
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.widget.doAfterTextChanged
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.databinding.FragmentCreateDrinkBinding
 import com.utmaximur.alcoholtracker.domain.entity.Icon
+import com.utmaximur.alcoholtracker.presentation.base.BaseFragment
 import com.utmaximur.alcoholtracker.presentation.base.BaseViewModelFactory
 import com.utmaximur.alcoholtracker.presentation.create_my_drink.adapter.SelectIconAdapter
 import com.utmaximur.alcoholtracker.presentation.create_my_drink.adapter.SelectVolumeAdapter
@@ -23,7 +21,7 @@ import java.util.*
 import javax.inject.Inject
 
 
-class CreateMyDrink : Fragment() {
+class CreateMyDrink : BaseFragment<FragmentCreateDrinkBinding>(FragmentCreateDrinkBinding::inflate) {
 
     private var addNewFragmentListener: AddNewFragmentListener? = null
 
@@ -37,18 +35,6 @@ class CreateMyDrink : Fragment() {
     private val viewModel: CreateMyDrinkViewModel by viewModels(
         factoryProducer = { viewModelFactory }
     )
-
-    private var _binding: FragmentCreateDrinkBinding? = null
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentCreateDrinkBinding.inflate(layoutInflater)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -171,10 +157,5 @@ class CreateMyDrink : Fragment() {
             rangeDegree.getCurrentRangeMin(),
             rangeDegree.getCurrentRangeMax()
         )
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

@@ -11,6 +11,7 @@ import com.utmaximur.alcoholtracker.domain.entity.Icon
 import com.utmaximur.alcoholtracker.domain.interactor.AddNewDrinkInteractor
 import com.utmaximur.alcoholtracker.util.extension.empty
 import com.utmaximur.alcoholtracker.util.formatDegree1f
+import com.utmaximur.alcoholtracker.util.setValue
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject

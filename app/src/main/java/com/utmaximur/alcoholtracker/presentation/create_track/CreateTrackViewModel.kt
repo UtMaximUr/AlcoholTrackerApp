@@ -9,6 +9,7 @@ import com.utmaximur.alcoholtracker.domain.entity.Track
 import com.utmaximur.alcoholtracker.domain.interactor.AddTrackInteractor
 import com.utmaximur.alcoholtracker.util.extension.empty
 import com.utmaximur.alcoholtracker.util.extension.first
+import com.utmaximur.alcoholtracker.util.setValue
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
@@ -95,14 +96,14 @@ class CreateTrackViewModel @Inject constructor(private var addTrackInteractor: A
     }
 
     fun getTotalMoney(quantity: Int, price: Float) {
-        (totalMoney as MutableLiveData).value = (quantity * price.toString().toDouble()).toString()
+        totalMoney.setValue((quantity * price.toString().toDouble()).toString())
     }
 
     fun updateDrinks() {
         viewModelScope.launch {
             val dataDrinksList = getAllDrink()
             drinkList = dataDrinksList
-            (drinksList as MutableLiveData).value = dataDrinksList
+            drinksList.setValue(dataDrinksList)
         }
     }
 
@@ -116,9 +117,9 @@ class CreateTrackViewModel @Inject constructor(private var addTrackInteractor: A
     }
 
     fun onTrackChange(track: Track?) {
-        (this.track as MutableLiveData).value = track
+        this.track.setValue(track!!)
 
-        id = track?.id!!
+        id = track.id
         drink = track.drink
         volume = track.volume
         quantity = track.quantity
@@ -129,7 +130,7 @@ class CreateTrackViewModel @Inject constructor(private var addTrackInteractor: A
         icon = track.icon
         image = track.image
 
-        (totalMoney as MutableLiveData).value = (track.price.times(track.quantity)).toString()
+        totalMoney.setValue((track.price.times(track.quantity)).toString())
     }
 
     fun onDateChange(date: Long) {
@@ -181,7 +182,7 @@ class CreateTrackViewModel @Inject constructor(private var addTrackInteractor: A
         if (resultCalculating.isNotEmpty()) {
             totalMoney = (quantity * resultCalculating.toFloat()).toString()
         }
-        (this.totalMoney as MutableLiveData).value = totalMoney
-        (valueCalculating as MutableLiveData).value = resultCalculating
+        this.totalMoney.setValue(totalMoney)
+        valueCalculating.setValue(resultCalculating)
     }
 }

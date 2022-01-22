@@ -3,12 +3,9 @@ package com.utmaximur.alcoholtracker.presentation.create_track
 import android.app.DatePickerDialog
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.*
 import androidx.core.widget.doAfterTextChanged
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -16,15 +13,17 @@ import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.databinding.FragmentAddTrackBinding
 import com.utmaximur.alcoholtracker.domain.entity.Drink
-import com.utmaximur.alcoholtracker.presentation.create_track.adapter.DrinkViewPagerAdapter.AddDrinkListener
+import com.utmaximur.alcoholtracker.presentation.base.BaseFragment
 import com.utmaximur.alcoholtracker.presentation.base.BaseViewModelFactory
 import com.utmaximur.alcoholtracker.presentation.create_track.adapter.DrinkViewPagerAdapter
+import com.utmaximur.alcoholtracker.presentation.create_track.adapter.DrinkViewPagerAdapter.AddDrinkListener
 import com.utmaximur.alcoholtracker.util.*
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
-class CreateTrackFragment : Fragment(), AddDrinkListener {
+class CreateTrackFragment : BaseFragment<FragmentAddTrackBinding>(FragmentAddTrackBinding::inflate),
+    AddDrinkListener {
 
     private var addFragmentListener: AddFragmentListener? = null
 
@@ -43,20 +42,8 @@ class CreateTrackFragment : Fragment(), AddDrinkListener {
         fun closeFragment()
     }
 
-    private var _binding: FragmentAddTrackBinding? = null
-    private val binding get() = _binding!!
-
     private lateinit var datePicker: DatePickerDialog
     private var dateAndTime = Calendar.getInstance()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentAddTrackBinding.inflate(layoutInflater)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -314,17 +301,12 @@ class CreateTrackFragment : Fragment(), AddDrinkListener {
 
     override fun onDestroy() {
         super.onDestroy()
+        findNavController().graph.findNode(R.id.addFragment)?.removeArgument(SELECT_DAY_ADD)
         addFragmentListener?.onShowNavigationBar()
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         addFragmentListener = context as AddFragmentListener
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-        findNavController().graph.findNode(R.id.addFragment)?.removeArgument(SELECT_DAY_ADD)
     }
 }
