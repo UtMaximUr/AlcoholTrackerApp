@@ -3,6 +3,7 @@
 package com.utmaximur.alcoholtracker.di.module
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
@@ -10,6 +11,8 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.utmaximur.alcoholtracker.data.AlcoholTrackDatabase
 import com.utmaximur.alcoholtracker.data.assets.AssetsModule
 import com.utmaximur.alcoholtracker.data.file.FileManager
+import com.utmaximur.alcoholtracker.data.preferences.SharedPref
+import com.utmaximur.alcoholtracker.util.PREFS_NAME
 import com.utmaximur.alcoholtracker.util.addImageField
 import com.utmaximur.alcoholtracker.util.convertMigrationModel
 import dagger.Module
@@ -54,6 +57,13 @@ class RoomDatabaseModule(private var application: Application) {
     @Provides
     fun provideFile(): FileManager {
         return FileManager(application.applicationContext)
+    }
+
+    @Provides
+    fun providePreferences(): SharedPref {
+        return SharedPref( application.applicationContext.getSharedPreferences(
+            PREFS_NAME, Context.MODE_PRIVATE
+        ))
     }
 
     /**
