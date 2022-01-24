@@ -36,7 +36,7 @@ import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.BuildConfig
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.presentation.base.BaseViewModelFactory
-import com.utmaximur.alcoholtracker.presentation.settings.ui.theme.SettingsTheme
+import com.utmaximur.alcoholtracker.presentation.splash.ui.theme.AlcoholTrackerTheme
 import com.utmaximur.alcoholtracker.util.*
 import javax.inject.Inject
 
@@ -58,7 +58,7 @@ class SettingsFragment : Fragment() {
         injectDagger()
         return ComposeView(requireContext()).apply {
             setContent {
-                SettingsTheme {
+                AlcoholTrackerTheme {
                     Surface(color = colorResource(id = R.color.background_color)) {
                         SettingsView(viewModel)
                     }
@@ -114,7 +114,6 @@ fun SettingsView(viewModel: SettingsViewModel) {
                 .padding(12.dp)
                 .fillMaxWidth(),
             shape = RoundedCornerShape(22.dp),
-            backgroundColor = colorResource(id = R.color.purple_700),
             elevation = 4.dp
         ) {
             Column {

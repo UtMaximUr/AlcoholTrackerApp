@@ -26,7 +26,11 @@ class StatisticViewModel @Inject constructor(
         MutableLiveData()
     }
 
-    fun getStatistics() = viewModelScope.launch {
+    init {
+        getStatistics()
+    }
+
+    private fun getStatistics() = viewModelScope.launch {
 
         val dataDrinksList = loadDrinksList()
         statisticsDrinksList.setValue(dataDrinksList)
