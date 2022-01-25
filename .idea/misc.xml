@@ -7,6 +7,7 @@
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/bg_rounded_corner.xml" value="0.37083333333333335" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/circle_mask.xml" value="0.37083333333333335" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/dot_default.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/dot_selected.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/dot_tab_selector.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_add_drink.xml" value="0.36512820512820515" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_add_photo.xml" value="0.36666666666666664" />
@@ -16,6 +17,8 @@
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_awesome_24dp.xml" value="0.36512820512820515" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_calendar_24dp.xml" value="0.36512820512820515" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_divider.xml" value="0.37083333333333335" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_dot_18dp.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_dot_default_18dp.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_drink_24dp.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_edit.xml" value="0.36512820512820515" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_info_24dp.xml" value="0.36666666666666664" />

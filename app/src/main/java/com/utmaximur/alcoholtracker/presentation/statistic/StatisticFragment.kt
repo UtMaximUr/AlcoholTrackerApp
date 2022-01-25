@@ -14,8 +14,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -67,7 +66,7 @@ class StatisticFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 AlcoholTrackerTheme {
-                    Surface(color = MaterialTheme.colors.background) {
+                    Surface(color = colorResource(id = R.color.background_color)) {
                         StatisticView(viewModel)
                     }
                 }
@@ -234,15 +233,14 @@ fun DrinkItem(
         modifier = Modifier.padding(6.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Row {
+        Row (verticalAlignment = Alignment.CenterVertically){
             Image(
-
-                modifier = Modifier.padding(4.dp),
+                modifier = Modifier.size(48.dp),
                 painter = painterResource(id = drink.icon.getIdRaw(context)),
                 contentDescription = null
             )
             Text(
-                modifier = Modifier.padding(4.dp),
+                maxLines = 1,
                 text = String.format(
                     context.resources.getString(R.string.statistic_count_drink),
                     drink.count
