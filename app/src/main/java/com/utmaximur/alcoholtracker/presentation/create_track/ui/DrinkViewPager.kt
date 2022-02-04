@@ -6,7 +6,6 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
@@ -19,13 +18,11 @@ import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.presentation.create_track.CreateTrackViewModel
-import kotlinx.coroutines.launch
 
 @ExperimentalPagerApi
 @Composable
 fun ViewPagerDrink(
-    viewModel: CreateTrackViewModel,
-    pagerState: PagerState = rememberPagerState()
+    viewModel: CreateTrackViewModel
 ) {
 
     val drinksList by viewModel.drinksList.observeAsState()
@@ -38,34 +35,26 @@ fun ViewPagerDrink(
         shape = RoundedCornerShape(22.dp),
         elevation = 8.dp
     ) {
-        Box(
-            contentAlignment = Alignment.BottomCenter
-        ) {
-            drinksList?.let { drinkList ->
-                LaunchedEffect(key1 = pagerState.currentPage) {
-                    launch {
-                        with(pagerState) {
-                            positionState?.let { position ->
-                                scrollToPage(
-                                    page = position
-                                )
-                            }
+        positionState?.let { position ->
+            val pagerState: PagerState = rememberPagerState(initialPage = position)
+            Box(
+                contentAlignment = Alignment.BottomCenter
+            ) {
+                drinksList?.let { drinkList ->
+                    HorizontalPager(
+                        count = drinkList.size,
+                        state =  pagerState
+                    ) { index ->
+                        ItemDrink(drinksList!![index])
+                        if (drinksList?.size != index) {
+                            viewModel.onViewPagerPositionChange(pagerState.currentPage)
                         }
                     }
+                    DotsIndicator(
+                        drinkList.size,
+                        pagerState
+                    )
                 }
-                HorizontalPager(
-                    count = drinkList.size,
-                    state = pagerState
-                ) { index ->
-                    ItemDrink(drinksList!![index])
-                    if (drinksList?.size != index) {
-                        viewModel.onViewPagerPositionChange(pagerState.currentPage)
-                    }
-                }
-                DotsIndicator(
-                    drinkList.size,
-                    pagerState
-                )
             }
         }
     }
