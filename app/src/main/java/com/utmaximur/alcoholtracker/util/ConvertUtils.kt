@@ -18,8 +18,8 @@ fun Int.dpToPx(): Int {
     return (this * density).roundToInt()
 }
 
-fun List<String?>.setVolumeUnit(context: Context): List<String?> {
-    val volumeListUnit: ArrayList<String?> = ArrayList()
+fun List<String?>.setVolumeUnit(context: Context): List<String> {
+    val volumeListUnit: ArrayList<String> = ArrayList()
     if (this.first()?.contains(".")!!) {
         this.forEach {
             volumeListUnit.add(String.format(context.getString(R.string.unit_l), it))
@@ -32,8 +32,8 @@ fun List<String?>.setVolumeUnit(context: Context): List<String?> {
     return volumeListUnit
 }
 
-fun String.digitOnly(context: Context): String {
-    return this.replace(context.getString(R.string.only_number_regex).toRegex(), "").trim()
+fun String.digitOnly(): String {
+    return this.replace("[^0-9, .]".toRegex(), "").trim()
 }
 
 fun Float.format1f(): String {
