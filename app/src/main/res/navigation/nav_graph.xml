@@ -7,8 +7,7 @@
     <fragment
         android:id="@+id/addFragment"
         android:name="com.utmaximur.alcoholtracker.presentation.create_track.CreateTrackFragment"
-        android:label="AddFragment"
-        tools:layout="@layout/fragment_add_track" >
+        android:label="AddFragment">
         <action
             android:id="@+id/action_addFragment_to_calculatorFragment"
             app:destination="@id/calculatorFragment" />
@@ -23,7 +22,7 @@
         android:id="@+id/addNewDrinkFragment"
         android:name="com.utmaximur.alcoholtracker.presentation.create_my_drink.CreateMyDrink"
         android:label="AddNewDrinkFragment"
-        tools:layout="@layout/fragment_create_drink" >
+        tools:layout="@layout/fragment_create_drink">
         <action
             android:id="@+id/action_addNewDrinkFragment_to_addPhotoBottomDialogFragment"
             app:destination="@id/addPhotoBottomDialogFragment" />
@@ -32,7 +31,7 @@
         android:id="@+id/calendarFragment"
         android:name="com.utmaximur.alcoholtracker.presentation.calendar.CalendarFragment"
         android:label="CalendarFragment"
-        tools:layout="@layout/fragment_calendar" >
+        tools:layout="@layout/fragment_calendar">
         <action
             android:id="@+id/action_calendarFragment_to_addDrinkDialogFragment"
             app:destination="@id/addDrinkDialogFragment" />
@@ -46,13 +45,11 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.utmaximur.alcoholtracker.presentation.settings.SettingsFragment"
-        android:label="SettingsFragment"
-        tools:layout="@layout/fragment_settings" />
+        android:label="SettingsFragment" />
     <fragment
         android:id="@+id/statisticFragment"
         android:name="com.utmaximur.alcoholtracker.presentation.statistic.StatisticFragment"
-        android:label="StatisticFragment"
-        tools:layout="@layout/fragment_statistic" />
+        android:label="StatisticFragment" />
     <dialog
         android:id="@+id/addPhotoBottomDialogFragment"
         android:name="com.utmaximur.alcoholtracker.presentation.dialog.add_photo.AddPhotoBottomDialogFragment"
@@ -61,7 +58,7 @@
     <dialog
         android:id="@+id/addDrinkDialogFragment"
         android:name="com.utmaximur.alcoholtracker.presentation.dialog.select_day.SelectDayDialogFragment"
-        android:label="AddDrinkDialogFragment" >
+        android:label="AddDrinkDialogFragment">
         <action
             android:id="@+id/action_addDrinkDialogFragment_to_addFragment"
             app:destination="@id/addFragment" />
@@ -80,11 +77,11 @@
         android:name="com.utmaximur.alcoholtracker.presentation.main.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
-    <activity
-        android:id="@+id/splashActivity"
-        android:name="com.utmaximur.alcoholtracker.presentation.splash.SplashActivity"
-        android:label="SplashActivity"
-        tools:layout="@layout/splash_layout" />
+    <!--    <activity-->
+    <!--        android:id="@+id/splashActivity"-->
+    <!--        android:name="com.utmaximur.alcoholtracker.presentation.splash.SplashActivity"-->
+    <!--        android:label="SplashActivity"-->
+    <!--        tools:layout="@layout/splash_layout" />-->
     <dialog
         android:id="@+id/calculatorFragment"
         android:name="com.utmaximur.alcoholtracker.presentation.calculator.CalculatorFragment"
@@ -94,21 +91,21 @@
         android:id="@+id/trackListBottomDialogFragment"
         android:name="com.utmaximur.alcoholtracker.presentation.calendar.TrackListBottomDialog"
         android:label="TrackListBottomDialogFragment"
-        tools:layout="@layout/dialog_track_list" >
+        tools:layout="@layout/dialog_track_list">
         <action
             android:id="@+id/action_trackListBottomDialogFragment_to_deleteDialogFragment"
             app:destination="@id/deleteDialogFragment" />
-        <action
-            android:id="@+id/action_trackListBottomDialogFragment_to_viewTrackFragment"
-            app:destination="@id/viewTrackFragment" />
+        <!--        <action-->
+        <!--            android:id="@+id/action_trackListBottomDialogFragment_to_viewTrackFragment"-->
+        <!--            app:destination="@id/viewTrackFragment" />-->
     </dialog>
-    <fragment
-        android:id="@+id/viewTrackFragment"
-        android:name="com.utmaximur.alcoholtracker.presentation.view_track.ViewTrackFragment"
-        android:label="ViewTrackFragment"
-        tools:layout="@layout/fragment_view_track">
-        <action
-            android:id="@+id/action_viewTrackFragment_to_addFragment"
-            app:destination="@id/addFragment" />
-    </fragment>
+    <!--    <fragment-->
+    <!--        android:id="@+id/viewTrackFragment"-->
+    <!--        android:name="com.utmaximur.alcoholtracker.presentation.view_track.ViewTrackFragment"-->
+    <!--        android:label="ViewTrackFragment"-->
+    <!--        tools:layout="@layout/fragment_view_track">-->
+    <!--        <action-->
+    <!--            android:id="@+id/action_viewTrackFragment_to_addFragment"-->
+    <!--            app:destination="@id/addFragment" />-->
+    <!--    </fragment>-->
 </navigation>

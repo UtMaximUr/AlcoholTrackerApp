@@ -83,6 +83,7 @@ fun QuantityNumberPicker(text: Int, viewModel: CreateTrackViewModel) {
     val possibleValues = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
     var state by remember { mutableStateOf(possibleValues.first()) }.apply {
         viewModel.onQuantityChange(value)
+        viewModel.onTotalMoneyCalculating(value)
     }
 
     ListItemPicker(
