@@ -75,15 +75,22 @@ fun NumberPickerDrink(
 
 @Composable
 fun QuantityNumberPicker(text: Int, viewModel: CreateTrackViewModel) {
+
+    val quantityState by viewModel.quantityState.observeAsState()
+
     Text(
         text = stringResource(id = text),
         fontFamily = FontFamily(Font(R.font.roboto_condensed_regular)),
         color = colorResource(id = R.color.text_color)
     )
     val possibleValues = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-    var state by remember { mutableStateOf(possibleValues.first()) }.apply {
-        viewModel.onQuantityChange(value)
-        viewModel.onTotalMoneyCalculating(value)
+    var state by remember {
+        mutableStateOf(quantityState)
+    }.apply {
+        value?.let { value ->
+            viewModel.onQuantityChange(value)
+            viewModel.onTotalMoneyCalculating(value)
+        }
     }
 
     ListItemPicker(
@@ -101,19 +108,19 @@ fun VolumeNumberPicker(
 ) {
 
     val context = LocalContext.current
-    val volumeState by viewModel.drinksList.observeAsState()
-    val positionState by viewModel.position.observeAsState()
+    val volumeState by viewModel.volumeState.observeAsState()
+    val drinkState by viewModel.drinkState.observeAsState()
 
     Text(
         text = stringResource(id = text),
         fontFamily = FontFamily(Font(R.font.roboto_condensed_regular)),
         color = colorResource(id = R.color.text_color)
     )
-    if (volumeState?.isNullOrEmpty() == false) {
-        val possibleValues: List<String> =
-            volumeState!![positionState!!].volume.setVolumeUnit(context)
-
-        var state by remember { mutableStateOf(possibleValues.first()) }.apply {
+    if (drinkState != null) {
+        val possibleValues: List<String> = drinkState!!.volume.setVolumeUnit(context)
+        var state by remember {
+            mutableStateOf(possibleValues[volumeState!!])
+        }.apply {
             viewModel.onVolumeChange(value)
         }
 
@@ -132,8 +139,8 @@ fun DegreeNumberPicker(
     viewModel: CreateTrackViewModel
 ) {
 
-    val degreeState by viewModel.drinksList.observeAsState()
-    val positionState by viewModel.position.observeAsState()
+    val drinkState by viewModel.drinkState.observeAsState()
+    val degreeState by viewModel.degreeState.observeAsState()
 
     Text(
         text = stringResource(id = text),
@@ -141,12 +148,13 @@ fun DegreeNumberPicker(
         color = colorResource(id = R.color.text_color)
     )
 
-    if (degreeState?.isNullOrEmpty() == false) {
-        val possibleValues: List<String?> = degreeState!![positionState!!].degree
-        var state by remember { mutableStateOf(possibleValues.first()) }.apply {
+    if (drinkState != null) {
+        val possibleValues: List<String?> = drinkState!!.degree
+        var state by remember {
+            mutableStateOf(possibleValues[degreeState!!])
+        }.apply {
             viewModel.onDegreeChange(value.toString())
         }
-
         ListItemPicker(
             label = { it.toString() },
             value = state,
