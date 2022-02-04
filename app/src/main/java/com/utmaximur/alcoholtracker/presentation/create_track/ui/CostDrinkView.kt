@@ -68,9 +68,9 @@ fun EventText(
 
     val focusManager = LocalFocusManager.current
     val keyboardController = LocalSoftwareKeyboardController.current
+    val event by viewModel.eventState.observeAsState()
+    val textState = remember { mutableStateOf(TextFieldValue(event ?: String.empty())) }
 
-
-    val textState = remember { mutableStateOf(TextFieldValue()) }
     Row(
         modifier = Modifier.padding(start = 12.dp, end = 12.dp),
         verticalAlignment = Alignment.CenterVertically
@@ -88,7 +88,7 @@ fun EventText(
             modifier = Modifier
                 .fillMaxWidth(),
             onValueChange = {
-                viewModel.onEventChange(it.toString())
+                viewModel.onEventChange(it.text)
                 textState.value = it
             },
             colors = TextFieldDefaults.textFieldColors(
@@ -118,7 +118,8 @@ fun EventText(
 fun CalculateText(
     text: Int,
     viewModel: CreateTrackViewModel,
-    onCalculateClick: (String) -> Unit) {
+    onCalculateClick: (String) -> Unit
+) {
 
     val textState by viewModel.valueCalculating.observeAsState(String.empty())
     val focusManager = LocalFocusManager.current
@@ -151,6 +152,7 @@ fun CalculateText(
                 .fillMaxWidth(),
             onValueChange = {
                 viewModel.onPriceChange(it)
+                viewModel.onTotalMoneyCalculating(it)
             },
             colors = TextFieldDefaults.textFieldColors(
                 textColor = colorResource(id = R.color.text_color),
