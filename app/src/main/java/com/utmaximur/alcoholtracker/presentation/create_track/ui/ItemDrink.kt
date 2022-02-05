@@ -1,7 +1,6 @@
 package com.utmaximur.alcoholtracker.presentation.create_track.ui
 
 import android.content.Context
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -16,7 +15,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
-import coil.compose.rememberImagePainter
+import com.skydoves.landscapist.glide.GlideImage
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.domain.entity.Drink
 import com.utmaximur.alcoholtracker.util.getResString
@@ -30,10 +29,10 @@ fun ItemDrink(
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
-        Image(
+        GlideImage(
+            imageModel = drink.photo,
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize(),
-            painter = rememberImagePainter(drink.photo),
             contentDescription = null
         )
         Card(
