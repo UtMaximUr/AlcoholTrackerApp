@@ -22,7 +22,7 @@ import com.utmaximur.alcoholtracker.util.getResString
 
 @Composable
 fun ItemDrink(
-    drink: Drink,
+    drink: Drink?,
     context: Context = LocalContext.current
 ) {
 
@@ -30,7 +30,7 @@ fun ItemDrink(
         modifier = Modifier.fillMaxSize()
     ) {
         GlideImage(
-            imageModel = drink.photo,
+            imageModel = drink?.photo,
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize(),
             contentDescription = null
@@ -44,7 +44,7 @@ fun ItemDrink(
             Text(
                 modifier = Modifier
                     .padding(8.dp),
-                text = drink.drink.getResString(context),
+                text = drink?.drink.toString().getResString(context),
                 fontFamily = FontFamily(Font(R.font.roboto_condensed_regular)),
                 color = colorResource(id = R.color.text_color)
             )
