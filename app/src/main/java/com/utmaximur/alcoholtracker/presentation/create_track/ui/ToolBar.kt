@@ -1,13 +1,16 @@
 package com.utmaximur.alcoholtracker.presentation.create_track.ui
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Done
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -23,10 +26,14 @@ fun ToolBar(
     viewModel: CreateTrackViewModel,
     title: Int?,
     onBackClick: () -> Unit,
-    onSaveClick: () -> Unit
+    onSaveClick: () -> Unit,
+    onCreateClick: () -> Unit,
+    onEditClick: () -> Unit,
+    onDeleteClick: () -> Unit
 ) {
 
     val visibleSaveButtonState by viewModel.visibleSaveButtonState.observeAsState(true)
+    val visibleEditDrinkButtonState by viewModel.visibleEditDrinkButtonState.observeAsState(false)
 
     TopAppBar(
         title = {
@@ -43,12 +50,52 @@ fun ToolBar(
         contentColor = colorResource(id = R.color.text_color),
         elevation = 2.dp,
         actions = {
-            AnimatedVisibility(visible = visibleSaveButtonState) {
-                IconButton(onClick = { onSaveClick() }) {
-                    Icon(
-                        imageVector = Icons.Default.Done,
-                        contentDescription = null
-                    )
+            Row {
+                AnimatedVisibility(
+                    visible = visibleEditDrinkButtonState,
+                    enter = fadeIn(),
+                    exit = fadeOut()
+                ) {
+                    Row {
+                        IconButton(onClick = { onEditClick() }) {
+                            Icon(
+                                imageVector = Icons.Default.Edit,
+                                contentDescription = null
+                            )
+                        }
+                        IconButton(onClick = { onDeleteClick() }) {
+                            Icon(
+                                imageVector = Icons.Default.Delete,
+                                contentDescription = null
+                            )
+                        }
+                    }
+                }
+                Box {
+                    this@Row.AnimatedVisibility(
+                        visible = visibleSaveButtonState,
+                        enter = fadeIn(),
+                        exit = fadeOut()
+                    ) {
+                        IconButton(onClick = { onSaveClick() }) {
+                            Icon(
+                                imageVector = Icons.Default.Done,
+                                contentDescription = null
+                            )
+                        }
+                    }
+                    this@Row.AnimatedVisibility(
+                        visible = !visibleSaveButtonState,
+                        enter = fadeIn(),
+                        exit = fadeOut()
+                    ) {
+                        IconButton(onClick = { onCreateClick() }) {
+                            Icon(
+                                imageVector = Icons.Default.Add,
+                                contentDescription = null
+                            )
+                        }
+                    }
                 }
             }
         }
