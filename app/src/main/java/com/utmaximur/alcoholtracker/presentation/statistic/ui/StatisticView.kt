@@ -13,7 +13,6 @@ import com.utmaximur.alcoholtracker.presentation.statistic.StatisticViewModel
 
 @ExperimentalPagerApi
 @ExperimentalFoundationApi
-@ExperimentalAnimationApi
 @Composable
 fun StatisticView(viewModel: StatisticViewModel) {
     Column(
