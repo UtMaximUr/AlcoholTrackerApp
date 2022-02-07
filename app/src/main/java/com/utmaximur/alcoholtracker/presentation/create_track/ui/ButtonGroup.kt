@@ -9,7 +9,10 @@ import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
@@ -18,15 +21,22 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.utmaximur.alcoholtracker.R
+import com.utmaximur.alcoholtracker.presentation.create_track.CreateTrackViewModel
+import com.utmaximur.alcoholtracker.util.formatDate
 
 @ExperimentalAnimationApi
 @Composable
 fun ButtonGroup(
-    dateState: String,
-    visibleTodayState: Boolean,
+    viewModel: CreateTrackViewModel,
     onSelectDateClick: () -> Unit,
     onTodayClick: () -> Unit
 ) {
+    var dateText = stringResource(id = R.string.add_date)
+    viewModel.selectedDate.observeAsState().apply {
+        value?.let { date -> dateText = date.formatDate(LocalContext.current) }
+    }
+    val dateState by viewModel.dateState.observeAsState(dateText)
+    val visibleTodayState by viewModel.visibleTodayState.observeAsState(true)
 
     Row(
         modifier = Modifier
