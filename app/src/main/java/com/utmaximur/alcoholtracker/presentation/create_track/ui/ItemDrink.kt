@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
@@ -30,7 +31,7 @@ fun ItemDrink(
         modifier = Modifier.fillMaxSize()
     ) {
         GlideImage(
-            imageModel = drink?.photo,
+            imageModel = drink?.photo ?: R.raw.createdrink,
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize(),
             contentDescription = null
@@ -44,7 +45,8 @@ fun ItemDrink(
             Text(
                 modifier = Modifier
                     .padding(8.dp),
-                text = drink?.drink.toString().getResString(context),
+                text = drink?.drink.getResString(context)
+                    ?: stringResource(id = R.string.add_new_drink),
                 fontFamily = FontFamily(Font(R.font.roboto_condensed_regular)),
                 color = colorResource(id = R.color.text_color)
             )
