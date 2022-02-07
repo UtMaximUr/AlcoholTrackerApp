@@ -3,12 +3,10 @@ package com.utmaximur.alcoholtracker.presentation.create_track.ui
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.expandVertically
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.OutlinedButton
+import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -41,6 +39,7 @@ fun ButtonGroup(
                 onSelectDateClick = onSelectDateClick
             )
         }
+        Spacer(modifier = Modifier.size(4.dp))
         AnimatedVisibility(
             visible = visibleTodayState,
             enter = expandVertically()
@@ -60,10 +59,8 @@ fun Button(
     radius: Int = 50,
     onSelectDateClick: () -> Unit
 ) {
-    androidx.compose.material.Button(
-        modifier = Modifier
-            .padding(end = 2.dp)
-            .fillMaxWidth(),
+   Button(
+        modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(radius),
         onClick = { onSelectDateClick() }
     ) {
@@ -83,8 +80,6 @@ fun OutlineButton(
     radius: Int = 50,
     onTodayClick: () -> Unit) {
     OutlinedButton(
-        modifier = Modifier
-            .padding(start = 2.dp),
         shape = RoundedCornerShape(radius),
         onClick = { onTodayClick() }
     ) {
