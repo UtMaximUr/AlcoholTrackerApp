@@ -39,8 +39,7 @@ import com.utmaximur.alcoholtracker.util.extension.empty
 @ExperimentalComposeUiApi
 @Composable
 fun CostDrink(
-    viewModel: CreateTrackViewModel,
-    onCalculateClick: (String) -> Unit
+    viewModel: CreateTrackViewModel
 ) {
     Card(
         modifier = Modifier
@@ -51,7 +50,7 @@ fun CostDrink(
         Column {
             EventText(R.string.add_event, KeyboardType.Text, viewModel)
             CalculateText(R.string.add_price, viewModel) { price ->
-                onCalculateClick(price)
+                viewModel.onCalculateClick(price)
             }
         }
     }

@@ -6,7 +6,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -20,15 +19,7 @@ import com.utmaximur.alcoholtracker.presentation.create_track.CreateTrackViewMod
 @ExperimentalAnimationApi
 @ExperimentalPagerApi
 @Composable
-fun CreateTrackerView(
-    viewModel: CreateTrackViewModel,
-    onSaveClick: () -> Unit,
-    onCalculateClick: (String) -> Unit
-) {
-
-    viewModel.saveState.observeAsState().apply {
-        if (value == true) onSaveClick()
-    }
+fun CreateTrackerView(viewModel: CreateTrackViewModel) {
 
     Column {
         ToolBar(
@@ -49,9 +40,7 @@ fun CreateTrackerView(
                 ViewPagerDrink(viewModel)
             }
             NumberPickerDrink(viewModel = viewModel)
-            CostDrink(viewModel = viewModel) { price ->
-                onCalculateClick(price)
-            }
+            CostDrink(viewModel = viewModel)
             ButtonGroup(viewModel = viewModel)
             TotalPrice(viewModel = viewModel)
         }
