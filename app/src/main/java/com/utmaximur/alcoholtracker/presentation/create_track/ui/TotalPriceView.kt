@@ -7,14 +7,20 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.utmaximur.alcoholtracker.R
+import com.utmaximur.alcoholtracker.presentation.create_track.CreateTrackViewModel
 
 @Composable
-fun TotalPrice(total: String?) {
+fun TotalPrice(viewModel: CreateTrackViewModel) {
+
+    val totalMoneyState by viewModel.totalMoney.observeAsState()
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -31,7 +37,7 @@ fun TotalPrice(total: String?) {
                 modifier = Modifier
                     .weight(1f)
                     .padding(end = 6.dp),
-                text = total.orEmpty(),
+                text = totalMoneyState.orEmpty(),
                 textAlign = TextAlign.End
             )
             Text(text = stringResource(id = R.string.add_currency))

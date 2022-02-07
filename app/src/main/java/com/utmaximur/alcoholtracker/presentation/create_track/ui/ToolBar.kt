@@ -24,7 +24,6 @@ import com.utmaximur.alcoholtracker.presentation.create_track.CreateTrackViewMod
 @Composable
 fun ToolBar(
     viewModel: CreateTrackViewModel,
-    title: Int?,
     onBackClick: () -> Unit,
     onSaveClick: () -> Unit,
     onCreateClick: () -> Unit,
@@ -32,12 +31,13 @@ fun ToolBar(
     onDeleteClick: () -> Unit
 ) {
 
+    val titleState by viewModel.titleFragment.observeAsState()
     val visibleSaveButtonState by viewModel.visibleSaveButtonState.observeAsState(true)
     val visibleEditDrinkButtonState by viewModel.visibleEditDrinkButtonState.observeAsState(false)
 
     TopAppBar(
         title = {
-            Text(text = stringResource(id = title ?: R.string.add_drink_title))
+            Text(text = stringResource(id = titleState ?: R.string.add_drink_title))
         },
         navigationIcon = {
             IconButton(onClick = {
