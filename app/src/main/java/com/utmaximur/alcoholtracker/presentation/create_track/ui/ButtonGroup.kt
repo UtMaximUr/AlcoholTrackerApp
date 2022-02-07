@@ -26,11 +26,7 @@ import com.utmaximur.alcoholtracker.util.formatDate
 
 @ExperimentalAnimationApi
 @Composable
-fun ButtonGroup(
-    viewModel: CreateTrackViewModel,
-    onSelectDateClick: () -> Unit,
-    onTodayClick: () -> Unit
-) {
+fun ButtonGroup(viewModel: CreateTrackViewModel) {
     var dateText = stringResource(id = R.string.add_date)
     viewModel.selectedDate.observeAsState().apply {
         value?.let { date -> dateText = date.formatDate(LocalContext.current) }
@@ -46,7 +42,7 @@ fun ButtonGroup(
         Box(modifier = Modifier.weight(1f)) {
             Button(
                 text = dateState,
-                onSelectDateClick = onSelectDateClick
+                onSelectDateClick = { viewModel.onSelectDayClick() }
             )
         }
         Spacer(modifier = Modifier.size(4.dp))
@@ -56,7 +52,7 @@ fun ButtonGroup(
         ) {
             OutlineButton(
                 text = R.string.add_today,
-                onTodayClick = onTodayClick
+                onTodayClick = { viewModel.onTodayClick() }
             )
         }
     }
@@ -69,7 +65,7 @@ fun Button(
     radius: Int = 50,
     onSelectDateClick: () -> Unit
 ) {
-   Button(
+    Button(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(radius),
         onClick = { onSelectDateClick() }
@@ -88,7 +84,8 @@ fun OutlineButton(
     text: Int,
     size: TextUnit = 16.sp,
     radius: Int = 50,
-    onTodayClick: () -> Unit) {
+    onTodayClick: () -> Unit
+) {
     OutlinedButton(
         shape = RoundedCornerShape(radius),
         onClick = { onTodayClick() }

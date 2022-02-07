@@ -22,14 +22,7 @@ import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.presentation.create_track.CreateTrackViewModel
 
 @Composable
-fun ToolBar(
-    viewModel: CreateTrackViewModel,
-    onBackClick: () -> Unit,
-    onSaveClick: () -> Unit,
-    onCreateClick: () -> Unit,
-    onEditClick: () -> Unit,
-    onDeleteClick: () -> Unit
-) {
+fun ToolBar(viewModel: CreateTrackViewModel) {
 
     val titleState by viewModel.titleFragment.observeAsState()
     val visibleSaveButtonState by viewModel.visibleSaveButtonState.observeAsState(true)
@@ -41,7 +34,7 @@ fun ToolBar(
         },
         navigationIcon = {
             IconButton(onClick = {
-                onBackClick()
+                viewModel.onCloseClick()
             }) {
                 Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null)
             }
@@ -57,13 +50,13 @@ fun ToolBar(
                     exit = fadeOut()
                 ) {
                     Row {
-                        IconButton(onClick = { onEditClick() }) {
+                        IconButton(onClick = { viewModel.onEditClick() }) {
                             Icon(
                                 imageVector = Icons.Default.Edit,
                                 contentDescription = null
                             )
                         }
-                        IconButton(onClick = { onDeleteClick() }) {
+                        IconButton(onClick = { viewModel.onDeleteClick() }) {
                             Icon(
                                 imageVector = Icons.Default.Delete,
                                 contentDescription = null
@@ -77,7 +70,7 @@ fun ToolBar(
                         enter = fadeIn(),
                         exit = fadeOut()
                     ) {
-                        IconButton(onClick = { onSaveClick() }) {
+                        IconButton(onClick = { viewModel.onSaveButtonClick() }) {
                             Icon(
                                 imageVector = Icons.Default.Done,
                                 contentDescription = null
@@ -89,7 +82,7 @@ fun ToolBar(
                         enter = fadeIn(),
                         exit = fadeOut()
                     ) {
-                        IconButton(onClick = { onCreateClick() }) {
+                        IconButton(onClick = { viewModel.onCreateClick() }) {
                             Icon(
                                 imageVector = Icons.Default.Add,
                                 contentDescription = null
