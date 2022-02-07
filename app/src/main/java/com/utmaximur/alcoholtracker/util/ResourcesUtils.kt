@@ -10,7 +10,8 @@ fun String.getIdRaw(context: Context): Int {
     )
 }
 
-fun String.getResString(context: Context): String {
+fun String?.getResString(context: Context): String? {
+    if (this.isNullOrEmpty()) return null
     val resIdString =
         context.resources.getIdentifier(
             this,
