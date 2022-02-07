@@ -14,10 +14,11 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.utmaximur.alcoholtracker.presentation.create_track.CreateTrackViewModel
 
 
-@ExperimentalMaterialApi
-@ExperimentalComposeUiApi
-@ExperimentalAnimationApi
-@ExperimentalPagerApi
+@OptIn(
+    ExperimentalPagerApi::class,
+    ExperimentalComposeUiApi::class,
+    ExperimentalAnimationApi::class
+)
 @Composable
 fun CreateTrackerView(viewModel: CreateTrackViewModel) {
 

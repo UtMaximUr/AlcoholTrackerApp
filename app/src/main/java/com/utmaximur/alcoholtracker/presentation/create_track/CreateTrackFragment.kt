@@ -6,17 +6,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Surface
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.colorResource
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.google.accompanist.pager.ExperimentalPagerApi
 import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.presentation.base.BaseViewModelFactory
@@ -27,10 +23,6 @@ import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
-@ExperimentalPagerApi
-@ExperimentalAnimationApi
-@ExperimentalComposeUiApi
-@ExperimentalMaterialApi
 class CreateTrackFragment : Fragment() {
 
     @Inject
