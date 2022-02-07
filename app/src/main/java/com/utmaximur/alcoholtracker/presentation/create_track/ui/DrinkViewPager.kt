@@ -29,9 +29,7 @@ fun ViewPagerDrink(
     val positionState by viewModel.position.observeAsState()
 
     Card(
-        modifier = Modifier
-            .padding(bottom = 12.dp)
-            .height(260.dp),
+        modifier = Modifier.padding(bottom = 12.dp),
         shape = RoundedCornerShape(22.dp),
         elevation = 8.dp
     ) {
@@ -42,16 +40,18 @@ fun ViewPagerDrink(
             ) {
                 drinksList?.let { drinkList ->
                     HorizontalPager(
-                        count = drinkList.size,
-                        state =  pagerState
+                        count = drinkList.size + 1,
+                        state = pagerState
                     ) { index ->
-                        ItemDrink(drinksList!![index])
-                        if (drinksList?.size != index) {
-                            viewModel.onViewPagerPositionChange(pagerState.currentPage)
+                        if (index != drinksList?.size) {
+                            ItemDrink(drinksList?.get(index))
+                        } else {
+                            ItemDrink(null)
                         }
+                        viewModel.onViewPagerPositionChange(pagerState.currentPage)
                     }
                     DotsIndicator(
-                        drinkList.size,
+                        drinkList.size + 1,
                         pagerState
                     )
                 }
@@ -77,16 +77,15 @@ fun DotsIndicator(
             if (index == pagerState.currentPage) {
                 Image(
                     painter = painterResource(id = R.drawable.ic_dot_18dp),
-                    contentDescription = null
+                    contentDescription = null,
+                    modifier = Modifier.size(12.dp)
                 )
             } else {
                 Image(
                     painter = painterResource(id = R.drawable.ic_dot_default_18dp),
-                    contentDescription = null
+                    contentDescription = null,
+                    modifier = Modifier.size(12.dp)
                 )
-            }
-            if (index != totalDots - 1) {
-                Spacer(modifier = Modifier.padding(horizontal = 2.dp))
             }
         }
     }
