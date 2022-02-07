@@ -1,6 +1,5 @@
 package com.utmaximur.alcoholtracker.presentation.settings.ui
 
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -25,7 +24,6 @@ import com.utmaximur.alcoholtracker.util.MARKET_APP
 import com.utmaximur.alcoholtracker.util.PRIVACY_POLICY
 import com.utmaximur.alcoholtracker.util.TERMS_OF_USE
 
-@ExperimentalAnimationApi
 @Composable
 fun SettingsView(viewModel: SettingsViewModel) {
     Column(

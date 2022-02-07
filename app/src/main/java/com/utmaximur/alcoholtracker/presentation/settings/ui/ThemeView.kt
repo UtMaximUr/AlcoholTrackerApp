@@ -1,7 +1,6 @@
 package com.utmaximur.alcoholtracker.presentation.settings.ui
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.Image
@@ -25,7 +24,6 @@ import androidx.compose.ui.unit.dp
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.presentation.settings.SettingsViewModel
 
-@ExperimentalAnimationApi
 @Composable
 fun ThemeList(visible: Boolean, viewModel: SettingsViewModel) {
 
@@ -50,7 +48,6 @@ fun ThemeList(visible: Boolean, viewModel: SettingsViewModel) {
     }
 }
 
-@ExperimentalAnimationApi
 @Composable
 fun ThemeItem(text: Int, themeCheckState: Boolean, onClick: (Boolean) -> Unit) {
     Row(
