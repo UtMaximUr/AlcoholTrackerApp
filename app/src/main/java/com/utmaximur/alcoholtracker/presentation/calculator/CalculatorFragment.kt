@@ -4,13 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.material.Surface
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.res.colorResource
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.utmaximur.alcoholtracker.App
-import com.utmaximur.alcoholtracker.databinding.FragmentCalculatorBinding
+import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.presentation.base.BaseViewModelFactory
-import com.utmaximur.alcoholtracker.util.*
+import com.utmaximur.alcoholtracker.presentation.calculator.ui.CalculatorView
+import com.utmaximur.alcoholtracker.presentation.splash.ui.theme.AlcoholTrackerTheme
+import com.utmaximur.alcoholtracker.util.KEY_CALCULATOR
+import com.utmaximur.alcoholtracker.util.PRICE_DRINK
 import com.utmaximur.alcoholtracker.util.extension.empty
+import com.utmaximur.alcoholtracker.util.setNavigationResult
 import javax.inject.Inject
 
 class CalculatorFragment : DialogFragment() {
@@ -22,16 +29,22 @@ class CalculatorFragment : DialogFragment() {
         factoryProducer = { viewModelFactory }
     )
 
-    private var _binding: FragmentCalculatorBinding? = null
-    private val binding get() = _binding!!
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentCalculatorBinding.inflate(layoutInflater)
-        return binding.root
+        return ComposeView(requireContext()).apply {
+            setContent {
+                AlcoholTrackerTheme {
+                    Surface(color = colorResource(id = R.color.background_color)) {
+                        CalculatorView(
+                            viewModel = viewModel,
+                            onDismiss = { })
+                    }
+                }
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,79 +58,9 @@ class CalculatorFragment : DialogFragment() {
         App.instance.alcoholTrackComponent.inject(this)
     }
 
-    private fun initUI() = with(binding) {
-        viewModel.currentValue.observe(viewLifecycleOwner, { value ->
-            result.text = value
+    private fun initUI() {
+        viewModel.currentValue.observe(viewLifecycleOwner) { value ->
             this@CalculatorFragment.setNavigationResult(KEY_CALCULATOR, value, false)
-        })
-
-        calculatorButton0.setOnClickListener {
-            viewModel.setValue(KEY_0)
-        }
-
-        calculatorButton1.setOnClickListener {
-            viewModel.setValue(KEY_1)
-        }
-
-        calculatorButton2.setOnClickListener {
-            viewModel.setValue(KEY_2)
-        }
-
-        calculatorButton3.setOnClickListener {
-            viewModel.setValue(KEY_3)
-        }
-
-        calculatorButton4.setOnClickListener {
-            viewModel.setValue(KEY_4)
-        }
-
-        calculatorButton5.setOnClickListener {
-            viewModel.setValue(KEY_5)
-        }
-
-        calculatorButton6.setOnClickListener {
-            viewModel.setValue(KEY_6)
-        }
-
-        calculatorButton7.setOnClickListener {
-            viewModel.setValue(KEY_7)
-        }
-
-        calculatorButton8.setOnClickListener {
-            viewModel.setValue(KEY_8)
-        }
-
-        calculatorButton9.setOnClickListener {
-            viewModel.setValue(KEY_9)
-        }
-
-        calculatorButtonOk.setOnClickListener {
-            this@CalculatorFragment.removeNavigationResult<String>(KEY_CALCULATOR)
-            dismiss()
-        }
-
-        calculatorButtonAc.setOnClickListener {
-            viewModel.acCalculation()
-        }
-
-        calculatorButtonPlus.setOnClickListener {
-            viewModel.setCurrentAction(ADDITION)
-        }
-
-        calculatorButtonMinus.setOnClickListener {
-            viewModel.setCurrentAction(SUBTRACTION)
-        }
-
-        calculatorButtonEqually.setOnClickListener {
-            viewModel.computeCalculation()
-        }
-
-        calculatorButtonDivide.setOnClickListener {
-            viewModel.setCurrentAction(DIVISION)
-        }
-
-        calculatorButtonMultiply.setOnClickListener {
-            viewModel.setCurrentAction(MULTIPLICATION)
         }
     }
 
@@ -125,10 +68,5 @@ class CalculatorFragment : DialogFragment() {
         if (arguments?.getString(PRICE_DRINK) != String.empty()) {
             viewModel.setPriceValue(arguments?.getString(PRICE_DRINK)?.toFloat()?.toInt()!!)
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
