@@ -14,16 +14,20 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.presentation.create_track.CreateTrackViewModel
+import com.utmaximur.alcoholtracker.presentation.dialog.delete.DeleteView
 
 @Composable
 fun ToolBar(viewModel: CreateTrackViewModel) {
 
+    val openDialog = remember { mutableStateOf(false) }
     val titleState by viewModel.titleFragment.observeAsState()
     val visibleSaveButtonState by viewModel.visibleSaveButtonState.observeAsState(true)
     val visibleEditDrinkButtonState by viewModel.visibleEditDrinkButtonState.observeAsState(false)
@@ -56,7 +60,10 @@ fun ToolBar(viewModel: CreateTrackViewModel) {
                                 contentDescription = null
                             )
                         }
-                        IconButton(onClick = { viewModel.onDeleteClick() }) {
+                        IconButton(onClick = {
+//                            viewModel.onDeleteClick()
+                            openDialog.value = true
+                        }) {
                             Icon(
                                 imageVector = Icons.Default.Delete,
                                 contentDescription = null
@@ -93,4 +100,14 @@ fun ToolBar(viewModel: CreateTrackViewModel) {
             }
         }
     )
+
+    if (openDialog.value) {
+        DeleteView(
+            onNegativeClick = { openDialog.value = false },
+            onPositiveClick = {
+                viewModel.onDeleteDrink()
+                openDialog.value = false
+            }
+        )
+    }
 }
