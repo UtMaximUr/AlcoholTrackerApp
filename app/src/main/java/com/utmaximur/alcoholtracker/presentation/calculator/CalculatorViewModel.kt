@@ -19,11 +19,7 @@ class CalculatorViewModel @Inject constructor() : ViewModel() {
 
     private var currentAction = Char.empty()
 
-    val currentValue: LiveData<String> by lazy { MutableLiveData() }
-
-    init {
-        currentValue.setValue(String.empty())
-    }
+    val currentValue: LiveData<String> by lazy { MutableLiveData(String.empty()) }
 
     fun setValue(value: Int) {
         if (isActionSelect) {
@@ -47,9 +43,9 @@ class CalculatorViewModel @Inject constructor() : ViewModel() {
         }
     }
 
-    fun setPriceValue(price: Int) {
-        if (price != Int.empty()) {
-            currentValue.setValue(price.toString())
+    fun setPriceValue(price: String) {
+        if (price.isNotEmpty()) {
+            currentValue.setValue(price)
         }
     }
 

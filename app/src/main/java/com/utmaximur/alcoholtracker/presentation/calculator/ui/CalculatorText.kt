@@ -17,8 +17,14 @@ import com.utmaximur.alcoholtracker.presentation.calculator.CalculatorViewModel
 import com.utmaximur.alcoholtracker.util.extension.empty
 
 @Composable
-fun CalculatorText(viewModel: CalculatorViewModel) {
-    val currentValue by viewModel.currentValue.observeAsState(String.empty())
+fun CalculatorText(
+    viewModel: CalculatorViewModel,
+    onResult: (String) -> Unit
+) {
+    val currentValue by viewModel.currentValue.observeAsState(String.empty()).apply {
+        onResult(value)
+    }
+
     Text(
         modifier = Modifier
             .fillMaxWidth()

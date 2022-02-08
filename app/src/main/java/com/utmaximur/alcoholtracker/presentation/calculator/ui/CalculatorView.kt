@@ -13,16 +13,23 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.utmaximur.alcoholtracker.R
+import com.utmaximur.alcoholtracker.di.component.DaggerCalculatorComponent
 import com.utmaximur.alcoholtracker.presentation.calculator.CalculatorViewModel
 import com.utmaximur.alcoholtracker.util.*
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun CalculatorView(
-    viewModel: CalculatorViewModel,
-    onOkClick: () -> Unit,
-    onDismiss: () -> Unit
+    price: String,
+    onDismiss: () -> Unit,
+    onResult: (String) -> Unit
 ) {
+    val component = DaggerCalculatorComponent.builder().build()
+    val viewModel: CalculatorViewModel = daggerViewModel {
+        component.getViewModel()
+    }
+    viewModel.setPriceValue(price)
+
     Dialog(
         onDismissRequest = { onDismiss() },
         properties = DialogProperties(usePlatformDefaultWidth = false)
@@ -38,7 +45,10 @@ fun CalculatorView(
                     .padding(12.dp)
                     .background(color = colorResource(id = R.color.background_color))
             ) {
-                CalculatorText(viewModel = viewModel)
+                CalculatorText(
+                    viewModel = viewModel,
+                    onResult = onResult
+                )
                 Row {
                     CalculatorButton(
                         modifier = Modifier.fillMaxWidth(0.75f),
@@ -51,7 +61,7 @@ fun CalculatorView(
                         idText = R.string.calc_ok,
                         colors = ButtonDefaults.buttonColors(),
                         idTextColor = R.color.text_color_white,
-                        onClick = { onOkClick() }
+                        onClick = { onDismiss() }
                     )
                 }
                 Spacer(modifier = Modifier.size(4.dp))
