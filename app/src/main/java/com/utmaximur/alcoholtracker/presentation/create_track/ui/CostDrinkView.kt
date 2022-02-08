@@ -33,6 +33,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import com.utmaximur.alcoholtracker.R
+import com.utmaximur.alcoholtracker.presentation.calculator.ui.CalculatorView
 import com.utmaximur.alcoholtracker.presentation.create_track.CreateTrackViewModel
 import com.utmaximur.alcoholtracker.util.extension.empty
 
@@ -49,9 +50,7 @@ fun CostDrink(
     ) {
         Column {
             EventText(R.string.add_event, KeyboardType.Text, viewModel)
-            CalculateText(R.string.add_price, viewModel) { price ->
-                viewModel.onCalculateClick(price)
-            }
+            CalculateText(R.string.add_price, viewModel)
         }
     }
 }
@@ -116,10 +115,10 @@ fun EventText(
 @Composable
 fun CalculateText(
     text: Int,
-    viewModel: CreateTrackViewModel,
-    onCalculateClick: (String) -> Unit
+    viewModel: CreateTrackViewModel
 ) {
 
+    val openDialog = remember { mutableStateOf(false) }
     val textState by viewModel.valueCalculating.observeAsState(String.empty())
     val focusManager = LocalFocusManager.current
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -141,7 +140,7 @@ fun CalculateText(
             },
             trailingIcon = {
                 Image(
-                    modifier = Modifier.clickable { onCalculateClick(textState) },
+                    modifier = Modifier.clickable { openDialog.value = true }, //onCalculateClick(textState) },
                     painter = painterResource(id = R.drawable.ic_calculate_white_24dp),
                     contentDescription = null,
                     colorFilter = ColorFilter.tint(colorResource(id = R.color.accent_color))
@@ -171,6 +170,14 @@ fun CalculateText(
                     focusManager.clearFocus()
                     keyboardController?.hide()
                 })
+        )
+    }
+
+    if (openDialog.value) {
+        CalculatorView(
+            price = textState,
+            onDismiss = { openDialog.value = false },
+            onResult = { viewModel.onTotalMoneyCalculating(it)}
         )
     }
 }
