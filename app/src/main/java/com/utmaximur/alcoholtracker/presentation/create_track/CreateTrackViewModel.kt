@@ -43,7 +43,6 @@ class CreateTrackViewModel @Inject constructor(private var addTrackInteractor: A
     val selectTodayState: LiveData<Boolean> by lazy { MutableLiveData() }
     val visibleTodayState: LiveData<Boolean> by lazy { MutableLiveData() }
     val dateState: LiveData<String> by lazy { MutableLiveData() }
-    val calculateState: LiveData<String> by lazy { MutableLiveData() }
 
     private var id: String = String.empty()
     private var volume: String = String.empty()
@@ -214,10 +213,6 @@ class CreateTrackViewModel @Inject constructor(private var addTrackInteractor: A
 
     fun onCloseClick() {
         closeState.setValue(true)
-    }
-
-    fun onCalculateClick(price: String) {
-        calculateState.setValue(price)
     }
 
     fun onCreateClick() {

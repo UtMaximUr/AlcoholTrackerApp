@@ -11,7 +11,6 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.colorResource
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.utmaximur.alcoholtracker.App
 import com.utmaximur.alcoholtracker.R
@@ -19,7 +18,6 @@ import com.utmaximur.alcoholtracker.presentation.base.BaseViewModelFactory
 import com.utmaximur.alcoholtracker.presentation.create_track.ui.CreateTrackerView
 import com.utmaximur.alcoholtracker.presentation.splash.ui.theme.AlcoholTrackerTheme
 import com.utmaximur.alcoholtracker.util.*
-import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
@@ -93,9 +91,6 @@ class CreateTrackFragment : Fragment() {
         saveState.observe(viewLifecycleOwner) {
             onSaveResult()
         }
-        calculateState.observe(viewLifecycleOwner) { price ->
-            this@CreateTrackFragment.onCalculateClick(price)
-        }
         editDrinkState.observe(viewLifecycleOwner) { drink ->
             val bundle = Bundle()
             bundle.putParcelable(EDIT_DRINK, drink)
@@ -133,20 +128,6 @@ class CreateTrackFragment : Fragment() {
             KEY_CALENDAR_UPDATE_OK,
             false
         )
-    }
-
-    private fun onCalculateClick(price: String) {
-        val bundle = Bundle()
-        bundle.putString(PRICE_DRINK, price)
-        this@CreateTrackFragment.getNavigationResultLiveData<String>(KEY_CALCULATOR)
-            ?.observe(
-                viewLifecycleOwner
-            ) { result ->
-                lifecycleScope.launch {
-                    viewModel.onTotalMoneyCalculating(result)
-                }
-            }
-        findNavController().navigate(R.id.calculatorFragment, bundle)
     }
 
     private fun initTrackArguments() {
