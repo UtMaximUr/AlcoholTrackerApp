@@ -40,7 +40,7 @@ class CalculatorFragment : DialogFragment() {
                     Surface(color = colorResource(id = R.color.background_color)) {
                         CalculatorView(
                             viewModel = viewModel,
-                            onDismiss = { })
+                            onDismiss = { this@CalculatorFragment.dismiss() })
                     }
                 }
             }
