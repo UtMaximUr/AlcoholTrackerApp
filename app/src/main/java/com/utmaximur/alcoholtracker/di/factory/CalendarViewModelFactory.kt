@@ -10,7 +10,7 @@ import javax.inject.Singleton
 @Singleton
 class CalendarViewModelFactory  @Inject constructor(private var calendarInteractor: CalendarInteractor) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return CalendarViewModel(calendarInteractor)  as T
     }
 }

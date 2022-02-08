@@ -10,7 +10,7 @@ import javax.inject.Singleton
 @Singleton
 class AddViewModelFactory  @Inject constructor(private var addTrackInteractor: AddTrackInteractor) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return CreateTrackViewModel(addTrackInteractor)  as T
     }
 }

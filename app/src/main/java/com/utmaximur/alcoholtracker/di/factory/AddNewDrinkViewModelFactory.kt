@@ -10,7 +10,7 @@ import javax.inject.Singleton
 @Singleton
 class AddNewDrinkViewModelFactory @Inject constructor(private var addNewDrinkInteractor: AddNewDrinkInteractor) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return CreateMyDrinkViewModel(addNewDrinkInteractor)  as T
     }
 }
