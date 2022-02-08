@@ -101,19 +101,6 @@ class CreateTrackFragment : Fragment() {
             bundle.putParcelable(EDIT_DRINK, drink)
             addFragmentListener?.onShowEditNewDrinkFragment(bundle)
         }
-        deleteDrinkState.observe(viewLifecycleOwner) { drink ->
-            this@CreateTrackFragment.getNavigationResultLiveData<String>(KEY_ADD)
-                ?.observe(
-                    viewLifecycleOwner
-                ) { result ->
-                    if (result == KEY_ADD_OK) {
-                        lifecycleScope.launch {
-                            onDeleteDrink(drink)
-                        }
-                    }
-                }
-            findNavController().navigate(R.id.deleteDialogFragment)
-        }
         selectDayState.observe(viewLifecycleOwner) { date ->
             dateAndTime.timeInMillis = date ?: Date().time
             datePicker = DatePickerDialog(

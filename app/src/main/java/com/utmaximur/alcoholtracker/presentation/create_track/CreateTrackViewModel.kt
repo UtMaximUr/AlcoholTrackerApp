@@ -39,7 +39,6 @@ class CreateTrackViewModel @Inject constructor(private var addTrackInteractor: A
     val visibleSaveButtonState: LiveData<Boolean> by lazy { MutableLiveData() }
     val visibleEditDrinkButtonState: LiveData<Boolean> by lazy { MutableLiveData() }
     val editDrinkState: LiveData<Drink> by lazy { MutableLiveData() }
-    val deleteDrinkState: LiveData<Drink> by lazy { MutableLiveData() }
     val selectDayState: LiveData<Long> by lazy { MutableLiveData() }
     val selectTodayState: LiveData<Boolean> by lazy { MutableLiveData() }
     val visibleTodayState: LiveData<Boolean> by lazy { MutableLiveData() }
@@ -112,9 +111,11 @@ class CreateTrackViewModel @Inject constructor(private var addTrackInteractor: A
         return addTrackInteractor.getDrinks()
     }
 
-    suspend fun onDeleteDrink(drink: Drink) {
-        addTrackInteractor.deleteDrink(drink)
-        updateDrinks()
+    fun onDeleteDrink() {
+        viewModelScope.launch {
+            addTrackInteractor.deleteDrink(currentDrink)
+            updateDrinks()
+        }
     }
 
     fun onTrackChange(track: Track?) {
@@ -225,10 +226,6 @@ class CreateTrackViewModel @Inject constructor(private var addTrackInteractor: A
 
     fun onEditClick() {
         editDrinkState.setValue(currentDrink)
-    }
-
-    fun onDeleteClick() {
-        deleteDrinkState.setValue(currentDrink)
     }
 
     fun onSelectDayClick() {
