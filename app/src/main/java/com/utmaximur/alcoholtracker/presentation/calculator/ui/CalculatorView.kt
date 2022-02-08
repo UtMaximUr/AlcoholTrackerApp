@@ -20,6 +20,7 @@ import com.utmaximur.alcoholtracker.util.*
 @Composable
 fun CalculatorView(
     viewModel: CalculatorViewModel,
+    onOkClick: () -> Unit,
     onDismiss: () -> Unit
 ) {
     Dialog(
@@ -50,7 +51,7 @@ fun CalculatorView(
                         idText = R.string.calc_ok,
                         colors = ButtonDefaults.buttonColors(),
                         idTextColor = R.color.text_color_white,
-                        onClick = { onDismiss() }
+                        onClick = { onOkClick() }
                     )
                 }
                 Spacer(modifier = Modifier.size(4.dp))
