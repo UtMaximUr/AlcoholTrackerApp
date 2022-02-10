@@ -26,9 +26,10 @@ import com.utmaximur.alcoholtracker.util.PRIVACY_POLICY
 import com.utmaximur.alcoholtracker.util.TERMS_OF_USE
 
 @Composable
-fun SettingsScreen(viewModel: SettingsViewModel = hiltViewModel()) {
+fun SettingsScreen(viewModel: SettingsViewModel = hiltViewModel(), innerPadding: PaddingValues) {
+    val bottomPadding = innerPadding.calculateBottomPadding() + 24.dp
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().padding(bottom = bottomPadding),
         verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
