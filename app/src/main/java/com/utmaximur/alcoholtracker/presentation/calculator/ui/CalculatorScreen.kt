@@ -12,22 +12,20 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.di.component.DaggerCalculatorComponent
 import com.utmaximur.alcoholtracker.presentation.calculator.CalculatorViewModel
 import com.utmaximur.alcoholtracker.util.*
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun CalculatorView(
+fun CalculatorScreen(
+    viewModel: CalculatorViewModel = hiltViewModel(),
     price: String,
     onDismiss: () -> Unit,
     onResult: (String) -> Unit
 ) {
-    val component = DaggerCalculatorComponent.builder().build()
-    val viewModel: CalculatorViewModel = daggerViewModel {
-        component.getViewModel()
-    }
+
     viewModel.setPriceValue(price)
 
     Dialog(

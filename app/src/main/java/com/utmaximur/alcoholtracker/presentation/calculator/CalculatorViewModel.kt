@@ -7,8 +7,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.utmaximur.alcoholtracker.util.*
 import com.utmaximur.alcoholtracker.util.extension.empty
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class CalculatorViewModel @Inject constructor() : ViewModel() {
 
     private var valueOne = Float.empty()
