@@ -56,17 +56,15 @@
 
     <!--dialog select date-->
     <string name="dialog_select_date_title">¿Usar la fecha seleccionada para agregar una bebida?</string>
-    <string name="dialog_select_date_ok">OK</string>
-    <string name="dialog_select_date_no">NO</string>
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_no">NO</string>
+    <string name="dialog_cancel">Cancelar</string>
 
     <!--dialog delete-->
     <string name="dialog_delete_title">¿Está seguro de que desea eliminar la entrada?</string>
 
     <!--dialog add volume-->
     <string name="dialog_add_volume_title">Selecciona el volumen de la bebida</string>
-    <string name="dialog_add_volume_ok">OK</string>
-    <string name="dialog_add_volume_cancel">Cancelar</string>
-
 
     <!--settings-->
     <string name="privacy_policy">Política de privacidad</string>

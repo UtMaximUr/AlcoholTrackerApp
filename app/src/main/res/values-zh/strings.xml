@@ -56,17 +56,15 @@
 
     <!--dialog select date-->
     <string name="dialog_select_date_title">使用所选日期添加饮料？</string>
-    <string name="dialog_select_date_ok">好的</string>
-    <string name="dialog_select_date_no">不</string>
+    <string name="dialog_ok">好的</string>
+    <string name="dialog_no">不</string>
+    <string name="dialog_cancel">取消</string>
 
     <!--dialog delete-->
     <string name="dialog_delete_title">您确定要删除该条目吗？</string>
 
     <!--dialog add volume-->
     <string name="dialog_add_volume_title">选择饮料量</string>
-    <string name="dialog_add_volume_ok">好的</string>
-    <string name="dialog_add_volume_cancel">取消</string>
-
 
     <!--settings-->
     <string name="privacy_policy">隐私政策</string>
