@@ -9,8 +9,10 @@ import com.utmaximur.alcoholtracker.util.THEME_DARK
 import com.utmaximur.alcoholtracker.util.THEME_LIGHT
 import com.utmaximur.alcoholtracker.util.THEME_UNDEFINED
 import com.utmaximur.alcoholtracker.util.setValue
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class SettingsViewModel @Inject constructor(private val settingsInteractor: SettingsInteractor) :
     ViewModel() {
 

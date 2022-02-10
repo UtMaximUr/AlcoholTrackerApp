@@ -7,13 +7,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.fragment.app.viewModels
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.utmaximur.alcoholtracker.presentation.statistic.StatisticViewModel
 
-@ExperimentalPagerApi
-@ExperimentalFoundationApi
+
+@OptIn(ExperimentalPagerApi::class, ExperimentalFoundationApi::class)
 @Composable
-fun StatisticView(viewModel: StatisticViewModel) {
+fun StatisticView(viewModel: StatisticViewModel = hiltViewModel()) {
+
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceEvenly,

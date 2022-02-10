@@ -17,6 +17,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.utmaximur.alcoholtracker.BuildConfig
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.presentation.settings.SettingsViewModel
@@ -25,7 +27,7 @@ import com.utmaximur.alcoholtracker.util.PRIVACY_POLICY
 import com.utmaximur.alcoholtracker.util.TERMS_OF_USE
 
 @Composable
-fun SettingsView(viewModel: SettingsViewModel) {
+fun SettingsView(viewModel: SettingsViewModel = hiltViewModel()) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Bottom,

@@ -7,9 +7,11 @@ import androidx.lifecycle.viewModelScope
 import com.utmaximur.alcoholtracker.domain.entity.DrinkStatistic
 import com.utmaximur.alcoholtracker.domain.interactor.StatisticInteractor
 import com.utmaximur.alcoholtracker.util.setValue
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class StatisticViewModel @Inject constructor(
     private var statisticInteractor: StatisticInteractor
 ) : ViewModel() {
