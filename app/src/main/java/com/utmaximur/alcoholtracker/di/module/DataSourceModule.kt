@@ -1,8 +1,5 @@
-@file:Suppress("PrivatePropertyName")
-
 package com.utmaximur.alcoholtracker.di.module
 
-import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -10,75 +7,51 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.utmaximur.alcoholtracker.data.AlcoholTrackDatabase
 import com.utmaximur.alcoholtracker.data.assets.AssetsModule
-import com.utmaximur.alcoholtracker.data.file.FileManager
-import com.utmaximur.alcoholtracker.data.preferences.SharedPref
-import com.utmaximur.alcoholtracker.util.PREFS_NAME
 import com.utmaximur.alcoholtracker.util.addImageField
 import com.utmaximur.alcoholtracker.util.convertMigrationModel
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 import javax.inject.Singleton
 
 
 @Module
-class RoomDatabaseModule(private var application: Application) {
+@InstallIn(SingletonComponent::class)
+class DataSourceModule {
 
     private lateinit var alcoholTrackDatabase: AlcoholTrackDatabase
 
     @Singleton
     @Provides
-    fun providesRoomDatabase(): AlcoholTrackDatabase {
+    fun providesRoomDatabase(@ApplicationContext context: Context): AlcoholTrackDatabase {
         alcoholTrackDatabase =
-            Room.databaseBuilder(application, AlcoholTrackDatabase::class.java, "app_database")
+            Room.databaseBuilder(context, AlcoholTrackDatabase::class.java, "app_database")
                 .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5)
                 .addCallback(databaseCallback)
                 .build()
         return alcoholTrackDatabase
     }
 
-    @Singleton
-    @Provides
-    fun providesTrackDAO(alcoholTrackDatabase: AlcoholTrackDatabase) =
-        alcoholTrackDatabase.getTrackDao()
-
-    @Singleton
-    @Provides
-    fun providesDrinkDAO(alcoholTrackDatabase: AlcoholTrackDatabase) =
-        alcoholTrackDatabase.getDrinkDao()
-
-    @Provides
-    fun provideAssets(): AssetsModule {
-        return AssetsModule(application.assets)
-    }
-
-    @Provides
-    fun provideFile(): FileManager {
-        return FileManager(application.applicationContext)
-    }
-
-    @Provides
-    fun providePreferences(): SharedPref {
-        return SharedPref( application.applicationContext.getSharedPreferences(
-            PREFS_NAME, Context.MODE_PRIVATE
-        ))
-    }
-
-    /**
-     * init database
-     */
-
     private val databaseCallback = object : RoomDatabase.Callback() {
         override fun onCreate(db: SupportSQLiteDatabase) {
             super.onCreate(db)
             CoroutineScope(Dispatchers.IO).launch {
-                provideAssets().getDrinkList().forEach {
-                    alcoholTrackDatabase.getDrinkDao().addDrink(it)
-                }
+//                provideAssets().getDrinkList().forEach {
+//                    alcoholTrackDatabase.getDrinkDao().addDrink(it)
+//                }
             }
         }
+    }
+
+    @Provides
+    fun provideAssets(@ApplicationContext context: Context): AssetsModule {
+        return AssetsModule(context.assets)
     }
 
     /**
@@ -149,18 +122,18 @@ class RoomDatabaseModule(private var application: Application) {
 
     private fun updateDrinkDb() {
         CoroutineScope(Dispatchers.IO).launch {
-            provideAssets().getDrinkList().forEach {
-                alcoholTrackDatabase.getDrinkDao().addDrink(it)
-            }
+//            provideAssets().getDrinkList().forEach {
+//                alcoholTrackDatabase.getDrinkDao().addDrink(it)
+//            }
         }
     }
 
     private fun updateTrackDb() {
         val coroutineScope = CoroutineScope(Dispatchers.IO).launch {
             alcoholTrackDatabase.getTrackDao().getTracks().forEach { alcoholTrack ->
-                alcoholTrackDatabase.getTrackDao().updateTrack(
-                    alcoholTrack.convertMigrationModel(application)
-                )
+//                alcoholTrackDatabase.getTrackDao().updateTrack(
+//                    alcoholTrack.convertMigrationModel(context)
+//                )
             }
         }
         coroutineScope.cancel()
@@ -169,9 +142,9 @@ class RoomDatabaseModule(private var application: Application) {
     private fun updateTrackDbAddImageField() {
         CoroutineScope(Dispatchers.IO).launch {
             alcoholTrackDatabase.getTrackDao().getTracks().forEach { alcoholTrack ->
-                alcoholTrackDatabase.getTrackDao().updateTrack(
-                    alcoholTrack.addImageField(application)
-                )
+//                alcoholTrackDatabase.getTrackDao().updateTrack(
+//                    alcoholTrack.addImageField(context)
+//                )
             }
         }
     }
