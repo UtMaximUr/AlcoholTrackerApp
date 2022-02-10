@@ -74,12 +74,8 @@
     <string name="settings_version">Ausführung</string>
     <string name="rate_app">Bewertungs App</string>
     <string name="default_theme">Verwenden Sie das Systemthema</string>
-
-    <string-array name="theme_array">
-        <item>Lichtthema</item>
-        <item>Dunkles Thema</item>
-
-    </string-array>
+    <string name="light_theme">Lichtthema</string>
+    <string name="dark_theme">Dunkles Thema</string>
 
     <!--statistic-->
     <string name="statistic_week_days">Woche</string>
@@ -139,6 +135,17 @@
     <string name="material_calendar_friday">Fre</string>
     <string name="material_calendar_saturday">Sam</string>
     <string name="material_calendar_sunday">Son</string>
+
+
+    <array name="calendar_week_days_array">
+        <item>Mon</item>
+        <item>Die</item>
+        <item>Mit</item>
+        <item>Don</item>
+        <item>Fre</item>
+        <item>Sam</item>
+        <item>Son</item>
+    </array>
 
     <array name="material_calendar_months_array">
         <item>Januar</item>

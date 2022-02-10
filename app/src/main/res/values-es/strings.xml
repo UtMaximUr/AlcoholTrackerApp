@@ -74,12 +74,8 @@
     <string name="settings_version">Versión</string>
     <string name="rate_app">Calificar aplicacion</string>
     <string name="default_theme">Usar tema del sistema</string>
-
-    <string-array name="theme_array">
-        <item>Tema claro</item>
-        <item>Tema oscuro</item>
-
-    </string-array>
+    <string name="light_theme">Tema claro</string>
+    <string name="dark_theme">Tema oscuro</string>
 
     <!--statistic-->
     <string name="statistic_week_days">Semana</string>
@@ -139,6 +135,16 @@
     <string name="material_calendar_friday">Vie</string>
     <string name="material_calendar_saturday">Sáb</string>
     <string name="material_calendar_sunday">Dom</string>
+
+    <array name="calendar_week_days_array">
+        <item>Lun</item>
+        <item>Mar</item>
+        <item>Mié</item>
+        <item>Jue</item>
+        <item>Vie</item>
+        <item>Sáb</item>
+        <item>Dom</item>
+    </array>
 
     <array name="material_calendar_months_array">
         <item>enero</item>

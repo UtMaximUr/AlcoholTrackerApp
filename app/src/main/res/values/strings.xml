@@ -79,12 +79,8 @@
     <string name="settings_version">Version</string>
     <string name="rate_app">Rate app</string>
     <string name="default_theme">Use system theme</string>
-
-    <string-array name="theme_array">
-        <item>Light theme</item>
-        <item>Dark theme</item>
-
-    </string-array>
+    <string name="light_theme">Light theme</string>
+    <string name="dark_theme">Dark theme</string>
 
     <!--statistic-->
     <string name="statistic_week_days">Week</string>
@@ -152,6 +148,16 @@
     <string name="material_calendar_saturday">Sat</string>
     <string name="material_calendar_sunday">Sun</string>
 
+    <array name="calendar_week_days_array">
+        <item>Mon</item>
+        <item>Tue</item>
+        <item>Wed</item>
+        <item>Thu</item>
+        <item>Fri</item>
+        <item>Sat</item>
+        <item>Sun</item>
+    </array>
+
     <array name="material_calendar_months_array">
         <item>January</item>
         <item>February</item>
@@ -210,5 +216,6 @@
         <item>1</item>
 
     </string-array>
+    <string name="title_activity_test" tools:ignore="MissingTranslation">TestActivity</string>
 
 </resources>

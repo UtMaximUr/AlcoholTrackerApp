@@ -74,12 +74,8 @@
     <string name="settings_version">Версия</string>
     <string name="rate_app">Оценить приложение</string>
     <string name="default_theme">Использовать системную тему</string>
-
-    <string-array name="theme_array">
-        <item>Светлая тема</item>
-        <item>Темная тема</item>
-
-    </string-array>
+    <string name="light_theme">Светлая тема</string>
+    <string name="dark_theme">Темная тема</string>
 
     <!--statistic-->
     <string name="statistic_week_days">Неделю</string>
@@ -142,6 +138,16 @@
     <string name="material_calendar_friday">Пт</string>
     <string name="material_calendar_saturday">Сб</string>
     <string name="material_calendar_sunday">Вс</string>
+
+    <array name="calendar_week_days_array">
+        <item>Пн</item>
+        <item>Вт</item>
+        <item>Ср</item>
+        <item>Чт</item>
+        <item>Пт</item>
+        <item>Сб</item>
+        <item>Вс</item>
+    </array>
 
     <array name="material_calendar_months_array">
         <item>Январь</item>

@@ -74,12 +74,8 @@
     <string name="settings_version">版本</string>
     <string name="rate_app">评价应用</string>
     <string name="default_theme">使用系统主题</string>
-
-    <string-array name="theme_array">
-        <item>浅色主题</item>
-        <item>黑暗主题</item>
-
-    </string-array>
+    <string name="light_theme">浅色主题</string>
+    <string name="dark_theme">黑暗主题</string>
 
     <!--statistic-->
     <string name="statistic_week_days">星期</string>
@@ -138,6 +134,16 @@
     <string name="material_calendar_friday">星期五</string>
     <string name="material_calendar_saturday">星期六</string>
     <string name="material_calendar_sunday">星期天</string>
+
+    <array name="calendar_week_days_array">
+        <item>星期一</item>
+        <item>星期二</item>
+        <item>星期三</item>
+        <item>星期四</item>
+        <item>星期五</item>
+        <item>星期六</item>
+        <item>星期天</item>
+    </array>
 
     <array name="material_calendar_months_array">
         <item>一月</item>

@@ -74,12 +74,8 @@
     <string name="settings_version">Version</string>
     <string name="rate_app">Application de taux</string>
     <string name="default_theme">Utiliser le thème du système</string>
-
-    <string-array name="theme_array">
-        <item>Thème léger</item>
-        <item>Thème sombre</item>
-
-    </string-array>
+    <string name="light_theme">Thème léger</string>
+    <string name="dark_theme">Thème sombre</string>
 
     <!--statistic-->
     <string name="statistic_week_days">Semaine</string>
@@ -139,6 +135,16 @@
     <string name="material_calendar_friday">Ven</string>
     <string name="material_calendar_saturday">Sam</string>
     <string name="material_calendar_sunday">Dim</string>
+
+    <array name="calendar_week_days_array">
+        <item>Lun</item>
+        <item>Mar</item>
+        <item>Mer</item>
+        <item>Jeu</item>
+        <item>Ven</item>
+        <item>Sam</item>
+        <item>Dim</item>
+    </array>
 
     <array name="material_calendar_months_array">
         <item>janvier</item>
