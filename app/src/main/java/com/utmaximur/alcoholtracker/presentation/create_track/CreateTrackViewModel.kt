@@ -13,11 +13,14 @@ import com.utmaximur.alcoholtracker.util.extension.empty
 import com.utmaximur.alcoholtracker.util.extension.first
 import com.utmaximur.alcoholtracker.util.setPostValue
 import com.utmaximur.alcoholtracker.util.setValue
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 
+
+@HiltViewModel
 class CreateTrackViewModel @Inject constructor(private var addTrackInteractor: AddTrackInteractor) :
     ViewModel() {
 
@@ -35,14 +38,10 @@ class CreateTrackViewModel @Inject constructor(private var addTrackInteractor: A
     val track: LiveData<Track> by lazy { MutableLiveData() }
     val saveState: LiveData<Boolean> by lazy { MutableLiveData() }
     val createDrinkState: LiveData<Boolean> by lazy { MutableLiveData() }
-    val closeState: LiveData<Boolean> by lazy { MutableLiveData() }
     val visibleSaveButtonState: LiveData<Boolean> by lazy { MutableLiveData() }
     val visibleEditDrinkButtonState: LiveData<Boolean> by lazy { MutableLiveData() }
     val editDrinkState: LiveData<Drink> by lazy { MutableLiveData() }
-    val selectDayState: LiveData<Long> by lazy { MutableLiveData() }
-    val selectTodayState: LiveData<Boolean> by lazy { MutableLiveData() }
     val visibleTodayState: LiveData<Boolean> by lazy { MutableLiveData() }
-    val dateState: LiveData<String> by lazy { MutableLiveData() }
 
     private var id: String = String.empty()
     private var volume: String = String.empty()
@@ -93,7 +92,6 @@ class CreateTrackViewModel @Inject constructor(private var addTrackInteractor: A
             }
         }
         saveState.setValue(true)
-        closeState.setValue(true)
     }
 
     private fun getTrackId(): String = UUID.randomUUID().toString()
@@ -154,11 +152,10 @@ class CreateTrackViewModel @Inject constructor(private var addTrackInteractor: A
         titleFragment.setValue(title)
     }
 
-    fun onDateChange(date: Long, formatDate: String = String.empty()) {
+    fun onDateChange(date: Long) {
         this.date = date
         selectedDate.setValue(date)
         visibleTodayState.setValue(false)
-        dateState.setValue(formatDate)
     }
 
     fun onEventChange(event: String) {
@@ -211,23 +208,11 @@ class CreateTrackViewModel @Inject constructor(private var addTrackInteractor: A
         totalMoney.setValue((quantity * price.toString().toDouble()).toString())
     }
 
-    fun onCloseClick() {
-        closeState.setValue(true)
-    }
-
     fun onCreateClick() {
         createDrinkState.setValue(true)
     }
 
     fun onEditClick() {
         editDrinkState.setValue(currentDrink)
-    }
-
-    fun onSelectDayClick() {
-        selectDayState.setValue(date)
-    }
-
-    fun onTodayClick() {
-        selectTodayState.setValue(true)
     }
 }
