@@ -9,6 +9,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.utmaximur.alcoholtracker.presentation.create_track.CreateTrackViewModel
 
@@ -19,11 +21,12 @@ import com.utmaximur.alcoholtracker.presentation.create_track.CreateTrackViewMod
     ExperimentalAnimationApi::class
 )
 @Composable
-fun CreateTrackerView(viewModel: CreateTrackViewModel) {
+fun CreateTrackerScreen(viewModel: CreateTrackViewModel = hiltViewModel(), navController: NavHostController) {
 
     Column {
         ToolBar(
-            viewModel = viewModel
+            viewModel = viewModel,
+            navController = navController
         )
         Column(
             modifier = Modifier
