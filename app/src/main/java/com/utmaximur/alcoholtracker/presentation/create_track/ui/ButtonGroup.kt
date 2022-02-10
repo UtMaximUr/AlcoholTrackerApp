@@ -63,7 +63,6 @@ fun ButtonGroup(
                 text = dateState.value,
                 onSelectDateClick = {
                     datePickerState.value = true
-                    viewModel.onSelectDayClick()
                 }
             )
         }
