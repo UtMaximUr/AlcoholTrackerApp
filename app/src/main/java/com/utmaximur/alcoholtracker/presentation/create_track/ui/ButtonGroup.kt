@@ -1,5 +1,6 @@
 package com.utmaximur.alcoholtracker.presentation.create_track.ui
 
+import android.content.Context
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.expandVertically
@@ -11,6 +12,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
@@ -23,16 +26,32 @@ import androidx.compose.ui.unit.sp
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.presentation.create_track.CreateTrackViewModel
 import com.utmaximur.alcoholtracker.util.formatDate
+import java.util.*
 
 @ExperimentalAnimationApi
 @Composable
-fun ButtonGroup(viewModel: CreateTrackViewModel) {
+fun ButtonGroup(
+    viewModel: CreateTrackViewModel,
+    context: Context = LocalContext.current,
+    calendar: Calendar = Calendar.getInstance()
+) {
     var dateText = stringResource(id = R.string.add_date)
     viewModel.selectedDate.observeAsState().apply {
-        value?.let { date -> dateText = date.formatDate(LocalContext.current) }
+        value?.let { date -> dateText = date.formatDate(context) }
     }
-    val dateState by viewModel.dateState.observeAsState(dateText)
+
+    val dateState = remember { mutableStateOf(dateText) }
     val visibleTodayState by viewModel.visibleTodayState.observeAsState(true)
+    val datePickerState = remember { mutableStateOf(false) }
+
+    AnimatedVisibility(visible = datePickerState.value) {
+        DatePicker({
+            dateState.value = it.formatDate(context)
+            viewModel.onDateChange(it)
+        }, {
+            datePickerState.value = false
+        })
+    }
 
     Row(
         modifier = Modifier
@@ -40,9 +59,12 @@ fun ButtonGroup(viewModel: CreateTrackViewModel) {
             .padding(bottom = 12.dp)
     ) {
         Box(modifier = Modifier.weight(1f)) {
-            Button(
-                text = dateState,
-                onSelectDateClick = { viewModel.onSelectDayClick() }
+            SelectDayButton(
+                text = dateState.value,
+                onSelectDateClick = {
+                    datePickerState.value = true
+                    viewModel.onSelectDayClick()
+                }
             )
         }
         Spacer(modifier = Modifier.size(4.dp))
@@ -50,16 +72,19 @@ fun ButtonGroup(viewModel: CreateTrackViewModel) {
             visible = visibleTodayState,
             enter = expandVertically()
         ) {
-            OutlineButton(
+            TodayButton(
                 text = R.string.add_today,
-                onTodayClick = { viewModel.onTodayClick() }
+                onTodayClick = {
+                    dateState.value = calendar.timeInMillis.formatDate(context)
+                    viewModel.onDateChange(calendar.timeInMillis)
+                }
             )
         }
     }
 }
 
 @Composable
-fun Button(
+fun SelectDayButton(
     text: String,
     size: TextUnit = 16.sp,
     radius: Int = 50,
@@ -80,7 +105,7 @@ fun Button(
 }
 
 @Composable
-fun OutlineButton(
+fun TodayButton(
     text: Int,
     size: TextUnit = 16.sp,
     radius: Int = 50,
