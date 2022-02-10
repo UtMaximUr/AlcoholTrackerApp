@@ -20,12 +20,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.presentation.create_track.CreateTrackViewModel
 import com.utmaximur.alcoholtracker.presentation.dialog.delete.DeleteView
 
 @Composable
-fun ToolBar(viewModel: CreateTrackViewModel) {
+fun ToolBar(viewModel: CreateTrackViewModel, navController: NavHostController) {
 
     val openDialog = remember { mutableStateOf(false) }
     val titleState by viewModel.titleFragment.observeAsState()
@@ -38,7 +39,7 @@ fun ToolBar(viewModel: CreateTrackViewModel) {
         },
         navigationIcon = {
             IconButton(onClick = {
-                viewModel.onCloseClick()
+                navController.popBackStack()
             }) {
                 Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null)
             }
@@ -61,7 +62,6 @@ fun ToolBar(viewModel: CreateTrackViewModel) {
                             )
                         }
                         IconButton(onClick = {
-//                            viewModel.onDeleteClick()
                             openDialog.value = true
                         }) {
                             Icon(
@@ -77,7 +77,10 @@ fun ToolBar(viewModel: CreateTrackViewModel) {
                         enter = fadeIn(),
                         exit = fadeOut()
                     ) {
-                        IconButton(onClick = { viewModel.onSaveButtonClick() }) {
+                        IconButton(onClick = {
+                            viewModel.onSaveButtonClick()
+                            navController.popBackStack()
+                        }) {
                             Icon(
                                 imageVector = Icons.Default.Done,
                                 contentDescription = null
