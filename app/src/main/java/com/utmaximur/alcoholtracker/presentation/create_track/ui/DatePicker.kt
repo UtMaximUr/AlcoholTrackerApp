@@ -47,7 +47,7 @@ fun DatePicker(onDateSelected: (Long) -> Unit, onDismissRequest: () -> Unit) {
                     .padding(16.dp)
             ) {
                 Text(
-                    text = stringResource(id = R.string.select_day),
+                    text = stringResource(id = R.string.add_date),
                     style = MaterialTheme.typography.subtitle1,
                     color = MaterialTheme.colors.onPrimary
                 )
