@@ -33,7 +33,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.presentation.calculator.ui.CalculatorView
+import com.utmaximur.alcoholtracker.presentation.calculator.ui.CalculatorScreen
 import com.utmaximur.alcoholtracker.presentation.create_track.CreateTrackViewModel
 import com.utmaximur.alcoholtracker.util.extension.empty
 
@@ -174,7 +174,7 @@ fun CalculateText(
     }
 
     if (openDialog.value) {
-        CalculatorView(
+        CalculatorScreen(
             price = textState,
             onDismiss = { openDialog.value = false },
             onResult = { viewModel.onTotalMoneyCalculating(it)}
