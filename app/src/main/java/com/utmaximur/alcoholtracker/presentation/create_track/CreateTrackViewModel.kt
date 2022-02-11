@@ -37,10 +37,8 @@ class CreateTrackViewModel @Inject constructor(private var addTrackInteractor: A
     val drinkState: LiveData<Drink> by lazy { MutableLiveData() }
     val track: LiveData<Track> by lazy { MutableLiveData() }
     val saveState: LiveData<Boolean> by lazy { MutableLiveData() }
-    val createDrinkState: LiveData<Boolean> by lazy { MutableLiveData() }
     val visibleSaveButtonState: LiveData<Boolean> by lazy { MutableLiveData() }
     val visibleEditDrinkButtonState: LiveData<Boolean> by lazy { MutableLiveData() }
-    val editDrinkState: LiveData<Drink> by lazy { MutableLiveData() }
     val visibleTodayState: LiveData<Boolean> by lazy { MutableLiveData() }
 
     private var id: String = String.empty()
@@ -206,13 +204,5 @@ class CreateTrackViewModel @Inject constructor(private var addTrackInteractor: A
 
     fun onTotalMoneyCalculating(quantity: Int) {
         totalMoney.setValue((quantity * price.toString().toDouble()).toString())
-    }
-
-    fun onCreateClick() {
-        createDrinkState.setValue(true)
-    }
-
-    fun onEditClick() {
-        editDrinkState.setValue(currentDrink)
     }
 }
