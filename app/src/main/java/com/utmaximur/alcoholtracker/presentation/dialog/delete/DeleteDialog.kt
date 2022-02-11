@@ -44,14 +44,14 @@ fun DeleteView(
                 ) {
                     Button(onClick = { onNegativeClick() }) {
                         Text(
-                            text = stringResource(id = R.string.dialog_select_date_no),
+                            text = stringResource(id = R.string.dialog_no),
                             color = colorResource(id = R.color.text_color_white)
                         )
                     }
                     Spacer(modifier = Modifier.size(4.dp))
                     Button(onClick = { onPositiveClick() }) {
                         Text(
-                            text = stringResource(id = R.string.dialog_select_date_ok),
+                            text = stringResource(id = R.string.dialog_ok),
                             color = colorResource(id = R.color.text_color_white)
                         )
                     }
