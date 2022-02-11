@@ -22,6 +22,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.utmaximur.alcoholtracker.R
+import com.utmaximur.alcoholtracker.navigation.NavigationDestination
 import com.utmaximur.alcoholtracker.presentation.create_track.CreateTrackViewModel
 import com.utmaximur.alcoholtracker.presentation.dialog.delete.DeleteView
 
@@ -55,7 +56,9 @@ fun ToolBar(viewModel: CreateTrackViewModel, navController: NavHostController) {
                     exit = fadeOut()
                 ) {
                     Row {
-                        IconButton(onClick = { viewModel.onEditClick() }) {
+                        IconButton(onClick = {
+                            navController.navigate(NavigationDestination.CreateDrinkScreen.destination)
+                        }) {
                             Icon(
                                 imageVector = Icons.Default.Edit,
                                 contentDescription = null
@@ -92,7 +95,9 @@ fun ToolBar(viewModel: CreateTrackViewModel, navController: NavHostController) {
                         enter = fadeIn(),
                         exit = fadeOut()
                     ) {
-                        IconButton(onClick = { viewModel.onCreateClick() }) {
+                        IconButton(onClick = {
+                            navController.navigate(NavigationDestination.CreateDrinkScreen.destination)
+                        }) {
                             Icon(
                                 imageVector = Icons.Default.Add,
                                 contentDescription = null
