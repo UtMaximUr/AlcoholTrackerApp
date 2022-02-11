@@ -39,6 +39,11 @@ class AppModule {
     @Provides
     fun provideStatisticsMapper() = StatisticsMapper()
 
+    @Provides
+    fun provideAssets(@ApplicationContext context: Context): AssetsModule {
+        return AssetsModule(context.assets)
+    }
+
 
     @Singleton
     @Provides
