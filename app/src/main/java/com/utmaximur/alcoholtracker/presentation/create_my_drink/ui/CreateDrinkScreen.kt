@@ -22,6 +22,7 @@ import androidx.navigation.NavHostController
 import com.skydoves.landscapist.glide.GlideImage
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.presentation.create_my_drink.CreateMyDrinkViewModel
+import com.utmaximur.alcoholtracker.presentation.dialog.add_photo.AddPhotoDialog
 import com.utmaximur.alcoholtracker.util.extension.empty
 import kotlinx.coroutines.launch
 
