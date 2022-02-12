@@ -1,10 +1,9 @@
-package com.utmaximur.alcoholtracker.presentation.create_my_drink.ui
+package com.utmaximur.alcoholtracker.presentation.dialog.add_photo
 
-import android.Manifest.permission.*
-import android.content.Context
+import android.Manifest.permission.CAMERA
+import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.result.launch
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -13,22 +12,18 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionStatus
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
 import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.presentation.dialog.add_photo.AddPhotoViewModel
 import com.utmaximur.alcoholtracker.util.extension.empty
-import com.utmaximur.alcoholtracker.util.toBitmap
 
 @OptIn(
     ExperimentalMaterialApi::class,
@@ -37,7 +32,6 @@ import com.utmaximur.alcoholtracker.util.toBitmap
 @Composable
 fun AddPhotoDialog(
     viewModel: AddPhotoViewModel = hiltViewModel(),
-    context: Context = LocalContext.current,
     state: ModalBottomSheetState,
     onResultChange: (String) -> Unit
 ) {
@@ -49,18 +43,16 @@ fun AddPhotoDialog(
         contract = ActivityResultContracts.GetContent()
     ) { uri ->
         uri?.let {
-            photoState.value = viewModel.savePhoto(it.toBitmap(context))
+            photoState.value = viewModel.saveImage(it).toString()
             onResultChange(photoState.value)
         }
     }
 
     val cameraLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.TakePicturePreview()
-    ) { bitmap ->
-        bitmap?.let {
-            photoState.value = viewModel.savePhoto(it)
-            onResultChange(photoState.value)
-        }
+        contract = ActivityResultContracts.TakePicture()
+    ) {
+        photoState.value = viewModel.saveImage().toString()
+        onResultChange(photoState.value)
     }
 
     ModalBottomSheetLayout(
@@ -97,6 +89,7 @@ fun AddPhotoDialog(
                     icon = R.drawable.ic_delete,
                     text = R.string.bottom_sheet_option_remove_photo,
                     onClick = {
+                        viewModel.deleteImage()
                         photoState.value = String.empty()
                         onResultChange(photoState.value)
                     }
@@ -119,7 +112,7 @@ fun AddPhotoDialog(
             PermissionsRequest(
                 permissions = CAMERA,
                 onGranted = {
-                    cameraLauncher.launch()
+                    cameraLauncher.launch(viewModel.createImageUri())
                     permissionState.value = String.empty()
                 }
             )
