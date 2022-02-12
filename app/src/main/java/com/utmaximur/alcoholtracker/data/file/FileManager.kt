@@ -1,46 +1,46 @@
 package com.utmaximur.alcoholtracker.data.file
 
-import android.content.ContentResolver
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.ImageDecoder
 import android.net.Uri
+import android.os.Build
 import android.os.Environment
+import android.provider.MediaStore
+import androidx.core.content.FileProvider
+import com.utmaximur.alcoholtracker.util.FILE_PROVIDER
 import com.utmaximur.alcoholtracker.util.FORMAT_IMAGE
 import java.io.*
 import java.util.*
 
 class FileManager(private val context: Context) {
 
-    private val sEOF = -1
-    private val bufferSize = 1024 * 4
+    private var uri: Uri? = null
+    private var file: File? = null
 
-    fun createFile(uri: Uri?): File? {
-        if (uri == null) return null
-        val contentResolver: ContentResolver = context.contentResolver
-        val inputStream: InputStream = contentResolver.openInputStream(uri)!!
-        val file: File = createCacheFile()!!
-        var out: FileOutputStream? = null
-        try {
-            out = FileOutputStream(file)
-        } catch (ignored: FileNotFoundException) {
+    fun createImageUri(): Uri? {
+        uri = createImageFile()?.let { file ->
+            FileProvider.getUriForFile(
+                context,
+                context.packageName + FILE_PROVIDER,
+                file
+            )
         }
-        copy(inputStream, out!!)
-        inputStream.close()
-        out.close()
-        return file
+        return uri
     }
 
-    fun createImageFile(): File? {
-        val storageDir: File = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
-        return File.createTempFile(
-            Date().time.toString(),
-            FORMAT_IMAGE,
-            storageDir
-        )
-    }
+    fun saveImage(uri: Uri?): String? {
+        deleteImage()
+        val bitmap = if (Build.VERSION.SDK_INT < 28) {
+            MediaStore.Images
+                .Media.getBitmap(context.contentResolver, uri ?: this.uri)
 
-    fun savePhoto(bitmap: Bitmap): String {
-        val file = File(context.filesDir, Date().time.toString() + FORMAT_IMAGE)
+        } else {
+            val source = ImageDecoder
+                .createSource(context.contentResolver, uri ?: this.uri!!)
+            ImageDecoder.decodeBitmap(source)
+        }
+        file = File(context.filesDir, Date().time.toString() + FORMAT_IMAGE)
         try {
             var fos: FileOutputStream? = null
             try {
@@ -52,36 +52,22 @@ class FileManager(private val context: Context) {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        return file.absolutePath
+        return file?.absolutePath
     }
 
-
-    private fun createCacheFile(): File? {
-        val prefix = "temp"
-        val dir = context.filesDir
-        var file: File? = null
-        try {
-            file = File.createTempFile(
-                prefix,
-                FORMAT_IMAGE,
-                dir
-            )
-        } catch (ignored: IOException) {
-        }
-        return file
+    private fun createImageFile(): File? {
+        val storageDir: File = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
+        return File.createTempFile(
+            Date().time.toString(),
+            FORMAT_IMAGE,
+            storageDir
+        )
     }
 
-    private fun copy(input: InputStream, output: OutputStream) {
-        var n: Int
-        val buffer = ByteArray(bufferSize)
-        while (sEOF != input.read(buffer).also { n = it }) {
-            output.write(buffer, 0, n)
-        }
-    }
-
-    fun deleteFile(file: File) {
-        if (file.exists()) {
-            file.deleteOnExit()
+    fun deleteImage() {
+        if (file?.exists() == true) {
+            file?.delete()
+//            file?.deleteOnExit()
         }
     }
 }
