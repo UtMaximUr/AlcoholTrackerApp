@@ -1,5 +1,6 @@
 package com.utmaximur.alcoholtracker.presentation.create_my_drink.ui
 
+import android.Manifest.permission.*
 import android.content.Context
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -7,6 +8,7 @@ import androidx.activity.result.launch
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -17,13 +19,21 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.PermissionStatus
+import com.google.accompanist.permissions.isGranted
+import com.google.accompanist.permissions.rememberPermissionState
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.presentation.dialog.add_photo.AddPhotoViewModel
 import com.utmaximur.alcoholtracker.util.extension.empty
 import com.utmaximur.alcoholtracker.util.toBitmap
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(
+    ExperimentalMaterialApi::class,
+    ExperimentalPermissionsApi::class
+)
 @Composable
 fun AddPhotoDialog(
     viewModel: AddPhotoViewModel = hiltViewModel(),
@@ -33,6 +43,7 @@ fun AddPhotoDialog(
 ) {
 
     val photoState = remember { mutableStateOf(String.empty()) }
+    val permissionState = remember { mutableStateOf(String.empty()) }
 
     val galleryLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
@@ -68,16 +79,12 @@ fun AddPhotoDialog(
                 ButtonDialog(
                     icon = R.drawable.ic_add_photo,
                     text = R.string.bottom_sheet_option_camera,
-                    onClick = {
-                        cameraLauncher.launch()
-                    }
+                    onClick = { permissionState.value = CAMERA }
                 )
                 ButtonDialog(
                     icon = R.drawable.ic_gallery,
                     text = R.string.bottom_sheet_option_gallery,
-                    onClick = {
-                        galleryLauncher.launch("image/*")
-                    }
+                    onClick = { permissionState.value = READ_EXTERNAL_STORAGE }
                 )
                 Divider(
                     color = Color.DarkGray,
@@ -97,6 +104,27 @@ fun AddPhotoDialog(
             }
         }
     ) { }
+
+    when (permissionState.value) {
+        READ_EXTERNAL_STORAGE -> {
+            PermissionsRequest(
+                permissions = READ_EXTERNAL_STORAGE,
+                onGranted = {
+                    galleryLauncher.launch("image/*")
+                    permissionState.value = String.empty()
+                }
+            )
+        }
+        CAMERA -> {
+            PermissionsRequest(
+                permissions = CAMERA,
+                onGranted = {
+                    cameraLauncher.launch()
+                    permissionState.value = String.empty()
+                }
+            )
+        }
+    }
 }
 
 @Composable
@@ -126,5 +154,26 @@ fun ButtonDialog(
             color = colorResource(id = R.color.text_color),
             fontSize = 16.sp
         )
+    }
+}
+
+@OptIn(ExperimentalPermissionsApi::class)
+@Composable
+fun PermissionsRequest(
+    permissions: String,
+    onGranted: () -> Unit,
+    onDenied: (@Composable () -> Unit)? = null
+) {
+
+    val permissionState = rememberPermissionState(permissions)
+
+    LaunchedEffect(Unit) {
+        if (!permissionState.status.isGranted)
+            permissionState.launchPermissionRequest()
+    }
+
+    when (permissionState.status) {
+        PermissionStatus.Granted -> onGranted.invoke()
+        is PermissionStatus.Denied -> onDenied?.invoke()
     }
 }
