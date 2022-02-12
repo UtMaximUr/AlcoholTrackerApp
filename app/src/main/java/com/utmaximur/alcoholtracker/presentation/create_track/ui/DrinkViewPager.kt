@@ -5,13 +5,15 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
@@ -27,6 +29,12 @@ fun ViewPagerDrink(
 
     val drinksList by viewModel.drinksList.observeAsState()
     val positionState by viewModel.position.observeAsState()
+
+    val lifeCycleState = LocalLifecycleOwner.current.lifecycle.observeAsSate()
+    when(lifeCycleState.value) {
+        Lifecycle.Event.ON_RESUME -> viewModel.updateDrinks()
+        else -> { lifeCycleState.value }
+    }
 
     Card(
         modifier = Modifier.padding(bottom = 12.dp),
@@ -89,4 +97,19 @@ fun DotsIndicator(
             }
         }
     }
+}
+
+@Composable
+fun Lifecycle.observeAsSate(): State<Lifecycle.Event> {
+    val state = remember { mutableStateOf(Lifecycle.Event.ON_ANY) }
+    DisposableEffect(this) {
+        val observer = LifecycleEventObserver { _, event ->
+            state.value = event
+        }
+        this@observeAsSate.addObserver(observer)
+        onDispose {
+            this@observeAsSate.removeObserver(observer)
+        }
+    }
+    return state
 }
