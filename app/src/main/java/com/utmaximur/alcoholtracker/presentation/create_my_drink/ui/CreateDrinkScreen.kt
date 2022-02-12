@@ -1,6 +1,7 @@
 package com.utmaximur.alcoholtracker.presentation.create_my_drink.ui
 
 
+import android.content.Context
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,12 +17,15 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.skydoves.landscapist.glide.GlideImage
 import com.utmaximur.alcoholtracker.R
+import com.utmaximur.alcoholtracker.navigation.NavigationDestination
 import com.utmaximur.alcoholtracker.presentation.create_my_drink.CreateMyDrinkViewModel
+import com.utmaximur.alcoholtracker.presentation.create_my_drink.state.EmptyFieldState
 import com.utmaximur.alcoholtracker.presentation.dialog.add_photo.AddPhotoDialog
 import com.utmaximur.alcoholtracker.util.extension.empty
 import kotlinx.coroutines.launch
@@ -30,13 +34,12 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterialApi::class, androidx.compose.ui.ExperimentalComposeUiApi::class)
 @Composable
 fun CreateDrinkScreen(
+    context: Context = LocalContext.current,
     viewModel: CreateMyDrinkViewModel = hiltViewModel(),
     navController: NavHostController
 ) {
 
-    val photoState = remember { mutableStateOf(String.empty()) }.apply {
-        viewModel.onPhotoChange(value)
-    }
+    val photoState = remember { mutableStateOf(String.empty()) }
 
     val scope = rememberCoroutineScope()
     val state = rememberModalBottomSheetState(
@@ -47,12 +50,38 @@ fun CreateDrinkScreen(
     val snackBarHostState = remember { SnackbarHostState() }
 
     viewModel.emptyFieldState.observeAsState().apply {
-        if (!value.isNullOrEmpty()) {
-            scope.launch {
-                value?.let { text ->
-                    snackBarHostState.showSnackbar(
-                        message = text
-                    )
+        value?.let { state ->
+            when (state) {
+                is EmptyFieldState.Empty -> {
+                    var idText = 0
+                    if (state.isPhotoEmpty)
+                        idText = R.string.empty_field_photo
+
+                    if (state.isNameEmpty)
+                        idText = R.string.empty_field_name
+
+                    if (state.isIconEmpty)
+                        idText = R.string.empty_field_icon
+
+                    if (state.isDegreeEmpty)
+                        idText = R.string.empty_field_degree
+
+                    if (state.isVolumeEmpty)
+                        idText = R.string.empty_field_volume
+
+                    if (state.isNotEmpty) {
+                        navController.popBackStack(
+                            route = NavigationDestination.AddTrackScreen.destination,
+                            inclusive = false
+                        )
+                        return@apply
+                    }
+
+                    scope.launch {
+                        snackBarHostState.showSnackbar(
+                            message = context.getString(idText)
+                        )
+                    }
                 }
             }
         }
@@ -88,6 +117,7 @@ fun CreateDrinkScreen(
     AddPhotoDialog(
         state = state,
         onResultChange = {
+            viewModel.onPhotoChange(it)
             photoState.value = it
             scope.launch { state.hide() }
         }

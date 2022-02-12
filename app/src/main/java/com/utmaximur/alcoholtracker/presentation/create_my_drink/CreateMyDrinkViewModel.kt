@@ -9,13 +9,16 @@ import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.domain.entity.Drink
 import com.utmaximur.alcoholtracker.domain.entity.Icon
 import com.utmaximur.alcoholtracker.domain.interactor.AddNewDrinkInteractor
+import com.utmaximur.alcoholtracker.presentation.create_my_drink.state.EmptyFieldState
 import com.utmaximur.alcoholtracker.util.extension.empty
 import com.utmaximur.alcoholtracker.util.formatDegree1f
 import com.utmaximur.alcoholtracker.util.setValue
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
+@HiltViewModel
 class CreateMyDrinkViewModel @Inject constructor(
     private var addNewDrinkInteractor: AddNewDrinkInteractor
 ) : ViewModel() {
@@ -31,21 +34,31 @@ class CreateMyDrinkViewModel @Inject constructor(
         MutableLiveData()
     }
 
+    val titleFragment: LiveData<Int> by lazy {
+        MutableLiveData()
+    }
+
+    val emptyFieldState: LiveData<EmptyFieldState> by lazy {
+        MutableLiveData()
+    }
+
     fun onSaveButtonClick() {
-        viewModelScope.launch {
-            val drink = Drink(
-                id,
-                name,
-                degreeList,
-                volumeList,
-                icon,
-                photo
-            )
-            if (id == String.empty()) {
-                val newDrink = drink.copy(id = getDrinkId())
-                addNewDrinkInteractor.insertDrink(newDrink)
-            } else {
-                addNewDrinkInteractor.updateDrink(drink)
+        if (checkEmptyField()) {
+            viewModelScope.launch {
+                val drink = Drink(
+                    id,
+                    name,
+                    degreeList,
+                    volumeList,
+                    icon,
+                    photo
+                )
+                if (id == String.empty()) {
+                    val newDrink = drink.copy(id = getDrinkId())
+                    addNewDrinkInteractor.insertDrink(newDrink)
+                } else {
+                    addNewDrinkInteractor.updateDrink(drink)
+                }
             }
         }
     }
@@ -54,32 +67,41 @@ class CreateMyDrinkViewModel @Inject constructor(
         return addNewDrinkInteractor.getIcons()
     }
 
-    fun getVolumes(context: Context): List<String?> {
+    fun getVolumes(context: Context): List<String> {
         val volume = context.resources.getStringArray(R.array.volume_array)
         return volume.toList()
     }
 
     private fun getDrinkId(): String = UUID.randomUUID().toString()
 
-    fun checkEmptyField(context: Context): String {
-        when {
-            photo.isEmpty() -> {
-                return context.getString(R.string.empty_field_photo)
+    private fun checkEmptyField(): Boolean {
+        (emptyFieldState as MutableLiveData).value = null
+        return when {
+            photo.isEmpty () -> {
+                emptyFieldState.setValue(EmptyFieldState.Empty(isPhotoEmpty = false))
+                false
             }
             name.isEmpty() -> {
-                return context.getString(R.string.empty_field_name)
+                emptyFieldState.setValue(EmptyFieldState.Empty(isNameEmpty = false))
+                false
             }
             icon.isEmpty() -> {
-                return context.getString(R.string.empty_field_icon)
+                emptyFieldState.setValue(EmptyFieldState.Empty(isIconEmpty = false))
+                false
             }
             degreeList.isEmpty() -> {
-                return context.getString(R.string.empty_field_degree)
+                emptyFieldState.setValue(EmptyFieldState.Empty(isDegreeEmpty = false))
+                false
             }
             volumeList.isEmpty() -> {
-                return context.getString(R.string.empty_field_volume)
+                emptyFieldState.setValue(EmptyFieldState.Empty(isVolumeEmpty = false))
+                false
+            }
+            else -> {
+                emptyFieldState.setValue(EmptyFieldState.Empty(isNotEmpty = true))
+                true
             }
         }
-        return ""
     }
 
     fun onDrinkChange(drink: Drink?) {
