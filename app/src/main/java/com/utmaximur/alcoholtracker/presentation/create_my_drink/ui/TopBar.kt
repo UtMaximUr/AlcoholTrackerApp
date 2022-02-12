@@ -1,6 +1,5 @@
 package com.utmaximur.alcoholtracker.presentation.create_my_drink.ui
 
-import android.content.Context
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
@@ -12,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -23,7 +21,6 @@ import com.utmaximur.alcoholtracker.presentation.create_my_drink.CreateMyDrinkVi
 
 @Composable
 fun TopBar(
-    context: Context = LocalContext.current,
     viewModel: CreateMyDrinkViewModel = hiltViewModel(),
     navController: NavHostController
 ) {
@@ -45,8 +42,7 @@ fun TopBar(
         elevation = 0.dp,
         actions = {
             IconButton(onClick = {
-                viewModel.onSaveButtonClick(context)
-                navController.popBackStack()
+                viewModel.onSaveButtonClick()
             }) {
                 Icon(
                     imageVector = Icons.Default.Done,
