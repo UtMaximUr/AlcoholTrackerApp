@@ -33,6 +33,7 @@ fun ToolBar(viewModel: CreateTrackViewModel, navController: NavHostController) {
     val titleState by viewModel.titleFragment.observeAsState()
     val visibleSaveButtonState by viewModel.visibleSaveButtonState.observeAsState(true)
     val visibleEditDrinkButtonState by viewModel.visibleEditDrinkButtonState.observeAsState(false)
+    val currentDrink by viewModel.drink.observeAsState()
 
     TopAppBar(
         title = {
@@ -57,7 +58,11 @@ fun ToolBar(viewModel: CreateTrackViewModel, navController: NavHostController) {
                 ) {
                     Row {
                         IconButton(onClick = {
-                            navController.navigate(NavigationDestination.CreateDrinkScreen.destination)
+                            navController.navigate(
+                                NavigationDestination.CreateDrinkScreen.route.plus(
+                                    "/${currentDrink?.id}"
+                                )
+                            )
                         }) {
                             Icon(
                                 imageVector = Icons.Default.Edit,
@@ -96,7 +101,7 @@ fun ToolBar(viewModel: CreateTrackViewModel, navController: NavHostController) {
                         exit = fadeOut()
                     ) {
                         IconButton(onClick = {
-                            navController.navigate(NavigationDestination.CreateDrinkScreen.destination)
+                            navController.navigate(NavigationDestination.CreateDrinkScreen.route)
                         }) {
                             Icon(
                                 imageVector = Icons.Default.Add,
