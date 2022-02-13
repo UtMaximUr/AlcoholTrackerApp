@@ -1,20 +1,13 @@
 package com.utmaximur.alcoholtracker
 
-import android.app.Application
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
-import com.utmaximur.alcoholtracker.di.component.AlcoholTrackComponent
-import com.utmaximur.alcoholtracker.di.component.DaggerAlcoholTrackComponent
-import com.utmaximur.alcoholtracker.di.module.RoomDatabaseModule
+import androidx.multidex.MultiDexApplication
 import com.utmaximur.alcoholtracker.util.*
+import dagger.hilt.android.HiltAndroidApp
 
-open class App : Application() {
-
-    companion object {
-        lateinit var instance: App
-    }
-
-    lateinit var alcoholTrackComponent: AlcoholTrackComponent
+@HiltAndroidApp
+open class App : MultiDexApplication() {
 
     private val sharedPrefs by lazy { getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE) }
 
@@ -25,12 +18,6 @@ open class App : Application() {
             THEME_LIGHT -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             THEME_UNDEFINED -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.getDefaultNightMode())
         }
-        instance = this
-
-        alcoholTrackComponent = DaggerAlcoholTrackComponent
-            .builder()
-            .roomDatabaseModule(RoomDatabaseModule(this))
-            .build()
     }
 
     private fun getSavedTheme() = sharedPrefs?.getInt(KEY_THEME, THEME_UNDEFINED)
