@@ -14,9 +14,9 @@ data class DrinkDBO(
     var id: String,
     var drink: String,
     @TypeConverters(Converters::class)
-    var degree: List<String?>,
+    var degree: List<String>,
     @TypeConverters(Converters::class)
-    var volume: List<String?>,
+    var volume: List<String>,
     var icon: String,
     var photo: String
 
