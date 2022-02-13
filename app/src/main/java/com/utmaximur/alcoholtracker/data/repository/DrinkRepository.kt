@@ -15,6 +15,10 @@ class DrinkRepository(alcoholTrackDatabase: AlcoholTrackDatabase, private val dr
         return drinkDao.getDrinks().map { drinkMapper.map(it) }
     }
 
+    suspend fun getDrinkById(id: String): Drink {
+        return drinkMapper.map(drinkDao.getDrinkById(id))
+    }
+
     suspend fun insertDrink(drink: Drink) {
         drinkDao.addDrink(drinkMapper.map(drink))
     }

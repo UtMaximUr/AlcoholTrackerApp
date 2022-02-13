@@ -19,6 +19,10 @@ class AddNewDrinkInteractor @Inject constructor(
         drinkRepository.updateDrink(drink)
     }
 
+    suspend fun getDrinkById(id: String): Drink {
+        return drinkRepository.getDrinkById(id)
+    }
+
     fun getIcons(): List<Icon> {
         return assetsRepository.getIcons()
     }

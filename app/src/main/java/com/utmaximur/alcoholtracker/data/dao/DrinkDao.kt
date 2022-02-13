@@ -12,6 +12,9 @@ interface DrinkDao {
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateDrink(drinkDBO: DrinkDBO)
 
+    @Query("SELECT * FROM drink_database WHERE id=:id")
+    suspend fun getDrinkById(id: String): DrinkDBO
+
     @Query("SELECT * FROM drink_database")
     suspend fun getDrinks(): List<DrinkDBO>
 
