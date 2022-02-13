@@ -1,6 +1,8 @@
 package com.utmaximur.alcoholtracker.presentation.main.ui
 
 
+import android.content.Context
+import android.util.Log
 import androidx.compose.animation.*
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.shape.CircleShape
@@ -8,8 +10,10 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavHostController
@@ -18,14 +22,18 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.utmaximur.alcoholtracker.R
+import com.utmaximur.alcoholtracker.data.update.UpdateManager
 import com.utmaximur.alcoholtracker.navigation.NavigationDestination.*
 import com.utmaximur.alcoholtracker.presentation.calendar.ui.CalendarScreen
 import com.utmaximur.alcoholtracker.presentation.create_my_drink.ui.CreateDrinkScreen
 import com.utmaximur.alcoholtracker.presentation.create_track.ui.CreateTrackerScreen
+import com.utmaximur.alcoholtracker.presentation.dialog.update.UpdateDialog
 import com.utmaximur.alcoholtracker.presentation.settings.ui.SettingsScreen
 import com.utmaximur.alcoholtracker.presentation.splash.ui.theme.AlcoholTrackerTheme
 import com.utmaximur.alcoholtracker.presentation.statistic.ui.StatisticScreen
 import com.utmaximur.alcoholtracker.util.DRINK
+import com.utmaximur.alcoholtracker.util.KEY_UPDATE
+import com.utmaximur.alcoholtracker.util.PREFS_NAME
 
 @Composable
 fun MainScreen() {
@@ -35,6 +43,8 @@ fun MainScreen() {
     bottomBarState.value =
         currentRoute(navController) != AddTrackScreen.route
                 && currentRoute(navController)?.contains(CreateDrinkScreen.route) == false
+
+    UpdateApp()
 
     AlcoholTrackerTheme {
         Scaffold(
@@ -117,4 +127,35 @@ fun BottomNavScreensController(navController: NavHostController, innerPadding: P
 fun currentRoute(navController: NavHostController): String? {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     return navBackStackEntry?.destination?.route
+}
+
+@Composable
+private fun UpdateApp() {
+    Log.d("debug_log", "UpdateApp")
+
+    val context = LocalContext.current
+
+    val openDialog = remember { mutableStateOf(false) }
+
+    val sharedPrefs by lazy { context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE) }
+    val savedUpdate = sharedPrefs.getBoolean(KEY_UPDATE, true)
+
+    Log.d("debug_log", "savedUpdate = $savedUpdate")
+
+    if (savedUpdate) {
+        UpdateManager.getInstance().registerListener()
+        UpdateManager.getInstance().attachUpdateListener(object : UpdateManager.UpdateListener {
+            override fun onShowUpdateDialog() {
+                openDialog.value = true
+            }
+        })
+        UpdateManager.getInstance().checkForUpdate(context)
+    }
+
+    if (openDialog.value) {
+        UpdateDialog(
+            onLaterClick = { openDialog.value = false },
+            onNowClick = { UpdateManager.getInstance().completeUpdate() }
+        )
+    }
 }
