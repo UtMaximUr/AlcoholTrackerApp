@@ -2,17 +2,15 @@ package com.utmaximur.alcoholtracker.data.update
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.IntentSender.SendIntentException
+import android.content.Context
+import android.util.Log
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.install.InstallState
 import com.google.android.play.core.install.InstallStateUpdatedListener
-import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.InstallStatus
-import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.android.play.core.tasks.Task
-import com.utmaximur.alcoholtracker.util.UPDATE_REQUEST_CODE
 
 
 class UpdateManager {
@@ -32,37 +30,18 @@ class UpdateManager {
         updateListener = null
     }
 
-    fun checkForUpdate(activity: Activity) {
-        appUpdateManager = AppUpdateManagerFactory.create(activity)
+    fun checkForUpdate(context: Context) {
+        appUpdateManager = AppUpdateManagerFactory.create(context)
         val appUpdateInfoTask: Task<AppUpdateInfo> =
             appUpdateManager?.appUpdateInfo as Task<AppUpdateInfo>
         appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
+            Log.d("debug_log", "appUpdateInfo = ${appUpdateInfo.installStatus()}")
             if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
                 if (updateListener != null) {
                     updateListener?.onShowUpdateDialog()
                 }
-            } else if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)
-            ) {
-                if (!activity.isFinishing) {
-                    try {
-                        startUpdate(appUpdateInfo, activity)
-                    } catch (e: SendIntentException) {
-                    }
-                }
             }
         }
-    }
-
-    @Throws(SendIntentException::class)
-    private fun startUpdate(appUpdateInfo: AppUpdateInfo, activity: Activity) {
-        if (appUpdateManager == null) return
-        appUpdateManager?.startUpdateFlowForResult(
-            appUpdateInfo,
-            AppUpdateType.FLEXIBLE,
-            activity,
-            UPDATE_REQUEST_CODE
-        )
     }
 
     fun registerListener() {
