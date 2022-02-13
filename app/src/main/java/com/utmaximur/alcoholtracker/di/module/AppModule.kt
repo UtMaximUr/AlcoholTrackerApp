@@ -13,6 +13,7 @@ import com.utmaximur.alcoholtracker.data.repository.*
 import com.utmaximur.alcoholtracker.domain.interactor.*
 import com.utmaximur.alcoholtracker.domain.mapper.CalendarMapper
 import com.utmaximur.alcoholtracker.domain.mapper.StatisticsMapper
+import com.utmaximur.alcoholtracker.util.PREFS_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -87,7 +88,7 @@ class AppModule {
     @Provides
     fun providesSharedPreferences(@ApplicationContext context: Context): SharedPreferences =
         context.getSharedPreferences(
-            "KEY_SHARED_PREF", Context.MODE_PRIVATE
+            PREFS_NAME, Context.MODE_PRIVATE
         )
 
     @Singleton
