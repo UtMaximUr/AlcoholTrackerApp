@@ -11,6 +11,8 @@ import androidx.compose.material.Checkbox
 import androidx.compose.material.CheckboxDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -33,6 +35,7 @@ fun DrinkVolume(
 ) {
 
     val volumeState = viewModel.getVolumes(context)
+    val volumeListState by viewModel.volumeListState.observeAsState()
 
     Column(modifier = Modifier.padding(16.dp)) {
         Text(
@@ -44,7 +47,7 @@ fun DrinkVolume(
         Spacer(modifier = Modifier.padding(top = 16.dp))
         LazyColumn {
             items(count = volumeState.size) { index ->
-                VolumeItem(volumeState[index]) {
+                VolumeItem(volumeState[index], volumeListState) {
                     viewModel.onVolumeChange(it)
                 }
             }
@@ -55,10 +58,17 @@ fun DrinkVolume(
 @Composable
 fun VolumeItem(
     volume: String,
+    selectedVolume: List<String?>?,
     onChecked: (String) -> Unit
 ) {
 
-    val volumeState = remember { mutableStateOf(false) }
+    val volumeState = remember { mutableStateOf(false) }.apply {
+        selectedVolume?.forEach {
+            if(it == volume) {
+                value = true
+            }
+        }
+    }
 
     Row(
         modifier = Modifier.clickable {

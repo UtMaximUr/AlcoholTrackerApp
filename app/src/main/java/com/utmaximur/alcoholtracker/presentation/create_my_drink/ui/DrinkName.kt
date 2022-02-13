@@ -33,6 +33,9 @@ fun DrinkName(viewModel: CreateMyDrinkViewModel) {
 
     val textState = remember { mutableStateOf(String.empty()) }.apply {
         viewModel.onNameDrinkChange(value)
+        viewModel.nameState.value?.let { name ->
+            value = name
+        }
     }
 
     val focusManager = LocalFocusManager.current

@@ -36,10 +36,19 @@ import kotlinx.coroutines.launch
 fun CreateDrinkScreen(
     context: Context = LocalContext.current,
     viewModel: CreateMyDrinkViewModel = hiltViewModel(),
-    navController: NavHostController
+    navController: NavHostController,
+    editDrinkId: String? = null
 ) {
 
-    val photoState = remember { mutableStateOf(String.empty()) }
+    editDrinkId?.let {
+        viewModel.onDrinkChange(editDrinkId, R.string.edit_drink_title)
+    }
+
+    val photoState = remember { mutableStateOf(String.empty()) }.apply {
+        viewModel.photoState.value?.let { photo ->
+            value = photo
+        }
+    }
 
     val scope = rememberCoroutineScope()
     val state = rememberModalBottomSheetState(
@@ -71,7 +80,7 @@ fun CreateDrinkScreen(
 
                     if (state.isNotEmpty) {
                         navController.popBackStack(
-                            route = NavigationDestination.AddTrackScreen.destination,
+                            route = NavigationDestination.AddTrackScreen.route,
                             inclusive = false
                         )
                         return@apply

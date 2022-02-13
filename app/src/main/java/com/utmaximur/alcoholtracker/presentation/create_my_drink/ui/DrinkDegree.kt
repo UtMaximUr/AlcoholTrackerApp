@@ -25,7 +25,11 @@ import com.utmaximur.alcoholtracker.util.format1f
 @Composable
 fun DrinkDegree(viewModel: CreateMyDrinkViewModel) {
 
-    val sliderPosition = remember { mutableStateOf(25f..75f) }
+    val sliderPosition = remember { mutableStateOf(25f..75f) }.apply {
+        viewModel.degreeListState.value?.let { degree ->
+            value = degree.first().toFloat()..degree.last().toFloat()
+        }
+    }
 
     Column(modifier = Modifier.padding(16.dp)) {
         Row {

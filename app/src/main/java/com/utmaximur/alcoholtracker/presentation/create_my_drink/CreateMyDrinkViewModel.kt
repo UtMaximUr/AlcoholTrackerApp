@@ -27,10 +27,27 @@ class CreateMyDrinkViewModel @Inject constructor(
     private var photo: String = String.empty()
     private var name: String = String.empty()
     private var icon: String = String.empty()
-    private var degreeList: ArrayList<String?> = ArrayList()
-    private var volumeList: ArrayList<String?> = ArrayList()
+    private var degreeList: ArrayList<String> = ArrayList()
+    private var volumeList: ArrayList<String> = ArrayList()
 
-    val drink: LiveData<Drink> by lazy {
+
+    val photoState: LiveData<String> by lazy {
+        MutableLiveData()
+    }
+
+    val nameState: LiveData<String> by lazy {
+        MutableLiveData()
+    }
+
+    val iconState: LiveData<String> by lazy {
+        MutableLiveData()
+    }
+
+    val degreeListState: LiveData<List<String>> by lazy {
+        MutableLiveData()
+    }
+
+    val volumeListState: LiveData<List<String?>> by lazy {
         MutableLiveData()
     }
 
@@ -104,17 +121,25 @@ class CreateMyDrinkViewModel @Inject constructor(
         }
     }
 
-    fun onDrinkChange(drink: Drink?) {
+    fun onDrinkChange(editDinkId: String, title: Int) {
+        titleFragment.setValue(title)
 
-        val dataDrinks = drink
-        (this.drink as MutableLiveData).value = dataDrinks
+        viewModelScope.launch {
+            val editDrink = addNewDrinkInteractor.getDrinkById(editDinkId)
 
-        id = drink?.id.toString()
-        photo = drink?.photo.toString()
-        name = drink?.drink.toString()
-        degreeList = drink?.degree as ArrayList<String?>
-        volumeList = drink.volume as ArrayList<String?>
-        icon = drink.icon
+            photoState.setValue(editDrink.photo)
+            nameState.setValue(editDrink.drink)
+            iconState.setValue(editDrink.icon)
+            degreeListState.setValue(editDrink.degree)
+            volumeListState.setValue(editDrink.volume)
+
+            id = editDrink.id
+            photo = editDrink.photo
+            name = editDrink.drink
+            degreeList = editDrink.degree as ArrayList<String>
+            volumeList = editDrink.volume as ArrayList<String>
+            icon = editDrink.icon
+        }
     }
 
     fun onPhotoChange(photo: String) {
@@ -142,7 +167,7 @@ class CreateMyDrinkViewModel @Inject constructor(
         }
     }
 
-    fun onVolumeChange(volume: String?) {
+    fun onVolumeChange(volume: String) {
         if (volumeList.contains(volume)) {
             volumeList.remove(volume)
         } else {

@@ -26,7 +26,11 @@ import com.utmaximur.alcoholtracker.util.getIdRaw
 fun DrinkIcon(viewModel: CreateMyDrinkViewModel) {
 
     val icons = viewModel.getIcons()
-    val selectedState = remember { mutableStateOf<Icon?>(null) }
+    val selectedState = remember { mutableStateOf<String?>(null) }.apply {
+        viewModel.iconState.value?.let { icon ->
+            value = icon
+        }
+    }
 
     LazyRow(
         modifier = Modifier
@@ -38,7 +42,7 @@ fun DrinkIcon(viewModel: CreateMyDrinkViewModel) {
                 icon = icons[index],
                 selectedState = selectedState,
                 onClick = {
-                    selectedState.value = it
+                    selectedState.value = it.icon
                     viewModel.onIconChange(it.icon)
                 })
         }
@@ -49,14 +53,14 @@ fun DrinkIcon(viewModel: CreateMyDrinkViewModel) {
 fun IconItem(
     context: Context = LocalContext.current,
     icon: Icon,
-    selectedState: MutableState<Icon?>,
+    selectedState: MutableState<String?>,
     onClick: (Icon) -> Unit
 ) {
     GlideImage(
         imageModel = icon.icon.getIdRaw(context),
         modifier = Modifier
             .aspectRatio(1f)
-            .alpha(if (selectedState.value == icon) 1f else 0.2f)
+            .alpha(if (selectedState.value == icon.icon) 1f else 0.2f)
             .clickable {
                 onClick(icon)
             }
