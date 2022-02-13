@@ -44,6 +44,11 @@ class AppModule {
         return AssetsModule(context.assets)
     }
 
+    @Provides
+    fun provideFileManager(@ApplicationContext context: Context): FileManager {
+        return FileManager(context)
+    }
+
 
     @Singleton
     @Provides
