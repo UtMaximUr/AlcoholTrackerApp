@@ -36,6 +36,7 @@ import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.presentation.calculator.ui.CalculatorScreen
 import com.utmaximur.alcoholtracker.presentation.create_track.CreateTrackViewModel
 import com.utmaximur.alcoholtracker.util.extension.empty
+import com.utmaximur.alcoholtracker.util.formatStringTo1f
 
 @ExperimentalComposeUiApi
 @Composable
@@ -129,7 +130,7 @@ fun CalculateText(
         verticalAlignment = Alignment.CenterVertically
     ) {
         TextField(
-            value = textState,
+            value = textState.formatStringTo1f(),
             label = { Text(text = stringResource(id = text)) },
             leadingIcon = {
                 Image(
