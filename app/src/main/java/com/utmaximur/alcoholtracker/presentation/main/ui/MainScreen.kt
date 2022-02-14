@@ -7,10 +7,7 @@ import androidx.compose.animation.*
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -29,7 +26,7 @@ import com.utmaximur.alcoholtracker.presentation.create_my_drink.ui.CreateDrinkS
 import com.utmaximur.alcoholtracker.presentation.create_track.ui.CreateTrackerScreen
 import com.utmaximur.alcoholtracker.presentation.dialog.update.UpdateDialog
 import com.utmaximur.alcoholtracker.presentation.settings.ui.SettingsScreen
-import com.utmaximur.alcoholtracker.presentation.splash.ui.theme.AlcoholTrackerTheme
+import com.utmaximur.alcoholtracker.presentation.main.ui.theme.AlcoholTrackerTheme
 import com.utmaximur.alcoholtracker.presentation.statistic.ui.StatisticScreen
 import com.utmaximur.alcoholtracker.util.DRINK
 import com.utmaximur.alcoholtracker.util.KEY_UPDATE
@@ -40,9 +37,6 @@ fun MainScreen() {
 
     val navController = rememberNavController()
     val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
-    bottomBarState.value =
-        currentRoute(navController) != AddTrackScreen.route
-                && currentRoute(navController)?.contains(CreateDrinkScreen.route) == false
 
     UpdateApp()
 
@@ -74,7 +68,7 @@ fun MainScreen() {
                 }
             }
         ) { innerPadding ->
-            BottomNavScreensController(navController = navController, innerPadding = innerPadding)
+            BottomNavScreensController(navController = navController, bottomBarState = bottomBarState, innerPadding = innerPadding)
         }
     }
 }
@@ -100,21 +94,34 @@ fun AddTrackButton(navController: NavHostController) {
 }
 
 @Composable
-fun BottomNavScreensController(navController: NavHostController, innerPadding: PaddingValues) {
+fun BottomNavScreensController(
+    navController: NavHostController,
+    bottomBarState: MutableState<Boolean>,
+    innerPadding: PaddingValues
+) {
     NavHost(navController, startDestination = CalendarScreen.route) {
         composable(CalendarScreen.route) {
+            bottomBarState.value = true
             CalendarScreen(innerPadding = innerPadding)
         }
         composable(AddTrackScreen.route) {
+            bottomBarState.value = false
             CreateTrackerScreen(navController = navController)
         }
         composable(StatisticScreen.route) {
+            bottomBarState.value = true
             StatisticScreen(innerPadding = innerPadding)
         }
         composable(SettingsScreen.route) {
+            bottomBarState.value = true
             SettingsScreen(innerPadding = innerPadding)
         }
+        composable(CreateDrinkScreen.route) {
+            bottomBarState.value = false
+            CreateDrinkScreen(navController = navController)
+        }
         composable(CreateDrinkScreen.route.plus("/{$DRINK}")) {
+            bottomBarState.value = false
             CreateDrinkScreen(
                 navController = navController,
                 editDrinkId = it.arguments?.getString(DRINK)
