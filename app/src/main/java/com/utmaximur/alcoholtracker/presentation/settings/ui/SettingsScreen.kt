@@ -1,6 +1,5 @@
 package com.utmaximur.alcoholtracker.presentation.settings.ui
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -12,12 +11,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.skydoves.landscapist.glide.GlideImage
 import com.utmaximur.alcoholtracker.BuildConfig
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.presentation.settings.SettingsViewModel
@@ -43,9 +42,9 @@ fun SettingsScreen(viewModel: SettingsViewModel = hiltViewModel(), innerPadding:
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Card(elevation = 11.dp) {
-                Image(
-                    modifier = Modifier.padding(20.dp),
-                    painter = painterResource(id = R.drawable.ic_launcher),
+                GlideImage(
+                    modifier = Modifier.padding(20.dp).size(128.dp),
+                    imageModel = R.mipmap.ic_launcher,
                     contentDescription = null
                 )
             }
