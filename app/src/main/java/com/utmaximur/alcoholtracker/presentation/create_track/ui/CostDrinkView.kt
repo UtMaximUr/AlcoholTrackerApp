@@ -67,8 +67,11 @@ fun EventText(
 
     val focusManager = LocalFocusManager.current
     val keyboardController = LocalSoftwareKeyboardController.current
-    val event by viewModel.eventState.observeAsState()
-    val textState = remember { mutableStateOf(TextFieldValue(event ?: String.empty())) }
+    val textState = remember { mutableStateOf(TextFieldValue(String.empty())) }
+
+    viewModel.eventState.observeAsState().apply {
+        value?.let { event -> textState.value = TextFieldValue(event) }
+    }
 
     Row(
         modifier = Modifier.padding(start = 12.dp, end = 12.dp),
