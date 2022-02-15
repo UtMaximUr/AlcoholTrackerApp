@@ -15,6 +15,9 @@ import androidx.navigation.NavHostController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.presentation.create_track.CreateTrackViewModel
+import com.utmaximur.alcoholtracker.util.SELECT_DAY_ADD
+import com.utmaximur.alcoholtracker.util.getNavigationResult
+import com.utmaximur.alcoholtracker.util.removeNavigationResult
 
 
 @OptIn(
@@ -32,6 +35,11 @@ fun CreateTrackerScreen(
     LaunchedEffect(key1 = Unit) {
         editTrackId?.let {
             viewModel.onTrackChange(editTrackId, R.string.edit_drink_title)
+        }
+        val dateArguments = navController.getNavigationResult<Long>(SELECT_DAY_ADD)
+        dateArguments?.let {  date ->
+            viewModel.onDateChange(date)
+            navController.removeNavigationResult<Long>(SELECT_DAY_ADD)
         }
     }
 
