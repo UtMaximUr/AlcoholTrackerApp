@@ -19,6 +19,10 @@ class AddTrackInteractor @Inject constructor(
         trackRepository.updateTrack(track)
     }
 
+    suspend fun getTrackById(id: String) : Track {
+        return trackRepository.getTrackById(id)
+    }
+
     suspend fun getDrinks(): List<Drink> {
         return drinkRepository.getDrinks()
     }

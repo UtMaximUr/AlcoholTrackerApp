@@ -22,6 +22,10 @@ class TrackRepository(
         }
     }
 
+    suspend fun getTrackById(id: String) : Track {
+        return trackMapper.map(trackDao.getTrackById(id))
+    }
+
     suspend fun insertTrack(track: Track) {
         trackDao.insertTrack(trackMapper.map(track))
     }

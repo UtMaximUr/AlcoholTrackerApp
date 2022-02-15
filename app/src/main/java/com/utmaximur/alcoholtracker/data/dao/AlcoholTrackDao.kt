@@ -18,6 +18,9 @@ interface AlcoholTrackDao {
     @Query("SELECT * FROM track_database WHERE date == :date")
     suspend fun getTrack(date: Long): TrackDBO
 
+    @Query("SELECT * FROM track_database WHERE id=:id")
+    suspend fun getTrackById(id: String): TrackDBO
+
     @Query("SELECT * FROM track_database")
     suspend fun getTracks(): List<TrackDBO>
 
