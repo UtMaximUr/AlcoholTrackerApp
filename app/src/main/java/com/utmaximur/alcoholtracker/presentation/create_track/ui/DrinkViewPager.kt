@@ -20,6 +20,7 @@ import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.presentation.create_track.CreateTrackViewModel
+import kotlinx.coroutines.launch
 
 @ExperimentalPagerApi
 @Composable
@@ -27,13 +28,25 @@ fun ViewPagerDrink(
     viewModel: CreateTrackViewModel
 ) {
 
+    val pagerState: PagerState = rememberPagerState()
+    val scope = rememberCoroutineScope()
+
     val drinksList by viewModel.drinksList.observeAsState()
-    val positionState by viewModel.position.observeAsState()
+
+    viewModel.position.observeAsState().apply {
+        value?.let { position ->
+            scope.launch {
+                pagerState.scrollToPage(position)
+            }
+        }
+    }
 
     val lifeCycleState = LocalLifecycleOwner.current.lifecycle.observeAsSate()
-    when(lifeCycleState.value) {
+    when (lifeCycleState.value) {
         Lifecycle.Event.ON_RESUME -> viewModel.updateDrinks()
-        else -> { lifeCycleState.value }
+        else -> {
+            lifeCycleState.value
+        }
     }
 
     Card(
@@ -41,28 +54,25 @@ fun ViewPagerDrink(
         shape = RoundedCornerShape(22.dp),
         elevation = 8.dp
     ) {
-        positionState?.let { position ->
-            val pagerState: PagerState = rememberPagerState(initialPage = position)
-            Box(
-                contentAlignment = Alignment.BottomCenter
-            ) {
-                drinksList?.let { drinkList ->
-                    HorizontalPager(
-                        count = drinkList.size + 1,
-                        state = pagerState
-                    ) { index ->
-                        if (index != drinksList?.size) {
-                            ItemDrink(drinksList?.get(index))
-                        } else {
-                            ItemDrink(null)
-                        }
-                        viewModel.onViewPagerPositionChange(pagerState.currentPage)
+        Box(
+            contentAlignment = Alignment.BottomCenter
+        ) {
+            drinksList?.let { drinkList ->
+                HorizontalPager(
+                    count = drinkList.size + 1,
+                    state = pagerState
+                ) { index ->
+                    if (index != drinksList?.size) {
+                        ItemDrink(drinksList?.get(index))
+                    } else {
+                        ItemDrink(null)
                     }
-                    DotsIndicator(
-                        drinkList.size + 1,
-                        pagerState
-                    )
+                    viewModel.onViewPagerPositionChange(pagerState.currentPage)
                 }
+                DotsIndicator(
+                    drinkList.size + 1,
+                    pagerState
+                )
             }
         }
     }
