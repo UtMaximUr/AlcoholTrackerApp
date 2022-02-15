@@ -16,6 +16,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.presentation.create_track.CreateTrackViewModel
+import com.utmaximur.alcoholtracker.util.extension.empty
 import com.utmaximur.alcoholtracker.util.setVolumeUnit
 
 @Composable
@@ -76,7 +77,16 @@ fun NumberPickerDrink(
 @Composable
 fun QuantityNumberPicker(text: Int, viewModel: CreateTrackViewModel) {
 
-    val quantityState by viewModel.quantityState.observeAsState()
+    val state = remember { mutableStateOf(Int.empty()) }.apply {
+        value.let { value ->
+            viewModel.onQuantityChange(value)
+            viewModel.onTotalMoneyCalculating(value)
+        }
+    }
+
+    viewModel.quantityState.observeAsState().apply {
+        value?.let { quantity -> state.value = quantity }
+    }
 
     Text(
         text = stringResource(id = text),
@@ -84,19 +94,11 @@ fun QuantityNumberPicker(text: Int, viewModel: CreateTrackViewModel) {
         color = colorResource(id = R.color.text_color)
     )
     val possibleValues = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-    var state by remember {
-        mutableStateOf(quantityState)
-    }.apply {
-        value?.let { value ->
-            viewModel.onQuantityChange(value)
-            viewModel.onTotalMoneyCalculating(value)
-        }
-    }
 
     ListItemPicker(
         label = { it.toString() },
-        value = state,
-        onValueChange = { state = it },
+        value = state.value,
+        onValueChange = { state.value = it.toString().toInt() },
         list = possibleValues
     )
 }
