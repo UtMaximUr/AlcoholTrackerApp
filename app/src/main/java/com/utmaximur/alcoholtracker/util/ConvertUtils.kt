@@ -2,7 +2,6 @@ package com.utmaximur.alcoholtracker.util
 
 
 import android.content.Context
-import android.content.res.Resources
 import androidx.core.text.isDigitsOnly
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.domain.entity.Track
@@ -10,8 +9,6 @@ import com.utmaximur.alcoholtracker.util.extension.empty
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.math.roundToInt
-
 
 
 fun List<String?>.setVolumeUnit(context: Context): List<String> {
