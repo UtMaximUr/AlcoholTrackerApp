@@ -8,11 +8,9 @@ import androidx.lifecycle.viewModelScope
 import com.utmaximur.alcoholtracker.domain.entity.Drink
 import com.utmaximur.alcoholtracker.domain.entity.Track
 import com.utmaximur.alcoholtracker.domain.interactor.AddTrackInteractor
-import com.utmaximur.alcoholtracker.util.digitOnly
+import com.utmaximur.alcoholtracker.util.*
 import com.utmaximur.alcoholtracker.util.extension.empty
 import com.utmaximur.alcoholtracker.util.extension.first
-import com.utmaximur.alcoholtracker.util.setPostValue
-import com.utmaximur.alcoholtracker.util.setValue
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.util.*
@@ -36,10 +34,10 @@ class CreateTrackViewModel @Inject constructor(private var addTrackInteractor: A
     val position: LiveData<Int> by lazy { MutableLiveData(Int.empty()) }
     val drinkState: LiveData<Drink> by lazy { MutableLiveData() }
     val track: LiveData<Track> by lazy { MutableLiveData() }
-    val saveState: LiveData<Boolean> by lazy { MutableLiveData() }
     val visibleSaveButtonState: LiveData<Boolean> by lazy { MutableLiveData() }
     val visibleEditDrinkButtonState: LiveData<Boolean> by lazy { MutableLiveData() }
     val visibleTodayState: LiveData<Boolean> by lazy { MutableLiveData() }
+    val drink: LiveData<Drink> by lazy { MutableLiveData() }
 
     private var id: String = String.empty()
     private var volume: String = String.empty()
@@ -89,7 +87,6 @@ class CreateTrackViewModel @Inject constructor(private var addTrackInteractor: A
                 addTrackInteractor.updateTrack(track)
             }
         }
-        saveState.setValue(true)
     }
 
     private fun getTrackId(): String = UUID.randomUUID().toString()
@@ -113,41 +110,40 @@ class CreateTrackViewModel @Inject constructor(private var addTrackInteractor: A
         }
     }
 
-    fun onTrackChange(track: Track?) {
-        if (track != null) {
-            id = track.id
-            volume = track.volume
-            quantity = track.quantity
-            degree = track.degree
-            event = track.event
-            date = track.date
-            price = track.price
+    fun onTrackChange(editTrackId: String, title: Int) {
 
-            this.track.setValue(track)
-            quantityState.setValue(track.quantity)
-            eventState.setValue(track.event)
-            selectedDate.setValue(track.date)
+        titleFragment.setValue(title)
+
+        viewModelScope.launch {
+            val editTrack = addTrackInteractor.getTrackById(editTrackId)
+
+            id = editTrack.id
+            volume = editTrack.volume
+            quantity = editTrack.quantity
+            degree = editTrack.degree
+            event = editTrack.event
+            date = editTrack.date
+            price = editTrack.price
+
+            track.setValue(editTrack)
+            quantityState.setValue(editTrack.quantity)
+            eventState.setValue(editTrack.event)
+            selectedDate.setValue(editTrack.date)
             visibleTodayState.setValue(false)
-            valueCalculating.setValue(track.price.toString())
-            totalMoney.setValue((track.price.times(track.quantity)).toString())
+            valueCalculating.setValue(editTrack.price.toString())
+            totalMoney.setValue((editTrack.price.times(editTrack.quantity)).toString())
 
-            viewModelScope.launch {
-                val dataDrinksList = getAllDrink()
-                dataDrinksList.forEach { drink ->
-                    if (drink.drink == track.drink) {
-                        currentDrink = drink
-                        drinkState.setPostValue(drink)
-                        position.setPostValue(dataDrinksList.indexOf(drink))
-                        volumeState.setPostValue(drink.volume.indexOf(track.volume.digitOnly()))
-                        degreeState.setPostValue(drink.degree.indexOf(track.degree))
-                    }
+            val dataDrinksList = getAllDrink()
+            dataDrinksList.forEach { drink ->
+                if (drink.drink == editTrack.drink) {
+                    currentDrink = drink
+                    drinkState.setPostValue(drink)
+                    position.setPostValue(dataDrinksList.indexOf(drink))
+                    volumeState.setPostValue(drink.volume.indexOf(editTrack.volume.digitOnly()))
+                    degreeState.setPostValue(drink.degree.indexOf(editTrack.degree))
                 }
             }
         }
-    }
-
-    fun onTitleChange(title: Int) {
-        titleFragment.setValue(title)
     }
 
     fun onDateChange(date: Long) {
@@ -181,6 +177,7 @@ class CreateTrackViewModel @Inject constructor(private var addTrackInteractor: A
     fun onViewPagerPositionChange(position: Int) {
         if (position != drinkList.size) {
             currentDrink = drinkList[position]
+            drink.setValue(currentDrink)
             drinkState.setValue(currentDrink)
             volume = currentDrink.volume.first().toString()
             degree = currentDrink.degree.first().toString()
