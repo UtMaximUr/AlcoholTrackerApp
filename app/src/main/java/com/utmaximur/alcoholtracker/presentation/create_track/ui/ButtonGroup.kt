@@ -35,14 +35,15 @@ fun ButtonGroup(
     context: Context = LocalContext.current,
     calendar: Calendar = Calendar.getInstance()
 ) {
-    var dateText = stringResource(id = R.string.add_date)
-    viewModel.selectedDate.observeAsState().apply {
-        value?.let { date -> dateText = date.formatDate(context) }
-    }
 
+    val dateText = stringResource(id = R.string.add_date)
     val dateState = remember { mutableStateOf(dateText) }
     val visibleTodayState by viewModel.visibleTodayState.observeAsState(true)
     val datePickerState = remember { mutableStateOf(false) }
+
+    viewModel.selectedDate.observeAsState().apply {
+        value?.let { date -> dateState.value = date.formatDate(context) }
+    }
 
     AnimatedVisibility(visible = datePickerState.value) {
         DatePicker({
