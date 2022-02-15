@@ -6,17 +6,13 @@ import android.content.res.Resources
 import androidx.core.text.isDigitsOnly
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.domain.entity.Track
+import com.utmaximur.alcoholtracker.util.extension.empty
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.roundToInt
 
 
-private val density by lazy { Resources.getSystem().displayMetrics.density }
-
-fun Int.dpToPx(): Int {
-    return (this * density).roundToInt()
-}
 
 fun List<String?>.setVolumeUnit(context: Context): List<String> {
     val volumeListUnit: ArrayList<String> = ArrayList()
@@ -40,6 +36,14 @@ fun Float.format1f(): String {
     return String.format("%.1f", this)
 }
 
+fun String.formatStringTo1f(): String {
+    return if (this.isNotEmpty()) {
+        String.format("%.1f", this.toFloat()).replace(",", ".")
+    } else {
+        String.empty()
+    }
+}
+
 fun Double.formatDegree1f(): String {
     return String.format("%.1f", this).replace(",", ".")
 }
@@ -47,6 +51,14 @@ fun Double.formatDegree1f(): String {
 fun Long.formatDate(context: Context): String {
     val sdf = SimpleDateFormat(
         context.resources.getString(R.string.date_format_pattern),
+        Locale.getDefault()
+    )
+    return String.format("%s", sdf.format(Date(this)))
+}
+
+fun Long.formatDatePicker(context: Context): String {
+    val sdf = SimpleDateFormat(
+        context.resources.getString(R.string.date_picker_format_pattern),
         Locale.getDefault()
     )
     return String.format("%s", sdf.format(Date(this)))
