@@ -110,27 +110,39 @@ fun VolumeNumberPicker(
 ) {
 
     val context = LocalContext.current
-    val volumeState by viewModel.volumeState.observeAsState()
-    val drinkState by viewModel.drinkState.observeAsState()
+    val volumeValues = remember { mutableStateListOf<String>() }
+    val volumeValue = remember { mutableStateOf(String.empty()) }.apply {
+        if (value.isNotEmpty()) {
+            viewModel.onVolumeChange(value)
+        }
+    }
+
+    viewModel.drinkState.observeAsState().apply {
+        value?.let { drink ->
+            volumeValues.clear()
+            volumeValues.addAll(drink.volume.setVolumeUnit(context))
+        }
+    }
+    viewModel.volumeState.observeAsState().apply {
+        value?.let { degree ->
+            if (volumeValues.isNotEmpty()) {
+                volumeValue.value = volumeValues[degree]
+            }
+        }
+    }
 
     Text(
         text = stringResource(id = text),
         fontFamily = FontFamily(Font(R.font.roboto_condensed_regular)),
         color = colorResource(id = R.color.text_color)
     )
-    if (drinkState != null) {
-        val possibleValues: List<String> = drinkState!!.volume.setVolumeUnit(context)
-        var state by remember {
-            mutableStateOf(possibleValues[volumeState!!])
-        }.apply {
-            viewModel.onVolumeChange(value)
-        }
 
+    if (volumeValues.isNotEmpty()) {
         ListItemPicker(
             label = { it },
-            value = state,
-            onValueChange = { state = it },
-            list = possibleValues
+            value = volumeValue.value,
+            onValueChange = { volumeValue.value = it },
+            list = volumeValues
         )
     }
 }
@@ -142,7 +154,11 @@ fun DegreeNumberPicker(
 ) {
 
     val degreeValues = remember { mutableStateListOf<String>() }
-    val degreeValue = remember { mutableStateOf(String.empty()) }
+    val degreeValue = remember { mutableStateOf(String.empty()) }.apply {
+        if (value.isNotEmpty()) {
+            viewModel.onDegreeChange(value)
+        }
+    }
 
     viewModel.drinkState.observeAsState().apply {
         value?.let { drink ->
