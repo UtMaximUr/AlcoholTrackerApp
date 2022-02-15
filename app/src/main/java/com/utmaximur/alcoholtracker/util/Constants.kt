@@ -1,15 +1,12 @@
 package com.utmaximur.alcoholtracker.util
 
-const val UPDATE_REQUEST_CODE = 8
-
 
 // AddPhotoFragment
-const val DATA = "data"
 const val FORMAT_IMAGE = ".jpeg"
 const val FILE_PROVIDER = ".fileprovider"
 
 // Settings Fragment
-const val PREFS_NAME = "theme_prefs"
+const val PREFS_NAME = "KEY_SHARED_PREF"
 const val KEY_THEME = "prefs.theme"
 const val KEY_UPDATE = "prefs.update"
 const val THEME_UNDEFINED = -1
@@ -24,12 +21,10 @@ const val PRIVACY_POLICY = "https://alcohol-tracker.flycricket.io/privacy.html"
 const val TERMS_OF_USE = "https://alcohol-tracker.flycricket.io/terms.html"
 
 // bundle
-const val DRINK = "drink"
-const val VIEW_DRINK = "viewDrink"
+const val EDIT_DRINK = "EDIT_DRINK"
 const val SELECT_DAY = "selectDate"
 const val SELECT_DAY_ADD = "selectDateAdd"
-const val EDIT_DRINK = "editDrink"
-const val PRICE_DRINK = "priceDrink"
+const val EDIT_TRACK = "EDIT_TRACK"
 
 // Utils
 const val RES_RAW = "raw"
@@ -51,17 +46,3 @@ const val ADDITION = '+'
 const val SUBTRACTION = '-'
 const val MULTIPLICATION = '*'
 const val DIVISION = '/'
-
-// delete dialog
-const val KEY_CALENDAR = "KEY_CALENDAR"
-const val KEY_CALENDAR_OK = "KEY_CALENDAR_OK"
-const val KEY_CALENDAR_UPDATE = "KEY_CALENDAR_UPDATE"
-const val KEY_CALENDAR_UPDATE_OK = "KEY_CALENDAR_UPDATE_OK"
-const val KEY_CALENDAR_DATA = "KEY_CALENDAR_DATA"
-const val KEY_CALENDAR_DATA_OK = "KEY_CALENDAR_DATA_OK"
-const val KEY_CALENDAR_DATA_NO = "KEY_CALENDAR_DATA_NO"
-const val KEY_ADD = "KEY_ADD"
-const val KEY_ADD_OK = "KEY_ADD_OK"
-const val KEY_CREATE_DRINK = "KEY_CREATE_DRINK"
-const val KEY_CREATE_DRINK_DELETE = "KEY_CREATE_DRINK_DELETE"
-const val KEY_CALCULATOR = "KEY_CALCULATOR"
