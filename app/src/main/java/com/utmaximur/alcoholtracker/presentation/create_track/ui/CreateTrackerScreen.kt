@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -12,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.google.accompanist.pager.ExperimentalPagerApi
+import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.presentation.create_track.CreateTrackViewModel
 
 
@@ -21,7 +23,17 @@ import com.utmaximur.alcoholtracker.presentation.create_track.CreateTrackViewMod
     ExperimentalAnimationApi::class
 )
 @Composable
-fun CreateTrackerScreen(viewModel: CreateTrackViewModel = hiltViewModel(), navController: NavHostController) {
+fun CreateTrackerScreen(
+    viewModel: CreateTrackViewModel = hiltViewModel(),
+    navController: NavHostController,
+    editTrackId: String? = null) {
+
+
+    LaunchedEffect(key1 = Unit) {
+        editTrackId?.let {
+            viewModel.onTrackChange(editTrackId, R.string.edit_drink_title)
+        }
+    }
 
     Column {
         ToolBar(
