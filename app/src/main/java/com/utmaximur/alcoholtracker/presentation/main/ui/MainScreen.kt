@@ -28,7 +28,8 @@ import com.utmaximur.alcoholtracker.presentation.dialog.update.UpdateDialog
 import com.utmaximur.alcoholtracker.presentation.settings.ui.SettingsScreen
 import com.utmaximur.alcoholtracker.presentation.main.ui.theme.AlcoholTrackerTheme
 import com.utmaximur.alcoholtracker.presentation.statistic.ui.StatisticScreen
-import com.utmaximur.alcoholtracker.util.DRINK
+import com.utmaximur.alcoholtracker.util.EDIT_DRINK
+import com.utmaximur.alcoholtracker.util.EDIT_TRACK
 import com.utmaximur.alcoholtracker.util.KEY_UPDATE
 import com.utmaximur.alcoholtracker.util.PREFS_NAME
 
@@ -102,11 +103,20 @@ fun BottomNavScreensController(
     NavHost(navController, startDestination = CalendarScreen.route) {
         composable(CalendarScreen.route) {
             bottomBarState.value = true
-            CalendarScreen(innerPadding = innerPadding)
+            CalendarScreen(
+                navController = navController,
+                innerPadding = innerPadding)
         }
         composable(AddTrackScreen.route) {
             bottomBarState.value = false
             CreateTrackerScreen(navController = navController)
+        }
+        composable(AddTrackScreen.route.plus("/{$EDIT_TRACK}")) {
+            bottomBarState.value = false
+            CreateTrackerScreen(
+                navController = navController,
+                editTrackId = it.arguments?.getString(EDIT_TRACK)
+            )
         }
         composable(StatisticScreen.route) {
             bottomBarState.value = true
@@ -120,11 +130,11 @@ fun BottomNavScreensController(
             bottomBarState.value = false
             CreateDrinkScreen(navController = navController)
         }
-        composable(CreateDrinkScreen.route.plus("/{$DRINK}")) {
+        composable(CreateDrinkScreen.route.plus("/{$EDIT_DRINK}")) {
             bottomBarState.value = false
             CreateDrinkScreen(
                 navController = navController,
-                editDrinkId = it.arguments?.getString(DRINK)
+                editDrinkId = it.arguments?.getString(EDIT_DRINK)
             )
         }
     }
