@@ -141,8 +141,22 @@ fun DegreeNumberPicker(
     viewModel: CreateTrackViewModel
 ) {
 
-    val drinkState by viewModel.drinkState.observeAsState()
-    val degreeState by viewModel.degreeState.observeAsState()
+    val degreeValues = remember { mutableStateListOf<String>() }
+    val degreeValue = remember { mutableStateOf(String.empty()) }
+
+    viewModel.drinkState.observeAsState().apply {
+        value?.let { drink ->
+            degreeValues.clear()
+            degreeValues.addAll(drink.degree)
+        }
+    }
+    viewModel.degreeState.observeAsState().apply {
+        value?.let { degree ->
+            if (degreeValues.isNotEmpty()) {
+                degreeValue.value = degreeValues[degree]
+            }
+        }
+    }
 
     Text(
         text = stringResource(id = text),
@@ -150,18 +164,12 @@ fun DegreeNumberPicker(
         color = colorResource(id = R.color.text_color)
     )
 
-    if (drinkState != null) {
-        val possibleValues: List<String?> = drinkState!!.degree
-        var state by remember {
-            mutableStateOf(possibleValues[degreeState!!])
-        }.apply {
-            viewModel.onDegreeChange(value.toString())
-        }
+    if (degreeValues.isNotEmpty()) {
         ListItemPicker(
-            label = { it.toString() },
-            value = state,
-            onValueChange = { state = it },
-            list = possibleValues
+            label = { it },
+            value = degreeValue.value,
+            onValueChange = { degreeValue.value = it },
+            list = degreeValues
         )
     }
 }
