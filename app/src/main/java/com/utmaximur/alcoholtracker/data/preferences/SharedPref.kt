@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import com.utmaximur.alcoholtracker.util.KEY_THEME
 import com.utmaximur.alcoholtracker.util.KEY_UPDATE
 import com.utmaximur.alcoholtracker.util.THEME_UNDEFINED
+import com.utmaximur.alcoholtracker.util.UPDATE_UNDEFINED
 
 class SharedPref(private val sharedPreferences: SharedPreferences) {
 
@@ -13,7 +14,7 @@ class SharedPref(private val sharedPreferences: SharedPreferences) {
     fun saveThemeChecked(theme: Int) =
         sharedPreferences.edit()?.putInt(KEY_THEME, theme)?.apply()
 
-    fun isUpdateChecked() = sharedPreferences.getBoolean(KEY_UPDATE, true)
+    fun isUpdateChecked() = sharedPreferences.getBoolean(KEY_UPDATE, UPDATE_UNDEFINED)
 
     fun getSelectedTheme() = sharedPreferences.getInt(KEY_THEME, THEME_UNDEFINED)
 
