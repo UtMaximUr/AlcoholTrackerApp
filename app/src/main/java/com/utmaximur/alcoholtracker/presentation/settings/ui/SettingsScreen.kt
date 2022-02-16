@@ -28,22 +28,29 @@ import com.utmaximur.alcoholtracker.util.TERMS_OF_USE
 fun SettingsScreen(viewModel: SettingsViewModel = hiltViewModel(), innerPadding: PaddingValues) {
     val bottomPadding = innerPadding.calculateBottomPadding() + 24.dp
     Column(
-        modifier = Modifier.fillMaxSize().padding(bottom = bottomPadding),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(bottom = bottomPadding),
         verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        val checkedThemeState by viewModel.checkedThemeState.observeAsState()
-        val checkedUpdateState by viewModel.checkedUpdateState.observeAsState()
+        val checkedThemeState by viewModel.checkedThemeState.observeAsState(true)
+        val checkedUpdateState by viewModel.checkedUpdateState.observeAsState(true)
 
         Column(
             modifier = Modifier.weight(1f),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Card(elevation = 11.dp) {
+            Card(
+                backgroundColor = MaterialTheme.colors.surface,
+                elevation = 11.dp
+            ) {
                 GlideImage(
-                    modifier = Modifier.padding(20.dp).size(128.dp),
+                    modifier = Modifier
+                        .padding(20.dp)
+                        .size(128.dp),
                     imageModel = R.mipmap.ic_launcher,
                     contentDescription = null
                 )
@@ -66,14 +73,15 @@ fun SettingsScreen(viewModel: SettingsViewModel = hiltViewModel(), innerPadding:
                 .padding(12.dp)
                 .fillMaxWidth(),
             shape = RoundedCornerShape(22.dp),
-            elevation = 4.dp
+            backgroundColor = MaterialTheme.colors.surface,
+            elevation = 11.dp
         ) {
             Column {
-                Switch(R.string.default_theme, checkedThemeState!!) {
+                Switch(R.string.default_theme, checkedThemeState) {
                     viewModel.onUseDefaultThemeChange(it)
                 }
-                ThemeList(checkedThemeState!!, viewModel)
-                Switch(R.string.check_for_updates, checkedUpdateState!!) {
+                ThemeList(checkedThemeState, viewModel)
+                Switch(R.string.check_for_updates, checkedUpdateState) {
                     viewModel.onUpdateChange(it)
                 }
                 Button(R.string.privacy_policy, PRIVACY_POLICY)
