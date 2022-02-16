@@ -12,7 +12,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -65,7 +64,7 @@ fun AddPhotoDialog(
                 Text(
                     text = stringResource(id = R.string.bottom_sheet_option_heading),
                     modifier = Modifier.padding(start = 16.dp, top = 8.dp, bottom = 16.dp),
-                    color = colorResource(id = R.color.text_color),
+                    color = MaterialTheme.colors.onPrimary,
                     fontSize = 16.sp
                 )
                 ButtonDialog(
@@ -132,19 +131,19 @@ fun ButtonDialog(
             defaultElevation = 0.dp,
             pressedElevation = 0.dp
         ),
-        colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
+        colors = ButtonDefaults.buttonColors(backgroundColor = Color.Transparent),
         onClick = { onClick() }
     ) {
         Icon(
             painter = painterResource(id = icon),
-            tint = colorResource(id = R.color.text_color),
+            tint = MaterialTheme.colors.onPrimary,
             contentDescription = null
         )
         Spacer(modifier = Modifier.padding(start = 32.dp))
         Text(
             text = stringResource(id = text),
             modifier = Modifier.weight(1f),
-            color = colorResource(id = R.color.text_color),
+            color = MaterialTheme.colors.onPrimary,
             fontSize = 16.sp
         )
     }
