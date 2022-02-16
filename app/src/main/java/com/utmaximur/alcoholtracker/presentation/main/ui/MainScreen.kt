@@ -24,52 +24,68 @@ import com.utmaximur.alcoholtracker.navigation.NavigationDestination.*
 import com.utmaximur.alcoholtracker.presentation.calendar.ui.CalendarScreen
 import com.utmaximur.alcoholtracker.presentation.create_my_drink.ui.CreateDrinkScreen
 import com.utmaximur.alcoholtracker.presentation.create_track.ui.CreateTrackerScreen
+import com.utmaximur.alcoholtracker.presentation.dialog.track_list.ui.TrackListBottomDialogScreen
 import com.utmaximur.alcoholtracker.presentation.dialog.update.UpdateDialog
 import com.utmaximur.alcoholtracker.presentation.settings.ui.SettingsScreen
 import com.utmaximur.alcoholtracker.presentation.main.ui.theme.AlcoholTrackerTheme
 import com.utmaximur.alcoholtracker.presentation.statistic.ui.StatisticScreen
-import com.utmaximur.alcoholtracker.util.EDIT_DRINK
-import com.utmaximur.alcoholtracker.util.EDIT_TRACK
-import com.utmaximur.alcoholtracker.util.KEY_UPDATE
-import com.utmaximur.alcoholtracker.util.PREFS_NAME
+import com.utmaximur.alcoholtracker.util.*
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun MainScreen() {
 
-    val navController = rememberNavController()
-    val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
-
     UpdateApp()
 
-    AlcoholTrackerTheme {
-        Scaffold(
-            bottomBar = {
-                AnimatedVisibility(
-                    visible = bottomBarState.value,
-                    enter = slideInVertically(initialOffsetY = { it }),
-                    exit = slideOutVertically(targetOffsetY = { it })
-                ) {
-                    BottomAppBar(
-                        cutoutShape = CircleShape,
-                        backgroundColor = Color.White,
+    val navController = rememberNavController()
+    val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
+    val modalBottomSheetState =
+        rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
+
+    ModalBottomSheetLayout(
+        sheetContent = {
+            TrackListBottomDialogScreen(
+                navController = navController,
+                modalBottomSheetState = modalBottomSheetState
+            )
+        },
+        sheetState = modalBottomSheetState
+    ) {
+        AlcoholTrackerTheme {
+            Scaffold(
+                bottomBar = {
+                    AnimatedVisibility(
+                        visible = bottomBarState.value,
+                        enter = slideInVertically(initialOffsetY = { it }),
+                        exit = slideOutVertically(targetOffsetY = { it })
                     ) {
-                        BottomBar(navController = navController)
+                        BottomAppBar(
+                            cutoutShape = CircleShape,
+                            backgroundColor = Color.White,
+                        ) {
+                            BottomBar(navController = navController)
+                        }
+                    }
+                },
+                floatingActionButtonPosition = FabPosition.Center,
+                isFloatingActionButtonDocked = true,
+                floatingActionButton = {
+                    AnimatedVisibility(
+                        visible = bottomBarState.value,
+                        enter = fadeIn(),
+                        exit = fadeOut(),
+                    ) {
+                        AddTrackButton(navController = navController)
                     }
                 }
-            },
-            floatingActionButtonPosition = FabPosition.Center,
-            isFloatingActionButtonDocked = true,
-            floatingActionButton = {
-                AnimatedVisibility(
-                    visible = bottomBarState.value,
-                    enter = fadeIn(),
-                    exit = fadeOut(),
-                ) {
-                    AddTrackButton(navController = navController)
-                }
+            ) { innerPadding ->
+                BottomNavScreensController(
+                    navController = navController,
+                    bottomBarState = bottomBarState,
+                    modalBottomSheetState = modalBottomSheetState,
+                    innerPadding = innerPadding
+                )
             }
-        ) { innerPadding ->
-            BottomNavScreensController(navController = navController, bottomBarState = bottomBarState, innerPadding = innerPadding)
         }
     }
 }
@@ -94,10 +110,12 @@ fun AddTrackButton(navController: NavHostController) {
     )
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun BottomNavScreensController(
     navController: NavHostController,
     bottomBarState: MutableState<Boolean>,
+    modalBottomSheetState: ModalBottomSheetState,
     innerPadding: PaddingValues
 ) {
     NavHost(navController, startDestination = CalendarScreen.route) {
@@ -105,7 +123,9 @@ fun BottomNavScreensController(
             bottomBarState.value = true
             CalendarScreen(
                 navController = navController,
-                innerPadding = innerPadding)
+                innerPadding = innerPadding,
+                modalBottomSheetState = modalBottomSheetState
+            )
         }
         composable(AddTrackScreen.route) {
             bottomBarState.value = false
