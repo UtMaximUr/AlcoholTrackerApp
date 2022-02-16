@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
@@ -17,7 +18,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
@@ -48,7 +48,7 @@ fun DrinkName(viewModel: CreateMyDrinkViewModel) {
             Image(
                 painter = painterResource(id = R.drawable.ic_local_bar_white_24dp),
                 contentDescription = null,
-                colorFilter = ColorFilter.tint(colorResource(id = R.color.accent_color))
+                colorFilter = ColorFilter.tint(MaterialTheme.colors.primary)
             )
         },
         modifier = Modifier
@@ -58,11 +58,11 @@ fun DrinkName(viewModel: CreateMyDrinkViewModel) {
             textState.value = it
         },
         colors = TextFieldDefaults.textFieldColors(
-            textColor = colorResource(id = R.color.text_color),
+            textColor = MaterialTheme.colors.onPrimary,
             disabledTextColor = Color.Transparent,
             backgroundColor = Color.Transparent,
-            focusedIndicatorColor = colorResource(id = R.color.accent_color),
-            unfocusedIndicatorColor = colorResource(id = R.color.accent_color),
+            focusedIndicatorColor = MaterialTheme.colors.primary,
+            unfocusedIndicatorColor = MaterialTheme.colors.primary,
             disabledIndicatorColor = Color.Transparent
         ),
         singleLine = true,

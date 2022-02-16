@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Checkbox
 import androidx.compose.material.CheckboxDefaults
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -17,7 +18,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -40,7 +40,7 @@ fun DrinkVolume(
     Column(modifier = Modifier.padding(16.dp)) {
         Text(
             text = stringResource(id = R.string.dialog_create_drink_add_volume),
-            color = colorResource(id = R.color.text_color),
+            color = MaterialTheme.colors.onPrimary,
             fontFamily = FontFamily(Font(R.font.roboto_condensed_regular)),
             fontSize = 16.sp
         )
@@ -79,7 +79,7 @@ fun VolumeItem(
         Text(
             text = volume,
             modifier = Modifier.weight(1f),
-            color = colorResource(id = R.color.text_color),
+            color = MaterialTheme.colors.onPrimary,
             fontFamily = FontFamily(Font(R.font.roboto_condensed_regular)),
             fontSize = 16.sp
         )
@@ -87,7 +87,7 @@ fun VolumeItem(
             checked = volumeState.value,
             enabled = false,
             colors = CheckboxDefaults.colors(
-                disabledColor = colorResource(id = R.color.accent_color)
+                disabledColor = MaterialTheme.colors.primary
             ),
             onCheckedChange = {}
         )
