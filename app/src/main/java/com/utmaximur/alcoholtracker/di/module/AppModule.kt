@@ -11,7 +11,7 @@ import com.utmaximur.alcoholtracker.data.mapper.TrackMapper
 import com.utmaximur.alcoholtracker.data.preferences.SharedPref
 import com.utmaximur.alcoholtracker.data.repository.*
 import com.utmaximur.alcoholtracker.domain.interactor.*
-import com.utmaximur.alcoholtracker.domain.mapper.CalendarMapper
+import com.utmaximur.alcoholtracker.domain.mapper.TrackListMapper
 import com.utmaximur.alcoholtracker.domain.mapper.StatisticsMapper
 import com.utmaximur.alcoholtracker.util.PREFS_NAME
 import dagger.Module
@@ -35,7 +35,7 @@ class AppModule {
     fun provideIconMapper() = IconMapper()
 
     @Provides
-    fun provideCalendarMapper() = CalendarMapper()
+    fun provideCalendarMapper() = TrackListMapper()
 
     @Provides
     fun provideStatisticsMapper() = StatisticsMapper()
@@ -119,8 +119,8 @@ class AppModule {
     @Singleton
     fun provideCalendarInteractor(
         trackRepository: TrackRepository,
-        calendarMapper: CalendarMapper
-    ): CalendarInteractor = CalendarInteractor(trackRepository, calendarMapper)
+        trackListMapper: TrackListMapper
+    ): CalendarInteractor = CalendarInteractor(trackRepository, trackListMapper)
 
     @Provides
     @Singleton
