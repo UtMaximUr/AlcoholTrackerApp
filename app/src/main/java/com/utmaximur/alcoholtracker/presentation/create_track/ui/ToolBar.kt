@@ -5,10 +5,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
@@ -17,7 +14,6 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -47,8 +43,8 @@ fun ToolBar(viewModel: CreateTrackViewModel, navController: NavHostController) {
             }
         },
         backgroundColor = Color.Transparent,
-        contentColor = colorResource(id = R.color.text_color),
-        elevation = 2.dp,
+        contentColor = MaterialTheme.colors.onPrimary,
+        elevation = 0.dp,
         actions = {
             Row {
                 AnimatedVisibility(

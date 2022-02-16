@@ -6,9 +6,7 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.expandVertically
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.OutlinedButton
-import androidx.compose.material.Button
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -16,7 +14,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -25,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.presentation.create_track.CreateTrackViewModel
+import com.utmaximur.alcoholtracker.presentation.main.ui.theme.TextColorWhite
 import com.utmaximur.alcoholtracker.util.formatDate
 import java.util.*
 
@@ -99,7 +97,7 @@ fun SelectDayButton(
             text = text,
             fontSize = size,
             fontFamily = FontFamily(Font(R.font.roboto_condensed_regular)),
-            color = colorResource(id = R.color.text_color_white)
+            color = TextColorWhite
         )
     }
 }
@@ -113,13 +111,14 @@ fun TodayButton(
 ) {
     OutlinedButton(
         shape = RoundedCornerShape(radius),
+        colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.background),
         onClick = { onTodayClick() }
     ) {
         Text(
             text = stringResource(id = text),
             fontSize = size,
             fontFamily = FontFamily(Font(R.font.roboto_condensed_regular)),
-            color = colorResource(id = R.color.text_color)
+            color = MaterialTheme.colors.onPrimary,
         )
     }
 }

@@ -9,10 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Card
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
-import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -94,7 +91,7 @@ fun EventText(
                 textState.value = it
             },
             colors = TextFieldDefaults.textFieldColors(
-                textColor = colorResource(id = R.color.text_color),
+                textColor = MaterialTheme.colors.onPrimary,
                 disabledTextColor = Color.Transparent,
                 backgroundColor = Color.Transparent,
                 focusedIndicatorColor = colorResource(id = R.color.accent_color),
@@ -144,10 +141,10 @@ fun CalculateText(
             },
             trailingIcon = {
                 Image(
-                    modifier = Modifier.clickable { openDialog.value = true }, //onCalculateClick(textState) },
+                    modifier = Modifier.clickable { openDialog.value = true },
                     painter = painterResource(id = R.drawable.ic_calculate_white_24dp),
                     contentDescription = null,
-                    colorFilter = ColorFilter.tint(colorResource(id = R.color.accent_color))
+                    colorFilter = ColorFilter.tint(MaterialTheme.colors.primary)
                 )
             },
             modifier = Modifier
@@ -157,7 +154,7 @@ fun CalculateText(
                 viewModel.onTotalMoneyCalculating(it)
             },
             colors = TextFieldDefaults.textFieldColors(
-                textColor = colorResource(id = R.color.text_color),
+                textColor = MaterialTheme.colors.onPrimary,
                 disabledTextColor = Color.Transparent,
                 backgroundColor = Color.Transparent,
                 focusedIndicatorColor = colorResource(id = R.color.accent_color),

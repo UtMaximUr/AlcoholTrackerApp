@@ -3,13 +3,13 @@ package com.utmaximur.alcoholtracker.presentation.create_track.ui
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -91,7 +91,7 @@ fun QuantityNumberPicker(text: Int, viewModel: CreateTrackViewModel) {
     Text(
         text = stringResource(id = text),
         fontFamily = FontFamily(Font(R.font.roboto_condensed_regular)),
-        color = colorResource(id = R.color.text_color)
+        color = MaterialTheme.colors.onPrimary,
     )
     val possibleValues = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 
@@ -134,7 +134,7 @@ fun VolumeNumberPicker(
     Text(
         text = stringResource(id = text),
         fontFamily = FontFamily(Font(R.font.roboto_condensed_regular)),
-        color = colorResource(id = R.color.text_color)
+        color = MaterialTheme.colors.onPrimary,
     )
 
     if (volumeValues.isNotEmpty()) {
@@ -177,7 +177,7 @@ fun DegreeNumberPicker(
     Text(
         text = stringResource(id = text),
         fontFamily = FontFamily(Font(R.font.roboto_condensed_regular)),
-        color = colorResource(id = R.color.text_color)
+        color = MaterialTheme.colors.onPrimary,
     )
 
     if (degreeValues.isNotEmpty()) {
