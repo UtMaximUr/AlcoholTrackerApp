@@ -22,8 +22,8 @@ const val TERMS_OF_USE = "https://alcohol-tracker.flycricket.io/terms.html"
 
 // bundle
 const val EDIT_DRINK = "EDIT_DRINK"
-const val SELECT_DAY = "selectDate"
-const val SELECT_DAY_ADD = "selectDateAdd"
+const val SELECT_DATE = "SELECT_DATE"
+const val SELECT_DAY_ADD = "SELECT_DAY_ADD"
 const val EDIT_TRACK = "EDIT_TRACK"
 
 // Utils
