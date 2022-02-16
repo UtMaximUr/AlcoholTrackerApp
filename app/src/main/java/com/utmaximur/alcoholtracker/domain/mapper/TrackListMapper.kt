@@ -5,7 +5,7 @@ import com.utmaximur.alcoholtracker.domain.entity.Track
 import java.util.*
 import javax.inject.Inject
 
-class CalendarMapper @Inject constructor() {
+class TrackListMapper @Inject constructor() {
 
     fun getAlcoholTrackByDay(
         tracksList: List<Track>,
