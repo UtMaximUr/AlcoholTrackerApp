@@ -7,7 +7,6 @@ import androidx.compose.material.SwitchDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -27,7 +26,7 @@ fun Switch(
                 .padding(12.dp),
             text = stringResource(id = text),
             fontFamily = FontFamily(Font(R.font.roboto_condensed_regular)),
-            color = colorResource(id = R.color.text_color)
+            color = MaterialTheme.colors.onPrimary
         )
         androidx.compose.material.Switch(modifier = Modifier
             .padding(12.dp),

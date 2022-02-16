@@ -3,6 +3,7 @@ package com.utmaximur.alcoholtracker.presentation.settings.ui
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -10,7 +11,6 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -58,7 +58,7 @@ fun SettingsScreen(viewModel: SettingsViewModel = hiltViewModel(), innerPadding:
                     .padding(12.dp, 0.dp, 12.dp, 0.dp),
                 text = stringResource(id = R.string.settings_version) + " " + BuildConfig.VERSION_NAME,
                 fontFamily = FontFamily(Font(R.font.roboto_condensed_regular)),
-                color = colorResource(id = R.color.text_color)
+                color = MaterialTheme.colors.onPrimary
             )
         }
         Card(

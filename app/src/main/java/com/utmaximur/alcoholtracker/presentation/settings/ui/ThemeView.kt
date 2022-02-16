@@ -9,6 +9,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -62,7 +63,7 @@ fun ThemeItem(text: Int, themeCheckState: Boolean, onClick: (Boolean) -> Unit) {
                 .padding(12.dp),
             text = stringResource(id = text),
             fontFamily = FontFamily(Font(R.font.roboto_condensed_regular)),
-            color = colorResource(id = R.color.text_color)
+            color = MaterialTheme.colors.onPrimary
         )
         AnimatedVisibility(visible = themeCheckState) {
             Image(
