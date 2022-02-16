@@ -2,12 +2,12 @@ package com.utmaximur.alcoholtracker.presentation.calculator.ui
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
@@ -30,7 +30,7 @@ fun CalculatorText(
             .fillMaxWidth()
             .padding(16.dp),
         text = currentValue,
-        color = colorResource(id = R.color.text_color),
+        color = MaterialTheme.colors.onPrimary,
         fontFamily = FontFamily(Font(R.font.roboto_condensed_regular)),
         textAlign = TextAlign.End
     )
