@@ -1,10 +1,10 @@
 package com.utmaximur.alcoholtracker.presentation.statistic.ui
 
-import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
-import androidx.compose.material.Scaffold
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -21,15 +21,12 @@ fun CountDaysStatistic(viewModel: StatisticViewModel) {
 
     Card(
         modifier = Modifier
+            .fillMaxHeight(0.15f)
             .padding(12.dp),
         shape = RoundedCornerShape(22.dp),
-        elevation = 8.dp
+        backgroundColor = MaterialTheme.colors.surface,
+        elevation = 11.dp
     ) {
-        Scaffold(
-            modifier = Modifier.heightIn(32.dp, 96.dp),
-            content = {
-                statisticsCountDays?.let { days -> ViewPagerCountDrink(days) }
-            }
-        )
+        statisticsCountDays?.let { days -> ViewPagerCountDrink(days) }
     }
 }

@@ -1,18 +1,14 @@
 package com.utmaximur.alcoholtracker.presentation.statistic.ui
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
-import androidx.compose.material.Scaffold
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -30,9 +26,11 @@ fun CountMoneyStatistic(viewModel: StatisticViewModel) {
     Card(
         modifier = Modifier
             .padding(12.dp)
+            .fillMaxHeight(0.15f)
             .fillMaxWidth(),
         shape = RoundedCornerShape(22.dp),
-        elevation = 8.dp
+        backgroundColor = MaterialTheme.colors.surface,
+        elevation = 11.dp
     ) {
         Column {
             Text(
@@ -40,14 +38,9 @@ fun CountMoneyStatistic(viewModel: StatisticViewModel) {
                     .padding(12.dp, 12.dp, 12.dp, 0.dp),
                 text = stringResource(id = R.string.statistic_spent),
                 fontFamily = FontFamily(Font(R.font.roboto_condensed_regular)),
-                color = colorResource(id = R.color.text_color)
+                color = MaterialTheme.colors.onPrimary
             )
-            Scaffold(
-                modifier = Modifier.heightIn(32.dp, 96.dp),
-                content = {
-                    statisticsPriceByPeriod?.let { money -> ViewPagerCountMoney(money) }
-                }
-            )
+            statisticsPriceByPeriod?.let { money -> ViewPagerCountMoney(money) }
         }
     }
 }

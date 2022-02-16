@@ -1,11 +1,11 @@
 package com.utmaximur.alcoholtracker.presentation.statistic.ui
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
@@ -50,19 +50,19 @@ fun CountMoneyItem(money: String, period: String) {
                 .weight(1f),
             text = period,
             fontFamily = FontFamily(Font(R.font.roboto_condensed_regular)),
-            color = colorResource(id = R.color.text_color)
+            color = MaterialTheme.colors.onPrimary
         )
         Text(
             modifier = Modifier.padding(bottom = 12.dp, top = 12.dp),
             text = money,
             fontFamily = FontFamily(Font(R.font.roboto_condensed_regular)),
-            color = colorResource(id = R.color.text_color)
+            color = MaterialTheme.colors.onPrimary
         )
         Text(
             modifier = Modifier.padding(12.dp),
             text = stringResource(id = R.string.add_currency),
             fontFamily = FontFamily(Font(R.font.roboto_condensed_regular)),
-            color = colorResource(id = R.color.text_color)
+            color = MaterialTheme.colors.onPrimary
         )
     }
 }
