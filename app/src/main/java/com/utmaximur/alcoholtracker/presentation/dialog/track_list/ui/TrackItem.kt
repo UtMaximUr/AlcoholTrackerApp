@@ -12,8 +12,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.sp
 import com.skydoves.landscapist.glide.GlideImage
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.domain.entity.Track
+import com.utmaximur.alcoholtracker.presentation.main.ui.theme.TextColorWhite
 import com.utmaximur.alcoholtracker.util.formatVolume
 import com.utmaximur.alcoholtracker.util.getResString
 import com.utmaximur.alcoholtracker.util.getSafeDoseOfAlcohol
@@ -54,7 +55,7 @@ fun TrackItem(track: Track) {
                             track.drink.getResString(LocalContext.current), track.quantity
                         ),
                         fontFamily = FontFamily(Font(R.font.roboto_condensed_regular)),
-                        color = colorResource(id = R.color.text_color_white),
+                        color = TextColorWhite,
                         fontSize = 18.sp
                     )
                     Row {
@@ -63,7 +64,7 @@ fun TrackItem(track: Track) {
                         Text(
                             text = track.volume.formatVolume(LocalContext.current, track.quantity),
                             fontFamily = FontFamily(Font(R.font.roboto_condensed_regular)),
-                            color = colorResource(id = R.color.text_color_white)
+                            color = TextColorWhite,
                         )
                         Spacer(modifier = Modifier.padding(8.dp))
                         ItemDrinkTitle(R.string.add_degree)
@@ -71,7 +72,7 @@ fun TrackItem(track: Track) {
                         Text(
                             text = track.degree,
                             fontFamily = FontFamily(Font(R.font.roboto_condensed_regular)),
-                            color = colorResource(id = R.color.text_color_white)
+                            color = TextColorWhite,
                         )
                         Spacer(modifier = Modifier.padding(8.dp))
                         ItemDrinkTitle(R.string.add_currency)
@@ -79,7 +80,7 @@ fun TrackItem(track: Track) {
                         Text(
                             text = (track.price * track.quantity).toString(),
                             fontFamily = FontFamily(Font(R.font.roboto_condensed_regular)),
-                            color = colorResource(id = R.color.text_color_white)
+                            color = TextColorWhite,
                         )
                     }
                 }
@@ -128,13 +129,13 @@ fun TrackItem(track: Track) {
                     Text(
                         text = track.getSafeDoseOfAlcohol(LocalContext.current),
                         fontFamily = FontFamily(Font(R.font.roboto_condensed_regular)),
-                        color = colorResource(id = R.color.text_color_white),
+                        color = TextColorWhite,
                         modifier = Modifier.padding(start = 8.dp)
                     )
                     Text(
                         text = stringResource(id = R.string.safe_dose_note),
                         fontFamily = FontFamily(Font(R.font.roboto_condensed_regular)),
-                        color = colorResource(id = R.color.text_color_white),
+                        color = TextColorWhite,
                         modifier = Modifier.padding(8.dp)
                     )
                 }
@@ -147,7 +148,7 @@ fun TrackItem(track: Track) {
                 Text(
                     text = track.event,
                     fontFamily = FontFamily(Font(R.font.roboto_condensed_regular)),
-                    color = colorResource(id = R.color.text_color_white),
+                    color = TextColorWhite,
                     modifier = Modifier.padding(8.dp)
                 )
             }
@@ -158,11 +159,11 @@ fun TrackItem(track: Track) {
 @Composable
 fun ItemDrinkTitle(
     text: Int,
-    color: Int = R.color.text_color_white
+    color: Color = TextColorWhite
 ) {
     Text(
         text = stringResource(id = text),
         fontFamily = FontFamily(Font(R.font.roboto_condensed_regular)),
-        color = colorResource(id = color)
+        color = color
     )
 }

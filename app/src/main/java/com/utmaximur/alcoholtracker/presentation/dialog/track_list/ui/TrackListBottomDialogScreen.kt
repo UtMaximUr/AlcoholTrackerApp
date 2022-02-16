@@ -17,7 +17,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -26,6 +25,8 @@ import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.domain.entity.Track
 import com.utmaximur.alcoholtracker.navigation.NavigationDestination
 import com.utmaximur.alcoholtracker.presentation.dialog.track_list.TrackListViewModel
+import com.utmaximur.alcoholtracker.presentation.main.ui.theme.DeleteColor
+import com.utmaximur.alcoholtracker.presentation.main.ui.theme.EditColor
 import com.utmaximur.alcoholtracker.util.SELECT_DATE
 import kotlinx.coroutines.launch
 
@@ -105,9 +106,9 @@ fun TrackListBottomDialogScreen(
                     val direction = dismissState.dismissDirection ?: return@SwipeToDismiss
                     val color by animateColorAsState(
                         when (dismissState.targetValue) {
-                            DismissValue.Default -> colorResource(id = R.color.background_color)
-                            DismissValue.DismissedToEnd -> colorResource(id = R.color.edit_color)
-                            DismissValue.DismissedToStart -> colorResource(id = R.color.delete_color)
+                            DismissValue.Default -> MaterialTheme.colors.primary
+                            DismissValue.DismissedToEnd -> EditColor
+                            DismissValue.DismissedToStart -> DeleteColor
                         }
                     )
                     val alignment = when (direction) {
