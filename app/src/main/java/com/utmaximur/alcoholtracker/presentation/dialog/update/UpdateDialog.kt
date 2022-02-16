@@ -6,10 +6,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -26,12 +26,12 @@ fun UpdateDialog(
             Icon(
                 painter = painterResource(id = R.drawable.ic_update_black_24dp),
                 contentDescription = null,
-                tint = colorResource(id = R.color.text_color)
+                tint = MaterialTheme.colors.onPrimary
             )
             Spacer(modifier = Modifier.padding(8.dp))
             Text(
                 text = stringResource(id = R.string.update_title),
-                color = colorResource(id = R.color.text_color)
+                color = MaterialTheme.colors.onPrimary
             )
         }
         Row(modifier = Modifier.padding(16.dp)) {
