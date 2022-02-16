@@ -9,9 +9,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -28,6 +26,7 @@ import com.utmaximur.alcoholtracker.presentation.dialog.track_list.ui.TrackListB
 import com.utmaximur.alcoholtracker.presentation.dialog.update.UpdateDialog
 import com.utmaximur.alcoholtracker.presentation.settings.ui.SettingsScreen
 import com.utmaximur.alcoholtracker.presentation.main.ui.theme.AlcoholTrackerTheme
+import com.utmaximur.alcoholtracker.presentation.main.ui.theme.TextColorWhite
 import com.utmaximur.alcoholtracker.presentation.statistic.ui.StatisticScreen
 import com.utmaximur.alcoholtracker.util.*
 
@@ -61,7 +60,7 @@ fun MainScreen() {
                     ) {
                         BottomAppBar(
                             cutoutShape = CircleShape,
-                            backgroundColor = Color.White,
+                            backgroundColor = MaterialTheme.colors.background,
                         ) {
                             BottomBar(navController = navController)
                         }
@@ -99,12 +98,12 @@ fun AddTrackButton(navController: NavHostController) {
                 restoreState = true
             }
         },
-        backgroundColor = colorResource(id = R.color.accent_color),
+        backgroundColor = MaterialTheme.colors.primary,
         content = {
             Icon(
                 painter = painterResource(id = R.drawable.ic_add_fab),
                 contentDescription = null,
-                tint = colorResource(id = R.color.white)
+                tint = TextColorWhite
             )
         }
     )
