@@ -87,12 +87,20 @@
     <string name="cd_icon_app">Icono de aplicación</string>
     <string name="cd_edit_button">Editar</string>
     <string name="cd_delete_button">Borrar</string>
-    <string name="cd_show_panel">Mover hacia la izquierda</string>
     <string name="cd_image_drink">Imagen de una bebida</string>
     <string name="cd_choice_theme">Tema seleccionado</string>
     <string name="cd_icon_drink">Icono de una bebida</string>
     <string name="cd_take_photo">Tomar foto</string>
     <string name="cd_save_drink">Guardar bebida</string>
+    <string name="cd_show_edit_panel">Deslizar a la izquierda</string>
+    <string name="cd_show_delete_panel">Desliza a la derecha</string>
+    <string name="cd_event">Evento</string>
+    <string name="cd_info_safe_dose">Alcohol en dosis segura</string>
+    <string name="cd_calculator">Calculadora</string>
+    <string name="cd_price">Costo de una bebida</string>
+    <string name="cd_back">Atrás</string>
+    <string name="cd_add_drink">Crea una bebida</string>
+    <string name="cd_name_drink">Nombre de la bebida</string>
 
     <!--regex-->
 

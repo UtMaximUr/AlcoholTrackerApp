@@ -17,6 +17,7 @@
     <!--add-->
     <string name="add_drink_title">Add drink</string>
     <string name="date_format_pattern" translatable="false">dd/MM/yyyy</string>
+    <string name="date_picker_format_pattern" translatable="false">d MMMM YYYY</string>
     <string name="add_drink">Drink</string>
     <string name="add_volume">Volume</string>
     <string name="add_quantity">Quantity</string>
@@ -61,17 +62,15 @@
 
     <!--dialog select date-->
     <string name="dialog_select_date_title">Use the selected date to add a drink?</string>
-    <string name="dialog_select_date_ok">OK</string>
-    <string name="dialog_select_date_no">NO</string>
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_no">NO</string>
+    <string name="dialog_cancel">Cancel</string>
 
     <!--dialog delete-->
     <string name="dialog_delete_title">Are you sure you want to delete the entry?</string>
 
     <!--dialog add volume-->
     <string name="dialog_add_volume_title">Select the volume of the drink</string>
-    <string name="dialog_add_volume_ok">OK</string>
-    <string name="dialog_add_volume_cancel">Cancel</string>
-
 
     <!--settings-->
     <string name="privacy_policy">Privacy policy</string>
@@ -97,13 +96,21 @@
     <string name="cd_icon_app">Application Icon</string>
     <string name="cd_edit_button">Edit</string>
     <string name="cd_delete_button">Delete</string>
-    <string name="cd_show_panel">Move left</string>
+    <string name="cd_show_edit_panel">Move left</string>
+    <string name="cd_show_delete_panel">Move right</string>
     <string name="cd_image_drink">Image of a drink</string>
     <string name="cd_choice_theme">Selected theme</string>
     <string name="cd_icon_drink">Icon of a drink</string>
     <string name="cd_take_photo">Take photo</string>
     <string name="cd_save_drink">Save drink</string>
-    <string name="cd_some_images">Some images</string>
+    <string name="cd_event">Event</string>
+    <string name="cd_info_safe_dose">Safe dose</string>
+    <string name="cd_calculator">Calculator</string>
+    <string name="cd_price">Price</string>
+    <string name="cd_back">Back</string>
+    <string name="cd_add_drink">Create drink</string>
+    <string name="cd_name_drink">Name drink</string>
+
 
     <!--regex-->
     <string name="only_number_regex" tools:ignore="TypographyDashes" translatable="false">[^0-9, .]</string>
@@ -216,6 +223,5 @@
         <item>1</item>
 
     </string-array>
-    <string name="title_activity_test" tools:ignore="MissingTranslation">TestActivity</string>
 
 </resources>

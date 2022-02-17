@@ -87,12 +87,20 @@
     <string name="cd_icon_app">应用程序图标</string>
     <string name="cd_edit_button">编辑</string>
     <string name="cd_delete_button">删除</string>
-    <string name="cd_show_panel">向左移动</string>
     <string name="cd_image_drink">一杯饮料的形象</string>
     <string name="cd_choice_theme">选定主题</string>
     <string name="cd_icon_drink">一杯饮料的图标</string>
     <string name="cd_take_photo">拍照</string>
     <string name="cd_save_drink">保存饮料</string>
+    <string name="cd_show_edit_panel">向左滑动</string>
+    <string name="cd_show_delete_panel">向右滑动</string>
+    <string name="cd_event">事件</string>
+    <string name="cd_info_safe_dose">安全剂量酒精</string>
+    <string name="cd_calculator">计算器</string>
+    <string name="cd_price">一杯饮料的费用</string>
+    <string name="cd_back">后退</string>
+    <string name="cd_add_drink">喝一杯</string>
+    <string name="cd_name_drink">饮品名称</string>
 
     <!--regex-->
 
