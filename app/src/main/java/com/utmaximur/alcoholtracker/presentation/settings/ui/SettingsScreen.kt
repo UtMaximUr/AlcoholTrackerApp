@@ -15,6 +15,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.skydoves.landscapist.glide.GlideImage
@@ -30,14 +31,12 @@ import timber.log.Timber
 fun SettingsScreen(
     viewModel: SettingsViewModel = hiltViewModel(),
     darkThemeState: MutableState<Boolean>,
-    innerPadding: PaddingValues) {
-
-    val bottomPadding = innerPadding.calculateBottomPadding() + 24.dp
+    innerPadding: Dp) {
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(bottom = bottomPadding),
+            .padding(bottom = innerPadding),
         verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

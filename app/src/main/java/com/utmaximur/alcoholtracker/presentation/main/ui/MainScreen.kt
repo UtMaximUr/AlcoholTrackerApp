@@ -4,13 +4,14 @@ package com.utmaximur.alcoholtracker.presentation.main.ui
 import android.content.Context
 import androidx.compose.animation.*
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -89,7 +90,7 @@ fun MainScreen() {
                     bottomBarState = bottomBarState,
                     darkThemeState = darkThemeState,
                     modalBottomSheetState = modalBottomSheetState,
-                    innerPadding = innerPadding
+                    innerPadding = innerPadding.calculateBottomPadding() + 24.dp
                 )
             }
         }
@@ -123,7 +124,7 @@ fun BottomNavScreensController(
     bottomBarState: MutableState<Boolean>,
     darkThemeState: MutableState<Boolean>,
     modalBottomSheetState: ModalBottomSheetState,
-    innerPadding: PaddingValues
+    innerPadding: Dp
 ) {
     NavHost(navController, startDestination = CalendarScreen.route) {
         composable(CalendarScreen.route) {
