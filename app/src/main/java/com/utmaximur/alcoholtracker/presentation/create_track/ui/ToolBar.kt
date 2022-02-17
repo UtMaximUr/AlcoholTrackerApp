@@ -39,7 +39,9 @@ fun ToolBar(viewModel: CreateTrackViewModel, navController: NavHostController) {
             IconButton(onClick = {
                 navController.popBackStack()
             }) {
-                Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null)
+                Icon(
+                    imageVector = Icons.Filled.ArrowBack,
+                    contentDescription = stringResource(id = R.string.cd_back))
             }
         },
         backgroundColor = Color.Transparent,
@@ -62,7 +64,7 @@ fun ToolBar(viewModel: CreateTrackViewModel, navController: NavHostController) {
                         }) {
                             Icon(
                                 imageVector = Icons.Default.Edit,
-                                contentDescription = null
+                                contentDescription = stringResource(id = R.string.cd_edit_button)
                             )
                         }
                         IconButton(onClick = {
@@ -70,7 +72,7 @@ fun ToolBar(viewModel: CreateTrackViewModel, navController: NavHostController) {
                         }) {
                             Icon(
                                 imageVector = Icons.Default.Delete,
-                                contentDescription = null
+                                contentDescription = stringResource(id = R.string.cd_delete_button)
                             )
                         }
                     }
@@ -87,7 +89,7 @@ fun ToolBar(viewModel: CreateTrackViewModel, navController: NavHostController) {
                         }) {
                             Icon(
                                 imageVector = Icons.Default.Done,
-                                contentDescription = null
+                                contentDescription = stringResource(id = R.string.cd_save_drink)
                             )
                         }
                     }
@@ -101,7 +103,7 @@ fun ToolBar(viewModel: CreateTrackViewModel, navController: NavHostController) {
                         }) {
                             Icon(
                                 imageVector = Icons.Default.Add,
-                                contentDescription = null
+                                contentDescription = stringResource(id = R.string.cd_add_drink)
                             )
                         }
                     }

@@ -34,7 +34,7 @@ fun ItemDrink(
             imageModel = drink?.photo ?: R.raw.createdrink,
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize(),
-            contentDescription = null
+            contentDescription = stringResource(id = R.string.cd_image_drink)
         )
         Card(
             modifier = Modifier
