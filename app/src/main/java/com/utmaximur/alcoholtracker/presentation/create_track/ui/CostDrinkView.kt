@@ -79,7 +79,7 @@ fun EventText(
             leadingIcon = {
                 Image(
                     painter = painterResource(id = R.drawable.ic_event_24dp),
-                    contentDescription = null,
+                    contentDescription = stringResource(id = R.string.cd_event),
                     colorFilter = ColorFilter.tint(MaterialTheme.colors.primary),
                 )
             },
@@ -134,7 +134,7 @@ fun CalculateText(
             leadingIcon = {
                 Image(
                     painter = painterResource(id = R.drawable.ic_local_bar_white_24dp),
-                    contentDescription = null,
+                    contentDescription = stringResource(id = R.string.cd_price),
                     colorFilter = ColorFilter.tint(MaterialTheme.colors.primary)
                 )
             },
@@ -142,7 +142,7 @@ fun CalculateText(
                 Image(
                     modifier = Modifier.clickable { openDialog.value = true },
                     painter = painterResource(id = R.drawable.ic_calculate_white_24dp),
-                    contentDescription = null,
+                    contentDescription = stringResource(id = R.string.cd_calculator),
                     colorFilter = ColorFilter.tint(MaterialTheme.colors.primary)
                 )
             },
