@@ -14,9 +14,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.skydoves.landscapist.glide.GlideImage
+import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.domain.entity.Icon
 import com.utmaximur.alcoholtracker.presentation.create_my_drink.CreateMyDrinkViewModel
 import com.utmaximur.alcoholtracker.util.getIdRaw
@@ -63,6 +65,7 @@ fun IconItem(
             .alpha(if (selectedState.value == icon.icon) 1f else 0.2f)
             .clickable {
                 onClick(icon)
-            }
+            },
+        contentDescription = stringResource(id = R.string.cd_icon_drink)
     )
 }

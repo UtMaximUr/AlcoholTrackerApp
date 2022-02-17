@@ -47,7 +47,7 @@ fun DrinkName(viewModel: CreateMyDrinkViewModel) {
         leadingIcon = {
             Image(
                 painter = painterResource(id = R.drawable.ic_local_bar_white_24dp),
-                contentDescription = null,
+                contentDescription = stringResource(id = R.string.cd_name_drink),
                 colorFilter = ColorFilter.tint(MaterialTheme.colors.primary)
             )
         },

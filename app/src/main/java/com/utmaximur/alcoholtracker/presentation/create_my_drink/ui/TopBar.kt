@@ -30,7 +30,10 @@ fun TopBar(
             IconButton(onClick = {
                 navController.popBackStack()
             }) {
-                Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null)
+                Icon(
+                    imageVector = Icons.Filled.ArrowBack,
+                    stringResource(id = R.string.cd_back)
+                )
             }
         },
         backgroundColor = Color.Transparent,
@@ -42,7 +45,7 @@ fun TopBar(
             }) {
                 Icon(
                     imageVector = Icons.Default.Done,
-                    contentDescription = null
+                    contentDescription = stringResource(id = R.string.cd_save_drink)
                 )
             }
         }
