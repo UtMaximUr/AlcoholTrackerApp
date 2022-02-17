@@ -1,20 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FFFFFF</color>
-    <color name="purple_700">#323232</color>
-    <color name="teal_200">#FFFFFF</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="text_color_white">#FFFFFFFF</color>
-    <color name="button_stroke_color">#FF000000</color>
-    <color name="text_warning_color">#D50000</color>
+    <color name="purple_500">#673AB7</color>
+    <color name="purple_700">#6200EA</color>
+    <color name="teal_200">#80DEEA</color>
     <color name="background_color">#FFFFFFFF</color>
-    <color name="calendar_color">#FF000000</color>
-    <color name="top_drink_color">#FF000000</color>
-    <color name="text_color">#FF000000</color>
     <color name="accent_color">#D50000</color>
-    <color name="statistic_color">#FF000000</color>
-    <color name="seekBarActiveColor">#DF0026</color>
-    <color name="seekBarInactiveColor">#9B9B9B</color>
 
 </resources>
