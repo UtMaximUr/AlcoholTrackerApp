@@ -80,7 +80,7 @@ fun DrinkItem(
             Image(
                 modifier = Modifier.size(48.dp),
                 painter = painterResource(id = drink.icon.getIdRaw(context)),
-                contentDescription = null
+                contentDescription = drink.drink.getResString(context)
             )
             Text(
                 maxLines = 1,
