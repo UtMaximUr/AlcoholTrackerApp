@@ -26,7 +26,7 @@ fun CalendarContent(
 ) {
 
     LaunchedEffect(key1 = Unit) {
-        viewModel.fetchTracks(calendar.timeInMillis)
+        viewModel.fetchEvents(calendar.timeInMillis)
         Timber.d("LaunchedEffect")
     }
 

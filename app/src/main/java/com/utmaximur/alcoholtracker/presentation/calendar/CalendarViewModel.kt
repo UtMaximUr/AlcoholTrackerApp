@@ -3,13 +3,12 @@ package com.utmaximur.alcoholtracker.presentation.calendar
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import com.utmaximur.alcoholtracker.domain.entity.EventDay
 import com.utmaximur.alcoholtracker.domain.entity.Track
 import com.utmaximur.alcoholtracker.domain.interactor.CalendarInteractor
 import com.utmaximur.alcoholtracker.presentation.calendar.state.TextState
 import com.utmaximur.alcoholtracker.util.setPostValue
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -17,7 +16,7 @@ import javax.inject.Inject
 open class CalendarViewModel @Inject constructor(private var calendarInteractor: CalendarInteractor) :
     ViewModel() {
 
-    val tracks: LiveData<List<Track>> by lazy {
+    val tracks: LiveData<List<EventDay>> by lazy {
         MutableLiveData()
     }
 
@@ -25,23 +24,13 @@ open class CalendarViewModel @Inject constructor(private var calendarInteractor:
         MutableLiveData()
     }
 
-    private suspend fun dataTracks(): List<Track> {
+    private suspend fun dataTracks(): List<EventDay> {
         return calendarInteractor.getTracks()
     }
 
-    fun updateTracks() {
-        viewModelScope.launch {
-            val dataTracks = dataTracks()
-            (tracks as MutableLiveData).value = dataTracks
-        }
-    }
-
-    private suspend fun dataAlcoholTrackByDay(eventDay: Long): List<Track> {
-        return calendarInteractor.getAlcoholTrackByDay(eventDay)
-    }
-
-    fun initTextState(date: Long) = viewModelScope.launch {
+    suspend fun fetchEvents(date: Long) {
         val dataTracks = dataTracks()
+        (tracks as MutableLiveData).value = dataTracks
         if (dataTracks.isEmpty()) {
             textState.setPostValue(TextState.AddPressToStart())
         } else {
@@ -52,6 +41,10 @@ open class CalendarViewModel @Inject constructor(private var calendarInteractor:
                 textState.setPostValue(TextState.SelectDay())
             }
         }
+    }
+
+    private suspend fun dataAlcoholTrackByDay(eventDay: Long): List<Track> {
+        return calendarInteractor.getAlcoholTrackByDay(eventDay)
     }
 
     suspend fun isTrackByDayEmpty(date: Long): Boolean {
