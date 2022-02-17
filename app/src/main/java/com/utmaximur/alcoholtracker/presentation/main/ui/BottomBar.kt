@@ -33,7 +33,7 @@ fun BottomBar(navController: NavHostController) {
                     icon = {
                         Icon(
                             painter = painterResource(id = screen.icon),
-                            contentDescription = null
+                            contentDescription = stringResource(id = screen.resourceId)
                         )
                     },
                     label = { Text(text = stringResource(id = screen.resourceId)) },
