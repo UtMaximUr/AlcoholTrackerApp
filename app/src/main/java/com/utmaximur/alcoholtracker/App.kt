@@ -11,7 +11,6 @@ open class App : MultiDexApplication() {
         super.onCreate()
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
-            Timber.tag("debug_log")
         }
     }
 }
