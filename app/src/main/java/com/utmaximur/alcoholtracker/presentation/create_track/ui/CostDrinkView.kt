@@ -22,7 +22,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
@@ -81,7 +80,7 @@ fun EventText(
                 Image(
                     painter = painterResource(id = R.drawable.ic_event_24dp),
                     contentDescription = null,
-                    colorFilter = ColorFilter.tint(colorResource(id = R.color.accent_color))
+                    colorFilter = ColorFilter.tint(MaterialTheme.colors.primary),
                 )
             },
             modifier = Modifier
@@ -94,8 +93,8 @@ fun EventText(
                 textColor = MaterialTheme.colors.onPrimary,
                 disabledTextColor = Color.Transparent,
                 backgroundColor = Color.Transparent,
-                focusedIndicatorColor = colorResource(id = R.color.accent_color),
-                unfocusedIndicatorColor = colorResource(id = R.color.accent_color),
+                focusedIndicatorColor = MaterialTheme.colors.primary,
+                unfocusedIndicatorColor = MaterialTheme.colors.primary,
                 disabledIndicatorColor = Color.Transparent
             ),
             singleLine = true,
@@ -136,7 +135,7 @@ fun CalculateText(
                 Image(
                     painter = painterResource(id = R.drawable.ic_local_bar_white_24dp),
                     contentDescription = null,
-                    colorFilter = ColorFilter.tint(colorResource(id = R.color.accent_color))
+                    colorFilter = ColorFilter.tint(MaterialTheme.colors.primary)
                 )
             },
             trailingIcon = {
@@ -157,8 +156,8 @@ fun CalculateText(
                 textColor = MaterialTheme.colors.onPrimary,
                 disabledTextColor = Color.Transparent,
                 backgroundColor = Color.Transparent,
-                focusedIndicatorColor = colorResource(id = R.color.accent_color),
-                unfocusedIndicatorColor = colorResource(id = R.color.accent_color),
+                focusedIndicatorColor = MaterialTheme.colors.primary,
+                unfocusedIndicatorColor = MaterialTheme.colors.primary,
                 disabledIndicatorColor = Color.Transparent
             ),
             singleLine = true,

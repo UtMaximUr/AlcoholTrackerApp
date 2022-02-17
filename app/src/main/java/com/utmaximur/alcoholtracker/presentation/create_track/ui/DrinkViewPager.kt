@@ -5,10 +5,12 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -96,6 +98,7 @@ fun DotsIndicator(
                 Image(
                     painter = painterResource(id = R.drawable.ic_dot_18dp),
                     contentDescription = null,
+                    colorFilter = ColorFilter.tint(MaterialTheme.colors.primary),
                     modifier = Modifier.size(12.dp)
                 )
             } else {

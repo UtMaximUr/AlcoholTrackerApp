@@ -4,6 +4,7 @@ package com.utmaximur.alcoholtracker.presentation.main.ui
 import android.content.Context
 import android.util.Log
 import androidx.compose.animation.*
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
@@ -34,10 +35,15 @@ import com.utmaximur.alcoholtracker.util.*
 @Composable
 fun MainScreen() {
 
+    val context = LocalContext.current
+    val isDark = isSystemInDarkTheme()
+
     UpdateApp()
 
     val navController = rememberNavController()
     val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
+    val darkThemeState =
+        rememberSaveable { (mutableStateOf(themeApp(context, isDark))) }
     val modalBottomSheetState =
         rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
 
@@ -50,7 +56,7 @@ fun MainScreen() {
         },
         sheetState = modalBottomSheetState
     ) {
-        AlcoholTrackerTheme {
+        AlcoholTrackerTheme(darkTheme = darkThemeState.value) {
             Scaffold(
                 bottomBar = {
                     AnimatedVisibility(
@@ -81,6 +87,7 @@ fun MainScreen() {
                 BottomNavScreensController(
                     navController = navController,
                     bottomBarState = bottomBarState,
+                    darkThemeState = darkThemeState,
                     modalBottomSheetState = modalBottomSheetState,
                     innerPadding = innerPadding
                 )
@@ -114,6 +121,7 @@ fun AddTrackButton(navController: NavHostController) {
 fun BottomNavScreensController(
     navController: NavHostController,
     bottomBarState: MutableState<Boolean>,
+    darkThemeState: MutableState<Boolean>,
     modalBottomSheetState: ModalBottomSheetState,
     innerPadding: PaddingValues
 ) {
@@ -143,7 +151,7 @@ fun BottomNavScreensController(
         }
         composable(SettingsScreen.route) {
             bottomBarState.value = true
-            SettingsScreen(innerPadding = innerPadding)
+            SettingsScreen(innerPadding = innerPadding, darkThemeState = darkThemeState)
         }
         composable(CreateDrinkScreen.route) {
             bottomBarState.value = false
@@ -193,5 +201,14 @@ private fun UpdateApp() {
             onLaterClick = { openDialog.value = false },
             onNowClick = { UpdateManager.getInstance().completeUpdate() }
         )
+    }
+}
+
+private fun themeApp(context: Context, isDark: Boolean): Boolean {
+    val sharedPrefs by lazy { context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE) }
+    return when (sharedPrefs?.getInt(KEY_THEME, THEME_UNDEFINED)) {
+        THEME_DARK -> true
+        THEME_LIGHT -> false
+        else -> isDark
     }
 }

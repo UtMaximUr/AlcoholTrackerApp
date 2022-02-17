@@ -1,15 +1,17 @@
 package com.utmaximur.alcoholtracker.presentation.settings.ui
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.material.contentColorFor
+import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
@@ -25,8 +27,13 @@ import com.utmaximur.alcoholtracker.util.PRIVACY_POLICY
 import com.utmaximur.alcoholtracker.util.TERMS_OF_USE
 
 @Composable
-fun SettingsScreen(viewModel: SettingsViewModel = hiltViewModel(), innerPadding: PaddingValues) {
+fun SettingsScreen(
+    viewModel: SettingsViewModel = hiltViewModel(),
+    darkThemeState: MutableState<Boolean>,
+    innerPadding: PaddingValues) {
+
     val bottomPadding = innerPadding.calculateBottomPadding() + 24.dp
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -35,7 +42,8 @@ fun SettingsScreen(viewModel: SettingsViewModel = hiltViewModel(), innerPadding:
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        val checkedThemeState by viewModel.checkedThemeState.observeAsState(true)
+        val isDark = isSystemInDarkTheme()
+        val checkedThemeState = remember { mutableStateOf(isDark == darkThemeState.value)}
         val checkedUpdateState by viewModel.checkedUpdateState.observeAsState(true)
 
         Column(
@@ -52,6 +60,7 @@ fun SettingsScreen(viewModel: SettingsViewModel = hiltViewModel(), innerPadding:
                         .padding(20.dp)
                         .size(128.dp),
                     imageModel = R.mipmap.ic_launcher,
+                    colorFilter = ColorFilter.tint(MaterialTheme.colors.primary),
                     contentDescription = null
                 )
             }
@@ -77,10 +86,18 @@ fun SettingsScreen(viewModel: SettingsViewModel = hiltViewModel(), innerPadding:
             elevation = 11.dp
         ) {
             Column {
-                Switch(R.string.default_theme, checkedThemeState) {
+                Switch(R.string.default_theme, checkedThemeState.value) {
+                    checkedThemeState.value = it
                     viewModel.onUseDefaultThemeChange(it)
+                    if (it && !darkThemeState.value) {
+                        darkThemeState.value = it
+                    }
                 }
-                ThemeList(checkedThemeState, viewModel)
+                ThemeList(
+                    visible = checkedThemeState.value,
+                    viewModel = viewModel,
+                    darkThemeState = darkThemeState
+                )
                 Switch(R.string.check_for_updates, checkedUpdateState) {
                     viewModel.onUpdateChange(it)
                 }

@@ -3,17 +3,12 @@ package com.utmaximur.alcoholtracker.presentation.main.ui
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
-import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.navigation.NavigationDestination
 
 @Composable
@@ -28,8 +23,8 @@ fun BottomBar(navController: NavHostController) {
     )
 
     BottomNavigation(
-        backgroundColor = colorResource(id = R.color.background_color),
-        contentColor = colorResource(id = R.color.accent_color),
+        backgroundColor = MaterialTheme.colors.background,
+        contentColor = MaterialTheme.colors.primary,
     ) {
         val currentRoute = currentRoute(navController)
         bottomNavigationItems.forEach { screen ->

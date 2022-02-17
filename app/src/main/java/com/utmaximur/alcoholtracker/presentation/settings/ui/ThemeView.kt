@@ -11,12 +11,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
@@ -26,10 +24,13 @@ import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.presentation.settings.SettingsViewModel
 
 @Composable
-fun ThemeList(visible: Boolean, viewModel: SettingsViewModel) {
+fun ThemeList(
+    visible: Boolean,
+    viewModel: SettingsViewModel,
+    darkThemeState: MutableState<Boolean>,
+) {
 
-    val themeLightCheckState by viewModel.themeLightCheckState.observeAsState()
-    val themeDarkCheckState by viewModel.themeDarkCheckState.observeAsState()
+    val themeCheckState = remember { mutableStateOf(darkThemeState.value)}
 
     AnimatedVisibility(
         visible = !visible,
@@ -37,13 +38,17 @@ fun ThemeList(visible: Boolean, viewModel: SettingsViewModel) {
         exit = shrinkVertically()
     ) {
         Column(
-            modifier = Modifier.background(colorResource(id = R.color.background_color))
+            modifier = Modifier.background(MaterialTheme.colors.background)
         ) {
-            ThemeItem(R.string.light_theme, themeLightCheckState!!) {
+            ThemeItem(R.string.light_theme, !themeCheckState.value) {
                 viewModel.onLightThemeChange(it)
+                themeCheckState.value = false
+                darkThemeState.value = false
             }
-            ThemeItem(R.string.dark_theme, themeDarkCheckState!!) {
+            ThemeItem(R.string.dark_theme, themeCheckState.value) {
                 viewModel.onDarkThemeChange(it)
+                themeCheckState.value = true
+                darkThemeState.value = true
             }
         }
     }
@@ -69,6 +74,7 @@ fun ThemeItem(text: Int, themeCheckState: Boolean, onClick: (Boolean) -> Unit) {
             Image(
                 modifier = Modifier.padding(end = 12.dp),
                 painter = painterResource(id = R.drawable.ic_choice_24dp),
+                colorFilter = ColorFilter.tint(MaterialTheme.colors.primary),
                 contentDescription = null
             )
         }
