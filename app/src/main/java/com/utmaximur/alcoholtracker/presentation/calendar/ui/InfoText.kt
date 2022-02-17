@@ -32,12 +32,10 @@ fun InfoText(viewModel: CalendarViewModel = hiltViewModel()) {
         }
 
 
-    if (textState.value != Int.empty()) {
-        Text(
-            text = stringResource(id = textState.value),
-            fontFamily = FontFamily(Font(R.font.roboto_condensed_regular)),
-        )
-    }
+    Text(
+        text = if (textState.value != Int.empty()) stringResource(id = textState.value) else String.empty(),
+        fontFamily = FontFamily(Font(R.font.roboto_condensed_regular))
+    )
 
     Timber.tag("calendar_debug_log")
     Timber.d("InfoText")
