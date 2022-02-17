@@ -41,7 +41,8 @@ fun TrackItem(track: Track) {
                 modifier = Modifier
                     .height(160.dp)
                     .fillMaxWidth(),
-                imageModel = track.image
+                imageModel = track.image,
+                contentDescription = stringResource(id = R.string.cd_image_drink)
             )
             AnimatedVisibility(
                 visible = infoTrackVisibleState.value,
@@ -91,7 +92,7 @@ fun TrackItem(track: Track) {
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.ic_info_24dp),
-                    contentDescription = null,
+                    contentDescription = stringResource(id = R.string.cd_info_safe_dose),
                     modifier = Modifier
                         .clickable {
                             infoSafeDoseVisibleState.value = !infoSafeDoseVisibleState.value
@@ -106,7 +107,7 @@ fun TrackItem(track: Track) {
                 AnimatedVisibility(visible = track.event.isNotEmpty()) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_event_24dp),
-                        contentDescription = null,
+                        contentDescription = stringResource(id = R.string.cd_event),
                         modifier = Modifier
                             .clickable {
                                 eventVisibleState.value = !eventVisibleState.value
