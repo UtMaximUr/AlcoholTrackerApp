@@ -60,7 +60,7 @@ fun SettingsScreen(
                         .size(128.dp),
                     imageModel = R.mipmap.ic_launcher,
                     colorFilter = ColorFilter.tint(MaterialTheme.colors.primary),
-                    contentDescription = null
+                    contentDescription = stringResource(id = R.string.cd_icon_app)
                 )
             }
         }

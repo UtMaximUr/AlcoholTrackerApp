@@ -75,7 +75,7 @@ fun ThemeItem(text: Int, themeCheckState: Boolean, onClick: (Boolean) -> Unit) {
                 modifier = Modifier.padding(end = 12.dp),
                 painter = painterResource(id = R.drawable.ic_choice_24dp),
                 colorFilter = ColorFilter.tint(MaterialTheme.colors.primary),
-                contentDescription = null
+                contentDescription = stringResource(id = R.string.cd_choice_theme)
             )
         }
     }
