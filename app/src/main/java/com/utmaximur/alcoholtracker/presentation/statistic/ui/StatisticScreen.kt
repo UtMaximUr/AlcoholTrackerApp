@@ -9,6 +9,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.utmaximur.alcoholtracker.presentation.statistic.StatisticViewModel
+import timber.log.Timber
 
 
 @OptIn(ExperimentalPagerApi::class, ExperimentalFoundationApi::class)
@@ -24,4 +25,7 @@ fun StatisticScreen(viewModel: StatisticViewModel = hiltViewModel(), innerPaddin
         CountDaysStatistic(viewModel)
         CountDrinksStatistic(viewModel)
     }
+
+    Timber.tag("debug_log")
+    Timber.d("StatisticScreen")
 }

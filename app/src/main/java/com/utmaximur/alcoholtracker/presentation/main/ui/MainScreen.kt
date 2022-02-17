@@ -175,6 +175,7 @@ fun currentRoute(navController: NavHostController): String? {
 
 @Composable
 private fun UpdateApp() {
+    Timber.tag("debug_log")
     Timber.d("UpdateApp")
 
     val context = LocalContext.current

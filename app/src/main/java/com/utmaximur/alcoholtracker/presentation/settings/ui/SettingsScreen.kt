@@ -24,6 +24,7 @@ import com.utmaximur.alcoholtracker.presentation.settings.SettingsViewModel
 import com.utmaximur.alcoholtracker.util.MARKET_APP
 import com.utmaximur.alcoholtracker.util.PRIVACY_POLICY
 import com.utmaximur.alcoholtracker.util.TERMS_OF_USE
+import timber.log.Timber
 
 @Composable
 fun SettingsScreen(
@@ -106,4 +107,7 @@ fun SettingsScreen(
             }
         }
     }
+
+    Timber.tag("debug_log")
+    Timber.d("SettingsScreen")
 }
