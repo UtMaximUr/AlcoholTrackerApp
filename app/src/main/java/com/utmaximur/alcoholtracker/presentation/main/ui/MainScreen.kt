@@ -2,7 +2,6 @@ package com.utmaximur.alcoholtracker.presentation.main.ui
 
 
 import android.content.Context
-import android.util.Log
 import androidx.compose.animation.*
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.PaddingValues
@@ -30,6 +29,7 @@ import com.utmaximur.alcoholtracker.presentation.main.ui.theme.AlcoholTrackerThe
 import com.utmaximur.alcoholtracker.presentation.main.ui.theme.TextColorWhite
 import com.utmaximur.alcoholtracker.presentation.statistic.ui.StatisticScreen
 import com.utmaximur.alcoholtracker.util.*
+import timber.log.Timber
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -175,7 +175,7 @@ fun currentRoute(navController: NavHostController): String? {
 
 @Composable
 private fun UpdateApp() {
-    Log.d("debug_log", "UpdateApp")
+    Timber.d("UpdateApp")
 
     val context = LocalContext.current
 
@@ -184,7 +184,7 @@ private fun UpdateApp() {
     val sharedPrefs by lazy { context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE) }
     val savedUpdate = sharedPrefs.getBoolean(KEY_UPDATE, true)
 
-    Log.d("debug_log", "savedUpdate = $savedUpdate")
+    Timber.d("UpdateApp/savedUpdate = $savedUpdate")
 
     if (savedUpdate) {
         UpdateManager.getInstance().registerListener()
