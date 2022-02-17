@@ -1,5 +1,6 @@
 package com.utmaximur.alcoholtracker.presentation.settings.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -10,7 +11,6 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
@@ -57,9 +57,9 @@ fun SettingsScreen(
                 GlideImage(
                     modifier = Modifier
                         .padding(20.dp)
+                        .background(MaterialTheme.colors.primary)
                         .size(128.dp),
-                    imageModel = R.mipmap.ic_launcher,
-                    colorFilter = ColorFilter.tint(MaterialTheme.colors.primary),
+                    imageModel = R.drawable.ic_launcher_foreground,
                     contentDescription = stringResource(id = R.string.cd_icon_app)
                 )
             }
