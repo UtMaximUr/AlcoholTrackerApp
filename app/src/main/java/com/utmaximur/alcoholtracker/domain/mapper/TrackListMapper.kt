@@ -1,11 +1,16 @@
 package com.utmaximur.alcoholtracker.domain.mapper
 
 
+import com.utmaximur.alcoholtracker.domain.entity.EventDay
 import com.utmaximur.alcoholtracker.domain.entity.Track
 import java.util.*
 import javax.inject.Inject
 
 class TrackListMapper @Inject constructor() {
+
+    fun getEventsDayList(tracksList: List<Track>): List<EventDay> {
+        return tracksList.map { track -> EventDay(track.date, track.icon) }
+    }
 
     fun getAlcoholTrackByDay(
         tracksList: List<Track>,
