@@ -137,7 +137,7 @@ fun ButtonDialog(
         Icon(
             painter = painterResource(id = icon),
             tint = MaterialTheme.colors.onPrimary,
-            contentDescription = null
+            contentDescription = stringResource(id = text)
         )
         Spacer(modifier = Modifier.padding(start = 32.dp))
         Text(
