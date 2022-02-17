@@ -1,12 +1,12 @@
 package com.utmaximur.alcoholtracker.domain.entity
 
+import com.utmaximur.alcoholtracker.util.extension.empty
 
-import androidx.annotation.DrawableRes
 
 data class EventDay(val date: Long) {
-    internal var imageDrawable: Int = 0
+    internal var idDrawable: String = String.empty()
 
-    constructor(date: Long, @DrawableRes drawableRes: Int) : this(date) {
-        imageDrawable = drawableRes
+    constructor(date: Long, idDrawable: String) : this(date) {
+        this.idDrawable = idDrawable
     }
 }
