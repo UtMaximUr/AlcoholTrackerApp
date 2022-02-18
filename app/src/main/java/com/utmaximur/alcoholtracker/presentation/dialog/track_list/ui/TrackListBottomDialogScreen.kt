@@ -106,7 +106,7 @@ fun TrackListBottomDialogScreen(
                     val direction = dismissState.dismissDirection ?: return@SwipeToDismiss
                     val color by animateColorAsState(
                         when (dismissState.targetValue) {
-                            DismissValue.Default -> MaterialTheme.colors.primary
+                            DismissValue.Default -> MaterialTheme.colors.background
                             DismissValue.DismissedToEnd -> EditColor
                             DismissValue.DismissedToStart -> DeleteColor
                         }

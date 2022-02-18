@@ -48,16 +48,17 @@ fun MainScreen() {
     val modalBottomSheetState =
         rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
 
-    ModalBottomSheetLayout(
-        sheetContent = {
-            TrackListBottomDialogScreen(
-                navController = navController,
-                modalBottomSheetState = modalBottomSheetState
-            )
-        },
-        sheetState = modalBottomSheetState
-    ) {
-        AlcoholTrackerTheme(darkTheme = darkThemeState.value) {
+    AlcoholTrackerTheme(darkTheme = darkThemeState.value) {
+        ModalBottomSheetLayout(
+            sheetContent = {
+                TrackListBottomDialogScreen(
+                    navController = navController,
+                    modalBottomSheetState = modalBottomSheetState
+                )
+            },
+            sheetState = modalBottomSheetState,
+            sheetBackgroundColor = MaterialTheme.colors.background
+        ) {
             Scaffold(
                 bottomBar = {
                     AnimatedVisibility(
