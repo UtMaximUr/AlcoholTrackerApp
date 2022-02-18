@@ -85,11 +85,11 @@ fun SettingsScreen(
             elevation = 11.dp
         ) {
             Column {
-                Switch(R.string.default_theme, checkedThemeState.value) {
-                    checkedThemeState.value = it
-                    viewModel.onUseDefaultThemeChange(it)
-                    if (it && !darkThemeState.value) {
-                        darkThemeState.value = it
+                Switch(R.string.default_theme, checkedThemeState.value) { isChecked ->
+                    checkedThemeState.value = isChecked
+                    viewModel.onUseDefaultThemeChange(isChecked)
+                    if (isChecked) {
+                        darkThemeState.value = isDark == isChecked
                     }
                 }
                 ThemeList(

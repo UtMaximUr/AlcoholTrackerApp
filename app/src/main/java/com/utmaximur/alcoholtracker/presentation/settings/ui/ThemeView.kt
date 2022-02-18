@@ -30,8 +30,6 @@ fun ThemeList(
     darkThemeState: MutableState<Boolean>,
 ) {
 
-    val themeCheckState = remember { mutableStateOf(darkThemeState.value)}
-
     AnimatedVisibility(
         visible = !visible,
         enter = expandVertically(),
@@ -40,14 +38,12 @@ fun ThemeList(
         Column(
             modifier = Modifier.background(MaterialTheme.colors.background)
         ) {
-            ThemeItem(R.string.light_theme, !themeCheckState.value) {
+            ThemeItem(R.string.light_theme, !darkThemeState.value) {
                 viewModel.onLightThemeChange(it)
-                themeCheckState.value = false
                 darkThemeState.value = false
             }
-            ThemeItem(R.string.dark_theme, themeCheckState.value) {
+            ThemeItem(R.string.dark_theme, darkThemeState.value) {
                 viewModel.onDarkThemeChange(it)
-                themeCheckState.value = true
                 darkThemeState.value = true
             }
         }
