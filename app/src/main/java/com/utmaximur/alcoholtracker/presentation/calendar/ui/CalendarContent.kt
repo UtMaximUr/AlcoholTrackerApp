@@ -73,7 +73,6 @@ fun CalendarContent(
         Box(modifier = Modifier.weight(1f)) {
             Month(
                 yearState = yearState,
-//                eventsState = eventsDayState,
                 pagerState = pagerMonthState,
                 onDayClick = {
                     scope.launch {
