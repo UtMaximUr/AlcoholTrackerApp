@@ -162,16 +162,20 @@ class CreateTrackViewModel @Inject constructor(private var addTrackInteractor: A
         valueCalculating.setValue(price)
     }
 
-    fun onDegreeChange(degree: String) {
+    fun onDegreeChange(degree: String, position: Int) {
         this.degree = degree
+        degreeState.setValue(position)
     }
 
     fun onQuantityChange(quantity: Int) {
         this.quantity = quantity
+        onTotalMoneyCalculating(quantity)
+        quantityState.setValue(quantity)
     }
 
-    fun onVolumeChange(volume: String) {
+    fun onVolumeChange(volume: String, position: Int) {
         this.volume = volume
+        volumeState.setValue(position)
     }
 
     fun onViewPagerPositionChange(position: Int) {
@@ -181,6 +185,8 @@ class CreateTrackViewModel @Inject constructor(private var addTrackInteractor: A
             drinkState.setValue(currentDrink)
             volume = currentDrink.volume.first().toString()
             degree = currentDrink.degree.first().toString()
+            volumeState.setValue(Int.empty())
+            degreeState.setValue(Int.empty())
             visibleSaveButtonState.setValue(true)
             visibleEditDrinkButtonState.setValue(!currentDrink.id.isDigitsOnly())
         } else {
@@ -199,7 +205,7 @@ class CreateTrackViewModel @Inject constructor(private var addTrackInteractor: A
         valueCalculating.setValue(resultCalculating)
     }
 
-    fun onTotalMoneyCalculating(quantity: Int) {
+    private fun onTotalMoneyCalculating(quantity: Int) {
         totalMoney.setValue((quantity * price.toString().toDouble()).toString())
     }
 }

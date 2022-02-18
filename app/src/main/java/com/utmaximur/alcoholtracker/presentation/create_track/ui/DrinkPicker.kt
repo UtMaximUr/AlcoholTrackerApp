@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.presentation.create_track.CreateTrackViewModel
 import com.utmaximur.alcoholtracker.util.extension.empty
+import com.utmaximur.alcoholtracker.util.extension.first
 import com.utmaximur.alcoholtracker.util.setVolumeUnit
 
 @Composable
@@ -77,28 +78,19 @@ fun NumberPickerDrink(
 @Composable
 fun QuantityNumberPicker(text: Int, viewModel: CreateTrackViewModel) {
 
-    val state = remember { mutableStateOf(Int.empty()) }.apply {
-        value.let { value ->
-            viewModel.onQuantityChange(value)
-            viewModel.onTotalMoneyCalculating(value)
-        }
-    }
-
-    viewModel.quantityState.observeAsState().apply {
-        value?.let { quantity -> state.value = quantity }
-    }
+    val quantity = viewModel.quantityState.observeAsState(Int.first())
 
     Text(
         text = stringResource(id = text),
         fontFamily = FontFamily(Font(R.font.roboto_condensed_regular)),
         color = MaterialTheme.colors.onPrimary,
     )
-    val possibleValues = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+    val possibleValues = (1..10).toList()
 
     ListItemPicker(
         label = { it.toString() },
-        value = state.value,
-        onValueChange = { state.value = it.toString().toInt() },
+        value = quantity.value,
+        onValueChange = { viewModel.onQuantityChange(it) },
         list = possibleValues
     )
 }
@@ -110,26 +102,9 @@ fun VolumeNumberPicker(
 ) {
 
     val context = LocalContext.current
-    val volumeValues = remember { mutableStateListOf<String>() }
-    val volumeValue = remember { mutableStateOf(String.empty()) }.apply {
-        if (value.isNotEmpty()) {
-            viewModel.onVolumeChange(value)
-        }
-    }
-
-    viewModel.drinkState.observeAsState().apply {
-        value?.let { drink ->
-            volumeValues.clear()
-            volumeValues.addAll(drink.volume.setVolumeUnit(context))
-        }
-    }
-    viewModel.volumeState.observeAsState().apply {
-        value?.let { degree ->
-            if (volumeValues.isNotEmpty()) {
-                volumeValue.value = volumeValues[degree]
-            }
-        }
-    }
+    val volumeValues: List<String>? =
+        viewModel.drinkState.observeAsState().value?.volume?.setVolumeUnit(context)
+    val volumeValue = viewModel.volumeState.observeAsState(Int.empty())
 
     Text(
         text = stringResource(id = text),
@@ -137,12 +112,12 @@ fun VolumeNumberPicker(
         color = MaterialTheme.colors.onPrimary,
     )
 
-    if (volumeValues.isNotEmpty()) {
+    volumeValues?.let { volumes ->
         ListItemPicker(
             label = { it },
-            value = volumeValue.value,
-            onValueChange = { volumeValue.value = it },
-            list = volumeValues
+            value = volumes[volumeValue.value],
+            onValueChange = { viewModel.onVolumeChange(it, volumes.indexOf(it)) },
+            list = volumes
         )
     }
 }
@@ -153,26 +128,8 @@ fun DegreeNumberPicker(
     viewModel: CreateTrackViewModel
 ) {
 
-    val degreeValues = remember { mutableStateListOf<String>() }
-    val degreeValue = remember { mutableStateOf(String.empty()) }.apply {
-        if (value.isNotEmpty()) {
-            viewModel.onDegreeChange(value)
-        }
-    }
-
-    viewModel.drinkState.observeAsState().apply {
-        value?.let { drink ->
-            degreeValues.clear()
-            degreeValues.addAll(drink.degree)
-        }
-    }
-    viewModel.degreeState.observeAsState().apply {
-        value?.let { degree ->
-            if (degreeValues.isNotEmpty()) {
-                degreeValue.value = degreeValues[degree]
-            }
-        }
-    }
+    val degreeValues = viewModel.drinkState.observeAsState().value?.degree
+    val degreeValue = viewModel.degreeState.observeAsState(Int.empty())
 
     Text(
         text = stringResource(id = text),
@@ -180,12 +137,12 @@ fun DegreeNumberPicker(
         color = MaterialTheme.colors.onPrimary,
     )
 
-    if (degreeValues.isNotEmpty()) {
+    degreeValues?.let { degrees ->
         ListItemPicker(
             label = { it },
-            value = degreeValue.value,
-            onValueChange = { degreeValue.value = it },
-            list = degreeValues
+            value = degrees[degreeValue.value],
+            onValueChange = { viewModel.onDegreeChange(it, degrees.indexOf(it)) },
+            list = degrees
         )
     }
 }
