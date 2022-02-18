@@ -1,6 +1,7 @@
 package com.utmaximur.alcoholtracker.presentation.statistic.ui
 
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -22,6 +23,7 @@ fun CountDaysStatistic(viewModel: StatisticViewModel) {
     Card(
         modifier = Modifier
             .fillMaxHeight(0.15f)
+            .fillMaxWidth()
             .padding(12.dp),
         shape = RoundedCornerShape(22.dp),
         backgroundColor = MaterialTheme.colors.surface,
