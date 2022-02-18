@@ -17,6 +17,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.data.update.UpdateManager
 import com.utmaximur.alcoholtracker.navigation.NavigationDestination.*
@@ -49,6 +50,7 @@ fun MainScreen() {
         rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
 
     AlcoholTrackerTheme(darkTheme = darkThemeState.value) {
+        SystemUiColor(darkThemeState.value)
         ModalBottomSheetLayout(
             sheetContent = {
                 TrackListBottomDialogScreen(
@@ -214,4 +216,17 @@ private fun themeApp(context: Context, isDark: Boolean): Boolean {
         THEME_LIGHT -> false
         else -> isDark
     }
+}
+
+@Composable
+private fun SystemUiColor(darkThemeState: Boolean) {
+    val systemUiController = rememberSystemUiController()
+    systemUiController.setStatusBarColor(
+        color = MaterialTheme.colors.background,
+        darkIcons = !darkThemeState
+    )
+    systemUiController.setSystemBarsColor(
+        color = MaterialTheme.colors.background,
+        darkIcons = !darkThemeState
+    )
 }
