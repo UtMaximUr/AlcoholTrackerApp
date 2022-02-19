@@ -1,8 +1,18 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext {
-        compose_version = '1.0.5'
-        kotlin_version = "1.5.31"
+        compose_version = "1.2.0-alpha02"
+        kotlin_version = "1.6.10"
+        gradle_version = "7.0.4"
+        nav_version = "2.4.0"
+        gs_version = "4.3.10"
+        firebase_version = "2.5.2"
+        multidex_version = '2.0.1'
+        json = '2.8.9'
+        firebase = '26.1.1'
+        in_app_updates = '1.10.3'
+        room_version = "2.4.1"
+        hilt_version = "2.40"
     }
 
     repositories {
@@ -10,12 +20,12 @@ buildscript {
         jcenter()
     }
     dependencies {
-        def nav_version = "2.3.5"
-        classpath "com.android.tools.build:gradle:7.0.4"
+        classpath "com.android.tools.build:gradle:$gradle_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
-        classpath 'com.google.gms:google-services:4.3.10'
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.5.2'
+        classpath "com.google.gms:google-services:$gs_version"
+        classpath "com.google.firebase:firebase-crashlytics-gradle:$firebase_version"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -32,15 +42,4 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
-}
-
-ext {
-    calendar = '1.7.0'
-    dagger = '2.38'
-    glide = '4.12.0'
-    json = '2.8.9'
-    firebase = '26.1.1'
-    in_app_updates = '1.10.3'
-    nav_version = "2.3.5"
-    room_version = "2.4.1"
 }
