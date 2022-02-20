@@ -1,0 +1,7 @@
+<resources>
+
+    <string name="unit_ml">%s мл</string>
+    <string name="unit_l">%s л</string>
+    <string name="safe_dose">%s %% от безопасной дозы*</string>
+
+</resources>
