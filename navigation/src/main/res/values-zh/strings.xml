@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="calendar">日历</string>
+    <string name="statistic">统计数据</string>
+    <string name="settings">设定值</string>
+
+</resources>

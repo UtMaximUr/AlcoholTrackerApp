@@ -1,27 +1,20 @@
-package com.utmaximur.alcoholtracker.presentation.main.ui
+package com.utmaximur.navigation
 
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.utmaximur.alcoholtracker.navigation.NavigationDestination
+import androidx.navigation.compose.currentBackStackEntryAsState
 
 @Composable
 fun BottomBar(navController: NavHostController) {
-
-    val bottomNavigationItems = listOf(
-        NavigationDestination.CalendarScreen,
-        NavigationDestination.StatisticScreen,
-        NavigationDestination.SpaceScreen,
-        NavigationDestination.SpaceScreen,
-        NavigationDestination.SettingsScreen
-    )
 
     BottomNavigation(
         backgroundColor = MaterialTheme.colors.background,
@@ -53,4 +46,10 @@ fun BottomBar(navController: NavHostController) {
             }
         }
     }
+}
+
+@Composable
+private fun currentRoute(navController: NavHostController): String? {
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    return navBackStackEntry?.destination?.route
 }

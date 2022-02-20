@@ -1,8 +1,8 @@
-package com.utmaximur.alcoholtracker.navigation
+package com.utmaximur.navigation
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import com.utmaximur.alcoholtracker.R
+
 
 sealed class NavigationDestination(
     val route: String = "",
@@ -28,3 +28,11 @@ sealed class NavigationDestination(
         NavigationDestination(route = "create_drink_screen")
 
 }
+
+val bottomNavigationItems = listOf(
+    NavigationDestination.CalendarScreen,
+    NavigationDestination.StatisticScreen,
+    NavigationDestination.SpaceScreen,
+    NavigationDestination.SpaceScreen,
+    NavigationDestination.SettingsScreen
+)
