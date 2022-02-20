@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.util
+package com.utmaximur.utils
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

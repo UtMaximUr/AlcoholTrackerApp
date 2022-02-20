@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.util
+package com.utmaximur.utils
 
 import androidx.navigation.NavHostController
 

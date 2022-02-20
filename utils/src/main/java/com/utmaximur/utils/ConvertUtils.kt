@@ -1,11 +1,8 @@
-package com.utmaximur.alcoholtracker.util
+package com.utmaximur.utils
 
 
 import android.content.Context
 import androidx.core.text.isDigitsOnly
-import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.domain.entity.Track
-import com.utmaximur.alcoholtracker.util.extension.empty
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -85,19 +82,19 @@ fun String.formatVolume(context: Context, quantity: Int): String {
     }
 }
 
-fun Track.getSafeDoseOfAlcohol(context: Context): String {
+fun Context.getSafeDoseOfAlcohol(volume: String, quantity: Int, degree: String): String {
     val digitVolume: String =
-        volume.replace(context.getString(R.string.only_number_regex).toRegex(), "").trim()
+        volume.replace(this.getString(R.string.only_number_regex).toRegex(), "").trim()
     return if (volume.contains(".")) {
         // convert ml to l
-        val volume = digitVolume.toDouble() * 1000
+        val v = digitVolume.toDouble() * 1000
         String.format(
-            context.getString(R.string.safe_dose),
-            ((quantity * volume) / 100 * degree.toDouble()).formatDegree1f()
+            this.getString(R.string.safe_dose),
+            ((quantity * v) / 100 * degree.toDouble()).formatDegree1f()
         )
     } else {
         String.format(
-            context.getString(R.string.safe_dose),
+            this.getString(R.string.safe_dose),
             ((quantity * digitVolume.toDouble()) / 100 * degree.toDouble()).formatDegree1f()
         )
     }
