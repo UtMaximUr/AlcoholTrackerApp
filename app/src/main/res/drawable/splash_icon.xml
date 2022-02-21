@@ -6,6 +6,5 @@
         </shape>
     </item>
     <item android:gravity="center"
-        android:bottom="@dimen/dp_32"
         android:drawable="@drawable/ic_launch_app" />
 </layer-list>
