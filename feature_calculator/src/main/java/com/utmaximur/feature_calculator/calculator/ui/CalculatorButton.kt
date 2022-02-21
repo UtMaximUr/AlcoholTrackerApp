@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.presentation.calculator.ui
+package com.utmaximur.feature_calculator.calculator.ui
 
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -7,7 +7,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import com.utmaximur.alcoholtracker.R
+import com.utmaximur.feature_calculator.R
+
 
 @Composable
 fun CalculatorButton(

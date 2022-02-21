@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.presentation.calculator.ui
+package com.utmaximur.feature_calculator.calculator.ui
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -12,9 +12,9 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.presentation.calculator.CalculatorViewModel
-import com.utmaximur.alcoholtracker.util.extension.empty
+import com.utmaximur.feature_calculator.R
+import com.utmaximur.feature_calculator.calculator.CalculatorViewModel
+import com.utmaximur.utils.empty
 
 @Composable
 fun CalculatorText(

@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.presentation.calculator.ui
+package com.utmaximur.feature_calculator.calculator.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -7,14 +7,15 @@ import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.presentation.calculator.CalculatorViewModel
-import com.utmaximur.alcoholtracker.presentation.main.ui.theme.TextColorWhite
-import com.utmaximur.alcoholtracker.util.*
+import com.utmaximur.feature_calculator.calculator.CalculatorViewModel
+import com.utmaximur.feature_calculator.utils.*
+import com.utmaximur.feature_calculator.R
+
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -53,7 +54,7 @@ fun CalculatorScreen(
                         modifier = Modifier.fillMaxWidth(),
                         idText = R.string.calc_ok,
                         colors = ButtonDefaults.buttonColors(),
-                        textColor = TextColorWhite,
+                        textColor = Color.White,
                         onClick = { onDismiss() }
                     )
                 }
@@ -80,7 +81,7 @@ fun CalculatorScreen(
                         modifier = Modifier.weight(1f),
                         idText = R.string.calc_divide,
                         colors = ButtonDefaults.buttonColors(),
-                        textColor = TextColorWhite,
+                        textColor = Color.White,
                         onClick = { viewModel.setCurrentAction(DIVISION) }
                     )
                 }
@@ -107,7 +108,7 @@ fun CalculatorScreen(
                         modifier = Modifier.weight(1f),
                         idText = R.string.calc_multiply,
                         colors = ButtonDefaults.buttonColors(),
-                        textColor = TextColorWhite,
+                        textColor = Color.White,
                         onClick = { viewModel.setCurrentAction(MULTIPLICATION) }
                     )
                 }
@@ -134,7 +135,7 @@ fun CalculatorScreen(
                         modifier = Modifier.weight(1f),
                         idText = R.string.calc_minus,
                         colors = ButtonDefaults.buttonColors(),
-                        textColor = TextColorWhite,
+                        textColor = Color.White,
                         onClick = { viewModel.setCurrentAction(SUBTRACTION) }
                     )
                 }
@@ -149,7 +150,7 @@ fun CalculatorScreen(
                         modifier = Modifier.fillMaxWidth(0.5f),
                         idText = R.string.calc_equally,
                         colors = ButtonDefaults.buttonColors(),
-                        textColor = TextColorWhite,
+                        textColor = Color.White,
                         onClick = { viewModel.computeCalculation() }
                     )
                     Spacer(modifier = Modifier.size(4.dp))
@@ -157,7 +158,7 @@ fun CalculatorScreen(
                         modifier = Modifier.weight(1f),
                         idText = R.string.calc_plus,
                         colors = ButtonDefaults.buttonColors(),
-                        textColor = TextColorWhite,
+                        textColor = Color.White,
                         onClick = { viewModel.setCurrentAction(ADDITION) }
                     )
                 }

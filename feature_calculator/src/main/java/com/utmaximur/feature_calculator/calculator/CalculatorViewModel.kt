@@ -1,21 +1,26 @@
-package com.utmaximur.alcoholtracker.presentation.calculator
+package com.utmaximur.feature_calculator.calculator
 
 
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.utmaximur.alcoholtracker.util.*
-import com.utmaximur.alcoholtracker.util.extension.empty
+import com.utmaximur.feature_calculator.utils.ADDITION
+import com.utmaximur.feature_calculator.utils.DIVISION
+import com.utmaximur.feature_calculator.utils.MULTIPLICATION
+import com.utmaximur.feature_calculator.utils.SUBTRACTION
+import com.utmaximur.utils.empty
+import com.utmaximur.utils.zero
+import com.utmaximur.utils.setValue
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class CalculatorViewModel @Inject constructor() : ViewModel() {
 
-    private var valueOne = Float.empty()
-    private var valueTwo = Float.empty()
-    private var valueCalculating = Float.empty()
+    private var valueOne = Float.zero()
+    private var valueTwo = Float.zero()
+    private var valueCalculating = Float.zero()
 
     private var isActionSelect = false
 
@@ -29,7 +34,7 @@ class CalculatorViewModel @Inject constructor() : ViewModel() {
             isActionSelect = !isActionSelect
         }
         // check zero
-        if (currentValue.value != Int.empty().toString()) {
+        if (currentValue.value != Int.zero().toString()) {
             // check max and min value
             if (currentValue.value != String.empty() && currentValue.value?.toFloat()!! > Float.MIN_VALUE
                 && currentValue.value?.toFloat()!! < Float.MAX_VALUE
@@ -84,7 +89,7 @@ class CalculatorViewModel @Inject constructor() : ViewModel() {
             }
 
             DIVISION -> {
-                if (valueTwo != Float.empty()) {
+                if (valueTwo != Float.zero()) {
                     valueCalculating = valueOne / valueTwo
                 }
             }
@@ -94,9 +99,9 @@ class CalculatorViewModel @Inject constructor() : ViewModel() {
     }
 
     fun acCalculation() {
-        valueOne = Float.empty()
-        valueTwo = Float.empty()
-        valueCalculating = Float.empty()
+        valueOne = Float.zero()
+        valueTwo = Float.zero()
+        valueCalculating = Float.zero()
         currentValue.setValue(String.empty())
         currentAction = Char.empty()
     }
