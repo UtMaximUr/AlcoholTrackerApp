@@ -1,10 +1,10 @@
-package com.utmaximur.alcoholtracker.domain.mapper
+package com.utmaximur.domain.mapper
 
 
 
-import com.utmaximur.alcoholtracker.domain.entity.Drink
-import com.utmaximur.alcoholtracker.domain.entity.DrinkStatistic
-import com.utmaximur.alcoholtracker.domain.entity.Track
+import com.utmaximur.domain.entity.Drink
+import com.utmaximur.domain.entity.DrinkStatistic
+import com.utmaximur.domain.entity.Track
 import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject

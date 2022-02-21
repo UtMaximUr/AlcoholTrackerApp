@@ -1,9 +1,10 @@
-package com.utmaximur.alcoholtracker.domain.interactor
+package com.utmaximur.domain.interactor
 
-import com.utmaximur.alcoholtracker.data.repository.AssetsRepository
-import com.utmaximur.alcoholtracker.data.repository.DrinkRepository
-import com.utmaximur.alcoholtracker.domain.entity.Drink
-import com.utmaximur.alcoholtracker.domain.entity.Icon
+
+import com.utmaximur.domain.entity.Drink
+import com.utmaximur.domain.entity.Icon
+import com.utmaximur.domain.repository.AssetsRepository
+import com.utmaximur.domain.repository.DrinkRepository
 import javax.inject.Inject
 
 class AddNewDrinkInteractor @Inject constructor(

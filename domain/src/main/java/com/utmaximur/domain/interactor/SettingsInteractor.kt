@@ -1,6 +1,6 @@
-package com.utmaximur.alcoholtracker.domain.interactor
+package com.utmaximur.domain.interactor
 
-import com.utmaximur.alcoholtracker.data.repository.PreferencesRepository
+import com.utmaximur.domain.repository.PreferencesRepository
 
 import javax.inject.Inject
 

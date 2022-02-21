@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.domain.entity
+package com.utmaximur.domain.entity
 
 
 data class DrinkStatistic(

@@ -1,9 +1,10 @@
-package com.utmaximur.alcoholtracker.domain.interactor
+package com.utmaximur.domain.interactor
 
-import com.utmaximur.alcoholtracker.data.repository.TrackRepository
-import com.utmaximur.alcoholtracker.domain.entity.EventDay
-import com.utmaximur.alcoholtracker.domain.entity.Track
-import com.utmaximur.alcoholtracker.domain.mapper.TrackListMapper
+
+import com.utmaximur.domain.entity.EventDay
+import com.utmaximur.domain.entity.Track
+import com.utmaximur.domain.mapper.TrackListMapper
+import com.utmaximur.domain.repository.TrackRepository
 import javax.inject.Inject
 
 class CalendarInteractor @Inject constructor(

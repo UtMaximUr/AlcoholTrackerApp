@@ -1,8 +1,8 @@
-package com.utmaximur.alcoholtracker.domain.mapper
+package com.utmaximur.domain.mapper
 
 
-import com.utmaximur.alcoholtracker.domain.entity.EventDay
-import com.utmaximur.alcoholtracker.domain.entity.Track
+import com.utmaximur.domain.entity.EventDay
+import com.utmaximur.domain.entity.Track
 import java.util.*
 import javax.inject.Inject
 

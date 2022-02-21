@@ -1,9 +1,6 @@
-package com.utmaximur.alcoholtracker.domain.entity
+package com.utmaximur.domain.entity
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
 
-@Parcelize
 data class Track(
 
     val id: String,
@@ -17,4 +14,4 @@ data class Track(
     val icon: String,
     val image: String
 
-) : Parcelable
+)
