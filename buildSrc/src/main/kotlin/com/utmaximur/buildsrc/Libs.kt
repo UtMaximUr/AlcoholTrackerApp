@@ -11,29 +11,28 @@ object Libs {
         const val coreKtx = "androidx.core:core-ktx:$core_ktx"
         const val multidex = "androidx.multidex:multidex:$multidex_version"
         const val appcompat = "androidx.appcompat:appcompat:$appcompat_version"
-        const val material =  "com.google.android.material:material:$material_version"
+        const val material = "com.google.android.material:material:$material_version"
     }
 
     object Compose {
-        // compose
         private const val compose_version = "1.2.0-alpha02"
+        private const val accompanist_version = "0.24.2-alpha"
+        private const val glide_version = "1.4.5"
+        private const val activity_version = "1.4.0"
 
-        const val runtime = "androidx.compose.runtime:runtime:$compose_version"
         const val ui_test = "androidx.compose.ui:ui-test-junit4:$compose_version"
         const val ui_tooling = "androidx.compose.ui:ui-tooling:$compose_version"
         const val ui = "androidx.compose.ui:ui:$compose_version"
-        const val material = "androidx.compose.material:material:$compose_version"
         const val preview = "androidx.compose.ui:ui-tooling-preview:$compose_version"
-        const val activity = "androidx.activity:activity-compose:1.4.0"
+        const val runtime = "androidx.compose.runtime:runtime:$compose_version"
+        const val material = "androidx.compose.material:material:$compose_version"
+        const val activity = "androidx.activity:activity-compose:$activity_version"
         const val livedata = "androidx.compose.runtime:runtime-livedata:$compose_version"
-        const val pager = "com.google.accompanist:accompanist-pager:0.24.2-alpha"
-        const val drawable_painter = "com.google.accompanist:accompanist-drawablepainter:0.16.0"
-        const val coil = "io.coil-kt:coil-compose:1.3.1"
-        const val placeholder = "com.google.accompanist:accompanist-placeholder:0.24.1-alpha"
-        const val glide = "com.github.skydoves:landscapist-glide:1.4.5"
-        const val view_model_compose = "androidx.lifecycle:lifecycle-viewmodel-compose:2.5.0-alpha01"
-        const val system_ui_controller = "com.google.accompanist:accompanist-systemuicontroller:0.24.2-alpha"
-        const val permissions = "com.google.accompanist:accompanist-permissions:0.24.2-alpha"
+        const val pager = "com.google.accompanist:accompanist-pager:$accompanist_version"
+        const val placeholder = "com.google.accompanist:accompanist-placeholder:$accompanist_version"
+        const val glide = "com.github.skydoves:landscapist-glide:$glide_version"
+        const val system_ui_controller = "com.google.accompanist:accompanist-systemuicontroller:$accompanist_version"
+        const val permissions = "com.google.accompanist:accompanist-permissions:$accompanist_version"
     }
 
     object Navigation {
@@ -47,8 +46,6 @@ object Libs {
         const val hilt_android = "com.google.dagger:hilt-android:$hilt_version"
         const val hilt_compiler = "com.google.dagger:hilt-compiler:$hilt_version"
         const val hilt_compose = "androidx.hilt:hilt-navigation-compose:$hilt_compose_version"
-//        const val hilt_viewmodel = "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
-//        kapt("com.google.dagger:hilt-android-compiler:2.38.1")
     }
 
     object Json {
@@ -80,11 +77,5 @@ object Libs {
         const val in_ap_updates = "com.google.android.play:core:$updates_version"
     }
 }
-
-
-//implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0'
-//testImplementation 'junit:junit:4.+'
-//androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-//androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
 

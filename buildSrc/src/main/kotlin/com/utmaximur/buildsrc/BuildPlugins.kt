@@ -3,7 +3,7 @@ package com.utmaximur.buildsrc
 object BuildPlugins {
 
     const val compose_version = "1.2.0-alpha02"
-    const val kotlin_version = "1.6.10"
+    private const val kotlin_version = "1.6.10"
     private const val gradle_version = "7.0.4"
     private const val google_service_version = "4.3.10"
     private const val firebase_version = "2.5.2"
