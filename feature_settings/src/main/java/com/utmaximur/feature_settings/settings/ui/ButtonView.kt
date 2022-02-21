@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.presentation.settings.ui
+package com.utmaximur.feature_settings.settings.ui
 
 import android.content.Intent
 import android.net.Uri
@@ -8,14 +8,14 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.presentation.main.ui.theme.TextColorWhite
+import com.utmaximur.feature_settings.R
 
 @Composable
 fun Button(text: Int, url: String) {
@@ -35,7 +35,7 @@ fun Button(text: Int, url: String) {
             text = stringResource(id = text),
             fontSize = 16.sp,
             fontFamily = FontFamily(Font(R.font.roboto_condensed_regular)),
-            color = TextColorWhite
+            color = Color.White
         )
     }
 }

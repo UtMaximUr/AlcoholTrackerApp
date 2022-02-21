@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.presentation.settings.ui
+package com.utmaximur.feature_settings.settings.ui
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -11,7 +11,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
-import com.utmaximur.alcoholtracker.R
+import com.utmaximur.feature_settings.R
 
 @Composable
 fun Switch(

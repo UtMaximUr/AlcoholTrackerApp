@@ -1,15 +1,12 @@
-package com.utmaximur.alcoholtracker.presentation.settings
+package com.utmaximur.feature_settings.settings
 
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.utmaximur.alcoholtracker.domain.interactor.SettingsInteractor
-import com.utmaximur.alcoholtracker.util.THEME_DARK
-import com.utmaximur.alcoholtracker.util.THEME_LIGHT
-import com.utmaximur.alcoholtracker.util.THEME_UNDEFINED
-import com.utmaximur.alcoholtracker.util.setValue
+import com.utmaximur.domain.interactor.SettingsInteractor
 import dagger.hilt.android.lifecycle.HiltViewModel
+import com.utmaximur.utils.*
 import javax.inject.Inject
 
 @HiltViewModel

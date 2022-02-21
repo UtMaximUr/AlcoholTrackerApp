@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.presentation.settings.ui
+package com.utmaximur.feature_settings.settings.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -19,13 +19,12 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.skydoves.landscapist.glide.GlideImage
-import com.utmaximur.alcoholtracker.BuildConfig
-import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.presentation.settings.SettingsViewModel
-import com.utmaximur.alcoholtracker.util.MARKET_APP
-import com.utmaximur.alcoholtracker.util.PRIVACY_POLICY
-import com.utmaximur.alcoholtracker.util.TERMS_OF_USE
-import timber.log.Timber
+import com.utmaximur.feature_settings.BuildConfig
+import com.utmaximur.feature_settings.R
+import com.utmaximur.feature_settings.settings.SettingsViewModel
+import com.utmaximur.feature_settings.utils.MARKET_APP
+import com.utmaximur.feature_settings.utils.PRIVACY_POLICY
+import com.utmaximur.feature_settings.utils.TERMS_OF_USE
 
 @Composable
 fun SettingsScreen(
@@ -71,7 +70,7 @@ fun SettingsScreen(
             Text(
                 modifier = Modifier
                     .padding(12.dp, 0.dp, 12.dp, 0.dp),
-                text = stringResource(id = R.string.settings_version) + " " + BuildConfig.VERSION_NAME,
+                text = stringResource(id = R.string.settings_version, BuildConfig.version),
                 fontFamily = FontFamily(Font(R.font.roboto_condensed_regular)),
                 color = MaterialTheme.colors.onPrimary
             )
@@ -106,7 +105,4 @@ fun SettingsScreen(
             }
         }
     }
-
-    Timber.tag("debug_log")
-    Timber.d("SettingsScreen")
 }

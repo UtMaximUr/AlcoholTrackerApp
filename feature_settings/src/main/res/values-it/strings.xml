@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="privacy_policy">Politica sulla riservatezza</string>
+    <string name="terms_of_use">Termini di utilizzo</string>
+    <string name="settings_version">Versione %s</string>
+    <string name="rate_app">Valuta l\'app</string>
+    <string name="default_theme">Usa il tema di sistema</string>
+    <string name="light_theme">Tema chiaro</string>
+    <string name="dark_theme">Tema scuro</string>
+    <string name="check_for_updates">Controlla gli aggiornamenti</string>
+
+    <string name="cd_icon_app">Icona dell\'applicazione</string>
+    <string name="cd_choice_theme">Tema selezionato</string>
+</resources>

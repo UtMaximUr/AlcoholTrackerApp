@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.presentation.settings.ui
+package com.utmaximur.feature_settings.settings.ui
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
@@ -20,8 +20,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
-import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.presentation.settings.SettingsViewModel
+import com.utmaximur.feature_settings.R
+import com.utmaximur.feature_settings.settings.SettingsViewModel
 
 @Composable
 fun ThemeList(

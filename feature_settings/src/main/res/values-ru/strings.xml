@@ -1,0 +1,14 @@
+<resources>
+
+    <string name="privacy_policy">Политика конфиденциальности</string>
+    <string name="terms_of_use">Пользовательское соглашение</string>
+    <string name="settings_version">Версия %s</string>
+    <string name="rate_app">Оценить приложение</string>
+    <string name="default_theme">Использовать системную тему</string>
+    <string name="light_theme">Светлая тема</string>
+    <string name="dark_theme">Темная тема</string>
+    <string name="check_for_updates">Проверить обновления</string>
+
+    <string name="cd_icon_app">Иконка приложения</string>
+    <string name="cd_choice_theme">Выбранная тема</string>
+</resources>
