@@ -1,4 +1,4 @@
-import com.utmaximur.buildsrc.AppConfig
+import com.utmaximur.buildsrc.Base
 import com.utmaximur.buildsrc.Libs
 
 plugins {
@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    compileSdk = AppConfig.compileSdk
+    compileSdk = Base.compileSdk
 
     defaultConfig {
-        minSdk = AppConfig.minSdk
-        targetSdk = AppConfig.targetSdk
+        minSdk = Base.minSdk
+        targetSdk = Base.targetSdk
     }
 
     compileOptions {
@@ -31,7 +31,7 @@ android {
 }
 
 dependencies {
-    api(Libs.Navigation.navigation_compose)
+    implementation(Libs.Navigation.navigation_compose)
     implementation(Libs.Compose.runtime)
     implementation(Libs.Compose.material)
 }
