@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="update_title">Il download dell\'aggiornamento è completo. Aggiornare?</string>
+    <string name="update_restart">Adesso</string>
+    <string name="update_later">Dopo</string>
+
+</resources>

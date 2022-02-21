@@ -1,0 +1,7 @@
+<resources>
+
+    <string name="update_title">Загрузка обновления завершено. Обновить?</string>
+    <string name="update_restart">Сейчас</string>
+    <string name="update_later">Позже</string>
+
+</resources>
