@@ -6,7 +6,9 @@ import androidx.compose.animation.*
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -15,23 +17,24 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.data.update.UpdateManager
-import com.utmaximur.alcoholtracker.navigation.NavigationDestination.*
-import com.utmaximur.alcoholtracker.presentation.calendar.ui.CalendarScreen
-import com.utmaximur.alcoholtracker.presentation.create_my_drink.ui.CreateDrinkScreen
-import com.utmaximur.alcoholtracker.presentation.create_track.ui.CreateTrackerScreen
-import com.utmaximur.alcoholtracker.presentation.dialog.track_list.ui.TrackListBottomDialogScreen
-import com.utmaximur.alcoholtracker.presentation.dialog.update.UpdateDialog
-import com.utmaximur.alcoholtracker.presentation.settings.ui.SettingsScreen
 import com.utmaximur.alcoholtracker.presentation.main.ui.theme.AlcoholTrackerTheme
 import com.utmaximur.alcoholtracker.presentation.main.ui.theme.TextColorWhite
-import com.utmaximur.alcoholtracker.presentation.statistic.ui.StatisticScreen
-import com.utmaximur.alcoholtracker.util.*
-import timber.log.Timber
+import com.utmaximur.data.utils.KEY_THEME
+import com.utmaximur.data.utils.PREFS_NAME
+import com.utmaximur.utils.*
+import com.utmaximur.feature_calendar.calendar.ui.CalendarScreen
+import com.utmaximur.feature_calendar.track_list.ui.TrackListBottomDialogScreen
+import com.utmaximur.feature_create_drink.ui.CreateDrinkScreen
+import com.utmaximur.feature_create_track.create_track.ui.CreateTrackerScreen
+import com.utmaximur.feature_settings.settings.ui.SettingsScreen
+import com.utmaximur.feature_statistic.statistic.ui.StatisticScreen
+import com.utmaximur.feature_update.UpdateDialog
+import com.utmaximur.navigation.BottomBar
+import com.utmaximur.navigation.NavigationDestination.*
+
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -39,8 +42,6 @@ fun MainScreen() {
 
     val context = LocalContext.current
     val isDark = isSystemInDarkTheme()
-
-    UpdateApp()
 
     val navController = rememberNavController()
     val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
@@ -75,6 +76,9 @@ fun MainScreen() {
                             BottomBar(navController = navController)
                         }
                     }
+                },
+                snackbarHost = {
+                    UpdateDialog()
                 },
                 floatingActionButtonPosition = FabPosition.Center,
                 isFloatingActionButtonDocked = true,
@@ -168,44 +172,6 @@ fun BottomNavScreensController(
                 editDrinkId = it.arguments?.getString(EDIT_DRINK)
             )
         }
-    }
-}
-
-@Composable
-fun currentRoute(navController: NavHostController): String? {
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-    return navBackStackEntry?.destination?.route
-}
-
-@Composable
-private fun UpdateApp() {
-    Timber.tag("debug_log")
-    Timber.d("UpdateApp")
-
-    val context = LocalContext.current
-
-    val openDialog = remember { mutableStateOf(false) }
-
-    val sharedPrefs by lazy { context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE) }
-    val savedUpdate = sharedPrefs.getBoolean(KEY_UPDATE, true)
-
-    Timber.d("UpdateApp/savedUpdate = $savedUpdate")
-
-    if (savedUpdate) {
-        UpdateManager.getInstance().registerListener()
-        UpdateManager.getInstance().attachUpdateListener(object : UpdateManager.UpdateListener {
-            override fun onShowUpdateDialog() {
-                openDialog.value = true
-            }
-        })
-        UpdateManager.getInstance().checkForUpdate(context)
-    }
-
-    if (openDialog.value) {
-        UpdateDialog(
-            onLaterClick = { openDialog.value = false },
-            onNowClick = { UpdateManager.getInstance().completeUpdate() }
-        )
     }
 }
 
