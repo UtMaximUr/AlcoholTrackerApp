@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.presentation.statistic.ui
+package com.utmaximur.feature_statistic.statistic.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Spacer
@@ -14,7 +14,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.PagerState
-import com.utmaximur.alcoholtracker.R
+import com.utmaximur.feature_statistic.R
 
 @ExperimentalPagerApi
 @Composable

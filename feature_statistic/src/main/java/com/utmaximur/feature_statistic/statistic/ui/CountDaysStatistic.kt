@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.presentation.statistic.ui
+package com.utmaximur.feature_statistic.statistic.ui
 
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,7 +12,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
-import com.utmaximur.alcoholtracker.presentation.statistic.StatisticViewModel
+import com.utmaximur.feature_statistic.statistic.StatisticViewModel
 
 @ExperimentalPagerApi
 @Composable

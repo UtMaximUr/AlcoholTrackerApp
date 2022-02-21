@@ -1,14 +1,14 @@
-package com.utmaximur.alcoholtracker.presentation.statistic
+package com.utmaximur.feature_statistic.statistic
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.utmaximur.alcoholtracker.domain.entity.DrinkStatistic
-import com.utmaximur.alcoholtracker.domain.interactor.StatisticInteractor
-import com.utmaximur.alcoholtracker.util.setValue
+import com.utmaximur.domain.entity.DrinkStatistic
+import com.utmaximur.domain.interactor.StatisticInteractor
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import com.utmaximur.utils.*
 import javax.inject.Inject
 
 @HiltViewModel

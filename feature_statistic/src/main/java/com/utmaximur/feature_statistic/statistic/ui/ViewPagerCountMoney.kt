@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.presentation.statistic.ui
+package com.utmaximur.feature_statistic.statistic.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
@@ -15,7 +15,7 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
-import com.utmaximur.alcoholtracker.R
+import com.utmaximur.feature_statistic.R
 
 @ExperimentalPagerApi
 @Composable
@@ -60,7 +60,7 @@ fun CountMoneyItem(money: String, period: String) {
         )
         Text(
             modifier = Modifier.padding(12.dp),
-            text = stringResource(id = R.string.add_currency),
+            text = stringResource(id = R.string.statistic_add_currency),
             fontFamily = FontFamily(Font(R.font.roboto_condensed_regular)),
             color = MaterialTheme.colors.onPrimary
         )

@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.presentation.statistic.ui
+package com.utmaximur.feature_statistic.statistic.ui
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
@@ -8,8 +8,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
-import com.utmaximur.alcoholtracker.presentation.statistic.StatisticViewModel
-import timber.log.Timber
+import com.utmaximur.feature_statistic.statistic.StatisticViewModel
+import com.utmaximur.feature_statistic.statistic.ui.CountDaysStatistic
+import com.utmaximur.feature_statistic.statistic.ui.CountDrinksStatistic
+import com.utmaximur.feature_statistic.statistic.ui.CountMoneyStatistic
 
 
 @OptIn(ExperimentalPagerApi::class, ExperimentalFoundationApi::class)
@@ -25,7 +27,4 @@ fun StatisticScreen(viewModel: StatisticViewModel = hiltViewModel(), innerPaddin
         CountDaysStatistic(viewModel)
         CountDrinksStatistic(viewModel)
     }
-
-    Timber.tag("debug_log")
-    Timber.d("StatisticScreen")
 }

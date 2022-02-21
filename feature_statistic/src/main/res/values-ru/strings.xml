@@ -1,0 +1,43 @@
+<resources>
+
+    <string name="unit_ml">%s мл</string>
+    <string name="unit_l">%s л</string>
+    <string name="statistic_week_days">Неделю</string>
+    <string name="statistic_month_days">Месяц</string>
+    <string name="statistic_year_days">Год</string>
+    <string name="statistic_count_days">Я пил %s из %d дней</string>
+    <string name="statistic_count_days_no_drink">Не пью %s!:)</string>
+    <string name="statistic_drinks">Напитки выпитые мною</string>
+    <string name="statistic_spent">Мною потрачено за</string>
+    <string name="statistic_add_currency">RUR</string>
+
+    <string name="absent">Абсент</string>
+    <string name="beer">Пиво</string>
+    <string name="brandy">Бренди</string>
+    <string name="champagne">Шампанское</string>
+    <string name="cider">Сидр</string>
+    <string name="cocktail">Коктейль</string>
+    <string name="cognac">Коньяк</string>
+    <string name="liqueur">Ликер</string>
+    <string name="shots">Шоты</string>
+    <string name="tequila">Текила</string>
+    <string name="vodka">Водка</string>
+    <string name="whiskey">Виски</string>
+    <string name="rum">Ром</string>
+    <string name="gin">Джин</string>
+    <string name="wine">Вино</string>
+
+    <plurals name="plurals_day">
+        <item quantity="one">%1$d день</item>
+        <item quantity="few">%1$d дня</item>
+        <item quantity="many">%1$d дней</item>
+        <item quantity="other">%1$d дней</item>
+    </plurals>
+
+    <string-array name="statistic_period_array">
+        <item>Неделю</item>
+        <item>Месяц</item>
+        <item>Год</item>
+    </string-array>
+
+</resources>

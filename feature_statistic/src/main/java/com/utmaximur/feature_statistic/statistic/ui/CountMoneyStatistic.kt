@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.presentation.statistic.ui
+package com.utmaximur.feature_statistic.statistic.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -14,8 +14,8 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
-import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.presentation.statistic.StatisticViewModel
+import com.utmaximur.feature_statistic.statistic.StatisticViewModel
+import com.utmaximur.feature_statistic.R
 
 @ExperimentalPagerApi
 @Composable

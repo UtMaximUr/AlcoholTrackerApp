@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="unit_ml">%s ml</string>
+    <string name="unit_l">%s l</string>
+    <string name="statistic_week_days">Semana</string>
+    <string name="statistic_month_days">Mes</string>
+    <string name="statistic_year_days">Año</string>
+    <string name="statistic_count_days_no_drink">¡No bebo %s! :)</string>
+    <string name="statistic_count_days">Bebí %s de %d días</string>
+    <string name="statistic_drinks">Las bebidas que bebí</string>
+    <string name="statistic_spent">Pasé en un</string>
+    <string name="statistic_add_currency">EUR</string>
+
+    <string name="absent">Ajenjo</string>
+    <string name="beer">Cerveza</string>
+    <string name="brandy">brandy</string>
+    <string name="champagne">champán</string>
+    <string name="cider">Sidra</string>
+    <string name="cocktail">Cóctel</string>
+    <string name="cognac">Coñac</string>
+    <string name="liqueur">Espíritu</string>
+    <string name="shots">Disparos</string>
+    <string name="tequila">Tequila</string>
+    <string name="vodka">Vodka</string>
+    <string name="whiskey">Whiskey</string>
+    <string name="rum">Ron</string>
+    <string name="gin">Ginebra</string>
+    <string name="wine">Vino</string>
+
+    <plurals name="plurals_day">
+        <item quantity="one">%1$d día</item>
+        <item quantity="other">%1$d días</item>
+    </plurals>
+
+    <string-array name="statistic_period_array">
+        <item>Semana</item>
+        <item>Mes</item>
+        <item>Año</item>
+    </string-array>
+
+</resources>

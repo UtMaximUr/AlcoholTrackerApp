@@ -1,6 +1,6 @@
-package com.utmaximur.alcoholtracker.presentation.statistic.ui
+package com.utmaximur.feature_statistic.statistic.ui
 
-import android.content.Context
+import android.content.res.Resources
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
@@ -15,7 +16,7 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
-import com.utmaximur.alcoholtracker.R
+import com.utmaximur.feature_statistic.R
 import java.util.*
 
 @ExperimentalPagerApi
@@ -23,7 +24,7 @@ import java.util.*
 fun ViewPagerCountDrink(
     statistic: List<Int>,
     pagerState: PagerState = rememberPagerState(),
-    context: Context = LocalContext.current
+    resources: Resources = LocalContext.current.resources
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
@@ -35,9 +36,9 @@ fun ViewPagerCountDrink(
         ) { index ->
             if (index == 0) {
                 DrinksDayItem(
-                    String.format(
-                        context.resources.getString(R.string.statistic_count_days),
-                        context.resources.getQuantityString(
+                    stringResource(
+                        id = R.string.statistic_count_days,
+                        resources.getQuantityString(
                             R.plurals.plurals_day,
                             statistic.first(),
                             statistic.first()
@@ -47,9 +48,9 @@ fun ViewPagerCountDrink(
                 )
             } else {
                 DrinksDayItem(
-                    String.format(
-                        context.resources.getString(R.string.statistic_count_days_no_drink),
-                        context.resources.getQuantityString(
+                    stringResource(
+                        id = R.string.statistic_count_days_no_drink,
+                        resources.getQuantityString(
                             R.plurals.plurals_day,
                             statistic.last(),
                             statistic.last()

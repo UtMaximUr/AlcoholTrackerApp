@@ -1,4 +1,4 @@
-package com.utmaximur.alcoholtracker.presentation.statistic.ui
+package com.utmaximur.feature_statistic.statistic.ui
 
 import android.content.Context
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -21,11 +21,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
-import com.utmaximur.alcoholtracker.R
-import com.utmaximur.alcoholtracker.domain.entity.DrinkStatistic
-import com.utmaximur.alcoholtracker.presentation.statistic.StatisticViewModel
-import com.utmaximur.alcoholtracker.util.getIdRaw
-import com.utmaximur.alcoholtracker.util.getResString
+import com.utmaximur.feature_statistic.statistic.StatisticViewModel
+import com.utmaximur.domain.entity.DrinkStatistic
+import com.utmaximur.feature_statistic.R
+import com.utmaximur.utils.getIdRaw
+import com.utmaximur.utils.getResString
 
 @ExperimentalFoundationApi
 @Composable
@@ -84,10 +84,7 @@ fun DrinkItem(
             )
             Text(
                 maxLines = 1,
-                text = String.format(
-                    context.resources.getString(R.string.statistic_count_drink),
-                    drink.count
-                ),
+                text = stringResource(id = R.string.statistic_count_drink, drink.count),
                 fontFamily = FontFamily(Font(R.font.roboto_condensed_regular)),
                 color = MaterialTheme.colors.onPrimary
             )
