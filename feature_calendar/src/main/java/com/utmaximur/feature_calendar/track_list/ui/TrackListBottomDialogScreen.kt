@@ -102,14 +102,14 @@ fun TrackListBottomDialogScreen(
             SwipeToDismiss(
                 state = dismissState,
                 directions = setOf(DismissDirection.StartToEnd, DismissDirection.EndToStart),
-                dismissThresholds = { FractionalThreshold(0.25f) },
+                dismissThresholds = { FractionalThreshold(if (it == DismissDirection.StartToEnd) 0.25f else 0.75f) },
                 background = {
                     val direction = dismissState.dismissDirection ?: return@SwipeToDismiss
                     val color by animateColorAsState(
                         when (dismissState.targetValue) {
                             DismissValue.Default -> MaterialTheme.colors.background
-                            DismissValue.DismissedToEnd -> Color.Yellow//EditColor
-                            DismissValue.DismissedToStart -> Color.Red//DeleteColor
+                            DismissValue.DismissedToEnd -> Color(0xFFFF6D00)
+                            DismissValue.DismissedToStart -> Color(0xFFDF0026)
                         }
                     )
                     val alignment = when (direction) {
