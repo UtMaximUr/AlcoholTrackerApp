@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="calendar_add_press">Add a drink to get started</string>
+    <string name="calendar_empty">Not a single gram was drunk on this day!:)</string>
+    <string name="calendar_select_date">Choose a date</string>
+    <string name="calendar_date">Date</string>
+    <string name="calendar_count_drink" translatable="false">%s x %d</string>
+
+    <string name="material_calendar_monday">Mon</string>
+    <string name="material_calendar_tuesday">Tue</string>
+    <string name="material_calendar_wednesday">Wed</string>
+    <string name="material_calendar_thursday">Thu</string>
+    <string name="material_calendar_friday">Fri</string>
+    <string name="material_calendar_saturday">Sat</string>
+    <string name="material_calendar_sunday">Sun</string>
+
+    <array name="calendar_week_days_array">
+        <item>Mon</item>
+        <item>Tue</item>
+        <item>Wed</item>
+        <item>Thu</item>
+        <item>Fri</item>
+        <item>Sat</item>
+        <item>Sun</item>
+    </array>
+
+    <array name="material_calendar_months_array">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </array>
+
+    <string name="add_volume">Volume</string>
+    <string name="add_degree">Degree</string>
+    <string name="add_currency">USD</string>
+    <string name="safe_dose_note">*a safe dose of 100 ml of ethyl alcohol according\nto a study by the University of Cambridge</string>
+
+    <string name="cd_image_drink">Image of a drink</string>
+    <string name="cd_info_safe_dose">Safe dose</string>
+    <string name="cd_event">Event</string>
+
+</resources>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="calendar_add_press">Fügen Sie ein Getränk hinzu, um loszulegen</string>
+    <string name="calendar_empty">An diesem Tag wurde kein einziges Gramm getrunken! :)</string>
+    <string name="calendar_select_date">Wählen Sie ein Datum</string>
+    <string name="calendar_date">Datum</string>
+
+    <string name="add_volume">Volumen</string>
+    <string name="add_degree">Grad</string>
+    <string name="add_currency">EUR</string>
+    <string name="safe_dose_note">* eine sichere Dosis von 100 ml Ethylalkohol gemäß \neiner Studie der Universität von Cambridge</string>
+
+    <string name="cd_image_drink">Bild eines Getränks</string>
+    <string name="cd_event">Veranstaltung</string>
+    <string name="cd_info_safe_dose">Alkohol sicher dosieren</string>
+
+    <string name="material_calendar_monday">Mon</string>
+    <string name="material_calendar_tuesday">Die</string>
+    <string name="material_calendar_wednesday">Mit</string>
+    <string name="material_calendar_thursday">Don</string>
+    <string name="material_calendar_friday">Fre</string>
+    <string name="material_calendar_saturday">Sam</string>
+    <string name="material_calendar_sunday">Son</string>
+
+    <array name="calendar_week_days_array">
+        <item>Mon</item>
+        <item>Die</item>
+        <item>Mit</item>
+        <item>Don</item>
+        <item>Fre</item>
+        <item>Sam</item>
+        <item>Son</item>
+    </array>
+
+    <array name="material_calendar_months_array">
+        <item>Januar</item>
+        <item>Februar</item>
+        <item>März</item>
+        <item>April</item>
+        <item>Mai</item>
+        <item>Juni</item>
+        <item>Juli</item>
+        <item>August</item>
+        <item>September</item>
+        <item>Oktober</item>
+        <item>November</item>
+        <item>Dezember</item>
+    </array>
+
+</resources>

@@ -1,0 +1,50 @@
+<resources>
+
+    <string name="calendar_add_press">Чтобы начать, добавьте напиток</string>
+    <string name="calendar_empty">В этот день не выпито ни грамма!:)</string>
+    <string name="calendar_select_date">Выберите дату</string>
+    <string name="calendar_date">Дата</string>
+
+    <string name="add_volume">Объем</string>
+    <string name="add_degree">Градус</string>
+    <string name="add_currency">RUR</string>
+    <string name="safe_dose_note">*безопасная доза равна 100 мл этилового спирта\nсогласно исследованию Кембриджского университета</string>
+
+    <string name="cd_image_drink">Изображение напитка</string>
+    <string name="cd_event">Событие</string>
+    <string name="cd_info_safe_dose">Безопасная доза алкоголя</string>
+
+    <string name="material_calendar_monday">Пн</string>
+    <string name="material_calendar_tuesday">Вт</string>
+    <string name="material_calendar_wednesday">Ср</string>
+    <string name="material_calendar_thursday">Чт</string>
+    <string name="material_calendar_friday">Пт</string>
+    <string name="material_calendar_saturday">Сб</string>
+    <string name="material_calendar_sunday">Вс</string>
+
+    <array name="calendar_week_days_array">
+        <item>Пн</item>
+        <item>Вт</item>
+        <item>Ср</item>
+        <item>Чт</item>
+        <item>Пт</item>
+        <item>Сб</item>
+        <item>Вс</item>
+    </array>
+
+    <array name="material_calendar_months_array">
+        <item>Январь</item>
+        <item>Февраль</item>
+        <item>Март</item>
+        <item>Апрель</item>
+        <item>Май</item>
+        <item>Июнь</item>
+        <item>Июль</item>
+        <item>Август</item>
+        <item>Сентябрь</item>
+        <item>Октябрь</item>
+        <item>Ноябрь</item>
+        <item>Декабрь</item>
+    </array>
+
+</resources>

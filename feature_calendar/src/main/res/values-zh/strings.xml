@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="calendar_add_press">加一杯饮料开始</string>
+    <string name="calendar_empty">这天没有喝一克！:)</string>
+    <string name="calendar_select_date">选择日期</string>
+    <string name="calendar_date">日期</string>
+
+    <string name="add_volume">体积</string>
+    <string name="add_degree">程度</string>
+    <string name="add_currency">CNY</string>
+    <string name="safe_dose_note">*根据剑桥大学的一项研究，\n安全剂量为100毫升的乙醇</string>
+
+    <string name="cd_image_drink">一杯饮料的形象</string>
+    <string name="cd_event">事件</string>
+    <string name="cd_info_safe_dose">安全剂量酒精</string>
+
+    <string name="material_calendar_monday">星期一</string>
+    <string name="material_calendar_tuesday">星期二</string>
+    <string name="material_calendar_wednesday">星期三</string>
+    <string name="material_calendar_thursday">星期四</string>
+    <string name="material_calendar_friday">星期五</string>
+    <string name="material_calendar_saturday">星期六</string>
+    <string name="material_calendar_sunday">星期天</string>
+
+    <array name="calendar_week_days_array">
+        <item>星期一</item>
+        <item>星期二</item>
+        <item>星期三</item>
+        <item>星期四</item>
+        <item>星期五</item>
+        <item>星期六</item>
+        <item>星期天</item>
+    </array>
+
+    <array name="material_calendar_months_array">
+        <item>一月</item>
+        <item>二月</item>
+        <item>行进</item>
+        <item>四月</item>
+        <item>可能</item>
+        <item>六月</item>
+        <item>七月</item>
+        <item>八月</item>
+        <item>九月</item>
+        <item>十月</item>
+        <item>十一月</item>
+        <item>十二月</item>
+    </array>
+
+</resources>
