@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="add_new_drink">Create drink</string>
+    <string name="create_drink_title">Create a drink</string>
+    <string name="create_drink_hint">Enter the title</string>
+    <string name="dialog_create_drink_add">Add icon drink</string>
+    <string name="select_icon">Select an icon</string>
+    <string name="dialog_create_drink_add_degree">Add the strength of the drink</string>
+    <string name="dialog_create_drink_add_volume">Add drink volume</string>
+    <string name="bottom_sheet_option_camera">Use Camera</string>
+    <string name="bottom_sheet_option_gallery">Upload from Gallery</string>
+    <string name="bottom_sheet_option_heading">Add Photo</string>
+    <string name="bottom_sheet_option_remove_photo">Remove Photo</string>
+    <string name="empty_field_photo">Take a photo or choose from the gallery</string>
+    <string name="empty_field_name">Enter the name of the drink</string>
+    <string name="empty_field_icon">Select the drink icon</string>
+    <string name="empty_field_degree">Select the strength of the drink</string>
+    <string name="empty_field_volume">Select the volume of the drink</string>
+    <string name="edit_drink_title">Edit drink</string>
+
+    <string name="divide_value" translatable="false"> - </string>
+
+    <string name="cd_back">Back</string>
+    <string name="cd_save_drink">Save drink</string>
+    <string name="cd_name_drink">Name drink</string>
+    <string name="cd_icon_drink">Icon of a drink</string>
+    <string name="cd_take_photo">Take photo</string>
+
+    <string-array name="volume_array">
+
+        <item>0.02</item>
+        <item>0.05</item>
+        <item>0.125</item>
+        <item>0.175</item>
+        <item>0.3</item>
+        <item>0.33</item>
+        <item>0.375</item>
+        <item>0.4</item>
+        <item>0.45</item>
+        <item>0.48</item>
+        <item>0.5</item>
+        <item>0.568</item>
+        <item>0.7</item>
+        <item>0.750</item>
+        <item>1</item>
+
+    </string-array>
+
+</resources>

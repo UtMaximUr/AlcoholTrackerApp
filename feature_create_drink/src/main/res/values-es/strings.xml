@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="add_new_drink">Crear bebida</string>
+    <string name="edit_drink_title">Editar bebida</string>
+    <string name="create_drink_title">Crea una bebida</string>
+    <string name="create_drink_hint">Ingrese el título</string>
+    <string name="dialog_create_drink_add">Agregar bebida de icono</string>
+    <string name="select_icon">Seleccione un icono</string>
+    <string name="dialog_create_drink_add_degree">Agrega la fuerza de la bebida</string>
+    <string name="dialog_create_drink_add_volume">Agregar volumen de bebida</string>
+    <string name="bottom_sheet_option_camera">Usar cámara</string>
+    <string name="bottom_sheet_option_gallery">Subir desde la galería</string>
+    <string name="bottom_sheet_option_heading">Añadir foto</string>
+    <string name="bottom_sheet_option_remove_photo">Quitar foto</string>
+    <string name="empty_field_photo">Toma una foto o elige de la galería</string>
+    <string name="empty_field_name">Ingrese el nombre de la bebida</string>
+    <string name="empty_field_icon">Seleccione el icono de bebida</string>
+    <string name="empty_field_degree">Seleccione la fuerza de la bebida</string>
+    <string name="empty_field_volume">Selecciona el volumen de la bebida</string>
+
+    <string name="cd_icon_drink">Icono de una bebida</string>
+    <string name="cd_take_photo">Tomar foto</string>
+    <string name="cd_save_drink">Guardar bebida</string>
+    <string name="cd_back">Atrás</string>
+    <string name="cd_name_drink">Nombre de la bebida</string>
+
+</resources>
