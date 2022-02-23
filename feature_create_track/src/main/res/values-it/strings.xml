@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="add_drink_title">Aggiungi la bevanda</string>
+    <string name="add_drink">Bere</string>
+    <string name="add_volume">Volume</string>
+    <string name="add_quantity">Quantità</string>
+    <string name="add_degree">Grado</string>
+    <string name="add_price">Costo di una bevanda</string>
+    <string name="add_date">Seleziona la data</string>
+    <string name="add_today">Oggi</string>
+    <string name="add_total_money">Totale</string>
+    <string name="add_currency">EUR</string>
+    <string name="add_new_drink">Crea bevanda</string>
+    <string name="edit_drink_title">Modifica drink</string>
+    <string name="add_event">Evento</string>
+
+    <string name="dialog_delete_title">Sei sicuro di voler eliminare la voce?</string>
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_no">NO</string>
+    <string name="dialog_cancel">Annulla</string>
+
+    <string name="cd_edit_button">modificare</string>
+    <string name="cd_delete_button">Elimina</string>
+    <string name="cd_image_drink">Immagine di una bevanda</string>
+    <string name="cd_save_drink">Risparmia drink</string>
+    <string name="cd_event">Evento</string>
+    <string name="cd_calculator">Calcolatore</string>
+    <string name="cd_price">Costo di una bevanda</string>
+    <string name="cd_back">Di ritorno</string>
+    <string name="cd_add_drink">Prepara un drink</string>
+
+</resources>

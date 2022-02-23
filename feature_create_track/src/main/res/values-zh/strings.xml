@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="add_drink_title">加饮料</string>
+    <string name="add_drink">喝</string>
+    <string name="add_volume">体积</string>
+    <string name="add_quantity">数量</string>
+    <string name="add_degree">程度</string>
+    <string name="add_price">一杯饮料的费用</string>
+    <string name="add_date">选择日期</string>
+    <string name="add_today">今天</string>
+    <string name="add_total_money">全部的</string>
+    <string name="add_currency">CNY</string>
+    <string name="add_new_drink">制作饮料</string>
+    <string name="edit_drink_title">编辑饮料</string>
+    <string name="add_event">事件</string>
+
+    <string name="dialog_delete_title">您确定要删除该条目吗？</string>
+    <string name="dialog_ok">好的</string>
+    <string name="dialog_no">不</string>
+    <string name="dialog_cancel">取消</string>
+
+    <string name="cd_edit_button">编辑</string>
+    <string name="cd_delete_button">删除</string>
+    <string name="cd_image_drink">一杯饮料的形象</string>
+    <string name="cd_save_drink">保存饮料</string>
+    <string name="cd_event">事件</string>
+    <string name="cd_calculator">计算器</string>
+    <string name="cd_price">一杯饮料的费用</string>
+    <string name="cd_back">后退</string>
+    <string name="cd_add_drink">喝一杯</string>
+
+</resources>
