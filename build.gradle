@@ -1,31 +1,19 @@
+import com.utmaximur.buildsrc.BuildPlugins
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    ext {
-        compose_version = "1.2.0-alpha02"
-        kotlin_version = "1.6.10"
-        gradle_version = "7.0.4"
-        nav_version = "2.4.0"
-        gs_version = "4.3.10"
-        firebase_version = "2.5.2"
-        multidex_version = '2.0.1'
-        json = '2.8.9'
-        firebase = '26.1.1'
-        in_app_updates = '1.10.3'
-        room_version = "2.4.1"
-        hilt_version = "2.40"
-    }
 
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:$gradle_version"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
-        classpath "com.google.gms:google-services:$gs_version"
-        classpath "com.google.firebase:firebase-crashlytics-gradle:$firebase_version"
-        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
+        classpath(BuildPlugins.gradle)
+        classpath(BuildPlugins.kotlin)
+        classpath(BuildPlugins.google_service)
+        classpath(BuildPlugins.firebase)
+        classpath(BuildPlugins.hilt)
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -35,8 +23,7 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
-        maven { url ' https://jitpack.io ' }
+        mavenCentral()
     }
 }
 
