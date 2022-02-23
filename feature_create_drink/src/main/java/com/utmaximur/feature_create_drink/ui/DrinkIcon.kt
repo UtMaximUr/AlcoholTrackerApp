@@ -33,7 +33,7 @@ fun DrinkIcon(viewModel: CreateMyDrinkViewModel) {
         }
     }
 
-    LazyRow(modifier = Modifier.padding(16.dp)) {
+    LazyRow(modifier = Modifier.padding(top = 12.dp)) {
         items(icons.size) { index ->
             IconItem(
                 icon = icons[index],

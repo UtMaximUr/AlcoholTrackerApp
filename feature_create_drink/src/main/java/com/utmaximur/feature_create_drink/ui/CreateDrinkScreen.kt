@@ -3,10 +3,7 @@ package com.utmaximur.feature_create_drink.ui
 
 import android.content.Context
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -108,9 +105,9 @@ fun CreateDrinkScreen(
             )
             Card(
                 modifier = Modifier
-                    .fillMaxHeight(0.3f)
-                    .padding(12.dp),
-                shape = RoundedCornerShape(12.dp),
+                    .height(220.dp)
+                    .padding(start = 12.dp, end = 12.dp),
+                shape = RoundedCornerShape(16.dp),
                 backgroundColor = MaterialTheme.colors.surface,
                 elevation = 11.dp
             ) {

@@ -52,8 +52,8 @@ fun DrinkName(viewModel: CreateMyDrinkViewModel) {
             )
         },
         modifier = Modifier
-            .padding(start = 16.dp, end = 16.dp)
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .padding(top = 8.dp, start = 12.dp, end = 12.dp),
         onValueChange = {
             textState.value = it
         },

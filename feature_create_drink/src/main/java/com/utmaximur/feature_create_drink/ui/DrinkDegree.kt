@@ -31,7 +31,7 @@ fun DrinkDegree(viewModel: CreateMyDrinkViewModel) {
         }
     }
 
-    Column(modifier = Modifier.padding(16.dp)) {
+    Column(modifier = Modifier.padding(top = 12.dp, start = 16.dp, end = 16.dp)) {
         Row {
             TextField(
                 text = stringResource(id = R.string.dialog_create_drink_add_degree),

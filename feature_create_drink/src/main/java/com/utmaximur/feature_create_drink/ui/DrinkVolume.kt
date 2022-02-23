@@ -7,7 +7,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Checkbox
 import androidx.compose.material.CheckboxDefaults
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -17,13 +16,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.google.accompanist.pager.ExperimentalPagerApi
-import com.utmaximur.feature_create_drink.R
 import com.utmaximur.feature_create_drink.CreateMyDrinkViewModel
+import com.utmaximur.feature_create_drink.R
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
@@ -35,8 +31,11 @@ fun DrinkVolume(
     val volumeState = viewModel.getVolumes(context)
     val volumeListState by viewModel.volumeListState.observeAsState()
 
-    Column(modifier = Modifier.padding(16.dp)) {
-        TextField(text = stringResource(id = R.string.dialog_create_drink_add_volume))
+    Column {
+        TextField(
+            text = stringResource(id = R.string.dialog_create_drink_add_volume),
+            modifier = Modifier.padding(start = 16.dp)
+        )
         Spacer(modifier = Modifier.padding(top = 16.dp))
         LazyColumn {
             items(count = volumeState.size) { index ->
@@ -73,6 +72,7 @@ fun VolumeItem(
         TextField(
             text = volume,
             modifier = Modifier
+                .padding(start = 16.dp)
                 .fillMaxHeight()
                 .weight(1f)
         )
