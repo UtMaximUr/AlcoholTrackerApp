@@ -4,34 +4,63 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable-v24/ic_add_fab.xml" value="0.36512820512820515" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2395" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/activated_checkbox.xml" value="0.2135" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/bg_rounded_corner.xml" value="0.37083333333333335" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/circle_mask.xml" value="0.37083333333333335" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/dot_default.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/dot_selected.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/dot_tab_selector.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_add_drink.xml" value="0.36512820512820515" />
-        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_add_photo.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_add_fab.xml" value="0.1835" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_add_photo.xml" value="0.22" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_add_white_24dp.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_alcohol_tracker.xml" value="0.2135" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_alcohol_tracker_name.xml" value="0.1855" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_arrow_down.xml" value="0.21510416666666668" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_arrow_drop_down_black_24dp.xml" value="0.1835" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_arrow_drop_up_black_24dp.xml" value="0.37083333333333335" />
-        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_awesome_24dp.xml" value="0.36512820512820515" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_arrow_left_24dp.xml" value="0.2135" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_arrow_right_24dp.xml" value="0.2135" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_artboard.xml" value="0.2135" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_awesome_24dp.xml" value="0.25" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_back.xml" value="0.1835" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_calculate_white_24dp.xml" value="0.1835" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_calendar_24dp.xml" value="0.36512820512820515" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_camera.xml" value="0.1835" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_check_box.xml" value="0.1835" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_check_box_outline.xml" value="0.1835" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_choice_24dp.xml" value="0.1835" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_delete.xml" value="0.1835" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_divider.xml" value="0.37083333333333335" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_dot_18dp.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_dot_default_18dp.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_drink_24dp.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_drink_24dp.xml" value="0.16" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_edit.xml" value="0.36512820512820515" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_event_24dp.xml" value="0.1835" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_info_24dp.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_launch_app.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_launcher.xml" value="0.36102564102564105" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1835" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.2395" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_local_bar_white_24dp.xml" value="0.1835" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_save_24dp.xml" value="0.36512820512820515" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_settings_24dp.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_settings_app.xml" value="0.2395" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_statistic_24dp.xml" value="0.202" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/ic_update_black_24dp.xml" value="0.2135" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/shadow_bottom.xml" value="0.36512820512820515" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/splash_background.xml" value="0.2135" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/splash_icon.xml" value="0.2135" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/splash_screen.xml" value="0.2135" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/toggle_event.xml" value="0.2135" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/toggle_info.xml" value="0.37083333333333335" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/drawable/toggle_open_drink_list.xml" value="0.37083333333333335" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/layout/activity_main.xml" value="0.3546875" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/layout/dialog_add_photo.xml" value="0.35052083333333334" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/layout/dialog_bottom_sheet.xml" value="0.34923076923076923" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/layout/dialog_track_list.xml" value="0.3546875" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/layout/dialog_update.xml" value="0.35052083333333334" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/layout/dialog_update_bottom_sheet.xml" value="0.19895833333333332" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/layout/fragment_add.xml" value="0.3546875" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/layout/fragment_add_new_drink.xml" value="0.33" />
@@ -47,6 +76,7 @@
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/layout/item_page.xml" value="0.11510416666666666" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/layout/item_page_drink.xml" value="0.3546875" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/layout/item_select_icon.xml" value="0.34923076923076923" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/layout/item_select_volume.xml" value="0.33611111111111114" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/layout/item_statistic.xml" value="0.34923076923076923" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/layout/item_theme.xml" value="0.35052083333333334" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/layout/item_top_drink.xml" value="0.34923076923076923" />
@@ -56,6 +86,30 @@
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/menu/menu_toolbar.xml" value="0.34923076923076923" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/menu/menu_toolbar_view_track.xml" value="0.3546875" />
         <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2125" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2395" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/feature_calendar/src/main/res/drawable/ic_arrow_left_24dp.xml" value="0.2395" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/feature_calendar/src/main/res/drawable/ic_arrow_right_24dp.xml" value="0.229" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/feature_calendar/src/main/res/drawable/ic_divider.xml" value="0.229" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/feature_calendar/src/main/res/drawable/ic_event_24dp.xml" value="0.229" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/feature_calendar/src/main/res/drawable/ic_info_24dp.xml" value="0.2395" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/feature_calendar/src/main/res/drawable/ic_local_bar_white_24dp.xml" value="0.229" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/feature_create_drink/src/main/res/drawable/ic_add_photo.xml" value="0.2395" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/feature_create_drink/src/main/res/drawable/ic_camera.xml" value="0.2395" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/feature_create_drink/src/main/res/drawable/ic_local_bar_white_24dp.xml" value="0.2395" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/feature_create_track/src/main/res/drawable/ic_calculate_white_24dp.xml" value="0.2395" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/feature_create_track/src/main/res/drawable/ic_dot_18dp.xml" value="0.229" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/feature_create_track/src/main/res/drawable/ic_dot_default_18dp.xml" value="0.2395" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/feature_create_track/src/main/res/drawable/ic_event_24dp.xml" value="0.2395" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/feature_create_track/src/main/res/drawable/ic_local_bar_white_24dp.xml" value="0.229" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/feature_settings/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2395" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/feature_settings/src/main/res/drawable/ic_choice_24dp.xml" value="0.2395" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/feature_settings/src/main/res/drawable/ic_launcher_foreground.xml" value="0.2395" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/feature_statistic/src/main/res/drawable/ic_dot_18dp.xml" value="0.2395" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/feature_statistic/src/main/res/drawable/ic_dot_default_18dp.xml" value="0.2395" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/feature_update/src/main/res/drawable/ic_update_black_24dp.xml" value="0.1855" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/navigation/src/main/res/drawable/ic_calendar_24dp.xml" value="0.2395" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/navigation/src/main/res/drawable/ic_settings_24dp.xml" value="0.2055" />
+        <entry key="..\:/Users/Predator/Desktop/AlcoholTracker/navigation/src/main/res/drawable/ic_statistic_24dp.xml" value="0.2055" />
       </map>
     </option>
   </component>
