@@ -58,7 +58,7 @@ class CreateMyDrinkViewModel @Inject constructor(
         MutableLiveData()
     }
 
-    fun onSaveButtonClick() {
+    fun onSaveButtonClick(onSuccess: () -> Unit) {
         if (checkEmptyField()) {
             viewModelScope.launch {
                 val drink = Drink(
@@ -76,6 +76,7 @@ class CreateMyDrinkViewModel @Inject constructor(
                     addNewDrinkInteractor.updateDrink(drink)
                 }
             }
+            onSuccess()
         }
     }
 
@@ -94,29 +95,26 @@ class CreateMyDrinkViewModel @Inject constructor(
         (emptyFieldState as MutableLiveData).value = null
         return when {
             photo.isEmpty () -> {
-                emptyFieldState.setValue(EmptyFieldState.Empty(isPhotoEmpty = false))
+                emptyFieldState.setValue(EmptyFieldState.Empty(isPhotoEmpty = true))
                 false
             }
             name.isEmpty() -> {
-                emptyFieldState.setValue(EmptyFieldState.Empty(isNameEmpty = false))
+                emptyFieldState.setValue(EmptyFieldState.Empty(isNameEmpty = true))
                 false
             }
             icon.isEmpty() -> {
-                emptyFieldState.setValue(EmptyFieldState.Empty(isIconEmpty = false))
+                emptyFieldState.setValue(EmptyFieldState.Empty(isIconEmpty = true))
                 false
             }
             degreeList.isEmpty() -> {
-                emptyFieldState.setValue(EmptyFieldState.Empty(isDegreeEmpty = false))
+                emptyFieldState.setValue(EmptyFieldState.Empty(isDegreeEmpty = true))
                 false
             }
             volumeList.isEmpty() -> {
-                emptyFieldState.setValue(EmptyFieldState.Empty(isVolumeEmpty = false))
+                emptyFieldState.setValue(EmptyFieldState.Empty(isVolumeEmpty = true))
                 false
             }
-            else -> {
-                emptyFieldState.setValue(EmptyFieldState.Empty(isNotEmpty = true))
-                true
-            }
+            else -> true
         }
     }
 
