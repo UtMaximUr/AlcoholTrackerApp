@@ -41,7 +41,9 @@ fun TopBar(
         elevation = 0.dp,
         actions = {
             IconButton(onClick = {
-                viewModel.onSaveButtonClick()
+                viewModel.onSaveButtonClick {
+                    navController.popBackStack()
+                }
             }) {
                 Icon(
                     imageVector = Icons.Default.Done,
