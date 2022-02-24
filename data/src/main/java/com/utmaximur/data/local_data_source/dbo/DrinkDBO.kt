@@ -4,8 +4,9 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.utmaximur.data.local_data_source.conversion.Converters
+import com.utmaximur.data.utils.DRINK_DB_NAME
 
-@Entity(tableName = "drink_database")
+@Entity(tableName = DRINK_DB_NAME)
 data class DrinkDBO(
     @PrimaryKey
     var id: String,

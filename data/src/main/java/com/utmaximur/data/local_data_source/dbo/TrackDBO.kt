@@ -2,8 +2,9 @@ package com.utmaximur.data.local_data_source.dbo
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.utmaximur.data.utils.TRACK_DB_NAME
 
-@Entity(tableName = "track_database")
+@Entity(tableName = TRACK_DB_NAME)
 data class TrackDBO(
 
     @PrimaryKey
