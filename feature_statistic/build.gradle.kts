@@ -1,4 +1,5 @@
 import com.utmaximur.buildsrc.Base
+import com.utmaximur.buildsrc.BuildPlugins
 import com.utmaximur.buildsrc.Libs
 
 plugins {
@@ -21,8 +22,7 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile(Base.proguardOptimize), Base.proguardRulesPro
             )
         }
     }
@@ -31,30 +31,19 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        freeCompilerArgs = listOf("-Xjvm-default=compatibility", "-Xopt-in=kotlin.RequiresOptIn")
-        jvmTarget = "1.8"
+        freeCompilerArgs = listOf(Base.xJvm, Base.xOpt)
+        jvmTarget = Base.jvmTarget
     }
     buildFeatures {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.2.0-alpha02"
+        kotlinCompilerExtensionVersion = BuildPlugins.compose_version
     }
 }
 
 dependencies {
-    implementation(project(":domain"))
-    implementation(project(":utils"))
-
-    implementation(Libs.Core.coreKtx)
-    implementation(Libs.Compose.material)
-
+    implementation(project(":core"))
     implementation(Libs.Hilt.hilt_android)
     kapt(Libs.Hilt.hilt_compiler)
-
-    implementation(Libs.Compose.glide)
-    implementation(Libs.Hilt.hilt_compose)
-    implementation(Libs.Compose.livedata)
-    implementation(Libs.Navigation.navigation_compose)
-    implementation(Libs.Compose.pager)
 }

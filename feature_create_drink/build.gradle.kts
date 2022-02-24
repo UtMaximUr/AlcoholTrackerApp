@@ -30,7 +30,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        freeCompilerArgs = listOf("-Xjvm-default=compatibility", "-Xopt-in=kotlin.RequiresOptIn")
+        freeCompilerArgs = listOf(Base.xJvm, Base.xOpt)
         jvmTarget = Base.jvmTarget
     }
     buildFeatures {
@@ -42,20 +42,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":domain"))
-    implementation(project(":utils"))
-    implementation(project(":navigation"))
-
-    implementation(Libs.Core.coreKtx)
-    implementation(Libs.Compose.material)
-
+    implementation(project(":core"))
     implementation(Libs.Hilt.hilt_android)
     kapt(Libs.Hilt.hilt_compiler)
-
-    implementation(Libs.Compose.glide)
-    implementation(Libs.Hilt.hilt_compose)
-    implementation(Libs.Compose.livedata)
-    implementation(Libs.Navigation.navigation_compose)
-    implementation(Libs.Compose.pager)
     implementation(Libs.Compose.permissions)
 }
