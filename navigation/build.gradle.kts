@@ -1,4 +1,5 @@
 import com.utmaximur.buildsrc.Base
+import com.utmaximur.buildsrc.BuildPlugins
 import com.utmaximur.buildsrc.Libs
 
 plugins {
@@ -19,14 +20,14 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        freeCompilerArgs = listOf("-Xjvm-default=compatibility", "-Xopt-in=kotlin.RequiresOptIn")
-        jvmTarget = "1.8"
+        freeCompilerArgs = listOf(Base.xJvm, Base.xOpt)
+        jvmTarget = Base.jvmTarget
     }
     buildFeatures {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.2.0-alpha02"
+        kotlinCompilerExtensionVersion = BuildPlugins.compose_version
     }
 }
 

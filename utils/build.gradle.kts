@@ -1,3 +1,4 @@
+import com.utmaximur.buildsrc.Base
 import com.utmaximur.buildsrc.Libs
 
 plugins {
@@ -6,19 +7,18 @@ plugins {
 }
 
 android {
-    compileSdk = 31
+    compileSdk = Base.compileSdk
 
     defaultConfig {
-        minSdk = 21
-        targetSdk = 31
+        minSdk = Base.minSdk
+        targetSdk = Base.targetSdk
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile(Base.proguardOptimize), Base.proguardRulesPro
             )
         }
     }
@@ -27,7 +27,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = Base.jvmTarget
     }
 }
 
