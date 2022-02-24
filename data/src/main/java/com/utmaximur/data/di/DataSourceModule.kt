@@ -7,6 +7,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.utmaximur.data.assets.AssetsModule
 import com.utmaximur.data.local_data_source.AlcoholTrackDatabase
 import com.utmaximur.data.local_data_source.AppDatabaseMigrations
+import com.utmaximur.data.utils.DB_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,12 +29,12 @@ class DataSourceModule {
     @Provides
     fun providesRoomDatabase(@ApplicationContext context: Context): AlcoholTrackDatabase {
         alcoholTrackDatabase =
-            Room.databaseBuilder(context, AlcoholTrackDatabase::class.java, "app_database")
+            Room.databaseBuilder(context, AlcoholTrackDatabase::class.java, DB_NAME)
                 .addMigrations(
-                    AppDatabaseMigrations.migration1to2(alcoholTrackDatabase),
-                    AppDatabaseMigrations.migration2to3(context, alcoholTrackDatabase),
-                    AppDatabaseMigrations.migration3to4(),
-                    AppDatabaseMigrations.migration4to5(alcoholTrackDatabase)
+                    AppDatabaseMigrations.migration1_2,
+                    AppDatabaseMigrations.migration2_3,
+                    AppDatabaseMigrations.migration3_4,
+                    AppDatabaseMigrations.migration4_5
                 )
                 .addCallback(databaseCallback(context))
                 .build()

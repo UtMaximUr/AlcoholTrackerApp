@@ -14,75 +14,64 @@ class AppDatabaseMigrations {
 
 
     companion object {
-        fun migration1to2(alcoholTrackDatabase: AlcoholTrackDatabase): Migration {
-            return object : Migration(1, 2) {
-                override fun migrate(database: SupportSQLiteDatabase) {
+        val migration1_2 = object : Migration(1, 2) {
+            override fun migrate(database: SupportSQLiteDatabase) {
 
-                    database.execSQL(
-                        "CREATE TABLE track_database_new (id TEXT NOT NULL," +
-                                " drink TEXT NOT NULL," +
-                                " volume TEXT NOT NULL," +
-                                " quantity INTEGER NOT NULL," +
-                                " degree TEXT NOT NULL," +
-                                " price REAL NOT NULL," +
-                                " date INTEGER NOT NULL," +
-                                " icon TEXT NOT NULL," +
-                                " PRIMARY KEY(id))"
-                    )
-                    database.execSQL(
-                        "INSERT INTO track_database_new (id, drink, volume, quantity, degree, price, date, icon) " +
-                                "SELECT id, drink, volume, quantity, degree, price, date, icon FROM track_database"
-                    )
-                    database.execSQL("DROP TABLE track_database")
-                    database.execSQL("ALTER TABLE track_database_new RENAME TO track_database")
+                database.execSQL(
+                    "CREATE TABLE track_database_new (id TEXT NOT NULL," +
+                            " drink TEXT NOT NULL," +
+                            " volume TEXT NOT NULL," +
+                            " quantity INTEGER NOT NULL," +
+                            " degree TEXT NOT NULL," +
+                            " price REAL NOT NULL," +
+                            " date INTEGER NOT NULL," +
+                            " icon TEXT NOT NULL," +
+                            " PRIMARY KEY(id))"
+                )
+                database.execSQL(
+                    "INSERT INTO track_database_new (id, drink, volume, quantity, degree, price, date, icon) " +
+                            "SELECT id, drink, volume, quantity, degree, price, date, icon FROM track_database"
+                )
+                database.execSQL("DROP TABLE track_database")
+                database.execSQL("ALTER TABLE track_database_new RENAME TO track_database")
 
-                    updateTrackDb(alcoholTrackDatabase)
-                }
             }
         }
 
-        fun migration2to3(context: Context, alcoholTrackDatabase: AlcoholTrackDatabase): Migration {
-            return object : Migration(2, 3) {
-                override fun migrate(database: SupportSQLiteDatabase) {
+        val migration2_3 = object : Migration(2, 3) {
+            override fun migrate(database: SupportSQLiteDatabase) {
 
-                    database.execSQL(
-                        "CREATE TABLE drink_database_new (id TEXT NOT NULL," +
-                                " drink TEXT NOT NULL," +
-                                " degree TEXT NOT NULL," +
-                                " volume TEXT NOT NULL," +
-                                " icon TEXT NOT NULL," +
-                                " photo TEXT NOT NULL," +
-                                " PRIMARY KEY(id))"
-                    )
+                database.execSQL(
+                    "CREATE TABLE drink_database_new (id TEXT NOT NULL," +
+                            " drink TEXT NOT NULL," +
+                            " degree TEXT NOT NULL," +
+                            " volume TEXT NOT NULL," +
+                            " icon TEXT NOT NULL," +
+                            " photo TEXT NOT NULL," +
+                            " PRIMARY KEY(id))"
+                )
 
-                    database.execSQL("DROP TABLE drink_database")
-                    database.execSQL("ALTER TABLE drink_database_new RENAME TO drink_database")
-
-                    updateDrinkDb(context, alcoholTrackDatabase)
-                }
+                database.execSQL("DROP TABLE drink_database")
+                database.execSQL("ALTER TABLE drink_database_new RENAME TO drink_database")
             }
         }
 
-        fun migration3to4(): Migration {
-            return object : Migration(3, 4) {
-                override fun migrate(database: SupportSQLiteDatabase) {
-                    database.execSQL(
-                        "ALTER TABLE track_database ADD COLUMN event TEXT NOT NULL DEFAULT ''"
-                    )
-                }
+        val migration3_4 = object : Migration(3, 4) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL(
+                    "ALTER TABLE track_database ADD COLUMN event TEXT NOT NULL DEFAULT ''"
+                )
             }
         }
 
-        fun migration4to5(alcoholTrackDatabase: AlcoholTrackDatabase): Migration {
-            return object : Migration(4, 5) {
-                override fun migrate(database: SupportSQLiteDatabase) {
-                    database.execSQL(
-                        "ALTER TABLE track_database ADD COLUMN image TEXT NOT NULL DEFAULT ''"
-                    )
-                    updateTrackDbAddImageField(alcoholTrackDatabase)
-                }
+        val migration4_5 = object : Migration(4, 5) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL(
+                    "ALTER TABLE track_database ADD COLUMN image TEXT NOT NULL DEFAULT ''"
+                )
             }
         }
+
 
         private fun updateDrinkDb(context: Context, alcoholTrackDatabase: AlcoholTrackDatabase) {
             CoroutineScope(Dispatchers.IO).launch {
