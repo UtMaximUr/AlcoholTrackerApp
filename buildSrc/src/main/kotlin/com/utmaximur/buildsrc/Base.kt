@@ -12,4 +12,6 @@ object Base {
     const val androidTestInstrumentation = "androidx.test.runner.AndroidJUnitRunner"
     const val proguardOptimize = "proguard-android-optimize.txt"
     const val proguardRulesPro = "proguard-rules.pro"
+    const val xJvm = "-Xjvm-default=compatibility"
+    const val xOpt = "-Xopt-in=kotlin.RequiresOptIn"
 }
