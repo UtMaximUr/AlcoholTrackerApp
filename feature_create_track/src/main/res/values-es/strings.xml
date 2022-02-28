@@ -18,6 +18,7 @@
     <string name="dialog_delete_title">¿Está seguro de que desea eliminar la entrada?</string>
     <string name="dialog_ok">OK</string>
     <string name="dialog_no">NO</string>
+    <string name="dialog_done">OK</string>
     <string name="dialog_cancel">Cancelar</string>
 
     <string name="cd_edit_button">Editar</string>

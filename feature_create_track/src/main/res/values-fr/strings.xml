@@ -18,6 +18,7 @@
     <string name="dialog_delete_title">Êtes-vous sûr de vouloir supprimer l\'entrée?</string>
     <string name="dialog_ok">OK</string>
     <string name="dialog_no">NON</string>
+    <string name="dialog_done">d\'accord</string>
     <string name="dialog_cancel">Annuler</string>
 
     <string name="cd_edit_button">Éditer</string>

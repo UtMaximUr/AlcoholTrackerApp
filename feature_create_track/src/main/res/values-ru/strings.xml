@@ -17,6 +17,7 @@
     <string name="dialog_delete_title">Вы действительно хотите удалить запись?</string>
     <string name="dialog_ok">Да</string>
     <string name="dialog_no">Нет</string>
+    <string name="dialog_done">Готово</string>
     <string name="dialog_cancel">Отмена</string>
 
     <string name="cd_edit_button">Редактировать</string>

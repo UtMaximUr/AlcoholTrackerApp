@@ -18,6 +18,7 @@
     <string name="dialog_delete_title">您确定要删除该条目吗？</string>
     <string name="dialog_ok">好的</string>
     <string name="dialog_no">不</string>
+    <string name="dialog_done">好的</string>
     <string name="dialog_cancel">取消</string>
 
     <string name="cd_edit_button">编辑</string>
