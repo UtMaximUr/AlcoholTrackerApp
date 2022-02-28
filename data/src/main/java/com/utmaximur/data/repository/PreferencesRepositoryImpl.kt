@@ -20,4 +20,6 @@ class PreferencesRepositoryImpl @Inject constructor(
 
     override fun isUpdateChecked() = sharedPreferences.isUpdateChecked()
 
+    override fun getSaveTheme() = sharedPreferences.getSaveTheme()
+
 }

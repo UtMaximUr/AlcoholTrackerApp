@@ -9,6 +9,7 @@ const val FILE_PROVIDER = ".fileprovider"
 
 const val PREFS_NAME = "KEY_SHARED_PREF"
 const val KEY_THEME = "prefs.theme"
+const val THEME_UNDEFINED = -1
 const val KEY_UPDATE = "prefs.update"
 const val UPDATE_UNDEFINED = true
 
