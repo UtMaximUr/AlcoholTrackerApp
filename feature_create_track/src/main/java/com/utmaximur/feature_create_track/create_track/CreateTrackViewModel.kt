@@ -206,4 +206,12 @@ class CreateTrackViewModel @Inject constructor(private var addTrackInteractor: A
     private fun onTotalMoneyCalculating(quantity: Int) {
         totalMoney.setValue((quantity * price.toString().toDouble()).toString())
     }
+
+    fun isDarkTheme(isDark: Boolean): Boolean {
+        return when (addTrackInteractor.getSaveTheme()) {
+            THEME_DARK -> true
+            THEME_LIGHT -> false
+            else -> isDark
+        }
+    }
 }

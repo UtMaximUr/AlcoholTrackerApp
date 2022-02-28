@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--    light theme -->
+    <style name="CustomDate" parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="CustomWeek" parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="CustomCalendar" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="colorAccent">#D50000</item>
+        <item name="android:textColorPrimary">#000000</item>
+    </style>
+
+    <!--    dark theme -->
+    <style name="CustomDateDark" parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="CustomWeekDark" parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="CustomCalendarDark" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="colorAccent">#FFBB86FC</item>
+        <item name="android:textColorPrimary">#FFFFFF</item>
+    </style>
+
+</resources>

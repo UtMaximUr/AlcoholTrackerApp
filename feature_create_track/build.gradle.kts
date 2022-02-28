@@ -44,6 +44,7 @@ android {
 
 dependencies {
     implementation(project(":core"))
+    implementation(Libs.Core.material)
     implementation(Libs.Hilt.hilt_android)
     kapt(Libs.Hilt.hilt_compiler)
     implementation(project(":feature_calculator"))

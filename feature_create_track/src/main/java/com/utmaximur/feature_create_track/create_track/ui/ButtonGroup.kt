@@ -44,12 +44,15 @@ fun ButtonGroup(
     }
 
     AnimatedVisibility(visible = datePickerState.value) {
-        DatePicker({
-            dateState.value = it.formatDate(context)
-            viewModel.onDateChange(it)
-        }, {
-            datePickerState.value = false
-        })
+        DatePicker(
+            viewModel = viewModel,
+            onDateSelected = {
+                dateState.value = it.formatDate(context)
+                viewModel.onDateChange(it)
+            },
+            onDismissRequest = {
+                datePickerState.value = false
+            })
     }
 
     Row(
