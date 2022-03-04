@@ -59,27 +59,28 @@ fun Month(
             userScrollEnabled = false
         ) {
             items(getCountDayPreviousMonth(yearState.value, month)) { index ->
-                Day(day = getDayPreviousMonth(yearState.value, month, index))
+                Day(day = getDayPreviousMonth(yearState.value, month, index.convertToDay()))
             }
             items(getCountDayCurrentMonth(yearState.value, month)) { index ->
                 Day(
-                    day = index + 1,
+                    day = index.convertToDay(),
                     event = context.getEvent(
                         yearState.value,
                         month,
-                        index + 1,
+                        index.convertToDay(),
                         eventsDayState.value
                     ),
                     currentDay = getCurrentDay(yearState.value, month, selectedDateState.value),
                     isCurrentDayOfMonth = true
                 ) {
-                    selectedDateState.value = CalendarDay(it, month, yearState.value)
-                    calendar.set(yearState.value, month, it)
+                    selectedDateState.value =
+                        CalendarDay(index.convertToDay(), month, yearState.value)
+                    calendar.set(yearState.value, month, index.convertToDay())
                     onDayClick(calendar.timeInMillis)
                 }
             }
             items(getCountDayNextMonth(yearState.value, month)) { index ->
-                Day(day = index + 1)
+                Day(day = index.convertToDay())
             }
         }
     }

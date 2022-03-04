@@ -45,11 +45,11 @@ fun getCountDayPreviousMonth(currentYear: Int, currentMonth: Int): Int {
     return calendar[Calendar.DAY_OF_WEEK] - calendar.firstDayOfWeek
 }
 
-fun getDayPreviousMonth(currentYear: Int, currentMonth: Int, index: Int): Int {
+fun getDayPreviousMonth(currentYear: Int, currentMonth: Int, currentDay: Int): Int {
     calendar.set(currentYear, currentMonth, 1)
     val dayOfWeek = calendar[Calendar.DAY_OF_WEEK] - calendar.firstDayOfWeek
     calendar.set(currentYear, currentMonth - 1, 1)
-    return calendar.getActualMaximum(Calendar.DAY_OF_MONTH) - dayOfWeek + index + 1
+    return calendar.getActualMaximum(Calendar.DAY_OF_MONTH) - dayOfWeek + currentDay
 }
 
 fun getCountDayCurrentMonth(currentYear: Int, currentMonth: Int): Int {
@@ -68,6 +68,8 @@ fun getCountDayNextMonth(currentYear: Int, currentMonth: Int): Int {
 fun getCurrentDay(currentYear: Int, currentMonth: Int, day: CalendarDay): Int {
     return if (day.month == currentMonth && day.year == currentYear) day.day else -1
 }
+
+fun Int.convertToDay() = this + 1
 
 fun Context.getEvent(
     currentYear: Int,

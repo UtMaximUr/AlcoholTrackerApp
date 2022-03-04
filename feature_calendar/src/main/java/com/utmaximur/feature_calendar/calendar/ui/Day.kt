@@ -33,7 +33,7 @@ fun Day(
     event: EventDay? = null,
     currentDay: Int = -1,
     isCurrentDayOfMonth: Boolean = false,
-    onClick: (Int) -> Unit = {},
+    onClick: (() -> Unit)? = null,
 ) {
     val interactionSource = remember {
         MutableInteractionSource()
@@ -47,7 +47,7 @@ fun Day(
                 interactionSource = interactionSource,
                 indication = null,
                 enabled = isCurrentDayOfMonth
-            ) { onClick(day) }
+            ) { onClick?.invoke() }
             .alpha(if (isCurrentDayOfMonth) 1f else 0.2f),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
