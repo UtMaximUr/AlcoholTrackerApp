@@ -4,7 +4,7 @@ import com.utmaximur.domain.repository.PreferencesRepository
 
 import javax.inject.Inject
 
-class SettingsInteractor @Inject constructor(
+class PreferencesInteractor @Inject constructor(
     private val preferencesRepository: PreferencesRepository
 ) {
 
@@ -15,4 +15,6 @@ class SettingsInteractor @Inject constructor(
         preferencesRepository.saveThemeChecked(theme)
 
     fun isUpdateChecked() = preferencesRepository.isUpdateChecked()
+
+    fun getSaveTheme() = preferencesRepository.getSaveTheme()
 }
