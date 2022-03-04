@@ -8,7 +8,7 @@ import javax.inject.Singleton
 @Singleton
 class PreferencesRepositoryImpl @Inject constructor(
     private val sharedPreferences: SharedPref
-): PreferencesRepository {
+) : PreferencesRepository {
 
     override fun saveUpdateChecked(checked: Boolean) {
         sharedPreferences.saveUpdateChecked(checked)
