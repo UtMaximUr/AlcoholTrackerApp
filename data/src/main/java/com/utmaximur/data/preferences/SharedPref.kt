@@ -3,16 +3,21 @@ package com.utmaximur.data.preferences
 import android.content.SharedPreferences
 import com.utmaximur.data.utils.*
 
-class SharedPref(private val sharedPreferences: SharedPreferences) {
+class SharedPref(sharedPreferences: SharedPreferences) {
 
-    fun saveUpdateChecked(checked: Boolean) =
-        sharedPreferences.edit()?.putBoolean(KEY_UPDATE, checked)?.apply()
+    private var updateValue by sharedPreferences.boolean(defaultValue = UPDATE_UNDEFINED)
+    private var themeValue by sharedPreferences.int(defaultValue = THEME_UNDEFINED)
 
-    fun saveThemeChecked(theme: Int) =
-        sharedPreferences.edit()?.putInt(KEY_THEME, theme)?.apply()
+    fun saveUpdateChecked(updateValue: Boolean) {
+        this.updateValue = updateValue
+    }
 
-    fun isUpdateChecked() = sharedPreferences.getBoolean(KEY_UPDATE, UPDATE_UNDEFINED)
+    fun saveThemeChecked(themeValue: Int) {
+        this.themeValue = themeValue
+    }
 
-    fun getSaveTheme() = sharedPreferences.getInt(KEY_THEME, THEME_UNDEFINED)
+    fun isUpdateChecked() = updateValue
+
+    fun getSaveTheme() = themeValue
 
 }
