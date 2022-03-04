@@ -1,16 +1,13 @@
 package com.utmaximur.alcoholtracker.presentation.main.ui
 
 
-import android.content.Context
 import androidx.compose.animation.*
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -22,9 +19,6 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.utmaximur.alcoholtracker.R
 import com.utmaximur.alcoholtracker.presentation.main.ui.theme.AlcoholTrackerTheme
 import com.utmaximur.alcoholtracker.presentation.main.ui.theme.TextColorWhite
-import com.utmaximur.data.utils.KEY_THEME
-import com.utmaximur.data.utils.PREFS_NAME
-import com.utmaximur.utils.*
 import com.utmaximur.feature_calendar.calendar.ui.CalendarScreen
 import com.utmaximur.feature_calendar.track_list.ui.TrackListBottomDialogScreen
 import com.utmaximur.feature_create_drink.ui.CreateDrinkScreen
@@ -34,19 +28,20 @@ import com.utmaximur.feature_statistic.statistic.ui.StatisticScreen
 import com.utmaximur.feature_update.UpdateDialog
 import com.utmaximur.navigation.BottomBar
 import com.utmaximur.navigation.NavigationDestination.*
+import com.utmaximur.utils.EDIT_DRINK
+import com.utmaximur.utils.EDIT_TRACK
 
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun MainScreen() {
+fun MainScreen(
+    themeApp: Boolean,
+    navController: NavHostController = rememberNavController()
+) {
 
-    val context = LocalContext.current
-    val isDark = isSystemInDarkTheme()
-
-    val navController = rememberNavController()
     val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
     val darkThemeState =
-        rememberSaveable { (mutableStateOf(themeApp(context, isDark))) }
+        rememberSaveable { (mutableStateOf(themeApp)) }
     val modalBottomSheetState =
         rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
 
@@ -172,15 +167,6 @@ fun BottomNavScreensController(
                 editDrinkId = it.arguments?.getString(EDIT_DRINK)
             )
         }
-    }
-}
-
-private fun themeApp(context: Context, isDark: Boolean): Boolean {
-    val sharedPrefs by lazy { context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE) }
-    return when (sharedPrefs?.getInt(KEY_THEME, THEME_UNDEFINED)) {
-        THEME_DARK -> true
-        THEME_LIGHT -> false
-        else -> isDark
     }
 }
 

@@ -61,6 +61,7 @@ android {
 
 dependencies {
 
+    implementation(project(":core"))
     implementation(project(":data"))
     implementation(project(":utils"))
     implementation(project(":navigation"))
