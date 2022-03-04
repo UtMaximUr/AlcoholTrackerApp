@@ -10,13 +10,9 @@ class PreferencesRepositoryImpl @Inject constructor(
     private val sharedPreferences: SharedPref
 ) : PreferencesRepository {
 
-    override fun saveUpdateChecked(checked: Boolean) {
-        sharedPreferences.saveUpdateChecked(checked)
-    }
+    override fun saveUpdateChecked(checked: Boolean) = sharedPreferences.saveUpdateChecked(checked)
 
-    override fun saveThemeChecked(theme: Int) {
-        sharedPreferences.saveThemeChecked(theme)
-    }
+    override fun saveThemeChecked(theme: Int) = sharedPreferences.saveThemeChecked(theme)
 
     override fun isUpdateChecked() = sharedPreferences.isUpdateChecked()
 
