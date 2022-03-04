@@ -2,6 +2,7 @@ package com.utmaximur.alcoholtracker.presentation.main.ui
 
 
 import androidx.compose.animation.*
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -35,13 +36,17 @@ import com.utmaximur.utils.EDIT_TRACK
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun MainScreen(
-    themeApp: Boolean,
-    navController: NavHostController = rememberNavController()
+    themeApp: Boolean?,
+    navController: NavHostController = rememberNavController(),
+    isDark: Boolean = isSystemInDarkTheme()
 ) {
 
-    val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
-    val darkThemeState =
-        rememberSaveable { (mutableStateOf(themeApp)) }
+    val bottomBarState = rememberSaveable {
+        (mutableStateOf(true))
+    }
+    val darkThemeState = rememberSaveable {
+        (mutableStateOf(themeApp ?: isDark))
+    }
     val modalBottomSheetState =
         rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
 
