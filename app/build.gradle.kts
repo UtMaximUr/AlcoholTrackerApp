@@ -76,11 +76,8 @@ dependencies {
     implementation(Libs.Core.appcompat)
     implementation(Libs.Core.material)
 
-    implementation(Libs.Compose.material)
     implementation(Libs.Compose.activity)
     implementation(Libs.Compose.system_ui_controller)
-
-    implementation(Libs.Navigation.navigation_compose)
 
     implementation(Libs.Core.multidex)
 
