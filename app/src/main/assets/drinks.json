@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "name" = "Absent",
+    "icon" = "https://raw.githubusercontent.com/UtMaximUr/AlcoholTrackerApp/refs/heads/compose/app/src/main/res/raw/ic_absent.png",
+    "photo" = "https://raw.githubusercontent.com/UtMaximUr/AlcoholTrackerApp/refs/heads/compose/app/src/main/assets/photo/absent.png"
+  },
+  {
+    "id": 2,
+    "name" = "Beer",
+    "icon" = "https://raw.githubusercontent.com/UtMaximUr/AlcoholTrackerApp/refs/heads/compose/app/src/main/res/raw/ic_beer.png",
+    "photo" = "https://raw.githubusercontent.com/UtMaximUr/AlcoholTrackerApp/refs/heads/compose/app/src/main/assets/photo/beer.png"
+  },
+  {
+    "id": 3,
+    "name" = "Brandy",
+    "icon" = "https://raw.githubusercontent.com/UtMaximUr/AlcoholTrackerApp/refs/heads/compose/app/src/main/res/raw/ic_brandy.png",
+    "photo" = "https://raw.githubusercontent.com/UtMaximUr/AlcoholTrackerApp/refs/heads/compose/app/src/main/assets/photo/brandy.png"
+  },
+  {
+    "id": 4,
+    "name" = "Champagne",
+    "icon" = "https://raw.githubusercontent.com/UtMaximUr/AlcoholTrackerApp/refs/heads/compose/app/src/main/res/raw/ic_champagne.png",
+    "photo" = "https://raw.githubusercontent.com/UtMaximUr/AlcoholTrackerApp/refs/heads/compose/app/src/main/assets/photo/champagne.png"
+  },
+  {
+    "id": 5,
+    "name" = "Cider",
+    "icon" = "https://raw.githubusercontent.com/UtMaximUr/AlcoholTrackerApp/refs/heads/compose/app/src/main/res/raw/ic_cider.png",
+    "photo" = "https://raw.githubusercontent.com/UtMaximUr/AlcoholTrackerApp/refs/heads/compose/app/src/main/assets/photo/cider.png"
+  },
+  {
+    "id": 6,
+    "name" = "Cocktail",
+    "icon" = "https://raw.githubusercontent.com/UtMaximUr/AlcoholTrackerApp/refs/heads/compose/app/src/main/res/raw/ic_cocktail.png",
+    "photo" = "https://raw.githubusercontent.com/UtMaximUr/AlcoholTrackerApp/refs/heads/compose/app/src/main/assets/photo/coctail.png"
+  },
+  {
+    "id": 7,
+    "name" = "Cognac",
+    "icon" = "https://raw.githubusercontent.com/UtMaximUr/AlcoholTrackerApp/refs/heads/compose/app/src/main/res/raw/ic_cognac.png",
+    "photo" = "https://raw.githubusercontent.com/UtMaximUr/AlcoholTrackerApp/refs/heads/compose/app/src/main/assets/photo/cognac.png"
+  },
+  {
+    "id": 8,
+    "name" = "Gin",
+    "icon" = "https://raw.githubusercontent.com/UtMaximUr/AlcoholTrackerApp/refs/heads/compose/app/src/main/res/raw/ic_gin.png",
+    "photo" = "https://raw.githubusercontent.com/UtMaximUr/AlcoholTrackerApp/refs/heads/compose/app/src/main/assets/photo/gin.png"
+  },
+  {
+    "id": 9,
+    "name" = "Liqueur",
+    "icon" = "https://raw.githubusercontent.com/UtMaximUr/AlcoholTrackerApp/refs/heads/compose/app/src/main/res/raw/ic_liqueur.png",
+    "photo" = "https://raw.githubusercontent.com/UtMaximUr/AlcoholTrackerApp/refs/heads/compose/app/src/main/assets/photo/liquor.png"
+  },
+  {
+    "id": 10,
+    "name" = "Rum",
+    "icon" = "https://raw.githubusercontent.com/UtMaximUr/AlcoholTrackerApp/refs/heads/compose/app/src/main/res/raw/ic_rum.png",
+    "photo" = "https://raw.githubusercontent.com/UtMaximUr/AlcoholTrackerApp/refs/heads/compose/app/src/main/assets/photo/rum.png"
+  },
+  {
+    "id": 11,
+    "name" = "Shots",
+    "icon" = "https://raw.githubusercontent.com/UtMaximUr/AlcoholTrackerApp/refs/heads/compose/app/src/main/res/raw/ic_shot.png",
+    "photo" = "https://raw.githubusercontent.com/UtMaximUr/AlcoholTrackerApp/refs/heads/compose/app/src/main/assets/photo/shots.png"
+  },
+  {
+    "id": 12,
+    "name" = "Tequila",
+    "icon" = "https://raw.githubusercontent.com/UtMaximUr/AlcoholTrackerApp/refs/heads/compose/app/src/main/res/raw/ic_tequila.png",
+    "photo" = "https://raw.githubusercontent.com/UtMaximUr/AlcoholTrackerApp/refs/heads/compose/app/src/main/assets/photo/tequila.png"
+  },
+  {
+    "id": 13,
+    "name" = "Vodka",
+    "icon" = "https://raw.githubusercontent.com/UtMaximUr/AlcoholTrackerApp/refs/heads/compose/app/src/main/res/raw/ic_vodka.png",
+    "photo" = "https://raw.githubusercontent.com/UtMaximUr/AlcoholTrackerApp/refs/heads/compose/app/src/main/assets/photo/vodka.png"
+  },
+  {
+    "id": 14,
+    "name" = "Whiskey",
+    "icon" = "https://raw.githubusercontent.com/UtMaximUr/AlcoholTrackerApp/refs/heads/compose/app/src/main/res/raw/ic_whiskey.png",
+    "photo" = "https://raw.githubusercontent.com/UtMaximUr/AlcoholTrackerApp/refs/heads/compose/app/src/main/assets/photo/whiskey.png"
+  },
+  {
+    "id" = 15,
+    "name" = "Wine",
+    "icon" = "https://raw.githubusercontent.com/UtMaximUr/AlcoholTrackerApp/refs/heads/compose/app/src/main/res/raw/ic_wine.png",
+    "photo" = "https://raw.githubusercontent.com/UtMaximUr/AlcoholTrackerApp/refs/heads/compose/app/src/main/assets/photo/wine.png"
+  }
+]
