@@ -84,7 +84,7 @@
     "photo": "https://raw.githubusercontent.com/UtMaximUr/AlcoholTrackerApp/refs/heads/compose/app/src/main/assets/photo/whiskey.png"
   },
   {
-    "id" = "15",
+    "id": "15",
     "name": "Wine",
     "icon": "https://raw.githubusercontent.com/UtMaximUr/AlcoholTrackerApp/refs/heads/compose/app/src/main/res/raw/ic_wine.png",
     "photo": "https://raw.githubusercontent.com/UtMaximUr/AlcoholTrackerApp/refs/heads/compose/app/src/main/assets/photo/wine.png"
