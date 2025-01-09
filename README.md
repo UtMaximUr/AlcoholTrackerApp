@@ -7,18 +7,17 @@
 In this application, you can mark all the days of alcohol intake, statistics on the intake of drinks.
 
 # Technology stack
-* Kotlin
+* Kotlin Multiplatform
 * Multi module
 * Single Activity
-* MVVM (Jetpack ViewModel + LiveData)
-* Jetpack Navigation
-* Jetpack Compose
-* Dagger Hilt
-* Room, migrations
+* MVI (MVIKotlin)
+* Decompose
+* Jetpack Compose Multiplatform
+* Koin
+* Room
 * Coroutines
-* Swipe and Drop
+* Convention plugins
 * Gradle Kotlin DSL
-* Dark mode
 
 
 # Calendar 
