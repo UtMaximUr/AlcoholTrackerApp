@@ -15,6 +15,8 @@ In this application, you can mark all the days of alcohol intake, statistics on 
 * Jetpack Compose Multiplatform
 * Koin
 * Room
+* Data store
+* Store5
 * Coroutines
 * Convention plugins
 * Gradle Kotlin DSL
