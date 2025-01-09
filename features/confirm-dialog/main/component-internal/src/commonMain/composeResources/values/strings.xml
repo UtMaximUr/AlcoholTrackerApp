@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="confirm_delete">Confirm deletion</string>
+    <string name="confirm_delete_text">Do you really want to delete the selected item?</string>
+    <string name="cancel">Cancel</string>
+    <string name="proceed">Continue</string>
+
+    <string name="cd_close">Back</string>
+</resources>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="permission_message_camera">You need permission to use the camera.\nYou can manage permissions in the device settings.</string>
+    <string name="permission_message_gallery">To select photos from the gallery, you need permission.\nYou can manage permissions in the device settings.</string>
+</resources>

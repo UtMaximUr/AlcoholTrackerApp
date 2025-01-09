@@ -1,7 +1,0 @@
-<resources>
-
-    <string name="update_title">The update download is complete. Update?</string>
-    <string name="update_restart">Now</string>
-    <string name="update_later">Later</string>
-
-</resources>

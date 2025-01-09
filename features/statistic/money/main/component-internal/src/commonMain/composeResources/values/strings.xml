@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="statistic_spent">I spent in a</string>
+    <string name="week_period">Week</string>
+    <string name="month_period">Month</string>
+    <string name="year_period">Year</string>
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_create_drink">Create drink</string>
+    <string name="title_name_drink">Name drink</string>
+    <string name="select_icon">Select icon</string>
+    <string name="save_drink">Save drink</string>
+
+    <string name="cd_drink_image">Drink image</string>
+    <string name="cd_drink_icon">Drink icon</string>
+</resources>

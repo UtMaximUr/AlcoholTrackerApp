@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="without_value">Without value></string>
+    <string name="add_today">Today</string>
+    <string name="add_date">Select date</string>
+
+    <string name="cd_menu">Open menu</string>
+    <string name="cd_back">Back</string>
+</resources>

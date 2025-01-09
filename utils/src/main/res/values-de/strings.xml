@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <string name="unit_ml">%s ml</string>
-    <string name="unit_l">%s l</string>
-    <string name="safe_dose">%s %% der sicheren Dosis *</string>
-
-</resources>

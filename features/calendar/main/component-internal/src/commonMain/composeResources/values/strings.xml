@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="volume">Volume %1$s</string>
+    <string name="degree">Degree %1$s</string>
+    <string name="currency">%1$s %2$s</string>
+    <string name="calendar_count_drink" translatable="false">%1$s x %2$s</string>
+    <string name="safe_dose_note">*a safe dose of 100 ml of ethyl alcohol according\nto a study by the University of Cambridge</string>
+    <string name="calendar_empty">Not a single gram was drunk on this day!:)\nPress «+» to get started</string>
+
+    <string name="cd_info_safe_dose">Safe dose</string>
+    <string name="cd_event">Event</string>
+    <string name="cd_delete_track">Delete track</string>
+    <string name="cd_add_track">Add track</string>
+    <string name="cd_change_calendar_view">Change calendar view</string>
+</resources>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_edit_track">Edit track</string>
+    <string name="add_total_money_title">Total</string>
+    <string name="add_total_money">%1$s %2$s</string>
+    <string name="add_event">Event</string>
+    <string name="add_price">Cost of one drink</string>
+    <string name="add_quantity">Quantity</string>
+    <string name="add_degree">Degree</string>
+    <string name="add_volume">Volume</string>
+
+    <string name="cd_back">Back</string>
+    <string name="cd_delete">Delete track</string>
+    <string name="cd_save">Save track</string>
+    <string name="cd_event">Event</string>
+    <string name="cd_price">Price</string>
+    <string name="cd_calculator">Calculator</string>
+</resources>

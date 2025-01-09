@@ -1,0 +1,184 @@
+[versions]
+#Android
+android-compileSdk = "34"
+android-minSdk = "23"
+android-targetSdk = "34"
+
+androidx-datastore = "1.1.1"
+jb-compose = "1.7.1"
+coreKtx = "1.15.0"
+plugin-android = "8.7.3"
+kotlin = "2.0.0"
+ksp = "2.0.0-1.0.21"
+plugin-gver = "0.50.0"
+googleService = "4.4.2"
+koin = "3.6.0-Beta4"
+koinCompsoe = "1.2.0-Beta4"
+koinAnnotations = "1.3.1"
+kotlinx-serialization = "1.7.0-RC"
+kotlinx-coroutines = "1.8.1"
+napier = "2.6.1"
+activity-compose = "1.6.1"
+desugar-jdk-libs = "2.0.4"
+android-viewmodel-kts = "2.8.0"
+shimmerVer = "1.2.0"
+firebaseBom = "33.1.2"
+firebaseMessaging = "24.0.0"
+zoomable = "1.6.1"
+kotlinx-datetime = "0.6.0"
+sqlite = "2.5.0-alpha12"
+evaluator = "1.1.1"
+buildkonfig = "0.15.2"
+
+# ArkIvanov
+arkivanov-decompose = "3.2.2"
+arkivanov-essenty = "2.2.1"
+arkivanov-mvi = "4.2.0"
+# Static analyze code
+detekt = "1.23.3"
+#ktlint = "0.50.0"
+# Выше нельзя пока, ломаются правила
+spotless = "6.21.0"
+ktlint_jlleitschuh = "11.5.0"
+coil = "3.0.0-alpha06"
+activityKtx = "1.9.0"
+androidx-room = "2.7.0-alpha11"
+uiAndroid = "1.7.6"
+# Ktor
+ktor = "2.3.8"
+ktorfitLib = "1.11.0"
+coreAnimation = "1.0.0"
+
+[libraries]
+# Androidx
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences-core", version.ref = "androidx-datastore" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
+plugin-android = { module = "com.android.tools.build:gradle", version.ref = "plugin-android" }
+plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+plugin-kotlin-serialization = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
+plugin-gver = { module = "com.github.ben-manes:gradle-versions-plugin", version.ref = "plugin-gver" }
+
+# Compose
+shimmer-compose = { group = "com.valentinilk.shimmer", name = "compose-shimmer", version.ref = "shimmerVer" }
+jetbrains-viewmodel = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version = "2.8.0" }
+
+# Koin
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koinCompsoe" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+#used inside custom plugins. Do not comment
+koin-annotations = { module = "io.insert-koin:koin-annotations", version.ref = "koinAnnotations" }
+koin-kspCompiler = { module = "io.insert-koin:koin-ksp-compiler", version.ref = "koinAnnotations" }
+
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
+
+napier = { module = "io.github.aakira:napier", version.ref = "napier" }
+
+store5 = { module = "org.mobilenativefoundation.store:store5", version = "5.0.0" }
+
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidx-room" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "androidx-room" }
+androidx-room-paging = { group = "androidx.room", name = "room-paging", version.ref = "androidx-room" }
+androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "androidx-room" }
+sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
+
+kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+
+activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
+desugar-jdk-libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar-jdk-libs" }
+android-viewmodel-kts = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "android-viewmodel-kts" }
+androidx-startup-runtime = { module = "androidx.startup:startup-runtime", version = "1.2.0" }
+
+# ArkIvanov
+arkivanov-decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "arkivanov-decompose" }
+arkivanov-decompose-extensions-compose = { module = "com.arkivanov.decompose:extensions-compose", version.ref = "arkivanov-decompose" }
+arkivanov-decompose-comp-experimtental = { group = "com.arkivanov.decompose", name = "extensions-compose-experimental", version.ref = "arkivanov-decompose" }
+arkivanov-essenty-lifecycle = { module = "com.arkivanov.essenty:lifecycle", version.ref = "arkivanov-essenty" }
+arkivanov-essenty-lifecycle-coroutines = { module = "com.arkivanov.essenty:lifecycle-coroutines", version.ref = "arkivanov-essenty" }
+arkivanov-mvi = { module = "com.arkivanov.mvikotlin:mvikotlin ", version.ref = "arkivanov-mvi" }
+arkivanov-mvikotlin-main = { module = "com.arkivanov.mvikotlin:mvikotlin-main", version.ref = "arkivanov-mvi" }
+arkivanov-mvikotlin-logging = { module = "com.arkivanov.mvikotlin:mvikotlin-logging", version.ref = "arkivanov-mvi" }
+#arkivanov-mvikotlin-timetravel = { module = "com.arkivanov.mvikotlin:mvikotlin-timetravel", version.ref = "arkivanov-mvi" }
+arkivanov-mvikotlin-extensions-coroutines = { module = "com.arkivanov.mvikotlin:mvikotlin-extensions-coroutines", version.ref = "arkivanov-mvi" }
+
+# Static analyze code
+detekt_plugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
+ktlint_jlleitschuh_plugin = { module = "org.jlleitschuh.gradle:ktlint-gradle", version.ref = "ktlint_jlleitschuh" }
+spotless_plugin = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless" }
+# Compose Multiplatform Plugin
+gradlePlugins-jb-compose = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "jb-compose" }
+gradlePlugins-kotlin-core = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+#ksp-gradle
+ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
+
+#coil
+coil-core = { module = "io.coil-kt.coil3:coil", version.ref = "coil" }
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
+coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-ktor", version.ref = "coil" }
+
+# firebase
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-messaging = { module = "com.google.firebase:firebase-messaging", version.ref = "firebaseMessaging" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
+# Image zoomable
+image-zoomable = { module = "com.mxalbert.zoomable:zoomable", version.ref = "zoomable" }
+# Ktor
+ktorfit-lib = { module = "de.jensklingenberg.ktorfit:ktorfit-lib", version.ref = "ktorfitLib" }
+ktorfit-flow = { module = "de.jensklingenberg.ktorfit:ktorfit-converters-flow", version.ref = "ktorfitLib" }
+ktorfit-ksp = { module = "de.jensklingenberg.ktorfit:ktorfit-ksp", version.ref = "ktorfitLib" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-client-serialization = { module = "io.ktor:ktor-client-serialization", version.ref = "ktor" }
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
+ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
+ktor-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
+ktor-client-auth = { module = "io.ktor:ktor-client-auth", version.ref = "ktor" }
+
+multiplatform-expressio-evaluator = { module = "io.github.murzagalin:multiplatform-expressions-evaluator", version.ref = "evaluator" }
+
+# Logging
+timber = "com.jakewharton.timber:timber:5.0.1"
+kermit = "co.touchlab:kermit:2.0.2"
+androidx-activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activityKtx" }
+androidx-ui-android = { group = "androidx.compose.ui", name = "ui-android", version.ref = "uiAndroid" }
+androidx-core-animation = { group = "androidx.core", name = "core-animation", version.ref = "coreAnimation" }
+[bundles]
+plugins = [
+    "plugin-android",
+    "plugin-kotlin",
+    "plugin-kotlin-serialization",
+    "plugin-gver"
+]
+coil = [
+    "coil-core",
+    "coil-compose",
+    "coil-network-okhttp"
+]
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "plugin-android" }
+android-library = { id = "com.android.library", version.ref = "plugin-android" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version = "2.0.0-RC3" }
+# do not comment this line, it's needed for the plugin
+cocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
+devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "jb-compose" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+google-services = { id = "com.google.gms.google-services", version.ref = "googleService" }
+room = { id = "androidx.room", version.ref = "androidx-room" }
+buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }
+ktorfit = { id = "de.jensklingenberg.ktorfit", version.ref = "ktorfitLib" }
+
+
+# Plugins defined by this project
+custom-android-application = "custom.android.application:unspecified"
+custom-android-library = "custom.androidMultiplatformLibrary:unspecified"
+custom-android-codequality = "custom.android.codequality:unspecified"
+custom-multiplatform-library = "custom.multiplatformLibrary:unspecified"
+custom-koin-platform = "custom.koinPlatformPlugin:unspecified"
+custom-feature-internal = "custom.featureInternal:unspecified"
+custom-ktorfit-plugin = "custom.ktorfitPlugin:unspecified"

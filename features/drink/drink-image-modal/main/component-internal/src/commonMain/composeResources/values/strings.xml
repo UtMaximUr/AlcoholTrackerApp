@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_heading">Add Photo</string>
+    <string name="action_camera">Use Camera</string>
+    <string name="action_gallery">Upload from Gallery</string>
+    <string name="action_remove_photo">Remove Photo</string>
+</resources>

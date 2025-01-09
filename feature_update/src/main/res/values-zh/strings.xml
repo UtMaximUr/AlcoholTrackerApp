@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <string name="update_title">更新下载已完成。 更新？</string>
-    <string name="update_restart">现在</string>
-    <string name="update_later">之后</string>
-
-</resources>
