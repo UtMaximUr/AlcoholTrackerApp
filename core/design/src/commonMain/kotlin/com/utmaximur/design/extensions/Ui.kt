@@ -60,15 +60,6 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.StringResource
 import kotlin.math.absoluteValue
 
-@OptIn(ExperimentalStdlibApi::class)
-fun String.parseColor(): Color {
-    return Color(
-        this
-            .removePrefix("#")
-            .hexToLong(HexFormat.Default)
-    ).copy(alpha = 1f)
-}
-
 fun Modifier.shimmer(showShimmer: Boolean): Modifier = composed {
     val shimmerInstance = rememberShimmer(
         shimmerBounds = ShimmerBounds.View,
@@ -92,20 +83,6 @@ fun Modifier.shimmer(showShimmer: Boolean): Modifier = composed {
     return@composed if (showShimmer) this.shimmer(shimmerInstance) else this
 }
 
-fun Modifier.backgroundItem(isFirst: Boolean, isLast: Boolean) = composed {
-    this.then(
-        Modifier.background(
-            color = MaterialTheme.colorScheme.primaryContainer,
-            shape = when {
-                isFirst && isLast -> MaterialTheme.shapes.extraLarge
-                isFirst -> RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp)
-                isLast -> RoundedCornerShape(bottomStart = 12.dp, bottomEnd = 12.dp)
-                else -> RectangleShape
-            }
-        )
-    )
-}
-
 fun String?.clearTags() = this?.replace("<[^>]*>".toRegex(), "").orEmpty()
 
 
@@ -121,18 +98,6 @@ fun Modifier.fadingEdge(brush: Brush) = this
     .drawWithContent {
         drawContent()
         drawRect(brush = brush, blendMode = BlendMode.DstIn)
-    }
-
-fun Modifier.drawBehind(color: Color) = this
-    .drawBehind {
-        val strokeWidthPx = 1.dp.toPx()
-        val verticalOffset = size.height - 2.sp.toPx()
-        drawLine(
-            color = color,
-            strokeWidth = strokeWidthPx,
-            start = Offset(0f, verticalOffset),
-            end = Offset(size.width, verticalOffset)
-        )
     }
 
 /**
