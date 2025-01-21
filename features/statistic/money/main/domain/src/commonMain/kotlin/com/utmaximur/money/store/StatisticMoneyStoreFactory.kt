@@ -11,8 +11,8 @@ import com.utmaximur.mappers.implementation.RequestMappers
 import com.utmaximur.money.interactor.GetMoneyStatistic
 import com.utmaximur.money.models.MoneyStatistic
 import com.utmaximur.money.store.StatisticMoneyStore.*
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.koin.core.annotation.Factory
 
 internal sealed interface Message {
@@ -30,10 +30,13 @@ internal class StatisticMoneyStoreFactory(
         bootstrapper = SimpleBootstrapper(Unit),
         executorFactory = coroutineExecutorFactory<_, _, _, Message, _> {
             onAction<Unit> {
-                interactor.doWork(Unit)
-                    .asRequest()
-                    .onEach { statistic -> dispatch(Message.UpdateState(statistic)) }
-                    .launchIn(this)
+                launch {
+                    interactor.doWork(Unit)
+                        .asRequest()
+                        .collectLatest { statistic ->
+                            dispatch(Message.UpdateState(statistic))
+                        }
+                }
             }
         },
         reducer = { message ->

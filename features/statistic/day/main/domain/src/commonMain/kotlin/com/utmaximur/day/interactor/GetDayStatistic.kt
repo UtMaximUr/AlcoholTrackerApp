@@ -23,7 +23,7 @@ internal class GetDayStatistic(
 
     private val repository by dayStatisticRepository
 
-    override fun doWork(params: Unit): Flow<List<DayStatistic>> =
+    override suspend fun doWork(params: Unit) =
         repository.tracksStream.map(::mapStatisticCountDays)
 
     private fun mapStatisticCountDays(tracks: List<Track>) = buildList {

@@ -1,17 +1,15 @@
 package com.utmaximur.data.splash_screen.store
 
 import com.utmaximur.app.base.coroutines.NamedCoroutineScopeIO
-import com.utmaximur.data.splash_screen.mapper.DrinkRemoteMapper
 import com.utmaximur.data.splash_screen.mapper.IconRemoteMapper
 import com.utmaximur.data.splash_screen.network.SplashScreenApi
+import com.utmaximur.databaseRoom.icon.IconDao
 import kotlinx.coroutines.CoroutineScope
 import org.koin.core.annotation.Factory
 import org.mobilenativefoundation.store.store5.Fetcher
 import org.mobilenativefoundation.store.store5.SourceOfTruth
 import org.mobilenativefoundation.store.store5.Store
 import org.mobilenativefoundation.store.store5.StoreBuilder
-import com.utmaximur.databaseRoom.drink.DrinkDao
-import com.utmaximur.databaseRoom.icon.IconDao
 
 @Factory
 internal class IconsStore(

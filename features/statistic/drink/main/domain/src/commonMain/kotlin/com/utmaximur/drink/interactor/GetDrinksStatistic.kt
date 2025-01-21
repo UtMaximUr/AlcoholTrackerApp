@@ -17,7 +17,7 @@ internal class GetMoneyStatistic(
 
     private val repository by dayStatisticRepository
 
-    override fun doWork(params: Unit) = combine(
+    override suspend fun doWork(params: Unit) = combine(
         repository.tracksStream,
         repository.drinksStream,
         ::mapDrinks

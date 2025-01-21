@@ -13,8 +13,8 @@ import com.utmaximur.drink.interactor.GetMoneyStatistic
 import com.utmaximur.drink.model.DrinkStatistic
 import com.utmaximur.drink.store.StatisticDrinkStore.State
 import com.utmaximur.mappers.implementation.RequestMappers
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 import org.koin.core.annotation.Factory
 
@@ -34,11 +34,14 @@ internal class StatisticDrinkStoreFactory(
         bootstrapper = SimpleBootstrapper(Unit),
         executorFactory = coroutineExecutorFactory<_, _, _, Message, _> {
             onAction<Unit> {
-                launch { analyticsManager.trackEvent(OpenScreenEvent()) }
-                interactor.doWork(Unit)
-                    .asRequest()
-                    .onEach { statistic -> dispatch(Message.UpdateState(statistic)) }
-                    .launchIn(this)
+                launch {
+                    analyticsManager.trackEvent(OpenScreenEvent())
+                    interactor.doWork(Unit)
+                        .asRequest()
+                        .collectLatest { statistic ->
+                            dispatch(Message.UpdateState(statistic))
+                        }
+                }
             }
         },
         reducer = { message ->

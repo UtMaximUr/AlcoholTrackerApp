@@ -37,7 +37,7 @@ abstract class Interactor<in P, R> {
         removeLoader()
     }
 
-    abstract fun doWork(params: P): R
+    abstract suspend fun doWork(params: P): R
 
     companion object {
         internal val DefaultTimeout = 1.minutes

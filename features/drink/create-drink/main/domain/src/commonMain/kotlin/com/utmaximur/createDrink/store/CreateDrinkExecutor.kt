@@ -16,7 +16,9 @@ import com.utmaximur.domain.models.Icon
 import com.utmaximur.message.models.MessageContainer
 import com.utmaximur.message.models.MessageService
 import createDrink.domain.resources.Res
+import createDrink.domain.resources.saving_error
 import createDrink.domain.resources.successful_save
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -38,6 +40,8 @@ internal class CreateDrinkExecutor(
     private val interactor: CreateDrink
 ) : CoroutineExecutor<Intent, Unit, State, Message, Label>() {
 
+    private var savingJob: Job? = null
+
     override fun executeAction(action: Unit) {
         scope.launch { analyticsManager.trackEvent(OpenScreenEvent()) }
         createDrinkRepository.iconsStream
@@ -50,28 +54,34 @@ internal class CreateDrinkExecutor(
 
     override fun executeIntent(intent: Intent) {
         when (intent) {
-            is Intent.SaveDrinkData -> handleDrinkData(intent.drinkData)
-        }
-    }
-
-    private fun handleDrinkData(drinkData: DrinkData) {
-        val validator = drinkValidator.validate(drinkData)
-        validator.errors.firstOrNull()?.let { error ->
-            showMessage(error.message)
-        }
-        if (validator.errors.isEmpty()) {
-            scope.launch {
-                analyticsManager.trackEvent(SaveDrinkEvent(drinkData.name))
-                interactor.doWork(drinkData)
-                showMessage(Res.string.successful_save)
-                publish(Label.CloseEvent)
+            is Intent.SaveDrinkData -> savingJob = scope.launch {
+                handleDrinkData(intent.drinkData)
             }
         }
     }
 
-    private fun showMessage(message: StringResource){
-        scope.launch {
-            messageService.showMessage(MessageContainer.SimpleMessage(getString(message)))
+    private suspend fun handleDrinkData(drinkData: DrinkData) {
+        val validator = drinkValidator.validate(drinkData)
+        validator.errors.firstOrNull()?.let { error ->
+            showMessage(error.message)
+            savingJob?.cancel()
         }
+        if (validator.errors.isEmpty()) {
+            analyticsManager.trackEvent(SaveDrinkEvent(validator.drinkData.name))
+            interactor.invoke(validator.drinkData)
+                .onFailure {
+                    showMessage(Res.string.saving_error, it.message)
+                    savingJob?.cancel()
+                }
+                .onSuccess {
+                    showMessage(Res.string.successful_save)
+                    publish(Label.CloseEvent)
+                }
+        }
+    }
+
+    private suspend fun showMessage(res: StringResource, args: String? = null) {
+        val message = getString(res, args.orEmpty())
+        messageService.showMessage(MessageContainer.SimpleMessage(message))
     }
 }
