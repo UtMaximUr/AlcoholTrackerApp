@@ -54,21 +54,14 @@ internal class CreateDrinkExecutor(
 
     override fun executeIntent(intent: Intent) {
         when (intent) {
-            is Intent.SaveDrinkData -> savingJob = scope.launch {
-                handleDrinkData(intent.drinkData)
-            }
+            is Intent.SaveDrinkData -> handleDrinkData(intent.drinkData)
         }
     }
 
-    private suspend fun handleDrinkData(drinkData: DrinkData) {
-        val validator = drinkValidator.validate(drinkData)
-        validator.errors.firstOrNull()?.let { error ->
-            showMessage(error.message)
-            savingJob?.cancel()
-        }
-        if (validator.errors.isEmpty()) {
-            analyticsManager.trackEvent(SaveDrinkEvent(validator.drinkData.name))
-            interactor.invoke(validator.drinkData)
+    private fun handleDrinkData(drinkData: DrinkData) =
+        withValidatorLaunch(drinkData) { data ->
+            analyticsManager.trackEvent(SaveDrinkEvent(data.name))
+            interactor.invoke(data)
                 .onFailure {
                     showMessage(Res.string.saving_error, it.message)
                     savingJob?.cancel()
@@ -77,6 +70,18 @@ internal class CreateDrinkExecutor(
                     showMessage(Res.string.successful_save)
                     publish(Label.CloseEvent)
                 }
+        }
+
+    private fun withValidatorLaunch(drinkData: DrinkData, block: suspend (DrinkData) -> Unit) {
+        savingJob = scope.launch {
+            val validator = drinkValidator.validate(drinkData)
+            validator.errors.firstOrNull()?.let { error ->
+                showMessage(error.message)
+                savingJob?.cancel()
+            }
+            validator.errors.ifEmpty {
+                block(validator.drinkData)
+            }
         }
     }
 
