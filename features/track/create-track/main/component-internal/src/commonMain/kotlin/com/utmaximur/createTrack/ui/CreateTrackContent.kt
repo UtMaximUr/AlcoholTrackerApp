@@ -51,7 +51,8 @@ fun CreateTrackContent(
     trackData: TrackData.Builder,
     requestDrinksUi: RequestUi<List<Drink>>,
     onCalculatorClick: () -> Unit,
-    onCurrencyClick: () -> Unit
+    onCurrencyClick: () -> Unit,
+    onDeleteClick: (Long) -> Unit
 ) {
 
     Column(
@@ -74,7 +75,10 @@ fun CreateTrackContent(
                     HorizontalPager(
                         state = pagerState,
                         pageContent = { index ->
-                            ItemDrink(drinks[index])
+                            ItemDrink(
+                                drink = drinks[index],
+                                onDeleteClick = onDeleteClick
+                            )
                         }
                     )
                     DotsIndicator(

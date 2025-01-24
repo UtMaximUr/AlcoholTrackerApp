@@ -11,8 +11,8 @@ import com.utmaximur.databaseRoom.track.TrackDao
 @Factory
 internal class RealCreateTrackRepository(
     currencySettingsManager: CurrencySettingsManager,
-    drinkDao: DrinkDao,
     private val trackDao: TrackDao,
+    private val drinkDao: DrinkDao,
     private val mapperHolder: MapperHolder
 ) : CreateTrackRepository {
 
@@ -23,5 +23,9 @@ internal class RealCreateTrackRepository(
 
     override suspend fun saveTrack(track: Track) {
         trackDao.insert(mapperHolder.trackLocalMapper.transform(track))
+    }
+
+    override suspend fun deleteDrink(id: Long) {
+        drinkDao.deleteDrinkById(id)
     }
 }

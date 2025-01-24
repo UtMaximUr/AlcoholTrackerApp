@@ -24,4 +24,7 @@ sealed interface ModalConfiguration {
 
     @Serializable
     data class DatePickerDialog(val selectedDate: Long?) : ModalConfiguration
+
+    @Serializable
+    data class ConfirmDialog(val drinkId: Long) : ModalConfiguration
 }

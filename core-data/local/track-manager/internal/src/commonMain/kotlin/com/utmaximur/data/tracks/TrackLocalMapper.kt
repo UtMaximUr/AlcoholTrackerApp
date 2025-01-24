@@ -16,7 +16,8 @@ internal class TrackLocalMapper : Mapper<Track, DbTrack> {
             id = from.drink.id,
             name = from.drink.name,
             icon = from.drink.icon,
-            photo = from.drink.photo
+            photo = from.drink.photo,
+            createdAt = from.drink.createdAt
         ),
         volume = from.volume,
         quantity = from.quantity,

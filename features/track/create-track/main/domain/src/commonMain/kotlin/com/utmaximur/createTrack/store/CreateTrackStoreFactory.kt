@@ -9,6 +9,7 @@ import com.utmaximur.createTrack.store.CreateTrackStore.Intent
 import com.utmaximur.createTrack.store.CreateTrackStore.Label
 import com.utmaximur.createTrack.store.CreateTrackStore.State
 import com.utmaximur.domain.calculator.CalculatorProviderData
+import com.utmaximur.domain.confirmDialog.ConfirmDialogProviderData
 import com.utmaximur.domain.createTrack.CreateTrackRepository
 import com.utmaximur.domain.datePicker.DateProviderData
 import org.koin.core.annotation.Factory
@@ -21,6 +22,7 @@ internal class CreateTrackStoreFactory(
     interactor: CreateTrack,
     calculatorProviderData: CalculatorProviderData,
     dateProviderData: DateProviderData,
+    confirmDialogProviderData: ConfirmDialogProviderData,
     messageService: MessageService,
     analyticsManager: AnalyticsManager
 ) : CreateTrackStore,
@@ -33,6 +35,7 @@ internal class CreateTrackStoreFactory(
                 repository = repository,
                 interactor = interactor,
                 calculatorProviderData = calculatorProviderData,
+                confirmDialogProviderData = confirmDialogProviderData,
                 dateProviderData = dateProviderData,
                 messageService = messageService,
                 analyticsManager = analyticsManager

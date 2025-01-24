@@ -23,6 +23,8 @@ interface CreateTrackComponent : ComposeComponent {
 
     fun navigateToCreateDrink()
 
+    fun onDeleteClick(id: Long)
+
     sealed interface Output {
 
         data object OpenCalculatorDialog : Output
@@ -32,6 +34,8 @@ interface CreateTrackComponent : ComposeComponent {
         data class OpenDatePickerDialog(val selectedDate: Long?) : Output
 
         data object NavigateToCreateDrink : Output
+
+        data class OpenConfirmDialog(val id: Long): Output
 
         data object NavigateBack : Output
     }

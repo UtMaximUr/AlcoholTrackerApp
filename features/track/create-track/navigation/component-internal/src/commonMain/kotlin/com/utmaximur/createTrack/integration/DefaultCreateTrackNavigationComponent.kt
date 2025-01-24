@@ -19,6 +19,7 @@ import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.pushNew
 import com.arkivanov.decompose.value.Value
 import com.utmaximur.calculator.CalculatorComponent
+import com.utmaximur.confirmDialog.ConfirmDialogComponent
 import com.utmaximur.core.decompose.ComposeComponent
 import com.utmaximur.core.decompose.ComposeDialogComponent
 import com.utmaximur.createDrink.CreateDrinkNavigationComponent
@@ -104,6 +105,14 @@ internal class DefaultCreateTrackNavigationComponent(
                 { modalNavigation.dismiss() }
             )
         }
+
+        is ModalConfiguration.ConfirmDialog -> get<ConfirmDialogComponent> {
+            parametersOf(
+                componentContext,
+                modalConfig.drinkId,
+                { modalNavigation.dismiss() }
+            )
+        }
     }
 
     private fun onCreateTrackOutput(output: CreateTrackComponent.Output) = when (output) {
@@ -122,6 +131,10 @@ internal class DefaultCreateTrackNavigationComponent(
 
         CreateTrackComponent.Output.NavigateToCreateDrink -> navigation.pushNew(
             Configuration.CreateDrinkScreen
+        )
+
+        is CreateTrackComponent.Output.OpenConfirmDialog -> modalNavigation.activate(
+            ModalConfiguration.ConfirmDialog(output.id)
         )
     }
 

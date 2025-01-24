@@ -28,6 +28,7 @@ dependencies {
     commonMainImplementation(projects.features.track.calculator.domain)
     commonMainImplementation(projects.features.track.datePicker.domain)
     commonMainImplementation(projects.features.message.domain)
+    commonMainImplementation(projects.features.confirmDialog.domain)
 }
 
 compose.resources {

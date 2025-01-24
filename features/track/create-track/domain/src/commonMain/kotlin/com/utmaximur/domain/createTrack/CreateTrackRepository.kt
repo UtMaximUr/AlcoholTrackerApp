@@ -10,4 +10,6 @@ interface CreateTrackRepository {
     val drinksStream: Flow<List<Drink>>
 
     suspend fun saveTrack(track: Track)
+
+    suspend fun deleteDrink(id: Long)
 }

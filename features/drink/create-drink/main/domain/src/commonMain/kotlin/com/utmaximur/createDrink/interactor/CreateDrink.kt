@@ -4,6 +4,7 @@ import com.utmaximur.createDrink.DrinkData
 import com.utmaximur.domain.Interactor
 import com.utmaximur.domain.createDrink.CreateDrinkRepository
 import com.utmaximur.domain.models.Drink
+import com.utmaximur.utils.extensions.localDateTimeNow
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.withContext
@@ -25,6 +26,7 @@ internal class CreateDrink(
     private fun DrinkData.toDrink() = Drink(
         name = name,
         icon = icon.url,
-        photo = photo
+        photo = photo,
+        createdAt = localDateTimeNow
     )
 }

@@ -10,6 +10,7 @@ import com.utmaximur.createTrack.store.CreateTrackStore.Intent
 import com.utmaximur.createTrack.store.CreateTrackStore.Label
 import com.utmaximur.createTrack.store.CreateTrackStore.State
 import com.utmaximur.domain.calculator.CalculatorProviderData
+import com.utmaximur.domain.confirmDialog.ConfirmDialogProviderData
 import com.utmaximur.domain.createTrack.CreateTrackRepository
 import com.utmaximur.domain.datePicker.DateProviderData
 import com.utmaximur.domain.models.Drink
@@ -22,9 +23,11 @@ import com.utmaximur.utils.extensions.toDateUi
 import createTrack.domain.resources.Res
 import createTrack.domain.resources.saving_error
 import createTrack.domain.resources.successful_save
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -45,6 +48,7 @@ internal class CreateTrackExecutor(
     private val interactor: CreateTrack,
     private val calculatorProviderData: CalculatorProviderData,
     private val dateProviderData: DateProviderData,
+    private val confirmDialogProviderData: ConfirmDialogProviderData,
     private val messageService: MessageService,
     private val analyticsManager: AnalyticsManager
 ) : CoroutineExecutor<Intent, Unit, State, Message, Label>() {
@@ -67,6 +71,11 @@ internal class CreateTrackExecutor(
             .launchIn(scope)
         repository.currencyStream
             .onEach { currency -> dispatch(Message.UpdateCurrency(currency)) }
+            .launchIn(scope)
+        confirmDialogProviderData.dataFlow
+            .filterNotNull()
+            .onEach { id -> repository.deleteDrink(id) }
+            .flowOn(Dispatchers.IO)
             .launchIn(scope)
     }
 

@@ -52,6 +52,9 @@ internal class DefaultCreateTrackComponent(
     override fun navigateToCreateDrink() =
         output(CreateTrackComponent.Output.NavigateToCreateDrink)
 
+    override fun onDeleteClick(id: Long) =
+        output(CreateTrackComponent.Output.OpenConfirmDialog(id))
+
     init {
         store.labels.onEach { event ->
             when (event) {

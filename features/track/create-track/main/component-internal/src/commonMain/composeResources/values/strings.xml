@@ -16,4 +16,5 @@
     <string name="cd_event">Event</string>
     <string name="cd_price">Price</string>
     <string name="cd_calculator">Calculator</string>
+    <string name="cd_delete">Delete drink</string>
 </resources>

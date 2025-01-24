@@ -13,6 +13,7 @@ internal class DrinkLocalMapper : Mapper<Drink, DbDrink> {
         id = from.id,
         name = from.name,
         icon = from.icon,
-        photo = from.photo
+        photo = from.photo,
+        createdAt = from.createdAt
     )
 }

@@ -14,4 +14,7 @@ interface DrinkDao : BaseDao<DbDrink> {
 
     @Query("SELECT * FROM DbDrink")
     fun getAll(): Flow<List<DbDrink>>
+
+    @Query("DELETE FROM DbDrink WHERE id=:id")
+    fun deleteDrinkById(id: Long)
 }

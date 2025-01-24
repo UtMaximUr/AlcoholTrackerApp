@@ -13,4 +13,5 @@ dependencies {
     commonMainImplementation(projects.features.track.datePicker.main.componentApi)
     commonMainImplementation(projects.features.settings.currencyModal.componentApi)
     commonMainImplementation(projects.features.drink.createDrink.navigation.componentApi)
+    commonMainImplementation(projects.features.confirmDialog.main.componentApi)
 }

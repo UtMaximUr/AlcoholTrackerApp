@@ -92,6 +92,7 @@ internal fun CreateTrackScreen(
                         currency = state.currency,
                         onCalculatorClick = component::openCalculatorDialog,
                         onCurrencyClick = component::openCurrencyDialog,
+                        onDeleteClick = component::onDeleteClick
                     )
                 }
                 item {

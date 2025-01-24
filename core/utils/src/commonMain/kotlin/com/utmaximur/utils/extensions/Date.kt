@@ -22,6 +22,7 @@ private val dateFormat_DD_MM_YYYY = LocalDate.Format {
 }
 
 val instantNow = Clock.System.now()
+val localDateTimeNow =  instantNow.toLocalDateTime(TimeZone.UTC)
 
 fun String?.parseToLong(): Long? {
     this?.ifEmpty { return null }

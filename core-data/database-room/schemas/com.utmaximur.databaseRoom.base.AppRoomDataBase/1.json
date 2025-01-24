@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "a09f8ceda78aafb5d403a6cf75a7b3ba",
+    "identityHash": "a23cf56af9470aec12f8780743d8e622",
     "entities": [
       {
         "tableName": "DbDrink",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `icon` TEXT NOT NULL, `photo` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `icon` TEXT NOT NULL, `photo` TEXT NOT NULL, `createdAt` TEXT)",
         "fields": [
           {
             "fieldPath": "id",
@@ -31,6 +31,11 @@
             "columnName": "photo",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "createdAt",
+            "affinity": "TEXT"
           }
         ],
         "primaryKey": {
@@ -42,7 +47,7 @@
       },
       {
         "tableName": "DbTrack",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `quantity` INTEGER NOT NULL, `degree` REAL NOT NULL, `volume` REAL NOT NULL, `event` TEXT NOT NULL, `price` REAL NOT NULL, `date` INTEGER NOT NULL, `drink_id` INTEGER NOT NULL, `drink_name` TEXT NOT NULL, `drink_icon` TEXT NOT NULL, `drink_photo` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `quantity` INTEGER NOT NULL, `degree` REAL NOT NULL, `volume` REAL NOT NULL, `event` TEXT NOT NULL, `price` REAL NOT NULL, `date` INTEGER NOT NULL, `drink_id` INTEGER NOT NULL, `drink_name` TEXT NOT NULL, `drink_icon` TEXT NOT NULL, `drink_photo` TEXT NOT NULL, `drink_createdAt` TEXT)",
         "fields": [
           {
             "fieldPath": "id",
@@ -109,6 +114,11 @@
             "columnName": "drink_photo",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "drink.createdAt",
+            "columnName": "drink_createdAt",
+            "affinity": "TEXT"
           }
         ],
         "primaryKey": {
@@ -145,7 +155,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a09f8ceda78aafb5d403a6cf75a7b3ba')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a23cf56af9470aec12f8780743d8e622')"
     ]
   }
 }
