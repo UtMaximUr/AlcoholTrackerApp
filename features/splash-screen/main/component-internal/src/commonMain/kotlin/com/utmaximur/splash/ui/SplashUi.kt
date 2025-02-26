@@ -14,6 +14,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -25,7 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
 import com.utmaximur.splash.SplashScreenComponent
 import com.utmaximur.splash.ui.wave.WaveView
-import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.resources.getString
 import splashScreen.resources.Res
 import splashScreen.resources.app_name
 
@@ -34,11 +35,9 @@ import splashScreen.resources.app_name
 internal fun SplashScreen(
     component: SplashScreenComponent
 ) {
-    var visibleState by remember { mutableStateOf(false) }
-    val appName = if (visibleState) stringResource(Res.string.app_name) else String()
-
+    var appName by remember { mutableStateOf(String()) }
     LaunchedEffect(Unit) {
-        visibleState = !visibleState
+        appName = getString(Res.string.app_name)
     }
 
     Scaffold(
@@ -61,8 +60,8 @@ internal fun SplashScreen(
                         .height(IntrinsicSize.Max)
                         .animateContentSize(
                             animationSpec = tween(
-                                delayMillis = 500,
-                                durationMillis = 700,
+                                delayMillis = delayMillis,
+                                durationMillis = durationMillis,
                                 easing = LinearOutSlowInEasing
                             ),
                             finishedListener = { _, _ ->
@@ -71,10 +70,14 @@ internal fun SplashScreen(
                         ),
                     text = appName,
                     style = MaterialTheme.typography.headlineLarge,
-                    fontSize = 32.sp,
+                    fontSize = appNameFontSize.sp,
                     color = MaterialTheme.colorScheme.tertiary
                 )
             }
         }
     }
 }
+
+private const val delayMillis = 500
+private const val durationMillis = 700
+private const val appNameFontSize = 32

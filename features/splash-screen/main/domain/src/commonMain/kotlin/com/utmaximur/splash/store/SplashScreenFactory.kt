@@ -40,6 +40,5 @@ internal class SplashScreenFactory(
                     is Intent.ReadyToLoad -> readyToLoadFlow.update { true }
                 }
             }
-        },
-        reducer = { State }
+        }
     )

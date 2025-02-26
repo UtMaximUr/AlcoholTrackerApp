@@ -21,7 +21,7 @@ fun provideApplicationInfo(flavor: Flavor, packageManager: PackageManager, conte
         packageName = context.packageName,
         debugBuild = (applicationInfo.flags and android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE) != 0,
         flavor = flavor,
-        versionName = packageInfo.versionName,
+        versionName = packageInfo.versionName.orEmpty(),
         versionCode = @Suppress("DEPRECATION") packageInfo.versionCode
     )
 }
