@@ -10,16 +10,13 @@ import actions.resources.ic_delete
 import actions.resources.ic_gallery
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.utmaximur.actions.ActionsImageComponent
+import com.utmaximur.design.modal.ModalBottomSheetApp
 import com.utmaximur.media.FilePickerFileType
 import com.utmaximur.media.FilePickerSelectionMode
 import com.utmaximur.media.rememberCameraManager
@@ -28,7 +25,6 @@ import com.utmaximur.permission.PermissionType
 import com.utmaximur.permission.state.rememberPermissionState
 import org.jetbrains.compose.resources.stringResource
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun ActionsSelectBottomSheet(
     component: ActionsImageComponent
@@ -48,12 +44,8 @@ internal fun ActionsSelectBottomSheet(
         filePicker.launch()
     }
 
-    ModalBottomSheet(
-        onDismissRequest = component::dismiss,
-        containerColor = MaterialTheme.colorScheme.primaryContainer,
-        contentColor = MaterialTheme.colorScheme.primary,
-        sheetState = rememberModalBottomSheetState(true),
-        shape = RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp)
+    ModalBottomSheetApp(
+        onDismissRequest = component::dismiss
     ) {
         Column {
             Text(
