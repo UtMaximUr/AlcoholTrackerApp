@@ -1,8 +1,10 @@
 package com.utmaximur.detailTrack.interactor
 
 import com.utmaximur.domain.Interactor
+import com.utmaximur.domain.ZERO_VALUE_L
 import com.utmaximur.domain.ZERO_VALUE_STRING
 import com.utmaximur.domain.detailTrack.DetailTrackRepository
+import com.utmaximur.domain.models.Place
 import com.utmaximur.domain.models.Track
 import com.utmaximur.domain.models.TrackData
 import com.utmaximur.utils.extensions.parseToLongNotNull
@@ -21,6 +23,10 @@ internal class UpdateTrack(
     override suspend fun doWork(params: Params) {
         withContext(Dispatchers.IO) {
             repository.updateTrack(params.toTrack())
+            params.trackData.place.ifUpdated { place ->
+                val updatedPlace = place.copy(trackId = params.trackId)
+                repository.updatePlace(updatedPlace)
+            }
         }
     }
 
@@ -34,6 +40,12 @@ internal class UpdateTrack(
         price = trackData.price.ifEmpty { ZERO_VALUE_STRING }.toFloat(),
         date = trackData.date.parseToLongNotNull()
     )
+
+    private inline fun Place.ifUpdated(block: (Place) -> Unit) {
+        if (this.trackId == ZERO_VALUE_L) {
+            block(this)
+        }
+    }
 
     data class Params(val trackId: Long, val trackData: TrackData)
 }

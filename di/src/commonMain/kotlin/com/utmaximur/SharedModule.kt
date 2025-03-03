@@ -44,6 +44,7 @@ import org.koin.core.annotation.Single
 import com.utmaximur.data.base_remote.RemoteModule
 import com.utmaximur.data.geocoder.GeocoderDataModule
 import com.utmaximur.data.map.MapDataModule
+import com.utmaximur.data.places.PlaceManagerModule
 import com.utmaximur.databaseRoom.RoomDataBaseModule
 import com.utmaximur.message.MessageDataModule
 import com.utmaximur.settings.SettingsNavigationComponentModule
@@ -77,6 +78,7 @@ import com.utmaximur.tracksModal.TracksModalMainComponentModule
         MessageDataModule::class,
         DrinkManagerModule::class,
         TrackManagerModule::class,
+        PlaceManagerModule::class,
         CalendarNavigationComponentModule::class,
         CalendarComponentModule::class,
         CalendarDataModule::class,

@@ -1,5 +1,6 @@
 package com.utmaximur.domain.detailTrack
 
+import com.utmaximur.domain.models.Place
 import com.utmaximur.domain.models.Track
 import kotlinx.coroutines.flow.Flow
 
@@ -12,4 +13,6 @@ interface DetailTrackRepository {
     suspend fun updateTrack(track: Track)
 
     suspend fun deleteTrack(id: Long)
+
+    suspend fun updatePlace(place: Place)
 }

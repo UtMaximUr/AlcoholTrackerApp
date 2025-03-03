@@ -55,6 +55,8 @@ includeCoreData("local:drink-manager:api")
 includeCoreData("local:drink-manager:internal")
 includeCoreData("local:track-manager:api")
 includeCoreData("local:track-manager:internal")
+includeCoreData("local:place-manager:api")
+includeCoreData("local:place-manager:internal")
 includeCoreData("models")
 
 includeCoreFeature("base")
