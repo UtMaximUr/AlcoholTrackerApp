@@ -1,4 +1,4 @@
-package com.utmaximur.calendar.ui.day
+package com.utmaximur.design.ui
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -17,31 +17,35 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import calendar.resources.Res
-import calendar.resources.calendar_count_drink
-import calendar.resources.currency
-import calendar.resources.degree
-import calendar.resources.volume
+import design.resources.calendar_count_drink
+import design.resources.currency
+import design.resources.degree
+import design.resources.volume
 import coil3.compose.AsyncImage
-import com.utmaximur.domain.models.Track
+import design.resources.Res
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun TrackItem(
-    track: Track,
+    drinkName: String,
+    drinkPhoto: String,
     currency: String,
-    onItemClick: (Long) -> Unit
+    quantity: Int,
+    volume: Float,
+    degree: Float,
+    totalPrice: Float,
+    onItemClick: () -> Unit
 ) {
     Box(
-        modifier = Modifier.clickable { onItemClick(track.id) },
+        modifier = Modifier.clickable(onClick = onItemClick),
         contentAlignment = Alignment.BottomStart
     ) {
         AsyncImage(
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(2 / 0.75f),
-            model = track.drink.photo,
-            contentDescription = track.drink.name,
+            model = drinkPhoto,
+            contentDescription = drinkName,
             contentScale = ContentScale.Crop
         )
         Column(
@@ -51,8 +55,8 @@ fun TrackItem(
             TextField(
                 text = stringResource(
                     Res.string.calendar_count_drink,
-                    track.drink.name,
-                    track.quantity
+                    drinkName,
+                    quantity
                 ),
                 style = MaterialTheme.typography.headlineLarge,
                 color = MaterialTheme.colorScheme.tertiary
@@ -60,12 +64,12 @@ fun TrackItem(
             Row(
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                TextField(text = stringResource(Res.string.volume, track.volume))
-                TextField(text = stringResource(Res.string.degree, track.degree))
+                TextField(text = stringResource(Res.string.volume, volume))
+                TextField(text = stringResource(Res.string.degree, degree))
                 TextField(
                     text = stringResource(
                         Res.string.currency,
-                        track.totalPrice,
+                        totalPrice,
                         currency
                     )
                 )

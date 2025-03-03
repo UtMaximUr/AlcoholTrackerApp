@@ -3,7 +3,12 @@
     <string name="without_value">Without value></string>
     <string name="add_today">Today</string>
     <string name="add_date">Select date</string>
+    <string name="volume">Volume %1$s</string>
+    <string name="degree">Degree %1$s</string>
+    <string name="currency">%1$s %2$s</string>
+    <string name="calendar_count_drink" translatable="false">%1$s x %2$s</string>
 
     <string name="cd_menu">Open menu</string>
+    <string name="cd_add_action">Add</string>
     <string name="cd_back">Back</string>
 </resources>

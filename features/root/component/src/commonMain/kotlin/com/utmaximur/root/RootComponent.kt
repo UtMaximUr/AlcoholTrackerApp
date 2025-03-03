@@ -15,6 +15,8 @@ interface RootComponent {
 
     fun onCalendarScreenClicked()
 
+    fun onMapScreenClicked()
+
     fun onStatisticScreenClicked()
 
     fun onSettingsScreenClicked()

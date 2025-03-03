@@ -28,13 +28,12 @@ fun InnerShadowTextFieldWithMenu(
     modifier: Modifier = Modifier,
     paddingValues: PaddingValues = PaddingValues(),
     title: String? = null,
+    textValue: Any? = null,
     options: List<String>?,
     placeholderText: String = title.orEmpty(),
     leadingIcon: @Composable (() -> Unit)? = null,
     supportingText: @Composable (() -> Unit)? = null,
-    onFocusChanged: (String) -> Unit = {},
     onValueChange: (String) -> Unit = {},
-    showShimmer: Boolean = false,
     enabled: Boolean = true,
     singleLine: Boolean = true,
     isError: Boolean = false,
@@ -56,9 +55,11 @@ fun InnerShadowTextFieldWithMenu(
             singleLine = singleLine,
             isError = isError,
             title = title,
+            textValue = textValue,
             readOnly = true,
             minLines = minLines,
-            trailingIcon = { ExposedDropdownMenu(expanded) }
+            trailingIcon = { ExposedDropdownMenu(expanded) },
+            onValueChange = onValueChange
         )
         ExposedDropdownMenu(
             expanded = expanded,

@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import calendar.resources.Res
 import calendar.resources.calendar_empty
+import com.utmaximur.design.ui.TrackItem
 import com.utmaximur.domain.models.Track
 import org.jetbrains.compose.resources.stringResource
 
@@ -24,9 +25,14 @@ internal fun DayContent(
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         items(tracks) { track ->
             TrackItem(
-                track = track,
+                drinkName = track.drink.name,
+                drinkPhoto = track.drink.photo,
                 currency = currency,
-                onItemClick = onItemClick
+                quantity = track.quantity,
+                volume = track.volume,
+                degree = track.degree,
+                totalPrice = track.totalPrice,
+                onItemClick = { onItemClick(track.id)}
             )
         }
     }

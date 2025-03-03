@@ -22,6 +22,8 @@ object ParamValues {
     const val CREATE_TRACK_SCREEN = "create_track_screen"
     const val DETAIL_TRACK_SCREEN = "detail_track_screen"
     const val CALENDAR_SCREEN = "calendar_screen"
+    const val MAP_SCREEN = "map_screen"
+    const val TRACKS_MODAL_SCREEN = "tracks_modal_screen"
     const val STATISTIC_SCREEN = "statistic_screen"
     const val SETTINGS_SCREEN = "settings_screen"
     const val CONFIRM_DIALOG = "confirm_dialog"

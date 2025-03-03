@@ -22,6 +22,26 @@ import androidx.compose.ui.unit.dp
 import com.utmaximur.design.extensions.clearTags
 import com.utmaximur.design.extensions.innerShadow
 
+/**
+ * Компонент текстового поля с внутренней тенью, поддерживающий различные кастомизации.
+ *
+ * @param modifier Модификатор для настройки внешнего вида и поведения текстового поля.
+ * @param paddingValues Отступы вокруг текстового поля. По умолчанию используются пустые отступы.
+ * @param title Заголовок текстового поля. Если не указан, используется [placeholderText].
+ * @param textValue Текущее значение текстового поля. Может быть любого типа, но будет преобразовано в строку.
+ * @param placeholderText Текст-заполнитель, который отображается, когда поле пустое.
+ * @param leadingIcon Иконка, отображаемая в начале текстового поля.
+ * @param trailingIcon Иконка, отображаемая в конце текстового поля.
+ * @param supportingText Дополнительный текст, отображаемый под полем (например, подсказка или сообщение об ошибке).
+ * @param onValueChange Колбэк, вызываемый при изменении текста в поле.
+ * @param enabled Включено ли текстовое поле. Если `false`, поле становится недоступным для редактирования.
+ * @param readOnly Только для чтения. Если `true`, поле нельзя редактировать, но оно остается доступным для взаимодействия.
+ * @param singleLine Ограничивает текст одной строкой. Если `true`, текст не переносится на новую строку.
+ * @param isError Указывает, находится ли поле в состоянии ошибки. Если `true`, поле подсвечивается как ошибочное.
+ * @param minLines Минимальное количество строк, которое может занимать текстовое поле.
+ * @param keyboardType Тип клавиатуры, который будет отображаться при фокусе на поле (например, текст, число, email).
+ *
+ */
 @Composable
 fun InnerShadowTextField(
     modifier: Modifier = Modifier,
@@ -41,9 +61,7 @@ fun InnerShadowTextField(
     keyboardType: KeyboardType = KeyboardType.Text
 ) {
 
-    val message = remember(key1 = textValue) {
-        mutableStateOf(textValue?.toString().orEmpty())
-    }.also { onValueChange(it.value) }
+    val message = remember(key1 = textValue) { mutableStateOf(textValue?.toString().orEmpty()) }
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
 
@@ -60,7 +78,10 @@ fun InnerShadowTextField(
                 .fillMaxWidth(),
             enabled = enabled,
             value = message.value.clearTags(),
-            onValueChange = { text -> message.value = text },
+            onValueChange = { text ->
+                message.value = text
+                onValueChange(text)
+            },
             readOnly = readOnly,
             keyboardOptions = KeyboardOptions(
                 imeAction = ImeAction.Done,

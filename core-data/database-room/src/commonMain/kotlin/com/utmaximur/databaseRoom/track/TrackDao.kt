@@ -13,6 +13,9 @@ interface TrackDao : BaseDao<DbTrack> {
     @Query("SELECT * FROM DbTrack WHERE id=:id")
     fun getTrackById(id: Long): Flow<DbTrack>
 
+    @Query("SELECT * FROM DbTrack WHERE id IN (:ids)")
+    fun getTracksByIds(ids: List<Long>): Flow<List<DbTrack>>
+
     @Query("SELECT * FROM DbTrack")
     fun getAll(): Flow<List<DbTrack>>
 

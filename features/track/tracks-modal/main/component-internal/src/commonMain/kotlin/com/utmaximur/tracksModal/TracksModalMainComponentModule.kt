@@ -1,0 +1,8 @@
+package com.utmaximur.tracksModal
+
+import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Module
+
+@Module(includes = [TracksModalDomainMainModule::class])
+@ComponentScan
+class TracksModalMainComponentModule

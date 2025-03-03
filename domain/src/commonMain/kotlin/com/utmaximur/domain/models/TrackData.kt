@@ -9,7 +9,8 @@ data class TrackData(
     val event: String,
     val price: String,
     val date: String,
-    val drink: Drink
+    val drink: Drink,
+    val place: Place
 ) {
 
     class Builder {
@@ -20,6 +21,7 @@ data class TrackData(
         private var price: String = EMPTY_STRING
         private var date: String = EMPTY_STRING
         private var drink: Drink = Drink.EMPTY
+        private var place: Place = Place.EMPTY
 
         fun setQuantity(param: String) = apply { quantity = param }
         fun setVolume(param: String) = apply { volume = param }
@@ -28,6 +30,7 @@ data class TrackData(
         fun setPrice(param: String) = apply { price = param }
         fun setDate(param: String) = apply { date = param }
         fun setDrink(param: Drink) = apply { drink = param }
+        fun setPlace(param: Place) = apply { place = param }
 
         fun build() = TrackData(
             drink = drink,
@@ -36,7 +39,8 @@ data class TrackData(
             degree = degree,
             event = event,
             price = price,
-            date = date
+            date = date,
+            place = place
         )
     }
 }

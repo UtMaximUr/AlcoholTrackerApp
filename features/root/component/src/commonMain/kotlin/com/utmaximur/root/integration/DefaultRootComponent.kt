@@ -12,6 +12,7 @@ import com.arkivanov.mvikotlin.extensions.coroutines.stateFlow
 import com.utmaximur.calendar.CalendarNavigationComponent
 import com.utmaximur.core.decompose.ComposeComponent
 import com.utmaximur.domain.root.store.RootStore
+import com.utmaximur.map.MapNavigationComponent
 import com.utmaximur.root.RootComponent
 import com.utmaximur.settings.SettingsNavigationComponent
 import com.utmaximur.splash.SplashScreenComponent
@@ -83,6 +84,13 @@ internal class DefaultRootComponent(
                 )
             }
 
+            Configuration.MapScreen -> get<MapNavigationComponent> {
+                parameterArrayOf(
+                    componentContext,
+                    handleBottomBarState
+                )
+            }
+
             Configuration.StatisticScreen -> get<StatisticComponent> {
                 parameterArrayOf(componentContext)
             }
@@ -99,6 +107,9 @@ internal class DefaultRootComponent(
 
     override fun onCalendarScreenClicked() =
         navigation.replaceAll(Configuration.CalendarScreen)
+
+    override fun onMapScreenClicked() =
+        navigation.replaceAll(Configuration.MapScreen)
 
     override fun onStatisticScreenClicked() =
         navigation.replaceAll(Configuration.StatisticScreen)

@@ -20,6 +20,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import com.utmaximur.calendar.CalendarNavigationComponent
+import com.utmaximur.map.MapNavigationComponent
 import com.utmaximur.root.RootComponent
 import com.utmaximur.settings.SettingsNavigationComponent
 import com.utmaximur.statistic.StatisticComponent
@@ -30,8 +31,10 @@ import org.jetbrains.compose.resources.stringResource
 import root.resources.Res
 import root.resources.calendar
 import root.resources.ic_calendar_24dp
+import root.resources.ic_map_24dp
 import root.resources.ic_settings_24dp
 import root.resources.ic_statistic_24dp
+import root.resources.map
 import root.resources.settings
 import root.resources.statistic
 
@@ -49,6 +52,12 @@ internal fun BottomBar(
             title = Res.string.calendar,
             selected = activeChild is CalendarNavigationComponent,
             onClick = component::onCalendarScreenClicked
+        )
+        NavigationItem(
+            icon = Res.drawable.ic_map_24dp,
+            title = Res.string.map,
+            selected = activeChild is MapNavigationComponent,
+            onClick = component::onMapScreenClicked
         )
         NavigationItem(
             icon = Res.drawable.ic_statistic_24dp,
