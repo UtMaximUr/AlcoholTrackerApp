@@ -98,9 +98,7 @@ internal class MapController(private val context: Context) : RelativeLayout(cont
         addedPlaceMarks.forEachIndexed { index, placeMark ->
             val placeMarkItem = places[index]
             placeMark.userData = placeMarkItem
-            getClusterItemIcon().let {
-                placeMark.setView(it)
-            }
+            getClusterItemIcon().let(placeMark::setView)
         }
 
         clusterizedCollection.clusterPlacemarks(clusterRadius, minZoom)
@@ -131,7 +129,7 @@ internal class MapController(private val context: Context) : RelativeLayout(cont
      */
     private fun getClusterItemIcon(): ViewProvider {
         val imageView = ImageView(context)
-        imageView.setImageResource(R.drawable.marker_default_icon)
+        imageView.setImageResource(R.drawable.ic_local_bar_white_24dp)
         return ViewProvider(imageView)
     }
 
