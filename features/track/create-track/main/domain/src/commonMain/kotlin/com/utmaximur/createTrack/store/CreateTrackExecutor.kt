@@ -29,6 +29,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.StringResource
@@ -63,7 +64,8 @@ internal class CreateTrackExecutor(
             .launchIn(scope)
         dateProviderData.dataFlow
             .filterNotNull()
-            .onEach { date -> dispatch(Message.UpdateSelectedDate(date.toDateUi())) }
+            .map { date -> date.toDateUi() }
+            .onEach { dateUi -> handleSelectedDate(dateUi) }
             .launchIn(scope)
         repository.drinksStream
             .asRequest()
@@ -86,7 +88,7 @@ internal class CreateTrackExecutor(
             }
 
             is Intent.SelectedDate -> publish(Label.DatePickerEvent(intent.date.parseToLong()))
-            Intent.Today -> dispatch(Message.UpdateSelectedDate(getTodayDateUi()))
+            Intent.Today -> handleSelectedDate(getTodayDateUi())
         }
     }
 
@@ -100,6 +102,11 @@ internal class CreateTrackExecutor(
                 showMessage(Res.string.successful_save)
                 publish(Label.CloseEvent)
             }
+    }
+
+    private fun handleSelectedDate(dateUi: String) {
+        dispatch(Message.UpdateSelectedDate(dateUi))
+        publish(Label.DateEvent(dateUi))
     }
 
     private suspend fun showMessage(res: StringResource, args: String? = null) {

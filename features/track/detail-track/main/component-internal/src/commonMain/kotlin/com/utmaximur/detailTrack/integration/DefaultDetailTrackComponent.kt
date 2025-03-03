@@ -3,14 +3,17 @@ package com.utmaximur.detailTrack.integration
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.ComponentContext
+import com.arkivanov.decompose.childContext
 import com.arkivanov.essenty.lifecycle.coroutines.coroutineScope
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.arkivanov.mvikotlin.extensions.coroutines.stateFlow
-import com.utmaximur.detailTrack.ui.DetailTrackScreen
 import com.utmaximur.detailTrack.DetailTrackComponent
 import com.utmaximur.detailTrack.store.DetailTrackStore
+import com.utmaximur.detailTrack.ui.DetailTrackScreen
+import com.utmaximur.domain.models.Place
 import com.utmaximur.domain.models.TrackData
+import com.utmaximur.geocoder.GeocoderComponent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
@@ -19,6 +22,7 @@ import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
+import org.koin.core.parameter.parameterArrayOf
 import org.koin.core.parameter.parametersOf
 
 @Factory
@@ -33,9 +37,23 @@ internal class DefaultDetailTrackComponent(
     private val store: DetailTrackStore = instanceKeeper.getStore {
         get { parametersOf(trackId) }
     }
+    private val trackBuilder = TrackData.Builder()
+    private val placeOutputHandler: (place: Place) -> Unit = {
+        trackBuilder.setPlace(it)
+    }
 
     @OptIn(ExperimentalCoroutinesApi::class)
     override val model: StateFlow<DetailTrackStore.State> = store.stateFlow
+
+    override val geocoderComponent: GeocoderComponent by lazy {
+        get {
+            parameterArrayOf(
+                childContext(GeocoderComponent::class.simpleName.orEmpty()),
+                placeOutputHandler,
+                trackId
+            )
+        }
+    }
 
     override fun navigateBack() = output(DetailTrackComponent.Output.NavigateBack)
 
@@ -59,6 +77,9 @@ internal class DefaultDetailTrackComponent(
                 is DetailTrackStore.Label.DatePickerEvent ->
                     output(DetailTrackComponent.Output.OpenDatePickerDialog(event.date))
 
+                is DetailTrackStore.Label.DateEvent ->
+                    trackBuilder.setDate(event.date)
+
                 is DetailTrackStore.Label.CloseEvent ->
                     output(DetailTrackComponent.Output.NavigateBack)
             }
@@ -66,6 +87,6 @@ internal class DefaultDetailTrackComponent(
     }
 
     @Composable
-    override fun Render(modifier: Modifier) = DetailTrackScreen(this)
+    override fun Render(modifier: Modifier) = DetailTrackScreen(this, trackBuilder)
 
 }

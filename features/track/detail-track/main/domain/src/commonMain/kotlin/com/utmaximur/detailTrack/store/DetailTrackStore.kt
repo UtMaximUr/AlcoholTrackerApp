@@ -40,6 +40,8 @@ interface DetailTrackStore : Store<Intent, State, Label> {
 
         data class DatePickerEvent(val date: Long?) : Label
 
+        data class DateEvent(val date: String): Label
+
         data object CloseEvent : Label
     }
 }

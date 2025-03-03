@@ -5,7 +5,8 @@ data class ApplicationInfo(
     val debugBuild: Boolean,
     val flavor: Flavor,
     val versionName: String,
-    val versionCode: Int
+    val versionCode: Int,
+    val language: String
 )
 
 enum class Flavor {

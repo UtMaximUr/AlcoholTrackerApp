@@ -13,6 +13,7 @@ dependencies {
     commonMainImplementation(projects.features.track.detailTrack.main.componentApi)
     commonMainImplementation(projects.features.track.detailTrack.main.domain)
     commonMainImplementation(projects.features.track.detailTrack.domain)
+    commonMainImplementation(projects.features.track.geocoder.main.componentApi)
 }
 
 compose.resources {

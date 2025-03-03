@@ -42,13 +42,20 @@ import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 import com.utmaximur.data.base_remote.RemoteModule
+import com.utmaximur.data.geocoder.GeocoderDataModule
+import com.utmaximur.data.map.MapDataModule
 import com.utmaximur.databaseRoom.RoomDataBaseModule
 import com.utmaximur.message.MessageDataModule
 import com.utmaximur.settings.SettingsNavigationComponentModule
 import com.utmaximur.tracker.TrackerAnalyticsModule
 import com.utmaximur.data.splash_screen.SplashScreenDataModule
+import com.utmaximur.data.tracksModal.TracksModalDataModule
 import com.utmaximur.detailTrack.DetailTrackNavigationComponentModule
+import com.utmaximur.geocoder.GeocoderMainComponentModule
+import com.utmaximur.map.MapComponentModule
+import com.utmaximur.map.MapNavigationComponentModule
 import com.utmaximur.splash.SplashScreenComponentModule
+import com.utmaximur.tracksModal.TracksModalMainComponentModule
 
 @Module(
     includes = [
@@ -73,6 +80,9 @@ import com.utmaximur.splash.SplashScreenComponentModule
         CalendarNavigationComponentModule::class,
         CalendarComponentModule::class,
         CalendarDataModule::class,
+        MapNavigationComponentModule::class,
+        MapComponentModule::class,
+        MapDataModule::class,
         CreateTrackNavigationComponentModule::class,
         CreateTrackMainComponentModule::class,
         CreateTrackDataModule::class,
@@ -100,7 +110,11 @@ import com.utmaximur.splash.SplashScreenComponentModule
         ImageActionsDataModule::class,
         CreateDrinkDataModule::class,
         CreateDrinkNavigationComponentModule::class,
-        CreateDrinkMainComponentModule::class
+        CreateDrinkMainComponentModule::class,
+        GeocoderDataModule::class,
+        GeocoderMainComponentModule::class,
+        TracksModalDataModule::class,
+        TracksModalMainComponentModule::class
     ]
 )
 

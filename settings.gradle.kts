@@ -136,6 +136,12 @@ includeFeature("track:date-picker:main:domain")
 includeFeature("track:date-picker:main:component-api")
 includeFeature("track:date-picker:main:component-internal")
 
+includeFeature("track:geocoder:data")
+includeFeature("track:geocoder:domain")
+includeFeature("track:geocoder:main:domain")
+includeFeature("track:geocoder:main:component-api")
+includeFeature("track:geocoder:main:component-internal")
+
 includeFeature("settings:navigation:component-api")
 includeFeature("settings:navigation:component-internal")
 includeFeature("settings:data")

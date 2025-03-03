@@ -9,6 +9,7 @@ import org.koin.core.annotation.Single
 import com.utmaximur.databaseRoom.base.AppRoomDataBase
 import com.utmaximur.databaseRoom.drink.DrinkDao
 import com.utmaximur.databaseRoom.icon.IconDao
+import com.utmaximur.databaseRoom.place.PlaceDao
 import com.utmaximur.databaseRoom.track.TrackDao
 
 @Module
@@ -29,4 +30,7 @@ class RoomDataBaseModule {
 
     @Factory
     fun provideIconDao(dataBase: AppRoomDataBase): IconDao = dataBase.iconDao()
+
+    @Factory
+    fun providePlaceDao(dataBase: AppRoomDataBase): PlaceDao = dataBase.placeDao()
 }

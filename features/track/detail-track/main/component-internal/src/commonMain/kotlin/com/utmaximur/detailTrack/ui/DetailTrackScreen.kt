@@ -9,10 +9,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.utmaximur.design.RequestWidget
@@ -34,13 +32,10 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun DetailTrackScreen(
-    component: DetailTrackComponent
+    component: DetailTrackComponent,
+    trackBuilder: TrackData.Builder
 ) {
     val state by component.model.collectAsState()
-    val trackBuilder = remember { TrackData.Builder() }
-    LaunchedEffect(state.selectedDate) {
-        trackBuilder.setDate(state.selectedDate)
-    }
 
     Scaffold(
         topBar = {
@@ -83,6 +78,9 @@ internal fun DetailTrackScreen(
                             onCalculatorClick = component::openCalculatorDialog
                         )
                     }
+                }
+                item {
+                    component.geocoderComponent.Render(Modifier)
                 }
                 item {
                     DateButtonGroup(

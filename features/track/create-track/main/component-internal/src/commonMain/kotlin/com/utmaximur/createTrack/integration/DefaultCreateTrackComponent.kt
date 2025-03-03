@@ -3,6 +3,7 @@ package com.utmaximur.createTrack.integration
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.ComponentContext
+import com.arkivanov.decompose.childContext
 import com.arkivanov.essenty.lifecycle.coroutines.coroutineScope
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.labels
@@ -10,7 +11,9 @@ import com.arkivanov.mvikotlin.extensions.coroutines.stateFlow
 import com.utmaximur.createTrack.CreateTrackComponent
 import com.utmaximur.createTrack.store.CreateTrackStore
 import com.utmaximur.createTrack.ui.CreateTrackScreen
+import com.utmaximur.domain.models.Place
 import com.utmaximur.domain.models.TrackData
+import com.utmaximur.geocoder.GeocoderComponent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
@@ -19,6 +22,7 @@ import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
+import org.koin.core.parameter.parameterArrayOf
 
 @Factory
 internal class DefaultCreateTrackComponent(
@@ -29,9 +33,22 @@ internal class DefaultCreateTrackComponent(
     KoinComponent {
 
     private val store: CreateTrackStore = instanceKeeper.getStore(::get)
+    private val trackBuilder = TrackData.Builder()
+    private val placeOutputHandler: (place: Place) -> Unit = {
+        trackBuilder.setPlace(it)
+    }
 
     @OptIn(ExperimentalCoroutinesApi::class)
     override val model: StateFlow<CreateTrackStore.State> = store.stateFlow
+
+    override val geocoderComponent: GeocoderComponent by lazy {
+        get {
+            parameterArrayOf(
+                childContext(GeocoderComponent::class.simpleName.orEmpty()),
+                placeOutputHandler
+            )
+        }
+    }
 
     override fun navigateBack() = output(CreateTrackComponent.Output.NavigateBack)
 
@@ -61,6 +78,9 @@ internal class DefaultCreateTrackComponent(
                 is CreateTrackStore.Label.DatePickerEvent ->
                     output(CreateTrackComponent.Output.OpenDatePickerDialog(event.date))
 
+                is CreateTrackStore.Label.DateEvent ->
+                    trackBuilder.setDate(event.date)
+
                 is CreateTrackStore.Label.CloseEvent ->
                     output(CreateTrackComponent.Output.NavigateBack)
             }
@@ -68,6 +88,6 @@ internal class DefaultCreateTrackComponent(
     }
 
     @Composable
-    override fun Render(modifier: Modifier) = CreateTrackScreen(this)
+    override fun Render(modifier: Modifier) = CreateTrackScreen(this, trackBuilder)
 
 }

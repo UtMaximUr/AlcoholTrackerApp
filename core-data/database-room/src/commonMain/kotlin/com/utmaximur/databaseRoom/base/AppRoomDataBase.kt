@@ -13,6 +13,8 @@ import com.utmaximur.databaseRoom.drink.DbDrink
 import com.utmaximur.databaseRoom.drink.DrinkDao
 import com.utmaximur.databaseRoom.icon.DbIcon
 import com.utmaximur.databaseRoom.icon.IconDao
+import com.utmaximur.databaseRoom.place.DbPlace
+import com.utmaximur.databaseRoom.place.PlaceDao
 import com.utmaximur.databaseRoom.track.DbTrack
 import com.utmaximur.databaseRoom.track.TrackDao
 
@@ -28,7 +30,8 @@ expect object AppDatabaseConstructor : RoomDatabaseConstructor<AppRoomDataBase> 
     entities = [
         DbDrink::class,
         DbTrack::class,
-        DbIcon::class
+        DbIcon::class,
+        DbPlace::class
     ],
     views = [
 
@@ -49,5 +52,6 @@ abstract class AppRoomDataBase : RoomDatabase() {
     abstract fun drinkDao(): DrinkDao
     abstract fun trackDao(): TrackDao
     abstract fun iconDao(): IconDao
+    abstract fun placeDao(): PlaceDao
 
 }

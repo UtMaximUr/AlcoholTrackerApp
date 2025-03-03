@@ -19,6 +19,7 @@ import com.utmaximur.utils.extensions.parseToLong
 import com.utmaximur.utils.extensions.toDateUi
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
@@ -48,7 +49,8 @@ internal class DetailTrackExecutor(
             .launchIn(scope)
         dateProviderData.dataFlow
             .filterNotNull()
-            .onEach { date -> dispatch(Message.UpdateSelectedDate(date.toDateUi())) }
+            .map { date -> date.toDateUi() }
+            .onEach { dateUi -> handleSelectedDate(dateUi) }
             .launchIn(scope)
         confirmDialogProviderData.dataFlow
             .filterNotNull()
@@ -59,7 +61,7 @@ internal class DetailTrackExecutor(
             .launchIn(scope)
         repository.observeTrackById(trackId)
             .onEach { track ->
-                dispatch(Message.UpdateSelectedDate(track.date.toDateUi()))
+                handleSelectedDate(track.date.toDateUi())
                 dispatch(Message.UpdatePrice(track.price))
             }
             .asRequest()
@@ -80,5 +82,10 @@ internal class DetailTrackExecutor(
             is Intent.SelectedDate -> publish(Label.DatePickerEvent(intent.date.parseToLong()))
             Intent.Today -> dispatch(Message.UpdateSelectedDate(getTodayDateUi()))
         }
+    }
+
+    private fun handleSelectedDate(dateUi: String) {
+        dispatch(Message.UpdateSelectedDate(dateUi))
+        publish(Label.DateEvent(dateUi))
     }
 }

@@ -2,10 +2,11 @@ package com.utmaximur.app.base
 
 import android.content.Context
 import android.content.pm.PackageManager
-import org.koin.core.annotation.Factory
-import org.koin.core.annotation.Single
 import com.utmaximur.app.base.app.ApplicationInfo
 import com.utmaximur.app.base.app.Flavor
+import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Single
+import java.util.Locale
 
 @Factory
 fun provideFlavor() = Flavor.Qa
@@ -17,11 +18,13 @@ fun providePackageManager(context: Context): PackageManager = context.packageMan
 fun provideApplicationInfo(flavor: Flavor, packageManager: PackageManager, context: Context): ApplicationInfo {
     val applicationInfo = packageManager.getApplicationInfo(context.packageName, 0)
     val packageInfo = packageManager.getPackageInfo(context.packageName, 0)
+    val locale = Locale.getDefault()
     return ApplicationInfo(
         packageName = context.packageName,
         debugBuild = (applicationInfo.flags and android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE) != 0,
         flavor = flavor,
         versionName = packageInfo.versionName.orEmpty(),
-        versionCode = @Suppress("DEPRECATION") packageInfo.versionCode
+        versionCode = @Suppress("DEPRECATION") packageInfo.versionCode,
+        language = locale.toString()
     )
 }

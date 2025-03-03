@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="place">Place</string>
+    <string name="place_hint">Enter a name and select an institution from the list</string>
+
+</resources>
