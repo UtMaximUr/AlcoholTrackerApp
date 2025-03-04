@@ -1,7 +1,5 @@
 package com.utmaximur.day.ui
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -31,7 +29,7 @@ internal fun DrinksDayItem(dayStatistic: DayStatistic) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(12.dp),
-        style = MaterialTheme.typography.titleMedium,
+        style = MaterialTheme.typography.headlineLarge,
         textAlign = TextAlign.Center,
         text = stringResource(
             Res.allStringResources.getStringResource(

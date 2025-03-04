@@ -3,7 +3,6 @@ package com.utmaximur.day.ui
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -13,18 +12,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.utmaximur.day.StatisticDayComponent
 import com.utmaximur.design.RequestWidget
+import com.utmaximur.design.ui.Carousel
 import com.utmaximur.design.ui.DotsIndicator
 import com.utmaximur.design.ui.ElevatedCardApp
 
 
 @Composable
 internal fun StatisticDayScreen(
-    component: StatisticDayComponent
+    component: StatisticDayComponent,
+    modifier: Modifier
 ) {
     val state by component.model.collectAsState()
 
     ElevatedCardApp(
-        modifier = Modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth()
     ) {
         RequestWidget(
             state = state.requestUi,
@@ -32,13 +33,15 @@ internal fun StatisticDayScreen(
         ) { statistics ->
             val pagerState = rememberPagerState(pageCount = { statistics.size })
             Column(modifier = Modifier.padding(12.dp)) {
-                HorizontalPager(
-                    state = pagerState
-                ) { index ->
-                    DrinksDayItem(
-                        dayStatistic = statistics[index]
-                    )
-                }
+                Carousel(
+                    horizontalPagerModifier = Modifier.weight(1f),
+                    pagerState = pagerState,
+                    carouselContent = { index ->
+                        DrinksDayItem(
+                            dayStatistic = statistics[index]
+                        )
+                    }
+                )
                 DotsIndicator(
                     modifier = Modifier.align(Alignment.CenterHorizontally),
                     totalDots = pagerState.pageCount,

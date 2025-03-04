@@ -28,6 +28,6 @@ internal class DefaultStatisticDayComponent(
     override val model: StateFlow<StatisticDayStore.State> = store.stateFlow
 
     @Composable
-    override fun Render(modifier: Modifier) = StatisticDayScreen(this)
+    override fun Render(modifier: Modifier) = StatisticDayScreen(this, modifier)
 
 }

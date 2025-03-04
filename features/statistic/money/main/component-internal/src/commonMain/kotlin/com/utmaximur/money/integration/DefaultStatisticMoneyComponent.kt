@@ -28,6 +28,6 @@ internal class DefaultStatisticMoneyComponent(
     override val model: StateFlow<StatisticMoneyStore.State> = store.stateFlow
 
     @Composable
-    override fun Render(modifier: Modifier) = StatisticMoneyScreen(this)
+    override fun Render(modifier: Modifier) = StatisticMoneyScreen(this, modifier)
 
 }

@@ -8,6 +8,7 @@ dependencies {
     commonMainImplementation(compose.components.resources)
     commonMainImplementation(libs.kotlinx.serialization.core)
 
+    commonMainImplementation(projects.core.design)
     commonMainImplementation(projects.features.statistic.money.main.componentApi)
     commonMainImplementation(projects.features.statistic.money.main.domain)
 }
