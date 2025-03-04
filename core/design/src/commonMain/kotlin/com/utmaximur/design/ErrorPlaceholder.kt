@@ -13,11 +13,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import design.resources.Res
+import design.resources.retry
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun ErrorPlaceholder(
     errorMessage: String,
-    errorTextButton: String = "Retry",
+    errorTextButton: String = stringResource(Res.string.retry),
     onRetryClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {

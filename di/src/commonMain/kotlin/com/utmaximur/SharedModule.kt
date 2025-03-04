@@ -55,6 +55,7 @@ import com.utmaximur.detailTrack.DetailTrackNavigationComponentModule
 import com.utmaximur.geocoder.GeocoderMainComponentModule
 import com.utmaximur.map.MapComponentModule
 import com.utmaximur.map.MapNavigationComponentModule
+import com.utmaximur.mappers.implementation.ProjectImplementationModule
 import com.utmaximur.splash.SplashScreenComponentModule
 import com.utmaximur.tracksModal.TracksModalMainComponentModule
 
@@ -70,6 +71,7 @@ import com.utmaximur.tracksModal.TracksModalMainComponentModule
         RemoteModule::class,
         TrackerAnalyticsModule::class,
         FirebaseTrackerAnalyticsModule::class,
+        ProjectImplementationModule::class,
         /*
         feature modules
          */

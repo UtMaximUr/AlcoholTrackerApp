@@ -14,7 +14,6 @@ import com.utmaximur.drink.model.DrinkStatistic
 import com.utmaximur.drink.store.StatisticDrinkStore.State
 import com.utmaximur.mappers.implementation.RequestMappers
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 import org.koin.core.annotation.Factory
 
@@ -49,7 +48,7 @@ internal class StatisticDrinkStoreFactory(
                 is Message.UpdateState -> {
                     val newRequestUi = RequestMapper.builder(message.request)
                         .mapData(RequestMappers.data.emptyListToNull())
-                        .mapLoading(RequestMappers.loading.default())
+                        .mapLoading(RequestMappers.loading.simple())
                         .build()
                     copy(requestUi = newRequestUi)
                 }

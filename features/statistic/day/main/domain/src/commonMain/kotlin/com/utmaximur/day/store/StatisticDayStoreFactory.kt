@@ -44,7 +44,7 @@ internal class StatisticDayStoreFactory(
                 is Message.UpdateState -> {
                     val newRequestUi = RequestMapper.builder(message.request)
                         .mapData(RequestMappers.data.emptyListToNull())
-                        .mapLoading(RequestMappers.loading.default())
+                        .mapLoading(RequestMappers.loading.simple())
                         .build()
                     copy(requestUi = newRequestUi)
                 }

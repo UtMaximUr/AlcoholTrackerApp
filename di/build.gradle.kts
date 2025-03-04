@@ -31,6 +31,7 @@ kotlin {
             implementation(projects.core.logging.internal)
             implementation(projects.core.analytics.tracker.internal)
             implementation(projects.core.analytics.firebase)
+            implementation(projects.core.mviMappers.internal)
 
             implementation(projects.coreData.settingsManager.internal)
             implementation(projects.coreData.databaseRoom)

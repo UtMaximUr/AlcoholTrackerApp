@@ -11,7 +11,7 @@ internal object CalendarReducer : Reducer<State, Message> {
         is Message.UpdateState -> {
             val newRequestUi = RequestMapper.builder(msg.request)
                 .mapData(RequestMappers.data.emptyMapToNull())
-                .mapLoading(RequestMappers.loading.default())
+                .mapLoading(RequestMappers.loading.simple())
                 .build()
             copy(requestTracksUi = newRequestUi)
         }

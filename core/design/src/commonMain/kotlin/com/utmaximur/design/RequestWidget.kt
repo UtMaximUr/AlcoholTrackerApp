@@ -13,6 +13,13 @@ fun <T : Any> RequestWidget(
     onRetryClick: () -> Unit = {},
     shimmerContentTemplate: @Composable () -> Unit = { },
     emptyContentTemplate: @Composable () -> Unit = { },
+    errorContentTemplate: @Composable (Throwable) -> Unit = { error ->
+        ErrorPlaceholder(
+            errorMessage = "$error",
+            onRetryClick = onRetryClick,
+            modifier = modifier
+        )
+    },
     content: @Composable (data: T) -> Unit
 ) {
     val (data, _, error) = state
@@ -25,10 +32,6 @@ fun <T : Any> RequestWidget(
 
         state.load is LoadStateType.Empty -> emptyContentTemplate()
 
-        error != null -> ErrorPlaceholder(
-            errorMessage = "$error",
-            onRetryClick = onRetryClick,
-            modifier = modifier
-        )
+        error != null -> errorContentTemplate(error)
     }
 }

@@ -15,12 +15,15 @@ internal class RealNetworkHandler(
     override fun handleError(e: Throwable) {
         logger.e { "[Network errors  -> ${e.stackTraceToString()}]" }
         when {
-            e.isNetworkConnectionError() -> messageService.showMessage(
-                MessageContainer.SnackbarMessage(
-                    userMessage = "TODO()",
-                    duration = MessageContainer.SnackbarMessage.SnackbarDuration.Long
-                )
-            )
+            e.isNetworkConnectionError() -> sendMessage("TODO()")
+            else -> sendMessage(e.toString())
         }
     }
+
+    private fun sendMessage(message: String?) = messageService.showMessage(
+        MessageContainer.SnackbarMessage(
+            userMessage = message.orEmpty(),
+            duration = MessageContainer.SnackbarMessage.SnackbarDuration.Long
+        )
+    )
 }

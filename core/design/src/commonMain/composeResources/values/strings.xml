@@ -7,6 +7,7 @@
     <string name="degree">Degree %1$s</string>
     <string name="currency">%1$s %2$s</string>
     <string name="calendar_count_drink" translatable="false">%1$s x %2$s</string>
+    <string name="retry">Retry</string>
 
     <string name="cd_menu">Open menu</string>
     <string name="cd_add_action">Add</string>
