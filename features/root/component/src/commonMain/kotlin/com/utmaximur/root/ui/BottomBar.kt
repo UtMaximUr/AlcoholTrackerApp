@@ -40,7 +40,8 @@ import root.resources.statistic
 
 @Composable
 internal fun BottomBar(
-    component: RootComponent
+    component: RootComponent,
+    isMapEnabled: Boolean
 ) {
 
     val stack by component.stack.subscribeAsState()
@@ -57,6 +58,7 @@ internal fun BottomBar(
             icon = Res.drawable.ic_map_24dp,
             title = Res.string.map,
             selected = activeChild is MapNavigationComponent,
+            enabled = isMapEnabled,
             onClick = component::onMapScreenClicked
         )
         NavigationItem(
@@ -81,6 +83,7 @@ fun RowScope.NavigationItem(
     title: StringResource,
     iconTint: Color? = null,
     selected: Boolean = false,
+    enabled: Boolean = true,
     onClick: () -> Unit
 ) {
     CompositionLocalProvider(LocalRippleConfiguration provides null) {
@@ -102,6 +105,7 @@ fun RowScope.NavigationItem(
                 )
             },
             selected = selected,
+            enabled = enabled,
             onClick = onClick,
             colors = NavigationBarItemDefaults.colors(
                 unselectedIconColor = MaterialTheme.colorScheme.primary,

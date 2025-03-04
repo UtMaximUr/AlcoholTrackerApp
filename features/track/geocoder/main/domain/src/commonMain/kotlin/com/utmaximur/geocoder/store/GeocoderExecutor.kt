@@ -1,6 +1,8 @@
 package com.utmaximur.geocoder.store
 
 import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineExecutor
+import com.utmaximur.core.mvi_mapper.Request
+import com.utmaximur.core.mvi_mapper.asRequest
 import com.utmaximur.domain.EMPTY_STRING
 import com.utmaximur.domain.geocoder.GeocoderRepository
 import com.utmaximur.domain.geocoder.SearchQuery
@@ -22,8 +24,9 @@ import kotlinx.coroutines.flow.update
 
 internal sealed interface Message {
     data class UpdateQuery(val query: String) : Message
-    data class UpdatePlaces(val places: List<Place>) : Message
+    data class UpdatePlaces(val requestPlacesUi: Request<List<Place>>) : Message
     data class UpdateSearchStarted(val searchStarted: Boolean) : Message
+    data class UpdateMapState(val isMapEnabled: Boolean) : Message
 }
 
 internal class GeocoderExecutor(
@@ -34,6 +37,7 @@ internal class GeocoderExecutor(
     private val debounceValue = 1_000L
 
     init {
+        observeMapEnabledState()
         observeSearchQuery()
     }
 
@@ -53,6 +57,11 @@ internal class GeocoderExecutor(
         }
     }
 
+    private fun observeMapEnabledState() = geocoderRepository
+        .mapEnabledState
+        .onEach { enabled -> dispatch(Message.UpdateMapState(enabled)) }
+        .launchIn(scope)
+
     @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
     private fun observeSearchQuery() = searchQuery
         .debounce(debounceValue)
@@ -60,6 +69,7 @@ internal class GeocoderExecutor(
         .filter { it.isReadyToRequest }
         .onEach { dispatch(Message.UpdateSearchStarted(true)) }
         .flatMapLatest(geocoderRepository::searchStream)
-        .onEach { places -> dispatch(Message.UpdatePlaces(places = places)) }
+        .asRequest()
+        .onEach { places -> dispatch(Message.UpdatePlaces(places)) }
         .launchIn(scope)
 }

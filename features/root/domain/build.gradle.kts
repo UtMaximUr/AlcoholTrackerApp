@@ -14,4 +14,5 @@ dependencies {
     commonMainImplementation(libs.arkivanov.essenty.lifecycle)
 
     commonMainImplementation(projects.coreData.settingsManager.api)
+    commonMainImplementation(projects.core.base)
 }

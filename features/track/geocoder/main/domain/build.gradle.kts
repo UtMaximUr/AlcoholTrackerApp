@@ -14,6 +14,8 @@ dependencies {
     commonMainImplementation(libs.arkivanov.essenty.lifecycle)
 
     commonMainImplementation(projects.core.base)
+    commonMainImplementation(projects.core.utils)
+    commonMainImplementation(projects.core.mviMappers.internal)
     commonMainImplementation(projects.domain)
     commonMainImplementation(projects.features.track.geocoder.domain)
 }

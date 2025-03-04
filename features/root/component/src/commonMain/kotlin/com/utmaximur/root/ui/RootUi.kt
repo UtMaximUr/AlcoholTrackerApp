@@ -53,7 +53,12 @@ fun RootScreen(
                         BottomAppBar(
                             containerColor = MaterialTheme.colorScheme.primaryContainer,
                             contentPadding = PaddingValues(horizontal = 0.dp),
-                            content = { BottomBar(component = component) }
+                            content = {
+                                BottomBar(
+                                    component = component,
+                                    isMapEnabled = state.isMapEnabled
+                                )
+                            }
                         )
                     }
                 },

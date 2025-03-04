@@ -13,11 +13,13 @@ interface RootStore : Store<Intent, State, Label> {
 
     data class State(
         val isDarkTheme: Boolean,
-        val isBottomBarVisible: Boolean
+        val isBottomBarVisible: Boolean,
+        val isMapEnabled: Boolean
     ) {
         constructor(): this(
             isDarkTheme = false,
-            isBottomBarVisible = true
+            isBottomBarVisible = true,
+            isMapEnabled = true
         )
     }
 

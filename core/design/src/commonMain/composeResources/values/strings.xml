@@ -10,5 +10,6 @@
 
     <string name="cd_menu">Open menu</string>
     <string name="cd_add_action">Add</string>
+    <string name="cd_lock">Functional blocked</string>
     <string name="cd_back">Back</string>
 </resources>

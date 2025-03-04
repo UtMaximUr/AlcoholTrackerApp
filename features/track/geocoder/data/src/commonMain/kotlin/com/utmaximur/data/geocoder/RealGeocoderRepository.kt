@@ -1,6 +1,7 @@
 package com.utmaximur.data.geocoder
 
 import com.utmaximur.app.base.app.ApplicationInfo
+import com.utmaximur.app.base.app.Flavor
 import com.utmaximur.data.geocoder.mapper.MapperHolder
 import com.utmaximur.data.geocoder.network.GeocoderApi
 import com.utmaximur.databaseRoom.place.PlaceDao
@@ -23,6 +24,10 @@ internal class RealGeocoderRepository(
     private val mapper: MapperHolder,
     private val placeDao: PlaceDao
 ) : GeocoderRepository {
+
+    override val mapEnabledState: Flow<Boolean> = flow {
+        emit(applicationInfo.flavor != Flavor.WithoutMap)
+    }
 
     override fun searchStream(query: SearchQuery): Flow<List<Place>> = flow {
         val searchResult = geocoderApi.getPlace(
