@@ -2,6 +2,7 @@ package com.utmaximur.geocoder.store
 
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
+import com.utmaximur.core.mvi_mapper.ErrorHandler
 import com.utmaximur.domain.geocoder.GeocoderRepository
 import com.utmaximur.geocoder.store.GeocoderStore.Intent
 import com.utmaximur.geocoder.store.GeocoderStore.Label
@@ -14,7 +15,8 @@ import org.koin.core.annotation.InjectedParam
 internal class GeocoderStoreFactory(
     storeFactory: StoreFactory,
     @InjectedParam trackId: Long?,
-    geocoderRepository: GeocoderRepository
+    geocoderRepository: GeocoderRepository,
+    errorHandler: ErrorHandler
 ) : GeocoderStore,
     Store<Intent, State, Label> by storeFactory.create(
         name = GeocoderStore::class.simpleName,
@@ -25,5 +27,5 @@ internal class GeocoderStoreFactory(
                 geocoderRepository = geocoderRepository
             )
         },
-        reducer = GeocoderReducer
+        reducer = GeocoderReducer(errorHandler)
     )

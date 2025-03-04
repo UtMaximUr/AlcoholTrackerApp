@@ -1,15 +1,18 @@
 package com.utmaximur.geocoder.store
 
 import com.arkivanov.mvikotlin.core.store.Reducer
+import com.utmaximur.core.mvi_mapper.ErrorHandler
 import com.utmaximur.core.mvi_mapper.RequestMapper
 import com.utmaximur.mappers.implementation.RequestMappers
 
-internal object GeocoderReducer : Reducer<GeocoderStore.State, Message> {
+internal class GeocoderReducer(
+    private val errorHandler: ErrorHandler
+) : Reducer<GeocoderStore.State, Message> {
     override fun GeocoderStore.State.reduce(msg: Message) = when (msg) {
         is Message.UpdatePlaces -> {
             val newRequestUi = RequestMapper.builder(msg.requestPlacesUi)
                 .mapData(RequestMappers.data.single())
-                .mapLoading(RequestMappers.loading.default())
+                .handleError(RequestMappers.error.forced(errorHandler))
                 .build()
             copy(requestPlacesUi = newRequestUi, searchStarted = false)
         }

@@ -32,11 +32,12 @@ internal fun SearchTextField(
     paddingValues: PaddingValues = PaddingValues(),
     title: String,
     textValue: Any?,
-    foundValues: List<Place>,
     searchIndicatorActive: Boolean,
+    enabled: Boolean = true,
     placeholderText: String = title,
     onValueChange: (String) -> Unit,
-    onValueSelect: (Place) -> Unit
+    onValueSelect: (Place) -> Unit,
+    foundContent: @Composable (@Composable (List<Place>) -> Unit) -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -60,6 +61,7 @@ internal fun SearchTextField(
             title = title,
             textValue = textValue,
             onValueChange = onValueChange,
+            enabled = enabled,
             trailingIcon = {
                 AnimatedVisibility(
                     visible = searchIndicatorActive,
@@ -74,21 +76,24 @@ internal fun SearchTextField(
                 }
             }
         )
-        ExposedDropdownMenu(
-            expanded = expanded && foundValues.isNotEmpty(),
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-            onDismissRequest = { expanded = !expanded }
-        ) {
-            foundValues.forEach { value ->
-                DropdownMenuItem(
-                    text = {
-                        Text(
-                            text = value.title,
-                            style = MaterialTheme.typography.bodyMedium
-                        )
-                    },
-                    onClick = { omItemClick(value) }
-                )
+        foundContent { content ->
+            ExposedDropdownMenu(
+                expanded = expanded,
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                shape = MaterialTheme.shapes.large,
+                onDismissRequest = { expanded = !expanded }
+            ) {
+                content.forEach { value ->
+                    DropdownMenuItem(
+                        text = {
+                            Text(
+                                text = value.title,
+                                style = MaterialTheme.typography.bodyMedium
+                            )
+                        },
+                        onClick = { omItemClick(value) }
+                    )
+                }
             }
         }
     }

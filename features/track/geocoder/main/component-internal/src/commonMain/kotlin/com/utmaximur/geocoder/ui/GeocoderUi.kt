@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.unit.dp
+import com.utmaximur.design.RequestWidget
 import com.utmaximur.design.ui.ElevatedCardApp
 import com.utmaximur.geocoder.GeocoderComponent
 import geocoder.resources.Res
@@ -26,10 +27,17 @@ internal fun GeocoderUi(
             title = stringResource(Res.string.place),
             placeholderText = stringResource(Res.string.place_hint),
             textValue = state.query,
-            foundValues = state.places,
+            enabled = state.isMapEnabled,
             searchIndicatorActive = state.searchStarted,
             onValueChange = component::handleQuery,
-            onValueSelect = component::handleSelectedPlace
+            onValueSelect = component::handleSelectedPlace,
+            foundContent = {
+                RequestWidget(
+                    state = state.requestPlacesUi,
+                    content = { places -> it.invoke(places) },
+                    errorContentTemplate = { }
+                )
+            }
         )
     }
 }
