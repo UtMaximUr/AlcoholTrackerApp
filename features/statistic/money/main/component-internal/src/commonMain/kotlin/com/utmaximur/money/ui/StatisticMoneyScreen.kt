@@ -42,9 +42,9 @@ internal fun StatisticMoneyScreen(
             ) {
                 Text(
                     modifier = Modifier
-                        .padding(horizontal = 12.dp)
+                        .padding(top = 12.dp)
                         .align(Alignment.CenterHorizontally),
-                    style = MaterialTheme.typography.titleMedium,
+                    style = MaterialTheme.typography.titleLarge,
                     text = stringResource(Res.string.statistic_spent)
                 )
                 Carousel(
