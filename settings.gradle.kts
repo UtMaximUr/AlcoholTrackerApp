@@ -1,6 +1,6 @@
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 pluginManagement {
-    includeBuild("gradle/build-logic")
+    includeBuild("build-logic")
     repositories {
         google {
             mavenContent {
@@ -75,6 +75,7 @@ includeCoreFeature("mvi-mappers:internal")
 includeCoreFeature("permission")
 includeCoreFeature("media:compose")
 includeCoreFeature("media:core")
+includeCoreFeature("internet-connection")
 
 includeFeature("message:data")
 includeFeature("message:domain")
