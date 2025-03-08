@@ -12,6 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.utmaximur.day.StatisticDayComponent
 import com.utmaximur.design.RequestWidget
+import com.utmaximur.design.extensions.endFade
+import com.utmaximur.design.extensions.fadingEdge
+import com.utmaximur.design.extensions.startFade
 import com.utmaximur.design.ui.Carousel
 import com.utmaximur.design.ui.DotsIndicator
 import com.utmaximur.design.ui.ElevatedCardApp
@@ -32,7 +35,11 @@ internal fun StatisticDayScreen(
             shimmerContentTemplate = { DrinksDayShimmer() }
         ) { statistics ->
             val pagerState = rememberPagerState(pageCount = { statistics.size })
-            Column(modifier = Modifier.padding(12.dp)) {
+            Column(modifier = Modifier
+                .padding(vertical = 12.dp)
+                .fadingEdge(startFade)
+                .fadingEdge(endFade)
+            ) {
                 Carousel(
                     horizontalPagerModifier = Modifier.weight(1f),
                     pagerState = pagerState,

@@ -13,6 +13,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.utmaximur.design.RequestWidget
+import com.utmaximur.design.extensions.endFade
+import com.utmaximur.design.extensions.fadingEdge
+import com.utmaximur.design.extensions.startFade
 import com.utmaximur.design.ui.Carousel
 import com.utmaximur.design.ui.DotsIndicator
 import com.utmaximur.design.ui.ElevatedCardApp
@@ -38,7 +41,10 @@ internal fun StatisticMoneyScreen(
         ) { statistics ->
             val pagerState = rememberPagerState(pageCount = { statistics.size })
             Column(
-                modifier = Modifier.padding(12.dp)
+                modifier = Modifier
+                    .padding(vertical = 12.dp)
+                    .fadingEdge(startFade)
+                    .fadingEdge(endFade)
             ) {
                 Text(
                     modifier = Modifier
