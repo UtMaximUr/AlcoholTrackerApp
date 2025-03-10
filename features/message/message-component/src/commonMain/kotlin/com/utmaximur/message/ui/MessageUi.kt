@@ -7,7 +7,7 @@ import com.utmaximur.message.store.MessageStore
 
 @Composable
 fun MessageUi(
-    component: MessageComponent
+    component: MessageComponent,
 ) {
     CompositionLocalProvider(LocalLifecycleOwner provides component) {
         component.labels.collectSideEffectWithLifecycle { sideEffect ->
@@ -15,7 +15,7 @@ fun MessageUi(
                 is MessageStore.Label.SnackbarMessage -> {
                     SnackbarMessageHandler(
                         snackbarMessage = sideEffect,
-                        onDismiss = {}
+                        onDismiss = {},
                     )
                 }
             }

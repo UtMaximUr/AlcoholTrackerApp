@@ -9,11 +9,10 @@ import androidx.compose.ui.Modifier
 import com.utmaximur.design.button.AddFloatingActionButton
 import com.utmaximur.map.MapComponent
 
-
 @Composable
 internal fun MapScreen(
     modifier: Modifier,
-    component: MapComponent
+    component: MapComponent,
 ) {
     val state by component.model.collectAsState()
 
@@ -23,12 +22,12 @@ internal fun MapScreen(
             MapContent(
                 places = state.places,
                 isDarkTheme = state.isDarkTheme,
-                mapObjectClick = component::onMapObjectsClick
+                mapObjectClick = component::onMapObjectsClick,
             )
         },
         floatingActionButton = {
             AddFloatingActionButton(onClick = component::onCreateTrackClick)
         },
-        floatingActionButtonPosition = FabPosition.EndOverlay
+        floatingActionButtonPosition = FabPosition.EndOverlay,
     )
 }

@@ -8,12 +8,12 @@ sealed interface MessageContainer {
         val userMessage: String,
         val actionLabelMessage: String? = null,
         val withDismissAction: Boolean = false,
-        val duration: SnackbarDuration = SnackbarDuration.Short
+        val duration: SnackbarDuration = SnackbarDuration.Short,
     ) : MessageContainer {
         enum class SnackbarDuration {
             Short,
             Long,
-            Indefinite
+            Indefinite,
         }
     }
 }

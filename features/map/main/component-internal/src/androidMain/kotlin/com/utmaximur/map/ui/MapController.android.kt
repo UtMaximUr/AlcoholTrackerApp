@@ -1,6 +1,5 @@
 package com.utmaximur.map.ui
 
-
 import android.content.Context
 import android.view.Gravity
 import android.widget.ImageView
@@ -23,7 +22,6 @@ import features.map.main.componentinternal.R
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 
-
 /**
  * Кастомное вью карты.
  *
@@ -33,8 +31,12 @@ import org.koin.core.component.get
  * @param context
  */
 
-internal class MapController(private val context: Context) : RelativeLayout(context),
-    ClusterListener, ClusterTapListener, MapObjectTapListener, KoinComponent {
+internal class MapController(private val context: Context) :
+    RelativeLayout(context),
+    ClusterListener,
+    ClusterTapListener,
+    MapObjectTapListener,
+    KoinComponent {
 
     private val mapKit: MapKit = get()
     private val mapView: MapView = MapView(context)
@@ -89,7 +91,7 @@ internal class MapController(private val context: Context) : RelativeLayout(cont
     private fun addMarkersOnMap(
         places: List<Place>,
         clusterRadius: Double = DEFAULT_CLUSTER_RADIUS,
-        minZoom: Int = DEFAULT_MIN_ZOOM
+        minZoom: Int = DEFAULT_MIN_ZOOM,
     ) {
         val clusterizedCollection = map.mapObjects.addClusterizedPlacemarkCollection(this)
         val addedPlaceMarks = clusterizedCollection

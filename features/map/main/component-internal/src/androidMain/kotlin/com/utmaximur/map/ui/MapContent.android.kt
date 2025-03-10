@@ -10,7 +10,7 @@ import com.utmaximur.domain.models.Place
 internal actual fun MapContent(
     places: List<Place>,
     isDarkTheme: Boolean,
-    mapObjectClick: (List<Long>) -> Unit
+    mapObjectClick: (List<Long>) -> Unit,
 ) {
     AndroidView(
         modifier = Modifier.fillMaxSize(),
@@ -26,6 +26,6 @@ internal actual fun MapContent(
         },
         onRelease = { mapView ->
             mapView.onStop()
-        }
+        },
     )
 }

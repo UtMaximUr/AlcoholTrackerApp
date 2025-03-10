@@ -8,10 +8,10 @@ internal fun MessageContainer.SnackbarMessage.toSnackbarMessageUi() = MessageSto
     userMessage = userMessage,
     actionLabelMessage = actionLabelMessage,
     duration = duration.toUiDuration(),
-    withDismissAction = withDismissAction
+    withDismissAction = withDismissAction,
 )
 internal fun MessageContainer.SimpleMessage.toSnackbarMessageUi() = MessageStore.Label.SnackbarMessage(
-    userMessage = text
+    userMessage = text,
 )
 private fun MessageContainer.SnackbarMessage.SnackbarDuration.toUiDuration() =
     when (this) {

@@ -7,5 +7,5 @@ import com.utmaximur.domain.models.Place
 internal expect fun MapContent(
     places: List<Place>,
     isDarkTheme: Boolean,
-    mapObjectClick: (List<Long>) -> Unit
+    mapObjectClick: (List<Long>) -> Unit,
 )

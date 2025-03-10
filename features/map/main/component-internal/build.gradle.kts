@@ -38,7 +38,7 @@ buildkonfig {
         buildConfigField(
             FieldSpec.Type.STRING,
             propertyKey,
-            apiKey
+            apiKey,
         )
     }
 }

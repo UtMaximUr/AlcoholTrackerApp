@@ -20,7 +20,7 @@ val LocalLifecycleOwner = compositionLocalOf<LifecycleOwner> {
 @Composable
 fun <T> Flow<T>.collectSideEffectWithLifecycle(
     lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
-    onEach: @Composable (T) -> Unit
+    onEach: @Composable (T) -> Unit,
 ) {
     var sideEffect by remember { mutableStateOf<T?>(null) }
 

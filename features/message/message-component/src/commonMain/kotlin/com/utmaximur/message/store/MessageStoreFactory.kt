@@ -17,7 +17,7 @@ import org.koin.core.annotation.Factory
 @Factory
 internal class MessageStoreFactory(
     storeFactory: StoreFactory,
-    messageService: MessageService
+    messageService: MessageService,
 ) : MessageStore,
     Store<Intent, State, Label> by storeFactory.create(
         name = MessageStore::class.simpleName,
@@ -32,5 +32,5 @@ internal class MessageStoreFactory(
                     }
                 }.launchIn(this)
             }
-        }
+        },
     )

@@ -9,9 +9,9 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.staticCompositionLocalOf
+import com.utmaximur.message.store.MessageStore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import com.utmaximur.message.store.MessageStore
 
 internal val LocalSnackbarController = staticCompositionLocalOf<SnackbarController> {
     error("You didn't providing a SnackbarController")
@@ -25,7 +25,7 @@ interface SnackbarController {
         actionLabel: String? = null,
         withDismissAction: Boolean = false,
         duration: SnackbarDuration = SnackbarDuration.Short,
-        onSnackbarResult: (SnackbarResult) -> Unit = {}
+        onSnackbarResult: (SnackbarResult) -> Unit = {},
     )
 }
 
@@ -33,14 +33,14 @@ interface SnackbarController {
 fun ProvideSnackbarController(
     snackbarHostState: SnackbarHostState,
     coroutineScope: CoroutineScope,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     CompositionLocalProvider(
         LocalSnackbarController provides SnackbarController(
             snackbarHostState,
-            coroutineScope
+            coroutineScope,
         ),
-        content = content
+        content = content,
     )
 }
 
@@ -48,7 +48,7 @@ fun ProvideSnackbarController(
 internal fun SnackbarMessageHandler(
     snackbarMessage: MessageStore.Label.SnackbarMessage,
     onDismiss: () -> Unit,
-    snackbarController: SnackbarController = LocalSnackbarController.current
+    snackbarController: SnackbarController = LocalSnackbarController.current,
 ) {
     val userMessage = snackbarMessage.userMessage
     val actionLabel = snackbarMessage.actionLabelMessage
@@ -58,7 +58,7 @@ internal fun SnackbarMessageHandler(
             actionLabel = actionLabel,
             withDismissAction = snackbarMessage.withDismissAction,
             duration = snackbarMessage.duration,
-            onSnackbarResult = snackbarMessage.onSnackbarResult
+            onSnackbarResult = snackbarMessage.onSnackbarResult,
         )
         onDismiss()
     }
@@ -67,30 +67,30 @@ internal fun SnackbarMessageHandler(
 @Stable
 private fun SnackbarController(
     snackbarHostState: SnackbarHostState,
-    coroutineScope: CoroutineScope
+    coroutineScope: CoroutineScope,
 ): SnackbarController = SnackbarControllerImpl(
     snackbarHostState,
-    coroutineScope
+    coroutineScope,
 )
 
 @Immutable
 private class SnackbarControllerImpl(
     private val snackbarHostState: SnackbarHostState,
-    private val coroutineScope: CoroutineScope
+    private val coroutineScope: CoroutineScope,
 ) : SnackbarController {
     override fun showMessage(
         message: String,
         actionLabel: String?,
         withDismissAction: Boolean,
         duration: SnackbarDuration,
-        onSnackbarResult: (SnackbarResult) -> Unit
+        onSnackbarResult: (SnackbarResult) -> Unit,
     ) {
         coroutineScope.launch {
             snackbarHostState.showSnackbar(
                 message,
                 actionLabel,
                 withDismissAction,
-                duration
+                duration,
             ).let(onSnackbarResult)
         }
     }

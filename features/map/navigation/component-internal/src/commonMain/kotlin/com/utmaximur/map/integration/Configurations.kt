@@ -13,7 +13,6 @@ sealed interface Configuration {
 
     @Serializable
     data class DetailTrackScreen(val trackId: Long) : Configuration
-
 }
 
 @Serializable

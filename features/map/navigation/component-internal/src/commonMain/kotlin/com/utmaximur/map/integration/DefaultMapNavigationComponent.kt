@@ -35,7 +35,7 @@ import org.koin.core.parameter.parametersOf
 @Factory
 internal class DefaultMapNavigationComponent(
     @InjectedParam componentContext: ComponentContext,
-    @InjectedParam handleBottomBarState: (Boolean) -> Unit
+    @InjectedParam handleBottomBarState: (Boolean) -> Unit,
 ) : MapNavigationComponent,
     ComponentContext by componentContext,
     KoinComponent {
@@ -47,7 +47,7 @@ internal class DefaultMapNavigationComponent(
         serializer = Configuration.serializer(),
         initialConfiguration = Configuration.MapScreen,
         handleBackButton = true,
-        childFactory = ::createChild
+        childFactory = ::createChild,
     )
 
     init {
@@ -55,7 +55,8 @@ internal class DefaultMapNavigationComponent(
             val configuration = childStack.active.configuration
             val isVisibleBottomBar = when (configuration) {
                 is Configuration.CreateTrackScreen,
-                is Configuration.DetailTrackScreen -> false
+                is Configuration.DetailTrackScreen,
+                -> false
 
                 else -> true
             }
@@ -65,20 +66,20 @@ internal class DefaultMapNavigationComponent(
 
     private fun createChild(
         configuration: Configuration,
-        componentContext: ComponentContext
+        componentContext: ComponentContext,
     ): ComposeComponent =
         when (configuration) {
             is Configuration.MapScreen -> get<MapComponent> {
                 parameterArrayOf(
                     componentContext,
-                    ::onCalendarOutput
+                    ::onCalendarOutput,
                 )
             }
 
             is Configuration.CreateTrackScreen -> get<CreateTrackNavigationComponent> {
                 parameterArrayOf(
                     componentContext,
-                    { navigation.pop() }
+                    { navigation.pop() },
                 )
             }
 
@@ -86,7 +87,7 @@ internal class DefaultMapNavigationComponent(
                 parameterArrayOf(
                     componentContext,
                     configuration.trackId,
-                    { navigation.pop() }
+                    { navigation.pop() },
                 )
             }
         }
@@ -97,28 +98,29 @@ internal class DefaultMapNavigationComponent(
         source = modalNavigation,
         serializer = ModalConfiguration.serializer(),
         handleBackButton = true,
-        childFactory = ::createModal
+        childFactory = ::createModal,
     )
 
     private fun createModal(
-        modalConfig: ModalConfiguration, componentContext: ComponentContext
+        modalConfig: ModalConfiguration,
+        componentContext: ComponentContext,
     ): ComposeDialogComponent = when (modalConfig) {
         is ModalConfiguration.TracksDialog -> get<TracksModalComponent> {
             parametersOf(
                 componentContext,
                 modalConfig.trackIds,
-                ::onTracksModalOutput
+                ::onTracksModalOutput,
             )
         }
     }
 
     private fun onCalendarOutput(output: MapComponent.Output): Unit = when (output) {
         MapComponent.Output.NavigateCreateTrack -> navigation.pushNew(
-            Configuration.CreateTrackScreen
+            Configuration.CreateTrackScreen,
         )
 
         is MapComponent.Output.OpenTracksDialog -> modalNavigation.activate(
-            ModalConfiguration.TracksDialog(output.trackIds)
+            ModalConfiguration.TracksDialog(output.trackIds),
         )
     }
 
@@ -133,7 +135,7 @@ internal class DefaultMapNavigationComponent(
     override fun Render(modifier: Modifier) {
         Children(
             stack = stack,
-            animation = stackAnimation(slide())
+            animation = stackAnimation(slide()),
         ) { child ->
             child.instance.Render(modifier)
         }

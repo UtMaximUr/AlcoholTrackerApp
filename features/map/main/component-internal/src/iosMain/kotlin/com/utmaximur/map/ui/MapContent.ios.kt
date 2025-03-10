@@ -8,8 +8,7 @@ import com.utmaximur.domain.models.Place
 internal actual fun MapContent(
     places: List<Place>,
     isDarkTheme: Boolean,
-    mapObjectClick: (List<Long>) -> Unit
+    mapObjectClick: (List<Long>) -> Unit,
 ) {
     val coroutineScope = rememberCoroutineScope()
-
 }
