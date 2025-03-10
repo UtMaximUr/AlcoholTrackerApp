@@ -34,7 +34,7 @@ import org.koin.core.parameter.parametersOf
 internal class DefaultDetailTrackNavigationComponent(
     @InjectedParam componentContext: ComponentContext,
     @InjectedParam private val trackId: Long,
-    @InjectedParam private val back: () -> Unit
+    @InjectedParam private val back: () -> Unit,
 ) : DetailTrackNavigationComponent,
     ComponentContext by componentContext,
     KoinComponent {
@@ -46,19 +46,19 @@ internal class DefaultDetailTrackNavigationComponent(
         serializer = Configuration.serializer(),
         initialConfiguration = Configuration.DetailTrackScreen,
         handleBackButton = true,
-        childFactory = ::createChild
+        childFactory = ::createChild,
     )
 
     private fun createChild(
         configuration: Configuration,
-        componentContext: ComponentContext
+        componentContext: ComponentContext,
     ): ComposeComponent =
         when (configuration) {
             is Configuration.DetailTrackScreen -> get<DetailTrackComponent> {
                 parameterArrayOf(
                     componentContext,
                     trackId,
-                    ::onDetailTrackOutput
+                    ::onDetailTrackOutput,
                 )
             }
         }
@@ -69,16 +69,17 @@ internal class DefaultDetailTrackNavigationComponent(
         source = modalNavigation,
         serializer = ModalConfiguration.serializer(),
         handleBackButton = true,
-        childFactory = ::createModal
+        childFactory = ::createModal,
     )
 
     private fun createModal(
-        modalConfig: ModalConfiguration, componentContext: ComponentContext
+        modalConfig: ModalConfiguration,
+        componentContext: ComponentContext,
     ): ComposeDialogComponent = when (modalConfig) {
         ModalConfiguration.CalculatorDialog -> get<CalculatorComponent> {
             parametersOf(
                 componentContext,
-                { modalNavigation.dismiss() }
+                { modalNavigation.dismiss() },
             )
         }
 
@@ -86,7 +87,7 @@ internal class DefaultDetailTrackNavigationComponent(
             parametersOf(
                 componentContext,
                 modalConfig.selectedDate,
-                { modalNavigation.dismiss() }
+                { modalNavigation.dismiss() },
             )
         }
 
@@ -94,7 +95,7 @@ internal class DefaultDetailTrackNavigationComponent(
             parametersOf(
                 componentContext,
                 modalConfig.trackId,
-                { modalNavigation.dismiss() }
+                { modalNavigation.dismiss() },
             )
         }
     }
@@ -102,15 +103,15 @@ internal class DefaultDetailTrackNavigationComponent(
     private fun onDetailTrackOutput(output: DetailTrackComponent.Output) = when (output) {
         DetailTrackComponent.Output.NavigateBack -> back()
         DetailTrackComponent.Output.OpenCalculatorDialog -> modalNavigation.activate(
-            ModalConfiguration.CalculatorDialog
+            ModalConfiguration.CalculatorDialog,
         )
 
         is DetailTrackComponent.Output.OpenDatePickerDialog -> modalNavigation.activate(
-            ModalConfiguration.DatePickerDialog(output.selectedDate)
+            ModalConfiguration.DatePickerDialog(output.selectedDate),
         )
 
         is DetailTrackComponent.Output.OpenConfirmDialog -> modalNavigation.activate(
-            ModalConfiguration.ConfirmDialog(output.trackId)
+            ModalConfiguration.ConfirmDialog(output.trackId),
         )
     }
 
@@ -118,7 +119,7 @@ internal class DefaultDetailTrackNavigationComponent(
     override fun Render(modifier: Modifier) {
         Children(
             stack = stack,
-            animation = stackAnimation(slide())
+            animation = stackAnimation(slide()),
         ) { child ->
             child.instance.Render(modifier)
         }

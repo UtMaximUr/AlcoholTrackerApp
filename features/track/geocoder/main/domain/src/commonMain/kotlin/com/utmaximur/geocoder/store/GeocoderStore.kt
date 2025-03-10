@@ -14,13 +14,13 @@ interface GeocoderStore : Store<Intent, State, Label> {
         val query: String,
         val requestPlacesUi: RequestUi<List<Place>>,
         val searchStarted: Boolean,
-        val isMapEnabled: Boolean
+        val isMapEnabled: Boolean,
     ) {
         constructor() : this(
             query = EMPTY_STRING,
             requestPlacesUi = RequestUi(),
             searchStarted = false,
-            isMapEnabled = true
+            isMapEnabled = true,
         )
     }
 

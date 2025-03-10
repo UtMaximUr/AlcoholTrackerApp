@@ -1,6 +1,5 @@
 package com.utmaximur.calculator.ui
 
-
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -10,27 +9,26 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.utmaximur.design.extensions.bounceClick
 
-
 @Composable
 internal fun CalculatorButton(
     modifier: Modifier = Modifier,
     title: String,
     containerColor: Color = MaterialTheme.colorScheme.background,
     textColor: Color = MaterialTheme.colorScheme.primary,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     TextButton(
         modifier = modifier.bounceClick(),
         shape = MaterialTheme.shapes.large,
         colors = ButtonDefaults.buttonColors(
-            containerColor = containerColor
+            containerColor = containerColor,
         ),
-        onClick = onClick
+        onClick = onClick,
     ) {
         Text(
             text = title.uppercase(),
             style = MaterialTheme.typography.bodyMedium,
-            color = textColor
+            color = textColor,
         )
     }
 }

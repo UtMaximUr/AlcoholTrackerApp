@@ -21,7 +21,7 @@ import org.koin.core.parameter.parametersOf
 internal class DefaultGeocoderComponent(
     @InjectedParam componentContext: ComponentContext,
     @InjectedParam private val placeOutputHandler: (place: Place) -> Unit,
-    @InjectedParam trackId: Long?
+    @InjectedParam trackId: Long?,
 ) : GeocoderComponent,
     ComponentContext by componentContext,
     KoinComponent {
@@ -43,5 +43,4 @@ internal class DefaultGeocoderComponent(
 
     @Composable
     override fun Render(modifier: Modifier) = GeocoderUi(this)
-
 }

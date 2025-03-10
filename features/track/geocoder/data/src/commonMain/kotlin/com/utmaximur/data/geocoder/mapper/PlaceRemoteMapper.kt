@@ -13,7 +13,7 @@ class PlaceRemoteMapper : Mapper<Feature, Place> {
         return Place(
             title = "${properties.name} ${properties.description}",
             longitude = coordinates.first(),
-            latitude = coordinates.last()
+            latitude = coordinates.last(),
         )
     }
 }

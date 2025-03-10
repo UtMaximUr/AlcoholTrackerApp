@@ -1,14 +1,14 @@
 package com.utmaximur.data.createTrack
 
+import com.utmaximur.databaseRoom.drink.DrinkDao
+import com.utmaximur.databaseRoom.place.PlaceDao
+import com.utmaximur.databaseRoom.track.TrackDao
 import com.utmaximur.domain.createTrack.CreateTrackRepository
+import com.utmaximur.domain.models.Place
 import com.utmaximur.domain.models.Track
 import com.utmaximur.settingsManager.CurrencySettingsManager
 import com.utmaximur.utils.extensions.mapList
 import org.koin.core.annotation.Factory
-import com.utmaximur.databaseRoom.drink.DrinkDao
-import com.utmaximur.databaseRoom.place.PlaceDao
-import com.utmaximur.databaseRoom.track.TrackDao
-import com.utmaximur.domain.models.Place
 
 @Factory
 internal class RealCreateTrackRepository(
@@ -16,7 +16,7 @@ internal class RealCreateTrackRepository(
     private val trackDao: TrackDao,
     private val drinkDao: DrinkDao,
     private val placeDao: PlaceDao,
-    private val mapperHolder: MapperHolder
+    private val mapperHolder: MapperHolder,
 ) : CreateTrackRepository {
 
     override val currencyStream = currencySettingsManager.currencyStateStream

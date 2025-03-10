@@ -27,31 +27,30 @@ import com.utmaximur.design.ui.ElevatedCardApp
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
-
 @Composable
 internal fun CalculatorScreen(
-    component: CalculatorComponent
+    component: CalculatorComponent,
 ) {
     val state by component.model.collectAsState()
 
     Dialog(
         onDismissRequest = component::dismiss,
-        properties = DialogProperties(usePlatformDefaultWidth = false)
+        properties = DialogProperties(usePlatformDefaultWidth = false),
     ) {
         ElevatedCardApp(
             modifier = Modifier
                 .padding(12.dp)
                 .fillMaxWidth(),
-            contentPaddingValues = PaddingValues(12.dp)
+            contentPaddingValues = PaddingValues(12.dp),
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
                     text = stringResource(Res.string.calculator),
-                    style = MaterialTheme.typography.titleLarge
+                    style = MaterialTheme.typography.titleLarge,
                 )
                 Icon(
                     painter = painterResource(Res.drawable.ic_close_button),
@@ -64,7 +63,7 @@ internal fun CalculatorScreen(
             }
             CalculatorText(
                 expression = state.expression,
-                input = state.input
+                input = state.input,
             )
             state.matrixItems.forEach { items ->
                 CalculatorRow(
@@ -76,9 +75,9 @@ internal fun CalculatorScreen(
                             containerColor = containerColor,
                             textColor = textColor,
                             title = item.title,
-                            onClick = { component.handleCommand(item.action.execute()) }
+                            onClick = { component.handleCommand(item.action.execute()) },
                         )
-                    }
+                    },
                 )
             }
         }

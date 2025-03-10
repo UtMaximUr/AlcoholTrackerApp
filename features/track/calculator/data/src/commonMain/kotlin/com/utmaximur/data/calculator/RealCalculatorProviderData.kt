@@ -5,7 +5,6 @@ import com.utmaximur.app.base.MutableSharedFlowWrapper
 import com.utmaximur.domain.calculator.CalculatorProviderData
 import org.koin.core.annotation.Single
 
-
 @Single
 internal class RealCalculatorProviderData :
     BaseSingleProviderData<Float?>(MutableSharedFlowWrapper()), CalculatorProviderData

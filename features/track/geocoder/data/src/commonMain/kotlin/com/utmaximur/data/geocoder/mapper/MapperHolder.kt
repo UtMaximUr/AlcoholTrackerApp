@@ -9,5 +9,5 @@ import org.koin.core.annotation.Named
 internal class MapperHolder(
     val placeRemoteMapper: PlaceRemoteMapper,
     @Named(NAMED_PLACE_UI_MAPPER)
-    val placeUiMapper: PlaceUiMapper
+    val placeUiMapper: PlaceUiMapper,
 )

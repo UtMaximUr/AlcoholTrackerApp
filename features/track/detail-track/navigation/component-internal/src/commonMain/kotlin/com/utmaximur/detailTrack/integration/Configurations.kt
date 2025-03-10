@@ -7,7 +7,6 @@ sealed interface Configuration {
 
     @Serializable
     data object DetailTrackScreen : Configuration
-
 }
 
 @Serializable

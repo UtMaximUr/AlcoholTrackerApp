@@ -8,10 +8,10 @@ import com.utmaximur.datePicker.store.DatePickerStore.State
 interface DatePickerStore : Store<Intent, State, Label> {
 
     data class State(
-        val selectedDate: Long?
+        val selectedDate: Long?,
     ) {
         constructor() : this(
-            selectedDate = null
+            selectedDate = null,
         )
     }
 
@@ -23,6 +23,5 @@ interface DatePickerStore : Store<Intent, State, Label> {
     sealed interface Label {
 
         data object CloseEvent : Label
-
     }
 }

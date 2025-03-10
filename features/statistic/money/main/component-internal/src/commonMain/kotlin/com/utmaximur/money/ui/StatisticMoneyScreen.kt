@@ -24,48 +24,47 @@ import money.resources.Res
 import money.resources.statistic_spent
 import org.jetbrains.compose.resources.stringResource
 
-
 @Composable
 internal fun StatisticMoneyScreen(
     component: StatisticMoneyComponent,
-    modifier: Modifier
+    modifier: Modifier,
 ) {
     val state by component.model.collectAsState()
 
     ElevatedCardApp(
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth(),
     ) {
         RequestWidget(
             state = state.requestUi,
-            shimmerContentTemplate = { CountMoneyShimmer() }
+            shimmerContentTemplate = { CountMoneyShimmer() },
         ) { statistics ->
             val pagerState = rememberPagerState(pageCount = { statistics.size })
             Column(
                 modifier = Modifier
                     .padding(vertical = 12.dp)
                     .fadingEdge(startFade)
-                    .fadingEdge(endFade)
+                    .fadingEdge(endFade),
             ) {
                 Text(
                     modifier = Modifier
                         .padding(top = 12.dp)
                         .align(Alignment.CenterHorizontally),
                     style = MaterialTheme.typography.titleLarge,
-                    text = stringResource(Res.string.statistic_spent)
+                    text = stringResource(Res.string.statistic_spent),
                 )
                 Carousel(
                     horizontalPagerModifier = Modifier.weight(1f),
                     pagerState = pagerState,
                     carouselContent = { index ->
                         CountMoneyItem(
-                            statistic = statistics[index]
+                            statistic = statistics[index],
                         )
-                    }
+                    },
                 )
                 DotsIndicator(
                     modifier = Modifier.align(Alignment.CenterHorizontally),
                     totalDots = pagerState.pageCount,
-                    selectedIndex = pagerState.currentPage
+                    selectedIndex = pagerState.currentPage,
                 )
             }
         }

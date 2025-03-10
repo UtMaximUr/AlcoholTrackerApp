@@ -27,7 +27,7 @@ import org.koin.core.parameter.parameterArrayOf
 @Factory
 internal class DefaultCreateTrackComponent(
     @InjectedParam componentContext: ComponentContext,
-    @InjectedParam private val output: (CreateTrackComponent.Output) -> Unit
+    @InjectedParam private val output: (CreateTrackComponent.Output) -> Unit,
 ) : CreateTrackComponent,
     ComponentContext by componentContext,
     KoinComponent {
@@ -45,7 +45,7 @@ internal class DefaultCreateTrackComponent(
         get {
             parameterArrayOf(
                 childContext(GeocoderComponent::class.simpleName.orEmpty()),
-                placeOutputHandler
+                placeOutputHandler,
             )
         }
     }
@@ -89,5 +89,4 @@ internal class DefaultCreateTrackComponent(
 
     @Composable
     override fun Render(modifier: Modifier) = CreateTrackScreen(this, trackBuilder)
-
 }

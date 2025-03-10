@@ -14,7 +14,7 @@ internal class RealTracksModalRepository(
     currencySettingsManager: CurrencySettingsManager,
     private val trackDao: TrackDao,
     @Named(NAMED_TRACK_UI_MAPPER)
-    val trackUiMapper: TrackUiMapper
+    val trackUiMapper: TrackUiMapper,
 ) : TracksModalRepository {
 
     override val currencyStream = currencySettingsManager.currencyStateStream

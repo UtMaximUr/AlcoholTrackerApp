@@ -15,20 +15,18 @@ internal class CodeQualityConventionPlugin : Plugin<Project> {
         apply<AppKtlintPlugin>()
         apply<AppSpotlessPlugin>()
 
-        /*
-        //TODO uncomment, now its disable
-        tasks.named("preBuild") {
-            *//**
-             * just to check in which module the tasks are executed
-             *//*
-            val name = "${project.parent?.name}:${project.name}"
-            println("inside tasks -> $name")
-            //does not work with moko res and i don't know even, how to fix it yet
-            dependsOn("ktlintFormat")
-            dependsOn("spotlessCheck")
-            dependsOn("spotlessApply")
-            dependsOn("detekt")
-        }*/
+//        tasks.named("preBuild") {
+//            /**
+//             * just to check in which module the tasks are executed
+//             */
+//            val name = "${project.parent?.name}:${project.name}"
+//            println("inside tasks -> $name")
+//
+//            dependsOn("ktlintFormat")
+//            dependsOn("spotlessCheck")
+//            dependsOn("spotlessApply")
+//            dependsOn("detekt")
+//        }
         Unit
     }
 }

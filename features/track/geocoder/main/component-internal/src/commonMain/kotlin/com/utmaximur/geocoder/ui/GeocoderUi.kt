@@ -13,15 +13,14 @@ import geocoder.resources.place
 import geocoder.resources.place_hint
 import org.jetbrains.compose.resources.stringResource
 
-
 @Composable
 internal fun GeocoderUi(
-    component: GeocoderComponent
+    component: GeocoderComponent,
 ) {
     val state by component.model.collectAsState()
 
     ElevatedCardApp(
-        contentPaddingValues = PaddingValues(12.dp)
+        contentPaddingValues = PaddingValues(12.dp),
     ) {
         SearchTextField(
             title = stringResource(Res.string.place),
@@ -35,9 +34,9 @@ internal fun GeocoderUi(
                 RequestWidget(
                     state = state.requestPlacesUi,
                     content = { places -> it.invoke(places) },
-                    errorContentTemplate = { }
+                    errorContentTemplate = { },
                 )
-            }
+            },
         )
     }
 }

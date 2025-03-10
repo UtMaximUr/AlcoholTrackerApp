@@ -29,7 +29,7 @@ import org.koin.core.parameter.parametersOf
 internal class DefaultDetailTrackComponent(
     @InjectedParam componentContext: ComponentContext,
     @InjectedParam private val trackId: Long,
-    @InjectedParam private val output: (DetailTrackComponent.Output) -> Unit
+    @InjectedParam private val output: (DetailTrackComponent.Output) -> Unit,
 ) : DetailTrackComponent,
     ComponentContext by componentContext,
     KoinComponent {
@@ -50,7 +50,7 @@ internal class DefaultDetailTrackComponent(
             parameterArrayOf(
                 childContext(GeocoderComponent::class.simpleName.orEmpty()),
                 placeOutputHandler,
-                trackId
+                trackId,
             )
         }
     }
@@ -88,5 +88,4 @@ internal class DefaultDetailTrackComponent(
 
     @Composable
     override fun Render(modifier: Modifier) = DetailTrackScreen(this, trackBuilder)
-
 }

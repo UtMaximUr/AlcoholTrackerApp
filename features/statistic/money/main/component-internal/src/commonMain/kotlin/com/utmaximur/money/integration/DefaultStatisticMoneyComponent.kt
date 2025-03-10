@@ -17,7 +17,7 @@ import org.koin.core.component.get
 
 @Factory
 internal class DefaultStatisticMoneyComponent(
-    @InjectedParam componentContext: ComponentContext
+    @InjectedParam componentContext: ComponentContext,
 ) : StatisticMoneyComponent,
     ComponentContext by componentContext,
     KoinComponent {
@@ -29,5 +29,4 @@ internal class DefaultStatisticMoneyComponent(
 
     @Composable
     override fun Render(modifier: Modifier) = StatisticMoneyScreen(this, modifier)
-
 }

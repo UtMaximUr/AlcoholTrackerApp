@@ -18,15 +18,14 @@ import datePicker.resources.Res
 import datePicker.resources.date_picker_continue
 import org.jetbrains.compose.resources.stringResource
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun DatePickerScreen(
-    component: DatePickerComponent
+    component: DatePickerComponent,
 ) {
     val state by component.model.collectAsState()
     val datePickerState = rememberDatePickerState(
-        initialSelectedDateMillis = state.selectedDate
+        initialSelectedDateMillis = state.selectedDate,
     )
 
     DatePickerDialog(
@@ -37,17 +36,17 @@ internal fun DatePickerScreen(
                     component.handleSelectDate(datePickerState.selectedDateMillis)
                 },
                 modifier = Modifier.bounceClick(),
-                shape = MaterialTheme.shapes.large
+                shape = MaterialTheme.shapes.large,
             ) {
                 Text(
                     text = stringResource(Res.string.date_picker_continue),
                     style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.tertiary
+                    color = MaterialTheme.colorScheme.tertiary,
                 )
             }
         },
         colors = DatePickerDefaults.colors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
         ),
         content = {
             DatePicker(
@@ -58,8 +57,8 @@ internal fun DatePickerScreen(
                     todayDateBorderColor = MaterialTheme.colorScheme.tertiary,
                     navigationContentColor = MaterialTheme.colorScheme.tertiary,
 
-                )
+                ),
             )
-        }
+        },
     )
 }

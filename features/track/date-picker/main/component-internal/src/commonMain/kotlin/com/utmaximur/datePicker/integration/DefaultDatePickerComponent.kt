@@ -24,7 +24,7 @@ import org.koin.core.parameter.parametersOf
 internal class DefaultDatePickerComponent(
     @InjectedParam componentContext: ComponentContext,
     @InjectedParam private val selectedDate: Long?,
-    @InjectedParam private val closeDialog: () -> Unit
+    @InjectedParam private val closeDialog: () -> Unit,
 ) : DatePickerComponent,
     ComponentContext by componentContext,
     KoinComponent {
@@ -51,5 +51,4 @@ internal class DefaultDatePickerComponent(
 
     @Composable
     override fun Render(modifier: Modifier) = DatePickerScreen(this)
-
 }

@@ -37,7 +37,7 @@ internal fun SearchTextField(
     placeholderText: String = title,
     onValueChange: (String) -> Unit,
     onValueSelect: (Place) -> Unit,
-    foundContent: @Composable (@Composable (List<Place>) -> Unit) -> Unit
+    foundContent: @Composable (@Composable (List<Place>) -> Unit) -> Unit,
 ) {
     var expanded by remember { mutableStateOf(false) }
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -52,8 +52,8 @@ internal fun SearchTextField(
 
     ExposedDropdownMenuBox(
         expanded = expanded,
-        onExpandedChange = { expanded = !expanded })
-    {
+        onExpandedChange = { expanded = !expanded },
+    ) {
         InnerShadowTextField(
             modifier = modifier.menuAnchor(MenuAnchorType.PrimaryEditable),
             paddingValues = paddingValues,
@@ -71,27 +71,27 @@ internal fun SearchTextField(
                     CircularProgressIndicator(
                         modifier = Modifier.size(24.dp),
                         color = MaterialTheme.colorScheme.tertiary,
-                        strokeWidth = 2.dp
+                        strokeWidth = 2.dp,
                     )
                 }
-            }
+            },
         )
         foundContent { content ->
             ExposedDropdownMenu(
                 expanded = expanded,
                 containerColor = MaterialTheme.colorScheme.primaryContainer,
                 shape = MaterialTheme.shapes.large,
-                onDismissRequest = { expanded = !expanded }
+                onDismissRequest = { expanded = !expanded },
             ) {
                 content.forEach { value ->
                     DropdownMenuItem(
                         text = {
                             Text(
                                 text = value.title,
-                                style = MaterialTheme.typography.bodyMedium
+                                style = MaterialTheme.typography.bodyMedium,
                             )
                         },
-                        onClick = { omItemClick(value) }
+                        onClick = { omItemClick(value) },
                     )
                 }
             }

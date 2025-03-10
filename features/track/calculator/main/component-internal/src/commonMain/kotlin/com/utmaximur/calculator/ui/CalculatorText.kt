@@ -15,18 +15,18 @@ import androidx.compose.ui.unit.sp
 @Composable
 internal fun CalculatorText(
     expression: String,
-    input: String
+    input: String,
 ) {
     Column(
         modifier = Modifier.padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         Text(
             modifier = Modifier.fillMaxWidth(),
             style = MaterialTheme.typography.titleMedium,
             text = expression,
             textAlign = TextAlign.End,
-            color = MaterialTheme.colorScheme.secondary
+            color = MaterialTheme.colorScheme.secondary,
         )
 
         Text(
@@ -34,7 +34,7 @@ internal fun CalculatorText(
             style = MaterialTheme.typography.titleMedium,
             text = input,
             textAlign = TextAlign.End,
-            fontSize = 20.sp
+            fontSize = 20.sp,
         )
     }
 }

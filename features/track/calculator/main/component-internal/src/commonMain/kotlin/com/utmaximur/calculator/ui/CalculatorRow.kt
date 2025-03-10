@@ -16,7 +16,7 @@ internal fun CalculatorRow(
     maxRowCount: Int,
     horizontalSpace: Dp = 6.dp,
     items: List<CalculatorItem>,
-    button: @Composable (Modifier, CalculatorItem, Color, Color) -> Unit
+    button: @Composable (Modifier, CalculatorItem, Color, Color) -> Unit,
 ) {
     val correctionWeight = horizontalSpace.value / 1000
     val defaultWeight = 1f
@@ -24,7 +24,7 @@ internal fun CalculatorRow(
 
     Row(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(horizontalSpace)
+        horizontalArrangement = Arrangement.spacedBy(horizontalSpace),
     ) {
         items.forEachIndexed { index, item ->
             val weight = when {

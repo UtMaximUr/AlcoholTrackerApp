@@ -1,7 +1,9 @@
 package com.utmaximur.data.detailTrack
 
 import com.utmaximur.databaseRoom.place.PlaceDao
+import com.utmaximur.databaseRoom.track.TrackDao
 import com.utmaximur.domain.detailTrack.DetailTrackRepository
+import com.utmaximur.domain.models.Place
 import com.utmaximur.domain.models.Track
 import com.utmaximur.settingsManager.CurrencySettingsManager
 import kotlinx.coroutines.Dispatchers
@@ -9,15 +11,13 @@ import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import org.koin.core.annotation.Factory
-import com.utmaximur.databaseRoom.track.TrackDao
-import com.utmaximur.domain.models.Place
 
 @Factory
 internal class RealDetailTrackRepository(
     currencySettingsManager: CurrencySettingsManager,
     private val trackDao: TrackDao,
     private val placeDao: PlaceDao,
-    private val mapper: MapperHolder
+    private val mapper: MapperHolder,
 ) : DetailTrackRepository {
 
     override val currencyStream = currencySettingsManager.currencyStateStream

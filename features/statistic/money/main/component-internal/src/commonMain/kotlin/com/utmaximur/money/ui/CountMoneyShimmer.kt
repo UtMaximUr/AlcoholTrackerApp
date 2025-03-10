@@ -17,7 +17,7 @@ internal fun CountMoneyShimmer() {
             .padding(12.dp)
             .fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(12.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         TextShimmer(aspectRatio = 12f)
         TextShimmer(aspectRatio = 16f)

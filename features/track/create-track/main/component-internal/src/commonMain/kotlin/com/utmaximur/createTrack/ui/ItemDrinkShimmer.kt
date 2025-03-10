@@ -18,7 +18,7 @@ fun ItemDrinkShimmer() {
                 .clip(MaterialTheme.shapes.extraLarge)
                 .showShimmer()
                 .fillMaxWidth()
-                .aspectRatio(4 / 3f)
+                .aspectRatio(4 / 3f),
         )
     }
 }

@@ -29,11 +29,10 @@ import detailTrack.resources.title_edit_track
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
-
 @Composable
 internal fun DetailTrackScreen(
     component: DetailTrackComponent,
-    trackBuilder: TrackData.Builder
+    trackBuilder: TrackData.Builder,
 ) {
     val state by component.model.collectAsState()
 
@@ -46,16 +45,16 @@ internal fun DetailTrackScreen(
                     IconButton(onClick = component::onDeleteClick) {
                         Icon(
                             painter = painterResource(Res.drawable.ic_delete_button),
-                            contentDescription = stringResource(Res.string.cd_delete)
+                            contentDescription = stringResource(Res.string.cd_delete),
                         )
                     }
                     IconButton(onClick = { component.onSaveClick(trackBuilder.build()) }) {
                         Icon(
                             painter = painterResource(Res.drawable.ic_save_button),
-                            contentDescription = stringResource(Res.string.cd_save)
+                            contentDescription = stringResource(Res.string.cd_save),
                         )
                     }
-                }
+                },
             )
         },
         content = { innerPadding ->
@@ -65,17 +64,17 @@ internal fun DetailTrackScreen(
                     .fillMaxSize()
                     .fadingEdge(bottomFade),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
-                contentPadding = PaddingValues(12.dp)
+                contentPadding = PaddingValues(12.dp),
             ) {
                 item {
                     RequestWidget(
-                        state = state.requestTrackUi
+                        state = state.requestTrackUi,
                     ) { track ->
                         TrackContent(
                             trackData = trackBuilder,
                             track = track,
                             price = state.price,
-                            onCalculatorClick = component::openCalculatorDialog
+                            onCalculatorClick = component::openCalculatorDialog,
                         )
                     }
                 }
@@ -86,20 +85,20 @@ internal fun DetailTrackScreen(
                     DateButtonGroup(
                         selectedDate = state.selectedDate,
                         onSelectDateClick = component::openDatePickerDialog,
-                        onTodayClick = component::onTodayClick
+                        onTodayClick = component::onTodayClick,
                     )
                 }
                 item {
                     RequestWidget(
-                        state = state.requestTrackUi
+                        state = state.requestTrackUi,
                     ) { track ->
                         TotalPrice(
                             currency = state.currency,
-                            totalPrice = track.totalPrice
+                            totalPrice = track.totalPrice,
                         )
                     }
                 }
             }
-        }
+        },
     )
 }

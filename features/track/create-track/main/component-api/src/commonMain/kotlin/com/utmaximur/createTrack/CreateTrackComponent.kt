@@ -38,7 +38,7 @@ interface CreateTrackComponent : ComposeComponent {
 
         data object NavigateToCreateDrink : Output
 
-        data class OpenConfirmDialog(val id: Long): Output
+        data class OpenConfirmDialog(val id: Long) : Output
 
         data object NavigateBack : Output
     }

@@ -7,5 +7,4 @@ import kotlinx.coroutines.flow.StateFlow
 interface StatisticDayComponent : ComposeComponent {
 
     val model: StateFlow<StatisticDayStore.State>
-
 }

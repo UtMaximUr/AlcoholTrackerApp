@@ -18,23 +18,22 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun TotalPrice(
     currency: String,
-    totalPrice: Float
+    totalPrice: Float,
 ) {
-
     ElevatedCardApp {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(12.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             Text(
                 text = stringResource(Res.string.add_total_money_title),
-                style = MaterialTheme.typography.labelLarge
+                style = MaterialTheme.typography.labelLarge,
             )
             Text(
                 text = stringResource(Res.string.add_total_money, totalPrice, currency),
-                style = MaterialTheme.typography.labelLarge
+                style = MaterialTheme.typography.labelLarge,
             )
         }
     }

@@ -22,7 +22,7 @@ internal class RealGeocoderRepository(
     private val geocoderApi: GeocoderApi,
     private val applicationInfo: ApplicationInfo,
     private val mapper: MapperHolder,
-    private val placeDao: PlaceDao
+    private val placeDao: PlaceDao,
 ) : GeocoderRepository {
 
     override val mapEnabledState: Flow<Boolean> = flow {
@@ -33,7 +33,7 @@ internal class RealGeocoderRepository(
         val searchResult = geocoderApi.getPlace(
             query = query.query,
             apikey = BuildKonfig.GEOCODER_KEY,
-            lang = applicationInfo.language
+            lang = applicationInfo.language,
         ).features.map(mapper.placeRemoteMapper::transform)
         emit(searchResult)
     }.flowOn(Dispatchers.IO)

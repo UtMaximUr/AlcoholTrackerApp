@@ -43,5 +43,5 @@ internal class DatePickerStoreFactory(
             when (message) {
                 is Message.UpdateState -> copy(selectedDate = message.selectedDate)
             }
-        }
+        },
     )

@@ -22,28 +22,28 @@ import org.jetbrains.compose.resources.stringResource
 internal fun CountMoneyItem(statistic: MoneyStatistic) {
     Column(
         modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+        verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         Text(
             modifier = Modifier.align(Alignment.CenterHorizontally),
             style = MaterialTheme.typography.titleLarge,
             text = stringResource(
                 Res.allStringResources.getStringResource(
-                    idResource = statistic.statisticPeriod.raw
-                )
-            )
+                    idResource = statistic.statisticPeriod.raw,
+                ),
+            ),
         )
         Row(
             modifier = Modifier.align(Alignment.CenterHorizontally),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             Text(
                 style = MaterialTheme.typography.headlineLarge,
-                text = statistic.moneyAmount
+                text = statistic.moneyAmount,
             )
             Text(
                 style = MaterialTheme.typography.headlineLarge,
-                text = statistic.currency
+                text = statistic.currency,
             )
         }
     }

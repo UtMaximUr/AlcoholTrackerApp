@@ -23,7 +23,7 @@ import org.koin.core.component.get
 @Factory
 internal class DefaultCalculatorComponent(
     @InjectedParam componentContext: ComponentContext,
-    @InjectedParam private val closeDialog: () -> Unit
+    @InjectedParam private val closeDialog: () -> Unit,
 ) : CalculatorComponent,
     ComponentContext by componentContext,
     KoinComponent {
@@ -48,5 +48,4 @@ internal class DefaultCalculatorComponent(
 
     @Composable
     override fun Render(modifier: Modifier) = CalculatorScreen(this)
-
 }

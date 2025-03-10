@@ -10,13 +10,12 @@ import com.utmaximur.geocoder.store.GeocoderStore.State
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
 
-
 @Factory
 internal class GeocoderStoreFactory(
     storeFactory: StoreFactory,
     @InjectedParam trackId: Long?,
     geocoderRepository: GeocoderRepository,
-    errorHandler: ErrorHandler
+    errorHandler: ErrorHandler,
 ) : GeocoderStore,
     Store<Intent, State, Label> by storeFactory.create(
         name = GeocoderStore::class.simpleName,
@@ -24,8 +23,8 @@ internal class GeocoderStoreFactory(
         bootstrapper = GeocoderBootstrapper(trackId),
         executorFactory = {
             GeocoderExecutor(
-                geocoderRepository = geocoderRepository
+                geocoderRepository = geocoderRepository,
             )
         },
-        reducer = GeocoderReducer(errorHandler)
+        reducer = GeocoderReducer(errorHandler),
     )

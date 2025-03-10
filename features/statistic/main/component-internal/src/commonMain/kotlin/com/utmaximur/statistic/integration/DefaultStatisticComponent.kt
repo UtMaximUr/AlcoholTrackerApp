@@ -17,7 +17,7 @@ import org.koin.core.parameter.parameterArrayOf
 
 @Factory
 internal class DefaultStatisticComponent(
-    @InjectedParam componentContext: ComponentContext
+    @InjectedParam componentContext: ComponentContext,
 ) : StatisticComponent,
     ComponentContext by componentContext,
     KoinComponent {
@@ -25,7 +25,7 @@ internal class DefaultStatisticComponent(
     override val statisticMoneyComponent: StatisticMoneyComponent by lazy {
         get {
             parameterArrayOf(
-                childContext(StatisticMoneyComponent::class.simpleName.orEmpty())
+                childContext(StatisticMoneyComponent::class.simpleName.orEmpty()),
             )
         }
     }
@@ -33,7 +33,7 @@ internal class DefaultStatisticComponent(
     override val statisticDayComponent: StatisticDayComponent by lazy {
         get {
             parameterArrayOf(
-                childContext(StatisticDayComponent::class.simpleName.orEmpty())
+                childContext(StatisticDayComponent::class.simpleName.orEmpty()),
             )
         }
     }
@@ -41,12 +41,11 @@ internal class DefaultStatisticComponent(
     override val statisticDrinkComponent: StatisticDrinkComponent by lazy {
         get {
             parameterArrayOf(
-                childContext(StatisticDrinkComponent::class.simpleName.orEmpty())
+                childContext(StatisticDrinkComponent::class.simpleName.orEmpty()),
             )
         }
     }
 
     @Composable
     override fun Render(modifier: Modifier) = StatisticScreen(modifier, this)
-
 }

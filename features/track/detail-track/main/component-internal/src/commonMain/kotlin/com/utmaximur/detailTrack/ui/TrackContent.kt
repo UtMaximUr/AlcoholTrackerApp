@@ -33,51 +33,50 @@ import detailTrack.resources.ic_local_bar_white_24dp
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
-
 @Composable
 fun TrackContent(
     price: Float,
     trackData: TrackData.Builder,
     track: Track,
-    onCalculatorClick: () -> Unit
+    onCalculatorClick: () -> Unit,
 ) {
     LaunchedEffect(track) {
         trackData.setDrink(track.drink)
     }
 
     Column(
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+        verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         ElevatedCardApp {
             AsyncImage(
                 modifier = Modifier.aspectRatio(4 / 3f),
                 model = track.drink.photo,
                 contentDescription = track.drink.name,
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Crop,
             )
         }
 
         ElevatedCardApp(
             contentPaddingValues = PaddingValues(12.dp),
-            verticalArrangement = Arrangement.spacedBy(6.dp)
+            verticalArrangement = Arrangement.spacedBy(6.dp),
         ) {
             InnerShadowTextField(
                 title = stringResource(Res.string.add_quantity),
                 textValue = track.quantity,
                 keyboardType = KeyboardType.Number,
-                onValueChange = trackData::setQuantity
+                onValueChange = trackData::setQuantity,
             )
             InnerShadowTextField(
                 title = stringResource(Res.string.add_volume),
                 textValue = track.volume,
                 keyboardType = KeyboardType.Number,
-                onValueChange = trackData::setVolume
+                onValueChange = trackData::setVolume,
             )
             InnerShadowTextField(
                 title = stringResource(Res.string.add_degree),
                 textValue = track.degree,
                 keyboardType = KeyboardType.Number,
-                onValueChange = trackData::setDegree
+                onValueChange = trackData::setDegree,
             )
             InnerShadowTextField(
                 title = stringResource(Res.string.add_event),
@@ -87,9 +86,9 @@ fun TrackContent(
                     Icon(
                         painter = painterResource(Res.drawable.ic_event_24dp),
                         contentDescription = stringResource(Res.string.cd_event),
-                        tint = MaterialTheme.colorScheme.tertiary
+                        tint = MaterialTheme.colorScheme.tertiary,
                     )
-                }
+                },
             )
             InnerShadowTextField(
                 title = stringResource(Res.string.add_price),
@@ -100,7 +99,7 @@ fun TrackContent(
                     Icon(
                         painter = painterResource(Res.drawable.ic_local_bar_white_24dp),
                         contentDescription = stringResource(Res.string.cd_price),
-                        tint = MaterialTheme.colorScheme.tertiary
+                        tint = MaterialTheme.colorScheme.tertiary,
                     )
                 },
                 trailingIcon = {
@@ -108,9 +107,9 @@ fun TrackContent(
                         modifier = Modifier.clickable(onClick = onCalculatorClick),
                         painter = painterResource(Res.drawable.ic_calculate_white_24dp),
                         contentDescription = stringResource(Res.string.cd_calculator),
-                        tint = MaterialTheme.colorScheme.tertiary
+                        tint = MaterialTheme.colorScheme.tertiary,
                     )
-                }
+                },
             )
         }
     }

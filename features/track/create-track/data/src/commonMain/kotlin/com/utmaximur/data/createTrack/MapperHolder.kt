@@ -16,5 +16,5 @@ internal class MapperHolder(
     @Named(NAMED_DRINK_UI_MAPPER)
     val drinkUiMapper: DrinkUiMapper,
     @Named(NAMED_PLACE_LOCAL_MAPPER)
-    val placeLocalMapper: PlaceLocalMapper
+    val placeLocalMapper: PlaceLocalMapper,
 )

@@ -21,7 +21,6 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 
-
 internal sealed interface Message {
     data class UpdateQuery(val query: String) : Message
     data class UpdatePlaces(val requestPlacesUi: Request<List<Place>>) : Message
@@ -43,10 +42,11 @@ internal class GeocoderExecutor(
 
     override fun executeAction(action: Action) {
         when (action) {
-            is Action.GetPlace -> geocoderRepository
-                .getPlaceByTrackId(action.trackId)
-                .onEach { place -> dispatch(Message.UpdateQuery(place.title)) }
-                .launchIn(scope)
+            is Action.GetPlace ->
+                geocoderRepository
+                    .getPlaceByTrackId(action.trackId)
+                    .onEach { place -> dispatch(Message.UpdateQuery(place.title)) }
+                    .launchIn(scope)
         }
     }
 

@@ -33,11 +33,10 @@ import createTrack.resources.title_create_track
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
-
 @Composable
 internal fun CreateTrackScreen(
     component: CreateTrackComponent,
-    trackBuilder: TrackData.Builder
+    trackBuilder: TrackData.Builder,
 ) {
     val state by component.model.collectAsState()
 
@@ -51,23 +50,23 @@ internal fun CreateTrackScreen(
                         modifier = Modifier.bounceClick(),
                         shape = MaterialTheme.shapes.large,
                         colors = ButtonDefaults.textButtonColors(
-                            containerColor = MaterialTheme.colorScheme.tertiary
+                            containerColor = MaterialTheme.colorScheme.tertiary,
                         ),
-                        onClick = component::navigateToCreateDrink
+                        onClick = component::navigateToCreateDrink,
                     ) {
                         Text(
                             text = stringResource(Res.string.title_create_drink),
                             style = MaterialTheme.typography.bodyMedium,
-                            color = Color.White
+                            color = Color.White,
                         )
                     }
                     IconButton(onClick = { component.onSaveClick(trackBuilder.build()) }) {
                         Icon(
                             painter = painterResource(Res.drawable.ic_save_button),
-                            contentDescription = stringResource(Res.string.cd_save)
+                            contentDescription = stringResource(Res.string.cd_save),
                         )
                     }
-                }
+                },
             )
         },
         content = { innerPadding ->
@@ -77,7 +76,7 @@ internal fun CreateTrackScreen(
                     .fillMaxSize()
                     .fadingEdge(bottomFade),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
-                contentPadding = PaddingValues(12.dp)
+                contentPadding = PaddingValues(12.dp),
             ) {
                 item {
                     CreateTrackContent(
@@ -87,7 +86,7 @@ internal fun CreateTrackScreen(
                         currency = state.currency,
                         onCalculatorClick = component::openCalculatorDialog,
                         onCurrencyClick = component::openCurrencyDialog,
-                        onDeleteClick = component::onDeleteClick
+                        onDeleteClick = component::onDeleteClick,
                     )
                 }
                 item {
@@ -97,10 +96,10 @@ internal fun CreateTrackScreen(
                     DateButtonGroup(
                         selectedDate = state.selectedDate,
                         onSelectDateClick = component::openDatePickerDialog,
-                        onTodayClick = component::onTodayClick
+                        onTodayClick = component::onTodayClick,
                     )
                 }
             }
-        }
+        },
     )
 }

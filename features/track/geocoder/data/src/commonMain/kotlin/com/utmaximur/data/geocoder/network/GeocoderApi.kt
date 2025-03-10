@@ -8,6 +8,6 @@ interface GeocoderApi {
     suspend fun getPlace(
         @Query("text") query: String,
         @Query("apikey") apikey: String,
-        @Query("lang") lang: String
+        @Query("lang") lang: String,
     ): FeatureCollection
 }

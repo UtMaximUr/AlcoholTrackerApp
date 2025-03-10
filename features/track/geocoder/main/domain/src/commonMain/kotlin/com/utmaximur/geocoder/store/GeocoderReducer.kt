@@ -6,7 +6,7 @@ import com.utmaximur.core.mvi_mapper.RequestMapper
 import com.utmaximur.mappers.implementation.RequestMappers
 
 internal class GeocoderReducer(
-    private val errorHandler: ErrorHandler
+    private val errorHandler: ErrorHandler,
 ) : Reducer<GeocoderStore.State, Message> {
     override fun GeocoderStore.State.reduce(msg: Message) = when (msg) {
         is Message.UpdatePlaces -> {

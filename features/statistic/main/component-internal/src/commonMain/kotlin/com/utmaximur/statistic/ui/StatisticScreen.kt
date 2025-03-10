@@ -14,11 +14,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.utmaximur.statistic.StatisticComponent
 
-
 @Composable
 internal fun StatisticScreen(
     modifier: Modifier,
-    component: StatisticComponent
+    component: StatisticComponent,
 ) {
     Scaffold(modifier = modifier) {
         Column(
@@ -26,7 +25,7 @@ internal fun StatisticScreen(
                 .fillMaxSize()
                 .padding(12.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                 val rowModifier = remember { Modifier.weight(1f).aspectRatio(1f) }

@@ -1,7 +1,7 @@
 package com.utmaximur.domain.geocoder
 
 data class SearchQuery(
-    val query: String
+    val query: String,
 ) {
     val isReadyToRequest = query.length >= MIN_QUERY_LENGTH && query.isNotEmpty()
     companion object {

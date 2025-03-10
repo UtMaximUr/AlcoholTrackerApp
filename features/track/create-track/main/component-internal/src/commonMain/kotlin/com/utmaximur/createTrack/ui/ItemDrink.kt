@@ -25,37 +25,36 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun ItemDrink(
     drink: Drink,
-    onDeleteClick: (Long) -> Unit
+    onDeleteClick: (Long) -> Unit,
 ) {
-
     Box(modifier = Modifier.fillMaxSize()) {
         ImageLoaderContent(
             modifier = Modifier.fillMaxSize(),
             imageUrl = drink.photo,
             contentDescription = drink.name,
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.Crop,
         )
         ElevatedCardApp(
             modifier = Modifier.padding(12.dp),
             shape = MaterialTheme.shapes.large,
-            defaultElevation = 2.dp
+            defaultElevation = 2.dp,
         ) {
             Text(
                 modifier = Modifier.padding(8.dp),
                 text = drink.name,
-                style = MaterialTheme.typography.titleMedium
+                style = MaterialTheme.typography.titleMedium,
             )
         }
         AnimatedVisibility(
             modifier = Modifier
                 .padding(4.dp)
                 .align(Alignment.TopEnd),
-            visible = drink.isUserCreated
+            visible = drink.isUserCreated,
         ) {
             IconButton(onClick = { onDeleteClick(drink.id) }) {
                 Icon(
                     painter = painterResource(Res.drawable.ic_delete_button),
-                    contentDescription = stringResource(Res.string.cd_delete)
+                    contentDescription = stringResource(Res.string.cd_delete),
                 )
             }
         }

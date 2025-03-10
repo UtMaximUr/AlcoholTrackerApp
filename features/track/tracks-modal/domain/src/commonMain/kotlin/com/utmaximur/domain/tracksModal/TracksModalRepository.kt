@@ -8,5 +8,4 @@ interface TracksModalRepository {
     val currencyStream: Flow<String>
 
     fun observeTracksByIds(trackIds: List<Long>): Flow<List<Track>>
-
 }

@@ -37,7 +37,7 @@ import org.koin.core.parameter.parametersOf
 @Factory
 internal class DefaultCreateTrackNavigationComponent(
     @InjectedParam componentContext: ComponentContext,
-    @InjectedParam private val back: () -> Unit
+    @InjectedParam private val back: () -> Unit,
 ) : CreateTrackNavigationComponent,
     ComponentContext by componentContext,
     KoinComponent {
@@ -49,25 +49,25 @@ internal class DefaultCreateTrackNavigationComponent(
         serializer = Configuration.serializer(),
         initialConfiguration = Configuration.CreateTrackScreen,
         handleBackButton = true,
-        childFactory = ::createChild
+        childFactory = ::createChild,
     )
 
     private fun createChild(
         configuration: Configuration,
-        componentContext: ComponentContext
+        componentContext: ComponentContext,
     ): ComposeComponent =
         when (configuration) {
             is Configuration.CreateTrackScreen -> get<CreateTrackComponent> {
                 parameterArrayOf(
                     componentContext,
-                    ::onCreateTrackOutput
+                    ::onCreateTrackOutput,
                 )
             }
 
             Configuration.CreateDrinkScreen -> get<CreateDrinkNavigationComponent> {
                 parameterArrayOf(
                     componentContext,
-                    { navigation.pop() }
+                    { navigation.pop() },
                 )
             }
         }
@@ -78,23 +78,24 @@ internal class DefaultCreateTrackNavigationComponent(
         source = modalNavigation,
         serializer = ModalConfiguration.serializer(),
         handleBackButton = true,
-        childFactory = ::createModal
+        childFactory = ::createModal,
     )
 
     private fun createModal(
-        modalConfig: ModalConfiguration, componentContext: ComponentContext
+        modalConfig: ModalConfiguration,
+        componentContext: ComponentContext,
     ): ComposeDialogComponent = when (modalConfig) {
         ModalConfiguration.CalculatorDialog -> get<CalculatorComponent> {
             parametersOf(
                 componentContext,
-                { modalNavigation.dismiss() }
+                { modalNavigation.dismiss() },
             )
         }
 
         ModalConfiguration.CurrencyDialog -> get<CurrencyComponent> {
             parametersOf(
                 componentContext,
-                { modalNavigation.dismiss() }
+                { modalNavigation.dismiss() },
             )
         }
 
@@ -102,7 +103,7 @@ internal class DefaultCreateTrackNavigationComponent(
             parametersOf(
                 componentContext,
                 modalConfig.selectedDate,
-                { modalNavigation.dismiss() }
+                { modalNavigation.dismiss() },
             )
         }
 
@@ -110,7 +111,7 @@ internal class DefaultCreateTrackNavigationComponent(
             parametersOf(
                 componentContext,
                 modalConfig.drinkId,
-                { modalNavigation.dismiss() }
+                { modalNavigation.dismiss() },
             )
         }
     }
@@ -118,23 +119,23 @@ internal class DefaultCreateTrackNavigationComponent(
     private fun onCreateTrackOutput(output: CreateTrackComponent.Output) = when (output) {
         CreateTrackComponent.Output.NavigateBack -> back()
         CreateTrackComponent.Output.OpenCalculatorDialog -> modalNavigation.activate(
-            ModalConfiguration.CalculatorDialog
+            ModalConfiguration.CalculatorDialog,
         )
 
         CreateTrackComponent.Output.OpenCurrencyDialog -> modalNavigation.activate(
-            ModalConfiguration.CurrencyDialog
+            ModalConfiguration.CurrencyDialog,
         )
 
         is CreateTrackComponent.Output.OpenDatePickerDialog -> modalNavigation.activate(
-            ModalConfiguration.DatePickerDialog(output.selectedDate)
+            ModalConfiguration.DatePickerDialog(output.selectedDate),
         )
 
         CreateTrackComponent.Output.NavigateToCreateDrink -> navigation.pushNew(
-            Configuration.CreateDrinkScreen
+            Configuration.CreateDrinkScreen,
         )
 
         is CreateTrackComponent.Output.OpenConfirmDialog -> modalNavigation.activate(
-            ModalConfiguration.ConfirmDialog(output.id)
+            ModalConfiguration.ConfirmDialog(output.id),
         )
     }
 
@@ -142,7 +143,7 @@ internal class DefaultCreateTrackNavigationComponent(
     override fun Render(modifier: Modifier) {
         Children(
             stack = stack,
-            animation = stackAnimation(slide())
+            animation = stackAnimation(slide()),
         ) { child ->
             child.instance.Render(modifier)
         }
