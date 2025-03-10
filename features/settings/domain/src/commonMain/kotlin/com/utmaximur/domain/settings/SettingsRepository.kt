@@ -13,5 +13,4 @@ interface SettingsRepository {
     suspend fun activeDarkTheme(active: Boolean)
 
     suspend fun saveCurrency(currency: String)
-
 }

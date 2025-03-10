@@ -19,7 +19,7 @@ import org.koin.core.component.get
 @Factory
 internal class DefaultCurrencyComponent(
     @InjectedParam componentContext: ComponentContext,
-    @InjectedParam private val dismissCallback: () -> Unit
+    @InjectedParam private val dismissCallback: () -> Unit,
 ) : CurrencyComponent,
     ComponentContext by componentContext,
     KoinComponent {

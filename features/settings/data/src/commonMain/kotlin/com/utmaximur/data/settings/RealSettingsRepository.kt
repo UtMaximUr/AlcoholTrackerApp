@@ -12,7 +12,7 @@ import org.koin.core.annotation.Factory
 internal class RealSettingsRepository(
     applicationInfo: ApplicationInfo,
     private val themeSettingsManager: ThemeSettingsManager,
-    private val currencySettingsManager: CurrencySettingsManager
+    private val currencySettingsManager: CurrencySettingsManager,
 ) : SettingsRepository {
 
     override val appVersionStream: Flow<String> =

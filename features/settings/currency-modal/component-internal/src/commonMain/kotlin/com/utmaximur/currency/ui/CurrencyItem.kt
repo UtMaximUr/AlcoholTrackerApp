@@ -17,7 +17,7 @@ import com.utmaximur.currency.store.Currency
 internal fun CurrencyItem(
     currency: Currency,
     isSelected: Boolean,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     ListItem(
         modifier = Modifier
@@ -26,7 +26,7 @@ internal fun CurrencyItem(
         headlineContent = {
             Text(
                 text = currency.name,
-                style = MaterialTheme.typography.bodyMedium
+                style = MaterialTheme.typography.bodyMedium,
             )
         },
         leadingContent = {
@@ -34,12 +34,12 @@ internal fun CurrencyItem(
                 selected = isSelected,
                 onClick = null,
                 colors = RadioButtonDefaults.colors(
-                    selectedColor = MaterialTheme.colorScheme.tertiary
-                )
+                    selectedColor = MaterialTheme.colorScheme.tertiary,
+                ),
             )
         },
         colors = ListItemDefaults.colors(
-            containerColor = Color.Transparent
-        )
+            containerColor = Color.Transparent,
+        ),
     )
 }

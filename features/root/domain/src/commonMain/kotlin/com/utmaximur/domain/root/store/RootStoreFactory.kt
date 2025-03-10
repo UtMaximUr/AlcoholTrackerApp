@@ -24,7 +24,7 @@ internal sealed interface Message {
 internal class RootStoreFactory(
     storeFactory: StoreFactory,
     themeSettingsManager: ThemeSettingsManager,
-    applicationInfo: ApplicationInfo
+    applicationInfo: ApplicationInfo,
 ) : RootStore,
     Store<Intent, State, Label> by storeFactory.create(
         name = RootStore::class.simpleName,
@@ -51,5 +51,5 @@ internal class RootStoreFactory(
                 is Message.UpdateBottomBarState -> copy(isBottomBarVisible = message.isVisible)
                 is Message.UpdateMapState -> copy(isMapEnabled = message.isMapEnabled)
             }
-        }
+        },
     )

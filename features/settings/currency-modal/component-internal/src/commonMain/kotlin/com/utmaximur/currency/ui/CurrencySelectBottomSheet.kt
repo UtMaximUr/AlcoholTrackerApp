@@ -12,19 +12,19 @@ import com.utmaximur.design.modal.ModalBottomSheetApp
 
 @Composable
 internal fun CurrencySelectBottomSheet(
-    component: CurrencyComponent
+    component: CurrencyComponent,
 ) {
     val state by component.model.collectAsState()
 
     ModalBottomSheetApp(
-        onDismissRequest = component::dismiss
+        onDismissRequest = component::dismiss,
     ) {
         LazyColumn(contentPadding = PaddingValues(vertical = 16.dp)) {
             items(state.currencies) { item ->
                 CurrencyItem(
                     currency = item,
                     isSelected = state.currentCurrency == item,
-                    onClick = { component.onSelectClick(item) }
+                    onClick = { component.onSelectClick(item) },
                 )
             }
         }
