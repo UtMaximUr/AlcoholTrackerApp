@@ -9,13 +9,13 @@ data class Place(
     val title: String,
     val longitude: Double,
     val latitude: Double,
-    val trackId: Long = ZERO_VALUE_L
+    val trackId: Long = ZERO_VALUE_L,
 ) {
     companion object {
         val EMPTY = Place(
             title = EMPTY_STRING,
             longitude = ZERO_VALUE_D,
-            latitude = ZERO_VALUE_D
+            latitude = ZERO_VALUE_D,
         )
     }
 }

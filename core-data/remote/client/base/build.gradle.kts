@@ -39,7 +39,7 @@ buildkonfig {
         buildConfigField(
             FieldSpec.Type.STRING,
             "BASE_URL",
-            "https://raw.githubusercontent.com/UtMaximUr/AlcoholTrackerApp/refs/heads/main/app/src/main/assets/"
+            "https://raw.githubusercontent.com/UtMaximUr/AlcoholTrackerApp/refs/heads/main/app/src/main/assets/",
         )
     }
 }

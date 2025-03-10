@@ -10,7 +10,7 @@ data class TrackData(
     val price: String,
     val date: String,
     val drink: Drink,
-    val place: Place
+    val place: Place,
 ) {
 
     class Builder {
@@ -40,7 +40,7 @@ data class TrackData(
             event = event,
             price = price,
             date = date,
-            place = place
+            place = place,
         )
     }
 }

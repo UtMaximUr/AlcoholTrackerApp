@@ -22,10 +22,9 @@ abstract class Interactor<in P, R> {
     private fun removeLoader() =
         loadingState.update { it.dec() }
 
-
     suspend operator fun invoke(
         params: P,
-        timeout: Duration = DefaultTimeout
+        timeout: Duration = DefaultTimeout,
     ): Result<R> = try {
         addLoader()
         runCatching {
@@ -45,5 +44,5 @@ abstract class Interactor<in P, R> {
 }
 
 suspend operator fun <R> Interactor<Unit, R>.invoke(
-    timeout: Duration = Interactor.DefaultTimeout
+    timeout: Duration = Interactor.DefaultTimeout,
 ) = invoke(Unit, timeout)

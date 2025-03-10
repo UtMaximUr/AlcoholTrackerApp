@@ -24,7 +24,7 @@ actual fun Throwable.isNetworkConnectionError(): Boolean {
             NSURLErrorResourceUnavailable,
             NSURLErrorNotConnectedToInternet,
             NSURLErrorDataNotAllowed,
-            NSURLErrorCannotLoadFromNetwork
+            NSURLErrorCannotLoadFromNetwork,
         ) -> true
 
         else -> false

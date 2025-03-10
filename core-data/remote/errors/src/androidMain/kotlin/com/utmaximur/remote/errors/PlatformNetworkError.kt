@@ -10,7 +10,8 @@ actual fun Throwable.isNetworkConnectionError(): Boolean {
         is ConnectException,
         is SocketTimeoutException,
         is TimeoutException,
-        is UnknownHostException -> true
+        is UnknownHostException,
+        -> true
         else -> false
     }
 }

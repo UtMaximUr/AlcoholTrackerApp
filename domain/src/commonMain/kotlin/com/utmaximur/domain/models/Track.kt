@@ -10,7 +10,7 @@ data class Track(
     val degree: Float,
     val event: String,
     val price: Float,
-    val date: Long
+    val date: Long,
 ) {
     val totalPrice = quantity * price
 }

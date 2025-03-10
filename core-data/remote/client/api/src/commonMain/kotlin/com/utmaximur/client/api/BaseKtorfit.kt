@@ -6,7 +6,7 @@ import io.ktor.client.HttpClient
 
 abstract class BaseKtorfit(
     private val client: HttpClient,
-    initialBaseUrl: String
+    initialBaseUrl: String,
 ) : KtorfitProvider {
 
     private var baseUrl: String? = initialBaseUrl

@@ -56,7 +56,8 @@ sealed class NetworkResponseError : NetworkError() {
             HttpStatusCode.NotFound -> NotFound
             HttpStatusCode.InternalServerError -> Internal
             HttpStatusCode.BadGateway, HttpStatusCode.ServiceUnavailable,
-            HttpStatusCode.GatewayTimeout -> Unreachable
+            HttpStatusCode.GatewayTimeout,
+            -> Unreachable
             /*
              * provide other http status
              */

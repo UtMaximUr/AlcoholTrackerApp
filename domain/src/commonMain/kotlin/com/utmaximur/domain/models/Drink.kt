@@ -9,7 +9,7 @@ data class Drink(
     val name: String,
     val icon: String,
     val photo: String,
-    val createdAt: LocalDateTime? = null
+    val createdAt: LocalDateTime? = null,
 ) {
     val isUserCreated = createdAt != null
     companion object {
@@ -17,7 +17,7 @@ data class Drink(
             id = ZERO_VALUE_L,
             name = EMPTY_STRING,
             icon = EMPTY_STRING,
-            photo = EMPTY_STRING
+            photo = EMPTY_STRING,
         )
     }
 }
