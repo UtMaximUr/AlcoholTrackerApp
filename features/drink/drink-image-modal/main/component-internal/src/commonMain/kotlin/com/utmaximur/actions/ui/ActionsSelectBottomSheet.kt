@@ -27,15 +27,15 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun ActionsSelectBottomSheet(
-    component: ActionsImageComponent
+    component: ActionsImageComponent,
 ) {
     val cameraManager = rememberCameraManager(
-        onResult = component::handleFile
+        onResult = component::handleFile,
     )
     val filePicker = rememberFilePickerLauncher(
         type = FilePickerFileType.Image,
         selectionMode = FilePickerSelectionMode.Single,
-        onResult = component::handleFiles
+        onResult = component::handleFiles,
     )
     val cameraPermissionState = rememberPermissionState(PermissionType.CAMERA) {
         cameraManager.launch()
@@ -45,31 +45,30 @@ internal fun ActionsSelectBottomSheet(
     }
 
     ModalBottomSheetApp(
-        onDismissRequest = component::dismiss
+        onDismissRequest = component::dismiss,
     ) {
         Column {
             Text(
                 modifier = Modifier.padding(16.dp),
                 text = stringResource(Res.string.action_heading),
-                style = MaterialTheme.typography.titleLarge
+                style = MaterialTheme.typography.titleLarge,
             )
             ActionItem(
                 icon = Res.drawable.ic_camera,
                 title = Res.string.action_camera,
-                onClick = cameraPermissionState::launchRequestPermission
+                onClick = cameraPermissionState::launchRequestPermission,
             )
             ActionItem(
                 icon = Res.drawable.ic_gallery,
                 title = Res.string.action_gallery,
-                onClick = galleryPermissionState::launchRequestPermission
+                onClick = galleryPermissionState::launchRequestPermission,
             )
             ActionItem(
                 icon = Res.drawable.ic_delete,
                 title = Res.string.action_remove_photo,
                 tinColor = MaterialTheme.colorScheme.tertiary,
-                onClick = component::onDeleteFileClick
+                onClick = component::onDeleteFileClick,
             )
         }
     }
 }
-

@@ -8,5 +8,4 @@ interface MapRepository {
     val darkThemeStateStream: Flow<Boolean>
 
     fun observePlace(): Flow<List<Place>>
-
 }

@@ -31,7 +31,7 @@ import org.koin.core.parameter.parametersOf
 @Factory
 internal class DefaultCreateDrinkNavigationComponent(
     @InjectedParam componentContext: ComponentContext,
-    @InjectedParam private val back: () -> Unit
+    @InjectedParam private val back: () -> Unit,
 ) : CreateDrinkNavigationComponent,
     ComponentContext by componentContext,
     KoinComponent {
@@ -43,18 +43,18 @@ internal class DefaultCreateDrinkNavigationComponent(
         serializer = Configuration.serializer(),
         initialConfiguration = Configuration.CreateDrinkScreen,
         handleBackButton = true,
-        childFactory = ::createChild
+        childFactory = ::createChild,
     )
 
     private fun createChild(
         configuration: Configuration,
-        componentContext: ComponentContext
+        componentContext: ComponentContext,
     ): ComposeComponent =
         when (configuration) {
             is Configuration.CreateDrinkScreen -> get<CreateDrinkComponent> {
                 parameterArrayOf(
                     componentContext,
-                    ::onCreateDrinkOutput
+                    ::onCreateDrinkOutput,
                 )
             }
         }
@@ -65,16 +65,17 @@ internal class DefaultCreateDrinkNavigationComponent(
         source = modalNavigation,
         serializer = ModalConfiguration.serializer(),
         handleBackButton = true,
-        childFactory = ::createModal
+        childFactory = ::createModal,
     )
 
     private fun createModal(
-        modalConfig: ModalConfiguration, componentContext: ComponentContext
+        modalConfig: ModalConfiguration,
+        componentContext: ComponentContext,
     ): ComposeDialogComponent = when (modalConfig) {
         ModalConfiguration.ImageActionsDialog -> get<ActionsImageComponent> {
             parametersOf(
                 componentContext,
-                { modalNavigation.dismiss() }
+                { modalNavigation.dismiss() },
             )
         }
     }
@@ -82,7 +83,7 @@ internal class DefaultCreateDrinkNavigationComponent(
     private fun onCreateDrinkOutput(output: CreateDrinkComponent.Output): Unit = when (output) {
         CreateDrinkComponent.Output.NavigateBack -> back()
         CreateDrinkComponent.Output.OpenImageActionsDialog -> modalNavigation.activate(
-            ModalConfiguration.ImageActionsDialog
+            ModalConfiguration.ImageActionsDialog,
         )
     }
 
@@ -90,7 +91,7 @@ internal class DefaultCreateDrinkNavigationComponent(
     override fun Render(modifier: Modifier) {
         Children(
             stack = stack,
-            animation = stackAnimation(slide())
+            animation = stackAnimation(slide()),
         ) { child ->
             child.instance.Render(modifier)
         }

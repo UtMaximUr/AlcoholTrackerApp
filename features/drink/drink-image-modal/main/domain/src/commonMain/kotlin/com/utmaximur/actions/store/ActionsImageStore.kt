@@ -2,8 +2,8 @@ package com.utmaximur.actions.store
 
 import com.arkivanov.mvikotlin.core.store.Store
 import com.utmaximur.actions.store.ActionsImageStore.Intent
-import com.utmaximur.actions.store.ActionsImageStore.State
 import com.utmaximur.actions.store.ActionsImageStore.Label
+import com.utmaximur.actions.store.ActionsImageStore.State
 import com.utmaximur.media.PlatformFile
 
 interface ActionsImageStore : Store<Intent, State, Label> {

@@ -20,7 +20,7 @@ import org.koin.core.component.get
 @Factory
 internal class DefaultActionsImageComponent(
     @InjectedParam componentContext: ComponentContext,
-    @InjectedParam private val dismissCallback: () -> Unit
+    @InjectedParam private val dismissCallback: () -> Unit,
 ) : ActionsImageComponent,
     ComponentContext by componentContext,
     KoinComponent {

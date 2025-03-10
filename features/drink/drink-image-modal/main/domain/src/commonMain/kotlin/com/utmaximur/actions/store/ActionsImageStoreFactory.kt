@@ -8,11 +8,10 @@ import com.utmaximur.domain.actions.PlatformFileProviderData
 import kotlinx.coroutines.launch
 import org.koin.core.annotation.Factory
 
-
 @Factory
 internal class ActionsImageStoreFactory(
     storeFactory: StoreFactory,
-    providerData: PlatformFileProviderData
+    providerData: PlatformFileProviderData,
 ) : ActionsImageStore,
     Store<ActionsImageStore.Intent, ActionsImageStore.State, ActionsImageStore.Label> by storeFactory.create(
         name = ActionsImageStore::class.simpleName,
@@ -40,5 +39,5 @@ internal class ActionsImageStoreFactory(
                     }
                 }
             }
-        }
+        },
     )

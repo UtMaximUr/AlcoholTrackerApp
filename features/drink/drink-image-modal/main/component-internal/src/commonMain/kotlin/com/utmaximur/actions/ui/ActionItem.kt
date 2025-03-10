@@ -22,7 +22,7 @@ internal fun ActionItem(
     icon: DrawableResource,
     title: StringResource,
     tinColor: Color = MaterialTheme.colorScheme.primary,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     ListItem(
         modifier = Modifier
@@ -31,7 +31,7 @@ internal fun ActionItem(
         headlineContent = {
             Text(
                 text = stringResource(title),
-                style = MaterialTheme.typography.bodyMedium
+                style = MaterialTheme.typography.bodyMedium,
             )
         },
         leadingContent = {
@@ -39,11 +39,11 @@ internal fun ActionItem(
                 modifier = Modifier.size(24.dp),
                 painter = painterResource(icon),
                 contentDescription = stringResource(title),
-                tint = tinColor
+                tint = tinColor,
             )
         },
         colors = ListItemDefaults.colors(
-            containerColor = Color.Transparent
-        )
+            containerColor = Color.Transparent,
+        ),
     )
 }
