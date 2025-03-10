@@ -20,7 +20,7 @@ import org.jetbrains.compose.resources.stringResource
 internal fun DayContent(
     tracks: List<Track>,
     currency: String,
-    onItemClick: (Long) -> Unit
+    onItemClick: (Long) -> Unit,
 ) {
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         items(tracks) { track ->
@@ -32,7 +32,7 @@ internal fun DayContent(
                 volume = track.volume,
                 degree = track.degree,
                 totalPrice = track.totalPrice,
-                onItemClick = { onItemClick(track.id)}
+                onItemClick = { onItemClick(track.id) },
             )
         }
     }
@@ -42,13 +42,13 @@ internal fun DayContent(
 internal fun DayEmptyContent() {
     Box(
         modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.Center,
     ) {
         Text(
             text = stringResource(Res.string.calendar_empty),
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.titleMedium,
-            color = MaterialTheme.colorScheme.secondary
+            color = MaterialTheme.colorScheme.secondary,
         )
     }
 }

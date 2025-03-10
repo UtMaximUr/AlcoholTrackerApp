@@ -38,7 +38,7 @@ object DateRangeDefaults {
         heightContainer = 40.dp,
         horizontalPadding = 8.dp,
         topPadding = 0.dp,
-        bottomPadding = 8.dp
+        bottomPadding = 8.dp,
     )
 }
 
@@ -46,12 +46,11 @@ object DateRangeDefaults {
 internal fun DateRangeLayout(
     calendarState: CalendarState,
     onDateClick: (LocalDate) -> Unit,
-    config: DateRangeConfig = DateRangeDefaults.config()
+    config: DateRangeConfig = DateRangeDefaults.config(),
 ) {
-
     val pagerState = rememberPagerState(
         initialPage = calendarState.weekNumber,
-        pageCount = { calendarState.datesByWeek.size }
+        pageCount = { calendarState.datesByWeek.size },
     )
 
     LaunchedEffect(Unit) {
@@ -67,9 +66,8 @@ internal fun DateRangeLayout(
                 .padding(bottom = config.bottomPadding, top = config.topPadding)
                 .height(config.heightContainer)
                 .padding(horizontal = config.horizontalPadding),
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.SpaceBetween,
         ) {
-
             calendarState.datesByWeek[index].forEach { date ->
                 Box(
                     contentAlignment = Alignment.Center,
@@ -79,9 +77,9 @@ internal fun DateRangeLayout(
                             color = config.dateBackgroundColor(
                                 calendarState.currentDate,
                                 calendarState.selectedDate,
-                                date
+                                date,
                             ),
-                            shape = CircleShape
+                            shape = CircleShape,
                         )
                         .clickable { onDateClick(date) }
                         .fillMaxHeight(),
@@ -89,7 +87,7 @@ internal fun DateRangeLayout(
                     Text(
                         text = date.dayOfMonth.toString(),
                         style = MaterialTheme.typography.titleSmall,
-                        color = config.dateTextColor(calendarState.currentDate, calendarState.selectedDate, date)
+                        color = config.dateTextColor(calendarState.currentDate, calendarState.selectedDate, date),
                     )
                 }
             }

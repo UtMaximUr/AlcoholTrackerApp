@@ -24,16 +24,15 @@ fun CalendarViewLayout(
     requestUi: RequestUi<TracksData>,
     currency: String,
     onItemClick: (Long) -> Unit,
-    changeView: () -> Unit
+    changeView: () -> Unit,
 ) {
     WeekDayLayout()
 
     Crossfade(
         targetState = calendarView,
-        animationSpec = tween(500)
+        animationSpec = tween(500),
     ) { view ->
         when (view) {
-
             CalendarView.DAY_VIEW -> HorizontalWeek(
                 modifier = modifier,
                 calendarState = calendarState,
@@ -45,9 +44,9 @@ fun CalendarViewLayout(
                     DayContent(
                         tracks = tracks,
                         currency = currency,
-                        onItemClick = onItemClick
+                        onItemClick = onItemClick,
                     )
-                }
+                },
             )
 
             CalendarView.MONTH_VIEW -> HorizontalMonth(
@@ -58,9 +57,9 @@ fun CalendarViewLayout(
                 dayContent = { tracks ->
                     DayMonthContent(
                         modifier = Modifier.align(Alignment.CenterHorizontally),
-                        tracks = tracks
+                        tracks = tracks,
                     )
-                }
+                },
             )
         }
     }

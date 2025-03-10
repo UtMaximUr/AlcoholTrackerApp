@@ -25,12 +25,11 @@ import com.utmaximur.design.button.AddFloatingActionButton
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun CalendarScreen(
     modifier: Modifier,
-    component: CalendarComponent
+    component: CalendarComponent,
 ) {
     val state by component.model.collectAsState()
     val calendarState = rememberCalendarState()
@@ -50,27 +49,27 @@ internal fun CalendarScreen(
                         text = calendarState.currentMonthYear.localized().uppercase(),
                         style = MaterialTheme.typography.titleLarge,
                         overflow = TextOverflow.Ellipsis,
-                        maxLines = 1
+                        maxLines = 1,
                     )
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
                 ),
                 actions = {
                     IconButton(onClick = component::toggleView) {
                         Icon(
                             painter = painterResource(state.calendarView.icon),
-                            contentDescription = stringResource(state.calendarView.title)
+                            contentDescription = stringResource(state.calendarView.title),
                         )
                     }
-                }
+                },
             )
         },
         content = { innerPadding ->
             Column(
                 modifier = Modifier
                     .padding(top = innerPadding.calculateTopPadding())
-                    .fillMaxSize()
+                    .fillMaxSize(),
             ) {
                 CalendarViewLayout(
                     modifier = Modifier,
@@ -79,13 +78,13 @@ internal fun CalendarScreen(
                     requestUi = state.requestTracksUi,
                     currency = state.currency,
                     onItemClick = component::onTrackClick,
-                    changeView = component::toggleView
+                    changeView = component::toggleView,
                 )
             }
         },
         floatingActionButton = {
             AddFloatingActionButton(onClick = component::onCreateTrackClick)
         },
-        floatingActionButtonPosition = FabPosition.EndOverlay
+        floatingActionButtonPosition = FabPosition.EndOverlay,
     )
 }

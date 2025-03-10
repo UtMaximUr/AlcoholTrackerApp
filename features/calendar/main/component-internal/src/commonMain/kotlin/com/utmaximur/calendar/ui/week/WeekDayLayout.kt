@@ -25,12 +25,12 @@ internal fun WeekDayLayout() {
             .padding(bottom = 1.dp)
             .background(color = MaterialTheme.colorScheme.primaryContainer)
             .padding(top = 16.dp, bottom = 14.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
+        horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         daysOfWeekSortedBy(firstDayOfWeek()).forEach {
             Box(
                 contentAlignment = Alignment.Center,
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
             ) {
                 Text(
                     text = it.localized(),
@@ -38,7 +38,7 @@ internal fun WeekDayLayout() {
                     color = when {
                         it.isDayOff() -> MaterialTheme.colorScheme.tertiary
                         else -> MaterialTheme.colorScheme.primary
-                    }
+                    },
                 )
             }
         }

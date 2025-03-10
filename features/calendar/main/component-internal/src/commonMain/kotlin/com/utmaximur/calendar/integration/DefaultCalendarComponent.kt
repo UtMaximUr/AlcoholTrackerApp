@@ -18,7 +18,7 @@ import org.koin.core.component.get
 @Factory
 internal class DefaultCalendarComponent(
     @InjectedParam componentContext: ComponentContext,
-    @InjectedParam private val output: (CalendarComponent.Output) -> Unit
+    @InjectedParam private val output: (CalendarComponent.Output) -> Unit,
 ) : CalendarComponent,
     ComponentContext by componentContext,
     KoinComponent {
@@ -38,5 +38,4 @@ internal class DefaultCalendarComponent(
 
     @Composable
     override fun Render(modifier: Modifier) = CalendarScreen(modifier, this)
-
 }

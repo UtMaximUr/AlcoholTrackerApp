@@ -19,12 +19,11 @@ fun HorizontalMonth(
     calendarState: CalendarState,
     requestUi: RequestUi<TracksData>,
     changeView: () -> Unit,
-    dayContent: @Composable ColumnScope.(List<Track>) -> Unit
+    dayContent: @Composable ColumnScope.(List<Track>) -> Unit,
 ) {
-
     val pagerState = rememberPagerState(
         initialPage = calendarState.currentMonthIndex,
-        pageCount = { calendarState.months.size }
+        pageCount = { calendarState.months.size },
     )
 
     LaunchedEffect(Unit) {
@@ -34,7 +33,7 @@ fun HorizontalMonth(
 
     HorizontalPager(
         state = pagerState,
-        modifier = modifier
+        modifier = modifier,
     ) { index ->
         MonthViewLayout(
             dateMatrix = calendarState.months[index].dateMatrix,
@@ -45,9 +44,9 @@ fun HorizontalMonth(
             dayContent = { date ->
                 RequestWidget(
                     state = requestUi,
-                    content = { tracks -> dayContent(tracks[date].orEmpty()) }
+                    content = { tracks -> dayContent(tracks[date].orEmpty()) },
                 )
-            }
+            },
         )
     }
 }

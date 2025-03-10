@@ -16,12 +16,12 @@ import com.utmaximur.domain.models.Track
 @Composable
 internal fun DayMonthContent(
     modifier: Modifier,
-    tracks: List<Track>
+    tracks: List<Track>,
 ) {
     FlowRow(
         modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(2.dp),
-        verticalArrangement = Arrangement.spacedBy(2.dp)
+        verticalArrangement = Arrangement.spacedBy(2.dp),
     ) {
         tracks.forEach { track ->
             AsyncImage(
@@ -30,7 +30,7 @@ internal fun DayMonthContent(
                     .aspectRatio(1 / 2f),
                 model = track.drink.icon,
                 contentDescription = track.drink.name,
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Crop,
             )
         }
     }

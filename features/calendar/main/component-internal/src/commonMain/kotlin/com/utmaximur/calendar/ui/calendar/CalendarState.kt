@@ -8,14 +8,6 @@ import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.listSaver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import kotlinx.datetime.Clock
-import kotlinx.datetime.DayOfWeek
-import kotlinx.datetime.LocalDate
-import kotlinx.datetime.Month
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.isoDayNumber
-import kotlinx.datetime.number
-import kotlinx.datetime.todayIn
 import com.utmaximur.calendar.models.CalendarDateInfo
 import com.utmaximur.calendar.models.CalendarMonth
 import com.utmaximur.calendar.models.atDay
@@ -28,6 +20,14 @@ import com.utmaximur.calendar.models.lastDayOfWeek
 import com.utmaximur.calendar.models.next
 import com.utmaximur.calendar.models.previous
 import com.utmaximur.calendar.models.startRangeMonth
+import kotlinx.datetime.Clock
+import kotlinx.datetime.DayOfWeek
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.Month
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.isoDayNumber
+import kotlinx.datetime.number
+import kotlinx.datetime.todayIn
 
 /**
  * Создает и запоминает состояние календаря в рамках композиции с использованием
@@ -43,11 +43,11 @@ import com.utmaximur.calendar.models.startRangeMonth
  */
 @Composable
 fun rememberCalendarState(
-    selectedDate: LocalDate = Clock.System.todayIn(TimeZone.currentSystemDefault())
+    selectedDate: LocalDate = Clock.System.todayIn(TimeZone.currentSystemDefault()),
 ): CalendarState {
     return rememberSaveable(
         inputs = arrayOf(
-            selectedDate
+            selectedDate,
         ),
         saver = CalendarState.Saver,
     ) {
@@ -57,7 +57,7 @@ fun rememberCalendarState(
 
 @Stable
 class CalendarState internal constructor(
-    selectedDate: LocalDate
+    selectedDate: LocalDate,
 ) {
     private val dayOfWeekAmount: Int = 7
     private var _currentMonthYear by mutableStateOf(selectedDate.CalendarMonth)
@@ -181,12 +181,12 @@ class CalendarState internal constructor(
      * @return Объект [CalendarDateInfo], содержащий матрицу дат и данные о текущем месяце.
      */
     private fun calculateCalendarGridInfo(
-        currentMonth: CalendarMonth
+        currentMonth: CalendarMonth,
     ): CalendarDateInfo {
         val datesByMonth = calculateDatesByMonth(currentMonth)
         return CalendarDateInfo(
             dateMatrix = datesByMonth.chunked(dayOfWeekAmount),
-            currentMonth = currentMonth
+            currentMonth = currentMonth,
         )
     }
 
@@ -221,7 +221,7 @@ class CalendarState internal constructor(
      * @return Список объектов [LocalDate], представляющий все дни в месяце, включая дни соседних месяцев.
      */
     private fun calculateDatesByMonth(
-        currentMonth: CalendarMonth
+        currentMonth: CalendarMonth,
     ): List<LocalDate> {
         val firstDayOfWeek = daysOfWeekSortedBy(firstDayOfWeek()).first()
         val previousMonth = currentMonth.previous()
@@ -230,8 +230,11 @@ class CalendarState internal constructor(
         val lastDaysAmountInPreviousMonth = when (firstDayOfWeek) {
             DayOfWeek.MONDAY -> previousMonthLastDayOfWeek.isoDayNumber
             DayOfWeek.SUNDAY -> {
-                if (previousMonthLastDayOfWeek == DayOfWeek.SATURDAY) 0
-                else previousMonthLastDayOfWeek.isoDayNumber + 1
+                if (previousMonthLastDayOfWeek == DayOfWeek.SATURDAY) {
+                    0
+                } else {
+                    previousMonthLastDayOfWeek.isoDayNumber + 1
+                }
             }
 
             else -> error("Unexpected firstDayOfWeek: $firstDayOfWeek")
@@ -242,20 +245,20 @@ class CalendarState internal constructor(
         repeat(lastDaysAmountInPreviousMonth) {
             dates.add(
                 previousMonth.atDay(
-                    previousMonth.numberOfDays + it + 1 - lastDaysAmountInPreviousMonth
-                )
+                    previousMonth.numberOfDays + it + 1 - lastDaysAmountInPreviousMonth,
+                ),
             )
         }
 
         repeat(daysAmountInCurrentMonth) {
             dates.add(
-                currentMonth.atDay(it + 1)
+                currentMonth.atDay(it + 1),
             )
         }
 
         repeat(firstDaysAmountInNextMonth) {
             dates.add(
-                nextMonth.atDay(it + 1)
+                nextMonth.atDay(it + 1),
             )
         }
         return dates
@@ -265,14 +268,14 @@ class CalendarState internal constructor(
         internal val Saver: Saver<CalendarState, Any> = listSaver(
             save = {
                 listOf(
-                    it.selectedDate.toString()
+                    it.selectedDate.toString(),
                 )
             },
             restore = {
                 CalendarState(
-                    selectedDate = LocalDate.parse(it[0])
+                    selectedDate = LocalDate.parse(it[0]),
                 )
-            }
+            },
         )
     }
 }

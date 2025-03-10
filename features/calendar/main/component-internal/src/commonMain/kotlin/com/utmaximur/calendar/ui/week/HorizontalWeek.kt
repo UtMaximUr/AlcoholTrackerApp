@@ -23,13 +23,12 @@ fun HorizontalWeek(
     modifier: Modifier,
     calendarState: CalendarState,
     requestUi: RequestUi<TracksData>,
-    dayContent: @Composable ColumnScope.(List<Track>) -> Unit
+    dayContent: @Composable ColumnScope.(List<Track>) -> Unit,
 ) {
-
     val coroutineScope = rememberCoroutineScope()
     val pagerState = rememberPagerState(
         initialPage = calendarState.dates.indexOf(calendarState.selectedDate),
-        pageCount = { calendarState.dates.size }
+        pageCount = { calendarState.dates.size },
     )
 
     LaunchedEffect(Unit) {
@@ -45,15 +44,15 @@ fun HorizontalWeek(
                     val index = calendarState.dates.indexOf(date)
                     pagerState.animateScrollToPage(index)
                 }
-            }
+            },
         )
         HorizontalPager(state = pagerState) { index ->
             RequestWidget(
                 state = requestUi,
-                emptyContentTemplate = { DayEmptyContent() }
+                emptyContentTemplate = { DayEmptyContent() },
             ) { tracks ->
                 dayContent(
-                    tracks[calendarState.dates[index]].orEmpty()
+                    tracks[calendarState.dates[index]].orEmpty(),
                 )
             }
         }

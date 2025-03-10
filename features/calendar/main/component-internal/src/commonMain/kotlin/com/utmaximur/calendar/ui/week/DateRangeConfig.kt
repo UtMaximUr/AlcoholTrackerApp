@@ -14,13 +14,13 @@ data class DateRangeConfig(
     val heightContainer: Dp,
     val horizontalPadding: Dp,
     val topPadding: Dp,
-    val bottomPadding: Dp
+    val bottomPadding: Dp,
 ) {
     @Composable
     fun dateTextColor(
         currentDate: LocalDate,
         selectedDate: LocalDate,
-        date: LocalDate
+        date: LocalDate,
     ): Color = with(this) {
         return@with when {
             selectedDate == date && currentDate == date -> selectedDateTextColor
@@ -33,7 +33,7 @@ data class DateRangeConfig(
     fun dateBackgroundColor(
         currentDate: LocalDate,
         selectedDate: LocalDate,
-        date: LocalDate
+        date: LocalDate,
     ): Color = with(this) {
         return@with when {
             selectedDate == date && currentDate == date -> currentDateActiveBackgroundColor
