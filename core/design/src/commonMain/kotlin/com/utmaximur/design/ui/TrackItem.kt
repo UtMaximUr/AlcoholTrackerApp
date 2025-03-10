@@ -17,12 +17,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import coil3.compose.AsyncImage
+import design.resources.Res
 import design.resources.calendar_count_drink
 import design.resources.currency
 import design.resources.degree
 import design.resources.volume
-import coil3.compose.AsyncImage
-import design.resources.Res
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -34,11 +34,11 @@ fun TrackItem(
     volume: Float,
     degree: Float,
     totalPrice: Float,
-    onItemClick: () -> Unit
+    onItemClick: () -> Unit,
 ) {
     Box(
         modifier = Modifier.clickable(onClick = onItemClick),
-        contentAlignment = Alignment.BottomStart
+        contentAlignment = Alignment.BottomStart,
     ) {
         AsyncImage(
             modifier = Modifier
@@ -46,23 +46,23 @@ fun TrackItem(
                 .aspectRatio(2 / 0.75f),
             model = drinkPhoto,
             contentDescription = drinkName,
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.Crop,
         )
         Column(
             modifier = Modifier.padding(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             TextField(
                 text = stringResource(
                     Res.string.calendar_count_drink,
                     drinkName,
-                    quantity
+                    quantity,
                 ),
                 style = MaterialTheme.typography.headlineLarge,
-                color = MaterialTheme.colorScheme.tertiary
+                color = MaterialTheme.colorScheme.tertiary,
             )
             Row(
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 TextField(text = stringResource(Res.string.volume, volume))
                 TextField(text = stringResource(Res.string.degree, degree))
@@ -70,8 +70,8 @@ fun TrackItem(
                     text = stringResource(
                         Res.string.currency,
                         totalPrice,
-                        currency
-                    )
+                        currency,
+                    ),
                 )
             }
         }
@@ -83,12 +83,12 @@ private fun TextField(
     text: Any,
     modifier: Modifier = Modifier,
     style: TextStyle = MaterialTheme.typography.titleMedium,
-    color: Color = Color.White
+    color: Color = Color.White,
 ) {
     Text(
         modifier = modifier,
         text = text.toString(),
         style = style,
-        color = color
+        color = color,
     )
 }

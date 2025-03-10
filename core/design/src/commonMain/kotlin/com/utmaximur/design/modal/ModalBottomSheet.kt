@@ -15,12 +15,12 @@ import androidx.compose.ui.unit.dp
 fun ModalBottomSheetApp(
     containerColor: Color = MaterialTheme.colorScheme.primaryContainer,
     onDismissRequest: () -> Unit,
-    content: @Composable ColumnScope.() -> Unit
+    content: @Composable ColumnScope.() -> Unit,
 ) = ModalBottomSheet(
     onDismissRequest = onDismissRequest,
     containerColor = containerColor,
     contentColor = MaterialTheme.colorScheme.primary,
     sheetState = rememberModalBottomSheetState(true),
     shape = RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp),
-    content = content
+    content = content,
 )

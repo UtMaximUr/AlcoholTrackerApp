@@ -17,24 +17,24 @@ import org.jetbrains.compose.resources.painterResource
 fun DotsIndicator(
     modifier: Modifier,
     totalDots: Int,
-    selectedIndex: Int
+    selectedIndex: Int,
 ) {
     LazyRow(
         modifier = modifier.wrapContentSize(),
-        horizontalArrangement = Arrangement.spacedBy(4.dp)
+        horizontalArrangement = Arrangement.spacedBy(4.dp),
     ) {
         items(totalDots) { index ->
             if (index == selectedIndex) {
                 Icon(
                     painter = painterResource(Res.drawable.ic_dot_18dp),
                     tint = MaterialTheme.colorScheme.tertiary,
-                    contentDescription = null
+                    contentDescription = null,
                 )
             } else {
                 Icon(
                     painter = painterResource(Res.drawable.ic_dot_default_18dp),
                     tint = MaterialTheme.colorScheme.outline,
-                    contentDescription = null
+                    contentDescription = null,
                 )
             }
         }

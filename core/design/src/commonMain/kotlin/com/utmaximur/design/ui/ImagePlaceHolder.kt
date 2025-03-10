@@ -33,7 +33,7 @@ fun ImageLoaderContent(
     modifier: Modifier,
     imageUrl: String,
     contentDescription: String,
-    contentScale: ContentScale = ContentScale.Fit
+    contentScale: ContentScale = ContentScale.Fit,
 ) {
     val context = LocalPlatformContext.current
     SubcomposeAsyncImage(
@@ -55,24 +55,23 @@ fun ImageLoaderContent(
                     contentScale = contentScale,
                 )
             }
-        }
+        },
     )
 }
 
-
 @Composable
 private fun AnimatedVisibilityContent(
-    content: @Composable AnimatedVisibilityScope.() -> Unit
+    content: @Composable AnimatedVisibilityScope.() -> Unit,
 ) {
     var visibleState by remember { mutableStateOf(false) }
     AnimatedVisibility(
         visible = visibleState,
         enter = fadeIn(
             animationSpec = spring(
-                stiffness = Spring.StiffnessMediumLow
-            )
+                stiffness = Spring.StiffnessMediumLow,
+            ),
         ),
-        content = content
+        content = content,
     )
     LaunchedEffect(Unit) {
         visibleState = true
@@ -84,11 +83,11 @@ private fun LoadingImagePlaceHolder() = Box(
     modifier = Modifier
         .clip(shape = MaterialTheme.shapes.extraLarge)
         .showShimmer()
-        .fillMaxSize()
+        .fillMaxSize(),
 )
 
 @Composable
 private fun ErrorImagePlaceHolder() = Image(
     painter = painterResource(Res.drawable.ic_image_off_outline),
-    contentDescription = stringResource(Res.string.cd_image)
+    contentDescription = stringResource(Res.string.cd_image),
 )

@@ -23,13 +23,12 @@ fun TopBar(
     onBackClick: () -> Unit = {},
     actions: @Composable RowScope.() -> Unit = {},
 ) {
-
     TopAppBar(
         navigationIcon = {
             IconButton(onClick = onBackClick) {
                 Icon(
                     painter = painterResource(Res.drawable.ic_back_button),
-                    contentDescription = stringResource(Res.string.cd_back)
+                    contentDescription = stringResource(Res.string.cd_back),
                 )
             }
         },
@@ -38,12 +37,12 @@ fun TopBar(
                 text = title,
                 style = MaterialTheme.typography.titleLarge,
                 overflow = TextOverflow.Ellipsis,
-                maxLines = 1
+                maxLines = 1,
             )
         },
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
         ),
-        actions = actions
+        actions = actions,
     )
 }

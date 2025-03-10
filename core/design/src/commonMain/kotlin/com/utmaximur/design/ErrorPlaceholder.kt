@@ -22,29 +22,29 @@ fun ErrorPlaceholder(
     errorMessage: String,
     errorTextButton: String = stringResource(Res.string.retry),
     onRetryClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
             .padding(horizontal = 16.dp)
-            .fillMaxSize()
+            .fillMaxSize(),
     ) {
         Text(
             text = errorMessage,
             textAlign = TextAlign.Center,
             modifier = Modifier.fillMaxWidth(),
             style = MaterialTheme.typography.titleSmall,
-            color = MaterialTheme.colorScheme.onBackground
+            color = MaterialTheme.colorScheme.onBackground,
         )
         TextButton(
-            onClick = onRetryClick
+            onClick = onRetryClick,
         ) {
             Text(
                 text = errorTextButton.uppercase(),
                 style = MaterialTheme.typography.titleSmall,
-                color = MaterialTheme.colorScheme.onBackground
+                color = MaterialTheme.colorScheme.onBackground,
             )
         }
     }

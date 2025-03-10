@@ -12,13 +12,13 @@ import org.jetbrains.compose.resources.StringResource
 @Composable
 fun Map<String, StringResource>.getStringResource(
     idResource: String,
-    placeholder: StringResource = Res.string.without_value
+    placeholder: StringResource = Res.string.without_value,
 ) = this[idResource] ?: placeholder
 
 @Composable
 fun TextOutlinedLabel(title: String) = Text(
     text = title,
-    style = MaterialTheme.typography.labelMedium
+    style = MaterialTheme.typography.labelMedium,
 )
 
 @Composable
@@ -32,5 +32,5 @@ fun DefaultOutlinedTextFieldDefaults() = OutlinedTextFieldDefaults.colors(
     cursorColor = MaterialTheme.colorScheme.primary,
     focusedBorderColor = MaterialTheme.colorScheme.tertiary,
     unfocusedBorderColor = MaterialTheme.colorScheme.primaryContainer,
-    focusedLabelColor = MaterialTheme.colorScheme.tertiary
+    focusedLabelColor = MaterialTheme.colorScheme.tertiary,
 )

@@ -11,7 +11,7 @@ sealed interface NetworkStatus {
 
 inline fun <Result> Flow<NetworkStatus>.map(
     crossinline onUnavailable: suspend () -> Result,
-    crossinline onAvailable: suspend () -> Result
+    crossinline onAvailable: suspend () -> Result,
 ): Flow<Result> = map { status ->
     when (status) {
         NetworkStatus.Unavailable -> onUnavailable()

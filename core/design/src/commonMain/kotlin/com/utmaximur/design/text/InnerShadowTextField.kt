@@ -64,9 +64,8 @@ fun InnerShadowTextField(
     singleLine: Boolean = true,
     isError: Boolean = false,
     minLines: Int = 1,
-    keyboardType: KeyboardType = KeyboardType.Text
+    keyboardType: KeyboardType = KeyboardType.Text,
 ) {
-
     val message = remember(key1 = textValue) { mutableStateOf(textValue?.toString().orEmpty()) }
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
@@ -75,7 +74,7 @@ fun InnerShadowTextField(
         modifier = Modifier
             .padding(paddingValues)
             .fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(10.dp)
+        verticalArrangement = Arrangement.spacedBy(10.dp),
     ) {
         title?.let { TextOutlinedLabel(it) }
         OutlinedTextField(
@@ -91,13 +90,13 @@ fun InnerShadowTextField(
             readOnly = readOnly,
             keyboardOptions = KeyboardOptions(
                 imeAction = ImeAction.Done,
-                keyboardType = keyboardType
+                keyboardType = keyboardType,
             ),
             keyboardActions = KeyboardActions(
                 onDone = {
                     focusManager.clearFocus()
                     keyboardController?.hide()
-                }
+                },
             ),
             textStyle = MaterialTheme.typography.bodyMedium,
             leadingIcon = leadingIcon,
@@ -109,11 +108,11 @@ fun InnerShadowTextField(
                 Text(
                     text = placeholderText,
                     style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.secondary
+                    color = MaterialTheme.colorScheme.secondary,
                 )
             },
             minLines = minLines,
-            isError = isError
+            isError = isError,
         )
         supportingText?.let { it() }
     }
@@ -122,7 +121,7 @@ fun InnerShadowTextField(
 @Composable
 private fun trailingOrBlockedIcon(
     enabled: Boolean,
-    trailingIcon: @Composable (() -> Unit)?
+    trailingIcon: @Composable (() -> Unit)?,
 ): @Composable (() -> Unit)? {
     return when {
         enabled -> trailingIcon?.let { icon -> { icon.invoke() } }
@@ -136,5 +135,5 @@ private fun trailingOrBlockedIcon(
 private fun FunctionalBlockedIcon() = Icon(
     painter = painterResource(Res.drawable.ic_lock_24dp),
     contentDescription = stringResource(Res.string.cd_lock),
-    tint = MaterialTheme.colorScheme.tertiary
+    tint = MaterialTheme.colorScheme.tertiary,
 )

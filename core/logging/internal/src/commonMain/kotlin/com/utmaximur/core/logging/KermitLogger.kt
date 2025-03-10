@@ -3,7 +3,6 @@ package com.utmaximur.core.logging
 import co.touchlab.kermit.Severity
 import com.utmaximur.app.base.app.ApplicationInfo
 import com.utmaximur.app.base.app.Flavor
-import com.utmaximur.core.logging.Logger
 import co.touchlab.kermit.Logger as Kermit
 
 internal class KermitLogger(applicationInfo: ApplicationInfo) : Logger {
@@ -13,7 +12,7 @@ internal class KermitLogger(applicationInfo: ApplicationInfo) : Logger {
                 applicationInfo.debugBuild -> Severity.Debug
                 applicationInfo.flavor == Flavor.Qa -> Severity.Debug
                 else -> Severity.Error
-            }
+            },
         )
     }
 

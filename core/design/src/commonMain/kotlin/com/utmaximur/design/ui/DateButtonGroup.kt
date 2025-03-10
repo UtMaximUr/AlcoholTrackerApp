@@ -21,7 +21,6 @@ import design.resources.add_today
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
-
 @Composable
 fun DateButtonGroup(
     selectedDate: String,
@@ -30,20 +29,20 @@ fun DateButtonGroup(
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(6.dp)
+        horizontalArrangement = Arrangement.spacedBy(6.dp),
     ) {
         SelectDayButton(
             modifier = Modifier.weight(1f),
             text = selectedDate.ifEmpty { stringResource(Res.string.add_date) },
-            onSelectDateClick = { onSelectDateClick(selectedDate) }
+            onSelectDateClick = { onSelectDateClick(selectedDate) },
         )
         AnimatedVisibility(
             visible = selectedDate.isEmpty(),
-            enter = expandVertically()
+            enter = expandVertically(),
         ) {
             TodayButton(
                 text = Res.string.add_today,
-                onTodayClick = onTodayClick
+                onTodayClick = onTodayClick,
             )
         }
     }
@@ -53,20 +52,20 @@ fun DateButtonGroup(
 internal fun SelectDayButton(
     modifier: Modifier,
     text: String,
-    onSelectDateClick: () -> Unit
+    onSelectDateClick: () -> Unit,
 ) {
     Button(
         modifier = modifier.bounceClick(),
         shape = MaterialTheme.shapes.extraLarge,
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.tertiary,
-            contentColor = Color.White
+            contentColor = Color.White,
         ),
-        onClick = { onSelectDateClick() }
+        onClick = { onSelectDateClick() },
     ) {
         Text(
             text = text,
-            style = MaterialTheme.typography.labelLarge
+            style = MaterialTheme.typography.labelLarge,
         )
     }
 }
@@ -74,20 +73,20 @@ internal fun SelectDayButton(
 @Composable
 internal fun TodayButton(
     text: StringResource,
-    onTodayClick: () -> Unit
+    onTodayClick: () -> Unit,
 ) {
     OutlinedButton(
         modifier = Modifier.bounceClick(),
         shape = MaterialTheme.shapes.extraLarge,
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
-            contentColor = MaterialTheme.colorScheme.primary
+            contentColor = MaterialTheme.colorScheme.primary,
         ),
-        onClick = { onTodayClick() }
+        onClick = { onTodayClick() },
     ) {
         Text(
             text = stringResource(text),
-            style = MaterialTheme.typography.labelLarge
+            style = MaterialTheme.typography.labelLarge,
         )
     }
 }

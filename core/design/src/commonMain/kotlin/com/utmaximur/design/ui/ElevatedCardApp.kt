@@ -21,23 +21,23 @@ fun ElevatedCardApp(
     defaultElevation: Dp = 4.dp,
     contentPaddingValues: PaddingValues = PaddingValues(0.dp),
     verticalArrangement: Arrangement.Vertical = Arrangement.spacedBy(0.dp),
-    content: @Composable ColumnScope.() -> Unit
+    content: @Composable ColumnScope.() -> Unit,
 ) = ElevatedCard(
     modifier = modifier,
     shape = shape,
     elevation = CardDefaults.cardElevation(
-        defaultElevation = defaultElevation
+        defaultElevation = defaultElevation,
     ),
     colors = CardDefaults.cardColors(
         containerColor = MaterialTheme.colorScheme.primaryContainer,
-        contentColor = MaterialTheme.colorScheme.primary
+        contentColor = MaterialTheme.colorScheme.primary,
     ),
     content = {
         Column(
             modifier = Modifier.padding(contentPaddingValues),
-            verticalArrangement = verticalArrangement
+            verticalArrangement = verticalArrangement,
         ) {
             content()
         }
-    }
+    },
 )

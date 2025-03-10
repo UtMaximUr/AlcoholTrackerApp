@@ -5,7 +5,6 @@ import androidx.compose.ui.Modifier
 import com.utmaximur.core.mvi_mapper.RequestUi
 import com.utmaximur.mappers.implementation.LoadStateType
 
-
 @Composable
 fun <T : Any> RequestWidget(
     state: RequestUi<T>,
@@ -17,15 +16,14 @@ fun <T : Any> RequestWidget(
         ErrorPlaceholder(
             errorMessage = "$error",
             onRetryClick = onRetryClick,
-            modifier = modifier
+            modifier = modifier,
         )
     },
-    content: @Composable (data: T) -> Unit
+    content: @Composable (data: T) -> Unit,
 ) {
     val (data, _, error) = state
 
     when {
-
         data != null -> content(data)
 
         state.isLoading -> shimmerContentTemplate()

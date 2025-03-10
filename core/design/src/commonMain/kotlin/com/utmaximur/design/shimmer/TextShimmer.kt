@@ -14,6 +14,6 @@ fun TextShimmer(aspectRatio: Float) {
         modifier = Modifier
             .showShimmer()
             .height(height = 18.dp)
-            .aspectRatio(aspectRatio)
+            .aspectRatio(aspectRatio),
     )
 }

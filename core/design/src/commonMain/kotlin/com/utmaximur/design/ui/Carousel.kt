@@ -18,7 +18,7 @@ fun Carousel(
     horizontalPagerModifier: Modifier = Modifier,
     config: CarouselConfig = CarouselDefaults.config(),
     pagerState: PagerState,
-    carouselContent: @Composable (Int) -> Unit
+    carouselContent: @Composable (Int) -> Unit,
 ) {
     val isDragged by pagerState.interactionSource.collectIsDraggedAsState()
     val lastIndex by remember(pagerState.currentPage) {
@@ -31,14 +31,14 @@ fun Carousel(
                 val page = if (lastIndex) 0 else pagerState.currentPage.inc()
                 pagerState.animateScrollToPage(
                     page,
-                    animationSpec = tween(if (lastIndex) config.animationSpec / 2 else config.animationSpec)
+                    animationSpec = tween(if (lastIndex) config.animationSpec / 2 else config.animationSpec),
                 )
             }
         }
     }
     HorizontalPager(
         modifier = horizontalPagerModifier,
-        state = pagerState
+        state = pagerState,
     ) { index ->
         carouselContent(index)
     }
@@ -49,13 +49,13 @@ object CarouselDefaults {
     @Composable
     fun config() = CarouselConfig(
         carouselDelay = 2_000,
-        animationSpec = 1400
+        animationSpec = 1400,
     )
 }
 
 data class CarouselConfig(
     val carouselDelay: Long = 2_000,
-    val animationSpec: Int = 1400
+    val animationSpec: Int = 1400,
 ) {
     init {
         require(animationSpec > 0, { "AnimationSpec must be > 0" })

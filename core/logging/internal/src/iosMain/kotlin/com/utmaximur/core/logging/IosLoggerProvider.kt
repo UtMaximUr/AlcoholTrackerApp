@@ -1,9 +1,7 @@
 package com.utmaximur.core.logging
 
-import org.koin.core.annotation.Single
 import com.utmaximur.app.base.app.ApplicationInfo
-import com.utmaximur.core.logging.KermitLogger
-import com.utmaximur.core.logging.Logger
+import org.koin.core.annotation.Single
 
 @Single
 fun provideIosLogger(applicationInfo: ApplicationInfo): Logger = KermitLogger(applicationInfo)

@@ -55,7 +55,6 @@ internal class NetworkStatusTracker(logger: Logger) : ObserveNetworkStatus {
     }.distinctUntilChanged()
 
     private fun ConnectivityManager.getCurrentNetworkState(): NetworkStatus {
-
         val networkCapabilities = getNetworkCapabilities(activeNetwork)
 
         return networkCapabilities?.asNetworkState() ?: NetworkStatus.Unavailable
