@@ -25,7 +25,7 @@ internal actual class PermissionsManager actual constructor(private val callback
         when (permission) {
             PermissionType.CAMERA -> {
                 val cameraPermissions = arrayOf(
-                    android.Manifest.permission.CAMERA
+                    android.Manifest.permission.CAMERA,
                 )
                 LaunchPermission(permission, cameraPermissions)
             }
@@ -34,7 +34,7 @@ internal actual class PermissionsManager actual constructor(private val callback
                 // Granted by default because in Android GetContent API does not require any runtime permissions
                 callback.onPermissionStatus(
                     permission,
-                    PermissionStatus.GRANTED
+                    PermissionStatus.GRANTED,
                 )
             }
         }
@@ -53,7 +53,7 @@ internal actual class PermissionsManager actual constructor(private val callback
         val context = LocalContext.current
         Intent(
             Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-            Uri.fromParts("package", context.packageName, null)
+            Uri.fromParts("package", context.packageName, null),
         ).also {
             context.startActivity(it)
         }
@@ -62,7 +62,7 @@ internal actual class PermissionsManager actual constructor(private val callback
     @Composable
     private fun LaunchPermission(permission: PermissionType, permissions: Array<String>) {
         val launcher = rememberLauncherForActivityResult(
-            ActivityResultContracts.RequestMultiplePermissions()
+            ActivityResultContracts.RequestMultiplePermissions(),
         ) { result ->
             val permissionsGranted = result.values.reduce { acc, isPermissionGranted ->
                 acc && isPermissionGranted
@@ -74,8 +74,9 @@ internal actual class PermissionsManager actual constructor(private val callback
             callback.onPermissionStatus(permission, permissionStatus)
         }
         when {
-            isPermissionGranted(permission) -> callback.onPermissionStatus(permission,
-                PermissionStatus.GRANTED
+            isPermissionGranted(permission) -> callback.onPermissionStatus(
+                permission,
+                PermissionStatus.GRANTED,
             )
             else -> LaunchedEffect(permissions) { launcher.launch(permissions) }
         }
@@ -86,7 +87,7 @@ internal actual class PermissionsManager actual constructor(private val callback
         val context = LocalContext.current
         return ContextCompat.checkSelfPermission(
             context,
-            permission
+            permission,
         ) == PackageManager.PERMISSION_GRANTED
     }
 }

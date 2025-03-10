@@ -1,7 +1,6 @@
 package com.utmaximur.permission
 
 import androidx.compose.runtime.Composable
-import com.utmaximur.permission.PermissionType
 
 internal interface PermissionHandler {
 

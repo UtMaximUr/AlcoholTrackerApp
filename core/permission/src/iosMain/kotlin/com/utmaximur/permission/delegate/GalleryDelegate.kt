@@ -1,18 +1,18 @@
 package com.utmaximur.permission.delegate
 
+import com.utmaximur.permission.PermissionCallback
+import com.utmaximur.permission.PermissionStatus
+import com.utmaximur.permission.PermissionType
 import platform.Photos.PHAuthorizationStatus
 import platform.Photos.PHAuthorizationStatusAuthorized
 import platform.Photos.PHAuthorizationStatusDenied
 import platform.Photos.PHAuthorizationStatusNotDetermined
 import platform.Photos.PHPhotoLibrary
-import com.utmaximur.permission.PermissionCallback
-import com.utmaximur.permission.PermissionStatus
-import com.utmaximur.permission.PermissionType
 
 internal fun askGalleryPermission(
     status: PHAuthorizationStatus,
     permission: PermissionType,
-    callback: PermissionCallback
+    callback: PermissionCallback,
 ) {
     when (status) {
         PHAuthorizationStatusAuthorized -> {
@@ -28,7 +28,7 @@ internal fun askGalleryPermission(
         PHAuthorizationStatusDenied -> {
             callback.onPermissionStatus(
                 permission,
-                PermissionStatus.DENIED
+                PermissionStatus.DENIED,
             )
         }
 

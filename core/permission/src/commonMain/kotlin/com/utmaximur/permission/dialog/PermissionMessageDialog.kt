@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.sp
 internal fun PermissionMessageDialog(
     message: String,
     onPositiveClick: () -> Unit = {},
-    onNegativeClick: () -> Unit = {}
+    onNegativeClick: () -> Unit = {},
 ) {
     AlertDialog(
         onDismissRequest = onNegativeClick,
@@ -20,19 +20,19 @@ internal fun PermissionMessageDialog(
             Text(
                 text = "Res.string.permission_title",
                 style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.primary
+                color = MaterialTheme.colorScheme.primary,
             )
         },
         text = {
             Text(
                 text = message,
                 style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.primary
+                color = MaterialTheme.colorScheme.primary,
             )
         },
         confirmButton = {
             TextButton(
-                onClick = onPositiveClick
+                onClick = onPositiveClick,
             ) {
                 Text(
                     text = "Res.string.permission_settings",
@@ -44,7 +44,7 @@ internal fun PermissionMessageDialog(
         },
         dismissButton = {
             TextButton(
-                onClick = onNegativeClick
+                onClick = onNegativeClick,
             ) {
                 Text(
                     text = "Res.string.permission_cancel",
@@ -52,6 +52,6 @@ internal fun PermissionMessageDialog(
                     fontSize = 13.sp,
                 )
             }
-        }
+        },
     )
 }

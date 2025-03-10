@@ -10,7 +10,7 @@ import java.io.File
 
 actual class PlatformFile(
     val uri: Uri,
-    private val context: Context
+    private val context: Context,
 ) {
 
     actual val name: String by lazy {

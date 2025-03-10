@@ -1,8 +1,8 @@
 package com.utmaximur.core.logging
 
-import org.koin.core.annotation.Single
 import com.utmaximur.app.base.app.ApplicationInfo
 import com.utmaximur.app.base.app.Flavor
+import org.koin.core.annotation.Single
 import timber.log.Timber
 @Single
 internal class TimberLogger(applicationInfo: ApplicationInfo) : Logger {

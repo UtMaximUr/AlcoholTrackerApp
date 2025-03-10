@@ -33,7 +33,7 @@ import platform.Foundation.pathExtension
 import platform.posix.memcpy
 
 actual class PlatformFile(
-    val nsUrl: NSURL
+    val nsUrl: NSURL,
 ) {
     actual val name: String = nsUrl.lastPathComponent ?: String()
 
@@ -83,14 +83,14 @@ actual class PlatformFile(
         val cfFileExtension = CFStringCreateWithCString(
             kCFAllocatorDefault,
             fileExtension,
-            kCFStringEncodingUTF8
+            kCFStringEncodingUTF8,
         ) ?: return null
 
         // Получаем UTI для данного расширения
         val uti = UTTypeCreatePreferredIdentifierForTag(
             kUTTagClassFilenameExtension,
             cfFileExtension,
-            null
+            null,
         )
 
         // Получаем MIME-type на основе UTI

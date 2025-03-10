@@ -39,7 +39,8 @@ enum class MimeType(val value: String) {
     PNG("image/png"),
     SVG("image/svg+xml"),
     WEBP("image/webp"),
-    UNKNOWN("unknown");
+    UNKNOWN("unknown"),
+    ;
 
     companion object {
         fun findByValue(value: String) = entries.find { it.value.contains(value) } ?: UNKNOWN

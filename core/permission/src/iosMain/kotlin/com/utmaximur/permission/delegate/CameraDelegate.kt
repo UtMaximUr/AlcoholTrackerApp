@@ -1,5 +1,8 @@
 package com.utmaximur.permission.delegate
 
+import com.utmaximur.permission.PermissionCallback
+import com.utmaximur.permission.PermissionStatus
+import com.utmaximur.permission.PermissionType
 import platform.AVFoundation.AVAuthorizationStatus
 import platform.AVFoundation.AVAuthorizationStatusAuthorized
 import platform.AVFoundation.AVAuthorizationStatusDenied
@@ -7,14 +10,11 @@ import platform.AVFoundation.AVAuthorizationStatusNotDetermined
 import platform.AVFoundation.AVCaptureDevice
 import platform.AVFoundation.AVMediaTypeVideo
 import platform.AVFoundation.requestAccessForMediaType
-import com.utmaximur.permission.PermissionCallback
-import com.utmaximur.permission.PermissionStatus
-import com.utmaximur.permission.PermissionType
 
 internal fun askCameraPermission(
     status: AVAuthorizationStatus,
     permission: PermissionType,
-    callback: PermissionCallback
+    callback: PermissionCallback,
 ) {
     when (status) {
         AVAuthorizationStatusAuthorized -> {

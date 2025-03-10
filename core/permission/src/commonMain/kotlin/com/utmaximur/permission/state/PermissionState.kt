@@ -13,7 +13,6 @@ import com.utmaximur.permission.createPermissionsManager
 import com.utmaximur.permission.dialog.PermissionMessageDialog
 import org.jetbrains.compose.resources.stringResource
 
-
 /**
  * @param permissionType - [PermissionType] тип разрешения.
  * @param permissionGranted - обратный вызов при получении разрешений от пользователя.
@@ -22,7 +21,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun rememberPermissionState(
     permissionType: PermissionType,
-    permissionGranted: () -> Unit = {}
+    permissionGranted: () -> Unit = {},
 ): PermissionState {
     var launchState by remember { mutableStateOf(value = false) }
     var permissionRationalDialog by remember { mutableStateOf(value = false) }
@@ -55,7 +54,7 @@ fun rememberPermissionState(
             },
             onNegativeClick = {
                 permissionRationalDialog = false
-            }
+            },
         )
 
         launchSetting -> {
@@ -67,10 +66,9 @@ fun rememberPermissionState(
     return MutablePermissionState(
         isPermissionGranted = permissionsManager.isPermissionGranted(permissionType),
         permissionLaunch = { launchState = true },
-        settingsLaunch = { launchSetting = true }
+        settingsLaunch = { launchSetting = true },
     )
 }
-
 
 @Stable
 interface PermissionState {
@@ -80,5 +78,4 @@ interface PermissionState {
     fun launchRequestPermission()
 
     fun openSettings()
-
 }

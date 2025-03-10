@@ -151,7 +151,7 @@ object RequestMappers {
          */
         fun <T1, T2> default(
             isSwr: Boolean = false,
-            showEmptyState: Boolean = true
+            showEmptyState: Boolean = true,
         ): RequestLoadingMapper<T1, T2> = { request, data ->
             val hasData = when (data) {
                 is List<*> -> data.isNotEmpty()
@@ -251,10 +251,10 @@ object RequestMappers {
                 val isSecurityProblem = error?.isNetworkConnectionError() == true
                 val isNonAuthorized = error is NetworkResponseError.Unauthorized
                 val isErrorStateOnDisplay = loading is LoadStateType.Error ||
-                        loading is LoadStateType.NoInternet
+                    loading is LoadStateType.NoInternet
                 if (isSecurityProblem || isNonAuthorized || !isErrorStateOnDisplay) {
                     error?.also(
-                        errorHandler::handleError
+                        errorHandler::handleError,
                     )
                 }
                 true

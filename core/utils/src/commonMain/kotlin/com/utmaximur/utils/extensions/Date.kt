@@ -12,7 +12,6 @@ import kotlinx.datetime.format.char
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
 
-
 private val dateFormat_DD_MM_YYYY = LocalDate.Format {
     dayOfMonth()
     char('/')
@@ -22,7 +21,7 @@ private val dateFormat_DD_MM_YYYY = LocalDate.Format {
 }
 
 val instantNow = Clock.System.now()
-val localDateTimeNow =  instantNow.toLocalDateTime(TimeZone.UTC)
+val localDateTimeNow = instantNow.toLocalDateTime(TimeZone.UTC)
 
 fun String?.parseToLong(): Long? {
     this?.ifEmpty { return null }

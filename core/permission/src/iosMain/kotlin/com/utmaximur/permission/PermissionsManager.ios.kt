@@ -2,6 +2,8 @@ package com.utmaximur.permission
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import com.utmaximur.permission.delegate.askCameraPermission
+import com.utmaximur.permission.delegate.askGalleryPermission
 import platform.AVFoundation.AVAuthorizationStatus
 import platform.AVFoundation.AVAuthorizationStatusAuthorized
 import platform.AVFoundation.AVCaptureDevice
@@ -13,8 +15,6 @@ import platform.Photos.PHAuthorizationStatusAuthorized
 import platform.Photos.PHPhotoLibrary
 import platform.UIKit.UIApplication
 import platform.UIKit.UIApplicationOpenSettingsURLString
-import com.utmaximur.permission.delegate.askCameraPermission
-import com.utmaximur.permission.delegate.askGalleryPermission
 
 @Composable
 internal actual fun createPermissionsManager(callback: PermissionCallback): PermissionsManager {
