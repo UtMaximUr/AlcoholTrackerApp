@@ -25,6 +25,6 @@ fun provideApplicationInfo(flavor: Flavor, packageManager: PackageManager, conte
         flavor = flavor,
         versionName = packageInfo.versionName.orEmpty(),
         versionCode = @Suppress("DEPRECATION") packageInfo.versionCode,
-        language = locale.toString()
+        language = locale.toString(),
     )
 }

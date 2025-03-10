@@ -10,11 +10,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.defaultComponentContext
+import com.utmaximur.root.RootComponent
+import com.utmaximur.root.ui.RootScreen
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import org.koin.core.parameter.parametersOf
-import com.utmaximur.root.RootComponent
-import com.utmaximur.root.ui.RootScreen
 
 internal class MainActivity : ComponentActivity(), KoinComponent {
 
@@ -22,11 +22,13 @@ internal class MainActivity : ComponentActivity(), KoinComponent {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge(
             statusBarStyle = SystemBarStyle.light(
-                Color.TRANSPARENT, Color.TRANSPARENT
+                Color.TRANSPARENT,
+                Color.TRANSPARENT,
             ),
             navigationBarStyle = SystemBarStyle.light(
-                Color.TRANSPARENT, Color.TRANSPARENT
-            )
+                Color.TRANSPARENT,
+                Color.TRANSPARENT,
+            ),
         )
         val root = get<RootComponent> {
             parametersOf(defaultComponentContext())
@@ -34,7 +36,7 @@ internal class MainActivity : ComponentActivity(), KoinComponent {
         setContent {
             Surface(
                 modifier = Modifier.fillMaxSize(),
-                content = { RootScreen(root) }
+                content = { RootScreen(root) },
             )
         }
     }

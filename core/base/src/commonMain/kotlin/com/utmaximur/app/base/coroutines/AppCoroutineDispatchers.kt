@@ -12,7 +12,7 @@ import org.koin.core.annotation.Single
 /*
 Не работают два annotation class в одном конструкторе
  */
-//TODO это не работает все как ожидалось
+// TODO это не работает все как ожидалось
 @Named("CoroutineDispatcherIO")
 annotation class NamedCoroutineDispatcherIO
 

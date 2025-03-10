@@ -1,8 +1,8 @@
 package com.utmaximur.tracker
 
-import org.koin.core.annotation.Single
 import com.utmaximur.analytics.domain.AnalyticsManager
 import com.utmaximur.data.tracker.AnalyticsTracker
+import org.koin.core.annotation.Single
 
 @Single
 internal class RealAnalyticsManager(private val tracker: AnalyticsTracker) : AnalyticsManager {

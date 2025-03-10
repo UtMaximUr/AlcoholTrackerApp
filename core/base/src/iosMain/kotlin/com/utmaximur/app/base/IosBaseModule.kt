@@ -1,10 +1,10 @@
 package com.utmaximur.app.base
 
+import com.utmaximur.app.base.app.ApplicationInfo
+import com.utmaximur.app.base.app.Flavor
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.Single
 import platform.Foundation.NSBundle
-import com.utmaximur.app.base.app.ApplicationInfo
-import com.utmaximur.app.base.app.Flavor
 import kotlin.experimental.ExperimentalNativeApi
 
 @Factory
@@ -20,5 +20,5 @@ fun provideApplicationInfo(flavor: Flavor) = ApplicationInfo(
     debugBuild = Platform.isDebugBinary,
     flavor = flavor,
     versionName = NSBundle.mainBundle.infoDictionary?.get("CFBundleShortVersionString") as? String ?: "",
-    versionCode = (NSBundle.mainBundle.infoDictionary?.get("CFBundleVersion") as? String)?.toIntOrNull() ?: 0
+    versionCode = (NSBundle.mainBundle.infoDictionary?.get("CFBundleVersion") as? String)?.toIntOrNull() ?: 0,
 )

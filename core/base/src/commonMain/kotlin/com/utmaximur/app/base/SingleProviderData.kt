@@ -38,7 +38,7 @@ interface SingleDataProcess<T> {
  * @param T Тип данных, с которым работает провайдер. Он может быть любым типом данных.
  */
 abstract class BaseSingleProviderData<T>(
-    private val mutableFlowWrapper: MutableFlowWrapper<T> = MutableStateFlowWrapper()
+    private val mutableFlowWrapper: MutableFlowWrapper<T> = MutableStateFlowWrapper(),
 ) : SingleDataProcess<T> {
 
     /**
@@ -75,7 +75,7 @@ class MutableStateFlowWrapper<T>(initial: T? = null) : MutableFlowWrapper<T> {
 class MutableSharedFlowWrapper<T>(
     replay: Int = 0,
     extraBufferCapacity: Int = 0,
-    onBufferOverflow: BufferOverflow = BufferOverflow.SUSPEND
+    onBufferOverflow: BufferOverflow = BufferOverflow.SUSPEND,
 ) : MutableFlowWrapper<T> {
     private val mutableFlow = MutableSharedFlow<T>(replay, extraBufferCapacity, onBufferOverflow)
 

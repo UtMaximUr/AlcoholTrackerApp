@@ -7,15 +7,15 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.ComposeUIViewController
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
-import platform.UIKit.UIViewController
 import com.utmaximur.Initializer
 import com.utmaximur.root.ui.RootScreen
+import platform.UIKit.UIViewController
 
 @Suppress("unused", "FunctionName")
 fun MainViewController(
     lifecycle: LifecycleRegistry,
     topSafeArea: Float,
-    bottomSafeArea: Float
+    bottomSafeArea: Float,
 ): UIViewController {
     val koinInitializer = Initializer(lifecycle)
 
