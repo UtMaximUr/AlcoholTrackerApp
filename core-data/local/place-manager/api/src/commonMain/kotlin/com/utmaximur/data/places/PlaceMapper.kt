@@ -4,7 +4,6 @@ import com.utmaximur.data.Mapper
 import com.utmaximur.databaseRoom.place.DbPlace
 import com.utmaximur.domain.models.Place
 
-
 typealias PlaceLocalMapper = Mapper<Place, DbPlace>
 typealias PlaceUiMapper = Mapper<DbPlace, Place>
 
