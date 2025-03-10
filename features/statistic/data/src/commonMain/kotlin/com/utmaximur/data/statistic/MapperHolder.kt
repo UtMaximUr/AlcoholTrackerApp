@@ -12,5 +12,5 @@ internal class MapperHolder(
     @Named(NAMED_TRACK_UI_MAPPER)
     val trackUiMapper: TrackUiMapper,
     @Named(NAMED_DRINK_UI_MAPPER)
-    val drinkUiMapper: DrinkUiMapper
+    val drinkUiMapper: DrinkUiMapper,
 )

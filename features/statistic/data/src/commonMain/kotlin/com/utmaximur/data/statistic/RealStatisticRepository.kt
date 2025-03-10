@@ -1,19 +1,18 @@
 package com.utmaximur.data.statistic
 
-
+import com.utmaximur.databaseRoom.drink.DrinkDao
+import com.utmaximur.databaseRoom.track.TrackDao
 import com.utmaximur.domain.statistic.StatisticRepository
 import com.utmaximur.settingsManager.CurrencySettingsManager
 import com.utmaximur.utils.extensions.mapList
 import org.koin.core.annotation.Factory
-import com.utmaximur.databaseRoom.drink.DrinkDao
-import com.utmaximur.databaseRoom.track.TrackDao
 
 @Factory
 internal class RealStatisticRepository(
     trackDao: TrackDao,
     drinkDao: DrinkDao,
     mapperHolder: MapperHolder,
-    currencySettingsManager: CurrencySettingsManager
+    currencySettingsManager: CurrencySettingsManager,
 ) : StatisticRepository {
 
     override val currencyStream = currencySettingsManager.currencyStateStream

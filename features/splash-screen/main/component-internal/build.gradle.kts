@@ -15,5 +15,3 @@ dependencies {
 compose.resources {
     packageOfResClass = "splashScreen.resources"
 }
-
-

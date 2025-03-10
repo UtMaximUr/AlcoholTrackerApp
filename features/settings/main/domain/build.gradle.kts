@@ -30,12 +30,12 @@ buildkonfig {
         buildConfigField(
             FieldSpec.Type.STRING,
             "URL_PRIVACY",
-            "https://alcohol-tracker.flycricket.io/privacy.html"
+            "https://alcohol-tracker.flycricket.io/privacy.html",
         )
         buildConfigField(
             FieldSpec.Type.STRING,
             "URL_TERMS",
-            "https://alcohol-tracker.flycricket.io/terms.html"
+            "https://alcohol-tracker.flycricket.io/terms.html",
         )
     }
 }

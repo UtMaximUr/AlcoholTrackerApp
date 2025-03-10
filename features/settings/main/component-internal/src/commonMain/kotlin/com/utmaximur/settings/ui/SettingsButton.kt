@@ -20,20 +20,20 @@ import settings.resources.ic_chevrone_right
 internal fun SettingsButton(
     modifier: Modifier = Modifier,
     title: StringResource,
-    trailingContent: @Composable (() -> Unit)? = { DefaultTrailingItem() }
+    trailingContent: @Composable (() -> Unit)? = { DefaultTrailingItem() },
 ) {
     ListItem(
         modifier = modifier,
         headlineContent = {
             Text(
                 text = stringResource(title),
-                style = MaterialTheme.typography.labelMedium
+                style = MaterialTheme.typography.labelMedium,
             )
         },
         trailingContent = trailingContent,
         colors = ListItemDefaults.colors(
-            containerColor = Color.Transparent
-        )
+            containerColor = Color.Transparent,
+        ),
     )
 }
 
@@ -42,5 +42,5 @@ internal fun DefaultTrailingItem() = Icon(
     modifier = Modifier.size(16.dp),
     painter = painterResource(Res.drawable.ic_chevrone_right),
     contentDescription = null,
-    tint = MaterialTheme.colorScheme.primary
+    tint = MaterialTheme.colorScheme.primary,
 )

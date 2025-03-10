@@ -10,7 +10,7 @@ import org.koin.core.annotation.Factory
 @Factory
 internal class FetchData(
     private val networkStatus: ObserveNetworkStatus,
-    splashScreenRepository: Lazy<SplashScreenRepository>
+    splashScreenRepository: Lazy<SplashScreenRepository>,
 ) : Interactor<Unit, Flow<Boolean>>() {
 
     private val repository by splashScreenRepository
@@ -19,6 +19,6 @@ internal class FetchData(
         networkStatus.invoke()
             .map(
                 onAvailable = repository::fetchAppData,
-                onUnavailable = repository::checkNotEmptyTable
+                onUnavailable = repository::checkNotEmptyTable,
             )
 }

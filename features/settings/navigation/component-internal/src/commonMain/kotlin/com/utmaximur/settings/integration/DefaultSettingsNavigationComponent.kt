@@ -28,7 +28,7 @@ import org.koin.core.parameter.parameterArrayOf
 
 @Factory
 internal class DefaultSettingsNavigationComponent(
-    @InjectedParam componentContext: ComponentContext
+    @InjectedParam componentContext: ComponentContext,
 ) : SettingsNavigationComponent,
     ComponentContext by componentContext,
     KoinComponent {
@@ -46,18 +46,18 @@ internal class DefaultSettingsNavigationComponent(
             source = modalNavigation,
             serializer = ModalConfiguration.serializer(),
             handleBackButton = true,
-            childFactory = ::createModal
+            childFactory = ::createModal,
         )
 
     private fun createModal(
         modalConfiguration: ModalConfiguration,
-        componentContext: ComponentContext
+        componentContext: ComponentContext,
     ): ComposeComponent =
         when (modalConfiguration) {
             is ModalConfiguration.Currency -> get<CurrencyComponent> {
                 parameterArrayOf(
                     componentContext,
-                    closeDialog
+                    closeDialog,
                 )
             }
         }
@@ -67,17 +67,17 @@ internal class DefaultSettingsNavigationComponent(
         serializer = SettingsNavigationConfiguration.serializer(),
         initialConfiguration = SettingsNavigationConfiguration.Main,
         handleBackButton = true,
-        childFactory = ::createChild
+        childFactory = ::createChild,
     )
 
     private fun createChild(
         configuration: SettingsNavigationConfiguration,
-        componentContext: ComponentContext
+        componentContext: ComponentContext,
     ): ComposeComponent = when (configuration) {
         is SettingsNavigationConfiguration.Main -> get<SettingsComponent> {
             parameterArrayOf(
                 componentContext,
-                ::onSettingsOutput
+                ::onSettingsOutput,
             )
         }
     }
@@ -91,7 +91,7 @@ internal class DefaultSettingsNavigationComponent(
     override fun Render(modifier: Modifier) {
         Children(
             stack = stack,
-            animation = stackAnimation(slide())
+            animation = stackAnimation(slide()),
         ) { child ->
             child.instance.Render(modifier)
         }

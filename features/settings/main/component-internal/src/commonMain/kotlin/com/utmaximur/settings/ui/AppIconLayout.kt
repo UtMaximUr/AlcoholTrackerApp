@@ -18,10 +18,10 @@ import settings.resources.ic_launcher_foreground
 
 @Composable
 internal fun AppIconLayout(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) = Box(
     modifier = modifier,
-    contentAlignment = Alignment.Center
+    contentAlignment = Alignment.Center,
 ) {
     Image(
         modifier = Modifier
@@ -29,6 +29,6 @@ internal fun AppIconLayout(
             .background(MaterialTheme.colorScheme.tertiary)
             .size(164.dp),
         painter = painterResource(Res.drawable.ic_launcher_foreground),
-        contentDescription = stringResource(Res.string.cd_icon_app)
+        contentDescription = stringResource(Res.string.cd_icon_app),
     )
 }

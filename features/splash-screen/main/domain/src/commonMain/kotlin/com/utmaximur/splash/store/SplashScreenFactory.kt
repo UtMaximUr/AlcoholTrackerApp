@@ -30,7 +30,7 @@ internal sealed interface Message {
 @Factory
 internal class SplashScreenFactory(
     storeFactory: StoreFactory,
-    interactor: FetchData
+    interactor: FetchData,
 ) : SplashScreenStore,
     Store<Intent, State, Label> by storeFactory.create(
         name = SplashScreenStore::class.simpleName,
@@ -63,5 +63,5 @@ internal class SplashScreenFactory(
                     copy(requestUi = newRequestUi)
                 }
             }
-        }
+        },
     )

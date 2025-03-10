@@ -18,7 +18,7 @@ import org.koin.core.component.get
 @Factory
 internal class DefaultSettingsComponent(
     @InjectedParam componentContext: ComponentContext,
-    @InjectedParam private val output: (SettingsComponent.Output) -> Unit
+    @InjectedParam private val output: (SettingsComponent.Output) -> Unit,
 ) : SettingsComponent,
     ComponentContext by componentContext,
     KoinComponent {
@@ -36,5 +36,4 @@ internal class DefaultSettingsComponent(
 
     @Composable
     override fun Render(modifier: Modifier) = SettingsScreen(modifier, this)
-
 }
