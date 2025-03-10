@@ -9,6 +9,6 @@ import org.koin.core.annotation.Factory
 internal class IconLocalMapper : Mapper<DbIcon, Icon> {
     override fun transform(from: DbIcon) = Icon(
         id = from.id,
-        url = from.url
+        url = from.url,
     )
 }

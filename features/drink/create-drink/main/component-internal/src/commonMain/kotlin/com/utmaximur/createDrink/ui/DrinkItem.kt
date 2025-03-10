@@ -26,7 +26,7 @@ import org.jetbrains.compose.resources.stringResource
 internal fun DrinkItem(
     url: String,
     isSelected: Boolean,
-    onItemClick: () -> Unit
+    onItemClick: () -> Unit,
 ) {
     CompositionLocalProvider(LocalRippleConfiguration provides null) {
         Column(
@@ -35,17 +35,17 @@ internal fun DrinkItem(
                 .selectable(
                     selected = isSelected,
                     onClick = onItemClick,
-                    role = Role.Image
+                    role = Role.Image,
                 )
                 .alpha(if (isSelected) DefaultAlpha else 0.2f)
                 .padding(6.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(6.dp)
+            verticalArrangement = Arrangement.spacedBy(6.dp),
         ) {
             AsyncImage(
                 modifier = Modifier.size(48.dp),
                 model = url,
-                contentDescription = stringResource(Res.string.cd_drink_icon)
+                contentDescription = stringResource(Res.string.cd_drink_icon),
             )
         }
     }

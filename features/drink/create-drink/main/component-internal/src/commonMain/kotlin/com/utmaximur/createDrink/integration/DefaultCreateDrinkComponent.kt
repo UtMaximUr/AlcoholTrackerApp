@@ -23,7 +23,7 @@ import org.koin.core.component.get
 @Factory
 internal class DefaultCreateDrinkComponent(
     @InjectedParam componentContext: ComponentContext,
-    @InjectedParam private val output: (CreateDrinkComponent.Output) -> Unit
+    @InjectedParam private val output: (CreateDrinkComponent.Output) -> Unit,
 ) : CreateDrinkComponent,
     ComponentContext by componentContext,
     KoinComponent {
@@ -34,14 +34,14 @@ internal class DefaultCreateDrinkComponent(
     override val model: StateFlow<CreateDrinkStore.State> = store.stateFlow
 
     override fun navigateBack() = output(
-        CreateDrinkComponent.Output.NavigateBack
+        CreateDrinkComponent.Output.NavigateBack,
     )
 
     override fun onSaveClick(drinkData: DrinkData) =
         store.accept(CreateDrinkStore.Intent.SaveDrinkData(drinkData))
 
     override fun openImageActionDialog() = output(
-        CreateDrinkComponent.Output.OpenImageActionsDialog
+        CreateDrinkComponent.Output.OpenImageActionsDialog,
     )
 
     init {
@@ -55,5 +55,4 @@ internal class DefaultCreateDrinkComponent(
 
     @Composable
     override fun Render(modifier: Modifier) = CreateDrinkScreen(this)
-
 }

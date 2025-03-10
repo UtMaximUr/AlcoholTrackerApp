@@ -20,7 +20,7 @@ import org.koin.core.component.get
 internal class DefaultConfirmDialogComponent(
     @InjectedParam componentContext: ComponentContext,
     @InjectedParam private val id: Long,
-    @InjectedParam private val closeDialog: () -> Unit
+    @InjectedParam private val closeDialog: () -> Unit,
 ) : ConfirmDialogComponent,
     ComponentContext by componentContext,
     KoinComponent {
@@ -41,5 +41,4 @@ internal class DefaultConfirmDialogComponent(
 
     @Composable
     override fun Render(modifier: Modifier) = ConfirmDialog(this)
-
 }

@@ -24,14 +24,14 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 internal fun DrinksIconContent(
     icons: List<Icon>,
-    onSelectIcon: (Icon) -> Unit
+    onSelectIcon: (Icon) -> Unit,
 ) {
     var selectedIcon by remember { mutableStateOf(Icon.EMPTY) }
     ElevatedCardApp(
-        contentPaddingValues = PaddingValues(12.dp)
+        contentPaddingValues = PaddingValues(12.dp),
     ) {
         TextOutlinedLabel(
-            title = stringResource(Res.string.select_icon)
+            title = stringResource(Res.string.select_icon),
         )
         LazyVerticalGrid(
             modifier = Modifier
@@ -40,7 +40,7 @@ internal fun DrinksIconContent(
             columns = GridCells.Fixed(4),
             verticalArrangement = Arrangement.spacedBy(12.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp),
-            contentPadding = PaddingValues(16.dp)
+            contentPadding = PaddingValues(16.dp),
         ) {
             items(icons) { icon ->
                 DrinkItem(
@@ -49,7 +49,7 @@ internal fun DrinksIconContent(
                     onItemClick = {
                         selectedIcon = icon
                         onSelectIcon(icon)
-                    }
+                    },
                 )
             }
         }

@@ -1,12 +1,10 @@
 package com.utmaximur.confirmDialog.ui
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -35,14 +33,13 @@ import confirmDialog.resources.proceed
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
-
 @Composable
 internal fun ConfirmDialog(
-    component: ConfirmDialogComponent
+    component: ConfirmDialogComponent,
 ) {
     Dialog(
         onDismissRequest = component::dismiss,
-        properties = DialogProperties(usePlatformDefaultWidth = false)
+        properties = DialogProperties(usePlatformDefaultWidth = false),
     ) {
         Column(
             modifier = Modifier
@@ -50,19 +47,19 @@ internal fun ConfirmDialog(
                 .fillMaxWidth()
                 .background(
                     color = MaterialTheme.colorScheme.primaryContainer,
-                    shape = MaterialTheme.shapes.extraLarge
+                    shape = MaterialTheme.shapes.extraLarge,
                 )
                 .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
                     text = stringResource(Res.string.confirm_delete),
-                    style = MaterialTheme.typography.titleLarge
+                    style = MaterialTheme.typography.titleLarge,
                 )
                 Icon(
                     painter = painterResource(Res.drawable.ic_close_button),
@@ -75,17 +72,17 @@ internal fun ConfirmDialog(
             }
             Text(
                 text = stringResource(Res.string.confirm_delete_text),
-                style = MaterialTheme.typography.labelMedium
+                style = MaterialTheme.typography.labelMedium,
             )
             Row(
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
             ) {
                 OutlinedButton(
                     modifier = Modifier
                         .weight(1f)
                         .bounceClick(),
                     onClick = component::dismiss,
-                    shape = MaterialTheme.shapes.large
+                    shape = MaterialTheme.shapes.large,
                 ) {
                     Text(
                         text = stringResource(Res.string.cancel),
@@ -99,13 +96,13 @@ internal fun ConfirmDialog(
                     onClick = component::confirm,
                     shape = MaterialTheme.shapes.large,
                     colors = ButtonDefaults.textButtonColors(
-                        containerColor = MaterialTheme.colorScheme.tertiary
-                    )
+                        containerColor = MaterialTheme.colorScheme.tertiary,
+                    ),
                 ) {
                     Text(
                         text = stringResource(Res.string.proceed),
                         style = MaterialTheme.typography.bodyMedium,
-                        color = Color.White
+                        color = Color.White,
                     )
                 }
             }

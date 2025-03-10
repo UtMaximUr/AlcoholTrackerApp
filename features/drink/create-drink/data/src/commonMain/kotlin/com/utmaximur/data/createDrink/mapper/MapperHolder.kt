@@ -9,5 +9,5 @@ import org.koin.core.annotation.Named
 internal class MapperHolder(
     @Named(NAMED_DRINK_LOCAL_MAPPER)
     val drinkLocalMapper: DrinkLocalMapper,
-    val iconLocalMapper: IconLocalMapper
+    val iconLocalMapper: IconLocalMapper,
 )

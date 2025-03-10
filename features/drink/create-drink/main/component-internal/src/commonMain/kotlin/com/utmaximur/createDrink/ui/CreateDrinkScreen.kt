@@ -39,10 +39,9 @@ import createDrink.resources.title_name_drink
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
-
 @Composable
 internal fun CreateDrinkScreen(
-    component: CreateDrinkComponent
+    component: CreateDrinkComponent,
 ) {
     val state by component.model.collectAsState()
     val drinkBuilder = remember { DrinkData.Builder() }
@@ -51,7 +50,7 @@ internal fun CreateDrinkScreen(
         topBar = {
             TopBar(
                 onBackClick = component::navigateBack,
-                title = stringResource(Res.string.title_create_drink)
+                title = stringResource(Res.string.title_create_drink),
             )
         },
         content = { innerPadding ->
@@ -60,12 +59,12 @@ internal fun CreateDrinkScreen(
                     .padding(innerPadding)
                     .padding(12.dp)
                     .fillMaxSize(),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+                verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {
                 ElevatedCardApp(
                     modifier = Modifier
                         .bounceClick()
-                        .clickable(onClick = component::openImageActionDialog)
+                        .clickable(onClick = component::openImageActionDialog),
                 ) {
                     SubcomposeAsyncImage(
                         modifier = Modifier.aspectRatio(4 / 3f),
@@ -76,22 +75,22 @@ internal fun CreateDrinkScreen(
                         error = {
                             Image(
                                 painter = painterResource(Res.drawable.placeholder_image),
-                                contentDescription = stringResource(Res.string.cd_drink_image)
+                                contentDescription = stringResource(Res.string.cd_drink_image),
                             )
-                        }
+                        },
                     )
                 }
                 ElevatedCardApp(
-                    contentPaddingValues = PaddingValues(12.dp)
+                    contentPaddingValues = PaddingValues(12.dp),
                 ) {
                     InnerShadowTextField(
                         title = stringResource(Res.string.title_name_drink),
-                        onValueChange = drinkBuilder::setName
+                        onValueChange = drinkBuilder::setName,
                     )
                 }
                 DrinksIconContent(
                     icons = state.icons,
-                    onSelectIcon = drinkBuilder::setIcon
+                    onSelectIcon = drinkBuilder::setIcon,
                 )
             }
         },
@@ -105,15 +104,15 @@ internal fun CreateDrinkScreen(
                 onClick = { component.onSaveClick(drinkBuilder.build()) },
                 shape = MaterialTheme.shapes.large,
                 colors = ButtonDefaults.textButtonColors(
-                    containerColor = MaterialTheme.colorScheme.tertiary
-                )
+                    containerColor = MaterialTheme.colorScheme.tertiary,
+                ),
             ) {
                 Text(
                     text = stringResource(Res.string.save_drink),
                     style = MaterialTheme.typography.bodyMedium,
-                    color = Color.White
+                    color = Color.White,
                 )
             }
-        }
+        },
     )
 }
