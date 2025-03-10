@@ -20,6 +20,7 @@ In this application, you can mark all the days of alcohol intake, statistics on 
 * Coroutines
 * Convention plugins
 * Gradle Kotlin DSL
+* Detekt
 
 
 # Calendar 

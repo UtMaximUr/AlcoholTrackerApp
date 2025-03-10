@@ -1,0 +1,33 @@
+style:
+  ForbiddenComment:
+    active: false
+  ReturnCount:
+    active: false
+  NewLineAtEndOfFile:
+    active: false
+
+
+exceptions:
+  TooGenericExceptionCaught:
+    active: false
+  TooGenericExceptionThrown:
+    active: false
+
+naming:
+  active: true
+  MatchingDeclarationName:
+    active: false
+  PackageNaming:
+    active: false
+  FunctionNaming:
+    active: true
+    functionPattern: '^[a-zA-Z][a-zA-Z0-9]*'
+
+complexity:
+  LongParameterList:
+    active: true
+    ignoreAnnotated: [ 'Composable' ]
+  LongMethod:
+    active: true
+    ignoreAnnotated: [ 'Composable' ]
+
