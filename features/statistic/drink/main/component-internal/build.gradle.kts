@@ -7,7 +7,6 @@ plugins {
 dependencies {
     commonMainImplementation(compose.components.resources)
     commonMainImplementation(libs.kotlinx.serialization.core)
-    commonMainImplementation(libs.bundles.coil)
 
     commonMainImplementation(projects.features.statistic.drink.main.componentApi)
     commonMainImplementation(projects.features.statistic.drink.main.domain)

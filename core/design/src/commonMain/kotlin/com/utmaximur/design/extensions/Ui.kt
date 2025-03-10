@@ -60,13 +60,15 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.StringResource
 import kotlin.math.absoluteValue
 
+fun Modifier.showShimmer() = this.shimmer(true)
+
 fun Modifier.shimmer(showShimmer: Boolean): Modifier = composed {
     val shimmerInstance = rememberShimmer(
         shimmerBounds = ShimmerBounds.View,
         theme = defaultShimmerTheme.copy(
             animationSpec = infiniteRepeatable(
                 animation = tween(
-                    durationMillis = 1_000,
+                    durationMillis = 700,
                     delayMillis = 300,
                     easing = LinearEasing
                 )

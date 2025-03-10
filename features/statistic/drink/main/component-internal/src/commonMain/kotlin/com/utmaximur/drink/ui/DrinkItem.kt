@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import coil3.compose.AsyncImage
+import com.utmaximur.design.ui.ImageLoaderContent
 import com.utmaximur.drink.model.DrinkStatistic
 import drinkStatistic.resources.Res
 import drinkStatistic.resources.count_drink
@@ -27,9 +27,9 @@ internal fun DrinkItem(
         verticalArrangement = Arrangement.spacedBy(6.dp)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            AsyncImage(
+            ImageLoaderContent(
                 modifier = Modifier.size(48.dp),
-                model = drink.icon,
+                imageUrl = drink.icon,
                 contentDescription = drink.name
             )
             Text(

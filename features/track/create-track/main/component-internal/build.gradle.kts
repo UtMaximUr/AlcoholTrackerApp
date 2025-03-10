@@ -8,7 +8,6 @@ dependencies {
     implementation(libs.androidx.ui.android)
     commonMainImplementation(compose.components.resources)
     commonMainImplementation(libs.kotlinx.serialization.core)
-    commonMainImplementation(libs.bundles.coil)
 
     commonMainImplementation(projects.features.track.createTrack.main.componentApi)
     commonMainImplementation(projects.features.track.createTrack.main.domain)

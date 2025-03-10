@@ -13,8 +13,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import coil3.compose.AsyncImage
 import com.utmaximur.design.ui.ElevatedCardApp
+import com.utmaximur.design.ui.ImageLoaderContent
 import com.utmaximur.domain.models.Drink
 import createTrack.resources.Res
 import createTrack.resources.cd_delete
@@ -29,9 +29,9 @@ fun ItemDrink(
 ) {
 
     Box(modifier = Modifier.fillMaxSize()) {
-        AsyncImage(
+        ImageLoaderContent(
             modifier = Modifier.fillMaxSize(),
-            model = drink.photo,
+            imageUrl = drink.photo,
             contentDescription = drink.name,
             contentScale = ContentScale.Crop
         )

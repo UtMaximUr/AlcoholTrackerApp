@@ -6,13 +6,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.utmaximur.design.extensions.shimmer
+import com.utmaximur.design.extensions.showShimmer
 
 @Composable
 fun TextShimmer(aspectRatio: Float) {
     Box(
         modifier = Modifier
-            .shimmer(true)
+            .showShimmer()
             .height(height = 18.dp)
             .aspectRatio(aspectRatio)
     )

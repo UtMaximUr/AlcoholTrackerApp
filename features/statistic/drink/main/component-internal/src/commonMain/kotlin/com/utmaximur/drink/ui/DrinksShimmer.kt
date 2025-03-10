@@ -13,7 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.utmaximur.design.extensions.shimmer
+import com.utmaximur.design.extensions.showShimmer
 import com.utmaximur.design.shimmer.TextShimmer
 
 @Composable
@@ -33,7 +33,7 @@ internal fun DrinksShimmer() {
             items(15) { _ ->
                 Box(
                     modifier = Modifier
-                        .shimmer(true)
+                        .showShimmer()
                         .aspectRatio(1f)
                 )
             }
