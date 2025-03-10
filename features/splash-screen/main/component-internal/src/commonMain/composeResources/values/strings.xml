@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Alcohol Tracker</string>
+    <string name="internet_connection_title">No Internet Connection found.\nCheck your connection.</string>
+
+    <string name="cd_internet_connection_logo">internet connection logo</string>
 </resources>

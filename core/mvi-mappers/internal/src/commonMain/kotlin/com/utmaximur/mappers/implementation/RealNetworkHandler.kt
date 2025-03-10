@@ -15,7 +15,7 @@ internal class RealNetworkHandler(
     override fun handleError(e: Throwable) {
         logger.e { "[Network errors  -> ${e.stackTraceToString()}]" }
         when {
-            e.isNetworkConnectionError() -> sendMessage("TODO()")
+            e.isNetworkConnectionError() -> sendMessage("No internet connection")
             else -> sendMessage(e.toString())
         }
     }

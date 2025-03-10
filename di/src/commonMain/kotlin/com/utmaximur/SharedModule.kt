@@ -9,6 +9,7 @@ import com.utmaximur.calculator.CalculatorMainComponentModule
 import com.utmaximur.calendar.CalendarComponentModule
 import com.utmaximur.calendar.CalendarNavigationComponentModule
 import com.utmaximur.confirmDialog.ConfirmDialogMainComponentModule
+import com.utmaximur.connection.NetworkConnectionModule
 import com.utmaximur.core.logging.LoggerModule
 import com.utmaximur.createDrink.CreateDrinkMainComponentModule
 import com.utmaximur.createDrink.CreateDrinkNavigationComponentModule
@@ -72,6 +73,7 @@ import com.utmaximur.tracksModal.TracksModalMainComponentModule
         TrackerAnalyticsModule::class,
         FirebaseTrackerAnalyticsModule::class,
         ProjectImplementationModule::class,
+        NetworkConnectionModule::class,
         /*
         feature modules
          */

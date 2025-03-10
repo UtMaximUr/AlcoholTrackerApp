@@ -6,9 +6,12 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.essenty.lifecycle.coroutines.coroutineScope
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.labels
+import com.arkivanov.mvikotlin.extensions.coroutines.stateFlow
 import com.utmaximur.splash.SplashScreenComponent
 import com.utmaximur.splash.store.SplashScreenStore
 import com.utmaximur.splash.ui.SplashScreen
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.core.annotation.Factory
@@ -25,6 +28,9 @@ internal class DefaultSplashScreenComponent(
     KoinComponent {
 
     private val store: SplashScreenStore = instanceKeeper.getStore(::get)
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    override val model: StateFlow<SplashScreenStore.State> = store.stateFlow
 
     override fun readyToLoad() = store.accept(SplashScreenStore.Intent.ReadyToLoad)
 
