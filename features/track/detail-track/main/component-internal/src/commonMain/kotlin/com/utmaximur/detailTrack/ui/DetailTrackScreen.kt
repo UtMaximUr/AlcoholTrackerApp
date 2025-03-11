@@ -1,10 +1,10 @@
 package com.utmaximur.detailTrack.ui
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -35,6 +35,7 @@ internal fun DetailTrackScreen(
     trackBuilder: TrackData.Builder,
 ) {
     val state by component.model.collectAsState()
+    val scrollState = rememberScrollState()
 
     Scaffold(
         topBar = {
@@ -45,60 +46,52 @@ internal fun DetailTrackScreen(
                     IconButton(onClick = component::onDeleteClick) {
                         Icon(
                             painter = painterResource(Res.drawable.ic_delete_button),
-                            contentDescription = stringResource(Res.string.cd_delete),
+                            contentDescription = stringResource(Res.string.cd_delete)
                         )
                     }
                     IconButton(onClick = { component.onSaveClick(trackBuilder.build()) }) {
                         Icon(
                             painter = painterResource(Res.drawable.ic_save_button),
-                            contentDescription = stringResource(Res.string.cd_save),
+                            contentDescription = stringResource(Res.string.cd_save)
                         )
                     }
-                },
+                }
             )
         },
         content = { innerPadding ->
-            LazyColumn(
+            Column(
                 modifier = Modifier
                     .padding(innerPadding)
-                    .fillMaxSize()
-                    .fadingEdge(bottomFade),
-                verticalArrangement = Arrangement.spacedBy(12.dp),
-                contentPadding = PaddingValues(12.dp),
+                    .verticalScroll(scrollState)
+                    .fadingEdge(bottomFade)
+                    .padding(12.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                item {
-                    RequestWidget(
-                        state = state.requestTrackUi,
-                    ) { track ->
-                        TrackContent(
-                            trackData = trackBuilder,
-                            track = track,
-                            price = state.price,
-                            onCalculatorClick = component::openCalculatorDialog,
-                        )
-                    }
-                }
-                item {
-                    component.geocoderComponent.Render(Modifier)
-                }
-                item {
-                    DateButtonGroup(
-                        selectedDate = state.selectedDate,
-                        onSelectDateClick = component::openDatePickerDialog,
-                        onTodayClick = component::onTodayClick,
+                RequestWidget(
+                    state = state.requestTrackUi,
+                ) { track ->
+                    TrackContent(
+                        trackData = trackBuilder,
+                        track = track,
+                        price = state.price,
+                        onCalculatorClick = component::openCalculatorDialog
                     )
                 }
-                item {
-                    RequestWidget(
-                        state = state.requestTrackUi,
-                    ) { track ->
-                        TotalPrice(
-                            currency = state.currency,
-                            totalPrice = track.totalPrice,
-                        )
-                    }
+                component.geocoderComponent.Render(Modifier)
+                DateButtonGroup(
+                    selectedDate = state.selectedDate,
+                    onSelectDateClick = component::openDatePickerDialog,
+                    onTodayClick = component::onTodayClick
+                )
+                RequestWidget(
+                    state = state.requestTrackUi
+                ) { track ->
+                    TotalPrice(
+                        currency = state.currency,
+                        totalPrice = track.totalPrice
+                    )
                 }
             }
-        },
+        }
     )
 }
