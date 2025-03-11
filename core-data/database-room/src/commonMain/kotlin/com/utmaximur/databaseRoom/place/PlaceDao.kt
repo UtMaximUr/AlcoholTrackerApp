@@ -14,5 +14,5 @@ interface PlaceDao : BaseDao<DbPlace> {
     fun getAll(): Flow<List<DbPlace>>
 
     @Query("SELECT * FROM DbPlace WHERE trackId=:id")
-    fun getPlaceByTrackId(id: Long): Flow<DbPlace>
+    fun getPlaceByTrackId(id: Long): Flow<DbPlace?>
 }

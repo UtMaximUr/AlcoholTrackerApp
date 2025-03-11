@@ -12,6 +12,7 @@ import com.utmaximur.geocoder.BuildKonfig
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
@@ -40,5 +41,6 @@ internal class RealGeocoderRepository(
 
     override fun getPlaceByTrackId(trackId: Long): Flow<Place> = placeDao
         .getPlaceByTrackId(trackId)
+        .filterNotNull()
         .map(mapper.placeUiMapper::transform)
 }
