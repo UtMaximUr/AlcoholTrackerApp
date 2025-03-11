@@ -18,5 +18,5 @@ fun provideApplicationInfo(flavor: Flavor) = ApplicationInfo(
     flavor = flavor,
     versionName = NSBundle.mainBundle.infoDictionary?.get("CFBundleShortVersionString") as? String ?: "",
     versionCode = (NSBundle.mainBundle.infoDictionary?.get("CFBundleVersion") as? String)?.toIntOrNull() ?: 0,
-    language = "TODO()"
+    language = "TODO()",
 )

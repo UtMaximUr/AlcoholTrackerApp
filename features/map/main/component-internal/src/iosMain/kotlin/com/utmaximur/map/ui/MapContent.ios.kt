@@ -9,5 +9,4 @@ internal actual fun MapContent(
     isDarkTheme: Boolean,
     mapObjectClick: (List<Long>) -> Unit,
 ) {
-
 }
