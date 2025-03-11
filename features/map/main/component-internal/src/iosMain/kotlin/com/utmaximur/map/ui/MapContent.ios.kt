@@ -1,7 +1,6 @@
 package com.utmaximur.map.ui
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import com.utmaximur.domain.models.Place
 
 @Composable

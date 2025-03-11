@@ -10,9 +10,6 @@ import kotlin.experimental.ExperimentalNativeApi
 @Factory
 fun provideFlavor() = Flavor.Qa
 
-// @Single
-// fun provideNSUser(): NSUserDefaults = NSUserDefaults.standardUserDefaults
-
 @OptIn(ExperimentalNativeApi::class)
 @Single
 fun provideApplicationInfo(flavor: Flavor) = ApplicationInfo(
