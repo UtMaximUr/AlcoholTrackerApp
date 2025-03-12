@@ -2,7 +2,6 @@ package com.utmaximur.detailTrack.interactor
 
 import com.utmaximur.domain.Interactor
 import com.utmaximur.domain.ZERO_VALUE_L
-import com.utmaximur.domain.ZERO_VALUE_STRING
 import com.utmaximur.domain.detailTrack.DetailTrackRepository
 import com.utmaximur.domain.models.Place
 import com.utmaximur.domain.models.Track
@@ -22,30 +21,38 @@ internal class UpdateTrack(
 
     override suspend fun doWork(params: Params) {
         withContext(Dispatchers.IO) {
-            repository.updateTrack(params.toTrack())
-            params.trackData.place.ifUpdated { place ->
-                val updatedPlace = place.copy(trackId = params.trackId)
-                repository.updatePlace(updatedPlace)
+            val track = params.track
+            repository.updateTrack(params.transform(track))
+            val updatedPlace = params.trackData.place.ifEmpty { place ->
+                place.copy(trackId = track.id)
             }
+            repository.updatePlace(updatedPlace)
         }
     }
 
-    private fun Params.toTrack() = Track(
-        id = trackId,
+    private fun Params.transform(track: Track) = Track(
+        id = track.id,
         drink = trackData.drink,
-        quantity = trackData.quantity.ifEmpty { ZERO_VALUE_STRING }.toInt(),
-        volume = trackData.volume.ifEmpty { ZERO_VALUE_STRING }.toFloat(),
-        degree = trackData.degree.ifEmpty { ZERO_VALUE_STRING }.toFloat(),
-        event = trackData.event,
-        price = trackData.price.ifEmpty { ZERO_VALUE_STRING }.toFloat(),
+        quantity = trackData.quantity.ifEmpty { track.quantity }.toInt(),
+        volume = trackData.volume.ifEmpty { track.volume }.toFloat(),
+        degree = trackData.degree.ifEmpty { track.degree }.toFloat(),
+        event = trackData.event.ifEmpty { track.event },
+        price = trackData.price.ifEmpty { track.price }.toFloat(),
         date = trackData.date.parseToLongNotNull()
     )
 
-    private inline fun Place.ifUpdated(block: (Place) -> Unit) {
-        if (this.trackId == ZERO_VALUE_L) {
+    private inline fun Place.ifEmpty(block: (Place) -> Place): Place {
+        return if (this.trackId == ZERO_VALUE_L) {
             block(this)
+        } else this
+    }
+
+    private inline fun <T> String.ifEmpty(block: () -> T): String {
+        return when {
+            this.isEmpty() -> block().toString()
+            else -> this
         }
     }
 
-    data class Params(val trackId: Long, val trackData: TrackData)
+    internal data class Params(val track: Track, val trackData: TrackData)
 }

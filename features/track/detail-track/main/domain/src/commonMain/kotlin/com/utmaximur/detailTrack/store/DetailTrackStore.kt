@@ -1,7 +1,6 @@
 package com.utmaximur.detailTrack.store
 
 import com.arkivanov.mvikotlin.core.store.Store
-import com.utmaximur.core.mvi_mapper.RequestUi
 import com.utmaximur.detailTrack.store.DetailTrackStore.Intent
 import com.utmaximur.detailTrack.store.DetailTrackStore.Label
 import com.utmaximur.detailTrack.store.DetailTrackStore.State
@@ -13,13 +12,13 @@ import com.utmaximur.domain.models.TrackData
 interface DetailTrackStore : Store<Intent, State, Label> {
 
     data class State(
-        val requestTrackUi: RequestUi<Track>,
+        val track: Track,
         val selectedDate: String,
         val price: Float,
         val currency: String
     ) {
         constructor() : this(
-            requestTrackUi = RequestUi(),
+            track = Track.EMPTY,
             selectedDate = EMPTY_STRING,
             price = ZERO_VALUE_F,
             currency = EMPTY_STRING

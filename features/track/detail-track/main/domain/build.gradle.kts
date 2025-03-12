@@ -17,11 +17,11 @@ dependencies {
     commonMainImplementation(projects.core.base)
     commonMainImplementation(projects.core.logging.api)
     commonMainImplementation(projects.core.utils)
-    commonMainImplementation(projects.core.mviMappers.internal)
     commonMainImplementation(projects.core.analytics.domain)
     commonMainImplementation(projects.core.analytics.params)
     commonMainImplementation(projects.features.track.detailTrack.domain)
     commonMainImplementation(projects.features.track.calculator.domain)
     commonMainImplementation(projects.features.track.datePicker.domain)
     commonMainImplementation(projects.features.confirmDialog.domain)
+    commonMainImplementation(projects.features.message.domain)
 }

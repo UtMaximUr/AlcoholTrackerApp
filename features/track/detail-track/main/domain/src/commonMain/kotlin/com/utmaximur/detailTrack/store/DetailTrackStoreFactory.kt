@@ -12,6 +12,7 @@ import com.utmaximur.domain.calculator.CalculatorProviderData
 import com.utmaximur.domain.confirmDialog.ConfirmDialogProviderData
 import com.utmaximur.domain.datePicker.DateProviderData
 import com.utmaximur.domain.detailTrack.DetailTrackRepository
+import com.utmaximur.message.models.MessageService
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
 
@@ -24,7 +25,8 @@ internal class DetailTrackStoreFactory(
     calculatorProviderData: CalculatorProviderData,
     dateProviderData: DateProviderData,
     confirmDialogProviderData: ConfirmDialogProviderData,
-    analyticsManager: AnalyticsManager
+    analyticsManager: AnalyticsManager,
+    messageService: MessageService
 ) : DetailTrackStore,
     Store<Intent, State, Label> by storeFactory.create(
         name = DetailTrackStore::class.simpleName,
@@ -38,7 +40,8 @@ internal class DetailTrackStoreFactory(
                 calculatorProviderData = calculatorProviderData,
                 dateProviderData = dateProviderData,
                 confirmDialogProviderData = confirmDialogProviderData,
-                analyticsManager = analyticsManager
+                analyticsManager = analyticsManager,
+                messageService = messageService
             )
         },
         reducer = DetailTrackReducer

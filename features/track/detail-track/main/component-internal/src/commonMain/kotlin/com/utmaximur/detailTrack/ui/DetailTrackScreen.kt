@@ -13,7 +13,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.utmaximur.design.RequestWidget
 import com.utmaximur.design.extensions.bottomFade
 import com.utmaximur.design.extensions.fadingEdge
 import com.utmaximur.design.topbar.TopBar
@@ -49,7 +48,7 @@ internal fun DetailTrackScreen(
                             contentDescription = stringResource(Res.string.cd_delete)
                         )
                     }
-                    IconButton(onClick = { component.onSaveClick(trackBuilder.build()) }) {
+                    IconButton(onClick = component::onSaveClick) {
                         Icon(
                             painter = painterResource(Res.drawable.ic_save_button),
                             contentDescription = stringResource(Res.string.cd_save)
@@ -67,30 +66,22 @@ internal fun DetailTrackScreen(
                     .padding(12.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                RequestWidget(
-                    state = state.requestTrackUi,
-                ) { track ->
-                    TrackContent(
-                        trackData = trackBuilder,
-                        track = track,
-                        price = state.price,
-                        onCalculatorClick = component::openCalculatorDialog
-                    )
-                }
+                TrackContent(
+                    trackData = trackBuilder,
+                    track = state.track,
+                    price = state.price,
+                    onCalculatorClick = component::openCalculatorDialog
+                )
                 component.geocoderComponent.Render(Modifier)
                 DateButtonGroup(
                     selectedDate = state.selectedDate,
                     onSelectDateClick = component::openDatePickerDialog,
                     onTodayClick = component::onTodayClick
                 )
-                RequestWidget(
-                    state = state.requestTrackUi
-                ) { track ->
-                    TotalPrice(
-                        currency = state.currency,
-                        totalPrice = track.totalPrice
-                    )
-                }
+                TotalPrice(
+                    currency = state.currency,
+                    totalPrice = state.track.totalPrice
+                )
             }
         }
     )

@@ -32,5 +32,5 @@ internal class RealDetailTrackRepository(
         withContext(Dispatchers.IO) { trackDao.deleteTrackById(id) }
 
     override suspend fun updatePlace(place: Place) =
-        placeDao.update(mapper.placeLocalMapper.transform(place))
+        placeDao.upsert(mapper.placeLocalMapper.transform(place))
 }

@@ -15,9 +15,12 @@ import com.utmaximur.domain.models.Place
 import com.utmaximur.domain.models.TrackData
 import com.utmaximur.geocoder.GeocoderComponent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.stateIn
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
 import org.koin.core.component.KoinComponent
@@ -57,8 +60,8 @@ internal class DefaultDetailTrackComponent(
 
     override fun navigateBack() = output(DetailTrackComponent.Output.NavigateBack)
 
-    override fun onSaveClick(trackData: TrackData) =
-        store.accept(DetailTrackStore.Intent.SaveTrackData(trackData))
+    override fun onSaveClick() =
+        store.accept(DetailTrackStore.Intent.SaveTrackData(trackBuilder.build()))
 
     override fun openCalculatorDialog() =
         output(DetailTrackComponent.Output.OpenCalculatorDialog)

@@ -2,8 +2,6 @@ package com.utmaximur.detailTrack.store
 
 import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineExecutor
 import com.utmaximur.analytics.domain.AnalyticsManager
-import com.utmaximur.core.mvi_mapper.Request
-import com.utmaximur.core.mvi_mapper.asRequest
 import com.utmaximur.detailTrack.analytic_events.OpenScreenEvent
 import com.utmaximur.detailTrack.interactor.UpdateTrack
 import com.utmaximur.detailTrack.store.DetailTrackStore.Intent
@@ -14,6 +12,9 @@ import com.utmaximur.domain.confirmDialog.ConfirmDialogProviderData
 import com.utmaximur.domain.datePicker.DateProviderData
 import com.utmaximur.domain.detailTrack.DetailTrackRepository
 import com.utmaximur.domain.models.Track
+import com.utmaximur.domain.models.TrackData
+import com.utmaximur.message.models.MessageContainer
+import com.utmaximur.message.models.MessageService
 import com.utmaximur.utils.extensions.getTodayDateUi
 import com.utmaximur.utils.extensions.parseToLong
 import com.utmaximur.utils.extensions.toDateUi
@@ -25,7 +26,7 @@ import kotlinx.coroutines.launch
 
 
 internal sealed interface Message {
-    data class UpdateState(val request: Request<Track>) : Message
+    data class UpdateTrack(val track: Track) : Message
     data class UpdatePrice(val price: Float) : Message
     data class UpdateSelectedDate(val date: String) : Message
     data class UpdateCurrency(val currency: String) : Message
@@ -38,7 +39,8 @@ internal class DetailTrackExecutor(
     private val calculatorProviderData: CalculatorProviderData,
     private val dateProviderData: DateProviderData,
     private val confirmDialogProviderData: ConfirmDialogProviderData,
-    private val analyticsManager: AnalyticsManager
+    private val analyticsManager: AnalyticsManager,
+    private val messageService: MessageService
 ) : CoroutineExecutor<Intent, Unit, State, Message, Label>() {
 
     override fun executeAction(action: Unit) {
@@ -64,8 +66,7 @@ internal class DetailTrackExecutor(
                 handleSelectedDate(track.date.toDateUi())
                 dispatch(Message.UpdatePrice(track.price))
             }
-            .asRequest()
-            .onEach { dispatch(Message.UpdateState(it)) }
+            .onEach { dispatch(Message.UpdateTrack(it)) }
             .launchIn(scope)
         repository.currencyStream
             .onEach { currency -> dispatch(Message.UpdateCurrency(currency)) }
@@ -74,11 +75,7 @@ internal class DetailTrackExecutor(
 
     override fun executeIntent(intent: Intent) {
         when (intent) {
-            is Intent.SaveTrackData -> scope.launch {
-                interactor.invoke(UpdateTrack.Params(trackId, intent.trackData))
-                publish(Label.CloseEvent)
-            }
-
+            is Intent.SaveTrackData -> handleSave(intent.trackData)
             is Intent.SelectedDate -> publish(Label.DatePickerEvent(intent.date.parseToLong()))
             Intent.Today -> dispatch(Message.UpdateSelectedDate(getTodayDateUi()))
         }
@@ -87,5 +84,19 @@ internal class DetailTrackExecutor(
     private fun handleSelectedDate(dateUi: String) {
         dispatch(Message.UpdateSelectedDate(dateUi))
         publish(Label.DateEvent(dateUi))
+    }
+
+    private fun handleSave(trackData: TrackData) = scope.launch {
+        val track = state().track
+        val params = UpdateTrack.Params(track, trackData)
+        interactor
+            .invoke(params)
+            .onSuccess { publish(Label.CloseEvent) }
+            .onFailure { error -> showErrorMessage(error) }
+    }
+
+    private fun showErrorMessage(error: Throwable) {
+        val message = error.message.orEmpty()
+        messageService.showMessage(MessageContainer.SimpleMessage(message))
     }
 }
