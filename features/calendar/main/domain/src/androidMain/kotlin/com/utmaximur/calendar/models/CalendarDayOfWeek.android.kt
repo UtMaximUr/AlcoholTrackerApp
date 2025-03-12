@@ -4,18 +4,23 @@ import android.os.Build
 import java.time.DayOfWeek
 import java.time.format.TextStyle
 import java.time.temporal.WeekFields
+import java.util.Calendar
 import java.util.Locale
 
 actual fun firstDayOfWeek(): DayOfWeek = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-    WeekFields.of(Locale.getDefault()).firstDayOfWeek!!
+    WeekFields.of(Locale.getDefault()).firstDayOfWeek
 } else {
-    TODO("VERSION.SDK_INT < O")
+    DayOfWeek.entries.first()
 }
 
-actual fun DayOfWeek.localized(): String =
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        getDisplayName(TextStyle.SHORT, Locale.getDefault())
+actual fun DayOfWeek.localized(): String {
+    val locale = Locale.getDefault()
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        getDisplayName(TextStyle.SHORT, locale)
             .replaceFirstChar { it.uppercaseChar() }
     } else {
-        TODO("VERSION.SDK_INT < O")
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.DAY_OF_WEEK, ordinal)
+        calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, locale) ?: name
     }
+}

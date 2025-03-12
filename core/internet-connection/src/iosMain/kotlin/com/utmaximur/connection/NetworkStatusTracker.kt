@@ -45,7 +45,6 @@ internal class NetworkStatusTracker(logger: Logger) : ObserveNetworkStatus {
     @OptIn(ExperimentalForeignApi::class)
     private fun cocoapods.Reachability.NetworkStatus?.asNetworkState() = when (this) {
         ReachableViaWWAN -> NetworkStatus.Available
-        // Todo разобраться  NetworkState.Reachable(false)
         ReachableViaWiFi -> NetworkStatus.Available
         else -> NetworkStatus.Unavailable
     }

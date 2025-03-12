@@ -13,24 +13,22 @@ actual fun CalendarMonth.localized(): String {
 }
 
 actual fun Month.localized(): String {
+    val locale = Locale.getDefault()
     val displayName = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        getDisplayName(
-            TextStyle.FULL_STANDALONE,
-            Locale.getDefault()
-        )
+        getDisplayName(TextStyle.FULL_STANDALONE, locale)
     } else {
-        TODO("VERSION.SDK_INT < O")
+        getDisplayNameWithCalendar(locale, ordinal)
     }
     // Почему-то на ру локали, некоторые месяца возвращаюся пустые.
-    if (displayName.isBlank()) {
-        val calendar = Calendar.getInstance()
-        calendar.set(Calendar.MONTH, ordinal)
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            calendar.getDisplayName(Calendar.MONTH, Calendar.LONG_STANDALONE, Locale.getDefault())?.toString() ?: name
-        } else {
-            name
-        }
+    if (displayName.isNullOrBlank()) {
+        return getDisplayNameWithCalendar(locale, ordinal) ?: name
     }
     return displayName
+}
+
+private fun getDisplayNameWithCalendar(locale: Locale, ordinal: Int): String? {
+    val calendar = Calendar.getInstance()
+    calendar.set(Calendar.MONTH, ordinal)
+    return calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, locale)
 }
 
