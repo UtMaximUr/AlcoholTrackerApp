@@ -31,4 +31,3 @@ private fun getDisplayNameWithCalendar(locale: Locale, ordinal: Int): String? {
     calendar.set(Calendar.MONTH, ordinal)
     return calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, locale)
 }
-
