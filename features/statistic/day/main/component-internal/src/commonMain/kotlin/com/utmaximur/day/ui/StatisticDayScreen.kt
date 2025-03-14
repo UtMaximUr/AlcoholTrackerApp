@@ -6,7 +6,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -16,7 +18,7 @@ import com.utmaximur.design.extensions.endFade
 import com.utmaximur.design.extensions.fadingEdge
 import com.utmaximur.design.extensions.startFade
 import com.utmaximur.design.ui.Carousel
-import com.utmaximur.design.ui.DotsIndicator
+import com.utmaximur.design.ui.dots.DotsIndicator
 import com.utmaximur.design.ui.ElevatedCardApp
 
 
@@ -51,8 +53,12 @@ internal fun StatisticDayScreen(
                 )
                 DotsIndicator(
                     modifier = Modifier.align(Alignment.CenterHorizontally),
-                    totalDots = pagerState.pageCount,
-                    selectedIndex = pagerState.currentPage
+                    pageCount = pagerState.pageCount,
+                    currentPageFraction = remember {
+                        derivedStateOf {
+                            pagerState.currentPage + pagerState.currentPageOffsetFraction
+                        }
+                    },
                 )
             }
         }

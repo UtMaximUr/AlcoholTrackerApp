@@ -16,6 +16,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
@@ -24,7 +26,7 @@ import com.utmaximur.core.mvi_mapper.RequestUi
 import com.utmaximur.design.RequestWidget
 import com.utmaximur.design.extensions.bounceClick
 import com.utmaximur.design.text.InnerShadowTextField
-import com.utmaximur.design.ui.DotsIndicator
+import com.utmaximur.design.ui.dots.DotsIndicator
 import com.utmaximur.design.ui.ElevatedCardApp
 import com.utmaximur.domain.models.Drink
 import com.utmaximur.domain.models.TrackData
@@ -81,8 +83,12 @@ fun CreateTrackContent(
                     )
                     DotsIndicator(
                         modifier = Modifier.padding(bottom = 12.dp),
-                        totalDots = drinks.size,
-                        selectedIndex = pagerState.currentPage,
+                        pageCount = pagerState.pageCount,
+                        currentPageFraction = remember {
+                            derivedStateOf {
+                                pagerState.currentPage + pagerState.currentPageOffsetFraction
+                            }
+                        },
                     )
                 }
             }
