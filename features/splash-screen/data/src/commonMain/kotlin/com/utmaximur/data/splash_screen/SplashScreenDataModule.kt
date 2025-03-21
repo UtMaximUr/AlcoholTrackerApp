@@ -1,6 +1,7 @@
 package com.utmaximur.data.splash_screen
 
 import com.utmaximur.data.splash_screen.network.SplashScreenApi
+import com.utmaximur.data.splash_screen.network.createSplashScreenApi
 import de.jensklingenberg.ktorfit.Ktorfit
 import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Module
@@ -11,5 +12,5 @@ import org.koin.core.annotation.Single
 @ComponentScan
 class SplashScreenDataModule {
     @Single
-    fun provideSplashScreenApi(ktorfit: Ktorfit): SplashScreenApi = ktorfit.create()
+    fun provideSplashScreenApi(ktorfit: Ktorfit): SplashScreenApi = ktorfit.createSplashScreenApi()
 }

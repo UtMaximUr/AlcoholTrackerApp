@@ -4,10 +4,10 @@ import de.jensklingenberg.ktorfit.http.GET
 import de.jensklingenberg.ktorfit.http.Query
 
 interface GeocoderApi {
-    @GET("https://search-maps.yandex.ru/v1/")
+    @GET(ApiConstants.BASE_URL)
     suspend fun getPlace(
-        @Query("text") query: String,
-        @Query("apikey") apikey: String,
-        @Query("lang") lang: String,
+        @Query(ApiConstants.TEXT) query: String,
+        @Query(ApiConstants.APIKEY) apikey: String,
+        @Query(ApiConstants.LANG) lang: String,
     ): FeatureCollection
 }

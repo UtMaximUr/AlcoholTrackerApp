@@ -1,10 +1,7 @@
 package helpers
 
-import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.the
 import org.gradle.kotlin.dsl.withType
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
@@ -12,13 +9,11 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
  * Configure base Kotlin with Android options
  */
 
-@OptIn(ExperimentalKotlinGradlePluginApi::class)
 internal fun Project.configureKotlinMultiplatform(
     kotlinMultiplatformExtension: KotlinMultiplatformExtension
 ) {
     kotlinMultiplatformExtension.apply {
         applyDefaultHierarchyTemplate()
-        val libs = the<LibrariesForLibs>()
         if (pluginManager.hasPlugin(libs.plugins.android.library.get().pluginId)
             || pluginManager.hasPlugin(libs.plugins.android.application.get().pluginId)
         ) {

@@ -1,18 +1,16 @@
 
 import com.android.build.gradle.internal.utils.KSP_PLUGIN_ID
-import org.gradle.accessors.dm.LibrariesForLibs
+import helpers.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
-import org.gradle.kotlin.dsl.the
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 @Suppress("unused")
 internal class KtorfitConventionPlugin : Plugin<Project> {
 
     override fun apply(target: Project) = target.run {
-        val libs = the<LibrariesForLibs>()
         pluginManager.apply(KSP_PLUGIN_ID)
         pluginManager.apply(libs.plugins.ktorfit.get().pluginId)
 

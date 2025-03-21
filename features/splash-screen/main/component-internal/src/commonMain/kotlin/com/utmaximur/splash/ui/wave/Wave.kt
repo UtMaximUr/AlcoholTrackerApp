@@ -1,7 +1,5 @@
 package com.utmaximur.splash.ui.wave
 
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.DrawScope
@@ -44,7 +42,7 @@ fun DrawScope.drawWave(
             wave.points[index + 1].apply {
                 val x2 = (prevPoint.x + this.x) / 2
                 val y2 = (prevPoint.y + this.y) / 2
-                path.quadraticBezierTo(point.x, point.y, x2, y2)
+                path.quadraticTo(point.x, point.y, x2, y2)
                 prevPoint = this
             }
         }
@@ -56,32 +54,4 @@ fun DrawScope.drawWave(
     path.close()
 
     drawPath(path = path, color = color)
-}
-
-fun DrawScope.drawWaveDebug(
-    wave: Wave,
-    strokeWidth: Float = 5f,
-    arcSize: Float = 20f
-) {
-    wave.points.forEachIndexed { index, point ->
-        kotlin.runCatching {
-            wave.points[index + 1].apply {
-                drawLine(
-                    color = Color.Yellow,
-                    start = Offset(x = point.x, y = point.y),
-                    end = Offset(x = this.x, y = this.y),
-                    strokeWidth = strokeWidth
-                )
-            }
-        }
-
-        drawArc(
-            color = Color.Green,
-            startAngle = 0f,
-            sweepAngle = 360f,
-            topLeft = Offset(point.x - (arcSize / 2), point.y - (arcSize / 2)),
-            size = Size(arcSize, arcSize),
-            useCenter = true
-        )
-    }
 }
