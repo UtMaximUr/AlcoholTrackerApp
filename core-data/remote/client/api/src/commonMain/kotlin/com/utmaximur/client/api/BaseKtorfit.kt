@@ -1,7 +1,7 @@
 package com.utmaximur.client.api
 
 import de.jensklingenberg.ktorfit.Ktorfit
-import de.jensklingenberg.ktorfit.converter.builtin.FlowConverterFactory
+import de.jensklingenberg.ktorfit.converter.FlowConverterFactory
 import io.ktor.client.HttpClient
 
 abstract class BaseKtorfit(

@@ -2,6 +2,8 @@ package com.utmaximur.data.base_remote
 
 import com.utmaximur.app.base.app.ApplicationInfo
 import com.utmaximur.app.base.app.Flavor
+import com.utmaximur.client.api.HttpClientProvider
+import com.utmaximur.remote.errors.NetworkResponseError
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngineFactory
 import io.ktor.client.plugins.HttpResponseValidator
@@ -17,8 +19,6 @@ import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import org.koin.core.annotation.Factory
-import com.utmaximur.client.api.HttpClientProvider
-import com.utmaximur.remote.errors.NetworkResponseError
 
 @Factory
 internal class BaseClient(

@@ -3,7 +3,6 @@ package com.utmaximur.data.base_remote
 import com.utmaximur.client.BuildKonfig
 import de.jensklingenberg.ktorfit.Ktorfit
 import io.ktor.client.HttpClient
-import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Factory
@@ -18,7 +17,6 @@ class RemoteModule {
     @Single
     fun provideHttpClient(httpClientProvider: HttpClientProvider): HttpClient = httpClientProvider.build()
 
-    @OptIn(ExperimentalSerializationApi::class)
     @Single
     fun provideJson(): Json = Json {
         explicitNulls = false
