@@ -8,10 +8,13 @@
     <string name="currency">%1$s %2$s</string>
     <string name="calendar_count_drink" translatable="false">%1$s x %2$s</string>
     <string name="retry">Retry</string>
+    <string name="internet_connection_title">No Internet Connection found.\nCheck your connection.</string>
 
     <string name="cd_menu">Open menu</string>
     <string name="cd_add_action">Add</string>
     <string name="cd_lock">Functional blocked</string>
     <string name="cd_back">Back</string>
     <string name="cd_image">Image not load</string>
+    <string name="cd_save">Save track</string>
+    <string name="cd_internet_connection_logo">internet connection logo</string>
 </resources>

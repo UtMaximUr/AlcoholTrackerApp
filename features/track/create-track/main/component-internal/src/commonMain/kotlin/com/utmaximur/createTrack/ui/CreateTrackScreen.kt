@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -19,18 +17,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.utmaximur.createTrack.CreateTrackComponent
-import com.utmaximur.design.extensions.bottomFade
+import com.utmaximur.design.button.SaveIconButton
 import com.utmaximur.design.extensions.bounceClick
-import com.utmaximur.design.extensions.fadingEdge
 import com.utmaximur.design.topbar.TopBar
 import com.utmaximur.design.ui.DateButtonGroup
 import com.utmaximur.domain.models.TrackData
 import createTrack.resources.Res
-import createTrack.resources.cd_save
-import createTrack.resources.ic_save_button
 import createTrack.resources.title_create_drink
 import createTrack.resources.title_create_track
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -61,12 +55,7 @@ internal fun CreateTrackScreen(
                             color = Color.White,
                         )
                     }
-                    IconButton(onClick = { component.onSaveClick(trackBuilder.build()) }) {
-                        Icon(
-                            painter = painterResource(Res.drawable.ic_save_button),
-                            contentDescription = stringResource(Res.string.cd_save),
-                        )
-                    }
+                    SaveIconButton { component.onSaveClick(trackBuilder.build()) }
                 }
             )
         },
@@ -75,7 +64,6 @@ internal fun CreateTrackScreen(
                 modifier = Modifier
                     .padding(innerPadding)
                     .verticalScroll(scrollState)
-                    .fadingEdge(bottomFade)
                     .padding(12.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {

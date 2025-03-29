@@ -51,11 +51,18 @@ fun ItemDrink(
                 .align(Alignment.TopEnd),
             visible = drink.isUserCreated,
         ) {
-            IconButton(onClick = { onDeleteClick(drink.id) }) {
-                Icon(
-                    painter = painterResource(Res.drawable.ic_delete_button),
-                    contentDescription = stringResource(Res.string.cd_delete),
-                )
+            ElevatedCardApp(
+                modifier = Modifier.padding(12.dp),
+                shape = MaterialTheme.shapes.large,
+                defaultElevation = 2.dp,
+            ) {
+                IconButton(onClick = { onDeleteClick(drink.id) }) {
+                    Icon(
+                        painter = painterResource(Res.drawable.ic_delete_button),
+                        contentDescription = stringResource(Res.string.cd_delete),
+                        tint = MaterialTheme.colorScheme.tertiary,
+                    )
+                }
             }
         }
     }
