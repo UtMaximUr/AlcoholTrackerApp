@@ -7,6 +7,9 @@ sealed interface Configuration {
 
     @Serializable
     data object CreateDrinkScreen : Configuration
+
+    @Serializable
+    data object KandinskyScreen : Configuration
 }
 
 @Serializable

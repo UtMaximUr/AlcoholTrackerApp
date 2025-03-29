@@ -15,12 +15,15 @@ import com.arkivanov.decompose.router.slot.childSlot
 import com.arkivanov.decompose.router.slot.dismiss
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
+import com.arkivanov.decompose.router.stack.pop
+import com.arkivanov.decompose.router.stack.pushNew
 import com.arkivanov.decompose.value.Value
 import com.utmaximur.actions.ActionsImageComponent
 import com.utmaximur.core.decompose.ComposeComponent
 import com.utmaximur.core.decompose.ComposeDialogComponent
 import com.utmaximur.createDrink.CreateDrinkComponent
 import com.utmaximur.createDrink.CreateDrinkNavigationComponent
+import com.utmaximur.kandinsky.KandinskyScreenComponent
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
 import org.koin.core.component.KoinComponent
@@ -57,6 +60,13 @@ internal class DefaultCreateDrinkNavigationComponent(
                     ::onCreateDrinkOutput,
                 )
             }
+
+            Configuration.KandinskyScreen -> get<KandinskyScreenComponent> {
+                parameterArrayOf(
+                    componentContext,
+                    ::onKandinskyOutput,
+                )
+            }
         }
 
     private val modalNavigation = SlotNavigation<ModalConfiguration>()
@@ -75,7 +85,7 @@ internal class DefaultCreateDrinkNavigationComponent(
         ModalConfiguration.ImageActionsDialog -> get<ActionsImageComponent> {
             parametersOf(
                 componentContext,
-                { modalNavigation.dismiss() },
+                ::onActionsImageOutput,
             )
         }
     }
@@ -85,6 +95,17 @@ internal class DefaultCreateDrinkNavigationComponent(
         CreateDrinkComponent.Output.OpenImageActionsDialog -> modalNavigation.activate(
             ModalConfiguration.ImageActionsDialog,
         )
+    }
+
+    private fun onActionsImageOutput(output: ActionsImageComponent.Output): Unit = when (output) {
+        ActionsImageComponent.Output.Dismiss -> modalNavigation.dismiss()
+        ActionsImageComponent.Output.NavigateKandinskyScreen -> modalNavigation.dismiss {
+            navigation.pushNew(Configuration.KandinskyScreen)
+        }
+    }
+
+    private fun onKandinskyOutput(output: KandinskyScreenComponent.Output): Unit = when (output) {
+        KandinskyScreenComponent.Output.NavigateBack -> navigation.pop()
     }
 
     @Composable
