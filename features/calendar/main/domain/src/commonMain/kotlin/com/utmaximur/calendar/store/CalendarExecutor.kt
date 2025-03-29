@@ -12,6 +12,7 @@ import com.utmaximur.core.mvi_mapper.asRequest
 import com.utmaximur.domain.calendar.CalendarRepository
 import com.utmaximur.domain.models.Track
 import com.utmaximur.utils.extensions.toLocalDate
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
@@ -32,16 +33,9 @@ internal class CalendarExecutor(
 ) : CoroutineExecutor<Intent, Unit, State, Message, Label>() {
 
     override fun executeAction(action: Unit) {
-        scope.launch { analyticsManager.trackEvent(OpenScreenEvent()) }
-        repository.currencyStream
-            .onEach { currency -> dispatch(Message.UpdateCurrency(currency)) }
-            .launchIn(scope)
-        repository.observeTracksByStartDate()
-            .map { tracks -> tracks.groupBy { it.date } }
-            .map { tracks -> tracks.mapKeys { (date, _) -> date.toLocalDate() } }
-            .asRequest()
-            .onEach { tracks -> dispatch(Message.UpdateState(tracks)) }
-            .launchIn(scope)
+        trackScreenOpen()
+        observeCurrency()
+        observeTracks()
     }
 
     override fun executeIntent(intent: Intent) {
@@ -50,11 +44,28 @@ internal class CalendarExecutor(
         }
     }
 
+    private fun trackScreenOpen() = scope.launch {
+        analyticsManager.trackEvent(OpenScreenEvent())
+    }
+
+    private fun observeCurrency() = repository
+        .currencyStream
+        .onEach { currency -> dispatch(Message.UpdateCurrency(currency)) }
+        .launchIn(scope)
+
+    private fun observeTracks() = repository
+        .observeTracksByStartDate()
+        .mapToGroupedDates()
+        .asRequest()
+        .onEach { tracks -> dispatch(Message.UpdateState(tracks)) }
+        .launchIn(scope)
+
+    private fun Flow<List<Track>>.mapToGroupedDates() = this
+        .map { tracks -> tracks.groupBy { it.date } }
+        .map { grouped -> grouped.mapKeys { (date, _) -> date.toLocalDate() } }
+
     private fun toggleCalendarView() {
-        val calendarView = when (state().calendarView) {
-            CalendarView.DAY_VIEW -> CalendarView.MONTH_VIEW
-            CalendarView.MONTH_VIEW -> CalendarView.DAY_VIEW
-        }
+        val calendarView = state().calendarView.toggle()
         dispatch(Message.UpdateCalendarView(calendarView))
     }
 }

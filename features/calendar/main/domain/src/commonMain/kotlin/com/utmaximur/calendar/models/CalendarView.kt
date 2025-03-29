@@ -19,5 +19,10 @@ enum class CalendarView(
     MONTH_VIEW(
         Res.string.schedule_month_view,
         Res.drawable.ic_calendar_month_view
-    )
+    );
+
+    fun toggle() = when (this) {
+        DAY_VIEW -> MONTH_VIEW
+        MONTH_VIEW -> DAY_VIEW
+    }
 }
