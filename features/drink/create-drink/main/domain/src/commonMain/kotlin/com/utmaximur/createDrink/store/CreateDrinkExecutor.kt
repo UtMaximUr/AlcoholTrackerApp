@@ -10,7 +10,7 @@ import com.utmaximur.createDrink.store.CreateDrinkStore.Intent
 import com.utmaximur.createDrink.store.CreateDrinkStore.Label
 import com.utmaximur.createDrink.store.CreateDrinkStore.State
 import com.utmaximur.createDrink.validation.DrinkValidator
-import com.utmaximur.domain.actions.PlatformFileProviderData
+import com.utmaximur.domain.actions.PathFileProviderData
 import com.utmaximur.domain.createDrink.CreateDrinkRepository
 import com.utmaximur.domain.models.Icon
 import com.utmaximur.message.models.MessageContainer
@@ -33,7 +33,7 @@ internal sealed interface Message {
 
 internal class CreateDrinkExecutor(
     private val analyticsManager: AnalyticsManager,
-    private val providerData: PlatformFileProviderData,
+    private val providerData: PathFileProviderData,
     private val messageService: MessageService,
     private val drinkValidator: DrinkValidator,
     private val createDrinkRepository: CreateDrinkRepository,
@@ -43,46 +43,54 @@ internal class CreateDrinkExecutor(
     private var savingJob: Job? = null
 
     override fun executeAction(action: Unit) {
-        scope.launch { analyticsManager.trackEvent(OpenScreenEvent()) }
-        createDrinkRepository.iconsStream
-            .onEach { icons -> dispatch(Message.UpdateIcons(icons)) }
-            .launchIn(scope)
-        providerData.dataFlow
-            .onEach { url -> dispatch(Message.UpdateImageUri(url)) }
-            .launchIn(scope)
+        trackScreenOpen()
+        observeIcons()
+        observeImageData()
     }
 
     override fun executeIntent(intent: Intent) {
         when (intent) {
-            is Intent.SaveDrinkData -> handleDrinkData(intent.drinkData)
+            is Intent.SaveDrinkData -> saveDrink(intent.drinkData)
         }
     }
 
-    private fun handleDrinkData(drinkData: DrinkData) =
-        withValidatorLaunch(drinkData) { data ->
+    private fun trackScreenOpen() = scope.launch {
+        analyticsManager.trackEvent(OpenScreenEvent())
+    }
+
+    private fun observeIcons() = createDrinkRepository.iconsStream
+        .onEach { icons -> dispatch(Message.UpdateIcons(icons)) }
+        .launchIn(scope)
+
+    private fun observeImageData() = providerData.dataFlow
+        .onEach { url -> dispatch(Message.UpdateImageUri(url)) }
+        .launchIn(scope)
+
+    private fun saveDrink(drinkData: DrinkData) =
+        validateAndProcessDrinkData(drinkData) { data ->
             analyticsManager.trackEvent(SaveDrinkEvent(data.name))
             interactor.invoke(data)
-                .onFailure {
-                    showMessage(Res.string.saving_error, it.message)
-                    savingJob?.cancel()
-                }
-                .onSuccess {
-                    showMessage(Res.string.successful_save)
-                    publish(Label.CloseEvent)
-                }
+                .onFailure { error -> handleSaveError(error) }
+                .onSuccess { handleSaveSuccess() }
         }
 
-    private fun withValidatorLaunch(drinkData: DrinkData, block: suspend (DrinkData) -> Unit) {
+    private fun validateAndProcessDrinkData(data: DrinkData, block: suspend (DrinkData) -> Unit) {
+        savingJob?.cancel()
         savingJob = scope.launch {
-            val validator = drinkValidator.validate(drinkData)
-            validator.errors.firstOrNull()?.let { error ->
-                showMessage(error.message)
-                savingJob?.cancel()
-            }
-            validator.errors.ifEmpty {
-                block(validator.drinkData)
-            }
+            val validatorResult = drinkValidator.validate(data)
+            validatorResult.errors.firstOrNull()?.let { error -> showMessage(error.message) }
+                ?: block(validatorResult.drinkData)
         }
+    }
+
+    private suspend fun handleSaveSuccess() {
+        showMessage(Res.string.successful_save)
+        publish(Label.CloseEvent)
+    }
+
+    private suspend fun handleSaveError(error: Throwable) {
+        showMessage(Res.string.saving_error, error.message)
+        savingJob?.cancel()
     }
 
     private suspend fun showMessage(res: StringResource, args: String? = null) {

@@ -9,7 +9,7 @@ import com.utmaximur.createDrink.store.CreateDrinkStore.Intent
 import com.utmaximur.createDrink.store.CreateDrinkStore.Label
 import com.utmaximur.createDrink.store.CreateDrinkStore.State
 import com.utmaximur.createDrink.validation.DrinkValidator
-import com.utmaximur.domain.actions.PlatformFileProviderData
+import com.utmaximur.domain.actions.PathFileProviderData
 import com.utmaximur.domain.createDrink.CreateDrinkRepository
 import com.utmaximur.message.models.MessageService
 import org.koin.core.annotation.Factory
@@ -18,7 +18,7 @@ import org.koin.core.annotation.Factory
 internal class CreateDrinkStoreFactory(
     storeFactory: StoreFactory,
     analyticsManager: AnalyticsManager,
-    providerData: PlatformFileProviderData,
+    providerData: PathFileProviderData,
     messageService: MessageService,
     drinkValidator: DrinkValidator,
     createDrinkRepository: CreateDrinkRepository,

@@ -1,11 +1,8 @@
 package com.utmaximur.createDrink.validation
 
 import com.utmaximur.createDrink.DrinkData
+import com.utmaximur.domain.Validator
 import org.koin.core.annotation.Factory
-
-internal fun interface Validator<in T : Any, out R> {
-    fun validate(value: T): R
-}
 
 internal class FieldValidator : Validator<DrinkData, List<ValidationError>> {
     override fun validate(value: DrinkData): List<ValidationError> {
