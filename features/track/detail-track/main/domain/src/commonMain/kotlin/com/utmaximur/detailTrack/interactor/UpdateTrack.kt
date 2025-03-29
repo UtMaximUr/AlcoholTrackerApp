@@ -1,7 +1,6 @@
 package com.utmaximur.detailTrack.interactor
 
 import com.utmaximur.domain.Interactor
-import com.utmaximur.domain.ZERO_VALUE_L
 import com.utmaximur.domain.detailTrack.DetailTrackRepository
 import com.utmaximur.domain.models.Place
 import com.utmaximur.domain.models.Track
@@ -23,10 +22,10 @@ internal class UpdateTrack(
         withContext(Dispatchers.IO) {
             val track = params.track
             repository.updateTrack(params.transform(track))
-            val updatedPlace = params.trackData.place.ifEmpty { place ->
-                place.copy(trackId = track.id)
+            params.trackData.place.ifNotEmpty { place ->
+                val updatedPlace = place.copy(trackId = track.id)
+                repository.updatePlace(updatedPlace)
             }
-            repository.updatePlace(updatedPlace)
         }
     }
 
@@ -41,10 +40,10 @@ internal class UpdateTrack(
         date = trackData.date.parseToLongNotNull()
     )
 
-    private inline fun Place.ifEmpty(block: (Place) -> Place): Place {
-        return if (this.trackId == ZERO_VALUE_L) {
+    private inline fun Place.ifNotEmpty(block: (Place) -> Unit) {
+        if (this != Place.EMPTY) {
             block(this)
-        } else this
+        }
     }
 
     private inline fun <T> String.ifEmpty(block: () -> T): String {
