@@ -4,7 +4,7 @@
 
 # AlcoholTrackerApp
 
-In this application, you can mark all the days of alcohol intake, statistics on the intake of drinks.
+In this app, you can mark all your drinking days, keep statistics about your drinks, mark places on a map, create new drinks and generate images for them using Fusion Brain AI.
 
 # Technology stack
 * Kotlin Multiplatform
@@ -17,6 +17,9 @@ In this application, you can mark all the days of alcohol intake, statistics on 
 * Room
 * Data store
 * Store5
+* Yandex Map
+* Geocoder API
+* Fusion Brain AI
 * Coroutines
 * Convention plugins
 * Gradle Kotlin DSL
