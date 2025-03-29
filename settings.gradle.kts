@@ -76,6 +76,7 @@ includeCoreFeature("permission")
 includeCoreFeature("media:compose")
 includeCoreFeature("media:core")
 includeCoreFeature("internet-connection")
+includeCoreFeature("work-manager")
 
 includeFeature("message:data")
 includeFeature("message:domain")
