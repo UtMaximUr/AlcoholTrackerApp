@@ -10,4 +10,13 @@ interface ActionsImageComponent : ComposeDialogComponent {
     fun handleFiles(platformFiles: List<PlatformFile>)
 
     fun onDeleteFileClick()
+
+    fun navigateToKandinskyScreen()
+
+    sealed interface Output {
+
+        data object Dismiss : Output
+
+        data object NavigateKandinskyScreen : Output
+    }
 }

@@ -44,6 +44,7 @@ import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 import com.utmaximur.data.base_remote.RemoteModule
 import com.utmaximur.data.geocoder.GeocoderDataModule
+import com.utmaximur.data.kandinsky.KandinskyDataModule
 import com.utmaximur.data.map.MapDataModule
 import com.utmaximur.data.places.PlaceManagerModule
 import com.utmaximur.databaseRoom.RoomDataBaseModule
@@ -54,6 +55,7 @@ import com.utmaximur.data.splash_screen.SplashScreenDataModule
 import com.utmaximur.data.tracksModal.TracksModalDataModule
 import com.utmaximur.detailTrack.DetailTrackNavigationComponentModule
 import com.utmaximur.geocoder.GeocoderMainComponentModule
+import com.utmaximur.kandinsky.KandinskyScreenComponentModule
 import com.utmaximur.map.MapComponentModule
 import com.utmaximur.map.MapNavigationComponentModule
 import com.utmaximur.mappers.implementation.ProjectImplementationModule
@@ -120,7 +122,9 @@ import com.utmaximur.tracksModal.TracksModalMainComponentModule
         GeocoderDataModule::class,
         GeocoderMainComponentModule::class,
         TracksModalDataModule::class,
-        TracksModalMainComponentModule::class
+        TracksModalMainComponentModule::class,
+        KandinskyScreenComponentModule::class,
+        KandinskyDataModule::class,
     ]
 )
 

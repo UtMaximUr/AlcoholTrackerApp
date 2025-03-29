@@ -82,6 +82,8 @@ kotlin {
             implementation(projects.features.drink.createDrink.data)
             implementation(projects.features.drink.drinkImageModal.main.componentInternal)
             implementation(projects.features.drink.drinkImageModal.data)
+            implementation(projects.features.drink.kandinsky.data)
+            implementation(projects.features.drink.kandinsky.main.componentInternal)
         }
         androidMain.dependencies {
             implementation(libs.androidx.startup.runtime)

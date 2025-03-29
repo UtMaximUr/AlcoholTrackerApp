@@ -3,11 +3,13 @@ package com.utmaximur.actions.ui
 import actions.resources.Res
 import actions.resources.action_camera
 import actions.resources.action_gallery
+import actions.resources.action_generate_image
 import actions.resources.action_heading
 import actions.resources.action_remove_photo
 import actions.resources.ic_camera
 import actions.resources.ic_delete
 import actions.resources.ic_gallery
+import actions.resources.ic_generate_image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -62,6 +64,11 @@ internal fun ActionsSelectBottomSheet(
                 icon = Res.drawable.ic_gallery,
                 title = Res.string.action_gallery,
                 onClick = galleryPermissionState::launchRequestPermission,
+            )
+            ActionItem(
+                icon = Res.drawable.ic_generate_image,
+                title = Res.string.action_generate_image,
+                onClick = component::navigateToKandinskyScreen,
             )
             ActionItem(
                 icon = Res.drawable.ic_delete,

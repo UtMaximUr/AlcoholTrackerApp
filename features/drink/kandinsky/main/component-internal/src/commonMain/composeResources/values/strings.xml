@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_generate_image">Generate image(Fusion Brain AI)</string>
+    <string name="title_image_style">Image style</string>
+    <string name="title_enter_text">Enter the text to generate the image</string>
+    <string name="create_generation">Create generation</string>
+    <string name="generation_progress">The image creation process is in progress.\nIt will take about 10 seconds, please wait.</string>
+
+    <string name="cd_generate_image">generate image placeholder</string>
+</resources>

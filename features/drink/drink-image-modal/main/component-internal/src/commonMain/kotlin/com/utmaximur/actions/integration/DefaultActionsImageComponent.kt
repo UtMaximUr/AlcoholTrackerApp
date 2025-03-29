@@ -20,7 +20,7 @@ import org.koin.core.component.get
 @Factory
 internal class DefaultActionsImageComponent(
     @InjectedParam componentContext: ComponentContext,
-    @InjectedParam private val dismissCallback: () -> Unit,
+    @InjectedParam private val output: (ActionsImageComponent.Output) -> Unit,
 ) : ActionsImageComponent,
     ComponentContext by componentContext,
     KoinComponent {
@@ -36,7 +36,10 @@ internal class DefaultActionsImageComponent(
     override fun onDeleteFileClick() =
         store.accept(ActionsImageStore.Intent.DeleteFile)
 
-    override fun dismiss() = dismissCallback()
+    override fun navigateToKandinskyScreen() =
+        output(ActionsImageComponent.Output.NavigateKandinskyScreen)
+
+    override fun dismiss() = output(ActionsImageComponent.Output.Dismiss)
 
     init {
         store.labels.onEach { event ->
