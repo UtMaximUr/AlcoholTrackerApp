@@ -10,4 +10,5 @@ dependencies {
     commonMainImplementation(projects.features.drink.createDrink.navigation.componentApi)
     commonMainImplementation(projects.features.drink.createDrink.main.componentApi)
     commonMainImplementation(projects.features.drink.drinkImageModal.main.componentApi)
+    commonMainImplementation(projects.features.drink.kandinsky.main.componentApi)
 }
