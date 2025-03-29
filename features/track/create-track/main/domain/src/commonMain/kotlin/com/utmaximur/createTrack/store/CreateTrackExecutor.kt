@@ -57,51 +57,78 @@ internal class CreateTrackExecutor(
     private var savingJob: Job? = null
 
     override fun executeAction(action: Unit) {
-        scope.launch { analyticsManager.trackEvent(OpenScreenEvent()) }
-        calculatorProviderData.dataFlow
-            .filterNotNull()
-            .onEach { price -> dispatch(Message.UpdatePrice(price)) }
-            .launchIn(scope)
-        dateProviderData.dataFlow
-            .filterNotNull()
-            .map { date -> date.toDateUi() }
-            .onEach { dateUi -> handleSelectedDate(dateUi) }
-            .launchIn(scope)
-        repository.drinksStream
-            .asRequest()
-            .onEach { drinks -> dispatch(Message.UpdateState(drinks)) }
-            .launchIn(scope)
-        repository.currencyStream
-            .onEach { currency -> dispatch(Message.UpdateCurrency(currency)) }
-            .launchIn(scope)
-        confirmDialogProviderData.dataFlow
-            .filterNotNull()
-            .onEach { id -> repository.deleteDrink(id) }
-            .flowOn(Dispatchers.IO)
-            .launchIn(scope)
+        trackScreenOpen()
+        observePriceUpdates()
+        observeDateUpdates()
+        observeDrinks()
+        observeCurrency()
+        observeConfirmDialog()
     }
 
     override fun executeIntent(intent: Intent) {
         when (intent) {
-            is Intent.SaveTrackData -> savingJob = scope.launch {
-                handleTrackData(intent.trackData)
-            }
-
-            is Intent.SelectedDate -> publish(Label.DatePickerEvent(intent.date.parseToLong()))
-            Intent.Today -> handleSelectedDate(getTodayDateUi())
+            is Intent.SaveTrackData -> handleSaveTrackData(intent.trackData)
+            is Intent.SelectedDate -> handleDatePicker(intent.date)
+            Intent.Today -> handleTodayIntent()
         }
     }
 
-    private suspend fun handleTrackData(trackData: TrackData) {
+    private fun trackScreenOpen() = scope.launch {
+        analyticsManager.trackEvent(OpenScreenEvent())
+    }
+
+    private fun observePriceUpdates() = calculatorProviderData.dataFlow
+        .filterNotNull()
+        .onEach { price -> dispatch(Message.UpdatePrice(price)) }
+        .launchIn(scope)
+
+    private fun observeDateUpdates() = dateProviderData.dataFlow
+        .filterNotNull()
+        .map { date -> date.toDateUi() }
+        .onEach { dateUi -> handleSelectedDate(dateUi) }
+        .launchIn(scope)
+
+    private fun observeDrinks() = repository.drinksStream
+        .asRequest()
+        .onEach { drinks -> dispatch(Message.UpdateState(drinks)) }
+        .launchIn(scope)
+
+    private fun observeCurrency() = repository.currencyStream
+        .onEach { currency -> dispatch(Message.UpdateCurrency(currency)) }
+        .launchIn(scope)
+
+    private fun observeConfirmDialog() = confirmDialogProviderData.dataFlow
+        .filterNotNull()
+        .onEach { id -> repository.deleteDrink(id) }
+        .flowOn(Dispatchers.IO)
+        .launchIn(scope)
+
+    private fun handleSaveTrackData(trackData: TrackData) {
+        savingJob?.cancel()
+        savingJob = scope.launch { processTrackData(trackData) }
+    }
+
+    private suspend fun processTrackData(trackData: TrackData) {
         interactor.invoke(trackData)
-            .onFailure {
-                showMessage(Res.string.saving_error, it.message)
-                savingJob?.cancel()
-            }
-            .onSuccess {
-                showMessage(Res.string.successful_save)
-                publish(Label.CloseEvent)
-            }
+            .onFailure { error -> handleSaveError(error) }
+            .onSuccess { handleSaveSuccess() }
+    }
+
+    private suspend fun handleSaveError(error: Throwable) {
+        showMessage(Res.string.saving_error, error.message)
+    }
+
+    private suspend fun handleSaveSuccess() {
+        showMessage(Res.string.successful_save)
+        publish(Label.CloseEvent)
+    }
+
+    private fun handleDatePicker(date: String) {
+        publish(Label.DatePickerEvent(date.parseToLong()))
+    }
+
+    private fun handleTodayIntent() {
+        handleSelectedDate(getTodayDateUi())
     }
 
     private fun handleSelectedDate(dateUi: String) {
