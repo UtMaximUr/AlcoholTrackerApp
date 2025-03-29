@@ -18,6 +18,7 @@ import com.utmaximur.message.models.MessageService
 import com.utmaximur.utils.extensions.getTodayDateUi
 import com.utmaximur.utils.extensions.parseToLong
 import com.utmaximur.utils.extensions.toDateUi
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
@@ -43,56 +44,84 @@ internal class DetailTrackExecutor(
     private val messageService: MessageService
 ) : CoroutineExecutor<Intent, Unit, State, Message, Label>() {
 
+    private var updateJob: Job? = null
+        get() = field?.takeIf { it.isActive }
+
     override fun executeAction(action: Unit) {
-        scope.launch { analyticsManager.trackEvent(OpenScreenEvent()) }
-        calculatorProviderData.dataFlow
-            .filterNotNull()
-            .onEach { price -> dispatch(Message.UpdatePrice(price)) }
-            .launchIn(scope)
-        dateProviderData.dataFlow
-            .filterNotNull()
-            .map { date -> date.toDateUi() }
-            .onEach { dateUi -> handleSelectedDate(dateUi) }
-            .launchIn(scope)
-        confirmDialogProviderData.dataFlow
-            .filterNotNull()
-            .onEach { id ->
-                repository.deleteTrack(id)
-                publish(Label.CloseEvent)
-            }
-            .launchIn(scope)
-        repository.observeTrackById(trackId)
-            .onEach { track ->
-                handleSelectedDate(track.date.toDateUi())
-                dispatch(Message.UpdatePrice(track.price))
-            }
-            .onEach { dispatch(Message.UpdateTrack(it)) }
-            .launchIn(scope)
-        repository.currencyStream
-            .onEach { currency -> dispatch(Message.UpdateCurrency(currency)) }
-            .launchIn(scope)
+        trackScreenOpen()
+        observeTrackDetails()
+        observePriceUpdates()
+        observeDateUpdates()
+        observeDeleteConfirmation()
+        observeCurrency()
     }
 
-    override fun executeIntent(intent: Intent) {
-        when (intent) {
-            is Intent.SaveTrackData -> handleSave(intent.trackData)
-            is Intent.SelectedDate -> publish(Label.DatePickerEvent(intent.date.parseToLong()))
-            Intent.Today -> dispatch(Message.UpdateSelectedDate(getTodayDateUi()))
-        }
+    override fun executeIntent(intent: Intent) = when (intent) {
+        is Intent.SaveTrackData -> saveTrack(intent.trackData)
+        is Intent.SelectedDate -> handleDateSelection(intent.date)
+        Intent.Today -> handleTodaySelection()
     }
+
+    private fun trackScreenOpen() = scope.launch {
+        analyticsManager.trackEvent(OpenScreenEvent())
+    }
+
+    private fun observeTrackDetails() = repository.observeTrackById(trackId)
+        .onEach { track ->
+            handleSelectedDate(track.date.toDateUi())
+            dispatch(Message.UpdatePrice(track.price))
+            dispatch(Message.UpdateTrack(track))
+        }
+        .launchIn(scope)
+
+    private fun observePriceUpdates() = calculatorProviderData.dataFlow
+        .filterNotNull()
+        .onEach { price -> dispatch(Message.UpdatePrice(price)) }
+        .launchIn(scope)
+
+    private fun observeDateUpdates() = dateProviderData.dataFlow
+        .filterNotNull()
+        .map { date -> date.toDateUi() }
+        .onEach { dateUi -> handleSelectedDate(dateUi) }
+        .launchIn(scope)
+
+    private fun observeDeleteConfirmation() = confirmDialogProviderData.dataFlow
+        .filterNotNull()
+        .onEach { id ->
+            repository.deleteTrack(id)
+            publish(Label.CloseEvent)
+        }
+        .launchIn(scope)
+
+    private fun observeCurrency() = repository.currencyStream
+        .onEach { currency -> dispatch(Message.UpdateCurrency(currency)) }
+        .launchIn(scope)
 
     private fun handleSelectedDate(dateUi: String) {
         dispatch(Message.UpdateSelectedDate(dateUi))
         publish(Label.DateEvent(dateUi))
     }
 
-    private fun handleSave(trackData: TrackData) = scope.launch {
-        val track = state().track
-        val params = UpdateTrack.Params(track, trackData)
-        interactor
-            .invoke(params)
+    private fun saveTrack(trackData: TrackData) {
+        updateJob?.cancel()
+        updateJob = scope.launch {
+            updateTrack(trackData)
+        }
+    }
+
+    private suspend fun updateTrack(trackData: TrackData) {
+        val params = UpdateTrack.Params(state().track, trackData)
+        interactor.invoke(params)
             .onSuccess { publish(Label.CloseEvent) }
             .onFailure { error -> showErrorMessage(error) }
+    }
+
+    private fun handleDateSelection(date: String) {
+        publish(Label.DatePickerEvent(date.parseToLong()))
+    }
+
+    private fun handleTodaySelection() {
+        dispatch(Message.UpdateSelectedDate(getTodayDateUi()))
     }
 
     private fun showErrorMessage(error: Throwable) {
