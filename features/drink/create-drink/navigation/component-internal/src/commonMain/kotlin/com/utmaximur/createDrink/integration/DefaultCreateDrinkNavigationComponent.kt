@@ -99,7 +99,7 @@ internal class DefaultCreateDrinkNavigationComponent(
 
     private fun onActionsImageOutput(output: ActionsImageComponent.Output): Unit = when (output) {
         ActionsImageComponent.Output.Dismiss -> modalNavigation.dismiss()
-        ActionsImageComponent.Output.NavigateKandinskyScreen -> modalNavigation.dismiss {
+        ActionsImageComponent.Output.KandinskyScreen -> modalNavigation.dismiss {
             navigation.pushNew(Configuration.KandinskyScreen)
         }
     }

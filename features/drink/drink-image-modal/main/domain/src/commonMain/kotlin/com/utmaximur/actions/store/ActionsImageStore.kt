@@ -8,7 +8,13 @@ import com.utmaximur.media.PlatformFile
 
 interface ActionsImageStore : Store<Intent, State, Label> {
 
-    data object State
+    data class State(
+        val isImageGenerationAvailable: Boolean
+    ) {
+        constructor() : this(
+            isImageGenerationAvailable = true
+        )
+    }
 
     sealed interface Intent {
 

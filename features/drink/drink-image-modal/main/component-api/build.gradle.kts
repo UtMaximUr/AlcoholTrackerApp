@@ -6,6 +6,7 @@ plugins {
 dependencies {
     commonMainImplementation(projects.core.decompose)
 
+    commonMainImplementation(projects.features.drink.drinkImageModal.main.domain)
     commonMainImplementation(projects.features.drink.drinkImageModal.domain)
     commonMainImplementation(projects.core.media.core)
 }
