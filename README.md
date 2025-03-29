@@ -27,10 +27,11 @@ In this app, you can mark all your drinking days, keep statistics about your dri
 
 
 # Calendar 
-<img src="https://user-images.githubusercontent.com/60608306/155937648-f28668d6-92c7-49c4-9659-8b41684af7a4.png" width="320"/>
+<img src="https://github.com/user-attachments/assets/42bddf24-a369-4773-a8bc-7b95cbfddc04.png" width="320"/>
 
 # Tracks
-- swipe to edit or delete   
+- swipe to edit or delete
+
 
 <img src="https://user-images.githubusercontent.com/60608306/155938193-f4dc7776-5874-4584-b064-7f3fef627cb6.png" width="320"/><img src="https://user-images.githubusercontent.com/60608306/155938195-113fdd1e-7a52-4f50-b792-a4437578b915.png" width="320"/><img src="https://user-images.githubusercontent.com/60608306/155938206-75219942-976b-41af-aa5c-e67b47472a38.png" width="320"/>
 
