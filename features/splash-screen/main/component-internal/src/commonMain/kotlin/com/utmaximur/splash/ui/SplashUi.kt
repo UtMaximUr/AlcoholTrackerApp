@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.utmaximur.design.RequestWidget
+import com.utmaximur.design.ui.NoInternetConnectionContent
 import com.utmaximur.splash.SplashScreenComponent
 
 @Composable
