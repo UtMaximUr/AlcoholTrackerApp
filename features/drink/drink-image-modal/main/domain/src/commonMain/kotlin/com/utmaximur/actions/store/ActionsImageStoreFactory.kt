@@ -4,14 +4,14 @@ import com.arkivanov.mvikotlin.core.store.SimpleBootstrapper
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
-import com.utmaximur.domain.actions.PlatformFileProviderData
+import com.utmaximur.domain.actions.PathFileProviderData
 import kotlinx.coroutines.launch
 import org.koin.core.annotation.Factory
 
 @Factory
 internal class ActionsImageStoreFactory(
     storeFactory: StoreFactory,
-    providerData: PlatformFileProviderData,
+    providerData: PathFileProviderData,
 ) : ActionsImageStore,
     Store<ActionsImageStore.Intent, ActionsImageStore.State, ActionsImageStore.Label> by storeFactory.create(
         name = ActionsImageStore::class.simpleName,
