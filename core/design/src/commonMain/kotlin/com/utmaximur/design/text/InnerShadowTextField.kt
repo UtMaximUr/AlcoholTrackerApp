@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -22,11 +21,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.utmaximur.design.extensions.clearTags
 import com.utmaximur.design.extensions.innerShadow
-import design.resources.Res
-import design.resources.cd_lock
-import design.resources.ic_lock_24dp
-import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.resources.stringResource
+import com.utmaximur.design.ui.trailingOrBlockedIcon
 
 /**
  * Компонент текстового поля с внутренней тенью, поддерживающий различные кастомизации.
@@ -117,23 +112,3 @@ fun InnerShadowTextField(
         supportingText?.let { it() }
     }
 }
-
-@Composable
-private fun trailingOrBlockedIcon(
-    enabled: Boolean,
-    trailingIcon: @Composable (() -> Unit)?,
-): @Composable (() -> Unit)? {
-    return when {
-        enabled -> trailingIcon?.let { icon -> { icon.invoke() } }
-        else -> {
-            { FunctionalBlockedIcon() }
-        }
-    }
-}
-
-@Composable
-private fun FunctionalBlockedIcon() = Icon(
-    painter = painterResource(Res.drawable.ic_lock_24dp),
-    contentDescription = stringResource(Res.string.cd_lock),
-    tint = MaterialTheme.colorScheme.tertiary,
-)
