@@ -30,12 +30,10 @@ internal class DatePickerStoreFactory(
             onAction<Unit> {
                 dispatch(Message.UpdateState(selectedDate = selectedDate))
             }
-            onIntent<Intent> { intent ->
-                when (intent) {
-                    is Intent.SelectedDate -> launch {
-                        providerData.sendData(intent.date)
-                        publish(Label.CloseEvent)
-                    }
+            onIntent<Intent.SelectedDate> { intent ->
+                launch {
+                    providerData.sendData(intent.date)
+                    publish(Label.CloseEvent)
                 }
             }
         },
