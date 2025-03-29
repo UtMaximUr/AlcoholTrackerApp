@@ -12,6 +12,9 @@
             <meta-data
                 android:name="com.utmaximur.KoinApplicationInitializer"
                 android:value="androidx.startup" />
+            <meta-data
+                android:name="com.utmaximur.WorkersInitializer"
+                android:value="androidx.startup" />
         </provider>
 
     </application>
