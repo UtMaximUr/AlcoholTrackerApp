@@ -9,6 +9,7 @@ object AnalyticsEvents {
     const val CHANGE_CURRENCY = "change_currency"
     const val OPEN_CALCULATOR_DIALOG = "open_calculator_dialog"
     const val CREATE_DRINK = "create_drink"
+    const val GENERATION_IMAGE = "generation_image"
 }
 
 object Param {
@@ -16,6 +17,8 @@ object Param {
     const val IS_DARK_THEME = "is_dark_theme"
     const val CURRENCY = "currency"
     const val DRINK_NAME = "drink_name"
+    const val PROMPT = "prompt"
+    const val STYLE = "style"
 }
 
 object ParamValues {
@@ -28,4 +31,5 @@ object ParamValues {
     const val SETTINGS_SCREEN = "settings_screen"
     const val CONFIRM_DIALOG = "confirm_dialog"
     const val CREATE_DRINK_SCREEN = "create_drink_screen"
+    const val KANDINSKY_SCREEN = "kandinsky_screen"
 }
