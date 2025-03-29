@@ -5,7 +5,6 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.extensions.coroutines.coroutineExecutorFactory
 import com.utmaximur.app.base.app.ApplicationInfo
-import com.utmaximur.app.base.app.Flavor
 import com.utmaximur.domain.root.store.RootStore.Intent
 import com.utmaximur.domain.root.store.RootStore.Label
 import com.utmaximur.domain.root.store.RootStore.State
@@ -32,7 +31,7 @@ internal class RootStoreFactory(
         bootstrapper = SimpleBootstrapper(Unit),
         executorFactory = coroutineExecutorFactory<_, _, _, Message, _> {
             onAction<Unit> {
-                val isMapEnabled = applicationInfo.flavor != Flavor.WithoutMap
+                val isMapEnabled = applicationInfo.flavor.isMapAvailable()
                 dispatch(Message.UpdateMapState(isMapEnabled = isMapEnabled))
                 themeSettingsManager.darkThemeStateStream.onEach { isDark ->
                     dispatch(Message.UpdateDarkTheme(isDarkTheme = isDark))

@@ -1,22 +1,26 @@
 package com.utmaximur.actions
 
+import com.utmaximur.actions.store.ActionsImageStore
 import com.utmaximur.core.decompose.ComposeDialogComponent
 import com.utmaximur.media.PlatformFile
+import kotlinx.coroutines.flow.StateFlow
 
 interface ActionsImageComponent : ComposeDialogComponent {
 
-    fun handleFile(platformFile: PlatformFile)
+    val model: StateFlow<ActionsImageStore.State>
 
-    fun handleFiles(platformFiles: List<PlatformFile>)
+    fun addFile(platformFile: PlatformFile)
 
-    fun onDeleteFileClick()
+    fun addFiles(platformFiles: List<PlatformFile>)
 
-    fun navigateToKandinskyScreen()
+    fun deleteFile()
+
+    fun navigateToKandinsky()
 
     sealed interface Output {
 
         data object Dismiss : Output
 
-        data object NavigateKandinskyScreen : Output
+        data object KandinskyScreen : Output
     }
 }

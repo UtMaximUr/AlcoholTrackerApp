@@ -15,6 +15,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.utmaximur.actions.ActionsImageComponent
@@ -31,13 +33,14 @@ import org.jetbrains.compose.resources.stringResource
 internal fun ActionsSelectBottomSheet(
     component: ActionsImageComponent,
 ) {
+    val state by component.model.collectAsState()
     val cameraManager = rememberCameraManager(
-        onResult = component::handleFile,
+        onResult = component::addFile,
     )
     val filePicker = rememberFilePickerLauncher(
         type = FilePickerFileType.Image,
         selectionMode = FilePickerSelectionMode.Single,
-        onResult = component::handleFiles,
+        onResult = component::addFiles,
     )
     val cameraPermissionState = rememberPermissionState(PermissionType.CAMERA) {
         cameraManager.launch()
@@ -68,13 +71,14 @@ internal fun ActionsSelectBottomSheet(
             ActionItem(
                 icon = Res.drawable.ic_generate_image,
                 title = Res.string.action_generate_image,
-                onClick = component::navigateToKandinskyScreen,
+                enabled = state.isImageGenerationAvailable,
+                onClick = component::navigateToKandinsky,
             )
             ActionItem(
                 icon = Res.drawable.ic_delete,
                 title = Res.string.action_remove_photo,
                 tinColor = MaterialTheme.colorScheme.tertiary,
-                onClick = component::onDeleteFileClick,
+                onClick = component::deleteFile,
             )
         }
     }

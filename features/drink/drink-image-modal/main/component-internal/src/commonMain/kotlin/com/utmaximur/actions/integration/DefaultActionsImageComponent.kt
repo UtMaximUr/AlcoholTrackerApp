@@ -6,10 +6,13 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.essenty.lifecycle.coroutines.coroutineScope
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.labels
+import com.arkivanov.mvikotlin.extensions.coroutines.stateFlow
 import com.utmaximur.actions.ActionsImageComponent
 import com.utmaximur.actions.store.ActionsImageStore
 import com.utmaximur.actions.ui.ActionsSelectBottomSheet
 import com.utmaximur.media.PlatformFile
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.core.annotation.Factory
@@ -27,17 +30,20 @@ internal class DefaultActionsImageComponent(
 
     private val store: ActionsImageStore = instanceKeeper.getStore(::get)
 
-    override fun handleFile(platformFile: PlatformFile) =
+    @OptIn(ExperimentalCoroutinesApi::class)
+    override val model: StateFlow<ActionsImageStore.State> = store.stateFlow
+
+    override fun addFile(platformFile: PlatformFile) =
         store.accept(ActionsImageStore.Intent.SelectedFile(platformFile))
 
-    override fun handleFiles(platformFiles: List<PlatformFile>) =
+    override fun addFiles(platformFiles: List<PlatformFile>) =
         store.accept(ActionsImageStore.Intent.SelectedFiles(platformFiles))
 
-    override fun onDeleteFileClick() =
+    override fun deleteFile() =
         store.accept(ActionsImageStore.Intent.DeleteFile)
 
-    override fun navigateToKandinskyScreen() =
-        output(ActionsImageComponent.Output.NavigateKandinskyScreen)
+    override fun navigateToKandinsky() =
+        output(ActionsImageComponent.Output.KandinskyScreen)
 
     override fun dismiss() = output(ActionsImageComponent.Output.Dismiss)
 

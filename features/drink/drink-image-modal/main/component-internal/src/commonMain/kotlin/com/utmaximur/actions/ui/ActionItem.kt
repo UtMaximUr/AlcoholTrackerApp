@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.utmaximur.design.ui.trailingOrBlockedIcon
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
@@ -22,12 +23,16 @@ internal fun ActionItem(
     icon: DrawableResource,
     title: StringResource,
     tinColor: Color = MaterialTheme.colorScheme.primary,
+    enabled: Boolean = true,
     onClick: () -> Unit,
 ) {
     ListItem(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable(onClick = onClick),
+            .clickable(
+                enabled = enabled,
+                onClick = onClick
+            ),
         headlineContent = {
             Text(
                 text = stringResource(title),
@@ -42,6 +47,7 @@ internal fun ActionItem(
                 tint = tinColor,
             )
         },
+        trailingContent = trailingOrBlockedIcon(enabled = enabled),
         colors = ListItemDefaults.colors(
             containerColor = Color.Transparent,
         ),
