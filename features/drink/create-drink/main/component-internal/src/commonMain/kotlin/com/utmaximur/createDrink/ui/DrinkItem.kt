@@ -15,8 +15,8 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.DefaultAlpha
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
-import coil3.compose.AsyncImage
 import com.utmaximur.design.extensions.bounceClick
+import com.utmaximur.design.ui.ImageLoaderContent
 import createDrink.resources.Res
 import createDrink.resources.cd_drink_icon
 import org.jetbrains.compose.resources.stringResource
@@ -42,10 +42,10 @@ internal fun DrinkItem(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(6.dp),
         ) {
-            AsyncImage(
+            ImageLoaderContent(
                 modifier = Modifier.size(48.dp),
-                model = url,
-                contentDescription = stringResource(Res.string.cd_drink_icon),
+                imageUrl = url,
+                contentDescription = stringResource(Res.string.cd_drink_icon)
             )
         }
     }

@@ -7,25 +7,19 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.SubcomposeAsyncImage
 import com.utmaximur.createDrink.CreateDrinkComponent
 import com.utmaximur.createDrink.DrinkData
+import com.utmaximur.design.button.SaveIconButton
 import com.utmaximur.design.extensions.bounceClick
 import com.utmaximur.design.text.InnerShadowTextField
 import com.utmaximur.design.topbar.TopBar
@@ -33,7 +27,6 @@ import com.utmaximur.design.ui.ElevatedCardApp
 import createDrink.resources.Res
 import createDrink.resources.cd_drink_image
 import createDrink.resources.placeholder_image
-import createDrink.resources.save_drink
 import createDrink.resources.title_create_drink
 import createDrink.resources.title_name_drink
 import org.jetbrains.compose.resources.painterResource
@@ -51,6 +44,9 @@ internal fun CreateDrinkScreen(
             TopBar(
                 onBackClick = component::navigateBack,
                 title = stringResource(Res.string.title_create_drink),
+                actions = {
+                    SaveIconButton { component.onSaveClick(drinkBuilder.build()) }
+                }
             )
         },
         content = { innerPadding ->
@@ -91,26 +87,6 @@ internal fun CreateDrinkScreen(
                 DrinksIconContent(
                     icons = state.icons,
                     onSelectIcon = drinkBuilder::setIcon,
-                )
-            }
-        },
-        bottomBar = {
-            TextButton(
-                modifier = Modifier
-                    .padding(16.dp)
-                    .navigationBarsPadding()
-                    .fillMaxWidth()
-                    .bounceClick(),
-                onClick = { component.onSaveClick(drinkBuilder.build()) },
-                shape = MaterialTheme.shapes.large,
-                colors = ButtonDefaults.textButtonColors(
-                    containerColor = MaterialTheme.colorScheme.tertiary,
-                ),
-            ) {
-                Text(
-                    text = stringResource(Res.string.save_drink),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = Color.White,
                 )
             }
         },
