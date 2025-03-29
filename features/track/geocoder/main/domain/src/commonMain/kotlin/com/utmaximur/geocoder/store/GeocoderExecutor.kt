@@ -12,6 +12,7 @@ import com.utmaximur.geocoder.store.GeocoderStore.Label
 import com.utmaximur.geocoder.store.GeocoderStore.State
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.filter
@@ -33,7 +34,7 @@ internal class GeocoderExecutor(
 ) : CoroutineExecutor<Intent, Action, State, Message, Label>() {
 
     private val searchQuery = MutableStateFlow(EMPTY_STRING)
-    private val debounceValue = 1_000L
+    private val debounceTime = 1_000L
 
     init {
         observeMapEnabledState()
@@ -42,11 +43,7 @@ internal class GeocoderExecutor(
 
     override fun executeAction(action: Action) {
         when (action) {
-            is Action.GetPlace ->
-                geocoderRepository
-                    .getPlaceByTrackId(action.trackId)
-                    .onEach { place -> dispatch(Message.UpdateQuery(place.title)) }
-                    .launchIn(scope)
+            is Action.GetPlace -> fetchPlace(action.trackId)
         }
     }
 
@@ -62,14 +59,26 @@ internal class GeocoderExecutor(
         .onEach { enabled -> dispatch(Message.UpdateMapState(enabled)) }
         .launchIn(scope)
 
-    @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
     private fun observeSearchQuery() = searchQuery
-        .debounce(debounceValue)
+        .setupDebounce()
+        .handleSearch()
+        .launchIn(scope)
+
+    @OptIn(FlowPreview::class)
+    private fun Flow<String>.setupDebounce() = this
+        .debounce(debounceTime)
         .map(::SearchQuery)
         .filter { it.isReadyToRequest }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    private fun Flow<SearchQuery>.handleSearch() = this
         .onEach { dispatch(Message.UpdateSearchStarted(true)) }
         .flatMapLatest(geocoderRepository::searchStream)
         .asRequest()
         .onEach { places -> dispatch(Message.UpdatePlaces(places)) }
+
+    private fun fetchPlace(trackId: Long) = geocoderRepository
+        .getPlaceByTrackId(trackId)
+        .onEach { place -> dispatch(Message.UpdateQuery(place.title)) }
         .launchIn(scope)
 }
