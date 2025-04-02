@@ -2,7 +2,7 @@ package com.utmaximur.calculator.ui
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -16,14 +16,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Dialog
-import androidx.compose.ui.window.DialogProperties
 import calculator.resources.Res
 import calculator.resources.calculator
 import calculator.resources.cd_close
 import calculator.resources.ic_close_button
 import com.utmaximur.calculator.CalculatorComponent
-import com.utmaximur.design.ui.ElevatedCardApp
+import com.utmaximur.design.modal.ModalBottomSheetApp
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -33,15 +31,13 @@ internal fun CalculatorScreen(
 ) {
     val state by component.model.collectAsState()
 
-    Dialog(
-        onDismissRequest = component::dismiss,
-        properties = DialogProperties(usePlatformDefaultWidth = false),
+    ModalBottomSheetApp(
+        onDismissRequest = component::dismiss
     ) {
-        ElevatedCardApp(
+        Column(
             modifier = Modifier
                 .padding(12.dp)
                 .fillMaxWidth(),
-            contentPaddingValues = PaddingValues(12.dp),
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),

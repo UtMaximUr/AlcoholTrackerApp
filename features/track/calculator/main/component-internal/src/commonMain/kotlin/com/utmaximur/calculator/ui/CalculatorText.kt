@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.utmaximur.design.extensions.innerShadow
 
 @Composable
 internal fun CalculatorText(
@@ -18,7 +19,10 @@ internal fun CalculatorText(
     input: String,
 ) {
     Column(
-        modifier = Modifier.padding(16.dp),
+        modifier = Modifier
+            .padding(vertical = 16.dp)
+            .innerShadow()
+            .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         Text(
