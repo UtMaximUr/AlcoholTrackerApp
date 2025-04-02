@@ -3,7 +3,6 @@ package com.utmaximur.kandinsky.ui
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -20,12 +19,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.utmaximur.core.mvi_mapper.RequestUi
 import com.utmaximur.design.RequestWidget
+import com.utmaximur.design.button.LoadingButton
 import com.utmaximur.design.text.InnerShadowTextField
 import com.utmaximur.design.ui.ElevatedCardApp
 import com.utmaximur.domain.kandinsky.GenerationResult
 import com.utmaximur.domain.kandinsky.ImageStyle
 import com.utmaximur.kandinsky.GenerateImageData
 import kandinsky.resources.Res
+import kandinsky.resources.create_generation
 import kandinsky.resources.generation_progress
 import kandinsky.resources.title_enter_text
 import org.jetbrains.compose.resources.stringResource
@@ -37,7 +38,8 @@ internal fun Content(
     requestStylesUi: RequestUi<List<ImageStyle>>,
     isProgressStatus: Boolean,
     generationResult: GenerationResult,
-    onRetryStylesLoadingClicked: () -> Unit
+    onRetryStylesLoadingClicked: () -> Unit,
+    onGenerateImageClicked: () -> Unit,
 ) {
     val scrollState = rememberScrollState()
     Column(
@@ -91,5 +93,12 @@ internal fun Content(
                 }
             )
         }
+        LoadingButton(
+            modifier = Modifier.fillMaxWidth(),
+            text = stringResource(Res.string.create_generation),
+            onClick = onGenerateImageClicked,
+            loading = isProgressStatus,
+            enabled = !isProgressStatus
+        )
     }
 }
