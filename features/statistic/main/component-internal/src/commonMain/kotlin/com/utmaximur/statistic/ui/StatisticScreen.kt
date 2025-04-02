@@ -19,9 +19,10 @@ internal fun StatisticScreen(
     modifier: Modifier,
     component: StatisticComponent,
 ) {
-    Scaffold(modifier = modifier) {
+    Scaffold(modifier = modifier) { innerPadding ->
         Column(
             modifier = Modifier
+                .padding(top = innerPadding.calculateTopPadding())
                 .fillMaxSize()
                 .padding(12.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),

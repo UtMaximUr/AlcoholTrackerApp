@@ -69,10 +69,13 @@ fun RootScreen(
                 content = { innerPadding ->
                     MessageUi(component = component.messageComponent)
                     Children(
-                        modifier = Modifier,
                         stack = component.stack,
                         animation = stackAnimation(fade()),
-                        content = { child -> child.instance.Render(Modifier.padding(innerPadding)) }
+                        content = { child ->
+                            child.instance.Render(
+                                Modifier.padding(bottom = innerPadding.calculateBottomPadding())
+                            )
+                        }
                     )
                 }
             )

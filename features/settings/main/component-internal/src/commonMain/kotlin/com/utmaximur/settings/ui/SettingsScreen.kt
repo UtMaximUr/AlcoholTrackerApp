@@ -34,9 +34,11 @@ internal fun SettingsScreen(
 ) {
     val state by component.model.collectAsState()
 
-    Scaffold(modifier = modifier) {
+    Scaffold(modifier = modifier) { innerPadding ->
         Column(
-            modifier = Modifier.padding(12.dp),
+            modifier = Modifier
+                .padding(top = innerPadding.calculateTopPadding())
+                .padding(12.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
