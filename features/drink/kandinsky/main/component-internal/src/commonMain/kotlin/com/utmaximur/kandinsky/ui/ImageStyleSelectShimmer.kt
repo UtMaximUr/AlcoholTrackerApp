@@ -2,7 +2,7 @@ package com.utmaximur.kandinsky.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.MaterialTheme
@@ -13,12 +13,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.utmaximur.design.extensions.showShimmer
 import com.utmaximur.design.shimmer.TextShimmer
-import com.utmaximur.design.ui.ElevatedCardApp
 
 @Composable
 internal fun ImageStyleSelectShimmer() {
-    ElevatedCardApp(
-        contentPaddingValues = PaddingValues(12.dp),
+    Column(
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         TextShimmer(aspectRatio = 6f)

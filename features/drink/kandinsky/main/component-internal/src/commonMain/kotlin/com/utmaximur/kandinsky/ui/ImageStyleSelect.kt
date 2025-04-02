@@ -1,7 +1,7 @@
 package com.utmaximur.kandinsky.ui
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
@@ -12,7 +12,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.utmaximur.design.text.TextOutlinedLabel
-import com.utmaximur.design.ui.ElevatedCardApp
 import com.utmaximur.design.ui.dots.DotsIndicator
 import com.utmaximur.domain.kandinsky.ImageStyle
 import kandinsky.resources.Res
@@ -29,8 +28,7 @@ internal fun ImageStyleSelectContent(
         imageStyles.getOrNull(pagerState.currentPage)
             ?.let { onItemSelected(it.name) }
     }
-    ElevatedCardApp(
-        contentPaddingValues = PaddingValues(12.dp),
+    Column(
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         TextOutlinedLabel(

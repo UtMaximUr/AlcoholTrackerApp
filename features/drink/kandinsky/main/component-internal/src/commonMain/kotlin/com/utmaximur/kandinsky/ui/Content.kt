@@ -3,12 +3,15 @@ package com.utmaximur.kandinsky.ui
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,8 +39,10 @@ internal fun Content(
     generationResult: GenerationResult,
     onRetryStylesLoadingClicked: () -> Unit
 ) {
+    val scrollState = rememberScrollState()
     Column(
         modifier = modifier
+            .verticalScroll(scrollState)
             .padding(12.dp)
             .fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(12.dp),
@@ -71,16 +76,20 @@ internal fun Content(
                 onValueChange = requestBuilder::setPrompt,
             )
         }
-        RequestWidget(
-            state = requestStylesUi,
-            shimmerContentTemplate = { ImageStyleSelectShimmer() },
-            onRetryClick = onRetryStylesLoadingClicked,
-            content = { imageStyles ->
-                ImageStyleSelectContent(
-                    imageStyles = imageStyles,
-                    onItemSelected = requestBuilder::setStyle
-                )
-            }
-        )
+        ElevatedCardApp(
+            contentPaddingValues = PaddingValues(12.dp)
+        ) {
+            RequestWidget(
+                state = requestStylesUi,
+                shimmerContentTemplate = { ImageStyleSelectShimmer() },
+                onRetryClick = onRetryStylesLoadingClicked,
+                content = { imageStyles ->
+                    ImageStyleSelectContent(
+                        imageStyles = imageStyles,
+                        onItemSelected = requestBuilder::setStyle
+                    )
+                }
+            )
+        }
     }
 }
