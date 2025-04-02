@@ -6,17 +6,17 @@
 //  Copyright © 2025 orgName. All rights reserved.
 //
 
-//import composeApp
+import composeApp
 
-//class LifecycleHolder : ObservableObject {
-//    let lifecycle: LifecycleRegistry
-//
-//    init() {
-//        lifecycle = LifecycleRegistryKt.LifecycleRegistry()
-//        lifecycle.onCreate()
-//    }
-//
-//    deinit {
-//        lifecycle.onDestroy()
-//    }
-//}
+class LifecycleHolder : ObservableObject {
+    let lifecycle: LifecycleRegistry
+
+    init() {
+        lifecycle = LifecycleRegistryKt.LifecycleRegistry()
+        lifecycle.onCreate()
+    }
+
+    deinit {
+        lifecycle.onDestroy()
+    }
+}
