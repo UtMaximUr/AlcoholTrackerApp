@@ -23,11 +23,8 @@ import com.utmaximur.utils.extensions.toDateUi
 import createTrack.domain.resources.Res
 import createTrack.domain.resources.saving_error
 import createTrack.domain.resources.successful_save
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.filterNotNull
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
@@ -100,7 +97,6 @@ internal class CreateTrackExecutor(
     private fun observeConfirmDialog() = confirmDialogProviderData.dataFlow
         .filterNotNull()
         .onEach { id -> repository.deleteDrink(id) }
-        .flowOn(Dispatchers.IO)
         .launchIn(scope)
 
     private fun handleSaveTrackData(trackData: TrackData) {
