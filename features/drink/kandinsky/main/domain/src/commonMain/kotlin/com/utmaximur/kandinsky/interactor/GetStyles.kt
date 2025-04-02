@@ -8,7 +8,7 @@ import com.utmaximur.domain.kandinsky.KandinskyRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterIsInstance
-import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.mapLatest
 import org.koin.core.annotation.Factory
 
 @Factory
@@ -23,6 +23,6 @@ internal class GetStyles(
     override suspend fun doWork(params: Unit): Flow<List<ImageStyle>> {
         return networkStatus.invoke()
             .filterIsInstance<NetworkStatus.Available>()
-            .flatMapLatest { repository.getStyles() }
+            .mapLatest { repository.getStyles() }
     }
 }

@@ -10,12 +10,11 @@ import de.jensklingenberg.ktorfit.http.Header
 import de.jensklingenberg.ktorfit.http.POST
 import de.jensklingenberg.ktorfit.http.Path
 import io.ktor.client.request.forms.MultiPartFormDataContent
-import kotlinx.coroutines.flow.Flow
 
 interface FusionBrainApi {
 
     @GET(ApiConstants.GET_STYLES_URL)
-    fun getStyles(): Flow<List<ImageStyleRemote>>
+    suspend fun getStyles(): List<ImageStyleRemote>
 
     @GET(ApiConstants.BASE_URL + ApiConstants.GET_MODELS_ENDPOINT)
     suspend fun getModels(

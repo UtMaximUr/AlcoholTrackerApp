@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface KandinskyRepository {
 
-    fun getStyles(): Flow<List<ImageStyle>>
+    suspend fun getStyles(): List<ImageStyle>
 
     fun observeGenerationResult(): Flow<GenerationResult>
 

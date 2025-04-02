@@ -5,9 +5,7 @@ import com.utmaximur.data.kandinsky.generate_image.worker.GenerateImageWorker
 import com.utmaximur.data.kandinsky.mapper.MapperHolder
 import com.utmaximur.data.kandinsky.network.FusionBrainApi
 import com.utmaximur.domain.kandinsky.GenerationResult
-import com.utmaximur.domain.kandinsky.ImageStyle
 import com.utmaximur.domain.kandinsky.KandinskyRepository
-import com.utmaximur.utils.extensions.mapList
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import org.koin.core.annotation.Factory
@@ -19,8 +17,8 @@ internal class RealKandinskyRepository(
     private val mapperHolder: MapperHolder
 ) : KandinskyRepository {
 
-    override fun getStyles(): Flow<List<ImageStyle>> = fusionBrainApi.getStyles()
-        .mapList(mapperHolder.imageStyleUiMapper::transform)
+    override suspend fun getStyles() = fusionBrainApi.getStyles()
+        .map(mapperHolder.imageStyleUiMapper::transform)
 
     override suspend fun requestGeneration(prompt: String, styleName: String) =
         GenerateImageWorker.sendRequestGeneration(prompt = prompt, styleName = styleName)
