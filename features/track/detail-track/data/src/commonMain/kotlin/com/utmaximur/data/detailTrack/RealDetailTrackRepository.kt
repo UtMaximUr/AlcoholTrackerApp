@@ -6,10 +6,7 @@ import com.utmaximur.domain.detailTrack.DetailTrackRepository
 import com.utmaximur.domain.models.Place
 import com.utmaximur.domain.models.Track
 import com.utmaximur.settingsManager.CurrencySettingsManager
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.withContext
 import org.koin.core.annotation.Factory
 
 @Factory
@@ -28,8 +25,7 @@ internal class RealDetailTrackRepository(
     override suspend fun updateTrack(track: Track) =
         trackDao.update(mapper.trackLocalMapper.transform(track))
 
-    override suspend fun deleteTrack(id: Long) =
-        withContext(Dispatchers.IO) { trackDao.deleteTrackById(id) }
+    override suspend fun deleteTrack(id: Long) = trackDao.deleteTrackById(id)
 
     override suspend fun updatePlace(place: Place) =
         placeDao.upsert(mapper.placeLocalMapper.transform(place))
