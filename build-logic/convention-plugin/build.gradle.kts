@@ -73,6 +73,10 @@ gradlePlugin {
             id = "custom.koinPlatformPlugin"
             implementationClass = "KoinAnnotationPlatformConventionPlugin"
         }
+        register("koinCommonPlugin") {
+            id = "custom.koinCommonPlugin"
+            implementationClass = "KoinAnnotationConventionPlugin"
+        }
         register("featureInternalPlugin") {
             id = "custom.featureInternal"
             implementationClass = "FeatureInternalPlugin"
