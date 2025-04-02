@@ -37,11 +37,8 @@ internal class RootStoreFactory(
                     dispatch(Message.UpdateDarkTheme(isDarkTheme = isDark))
                 }.launchIn(this)
             }
-            onIntent<Intent> { intent ->
-                when (intent) {
-                    is Intent.HandleBottomBarState ->
-                        dispatch(Message.UpdateBottomBarState(intent.isVisible))
-                }
+            onIntent<Intent.HandleBottomBarState> { intent ->
+                dispatch(Message.UpdateBottomBarState(intent.isVisible))
             }
         },
         reducer = { message ->
