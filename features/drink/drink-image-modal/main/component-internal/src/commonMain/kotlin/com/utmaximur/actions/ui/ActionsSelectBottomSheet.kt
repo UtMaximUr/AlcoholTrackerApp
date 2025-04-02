@@ -10,7 +10,6 @@ import actions.resources.ic_camera
 import actions.resources.ic_delete
 import actions.resources.ic_gallery
 import actions.resources.ic_generate_image
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -52,34 +51,32 @@ internal fun ActionsSelectBottomSheet(
     ModalBottomSheetApp(
         onDismissRequest = component::dismiss,
     ) {
-        Column {
-            Text(
-                modifier = Modifier.padding(16.dp),
-                text = stringResource(Res.string.action_heading),
-                style = MaterialTheme.typography.titleLarge,
-            )
-            ActionItem(
-                icon = Res.drawable.ic_camera,
-                title = Res.string.action_camera,
-                onClick = cameraPermissionState::launchRequestPermission,
-            )
-            ActionItem(
-                icon = Res.drawable.ic_gallery,
-                title = Res.string.action_gallery,
-                onClick = galleryPermissionState::launchRequestPermission,
-            )
-            ActionItem(
-                icon = Res.drawable.ic_generate_image,
-                title = Res.string.action_generate_image,
-                enabled = state.isImageGenerationAvailable,
-                onClick = component::navigateToKandinsky,
-            )
-            ActionItem(
-                icon = Res.drawable.ic_delete,
-                title = Res.string.action_remove_photo,
-                tinColor = MaterialTheme.colorScheme.tertiary,
-                onClick = component::deleteFile,
-            )
-        }
+        Text(
+            modifier = Modifier.padding(16.dp),
+            text = stringResource(Res.string.action_heading),
+            style = MaterialTheme.typography.titleLarge,
+        )
+        ActionItem(
+            icon = Res.drawable.ic_camera,
+            title = Res.string.action_camera,
+            onClick = cameraPermissionState::launchRequestPermission,
+        )
+        ActionItem(
+            icon = Res.drawable.ic_gallery,
+            title = Res.string.action_gallery,
+            onClick = galleryPermissionState::launchRequestPermission,
+        )
+        ActionItem(
+            icon = Res.drawable.ic_generate_image,
+            title = Res.string.action_generate_image,
+            enabled = state.isImageGenerationAvailable,
+            onClick = component::navigateToKandinsky,
+        )
+        ActionItem(
+            icon = Res.drawable.ic_delete,
+            title = Res.string.action_remove_photo,
+            tinColor = MaterialTheme.colorScheme.tertiary,
+            onClick = component::deleteFile,
+        )
     }
 }
