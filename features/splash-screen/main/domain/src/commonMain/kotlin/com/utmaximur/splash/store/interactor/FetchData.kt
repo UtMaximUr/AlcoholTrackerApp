@@ -19,6 +19,6 @@ internal class FetchData(
         networkStatus.invoke()
             .map(
                 onAvailable = repository::fetchAppData,
-                onUnavailable = repository::checkNotEmptyTable,
+                onUnavailable = repository::hasAllEssentialData,
             )
 }

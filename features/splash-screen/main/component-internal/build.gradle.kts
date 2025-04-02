@@ -5,7 +5,6 @@ plugins {
 }
 
 dependencies {
-    commonMainImplementation(compose.material3)
     commonMainImplementation(compose.components.resources)
 
     commonMainImplementation(projects.features.splashScreen.main.componentApi)

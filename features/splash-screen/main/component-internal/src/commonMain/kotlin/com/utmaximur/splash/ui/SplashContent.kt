@@ -18,15 +18,17 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
-import org.jetbrains.compose.resources.getString
+import org.jetbrains.compose.resources.StringResource
+import org.jetbrains.compose.resources.stringResource
 import splashScreen.resources.Res
 import splashScreen.resources.app_name
+import splashScreen.resources.empty
 
 @Composable
 internal fun SplashContent(readyToLoad: () -> Unit) {
-    var appName by remember { mutableStateOf(String()) }
+    var appName: StringResource by remember { mutableStateOf(Res.string.empty) }
     LaunchedEffect(Unit) {
-        appName = getString(Res.string.app_name)
+        appName = Res.string.app_name
     }
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -45,7 +47,7 @@ internal fun SplashContent(readyToLoad: () -> Unit) {
                         readyToLoad()
                     }
                 ),
-            text = appName,
+            text = stringResource(appName),
             style = MaterialTheme.typography.headlineLarge,
             fontSize = appNameFontSize.sp,
             color = MaterialTheme.colorScheme.tertiary
