@@ -23,5 +23,5 @@ interface TrackDao : BaseDao<DbTrack> {
     fun getTracksByStartDate(): Flow<List<DbTrack>>
 
     @Query("DELETE FROM DbTrack WHERE id=:id")
-    fun deleteTrackById(id: Long)
+    suspend fun deleteTrackById(id: Long)
 }

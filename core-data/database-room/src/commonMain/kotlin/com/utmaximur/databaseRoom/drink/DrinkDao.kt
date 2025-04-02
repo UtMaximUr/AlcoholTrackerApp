@@ -16,8 +16,8 @@ interface DrinkDao : BaseDao<DbDrink> {
     fun getAll(): Flow<List<DbDrink>>
 
     @Query("DELETE FROM DbDrink WHERE id=:id")
-    fun deleteDrinkById(id: Long)
+    suspend fun deleteDrinkById(id: Long)
 
     @Query("SELECT (SELECT COUNT(*) FROM DbDrink) != 0")
-    fun isTableNotEmpty(): Boolean
+    suspend fun isTableNotEmpty(): Boolean
 }

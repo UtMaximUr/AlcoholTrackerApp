@@ -14,5 +14,5 @@ interface IconDao : BaseDao<DbIcon> {
     fun getAll(): Flow<List<DbIcon>>
 
     @Query("SELECT (SELECT COUNT(*) FROM DbIcon) != 0")
-    fun isTableNotEmpty(): Boolean
+    suspend fun isTableNotEmpty(): Boolean
 }
