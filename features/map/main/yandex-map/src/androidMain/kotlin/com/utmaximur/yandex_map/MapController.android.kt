@@ -1,4 +1,4 @@
-package com.utmaximur.map.ui
+package com.utmaximur.yandex_map
 
 import android.content.Context
 import android.view.Gravity
@@ -18,7 +18,7 @@ import com.yandex.mapkit.map.MapObjectTapListener
 import com.yandex.mapkit.map.PlacemarkMapObject
 import com.yandex.mapkit.mapview.MapView
 import com.yandex.runtime.ui_view.ViewProvider
-import features.map.main.componentinternal.R
+import features.map.main.yandexmap.R
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 
@@ -36,6 +36,7 @@ internal class MapController(private val context: Context) :
     ClusterListener,
     ClusterTapListener,
     MapObjectTapListener,
+    AppMapController,
     KoinComponent {
 
     private val mapKit: MapKit = get()
@@ -47,39 +48,32 @@ internal class MapController(private val context: Context) :
         addView(mapView)
     }
 
-    /**
-     * Установить список объектов на карту
-     */
-    fun submitData(places: List<Place>) {
+    override fun submitData(places: List<Place>) {
+        if (places.isEmpty()) return
         addMarkersOnMap(places)
         // Устанавливаем позицию камеры по усредненным значениям
         val point = places.elementAtOrNull(places.size / 2)?.let {
             Point(it.latitude, it.longitude)
         }
-        moveTo(point, COMMON_ZOOM_LEVEL)
+        moveTo(point, commonZoomLevel)
     }
 
-    /**
-     * Установить слушатель нажатия на объект на карте
-     */
-    fun setMapObjectListener(mapObjectListener: (List<Long>) -> Unit) {
+    override fun setMapObjectListener(mapObjectListener: (List<Long>) -> Unit) {
         this.mapObjectListener = { mapObjectListener(it) }
     }
 
-    /**
-     * Устанавливает для карты NightMode
-     */
-    fun setDarkMode(isDarkMode: Boolean) {
+    override fun setDarkMode(isDarkMode: Boolean) {
         map.isNightModeEnabled = isDarkMode
     }
 
-    fun onStart() {
+    override fun onStart() {
         mapKit.onStart()
         mapView.onStart()
         map.mapObjects.addTapListener(this)
     }
 
-    fun onStop() {
+    override fun onStop() {
+        mapObjectListener = {}
         map.mapObjects.removeTapListener(this)
         mapView.onStop()
         mapKit.onStop()
@@ -90,8 +84,8 @@ internal class MapController(private val context: Context) :
      */
     private fun addMarkersOnMap(
         places: List<Place>,
-        clusterRadius: Double = DEFAULT_CLUSTER_RADIUS,
-        minZoom: Int = DEFAULT_MIN_ZOOM,
+        clusterRadius: Double = defaultClusterRadius,
+        minZoom: Int = defaultMinZoom,
     ) {
         val clusterizedCollection = map.mapObjects.addClusterizedPlacemarkCollection(this)
         val addedPlaceMarks = clusterizedCollection
@@ -106,7 +100,7 @@ internal class MapController(private val context: Context) :
         clusterizedCollection.clusterPlacemarks(clusterRadius, minZoom)
     }
 
-    private fun moveTo(point: Point?, zoom: Float = COMFORTABLE_ZOOM_LEVEL) {
+    private fun moveTo(point: Point?, zoom: Float = comfortableZoomLevel) {
         if (point == null) return
         val position = CameraPosition(point, zoom, 0.0f, 0.0f)
         val animation = Animation(Animation.Type.SMOOTH, 1f)
@@ -167,12 +161,5 @@ internal class MapController(private val context: Context) :
             }
         }
         return true
-    }
-
-    private companion object {
-        const val DEFAULT_CLUSTER_RADIUS = 42.0
-        const val DEFAULT_MIN_ZOOM = 35
-        const val COMFORTABLE_ZOOM_LEVEL = 15f
-        const val COMMON_ZOOM_LEVEL = 10f
     }
 }

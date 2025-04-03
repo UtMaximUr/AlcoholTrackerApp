@@ -1,4 +1,4 @@
-package com.utmaximur.map.ui
+package com.utmaximur.yandex_map
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -7,7 +7,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import com.utmaximur.domain.models.Place
 
 @Composable
-internal actual fun MapContent(
+actual fun YandexMapContent(
     places: List<Place>,
     isDarkTheme: Boolean,
     mapObjectClick: (List<Long>) -> Unit,

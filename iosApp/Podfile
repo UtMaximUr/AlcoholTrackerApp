@@ -3,4 +3,5 @@ target 'AlcoholTracker' do
   platform :ios, '16.0'
   pod 'composeApp', :path => '../composeApp'
   pod 'Reachability'
+  pod 'YandexMapsMobile', '4.13.0-lite'
 end

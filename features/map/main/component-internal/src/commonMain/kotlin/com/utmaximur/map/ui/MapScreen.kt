@@ -8,6 +8,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import com.utmaximur.design.button.AddFloatingActionButton
 import com.utmaximur.map.MapComponent
+import com.utmaximur.yandex_map.YandexMapContent
 
 @Composable
 internal fun MapScreen(
@@ -19,7 +20,7 @@ internal fun MapScreen(
     Scaffold(
         modifier = modifier,
         content = { _ ->
-            MapContent(
+            YandexMapContent(
                 places = state.places,
                 isDarkTheme = state.isDarkTheme,
                 mapObjectClick = component::onMapObjectsClick,

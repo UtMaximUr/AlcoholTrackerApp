@@ -15,10 +15,11 @@ struct iOSApp: App {
                     bottomSafeArea: Float(geo.safeAreaInsets.bottom)
                 )
                 .ignoresSafeArea()
-                .onTapGesture {
-                // Hide keyboard on tap outside of TextField
-                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                }
+// TODO() Проблема с тапами по яндекс карте
+//                .onTapGesture {
+//                // Hide keyboard on tap outside of TextField
+//                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+//                }
                 .onAppear { LifecycleRegistryExtKt.resume(lifecycleHolder.lifecycle) }
                 .onDisappear { LifecycleRegistryExtKt.stop(lifecycleHolder.lifecycle) }
             }

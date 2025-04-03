@@ -5,6 +5,10 @@ import com.utmaximur.app.base.app.Flavor
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.Single
 import platform.Foundation.NSBundle
+import platform.Foundation.NSLocale
+import platform.Foundation.countryCode
+import platform.Foundation.currentLocale
+import platform.Foundation.languageCode
 import kotlin.experimental.ExperimentalNativeApi
 
 @Factory
@@ -18,5 +22,5 @@ fun provideApplicationInfo(flavor: Flavor) = ApplicationInfo(
     flavor = flavor,
     versionName = NSBundle.mainBundle.infoDictionary?.get("CFBundleShortVersionString") as? String ?: "",
     versionCode = (NSBundle.mainBundle.infoDictionary?.get("CFBundleVersion") as? String)?.toIntOrNull() ?: 0,
-    language = "TODO()",
+    language = NSLocale.currentLocale.languageCode + NSLocale.currentLocale.countryCode?.let { "_$it" },
 )

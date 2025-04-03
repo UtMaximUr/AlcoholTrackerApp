@@ -1,7 +1,7 @@
-package com.utmaximur.map.ui
+package com.utmaximur.yandex_map
 
 import android.content.Context
-import com.utmaximur.map.BuildKonfig
+import com.utmaximur.yandex_map.BuildKonfig
 import com.yandex.mapkit.MapKit
 import com.yandex.mapkit.MapKitFactory
 import org.koin.core.annotation.Single

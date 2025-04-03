@@ -61,6 +61,7 @@ import com.utmaximur.map.MapNavigationComponentModule
 import com.utmaximur.mappers.implementation.ProjectImplementationModule
 import com.utmaximur.splash.SplashScreenComponentModule
 import com.utmaximur.tracksModal.TracksModalMainComponentModule
+import com.utmaximur.yandex_map.YandexMapModule
 
 @Module(
     includes = [
@@ -91,6 +92,7 @@ import com.utmaximur.tracksModal.TracksModalMainComponentModule
         MapNavigationComponentModule::class,
         MapComponentModule::class,
         MapDataModule::class,
+        YandexMapModule::class,
         CreateTrackNavigationComponentModule::class,
         CreateTrackMainComponentModule::class,
         CreateTrackDataModule::class,

@@ -49,6 +49,7 @@ kotlin {
             implementation(projects.features.calendar.data)
             implementation(projects.features.map.navigation.componentInternal)
             implementation(projects.features.map.main.componentInternal)
+            implementation(projects.features.map.main.yandexMap)
             implementation(projects.features.map.data)
             implementation(projects.features.statistic.data)
             implementation(projects.features.statistic.main.componentInternal)

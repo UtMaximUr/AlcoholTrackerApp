@@ -99,6 +99,7 @@ includeFeature("map:navigation:component-internal")
 includeFeature("map:main:domain")
 includeFeature("map:main:component-api")
 includeFeature("map:main:component-internal")
+includeFeature("map:main:yandex-map")
 
 includeFeature("statistic:data")
 includeFeature("statistic:domain")
