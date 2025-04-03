@@ -1,8 +1,10 @@
 package com.utmaximur.datePicker.ui
 
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDefaults
-import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -12,8 +14,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import com.utmaximur.datePicker.DatePickerComponent
 import com.utmaximur.design.extensions.bounceClick
+import com.utmaximur.design.modal.ModalBottomSheetApp
 import datePicker.resources.Res
 import datePicker.resources.date_picker_continue
 import org.jetbrains.compose.resources.stringResource
@@ -28,37 +33,37 @@ internal fun DatePickerScreen(
         initialSelectedDateMillis = state.selectedDate,
     )
 
-    DatePickerDialog(
-        onDismissRequest = component::dismiss,
-        confirmButton = {
-            TextButton(
-                onClick = {
-                    component.handleSelectDate(datePickerState.selectedDateMillis)
-                },
-                modifier = Modifier.bounceClick(),
-                shape = MaterialTheme.shapes.large,
-            ) {
-                Text(
-                    text = stringResource(Res.string.date_picker_continue),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.tertiary,
-                )
-            }
-        },
-        colors = DatePickerDefaults.colors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-        ),
-        content = {
-            DatePicker(
-                state = datePickerState,
-                colors = DatePickerDefaults.colors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    selectedDayContainerColor = MaterialTheme.colorScheme.tertiary,
-                    todayDateBorderColor = MaterialTheme.colorScheme.tertiary,
-                    navigationContentColor = MaterialTheme.colorScheme.tertiary,
+    ModalBottomSheetApp(
+        onDismissRequest = component::dismiss
+    ) {
+        DatePicker(
+            state = datePickerState,
+            colors = DatePickerDefaults.colors(
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                selectedDayContainerColor = MaterialTheme.colorScheme.tertiary,
+                todayDateBorderColor = MaterialTheme.colorScheme.tertiary,
+                navigationContentColor = MaterialTheme.colorScheme.tertiary,
 
                 ),
+        )
+        TextButton(
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth()
+                .bounceClick(),
+            shape = MaterialTheme.shapes.large,
+            onClick = {
+                component.handleSelectDate(datePickerState.selectedDateMillis)
+            },
+            colors = ButtonDefaults.textButtonColors(
+                containerColor = MaterialTheme.colorScheme.tertiary,
+            ),
+        ) {
+            Text(
+                text = stringResource(Res.string.date_picker_continue),
+                style = MaterialTheme.typography.bodyMedium,
+                color = Color.White,
             )
-        },
-    )
+        }
+    }
 }
