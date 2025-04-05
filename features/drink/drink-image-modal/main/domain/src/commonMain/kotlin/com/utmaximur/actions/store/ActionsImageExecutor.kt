@@ -5,6 +5,7 @@ import com.utmaximur.actions.store.ActionsImageStore.Intent
 import com.utmaximur.actions.store.ActionsImageStore.State
 import com.utmaximur.actions.store.ActionsImageStore.Label
 import com.utmaximur.app.base.app.ApplicationInfo
+import com.utmaximur.domain.EMPTY_STRING
 import com.utmaximur.domain.actions.PathFileProviderData
 import com.utmaximur.media.PlatformFile
 import kotlinx.coroutines.launch
@@ -46,7 +47,7 @@ internal class ActionsImageExecutor(
     }
 
     private fun handleDelete() = scope.launch {
-        providerData.sendData(String())
+        providerData.sendData(EMPTY_STRING)
         publish(Label.DeleteFile)
     }
 

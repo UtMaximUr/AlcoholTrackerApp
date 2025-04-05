@@ -21,6 +21,7 @@ dependencies {
     commonMainImplementation(projects.core.base)
     commonMainImplementation(projects.core.analytics.domain)
     commonMainImplementation(projects.core.analytics.params)
+    commonMainImplementation(projects.domain)
     commonMainImplementation(projects.features.track.calculator.domain)
 }
 

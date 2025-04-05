@@ -14,5 +14,6 @@ dependencies {
 
     commonMainImplementation(projects.core.base)
     commonMainImplementation(projects.core.media.core)
+    commonMainImplementation(projects.domain)
     commonMainImplementation(projects.features.drink.drinkImageModal.domain)
 }

@@ -6,6 +6,7 @@ import com.utmaximur.calculator.MatrixItems
 import com.utmaximur.calculator.store.CalculatorStore.Intent
 import com.utmaximur.calculator.store.CalculatorStore.Label
 import com.utmaximur.calculator.store.CalculatorStore.State
+import com.utmaximur.domain.EMPTY_STRING
 
 interface CalculatorStore : Store<Intent, State, Label> {
 
@@ -16,8 +17,8 @@ interface CalculatorStore : Store<Intent, State, Label> {
     ) {
         constructor() : this(
             matrixItems = emptyList(),
-            input = String(),
-            expression = String()
+            input = EMPTY_STRING,
+            expression = EMPTY_STRING
         )
     }
 

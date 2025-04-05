@@ -10,6 +10,7 @@ import com.utmaximur.calculator.analytic_events.OpenScreenEvent
 import com.utmaximur.calculator.store.CalculatorStore.Intent
 import com.utmaximur.calculator.store.CalculatorStore.Label
 import com.utmaximur.calculator.store.CalculatorStore.State
+import com.utmaximur.domain.EMPTY_STRING
 import com.utmaximur.domain.calculator.CalculatorProviderData
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.launchIn
@@ -31,8 +32,8 @@ internal class CalculatorExecutor(
     private val analyticsManager: AnalyticsManager
 ) : CoroutineExecutor<Intent, Unit, State, Message, Label>() {
 
-    private val inputValue = MutableStateFlow(String())
-    private val expressionValue = MutableStateFlow(String())
+    private val inputValue = MutableStateFlow(EMPTY_STRING)
+    private val expressionValue = MutableStateFlow(EMPTY_STRING)
 
     override fun executeAction(action: Unit) {
         scope.launch { analyticsManager.trackEvent(OpenScreenEvent()) }
@@ -61,8 +62,8 @@ internal class CalculatorExecutor(
         when (command) {
             CalculatorCommand.Backspace -> inputValue.update { it.dropLast(1) }
             CalculatorCommand.Clear -> {
-                expressionValue.update { String() }
-                inputValue.update { String() }
+                expressionValue.update { EMPTY_STRING }
+                inputValue.update { EMPTY_STRING }
             }
 
             is CalculatorCommand.MathOperation -> inputValue.update { it + command.operation }
