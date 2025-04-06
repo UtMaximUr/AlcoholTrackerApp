@@ -13,7 +13,8 @@ dependencies {
     commonMainImplementation(libs.ktorfit.lib)
     commonMainImplementation(libs.kotlinx.serialization.core)
 
-    commonMainImplementation(projects.coreData.local.drinkManager.api)
+    commonMainImplementation(projects.coreData.databaseRoom)
+    commonMainImplementation(projects.coreData.models)
     commonMainImplementation(projects.core.base)
     commonMainImplementation(projects.core.utils)
     commonMainImplementation(projects.domain)
