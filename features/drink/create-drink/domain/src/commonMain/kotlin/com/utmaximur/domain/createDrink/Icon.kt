@@ -1,4 +1,4 @@
-package com.utmaximur.domain.models
+package com.utmaximur.domain.createDrink
 
 import com.utmaximur.domain.EMPTY_STRING
 import com.utmaximur.domain.ZERO_VALUE_L

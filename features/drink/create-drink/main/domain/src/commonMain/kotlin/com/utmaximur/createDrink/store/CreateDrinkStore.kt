@@ -6,8 +6,7 @@ import com.utmaximur.createDrink.store.CreateDrinkStore.Intent
 import com.utmaximur.createDrink.store.CreateDrinkStore.Label
 import com.utmaximur.createDrink.store.CreateDrinkStore.State
 import com.utmaximur.domain.EMPTY_STRING
-import com.utmaximur.domain.models.Icon
-import com.utmaximur.domain.models.TrackData
+import com.utmaximur.domain.createDrink.Icon
 
 interface CreateDrinkStore : Store<Intent, State, Label> {
 

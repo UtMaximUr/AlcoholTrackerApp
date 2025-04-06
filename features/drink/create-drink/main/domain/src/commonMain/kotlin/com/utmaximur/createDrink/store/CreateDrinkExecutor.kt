@@ -12,7 +12,7 @@ import com.utmaximur.createDrink.store.CreateDrinkStore.State
 import com.utmaximur.createDrink.validation.DrinkValidator
 import com.utmaximur.domain.actions.PathFileProviderData
 import com.utmaximur.domain.createDrink.CreateDrinkRepository
-import com.utmaximur.domain.models.Icon
+import com.utmaximur.domain.createDrink.Icon
 import com.utmaximur.message.models.MessageContainer
 import com.utmaximur.message.models.MessageService
 import createDrink.domain.resources.Res

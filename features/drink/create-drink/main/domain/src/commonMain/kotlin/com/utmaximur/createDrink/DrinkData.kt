@@ -1,7 +1,7 @@
 package com.utmaximur.createDrink
 
 import com.utmaximur.domain.EMPTY_STRING
-import com.utmaximur.domain.models.Icon
+import com.utmaximur.domain.createDrink.Icon
 
 data class DrinkData(
     val name: String,

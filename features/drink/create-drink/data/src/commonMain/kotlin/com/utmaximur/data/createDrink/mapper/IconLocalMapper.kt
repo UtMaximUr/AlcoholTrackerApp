@@ -2,7 +2,7 @@ package com.utmaximur.data.createDrink.mapper
 
 import com.utmaximur.data.Mapper
 import com.utmaximur.databaseRoom.icon.DbIcon
-import com.utmaximur.domain.models.Icon
+import com.utmaximur.domain.createDrink.Icon
 import org.koin.core.annotation.Factory
 
 @Factory

@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.utmaximur.design.text.TextOutlinedLabel
 import com.utmaximur.design.ui.ElevatedCardApp
-import com.utmaximur.domain.models.Icon
+import com.utmaximur.domain.createDrink.Icon
 import createDrink.resources.Res
 import createDrink.resources.select_icon
 import org.jetbrains.compose.resources.stringResource
