@@ -5,8 +5,8 @@ import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.allocArrayOf
 import kotlinx.cinterop.memScoped
 import org.koin.core.annotation.Factory
-import platform.Foundation.NSCachesDirectory
 import platform.Foundation.NSData
+import platform.Foundation.NSDocumentDirectory
 import platform.Foundation.NSFileManager
 import platform.Foundation.NSUserDomainMask
 import platform.Foundation.create
@@ -18,7 +18,7 @@ internal actual class FileStorage {
     actual fun saveFileToCache(fileName: String, data: ByteArray): String? {
         val fileURL = NSFileManager.defaultManager
             .URLForDirectory(
-                directory = NSCachesDirectory,
+                directory = NSDocumentDirectory,
                 inDomain = NSUserDomainMask,
                 appropriateForURL = null,
                 create = true,
