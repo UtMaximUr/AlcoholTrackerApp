@@ -4,7 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.interop.LocalUIViewController
-import kotlinx.cinterop.BetaInteropApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -128,7 +127,6 @@ private fun rememberDocumentPickerLauncher(
     }
 }
 
-@OptIn(BetaInteropApi::class)
 @Composable
 private fun rememberImageVideoPickerLauncher(
     type: FilePickerFileType,

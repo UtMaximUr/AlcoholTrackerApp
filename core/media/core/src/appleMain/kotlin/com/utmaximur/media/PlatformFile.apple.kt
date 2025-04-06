@@ -28,8 +28,6 @@ import platform.Foundation.NSError
 import platform.Foundation.NSURL
 import platform.Foundation.NSURLFileSizeKey
 import platform.Foundation.dataWithContentsOfURL
-import platform.Foundation.lastPathComponent
-import platform.Foundation.pathExtension
 import platform.posix.memcpy
 
 actual class PlatformFile(
@@ -43,7 +41,7 @@ actual class PlatformFile(
 
     actual val mimeType: String? by lazy { nsUrl.getMimeType() }
 
-    @OptIn(ExperimentalForeignApi::class)
+    @OptIn(ExperimentalForeignApi::class, BetaInteropApi::class)
     actual suspend fun readBytes(): ByteArray = withContext(Dispatchers.IO) {
         memScoped {
             // Start accessing the security scoped resource
