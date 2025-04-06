@@ -6,9 +6,9 @@ plugins {
 }
 
 dependencies {
-    commonMainImplementation(projects.coreData.local.trackManager.api)
-    commonMainImplementation(projects.coreData.local.placeManager.api)
     commonMainImplementation(projects.coreData.settingsManager.api)
+    commonMainImplementation(projects.coreData.databaseRoom)
+    commonMainImplementation(projects.coreData.models)
     commonMainImplementation(projects.core.base)
     commonMainImplementation(projects.core.utils)
     commonMainImplementation(projects.features.map.domain)
