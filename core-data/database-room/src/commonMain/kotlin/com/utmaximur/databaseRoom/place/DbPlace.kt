@@ -1,9 +1,21 @@
 package com.utmaximur.databaseRoom.place
 
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import com.utmaximur.databaseRoom.track.DbTrack
 
-@Entity
+@Entity(
+    foreignKeys = [
+        ForeignKey(
+            entity = DbTrack::class,
+            parentColumns = ["id"],
+            childColumns = ["trackId"],
+            onDelete = ForeignKey.CASCADE
+        )
+    ]
+)
+
 data class DbPlace(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,

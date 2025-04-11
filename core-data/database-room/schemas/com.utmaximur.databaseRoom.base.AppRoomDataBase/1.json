@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "23de7e2eeff1554dd92ffa7a6ac79bf1",
+    "identityHash": "211e8fca041081ef3cb227519cf369ca",
     "entities": [
       {
         "tableName": "DbDrink",
@@ -154,7 +154,7 @@
       },
       {
         "tableName": "DbPlace",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `longitude` REAL NOT NULL, `latitude` REAL NOT NULL, `trackId` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `longitude` REAL NOT NULL, `latitude` REAL NOT NULL, `trackId` INTEGER NOT NULL, FOREIGN KEY(`trackId`) REFERENCES `DbTrack`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -192,12 +192,25 @@
           "columnNames": [
             "id"
           ]
-        }
+        },
+        "foreignKeys": [
+          {
+            "table": "DbTrack",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "trackId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
       }
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '23de7e2eeff1554dd92ffa7a6ac79bf1')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '211e8fca041081ef3cb227519cf369ca')"
     ]
   }
 }
