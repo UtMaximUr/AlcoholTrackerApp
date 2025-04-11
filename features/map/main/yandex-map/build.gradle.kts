@@ -24,7 +24,7 @@ kotlin {
 
 dependencies {
     commonMainImplementation(compose.components.resources)
-    commonMainImplementation(projects.domain)
+    commonMainImplementation(projects.features.map.domain)
     androidMainImplementation(libs.yandex.map.mobile)
 }
 

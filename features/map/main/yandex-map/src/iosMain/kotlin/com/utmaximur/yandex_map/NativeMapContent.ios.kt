@@ -7,29 +7,29 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.viewinterop.UIKitInteropInteractionMode
 import androidx.compose.ui.viewinterop.UIKitInteropProperties
 import androidx.compose.ui.viewinterop.UIKitView
-import com.utmaximur.domain.models.Place
+import com.utmaximur.domain.map.PlaceMark
+import kotlinx.cinterop.ExperimentalForeignApi
+import platform.CoreGraphics.CGRectMake
+import platform.UIKit.UIView
 
-@OptIn(ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalComposeUiApi::class, ExperimentalForeignApi::class)
 @Composable
-actual fun YandexMapContent(
-    places: List<Place>,
-    isDarkTheme: Boolean,
-    mapObjectClick: (List<Long>) -> Unit,
+internal actual fun NativeMapContent(
+    places: List<PlaceMark>,
+    yandexMapController: YandexMapController
 ) {
     UIKitView(
         modifier = Modifier.fillMaxSize(),
         factory = {
-            val mapView = MapController()
-            mapView.appMapController.onStart()
-            mapView
+            UIView(frame = CGRectMake(.0, .0, .0, .0)).apply {
+                addSubview(yandexMapController.getView())
+            }
         },
-        update = { mapView ->
-            mapView.appMapController.setDarkMode(isDarkTheme)
-            mapView.appMapController.submitData(places)
-            mapView.appMapController.setMapObjectListener(mapObjectClick)
+        update = {
+            yandexMapController.submitData(places)
         },
-        onRelease = { mapView ->
-            mapView.appMapController.onStop()
+        onRelease = {
+            yandexMapController.onStop()
         },
         properties = UIKitInteropProperties(
             interactionMode = UIKitInteropInteractionMode.NonCooperative,

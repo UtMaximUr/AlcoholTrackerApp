@@ -1,11 +1,55 @@
 package com.utmaximur.yandex_map
 
 import androidx.compose.runtime.Composable
-import com.utmaximur.domain.models.Place
+import androidx.compose.runtime.remember
+import com.utmaximur.domain.map.PlaceMark
+import com.utmaximur.yandex_map.clusters.MapClusterTapListener
+import com.utmaximur.yandex_map.clusters.MapClusterViewUpdater
+import com.utmaximur.yandex_map.configs.MapIconsConfig
+import com.utmaximur.yandex_map.configs.MapSettingsConfig
+import com.utmaximur.yandex_map.mapObjects.MapPlaceMarkTapListener
+import com.utmaximur.yandex_map.resources.MapIconProvider
+import com.utmaximur.yandex_map.resources.imageProvider
+
+typealias PlaceMarkIds = List<Long>
 
 @Composable
-expect fun YandexMapContent(
-    places: List<Place>,
-    isDarkTheme: Boolean,
-    mapObjectClick: (List<Long>) -> Unit,
+fun YandexMapContent(
+    places: List<PlaceMark>,
+    mapIconsConfig: MapIconsConfig,
+    mapSettingsConfig: MapSettingsConfig,
+    mapObjectListener: (PlaceMarkIds) -> Boolean,
+) {
+    val placeMarkImageProvider = imageProvider(mapIconsConfig.placeMarkIcon)
+    val clusterImageProvider = imageProvider(mapIconsConfig.clusterIcon)
+    val mapIconProvider = remember {
+        MapIconProvider(
+            placeMarkImageProvider = placeMarkImageProvider,
+            clusterImageProvider = clusterImageProvider,
+            clusterTextColor = mapIconsConfig.clusterTextColor
+        )
+    }
+    val mapPlaceMarkTapListener = remember { MapPlaceMarkTapListener(mapObjectListener) }
+    val mapClusterViewUpdater = remember { MapClusterViewUpdater(mapIconProvider) }
+    val mapClusterTapListener = remember { MapClusterTapListener(mapObjectListener) }
+    val yandexMapController = remember {
+        YandexMapController.create(
+            mapIconProvider = mapIconProvider,
+            mapPlaceMarkTapListener = mapPlaceMarkTapListener,
+            mapClusterViewUpdater = mapClusterViewUpdater,
+            mapClusterTapListener = mapClusterTapListener,
+            mapSettingsConfig = mapSettingsConfig,
+            mapObjectListener = mapObjectListener
+        )
+    }
+    NativeMapContent(
+        places = places,
+        yandexMapController = yandexMapController
+    )
+}
+
+@Composable
+internal expect fun NativeMapContent(
+    places: List<PlaceMark>,
+    yandexMapController: YandexMapController
 )
