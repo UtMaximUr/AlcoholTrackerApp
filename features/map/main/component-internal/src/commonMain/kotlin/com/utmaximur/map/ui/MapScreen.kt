@@ -36,7 +36,11 @@ internal fun MapScreen(
                     clusterIcon = Res.drawable.ic_cluster,
                     clusterTextColor = Color.White
                 ),
-                mapObjectListener = { ids ->
+                mapObjectListener = { id ->
+                    component.onMapObjectClick(id)
+                    true
+                },
+                mapClusterListener = { ids->
                     component.onMapObjectsClick(ids)
                     true
                 }

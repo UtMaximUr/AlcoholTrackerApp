@@ -34,6 +34,9 @@ internal class DefaultMapComponent(
     override fun onMapObjectsClick(ids: List<Long>) =
         output(MapComponent.Output.OpenTracksDialog(ids))
 
+    override fun onMapObjectClick(id: Long) =
+        output(MapComponent.Output.OpenTracksDialog(listOf(id)))
+
     @Composable
     override fun Render(modifier: Modifier) = MapScreen(modifier, this)
 }

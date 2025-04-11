@@ -104,7 +104,6 @@ internal actual class YandexMapController {
             mapClusterViewUpdater: MapClusterViewUpdater,
             mapClusterTapListener: MapClusterTapListener,
             mapSettingsConfig: MapSettingsConfig,
-            mapObjectListener: (PlaceMarkIds) -> Boolean,
         ): YandexMapController {
             return YandexMapController().apply {
                 this.mapIconProvider = mapIconProvider

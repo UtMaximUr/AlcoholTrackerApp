@@ -41,7 +41,6 @@ internal expect class YandexMapController {
             mapClusterViewUpdater: MapClusterViewUpdater,
             mapClusterTapListener: MapClusterTapListener,
             mapSettingsConfig: MapSettingsConfig,
-            mapObjectListener: (PlaceMarkIds) -> Boolean,
         ): YandexMapController
     }
 }

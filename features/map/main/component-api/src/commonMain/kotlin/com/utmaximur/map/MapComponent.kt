@@ -12,6 +12,8 @@ interface MapComponent : ComposeComponent {
 
     fun onMapObjectsClick(ids: List<Long>)
 
+    fun onMapObjectClick(id: Long)
+
     sealed interface Output {
 
         data object NavigateCreateTrack : Output

@@ -12,13 +12,15 @@ import com.utmaximur.yandex_map.resources.MapIconProvider
 import com.utmaximur.yandex_map.resources.imageProvider
 
 typealias PlaceMarkIds = List<Long>
+typealias PlaceMarkId = Long
 
 @Composable
 fun YandexMapContent(
     places: List<PlaceMark>,
     mapIconsConfig: MapIconsConfig,
     mapSettingsConfig: MapSettingsConfig,
-    mapObjectListener: (PlaceMarkIds) -> Boolean,
+    mapObjectListener: (PlaceMarkId) -> Boolean,
+    mapClusterListener: (PlaceMarkIds) -> Boolean
 ) {
     val placeMarkImageProvider = imageProvider(mapIconsConfig.placeMarkIcon)
     val clusterImageProvider = imageProvider(mapIconsConfig.clusterIcon)
@@ -31,7 +33,7 @@ fun YandexMapContent(
     }
     val mapPlaceMarkTapListener = remember { MapPlaceMarkTapListener(mapObjectListener) }
     val mapClusterViewUpdater = remember { MapClusterViewUpdater(mapIconProvider) }
-    val mapClusterTapListener = remember { MapClusterTapListener(mapObjectListener) }
+    val mapClusterTapListener = remember { MapClusterTapListener(mapClusterListener) }
     val yandexMapController = remember {
         YandexMapController.create(
             mapIconProvider = mapIconProvider,
@@ -39,7 +41,6 @@ fun YandexMapContent(
             mapClusterViewUpdater = mapClusterViewUpdater,
             mapClusterTapListener = mapClusterTapListener,
             mapSettingsConfig = mapSettingsConfig,
-            mapObjectListener = mapObjectListener
         )
     }
     NativeMapContent(
