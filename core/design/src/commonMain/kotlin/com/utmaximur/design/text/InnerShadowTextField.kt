@@ -70,7 +70,6 @@ fun InnerShadowTextField(
     Column(
         modifier = Modifier
             .padding(paddingValues)
-            .swipeToCloseKeyboard()
             .tapToCloseKeyboard()
             .fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(10.dp),
