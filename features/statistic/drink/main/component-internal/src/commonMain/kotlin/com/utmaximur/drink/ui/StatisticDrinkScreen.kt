@@ -18,10 +18,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.utmaximur.design.RequestWidget
+import com.utmaximur.design.extensions.bottomFade
+import com.utmaximur.design.extensions.fadingEdge
+import com.utmaximur.design.extensions.topFade
 import com.utmaximur.design.ui.ElevatedCardApp
 import com.utmaximur.drink.StatisticDrinkComponent
-import drinkStatistic.resources.Res
-import drinkStatistic.resources.statistic_drinks
+import features.statistic.drink.main.Res
+import features.statistic.drink.main.statistic_drinks
 import org.jetbrains.compose.resources.stringResource
 
 
@@ -47,7 +50,10 @@ internal fun StatisticDrinkScreen(
                     text = stringResource(Res.string.statistic_drinks)
                 )
                 LazyVerticalGrid(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier
+                        .fadingEdge(topFade)
+                        .fadingEdge(bottomFade)
+                        .fillMaxSize(),
                     columns = GridCells.Fixed(3),
                     verticalArrangement = Arrangement.SpaceAround,
                     contentPadding = PaddingValues(16.dp)
