@@ -1,9 +1,4 @@
-package com.utmaximur.domain.models
-
-import com.utmaximur.domain.EMPTY_STRING
-import com.utmaximur.domain.ZERO_VALUE
-import com.utmaximur.domain.ZERO_VALUE_F
-import com.utmaximur.domain.ZERO_VALUE_L
+package com.utmaximur.domain
 
 data class Track(
     val id: Long = ZERO_VALUE_L,

@@ -7,5 +7,5 @@ dependencies {
     commonMainImplementation(libs.kotlinx.coroutines.core)
 
     commonMainImplementation(projects.core.base)
-    commonMainApi(projects.domain)
+    commonMainApi(projects.domain.models)
 }

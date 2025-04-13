@@ -4,7 +4,7 @@ import com.utmaximur.data.createDrink.mapper.MapperHolder
 import com.utmaximur.databaseRoom.drink.DrinkDao
 import com.utmaximur.databaseRoom.icon.IconDao
 import com.utmaximur.domain.createDrink.CreateDrinkRepository
-import com.utmaximur.domain.models.Drink
+import com.utmaximur.domain.Drink
 import com.utmaximur.utils.extensions.mapList
 import org.koin.core.annotation.Factory
 

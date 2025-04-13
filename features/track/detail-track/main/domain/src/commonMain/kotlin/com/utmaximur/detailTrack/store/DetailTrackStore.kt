@@ -6,8 +6,8 @@ import com.utmaximur.detailTrack.store.DetailTrackStore.Label
 import com.utmaximur.detailTrack.store.DetailTrackStore.State
 import com.utmaximur.domain.EMPTY_STRING
 import com.utmaximur.domain.ZERO_VALUE_F
-import com.utmaximur.domain.models.Track
-import com.utmaximur.domain.models.TrackData
+import com.utmaximur.domain.Track
+import com.utmaximur.domain.TrackData
 
 interface DetailTrackStore : Store<Intent, State, Label> {
 

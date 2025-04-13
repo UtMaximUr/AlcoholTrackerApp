@@ -15,7 +15,7 @@ import com.utmaximur.calendar.ui.calendar.CalendarState
 import com.utmaximur.calendar.ui.day.DayEmptyContent
 import com.utmaximur.core.mvi_mapper.RequestUi
 import com.utmaximur.design.RequestWidget
-import com.utmaximur.domain.models.Track
+import com.utmaximur.domain.Track
 import kotlinx.coroutines.launch
 
 @Composable

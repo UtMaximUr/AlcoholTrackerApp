@@ -24,6 +24,7 @@ dependencies {
     commonMainImplementation(projects.core.mviMappers.internal)
     commonMainImplementation(projects.core.analytics.domain)
     commonMainImplementation(projects.core.analytics.params)
+    commonMainImplementation(projects.domain.api)
     commonMainImplementation(projects.features.track.createTrack.domain)
     commonMainImplementation(projects.features.track.calculator.domain)
     commonMainImplementation(projects.features.track.datePicker.domain)

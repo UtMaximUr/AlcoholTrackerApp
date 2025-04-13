@@ -2,7 +2,7 @@ package com.utmaximur.tracksModal.store
 
 import com.arkivanov.mvikotlin.core.store.Store
 import com.utmaximur.domain.EMPTY_STRING
-import com.utmaximur.domain.models.Track
+import com.utmaximur.domain.Track
 import com.utmaximur.tracksModal.store.TracksModalStore.Intent
 import com.utmaximur.tracksModal.store.TracksModalStore.Label
 import com.utmaximur.tracksModal.store.TracksModalStore.State

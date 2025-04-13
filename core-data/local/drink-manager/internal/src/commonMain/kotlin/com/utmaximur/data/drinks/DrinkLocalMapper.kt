@@ -2,7 +2,7 @@ package com.utmaximur.data.drinks
 
 import com.utmaximur.data.Mapper
 import com.utmaximur.databaseRoom.drink.DbDrink
-import com.utmaximur.domain.models.Drink
+import com.utmaximur.domain.Drink
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.Named
 

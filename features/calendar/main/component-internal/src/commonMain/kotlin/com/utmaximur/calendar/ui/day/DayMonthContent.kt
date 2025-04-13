@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.utmaximur.domain.models.Track
+import com.utmaximur.domain.Track
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable

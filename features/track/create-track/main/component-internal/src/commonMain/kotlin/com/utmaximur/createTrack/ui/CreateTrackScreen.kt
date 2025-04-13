@@ -21,7 +21,7 @@ import com.utmaximur.design.button.SaveIconButton
 import com.utmaximur.design.extensions.bounceClick
 import com.utmaximur.design.topbar.TopBar
 import com.utmaximur.design.ui.DateButtonGroup
-import com.utmaximur.domain.models.TrackData
+import com.utmaximur.domain.TrackData
 import createTrack.resources.Res
 import createTrack.resources.title_create_drink
 import createTrack.resources.title_create_track
@@ -55,7 +55,7 @@ internal fun CreateTrackScreen(
                             color = Color.White,
                         )
                     }
-                    SaveIconButton { component.onSaveClick(trackBuilder.build()) }
+                    SaveIconButton { component.onSaveClick() }
                 }
             )
         },

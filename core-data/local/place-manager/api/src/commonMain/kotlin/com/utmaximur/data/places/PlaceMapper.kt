@@ -2,7 +2,7 @@ package com.utmaximur.data.places
 
 import com.utmaximur.data.Mapper
 import com.utmaximur.databaseRoom.place.DbPlace
-import com.utmaximur.domain.models.Place
+import com.utmaximur.domain.Place
 
 typealias PlaceLocalMapper = Mapper<Place, DbPlace>
 typealias PlaceUiMapper = Mapper<DbPlace, Place>

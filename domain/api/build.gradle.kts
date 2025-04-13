@@ -6,5 +6,4 @@ plugins {
 
 dependencies {
     commonMainImplementation(libs.kotlinx.coroutines.core)
-    commonMainImplementation(libs.kotlinx.datetime)
 }

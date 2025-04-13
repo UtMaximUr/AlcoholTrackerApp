@@ -17,5 +17,6 @@ dependencies {
     commonMainImplementation(projects.core.mviMappers.internal)
     commonMainImplementation(projects.core.analytics.domain)
     commonMainImplementation(projects.core.analytics.params)
+    commonMainImplementation(projects.domain.api)
     commonMainImplementation(projects.features.statistic.domain)
 }

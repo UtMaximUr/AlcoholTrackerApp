@@ -8,7 +8,7 @@ dependencies {
     commonMainImplementation(compose.components.resources)
     commonMainImplementation(libs.kotlinx.serialization.core)
 
-    commonMainImplementation(projects.domain)
+    commonMainImplementation(projects.domain.models)
     commonMainImplementation(projects.features.track.geocoder.main.componentApi)
     commonMainImplementation(projects.features.track.geocoder.main.domain)
 }

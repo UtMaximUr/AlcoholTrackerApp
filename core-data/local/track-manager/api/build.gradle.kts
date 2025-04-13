@@ -9,5 +9,5 @@ dependencies {
 
     commonMainApi(projects.coreData.models)
     commonMainApi(projects.coreData.databaseRoom)
-    commonMainImplementation(projects.domain)
+    commonMainImplementation(projects.domain.models)
 }

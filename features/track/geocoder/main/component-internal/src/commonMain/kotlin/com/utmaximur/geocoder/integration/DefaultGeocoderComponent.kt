@@ -5,7 +5,7 @@ import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.stateFlow
-import com.utmaximur.domain.models.Place
+import com.utmaximur.domain.Place
 import com.utmaximur.geocoder.GeocoderComponent
 import com.utmaximur.geocoder.store.GeocoderStore
 import com.utmaximur.geocoder.ui.GeocoderUi

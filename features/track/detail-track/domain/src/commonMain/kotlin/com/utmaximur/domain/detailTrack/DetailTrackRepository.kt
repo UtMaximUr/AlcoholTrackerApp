@@ -1,7 +1,7 @@
 package com.utmaximur.domain.detailTrack
 
-import com.utmaximur.domain.models.Place
-import com.utmaximur.domain.models.Track
+import com.utmaximur.domain.Place
+import com.utmaximur.domain.Track
 import kotlinx.coroutines.flow.Flow
 
 interface DetailTrackRepository {

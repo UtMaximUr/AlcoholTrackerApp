@@ -8,5 +8,4 @@ dependencies {
 
     commonMainImplementation(projects.core.decompose)
     commonMainImplementation(projects.features.drink.createDrink.main.domain)
-    commonMainImplementation(projects.domain)
 }

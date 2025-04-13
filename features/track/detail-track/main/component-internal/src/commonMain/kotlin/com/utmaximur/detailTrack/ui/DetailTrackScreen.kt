@@ -18,7 +18,7 @@ import com.utmaximur.design.extensions.fadingEdge
 import com.utmaximur.design.topbar.TopBar
 import com.utmaximur.design.ui.DateButtonGroup
 import com.utmaximur.detailTrack.DetailTrackComponent
-import com.utmaximur.domain.models.TrackData
+import com.utmaximur.domain.TrackData
 import detailTrack.resources.Res
 import detailTrack.resources.cd_delete
 import detailTrack.resources.cd_save

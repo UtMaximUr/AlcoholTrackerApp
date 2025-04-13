@@ -2,7 +2,6 @@ package com.utmaximur.createTrack
 
 import com.utmaximur.core.decompose.ComposeComponent
 import com.utmaximur.createTrack.store.CreateTrackStore
-import com.utmaximur.domain.models.TrackData
 import com.utmaximur.geocoder.GeocoderComponent
 import kotlinx.coroutines.flow.StateFlow
 
@@ -14,7 +13,7 @@ interface CreateTrackComponent : ComposeComponent {
 
     fun navigateBack()
 
-    fun onSaveClick(trackData: TrackData)
+    fun onSaveClick()
 
     fun openCalculatorDialog()
 

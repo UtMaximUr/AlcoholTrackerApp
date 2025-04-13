@@ -28,8 +28,8 @@ import com.utmaximur.design.extensions.bounceClick
 import com.utmaximur.design.text.InnerShadowTextField
 import com.utmaximur.design.ui.dots.DotsIndicator
 import com.utmaximur.design.ui.ElevatedCardApp
-import com.utmaximur.domain.models.Drink
-import com.utmaximur.domain.models.TrackData
+import com.utmaximur.domain.Drink
+import com.utmaximur.domain.TrackData
 import createTrack.resources.Res
 import createTrack.resources.add_degree
 import createTrack.resources.add_event

@@ -6,7 +6,7 @@ import com.utmaximur.core.mvi_mapper.asRequest
 import com.utmaximur.domain.EMPTY_STRING
 import com.utmaximur.domain.geocoder.GeocoderRepository
 import com.utmaximur.domain.geocoder.SearchQuery
-import com.utmaximur.domain.models.Place
+import com.utmaximur.domain.Place
 import com.utmaximur.geocoder.store.GeocoderStore.Intent
 import com.utmaximur.geocoder.store.GeocoderStore.Label
 import com.utmaximur.geocoder.store.GeocoderStore.State

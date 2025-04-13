@@ -1,6 +1,6 @@
 package com.utmaximur.domain.geocoder
 
-import com.utmaximur.domain.models.Place
+import com.utmaximur.domain.Place
 import kotlinx.coroutines.flow.Flow
 
 interface GeocoderRepository {

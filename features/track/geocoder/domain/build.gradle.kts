@@ -5,5 +5,5 @@ plugins {
 
 dependencies {
     commonMainImplementation(libs.kotlinx.coroutines.core)
-    commonMainImplementation(projects.domain)
+    commonMainApi(projects.domain.models)
 }

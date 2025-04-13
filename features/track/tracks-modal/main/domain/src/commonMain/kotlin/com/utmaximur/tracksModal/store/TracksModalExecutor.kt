@@ -2,7 +2,7 @@ package com.utmaximur.tracksModal.store
 
 import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineExecutor
 import com.utmaximur.analytics.domain.AnalyticsManager
-import com.utmaximur.domain.models.Track
+import com.utmaximur.domain.Track
 import com.utmaximur.domain.tracksModal.TracksModalRepository
 import com.utmaximur.tracksModal.analytic_events.OpenScreenEvent
 import com.utmaximur.tracksModal.store.TracksModalStore.Intent

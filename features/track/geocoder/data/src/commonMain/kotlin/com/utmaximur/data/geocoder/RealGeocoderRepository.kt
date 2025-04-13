@@ -6,7 +6,7 @@ import com.utmaximur.data.geocoder.network.GeocoderApi
 import com.utmaximur.databaseRoom.place.PlaceDao
 import com.utmaximur.domain.geocoder.GeocoderRepository
 import com.utmaximur.domain.geocoder.SearchQuery
-import com.utmaximur.domain.models.Place
+import com.utmaximur.domain.Place
 import com.utmaximur.geocoder.BuildKonfig
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO

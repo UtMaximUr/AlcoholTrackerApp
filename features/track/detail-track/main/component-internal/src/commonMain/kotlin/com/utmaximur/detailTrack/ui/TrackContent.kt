@@ -16,8 +16,8 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.utmaximur.design.text.InnerShadowTextField
 import com.utmaximur.design.ui.ElevatedCardApp
-import com.utmaximur.domain.models.Track
-import com.utmaximur.domain.models.TrackData
+import com.utmaximur.domain.Track
+import com.utmaximur.domain.TrackData
 import detailTrack.resources.Res
 import detailTrack.resources.add_degree
 import detailTrack.resources.add_event

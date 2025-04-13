@@ -20,8 +20,8 @@ dependencies {
     commonMainImplementation(projects.core.logging.api)
     commonMainImplementation(projects.core.analytics.domain)
     commonMainImplementation(projects.core.analytics.params)
+    commonMainImplementation(projects.domain.api)
     commonMainImplementation(projects.features.settings.domain)
-    commonMainImplementation(projects.domain)
 }
 
 buildkonfig {

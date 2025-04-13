@@ -2,9 +2,9 @@ package com.utmaximur.detailTrack.interactor
 
 import com.utmaximur.domain.Interactor
 import com.utmaximur.domain.detailTrack.DetailTrackRepository
-import com.utmaximur.domain.models.Place
-import com.utmaximur.domain.models.Track
-import com.utmaximur.domain.models.TrackData
+import com.utmaximur.domain.Place
+import com.utmaximur.domain.Track
+import com.utmaximur.domain.TrackData
 import com.utmaximur.utils.extensions.parseToLongNotNull
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO

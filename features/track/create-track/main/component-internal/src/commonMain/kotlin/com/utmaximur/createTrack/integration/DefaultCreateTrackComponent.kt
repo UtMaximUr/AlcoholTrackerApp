@@ -11,8 +11,8 @@ import com.arkivanov.mvikotlin.extensions.coroutines.stateFlow
 import com.utmaximur.createTrack.CreateTrackComponent
 import com.utmaximur.createTrack.store.CreateTrackStore
 import com.utmaximur.createTrack.ui.CreateTrackScreen
-import com.utmaximur.domain.models.Place
-import com.utmaximur.domain.models.TrackData
+import com.utmaximur.domain.Place
+import com.utmaximur.domain.TrackData
 import com.utmaximur.geocoder.GeocoderComponent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.StateFlow
@@ -52,8 +52,8 @@ internal class DefaultCreateTrackComponent(
 
     override fun navigateBack() = output(CreateTrackComponent.Output.NavigateBack)
 
-    override fun onSaveClick(trackData: TrackData) =
-        store.accept(CreateTrackStore.Intent.SaveTrackData(trackData))
+    override fun onSaveClick() =
+        store.accept(CreateTrackStore.Intent.SaveTrackData(trackBuilder.build()))
 
     override fun openCalculatorDialog() =
         output(CreateTrackComponent.Output.OpenCalculatorDialog)

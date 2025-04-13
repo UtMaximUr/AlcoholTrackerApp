@@ -21,6 +21,7 @@ dependencies {
     commonMainImplementation(projects.core.logging.api)
     commonMainImplementation(projects.core.utils)
     commonMainImplementation(projects.core.mviMappers.internal)
+    commonMainImplementation(projects.domain.api)
     commonMainImplementation(projects.features.calendar.domain)
     commonMainImplementation(projects.core.analytics.domain)
     commonMainImplementation(projects.core.analytics.params)

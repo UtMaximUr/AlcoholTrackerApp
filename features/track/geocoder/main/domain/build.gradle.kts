@@ -16,6 +16,6 @@ dependencies {
     commonMainImplementation(projects.core.base)
     commonMainImplementation(projects.core.utils)
     commonMainImplementation(projects.core.mviMappers.internal)
-    commonMainImplementation(projects.domain)
+    commonMainImplementation(projects.domain.api)
     commonMainImplementation(projects.features.track.geocoder.domain)
 }

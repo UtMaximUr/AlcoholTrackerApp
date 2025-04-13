@@ -25,6 +25,7 @@ dependencies {
     commonMainImplementation(projects.core.mviMappers.internal)
     commonMainImplementation(projects.core.analytics.domain)
     commonMainImplementation(projects.core.analytics.params)
+    commonMainImplementation(projects.domain.api)
     commonMainImplementation(projects.features.drink.createDrink.domain)
     commonMainImplementation(projects.features.drink.drinkImageModal.domain)
     commonMainImplementation(projects.features.message.domain)

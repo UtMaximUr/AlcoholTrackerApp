@@ -1,7 +1,7 @@
 package com.utmaximur.money.interactor
 
 import com.utmaximur.domain.Interactor
-import com.utmaximur.domain.models.Track
+import com.utmaximur.domain.Track
 import com.utmaximur.domain.statistic.StatisticRepository
 import com.utmaximur.money.models.MoneyStatistic
 import com.utmaximur.money.models.StatisticPeriod

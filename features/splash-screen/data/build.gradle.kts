@@ -17,6 +17,5 @@ dependencies {
     commonMainImplementation(projects.coreData.models)
     commonMainImplementation(projects.core.base)
     commonMainImplementation(projects.core.utils)
-    commonMainImplementation(projects.domain)
     commonMainImplementation(projects.features.splashScreen.domain)
 }

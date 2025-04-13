@@ -15,7 +15,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.utmaximur.design.ui.ElevatedCardApp
 import com.utmaximur.design.ui.ImageLoaderContent
-import com.utmaximur.domain.models.Drink
+import com.utmaximur.domain.Drink
 import createTrack.resources.Res
 import createTrack.resources.cd_delete
 import createTrack.resources.ic_delete_button

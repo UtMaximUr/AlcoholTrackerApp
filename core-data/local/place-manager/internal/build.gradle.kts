@@ -12,7 +12,7 @@ kotlin {
             implementation(projects.coreData.databaseRoom)
             implementation(projects.coreData.models)
             implementation(projects.coreData.local.placeManager.api)
-            implementation(projects.domain)
+            implementation(projects.domain.models)
         }
     }
 }

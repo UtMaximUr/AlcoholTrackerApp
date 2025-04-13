@@ -13,7 +13,7 @@ import androidx.compose.ui.text.style.TextAlign
 import calendar.resources.Res
 import calendar.resources.calendar_empty
 import com.utmaximur.design.ui.TrackItem
-import com.utmaximur.domain.models.Track
+import com.utmaximur.domain.Track
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

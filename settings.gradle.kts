@@ -42,7 +42,8 @@ fun includeCoreData(projectName: String) {
 rootProject.name = "AlcoholTracker"
 include(":composeApp")
 include(":di")
-include(":domain")
+include(":domain:api")
+include(":domain:models")
 
 includeCoreData("settings-manager:api")
 includeCoreData("settings-manager:internal")

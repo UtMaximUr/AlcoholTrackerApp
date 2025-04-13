@@ -16,7 +16,6 @@ dependencies {
     commonMainImplementation(libs.ktorfit.lib)
     commonMainImplementation(libs.kotlinx.serialization.core)
 
-    commonMainImplementation(projects.domain)
     commonMainImplementation(projects.core.base)
     commonMainImplementation(projects.coreData.models)
     commonMainImplementation(projects.coreData.databaseRoom)

@@ -8,5 +8,4 @@ dependencies {
 
     commonMainImplementation(projects.core.decompose)
     commonMainImplementation(projects.features.track.tracksModal.main.domain)
-    commonMainImplementation(projects.domain)
 }

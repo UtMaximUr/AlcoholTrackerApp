@@ -1,7 +1,7 @@
 package com.utmaximur.domain.statistic
 
-import com.utmaximur.domain.models.Drink
-import com.utmaximur.domain.models.Track
+import com.utmaximur.domain.Drink
+import com.utmaximur.domain.Track
 import kotlinx.coroutines.flow.Flow
 
 interface StatisticRepository {

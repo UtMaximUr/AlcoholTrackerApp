@@ -13,8 +13,8 @@ import com.utmaximur.domain.calculator.CalculatorProviderData
 import com.utmaximur.domain.confirmDialog.ConfirmDialogProviderData
 import com.utmaximur.domain.createTrack.CreateTrackRepository
 import com.utmaximur.domain.datePicker.DateProviderData
-import com.utmaximur.domain.models.Drink
-import com.utmaximur.domain.models.TrackData
+import com.utmaximur.domain.Drink
+import com.utmaximur.domain.TrackData
 import com.utmaximur.message.models.MessageContainer
 import com.utmaximur.message.models.MessageService
 import com.utmaximur.utils.extensions.getTodayDateUi

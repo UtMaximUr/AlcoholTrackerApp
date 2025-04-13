@@ -1,8 +1,4 @@
-package com.utmaximur.domain.models
-
-import com.utmaximur.domain.EMPTY_STRING
-import com.utmaximur.domain.ZERO_VALUE_D
-import com.utmaximur.domain.ZERO_VALUE_L
+package com.utmaximur.domain
 
 data class Place(
     val id: Long = ZERO_VALUE_L,

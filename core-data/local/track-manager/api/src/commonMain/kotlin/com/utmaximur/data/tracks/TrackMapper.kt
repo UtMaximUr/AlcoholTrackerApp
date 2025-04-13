@@ -2,7 +2,7 @@ package com.utmaximur.data.tracks
 
 import com.utmaximur.data.Mapper
 import com.utmaximur.databaseRoom.track.DbTrack
-import com.utmaximur.domain.models.Track
+import com.utmaximur.domain.Track
 
 typealias TrackLocalMapper = Mapper<Track, DbTrack>
 typealias TrackUiMapper = Mapper<DbTrack, Track>

@@ -1,6 +1,4 @@
-package com.utmaximur.domain.models
-
-import com.utmaximur.domain.EMPTY_STRING
+package com.utmaximur.domain
 
 data class TrackData(
     val quantity: String,

@@ -10,7 +10,7 @@ import com.utmaximur.calendar.store.CalendarStore.State
 import com.utmaximur.core.mvi_mapper.Request
 import com.utmaximur.core.mvi_mapper.asRequest
 import com.utmaximur.domain.calendar.CalendarRepository
-import com.utmaximur.domain.models.Track
+import com.utmaximur.domain.Track
 import com.utmaximur.utils.extensions.toLocalDate
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.launchIn

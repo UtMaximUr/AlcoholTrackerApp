@@ -2,7 +2,7 @@ package com.utmaximur.data.places
 
 import com.utmaximur.data.Mapper
 import com.utmaximur.databaseRoom.place.DbPlace
-import com.utmaximur.domain.models.Place
+import com.utmaximur.domain.Place
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.Named
 

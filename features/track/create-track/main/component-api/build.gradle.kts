@@ -9,5 +9,4 @@ dependencies {
     commonMainImplementation(projects.core.decompose)
     commonMainImplementation(projects.features.track.createTrack.main.domain)
     commonMainImplementation(projects.features.track.geocoder.main.componentApi)
-    commonMainImplementation(projects.domain)
 }

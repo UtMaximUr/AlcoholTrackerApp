@@ -3,7 +3,7 @@ package com.utmaximur.createDrink.interactor
 import com.utmaximur.createDrink.DrinkData
 import com.utmaximur.domain.Interactor
 import com.utmaximur.domain.createDrink.CreateDrinkRepository
-import com.utmaximur.domain.models.Drink
+import com.utmaximur.domain.Drink
 import com.utmaximur.utils.extensions.localDateTimeNow
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO

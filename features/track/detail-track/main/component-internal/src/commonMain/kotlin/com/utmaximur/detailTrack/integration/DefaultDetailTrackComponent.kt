@@ -11,8 +11,8 @@ import com.arkivanov.mvikotlin.extensions.coroutines.stateFlow
 import com.utmaximur.detailTrack.DetailTrackComponent
 import com.utmaximur.detailTrack.store.DetailTrackStore
 import com.utmaximur.detailTrack.ui.DetailTrackScreen
-import com.utmaximur.domain.models.Place
-import com.utmaximur.domain.models.TrackData
+import com.utmaximur.domain.Place
+import com.utmaximur.domain.TrackData
 import com.utmaximur.geocoder.GeocoderComponent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.StateFlow

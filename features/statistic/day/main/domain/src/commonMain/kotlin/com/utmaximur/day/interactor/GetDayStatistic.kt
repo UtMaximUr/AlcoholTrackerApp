@@ -4,7 +4,7 @@ import com.utmaximur.day.models.DayStatistic
 import com.utmaximur.day.models.StatisticDay
 import com.utmaximur.domain.Interactor
 import com.utmaximur.domain.ZERO_VALUE
-import com.utmaximur.domain.models.Track
+import com.utmaximur.domain.Track
 import com.utmaximur.domain.statistic.StatisticRepository
 import com.utmaximur.utils.extensions.instantNow
 import kotlinx.coroutines.flow.Flow

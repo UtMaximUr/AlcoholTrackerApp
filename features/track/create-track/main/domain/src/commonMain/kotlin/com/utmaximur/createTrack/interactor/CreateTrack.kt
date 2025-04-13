@@ -3,9 +3,9 @@ package com.utmaximur.createTrack.interactor
 import com.utmaximur.domain.Interactor
 import com.utmaximur.domain.ZERO_VALUE_STRING
 import com.utmaximur.domain.createTrack.CreateTrackRepository
-import com.utmaximur.domain.models.Place
-import com.utmaximur.domain.models.Track
-import com.utmaximur.domain.models.TrackData
+import com.utmaximur.domain.Place
+import com.utmaximur.domain.Track
+import com.utmaximur.domain.TrackData
 import com.utmaximur.utils.extensions.parseToLongNotNull
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO

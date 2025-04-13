@@ -12,9 +12,9 @@ dependencies {
     commonMainImplementation(libs.arkivanov.essenty.lifecycle.coroutines)
     commonMainImplementation(libs.arkivanov.essenty.lifecycle)
 
-    commonMainImplementation(projects.domain)
     commonMainImplementation(projects.core.utils)
     commonMainImplementation(projects.core.mviMappers.internal)
     commonMainImplementation(projects.core.internetConnection)
+    commonMainImplementation(projects.domain.api)
     commonMainImplementation(projects.features.splashScreen.domain)
 }

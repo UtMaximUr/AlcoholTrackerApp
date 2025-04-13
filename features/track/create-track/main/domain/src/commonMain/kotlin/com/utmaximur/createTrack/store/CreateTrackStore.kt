@@ -7,8 +7,8 @@ import com.utmaximur.createTrack.store.CreateTrackStore.Label
 import com.utmaximur.createTrack.store.CreateTrackStore.State
 import com.utmaximur.domain.EMPTY_STRING
 import com.utmaximur.domain.ZERO_VALUE_F
-import com.utmaximur.domain.models.Drink
-import com.utmaximur.domain.models.TrackData
+import com.utmaximur.domain.Drink
+import com.utmaximur.domain.TrackData
 
 interface CreateTrackStore : Store<Intent, State, Label> {
 

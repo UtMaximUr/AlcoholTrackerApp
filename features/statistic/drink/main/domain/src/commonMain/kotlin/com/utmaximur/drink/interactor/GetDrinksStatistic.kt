@@ -2,8 +2,8 @@ package com.utmaximur.drink.interactor
 
 import com.utmaximur.domain.Interactor
 import com.utmaximur.domain.ZERO_VALUE
-import com.utmaximur.domain.models.Drink
-import com.utmaximur.domain.models.Track
+import com.utmaximur.domain.Drink
+import com.utmaximur.domain.Track
 import com.utmaximur.domain.statistic.StatisticRepository
 import com.utmaximur.drink.model.DrinkStatistic
 import kotlinx.coroutines.flow.Flow

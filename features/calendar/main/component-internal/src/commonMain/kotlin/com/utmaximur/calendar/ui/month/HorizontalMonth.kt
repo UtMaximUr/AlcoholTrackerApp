@@ -11,7 +11,7 @@ import com.utmaximur.calendar.store.TracksData
 import com.utmaximur.calendar.ui.calendar.CalendarState
 import com.utmaximur.core.mvi_mapper.RequestUi
 import com.utmaximur.design.RequestWidget
-import com.utmaximur.domain.models.Track
+import com.utmaximur.domain.Track
 
 @Composable
 fun HorizontalMonth(
