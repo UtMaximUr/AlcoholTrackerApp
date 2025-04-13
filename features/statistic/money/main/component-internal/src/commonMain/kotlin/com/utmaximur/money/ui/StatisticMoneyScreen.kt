@@ -19,11 +19,11 @@ import com.utmaximur.design.extensions.endFade
 import com.utmaximur.design.extensions.fadingEdge
 import com.utmaximur.design.extensions.startFade
 import com.utmaximur.design.ui.Carousel
-import com.utmaximur.design.ui.dots.DotsIndicator
 import com.utmaximur.design.ui.ElevatedCardApp
+import com.utmaximur.design.ui.dots.DotsIndicator
 import com.utmaximur.money.StatisticMoneyComponent
-import money.resources.Res
-import money.resources.statistic_spent
+import features.statistic.money.main.Res
+import features.statistic.money.main.statistic_spent
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

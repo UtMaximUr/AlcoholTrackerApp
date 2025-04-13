@@ -13,12 +13,11 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import features.root.Res
+import features.root.tt_norms_bold
+import features.root.tt_norms_medium
+import features.root.tt_norms_regular
 import org.jetbrains.compose.resources.Font
-import root.resources.Res
-import root.resources.tt_norms_bold
-import root.resources.tt_norms_extra_bold
-import root.resources.tt_norms_medium
-import root.resources.tt_norms_regular
 
 /**
  * Light default theme color scheme

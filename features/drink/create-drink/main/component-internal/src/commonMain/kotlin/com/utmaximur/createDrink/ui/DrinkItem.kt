@@ -17,8 +17,8 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.utmaximur.design.extensions.bounceClick
 import com.utmaximur.design.ui.ImageLoaderContent
-import createDrink.resources.Res
-import createDrink.resources.cd_drink_icon
+import features.drink.create_drink.main.Res
+import features.drink.create_drink.main.cd_drink_icon
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)

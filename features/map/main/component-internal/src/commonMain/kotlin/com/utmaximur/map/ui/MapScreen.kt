@@ -9,12 +9,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.utmaximur.design.button.AddFloatingActionButton
 import com.utmaximur.map.MapComponent
+import com.utmaximur.yandex_map.YandexMapContent
 import com.utmaximur.yandex_map.configs.MapIconsConfig
 import com.utmaximur.yandex_map.configs.MapSettingsConfig
-import com.utmaximur.yandex_map.YandexMapContent
-import map.resources.Res
-import map.resources.ic_cluster
-import map.resources.ic_cocktail_pin
+import features.map.main.Res
+import features.map.main.ic_cluster
+import features.map.main.ic_cocktail_pin
 
 @Composable
 internal fun MapScreen(

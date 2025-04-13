@@ -18,11 +18,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
+import features.splash_screen.main.Res
+import features.splash_screen.main.app_name
+import features.splash_screen.main.empty
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
-import splashScreen.resources.Res
-import splashScreen.resources.app_name
-import splashScreen.resources.empty
 
 @Composable
 internal fun SplashContent(readyToLoad: () -> Unit) {

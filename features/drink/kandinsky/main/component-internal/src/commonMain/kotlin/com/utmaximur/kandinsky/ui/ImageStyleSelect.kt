@@ -14,8 +14,8 @@ import androidx.compose.ui.unit.dp
 import com.utmaximur.design.text.TextOutlinedLabel
 import com.utmaximur.design.ui.dots.DotsIndicator
 import com.utmaximur.domain.kandinsky.ImageStyle
-import kandinsky.resources.Res
-import kandinsky.resources.title_image_style
+import features.drink.kandinsky.main.Res
+import features.drink.kandinsky.main.title_image_style
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

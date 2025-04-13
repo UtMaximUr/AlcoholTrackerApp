@@ -3,13 +3,10 @@ plugins {
     alias(libs.plugins.custom.android.codequality)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.custom.koin.platform)
-    alias(libs.plugins.jetbrainsCompose)
-    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.custom.multiplatform.composeResources.common)
 }
 
 dependencies {
-    commonMainImplementation(compose.runtime)
-    commonMainImplementation(compose.components.resources)
     commonMainImplementation(libs.kotlinx.coroutines.core)
     commonMainImplementation(libs.arkivanov.mvi)
     commonMainImplementation(libs.arkivanov.mvikotlin.extensions.coroutines)
@@ -26,8 +23,4 @@ dependencies {
     commonMainImplementation(projects.features.drink.kandinsky.domain)
     commonMainImplementation(projects.features.drink.drinkImageModal.domain)
     commonMainImplementation(projects.features.message.domain)
-}
-
-compose.resources {
-    packageOfResClass = "kandinsky.domain.resources"
 }

@@ -1,9 +1,9 @@
 package com.utmaximur.createDrink.validation
 
-import createDrink.domain.resources.Res
-import createDrink.domain.resources.icon_url_empty
-import createDrink.domain.resources.name_empty
-import createDrink.domain.resources.photo_url_empty
+import features.drink.create_drink.main.domain.Res
+import features.drink.create_drink.main.domain.icon_url_empty
+import features.drink.create_drink.main.domain.name_empty
+import features.drink.create_drink.main.domain.photo_url_empty
 import org.jetbrains.compose.resources.StringResource
 
 internal sealed interface ValidationError {

@@ -10,11 +10,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import features.settings.main.Res
+import features.settings.main.ic_chevrone_right
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import settings.resources.Res
-import settings.resources.ic_chevrone_right
 
 @Composable
 internal fun SettingsButton(

@@ -22,9 +22,9 @@ import com.utmaximur.design.extensions.bounceClick
 import com.utmaximur.design.topbar.TopBar
 import com.utmaximur.design.ui.DateButtonGroup
 import com.utmaximur.domain.TrackData
-import createTrack.resources.Res
-import createTrack.resources.title_create_drink
-import createTrack.resources.title_create_track
+import features.track.create_track.main.Res
+import features.track.create_track.main.title_create_drink
+import features.track.create_track.main.title_create_track
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

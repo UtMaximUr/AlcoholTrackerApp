@@ -16,10 +16,10 @@ import com.utmaximur.design.extensions.shimmer
 import com.utmaximur.design.ui.ElevatedCardApp
 import com.utmaximur.domain.kandinsky.GenerationResult
 import com.utmaximur.domain.kandinsky.GenerationStatus
-import kandinsky.resources.Res
-import kandinsky.resources.cd_generate_image
-import kandinsky.resources.error_placeholder_image
-import kandinsky.resources.placeholder_image
+import features.drink.kandinsky.main.Res
+import features.drink.kandinsky.main.cd_generate_image
+import features.drink.kandinsky.main.error_placeholder_image
+import features.drink.kandinsky.main.placeholder_image
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource

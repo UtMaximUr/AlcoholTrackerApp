@@ -12,8 +12,8 @@ import com.utmaximur.design.topbar.TopBar
 import com.utmaximur.design.ui.NoInternetConnectionContent
 import com.utmaximur.kandinsky.GenerateImageData
 import com.utmaximur.kandinsky.KandinskyScreenComponent
-import kandinsky.resources.Res
-import kandinsky.resources.title_generate_image
+import features.drink.kandinsky.main.Res
+import features.drink.kandinsky.main.title_generate_image
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

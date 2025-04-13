@@ -15,9 +15,9 @@ import com.utmaximur.domain.createDrink.CreateDrinkRepository
 import com.utmaximur.domain.createDrink.Icon
 import com.utmaximur.message.models.MessageContainer
 import com.utmaximur.message.models.MessageService
-import createDrink.domain.resources.Res
-import createDrink.domain.resources.saving_error
-import createDrink.domain.resources.successful_save
+import features.drink.create_drink.main.domain.Res
+import features.drink.create_drink.main.domain.saving_error
+import features.drink.create_drink.main.domain.successful_save
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach

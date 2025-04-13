@@ -12,8 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.utmaximur.design.text.getStringResource
 import com.utmaximur.money.models.MoneyStatistic
-import money.resources.Res
-import money.resources.allStringResources
+import features.statistic.money.main.Res
+import features.statistic.money.main.allStringResources
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
 

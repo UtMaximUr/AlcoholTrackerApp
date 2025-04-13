@@ -85,5 +85,13 @@ gradlePlugin {
             id = "custom.ktorfitPlugin"
             implementationClass = "KtorfitConventionPlugin"
         }
+        register("multiplatformComposeResources") {
+            id = "custom.multiplatform.composeResources"
+            implementationClass = "MultiplatformComposeResourcesConventionPlugin"
+        }
+        register("multiplatformComposeResourcesCommon") {
+            id = "custom.multiplatform.composeResourcesCommon"
+            implementationClass = "MultiplatformComposeResourcesCommonConventionPlugin"
+        }
     }
 }

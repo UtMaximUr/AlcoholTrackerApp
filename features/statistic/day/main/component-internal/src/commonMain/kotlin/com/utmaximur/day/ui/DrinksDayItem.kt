@@ -10,9 +10,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.utmaximur.day.models.DayStatistic
 import com.utmaximur.design.text.getStringResource
-import day.resources.Res
-import day.resources.allStringResources
-import day.resources.plurals_day
+import features.statistic.day.main.Res
+import features.statistic.day.main.allStringResources
+import features.statistic.day.main.plurals_day
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.pluralStringResource
 import org.jetbrains.compose.resources.stringResource

@@ -10,9 +10,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.utmaximur.design.ui.ElevatedCardApp
-import detailTrack.resources.Res
-import detailTrack.resources.add_total_money
-import detailTrack.resources.add_total_money_title
+import features.track.detail_track.main.Res
+import features.track.detail_track.main.add_total_money
+import features.track.detail_track.main.add_total_money_title
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

@@ -10,10 +10,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import calendar.resources.Res
-import calendar.resources.calendar_empty
 import com.utmaximur.design.ui.TrackItem
 import com.utmaximur.domain.Track
+import features.calendar.main.Res
+import features.calendar.main.calendar_empty
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

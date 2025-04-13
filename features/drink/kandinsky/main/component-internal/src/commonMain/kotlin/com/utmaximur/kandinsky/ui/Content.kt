@@ -25,10 +25,10 @@ import com.utmaximur.design.ui.ElevatedCardApp
 import com.utmaximur.domain.kandinsky.GenerationResult
 import com.utmaximur.domain.kandinsky.ImageStyle
 import com.utmaximur.kandinsky.GenerateImageData
-import kandinsky.resources.Res
-import kandinsky.resources.create_generation
-import kandinsky.resources.generation_progress
-import kandinsky.resources.title_enter_text
+import features.drink.kandinsky.main.Res
+import features.drink.kandinsky.main.create_generation
+import features.drink.kandinsky.main.generation_progress
+import features.drink.kandinsky.main.title_enter_text
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

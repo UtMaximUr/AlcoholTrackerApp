@@ -1,15 +1,5 @@
 package com.utmaximur.actions.ui
 
-import actions.resources.Res
-import actions.resources.action_camera
-import actions.resources.action_gallery
-import actions.resources.action_generate_image
-import actions.resources.action_heading
-import actions.resources.action_remove_photo
-import actions.resources.ic_camera
-import actions.resources.ic_delete
-import actions.resources.ic_gallery
-import actions.resources.ic_generate_image
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -26,6 +16,16 @@ import com.utmaximur.media.rememberCameraManager
 import com.utmaximur.media.rememberFilePickerLauncher
 import com.utmaximur.permission.PermissionType
 import com.utmaximur.permission.state.rememberPermissionState
+import features.drink.drink_image_modal.main.Res
+import features.drink.drink_image_modal.main.action_camera
+import features.drink.drink_image_modal.main.action_gallery
+import features.drink.drink_image_modal.main.action_generate_image
+import features.drink.drink_image_modal.main.action_heading
+import features.drink.drink_image_modal.main.action_remove_photo
+import features.drink.drink_image_modal.main.ic_camera
+import features.drink.drink_image_modal.main.ic_delete
+import features.drink.drink_image_modal.main.ic_gallery
+import features.drink.drink_image_modal.main.ic_generate_image
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

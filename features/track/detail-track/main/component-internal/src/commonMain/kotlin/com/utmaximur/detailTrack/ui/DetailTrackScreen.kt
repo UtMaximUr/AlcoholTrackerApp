@@ -19,12 +19,12 @@ import com.utmaximur.design.topbar.TopBar
 import com.utmaximur.design.ui.DateButtonGroup
 import com.utmaximur.detailTrack.DetailTrackComponent
 import com.utmaximur.domain.TrackData
-import detailTrack.resources.Res
-import detailTrack.resources.cd_delete
-import detailTrack.resources.cd_save
-import detailTrack.resources.ic_delete_button
-import detailTrack.resources.ic_save_button
-import detailTrack.resources.title_edit_track
+import features.track.detail_track.main.Res
+import features.track.detail_track.main.cd_delete
+import features.track.detail_track.main.cd_save
+import features.track.detail_track.main.ic_delete_button
+import features.track.detail_track.main.ic_save_button
+import features.track.detail_track.main.title_edit_track
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 

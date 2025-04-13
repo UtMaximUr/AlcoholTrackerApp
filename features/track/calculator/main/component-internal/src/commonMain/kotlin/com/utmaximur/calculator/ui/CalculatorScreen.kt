@@ -16,12 +16,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import calculator.resources.Res
-import calculator.resources.calculator
-import calculator.resources.cd_close
-import calculator.resources.ic_close_button
 import com.utmaximur.calculator.CalculatorComponent
 import com.utmaximur.design.modal.ModalBottomSheetApp
+import features.track.calculator.main.Res
+import features.track.calculator.main.calculator
+import features.track.calculator.main.cd_close
+import features.track.calculator.main.ic_close_button
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 

@@ -10,11 +10,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import features.settings.main.Res
+import features.settings.main.cd_icon_app
+import features.settings.main.ic_launcher_foreground
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import settings.resources.Res
-import settings.resources.cd_icon_app
-import settings.resources.ic_launcher_foreground
 
 @Composable
 internal fun AppIconLayout(

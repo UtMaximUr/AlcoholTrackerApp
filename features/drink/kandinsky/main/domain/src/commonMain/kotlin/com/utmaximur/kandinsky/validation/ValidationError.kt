@@ -1,8 +1,8 @@
 package com.utmaximur.kandinsky.validation
 
-import kandinsky.domain.resources.Res
-import kandinsky.domain.resources.prompt_empty
-import kandinsky.domain.resources.style_empty
+import features.drink.kandinsky.main.domain.Res
+import features.drink.kandinsky.main.domain.prompt_empty
+import features.drink.kandinsky.main.domain.style_empty
 import org.jetbrains.compose.resources.StringResource
 
 internal sealed interface ValidationError {

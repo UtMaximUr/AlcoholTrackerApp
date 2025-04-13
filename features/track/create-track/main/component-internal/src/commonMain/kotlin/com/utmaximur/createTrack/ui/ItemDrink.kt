@@ -16,9 +16,9 @@ import androidx.compose.ui.unit.dp
 import com.utmaximur.design.ui.ElevatedCardApp
 import com.utmaximur.design.ui.ImageLoaderContent
 import com.utmaximur.domain.Drink
-import createTrack.resources.Res
-import createTrack.resources.cd_delete
-import createTrack.resources.ic_delete_button
+import features.track.create_track.main.Res
+import features.track.create_track.main.cd_delete
+import features.track.create_track.main.ic_delete_button
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 

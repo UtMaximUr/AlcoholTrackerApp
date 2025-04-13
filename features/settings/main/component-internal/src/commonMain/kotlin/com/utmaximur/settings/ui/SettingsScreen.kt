@@ -19,13 +19,13 @@ import androidx.compose.ui.unit.dp
 import com.utmaximur.design.extensions.clickableSite
 import com.utmaximur.design.ui.ElevatedCardApp
 import com.utmaximur.settings.SettingsComponent
+import features.settings.main.Res
+import features.settings.main.currency
+import features.settings.main.privacy_policy
+import features.settings.main.settings_version
+import features.settings.main.terms_of_use
+import features.settings.main.theme
 import org.jetbrains.compose.resources.stringResource
-import settings.resources.Res
-import settings.resources.currency
-import settings.resources.privacy_policy
-import settings.resources.settings_version
-import settings.resources.terms_of_use
-import settings.resources.theme
 
 @Composable
 internal fun SettingsScreen(

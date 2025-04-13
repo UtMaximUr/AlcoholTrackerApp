@@ -21,8 +21,8 @@ import com.utmaximur.kandinsky.store.KandinskyScreenStore.State
 import com.utmaximur.kandinsky.validation.RequestValidator
 import com.utmaximur.message.models.MessageContainer
 import com.utmaximur.message.models.MessageService
-import kandinsky.domain.resources.Res
-import kandinsky.domain.resources.generate_error
+import features.drink.kandinsky.main.domain.Res
+import features.drink.kandinsky.main.domain.generate_error
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.launchIn

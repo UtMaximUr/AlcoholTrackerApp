@@ -4,6 +4,7 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.custom.multiplatform.library)
     alias(libs.plugins.custom.feature.internal)
+    alias(libs.plugins.custom.multiplatform.composeResources)
     alias(libs.plugins.buildkonfig)
     id(libs.plugins.cocoapods.get().pluginId)
 }
@@ -23,13 +24,8 @@ kotlin {
 }
 
 dependencies {
-    commonMainImplementation(compose.components.resources)
     commonMainImplementation(projects.features.map.domain)
     androidMainImplementation(libs.yandex.map.mobile)
-}
-
-compose.resources {
-    packageOfResClass = "yamdex_map.resources"
 }
 
 buildkonfig {

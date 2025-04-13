@@ -24,19 +24,19 @@ import com.utmaximur.map.MapNavigationComponent
 import com.utmaximur.root.RootComponent
 import com.utmaximur.settings.SettingsNavigationComponent
 import com.utmaximur.statistic.StatisticComponent
+import features.root.Res
+import features.root.calendar
+import features.root.ic_calendar_24dp
+import features.root.ic_map_24dp
+import features.root.ic_settings_24dp
+import features.root.ic_statistic_24dp
+import features.root.map
+import features.root.settings
+import features.root.statistic
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import root.resources.Res
-import root.resources.calendar
-import root.resources.ic_calendar_24dp
-import root.resources.ic_map_24dp
-import root.resources.ic_settings_24dp
-import root.resources.ic_statistic_24dp
-import root.resources.map
-import root.resources.settings
-import root.resources.statistic
 
 @Composable
 internal fun BottomBar(

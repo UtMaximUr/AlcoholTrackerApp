@@ -24,11 +24,11 @@ import com.utmaximur.design.extensions.bounceClick
 import com.utmaximur.design.text.InnerShadowTextField
 import com.utmaximur.design.topbar.TopBar
 import com.utmaximur.design.ui.ElevatedCardApp
-import createDrink.resources.Res
-import createDrink.resources.cd_drink_image
-import createDrink.resources.placeholder_image
-import createDrink.resources.title_create_drink
-import createDrink.resources.title_name_drink
+import features.drink.create_drink.main.Res
+import features.drink.create_drink.main.cd_drink_image
+import features.drink.create_drink.main.placeholder_image
+import features.drink.create_drink.main.title_create_drink
+import features.drink.create_drink.main.title_name_drink
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 

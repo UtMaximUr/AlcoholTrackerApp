@@ -19,8 +19,8 @@ import androidx.compose.ui.unit.dp
 import com.utmaximur.datePicker.DatePickerComponent
 import com.utmaximur.design.extensions.bounceClick
 import com.utmaximur.design.modal.ModalBottomSheetApp
-import datePicker.resources.Res
-import datePicker.resources.date_picker_continue
+import features.track.date_picker.main.Res
+import features.track.date_picker.main.date_picker_continue
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)

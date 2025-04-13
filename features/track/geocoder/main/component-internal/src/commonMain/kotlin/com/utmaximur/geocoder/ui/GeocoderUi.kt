@@ -8,9 +8,9 @@ import androidx.compose.ui.unit.dp
 import com.utmaximur.design.RequestWidget
 import com.utmaximur.design.ui.ElevatedCardApp
 import com.utmaximur.geocoder.GeocoderComponent
-import geocoder.resources.Res
-import geocoder.resources.place
-import geocoder.resources.place_hint
+import features.track.geocoder.main.Res
+import features.track.geocoder.main.place
+import features.track.geocoder.main.place_hint
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

@@ -13,8 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.utmaximur.design.ui.ImageLoaderContent
 import com.utmaximur.drink.model.DrinkStatistic
-import drinkStatistic.resources.Res
-import drinkStatistic.resources.count_drink
+import features.statistic.drink.main.Res
+import features.statistic.drink.main.count_drink
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

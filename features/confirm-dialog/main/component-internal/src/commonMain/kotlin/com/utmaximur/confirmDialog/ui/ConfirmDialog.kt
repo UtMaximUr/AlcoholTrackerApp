@@ -17,11 +17,11 @@ import androidx.compose.ui.unit.dp
 import com.utmaximur.confirmDialog.ConfirmDialogComponent
 import com.utmaximur.design.extensions.bounceClick
 import com.utmaximur.design.modal.ModalBottomSheetApp
-import confirmDialog.resources.Res
-import confirmDialog.resources.cancel
-import confirmDialog.resources.confirm_delete
-import confirmDialog.resources.confirm_delete_text
-import confirmDialog.resources.proceed
+import features.confirm_dialog.main.Res
+import features.confirm_dialog.main.cancel
+import features.confirm_dialog.main.confirm_delete
+import features.confirm_dialog.main.confirm_delete_text
+import features.confirm_dialog.main.proceed
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
