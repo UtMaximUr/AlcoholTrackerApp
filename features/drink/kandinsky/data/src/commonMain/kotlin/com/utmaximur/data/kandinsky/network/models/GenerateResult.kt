@@ -9,9 +9,13 @@ data class GenerateResult(
     val modelStatus: String = "",
     val uuid: String = "",
     val status: GenerateStatus = GenerateStatus.INITIAL,
-    val images: List<String> = listOf(),
+    val result : Result = Result(),
+)
+
+@Serializable
+data class Result(
+    val files: List<String> = listOf(),
     val censored: Boolean = false,
-    val generationTime: Int = 0
 )
 
 /**

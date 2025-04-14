@@ -23,7 +23,6 @@ dependencies {
     commonMainImplementation(projects.core.workManager)
     commonMainImplementation(projects.coreData.models)
     commonMainImplementation(projects.coreData.databaseRoom)
-    commonMainImplementation(projects.domain.api)
     commonMainImplementation(projects.features.drink.kandinsky.domain)
 }
 

@@ -1,7 +1,6 @@
 package com.utmaximur.data.kandinsky.network.models
 
 import com.utmaximur.data.kandinsky.network.ApiConstants
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -10,7 +9,6 @@ data class GenerationRequest(
     val style: String,
     val width: Int,
     val height: Int,
-    @SerialName("num_images")
     val numImages: Int,
     val generateParams: GenerateParamsRequest
 ) {

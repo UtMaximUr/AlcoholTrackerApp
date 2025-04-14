@@ -67,7 +67,7 @@ internal class GenerateImageWorker(
      *   - API не вернуло ни одной модели
      *   - Произошла ошибка сети или сервера (обрабатывается внутри `fusionBrainApi.getModels()`)
      */
-    private suspend fun fetchLatestModelVersionId(): Int {
+    private suspend fun fetchLatestModelVersionId(): String {
         val models = fusionBrainApi.getModels()
         models.ifEmpty { throw ServiceUnavailable() }
         logger.i { "GenerateImageWorker get latest model id" }
@@ -90,7 +90,7 @@ internal class GenerateImageWorker(
      * ### Возвращаемое значение:
      * @return [String] - UUID задачи, необходимый для проверки статуса генерации
      */
-    private suspend fun submitGenerationRequest(modelId: Int, params: GenerationRequest): String {
+    private suspend fun submitGenerationRequest(modelId: String, params: GenerationRequest): String {
         val formData = createRequestFormData(modelId, params)
         return fusionBrainApi.postGenerateImageRequest(body = formData).uuid
     }
@@ -114,10 +114,10 @@ internal class GenerateImageWorker(
      * - Для поля [modelId] устанавливается Content-Type: `text/plain`
      * - Для поля [params] используется Content-Type: `application/json`
      */
-    private fun createRequestFormData(modelId: Int, params: GenerationRequest) =
+    private fun createRequestFormData(modelId: String, params: GenerationRequest) =
         MultiPartFormDataContent(formData {
             append(
-                ApiConstants.MODEL_ID, modelId, headersOf(
+                ApiConstants.PIPELINE_ID, modelId, headersOf(
                     HttpHeaders.ContentType, ContentType.Text.Plain.toString()
                 )
             )
@@ -168,13 +168,14 @@ internal class GenerateImageWorker(
             generateResultDataSource.sendData(periodicResult)
             when (periodicResult.status) {
                 GenerateStatus.DONE -> {
-                    val base64String = periodicResult.images.firstOrNull() ?: return WorkerResult.failure(
+                    val base64String = periodicResult.result.files.firstOrNull() ?: return WorkerResult.failure(
                         throwable = GenerationResultNotFoundException()
                     )
                     val data = base64String.decodeBase64ToByteArray()
                     val path = fileStorage.saveFileToCache(periodicResult.uuid, data)
+                    val updatedResult = periodicResult.result.copy(files = listOf(path.orEmpty()))
                     generateResultDataSource.sendData(
-                        periodicResult.copy(images = listOf(path.orEmpty()))
+                        periodicResult.copy(result = updatedResult)
                     )
                     logger.i { "GenerateImageWorker generation result is successful" }
                     return WorkerResult.success()
