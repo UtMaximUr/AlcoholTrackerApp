@@ -1,5 +1,8 @@
 package com.utmaximur.calendar.ui
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandHorizontally
+import androidx.compose.animation.shrinkHorizontally
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -22,6 +25,7 @@ import com.utmaximur.calendar.models.localized
 import com.utmaximur.calendar.ui.calendar.CalendarViewLayout
 import com.utmaximur.calendar.ui.calendar.rememberCalendarState
 import com.utmaximur.design.button.AddFloatingActionButton
+import com.utmaximur.design.topbar.NavigationBackButton
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -44,6 +48,15 @@ internal fun CalendarScreen(
         modifier = modifier,
         topBar = {
             TopAppBar(
+                navigationIcon = {
+                    AnimatedVisibility (
+                        visible = state.isBackButtonVisible,
+                        enter = expandHorizontally(),
+                        exit = shrinkHorizontally()
+                    ) {
+                        NavigationBackButton(onBackClick = component::toggleView)
+                    }
+                },
                 title = {
                     Text(
                         text = calendarState.currentMonthYear.localized().uppercase(),

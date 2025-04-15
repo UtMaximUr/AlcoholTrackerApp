@@ -15,6 +15,7 @@ interface CalendarStore : Store<Intent, State, Label> {
         val requestTracksUi: RequestUi<TracksData>,
         val currency: String
     ) {
+        val isBackButtonVisible = calendarView == CalendarView.DAY_VIEW
         constructor() : this(
             calendarView = CalendarView.MONTH_VIEW,
             requestTracksUi = RequestUi(),
