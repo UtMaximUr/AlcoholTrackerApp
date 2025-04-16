@@ -4,6 +4,7 @@ import com.utmaximur.domain.map.PlaceMark
 import com.utmaximur.yandex_map.clusters.MapClusterTapListener
 import com.utmaximur.yandex_map.clusters.MapClusterViewUpdater
 import com.utmaximur.yandex_map.configs.MapSettingsConfig
+import com.utmaximur.yandex_map.map.NativeMapView
 import com.utmaximur.yandex_map.mapObjects.MapPlaceMarkTapListener
 import com.utmaximur.yandex_map.resources.MapIconProvider
 
@@ -24,6 +25,19 @@ internal expect class YandexMapController {
     fun applyNightMode()
 
     /**
+     * Изменяет текущий уровень масштаба, используя заданный шаг масштабирования.
+     *
+     * Положительное значение [zoomStep] увеличивает масштаб (приближение), отрицательное — уменьшает (отдаление).
+     * Например:
+     * - `zoom(0.1f)` увеличит масштаб на 10%
+     * - `zoom(-0.05f)` уменьшит масштаб на 5%
+     *
+     * @param zoomStep Шаг изменения масштаба (рекомендуемый диапазон: -0.5 до 0.5).
+     *                 Нулевое значение игнорируется.
+     */
+    fun zoom(zoomStep: Float)
+
+    /**
      * Метод жизненного цикла. Должен вызываться при старте связанного компонента.
      * Инициализирует ресурсы карты и подписки.
      */
@@ -34,6 +48,12 @@ internal expect class YandexMapController {
      * Освобождает ресурсы карты и останавливает фоновые процессы.
      */
     fun onStop()
+
+    /**
+     * Возвращает экземпляр [NativeMapView], используемый для отображения карты.
+     */
+    fun getMapView() : NativeMapView
+
     companion object {
         fun create(
             mapIconProvider: MapIconProvider,

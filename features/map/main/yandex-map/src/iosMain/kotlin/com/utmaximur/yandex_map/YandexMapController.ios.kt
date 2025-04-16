@@ -52,7 +52,16 @@ internal actual class YandexMapController {
         mapKit.onStop()
     }
 
-    internal fun getView() = mapView
+    actual fun zoom(zoomStep: Float) {
+        val cameraPosition = map?.cameraPosition ?: return
+        with(cameraPosition) {
+            map?.moveWithCameraPosition(
+                YMKCameraPosition.cameraPositionWithTarget(target, zoom + zoomStep, azimuth, tilt)
+            )
+        }
+    }
+
+    actual fun getMapView() = com.utmaximur.yandex_map.map.NativeMapView(mapView)
 
     private fun addMarkersOnMap(
         places: List<PlaceMark>,

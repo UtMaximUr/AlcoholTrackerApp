@@ -7,7 +7,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.viewinterop.UIKitInteropInteractionMode
 import androidx.compose.ui.viewinterop.UIKitInteropProperties
 import androidx.compose.ui.viewinterop.UIKitView
-import com.utmaximur.domain.map.PlaceMark
 import kotlinx.cinterop.ExperimentalForeignApi
 import platform.CoreGraphics.CGRectMake
 import platform.UIKit.UIView
@@ -15,18 +14,14 @@ import platform.UIKit.UIView
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalForeignApi::class)
 @Composable
 internal actual fun NativeMapContent(
-    places: List<PlaceMark>,
     yandexMapController: YandexMapController
 ) {
     UIKitView(
         modifier = Modifier.fillMaxSize(),
         factory = {
             UIView(frame = CGRectMake(.0, .0, .0, .0)).apply {
-                addSubview(yandexMapController.getView())
+                addSubview(yandexMapController.getMapView().mapView)
             }
-        },
-        update = {
-            yandexMapController.submitData(places)
         },
         onRelease = {
             yandexMapController.onStop()

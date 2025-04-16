@@ -53,6 +53,12 @@ internal actual class YandexMapController : KoinComponent {
         map.isNightModeEnabled = mapSettingsConfig.isDarkTheme
     }
 
+    actual fun zoom(zoomStep: Float) = with(map.cameraPosition) {
+        map.move(CameraPosition(target, zoom + zoomStep, azimuth, tilt))
+    }
+
+    actual fun getMapView() = com.utmaximur.yandex_map.map.NativeMapView(mapView)
+
     private fun calculateAverageCoordinates(places: List<PlaceMark>): Pair<Double, Double> {
         val avgLatitude = places.map { it.latitude }.average()
         val avgLongitude = places.map { it.longitude }.average()
@@ -86,8 +92,6 @@ internal actual class YandexMapController : KoinComponent {
         val animation = Animation(Animation.Type.SMOOTH, 1f)
         map.move(position, animation, null)
     }
-
-    internal fun getView() = mapView
 
     actual companion object {
         actual fun create(
