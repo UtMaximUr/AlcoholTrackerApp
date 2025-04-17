@@ -86,9 +86,9 @@ private fun DrinkSpecifications(
     verticalAlignment = Alignment.CenterVertically,
 ) {
     InfoText(text = stringResource(Res.string.volume, volume))
-    VerticalDividerRow()
+    InfoVerticalDivider()
     InfoText(text = stringResource(Res.string.degree, degree))
-    VerticalDividerRow()
+    InfoVerticalDivider()
     InfoText(text = stringResource(Res.string.currency, totalPrice, currency))
 }
 
@@ -109,7 +109,7 @@ private fun InfoText(
 )
 
 @Composable
-private inline fun VerticalDividerRow() = VerticalDivider(
+private fun InfoVerticalDivider() = VerticalDivider(
     modifier = Modifier.height(16.dp),
     thickness = 2.dp,
     color = MaterialTheme.colorScheme.tertiary
