@@ -6,6 +6,7 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
 import kotlinx.datetime.TimeZone
+import kotlinx.datetime.atStartOfDayIn
 import kotlinx.datetime.format
 import kotlinx.datetime.format.Padding
 import kotlinx.datetime.format.char
@@ -59,3 +60,6 @@ fun getTodayDateUi(timeZone: TimeZone = TimeZone.UTC): String {
     val nowDate = Clock.System.now().toLocalDateTime(timeZone).date
     return nowDate.format(dateFormat_DD_MM_YYYY)
 }
+
+fun LocalDate.toLong(timeZone: TimeZone = TimeZone.UTC) =
+    this.atStartOfDayIn(timeZone).toEpochMilliseconds()
