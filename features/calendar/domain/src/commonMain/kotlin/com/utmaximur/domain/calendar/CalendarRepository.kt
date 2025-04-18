@@ -7,5 +7,5 @@ interface CalendarRepository {
 
     val currencyStream: Flow<String>
 
-    fun observeTracksByStartDate(): Flow<List<Track>>
+    fun observeTracksByMonth(startDate: Long, endDate: Long): Flow<List<Track>>
 }

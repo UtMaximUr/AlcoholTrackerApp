@@ -125,12 +125,20 @@ class CalendarState internal constructor(
         }
 
     /**
-     * Получает первую дату из списка месяцев.
+     * Получает первую видимую дату.
      *
-     * @return Объект [LocalDate], представляющий первую дату в первом месяце.
+     * @return Объект [LocalDate]
      */
     val firstDate: LocalDate
         get() = months[currentMonthIndex].dateMatrix.flatten().first()
+
+    /**
+     * Получает последнюю видимую дату.
+     *
+     * @return Объект [LocalDate]
+     */
+    val lastDate: LocalDate
+        get() = months[currentMonthIndex].dateMatrix.flatten().last()
 
     /**
      * Получает индекс текущего месяца в диапазоне.

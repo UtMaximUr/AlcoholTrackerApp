@@ -10,6 +10,7 @@ import com.utmaximur.calendar.store.CalendarStore
 import com.utmaximur.calendar.ui.CalendarScreen
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.datetime.LocalDate
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
 import org.koin.core.component.KoinComponent
@@ -27,6 +28,9 @@ internal class DefaultCalendarComponent(
 
     @OptIn(ExperimentalCoroutinesApi::class)
     override val model: StateFlow<CalendarStore.State> = store.stateFlow
+
+    override fun handleVisibleDateRange(firstDate: LocalDate, lastDate: LocalDate) =
+        store.accept(CalendarStore.Intent.DateRange(firstDate, lastDate))
 
     override fun onCreateTrackClick() =
         output(CalendarComponent.Output.NavigateCreateTrack)

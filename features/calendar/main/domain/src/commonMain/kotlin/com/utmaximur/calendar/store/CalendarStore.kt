@@ -7,6 +7,7 @@ import com.utmaximur.calendar.store.CalendarStore.Label
 import com.utmaximur.calendar.store.CalendarStore.State
 import com.utmaximur.core.mvi_mapper.RequestUi
 import com.utmaximur.domain.EMPTY_STRING
+import kotlinx.datetime.LocalDate
 
 interface CalendarStore : Store<Intent, State, Label> {
 
@@ -16,6 +17,7 @@ interface CalendarStore : Store<Intent, State, Label> {
         val currency: String
     ) {
         val isBackButtonVisible = calendarView == CalendarView.DAY_VIEW
+
         constructor() : this(
             calendarView = CalendarView.MONTH_VIEW,
             requestTracksUi = RequestUi(),
@@ -24,7 +26,7 @@ interface CalendarStore : Store<Intent, State, Label> {
     }
 
     sealed interface Intent {
-
+        data class DateRange(val firstDate: LocalDate, val lastDate: LocalDate) : Intent
         data object ToggleCalendarView : Intent
     }
 

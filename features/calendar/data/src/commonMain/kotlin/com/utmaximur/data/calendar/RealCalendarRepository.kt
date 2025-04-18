@@ -19,7 +19,7 @@ internal class RealCalendarRepository(
 
     override val currencyStream = currencySettingsManager.currencyStateStream
 
-    override fun observeTracksByStartDate() = trackDao
-        .getTracksByStartDate()
+    override fun observeTracksByMonth(startDate: Long, endDate: Long) = trackDao
+        .getTrackByMonth(startDate, endDate)
         .mapList(trackUiMapper::transform)
 }

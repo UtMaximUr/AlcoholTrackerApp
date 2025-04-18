@@ -5,6 +5,7 @@ plugins {
 
 dependencies {
     commonMainImplementation(libs.arkivanov.decompose)
+    commonMainImplementation(libs.kotlinx.datetime)
 
     commonMainImplementation(projects.core.decompose)
     commonMainImplementation(projects.features.calendar.main.domain)

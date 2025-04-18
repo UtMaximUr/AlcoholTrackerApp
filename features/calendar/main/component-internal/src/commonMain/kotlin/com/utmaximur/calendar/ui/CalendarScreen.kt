@@ -16,8 +16,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import com.utmaximur.calendar.CalendarComponent
@@ -38,18 +40,19 @@ internal fun CalendarScreen(
     val state by component.model.collectAsState()
     val calendarState = rememberCalendarState()
 
-//    LaunchedEffect(Unit) {
-//        component.initialFromDate(calendarState.firstDate)
-//        snapshotFlow { calendarState.firstDate }
-//            .collect(component::handleFromDate)
-//    }
+    LaunchedEffect(Unit) {
+        snapshotFlow { calendarState.firstDate }
+            .collect { firstDate ->
+                component.handleVisibleDateRange(firstDate, calendarState.lastDate)
+            }
+    }
 
     Scaffold(
         modifier = modifier,
         topBar = {
             TopAppBar(
                 navigationIcon = {
-                    AnimatedVisibility (
+                    AnimatedVisibility(
                         visible = state.isBackButtonVisible,
                         enter = expandHorizontally(),
                         exit = shrinkHorizontally()

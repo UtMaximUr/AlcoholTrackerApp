@@ -4,6 +4,7 @@ import com.arkivanov.mvikotlin.core.store.SimpleBootstrapper
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.utmaximur.analytics.domain.AnalyticsManager
+import com.utmaximur.calendar.interactor.GetTracksByDateRange
 import com.utmaximur.calendar.store.CalendarStore.Intent
 import com.utmaximur.calendar.store.CalendarStore.Label
 import com.utmaximur.calendar.store.CalendarStore.State
@@ -14,6 +15,7 @@ import org.koin.core.annotation.Factory
 internal class CalendarStoreFactory(
     storeFactory: StoreFactory,
     repository: CalendarRepository,
+    interactor: GetTracksByDateRange,
     analyticsManager: AnalyticsManager
 ) : CalendarStore,
     Store<Intent, State, Label> by storeFactory.create(
@@ -23,6 +25,7 @@ internal class CalendarStoreFactory(
         executorFactory = {
             CalendarExecutor(
                 repository = repository,
+                interactor = interactor,
                 analyticsManager = analyticsManager
             )
         },
