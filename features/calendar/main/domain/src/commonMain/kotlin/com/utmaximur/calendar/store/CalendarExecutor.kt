@@ -37,7 +37,7 @@ internal class CalendarExecutor(
     private val analyticsManager: AnalyticsManager
 ) : CoroutineExecutor<Intent, Unit, State, Message, Label>() {
 
-    private val currentLocalDate = MutableStateFlow<DateRange?>(null)
+    private val currentDateRange = MutableStateFlow<DateRange?>(null)
 
     override fun executeAction(action: Unit) {
         trackScreenOpen()
@@ -48,7 +48,7 @@ internal class CalendarExecutor(
     override fun executeIntent(intent: Intent) {
         when (intent) {
             Intent.ToggleCalendarView -> toggleCalendarView()
-            is Intent.DateRange -> currentLocalDate.update {
+            is Intent.DateRange -> currentDateRange.update {
                 intent.firstDate to intent.lastDate
             }
         }
@@ -64,7 +64,7 @@ internal class CalendarExecutor(
         .launchIn(scope)
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    private fun observeTracks() = currentLocalDate
+    private fun observeTracks() = currentDateRange
         .filterNotNull()
         .flatMapLatest(interactor::doWork)
         .asRequest()
