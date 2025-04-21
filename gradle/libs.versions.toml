@@ -50,6 +50,7 @@ desugar-jdk-libs = "2.1.5"
 evaluator = "1.1.1"
 buildkonfig = "0.15.2"
 yandexMapsMobile = "4.5.0-full"
+reorderable = "2.4.3"
 
 # Plugins
 plugin-android = "8.7.3"
@@ -128,6 +129,7 @@ desugar-jdk-libs = { module = "com.android.tools:desugar_jdk_libs", version.ref 
 #image-zoomable = { module = "com.mxalbert.zoomable:zoomable", version.ref = "zoomable" }
 multiplatform-expressio-evaluator = { module = "io.github.murzagalin:multiplatform-expressions-evaluator", version.ref = "evaluator" }
 yandex-map-mobile = { module = "com.yandex.android:maps.mobile", version.ref = "yandexMapsMobile" }
+reorderable = { module = "sh.calvin.reorderable:reorderable", version.ref = "reorderable" }
 
 # Logging
 timber = "com.jakewharton.timber:timber:5.0.1"
