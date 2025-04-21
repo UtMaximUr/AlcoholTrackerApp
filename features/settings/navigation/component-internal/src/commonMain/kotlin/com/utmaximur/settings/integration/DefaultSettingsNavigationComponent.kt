@@ -15,11 +15,14 @@ import com.arkivanov.decompose.router.slot.childSlot
 import com.arkivanov.decompose.router.slot.dismiss
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
+import com.arkivanov.decompose.router.stack.pop
+import com.arkivanov.decompose.router.stack.pushNew
 import com.arkivanov.decompose.value.Value
 import com.utmaximur.core.decompose.ComposeComponent
 import com.utmaximur.currency.CurrencyComponent
 import com.utmaximur.settings.SettingsComponent
 import com.utmaximur.settings.SettingsNavigationComponent
+import com.utmaximur.sortingDrinks.SortingDrinksComponent
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
 import org.koin.core.component.KoinComponent
@@ -29,6 +32,7 @@ import org.koin.core.parameter.parameterArrayOf
 @Factory
 internal class DefaultSettingsNavigationComponent(
     @InjectedParam componentContext: ComponentContext,
+    @InjectedParam handleBottomBarState: (Boolean) -> Unit
 ) : SettingsNavigationComponent,
     ComponentContext by componentContext,
     KoinComponent {
@@ -70,6 +74,17 @@ internal class DefaultSettingsNavigationComponent(
         childFactory = ::createChild,
     )
 
+    init {
+        stack.subscribe { childStack ->
+            val configuration = childStack.active.configuration
+            val isVisibleBottomBar = when (configuration) {
+                is SettingsNavigationConfiguration.SortingDrinks -> false
+                else -> true
+            }
+            handleBottomBarState(isVisibleBottomBar)
+        }
+    }
+
     private fun createChild(
         configuration: SettingsNavigationConfiguration,
         componentContext: ComponentContext,
@@ -80,11 +95,22 @@ internal class DefaultSettingsNavigationComponent(
                 ::onSettingsOutput,
             )
         }
+
+        SettingsNavigationConfiguration.SortingDrinks -> get<SortingDrinksComponent> {
+            parameterArrayOf(
+                componentContext,
+                { navigation.pop() },
+            )
+        }
     }
 
     private fun onSettingsOutput(output: SettingsComponent.Output): Unit = when (output) {
         is SettingsComponent.Output.OpenSelectCurrencyDialog ->
             modalNavigation.activate(ModalConfiguration.Currency)
+
+        SettingsComponent.Output.NavigateToSortingDrinks -> navigation.pushNew(
+            SettingsNavigationConfiguration.SortingDrinks
+        )
     }
 
     @Composable

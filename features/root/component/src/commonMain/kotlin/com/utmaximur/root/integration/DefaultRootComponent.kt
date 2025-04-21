@@ -96,7 +96,10 @@ internal class DefaultRootComponent(
             }
 
             Configuration.SettingsScreen -> get<SettingsNavigationComponent> {
-                parameterArrayOf(componentContext)
+                parameterArrayOf(
+                    componentContext,
+                    handleBottomBarState
+                )
             }
         }
 

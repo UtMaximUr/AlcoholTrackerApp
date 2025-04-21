@@ -5,6 +5,7 @@
     <string name="terms_of_use">Terms of use</string>
     <string name="settings_version">Version %1$s</string>
     <string name="theme">Use a dark theme</string>
+    <string name="sorting_drinks">Sorting drinks</string>
 
     <string name="cd_icon_app">Application Icon</string>
 </resources>

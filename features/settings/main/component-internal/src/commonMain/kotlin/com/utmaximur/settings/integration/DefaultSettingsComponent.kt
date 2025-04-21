@@ -34,6 +34,9 @@ internal class DefaultSettingsComponent(
     override fun openCurrencyDialog() =
         output(SettingsComponent.Output.OpenSelectCurrencyDialog)
 
+    override fun navigateToSortingDrinks() =
+        output(SettingsComponent.Output.NavigateToSortingDrinks)
+
     @Composable
     override fun Render(modifier: Modifier) = SettingsScreen(modifier, this)
 }

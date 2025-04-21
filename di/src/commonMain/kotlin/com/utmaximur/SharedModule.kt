@@ -47,6 +47,7 @@ import com.utmaximur.data.geocoder.GeocoderDataModule
 import com.utmaximur.data.kandinsky.KandinskyDataModule
 import com.utmaximur.data.map.MapDataModule
 import com.utmaximur.data.places.PlaceManagerModule
+import com.utmaximur.data.sortingDrinks.SortingDrinksDataModule
 import com.utmaximur.databaseRoom.RoomDataBaseModule
 import com.utmaximur.message.MessageDataModule
 import com.utmaximur.settings.SettingsNavigationComponentModule
@@ -59,6 +60,7 @@ import com.utmaximur.kandinsky.KandinskyScreenComponentModule
 import com.utmaximur.map.MapComponentModule
 import com.utmaximur.map.MapNavigationComponentModule
 import com.utmaximur.mappers.implementation.ProjectImplementationModule
+import com.utmaximur.sortingDrinks.SortingDrinksMainComponentModule
 import com.utmaximur.splash.SplashScreenComponentModule
 import com.utmaximur.tracksModal.TracksModalMainComponentModule
 import com.utmaximur.yandex_map.YandexMapModule
@@ -127,6 +129,8 @@ import com.utmaximur.yandex_map.YandexMapModule
         TracksModalMainComponentModule::class,
         KandinskyScreenComponentModule::class,
         KandinskyDataModule::class,
+        SortingDrinksDataModule::class,
+        SortingDrinksMainComponentModule::class
     ]
 )
 

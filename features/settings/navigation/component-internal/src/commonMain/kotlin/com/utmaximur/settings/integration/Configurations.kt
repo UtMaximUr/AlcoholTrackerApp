@@ -6,6 +6,9 @@ import kotlinx.serialization.Serializable
 internal sealed interface SettingsNavigationConfiguration {
     @Serializable
     data object Main : SettingsNavigationConfiguration
+
+    @Serializable
+    data object SortingDrinks : SettingsNavigationConfiguration
 }
 
 @Serializable

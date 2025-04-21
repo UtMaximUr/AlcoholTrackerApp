@@ -11,4 +11,5 @@ dependencies {
     commonMainImplementation(projects.features.settings.navigation.componentApi)
     commonMainImplementation(projects.features.settings.main.componentApi)
     commonMainImplementation(projects.features.settings.currencyModal.componentApi)
+    commonMainImplementation(projects.features.settings.sortingDrinks.main.componentApi)
 }

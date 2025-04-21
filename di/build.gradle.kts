@@ -85,6 +85,8 @@ kotlin {
             implementation(projects.features.drink.drinkImageModal.data)
             implementation(projects.features.drink.kandinsky.data)
             implementation(projects.features.drink.kandinsky.main.componentInternal)
+            implementation(projects.features.settings.sortingDrinks.main.componentInternal)
+            implementation(projects.features.settings.sortingDrinks.data)
         }
         androidMain.dependencies {
             implementation(libs.androidx.startup.runtime)

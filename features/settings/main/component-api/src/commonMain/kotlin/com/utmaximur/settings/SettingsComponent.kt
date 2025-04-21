@@ -12,7 +12,10 @@ interface SettingsComponent : ComposeComponent {
 
     fun openCurrencyDialog()
 
+    fun navigateToSortingDrinks()
+
     sealed class Output {
         data object OpenSelectCurrencyDialog : Output()
+        data object NavigateToSortingDrinks : Output()
     }
 }

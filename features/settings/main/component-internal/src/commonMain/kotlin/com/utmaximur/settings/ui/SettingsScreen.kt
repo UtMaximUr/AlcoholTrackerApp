@@ -23,6 +23,7 @@ import features.settings.main.Res
 import features.settings.main.currency
 import features.settings.main.privacy_policy
 import features.settings.main.settings_version
+import features.settings.main.sorting_drinks
 import features.settings.main.terms_of_use
 import features.settings.main.theme
 import org.jetbrains.compose.resources.stringResource
@@ -77,6 +78,10 @@ internal fun SettingsScreen(
                             style = MaterialTheme.typography.bodyMedium,
                         )
                     },
+                )
+                SettingsButton(
+                    modifier = Modifier.clickable(onClick = component::navigateToSortingDrinks),
+                    title = Res.string.sorting_drinks,
                 )
                 SettingsButton(
                     modifier = Modifier.clickableSite(state.privacyPolicyUrl),

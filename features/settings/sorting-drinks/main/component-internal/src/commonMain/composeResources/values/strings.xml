@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_sorting_drinks">Sorting drinks</string>
+
+    <string name="cd_move">Move drink</string>
+</resources>

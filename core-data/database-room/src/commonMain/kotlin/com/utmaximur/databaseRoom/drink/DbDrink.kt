@@ -11,5 +11,11 @@ data class DbDrink(
     val name: String,
     val icon: String,
     val photo: String,
+    val position: Int? = null,
     val createdAt: LocalDateTime? = null
+)
+
+data class DbDrinkPosition(
+    val id: Long,
+    val position: Int
 )
