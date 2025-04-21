@@ -6,7 +6,7 @@ import com.utmaximur.domain.map.PlaceMark
 import org.koin.core.annotation.Factory
 
 @Factory
-internal class PlaceMarkUiMapper : Mapper<DbPlace, PlaceMark> {
+internal class PlaceMarkDomainMapper : Mapper<DbPlace, PlaceMark> {
     override fun transform(from: DbPlace) = PlaceMark(
         longitude = from.longitude,
         latitude = from.latitude,

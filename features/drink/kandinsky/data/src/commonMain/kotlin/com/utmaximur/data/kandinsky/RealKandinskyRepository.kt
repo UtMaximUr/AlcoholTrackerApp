@@ -18,13 +18,13 @@ internal class RealKandinskyRepository(
 ) : KandinskyRepository {
 
     override suspend fun getStyles() = fusionBrainApi.getStyles()
-        .map(mapperHolder.imageStyleUiMapper::transform)
+        .map(mapperHolder.imageStyleDomainMapper::transform)
 
     override suspend fun requestGeneration(prompt: String, styleName: String) =
         GenerateImageWorker.sendRequestGeneration(prompt = prompt, styleName = styleName)
 
     override fun observeGenerationResult(): Flow<GenerationResult> =
-        generateResultDataSource.dataFlow.map(mapperHolder.generationResultUiMapper::transform)
+        generateResultDataSource.dataFlow.map(mapperHolder.generationResultDomainMapper::transform)
 
     override suspend fun cancelAllGenerations() = GenerateImageWorker.cancelAllWork()
 }

@@ -41,5 +41,5 @@ internal class RealGeocoderRepository(
     override fun getPlaceByTrackId(trackId: Long): Flow<Place> = placeDao
         .getPlaceByTrackId(trackId)
         .filterNotNull()
-        .map(mapper.placeUiMapper::transform)
+        .map(mapper.placeDomainMapper::transform)
 }

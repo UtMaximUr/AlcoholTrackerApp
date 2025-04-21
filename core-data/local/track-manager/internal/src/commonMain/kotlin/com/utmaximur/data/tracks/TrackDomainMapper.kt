@@ -8,8 +8,8 @@ import org.koin.core.annotation.Factory
 import org.koin.core.annotation.Named
 
 @Factory
-@Named(NAMED_TRACK_UI_MAPPER)
-class TrackUiMapper : Mapper<DbTrack, Track> {
+@Named(NAMED_TRACK_DOMAIN_MAPPER)
+class TrackDomainMapper : Mapper<DbTrack, Track> {
     override fun transform(from: DbTrack) = Track(
         id = from.id,
         drink = Drink(

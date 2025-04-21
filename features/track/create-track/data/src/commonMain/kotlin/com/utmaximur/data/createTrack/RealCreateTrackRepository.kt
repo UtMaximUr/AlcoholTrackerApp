@@ -22,7 +22,7 @@ internal class RealCreateTrackRepository(
     override val currencyStream = currencySettingsManager.currencyStateStream
 
     override val drinksStream = drinkDao.getAll()
-        .mapList(mapperHolder.drinkUiMapper::transform)
+        .mapList(mapperHolder.drinkDomainMapper::transform)
 
     override suspend fun saveTrack(track: Track) =
         trackDao.insert(mapperHolder.trackLocalMapper.transform(track))

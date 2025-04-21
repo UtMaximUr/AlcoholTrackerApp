@@ -20,7 +20,7 @@ internal class RealDetailTrackRepository(
     override val currencyStream = currencySettingsManager.currencyStateStream
 
     override fun observeTrackById(trackId: Long) = trackDao.getTrackById(trackId)
-        .map(mapper.trackUiMapper::transform)
+        .map(mapper.trackDomainMapper::transform)
 
     override suspend fun updateTrack(track: Track) =
         trackDao.update(mapper.trackLocalMapper.transform(track))

@@ -1,7 +1,7 @@
 package com.utmaximur.data.calendar
 
-import com.utmaximur.data.tracks.NAMED_TRACK_UI_MAPPER
-import com.utmaximur.data.tracks.TrackUiMapper
+import com.utmaximur.data.tracks.NAMED_TRACK_DOMAIN_MAPPER
+import com.utmaximur.data.tracks.TrackDomainMapper
 import com.utmaximur.databaseRoom.track.TrackDao
 import com.utmaximur.domain.calendar.CalendarRepository
 import com.utmaximur.settingsManager.CurrencySettingsManager
@@ -12,8 +12,8 @@ import org.koin.core.annotation.Named
 @Factory
 internal class RealCalendarRepository(
     private val trackDao: TrackDao,
-    @Named(NAMED_TRACK_UI_MAPPER)
-    private val trackUiMapper: TrackUiMapper,
+    @Named(NAMED_TRACK_DOMAIN_MAPPER)
+    private val trackDomainMapper: TrackDomainMapper,
     currencySettingsManager: CurrencySettingsManager,
 ) : CalendarRepository {
 
@@ -21,5 +21,5 @@ internal class RealCalendarRepository(
 
     override fun observeTracksByMonth(startDate: Long, endDate: Long) = trackDao
         .getTrackByMonth(startDate, endDate)
-        .mapList(trackUiMapper::transform)
+        .mapList(trackDomainMapper::transform)
 }

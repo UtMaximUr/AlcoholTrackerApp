@@ -8,7 +8,7 @@ import com.utmaximur.domain.kandinsky.GenerationStatus
 import org.koin.core.annotation.Factory
 
 @Factory
-internal class GenerationResultUiMapper : Mapper<GenerateResult, GenerationResult> {
+internal class GenerationResultDomainMapper : Mapper<GenerateResult, GenerationResult> {
     override fun transform(from: GenerateResult) = GenerationResult(
         status = convertStatus(from.status),
         imagePathFile = from.result.files.firstOrNull().orEmpty(),

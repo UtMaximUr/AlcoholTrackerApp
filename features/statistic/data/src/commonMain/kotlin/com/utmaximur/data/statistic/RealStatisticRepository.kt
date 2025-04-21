@@ -18,8 +18,8 @@ internal class RealStatisticRepository(
     override val currencyStream = currencySettingsManager.currencyStateStream
 
     override val tracksStream = trackDao.getAll()
-        .mapList(mapperHolder.trackUiMapper::transform)
+        .mapList(mapperHolder.trackDomainMapper::transform)
 
     override val drinksStream = drinkDao.getAll()
-        .mapList(mapperHolder.drinkUiMapper::transform)
+        .mapList(mapperHolder.drinkDomainMapper::transform)
 }

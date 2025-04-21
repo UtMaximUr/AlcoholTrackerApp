@@ -9,7 +9,7 @@ import org.koin.core.annotation.Factory
 private const val RU_LANGUAGE = "ru_RU"
 
 @Factory
-internal class ImageStyleUiMapper(
+internal class ImageStyleDomainMapper(
     private val applicationInfo: ApplicationInfo
 ) : Mapper<ImageStyleRemote, ImageStyle> {
     override fun transform(from: ImageStyleRemote) = ImageStyle(
