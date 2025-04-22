@@ -13,6 +13,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -22,10 +23,12 @@ import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.stack.animation.fade
 import com.arkivanov.decompose.extensions.compose.stack.animation.stackAnimation
-import com.utmaximur.root.RootComponent
-import com.utmaximur.root.ui.theme.AlcoholTrackerTheme
+import com.utmaximur.bottombar.LocalBottomBarController
+import com.utmaximur.bottombar.ProvideBottomBarController
 import com.utmaximur.message.ui.MessageUi
 import com.utmaximur.message.ui.ProvideSnackbarController
+import com.utmaximur.root.RootComponent
+import com.utmaximur.root.ui.theme.AlcoholTrackerTheme
 
 @Composable
 fun RootScreen(
@@ -37,11 +40,16 @@ fun RootScreen(
     val coroutineScope = rememberCoroutineScope()
 
     AlcoholTrackerTheme(state.isDarkTheme) {
-        ProvideSnackbarController(snackbarHostState, coroutineScope) {
+        CompositionLocalProvider(
+            ProvideBottomBarController(),
+            ProvideSnackbarController(snackbarHostState, coroutineScope)
+        ) {
             Scaffold(
                 bottomBar = {
+                    val bottomBarController = LocalBottomBarController.current
+                    val bottomBarState by bottomBarController.state
                     AnimatedVisibility(
-                        visible = state.isBottomBarVisible,
+                        visible = bottomBarState.visible,
                         enter = slideInVertically(
                             initialOffsetY = { it },
                             animationSpec = spring(

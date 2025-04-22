@@ -83,6 +83,7 @@ includeFeature("message:data")
 includeFeature("message:domain")
 includeFeature("message:message-component")
 includeFeature("root:component")
+includeFeature("root:bottombar")
 includeFeature("root:domain")
 
 includeFeature("calendar:data")

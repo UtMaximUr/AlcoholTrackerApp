@@ -1,12 +1,14 @@
 package com.utmaximur.splash.integration
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.essenty.lifecycle.coroutines.coroutineScope
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.arkivanov.mvikotlin.extensions.coroutines.stateFlow
+import com.utmaximur.bottombar.LocalBottomBarController
 import com.utmaximur.splash.SplashScreenComponent
 import com.utmaximur.splash.store.SplashScreenStore
 import com.utmaximur.splash.ui.SplashScreen
@@ -44,6 +46,12 @@ internal class DefaultSplashScreenComponent(
     }
 
     @Composable
-    override fun Render(modifier: Modifier) = SplashScreen(this)
+    override fun Render(modifier: Modifier) {
+        val bottomBarController = LocalBottomBarController.current
+        LaunchedEffect(Unit) {
+            bottomBarController.hideToLifecycle(lifecycle)
+        }
+        SplashScreen(this)
+    }
 
 }

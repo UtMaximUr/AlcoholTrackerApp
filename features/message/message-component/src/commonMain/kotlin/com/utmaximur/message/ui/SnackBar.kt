@@ -4,7 +4,6 @@ import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
@@ -33,16 +32,10 @@ interface SnackbarController {
 fun ProvideSnackbarController(
     snackbarHostState: SnackbarHostState,
     coroutineScope: CoroutineScope,
-    content: @Composable () -> Unit,
-) {
-    CompositionLocalProvider(
-        LocalSnackbarController provides SnackbarController(
-            snackbarHostState,
-            coroutineScope,
-        ),
-        content = content,
-    )
-}
+) = LocalSnackbarController provides SnackbarController(
+    snackbarHostState,
+    coroutineScope,
+)
 
 @Composable
 internal fun SnackbarMessageHandler(

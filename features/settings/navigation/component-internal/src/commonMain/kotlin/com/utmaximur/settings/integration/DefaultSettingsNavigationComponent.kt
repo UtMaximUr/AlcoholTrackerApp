@@ -32,7 +32,6 @@ import org.koin.core.parameter.parameterArrayOf
 @Factory
 internal class DefaultSettingsNavigationComponent(
     @InjectedParam componentContext: ComponentContext,
-    @InjectedParam handleBottomBarState: (Boolean) -> Unit
 ) : SettingsNavigationComponent,
     ComponentContext by componentContext,
     KoinComponent {
@@ -73,17 +72,6 @@ internal class DefaultSettingsNavigationComponent(
         handleBackButton = true,
         childFactory = ::createChild,
     )
-
-    init {
-        stack.subscribe { childStack ->
-            val configuration = childStack.active.configuration
-            val isVisibleBottomBar = when (configuration) {
-                is SettingsNavigationConfiguration.SortingDrinks -> false
-                else -> true
-            }
-            handleBottomBarState(isVisibleBottomBar)
-        }
-    }
 
     private fun createChild(
         configuration: SettingsNavigationConfiguration,

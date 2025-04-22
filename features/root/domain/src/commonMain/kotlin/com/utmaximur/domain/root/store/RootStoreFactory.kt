@@ -15,7 +15,6 @@ import org.koin.core.annotation.Factory
 
 internal sealed interface Message {
     data class UpdateDarkTheme(val isDarkTheme: Boolean) : Message
-    data class UpdateBottomBarState(val isVisible: Boolean) : Message
     data class UpdateMapState(val isMapEnabled: Boolean) : Message
 }
 
@@ -37,14 +36,10 @@ internal class RootStoreFactory(
                     dispatch(Message.UpdateDarkTheme(isDarkTheme = isDark))
                 }.launchIn(this)
             }
-            onIntent<Intent.HandleBottomBarState> { intent ->
-                dispatch(Message.UpdateBottomBarState(intent.isVisible))
-            }
         },
         reducer = { message ->
             when (message) {
                 is Message.UpdateDarkTheme -> copy(isDarkTheme = message.isDarkTheme)
-                is Message.UpdateBottomBarState -> copy(isBottomBarVisible = message.isVisible)
                 is Message.UpdateMapState -> copy(isMapEnabled = message.isMapEnabled)
             }
         },

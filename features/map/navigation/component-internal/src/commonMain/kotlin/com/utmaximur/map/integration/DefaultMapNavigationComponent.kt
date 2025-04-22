@@ -35,7 +35,6 @@ import org.koin.core.parameter.parametersOf
 @Factory
 internal class DefaultMapNavigationComponent(
     @InjectedParam componentContext: ComponentContext,
-    @InjectedParam handleBottomBarState: (Boolean) -> Unit,
 ) : MapNavigationComponent,
     ComponentContext by componentContext,
     KoinComponent {
@@ -49,20 +48,6 @@ internal class DefaultMapNavigationComponent(
         handleBackButton = true,
         childFactory = ::createChild,
     )
-
-    init {
-        stack.subscribe { childStack ->
-            val configuration = childStack.active.configuration
-            val isVisibleBottomBar = when (configuration) {
-                is Configuration.CreateTrackScreen,
-                is Configuration.DetailTrackScreen,
-                -> false
-
-                else -> true
-            }
-            handleBottomBarState(isVisibleBottomBar)
-        }
-    }
 
     private fun createChild(
         configuration: Configuration,

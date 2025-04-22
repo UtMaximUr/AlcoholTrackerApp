@@ -1,6 +1,7 @@
 package com.utmaximur.createTrack.integration
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.childContext
@@ -8,6 +9,7 @@ import com.arkivanov.essenty.lifecycle.coroutines.coroutineScope
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.arkivanov.mvikotlin.extensions.coroutines.stateFlow
+import com.utmaximur.bottombar.LocalBottomBarController
 import com.utmaximur.createTrack.CreateTrackComponent
 import com.utmaximur.createTrack.store.CreateTrackStore
 import com.utmaximur.createTrack.ui.CreateTrackScreen
@@ -88,5 +90,11 @@ internal class DefaultCreateTrackComponent(
     }
 
     @Composable
-    override fun Render(modifier: Modifier) = CreateTrackScreen(this, trackBuilder)
+    override fun Render(modifier: Modifier) {
+        val bottomBarController = LocalBottomBarController.current
+        LaunchedEffect(Unit) {
+            bottomBarController.hideToLifecycle(lifecycle)
+        }
+        CreateTrackScreen(this, trackBuilder)
+    }
 }

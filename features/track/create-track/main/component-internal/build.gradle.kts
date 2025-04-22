@@ -12,4 +12,5 @@ dependencies {
     commonMainImplementation(projects.features.track.createTrack.main.domain)
     commonMainImplementation(projects.features.track.createTrack.domain)
     commonMainImplementation(projects.features.track.geocoder.main.componentApi)
+    commonMainImplementation(projects.features.root.bottombar)
 }

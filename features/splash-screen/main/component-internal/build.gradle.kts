@@ -8,4 +8,5 @@ plugins {
 dependencies {
     commonMainImplementation(projects.features.splashScreen.main.componentApi)
     commonMainImplementation(projects.features.splashScreen.main.domain)
+    commonMainImplementation(projects.features.root.bottombar)
 }

@@ -15,4 +15,5 @@ dependencies {
     commonMainImplementation(projects.features.settings.navigation.componentApi)
     commonMainImplementation(projects.features.message.messageComponent)
     commonMainImplementation(projects.features.root.domain)
+    commonMainImplementation(projects.features.root.bottombar)
 }

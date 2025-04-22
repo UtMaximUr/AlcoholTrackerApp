@@ -7,18 +7,14 @@ import com.utmaximur.domain.root.store.RootStore.State
 
 interface RootStore : Store<Intent, State, Label> {
 
-    sealed interface Intent {
-        data class HandleBottomBarState(val isVisible: Boolean) : Intent
-    }
+    sealed interface Intent
 
     data class State(
         val isDarkTheme: Boolean,
-        val isBottomBarVisible: Boolean,
         val isMapEnabled: Boolean,
     ) {
         constructor() : this(
             isDarkTheme = false,
-            isBottomBarVisible = true,
             isMapEnabled = true,
         )
     }

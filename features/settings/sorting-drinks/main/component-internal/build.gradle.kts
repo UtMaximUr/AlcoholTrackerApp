@@ -12,4 +12,5 @@ dependencies {
     commonMainImplementation(projects.features.settings.sortingDrinks.main.componentApi)
     commonMainImplementation(projects.features.settings.sortingDrinks.main.domain)
     commonMainImplementation(projects.features.settings.sortingDrinks.domain)
+    commonMainImplementation(projects.features.root.bottombar)
 }

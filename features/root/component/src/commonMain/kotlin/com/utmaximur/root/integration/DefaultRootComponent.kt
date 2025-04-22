@@ -43,10 +43,6 @@ internal class DefaultRootComponent(
 
     private val navigation = StackNavigation<Configuration>()
 
-    private val handleBottomBarState: (Boolean) -> Unit = { isVisible ->
-        store.accept(RootStore.Intent.HandleBottomBarState(isVisible))
-    }
-
     private val _stack =
         childStack(
             source = navigation,
@@ -57,13 +53,6 @@ internal class DefaultRootComponent(
         )
 
     override val stack: Value<ChildStack<*, ComposeComponent>> = _stack
-
-    init {
-        stack.subscribe { childStack ->
-            val configuration = childStack.active.configuration
-            handleBottomBarState(configuration !is Configuration.SplashScreen)
-        }
-    }
 
     private fun createChild(
         configuration: Configuration,
@@ -78,17 +67,11 @@ internal class DefaultRootComponent(
             }
 
             Configuration.CalendarScreen -> get<CalendarNavigationComponent> {
-                parameterArrayOf(
-                    componentContext,
-                    handleBottomBarState
-                )
+                parameterArrayOf(componentContext)
             }
 
             Configuration.MapScreen -> get<MapNavigationComponent> {
-                parameterArrayOf(
-                    componentContext,
-                    handleBottomBarState
-                )
+                parameterArrayOf(componentContext)
             }
 
             Configuration.StatisticScreen -> get<StatisticComponent> {
@@ -96,10 +79,7 @@ internal class DefaultRootComponent(
             }
 
             Configuration.SettingsScreen -> get<SettingsNavigationComponent> {
-                parameterArrayOf(
-                    componentContext,
-                    handleBottomBarState
-                )
+                parameterArrayOf(componentContext)
             }
         }
 
