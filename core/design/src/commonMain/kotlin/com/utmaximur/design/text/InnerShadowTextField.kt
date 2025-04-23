@@ -21,7 +21,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.utmaximur.design.extensions.clearTags
 import com.utmaximur.design.extensions.innerShadow
-import com.utmaximur.design.extensions.swipeToCloseKeyboard
 import com.utmaximur.design.extensions.tapToCloseKeyboard
 import com.utmaximur.design.ui.trailingOrBlockedIcon
 
