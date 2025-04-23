@@ -5,6 +5,7 @@ import com.utmaximur.domain.detailTrack.DetailTrackRepository
 import com.utmaximur.domain.Place
 import com.utmaximur.domain.Track
 import com.utmaximur.domain.TrackData
+import com.utmaximur.utils.extensions.decimalToFloat
 import com.utmaximur.utils.extensions.parseToLongNotNull
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -33,10 +34,10 @@ internal class UpdateTrack(
         id = track.id,
         drink = trackData.drink,
         quantity = trackData.quantity.ifEmpty { track.quantity }.toInt(),
-        volume = trackData.volume.ifEmpty { track.volume }.toFloat(),
-        degree = trackData.degree.ifEmpty { track.degree }.toFloat(),
+        volume = trackData.volume.ifEmpty { track.volume }.decimalToFloat(),
+        degree = trackData.degree.ifEmpty { track.degree }.decimalToFloat(),
         event = trackData.event.ifEmpty { track.event },
-        price = trackData.price.ifEmpty { track.price }.toFloat(),
+        price = trackData.price.ifEmpty { track.price }.decimalToFloat(),
         date = trackData.date.parseToLongNotNull()
     )
 

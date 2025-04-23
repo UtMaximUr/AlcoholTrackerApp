@@ -6,6 +6,7 @@ import com.utmaximur.domain.createTrack.CreateTrackRepository
 import com.utmaximur.domain.Place
 import com.utmaximur.domain.Track
 import com.utmaximur.domain.TrackData
+import com.utmaximur.utils.extensions.decimalToFloat
 import com.utmaximur.utils.extensions.parseToLongNotNull
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -32,10 +33,10 @@ internal class CreateTrack(
     private fun TrackData.toTrack() = Track(
         drink = drink,
         quantity = quantity.ifEmpty { ZERO_VALUE_STRING }.toInt(),
-        volume = volume.ifEmpty { ZERO_VALUE_STRING }.toFloat(),
-        degree = degree.ifEmpty { ZERO_VALUE_STRING }.toFloat(),
+        volume = volume.ifEmpty { ZERO_VALUE_STRING }.decimalToFloat(),
+        degree = degree.ifEmpty { ZERO_VALUE_STRING }.decimalToFloat(),
         event = event,
-        price = price.ifEmpty { ZERO_VALUE_STRING }.toFloat(),
+        price = price.ifEmpty { ZERO_VALUE_STRING }.decimalToFloat(),
         date = date.parseToLongNotNull()
     )
 

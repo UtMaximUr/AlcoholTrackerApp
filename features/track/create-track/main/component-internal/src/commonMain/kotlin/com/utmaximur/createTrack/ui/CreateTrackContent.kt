@@ -105,12 +105,12 @@ fun CreateTrackContent(
             )
             InnerShadowTextField(
                 title = stringResource(Res.string.add_volume),
-                keyboardType = KeyboardType.Number,
+                keyboardType = KeyboardType.Decimal,
                 onValueChange = trackData::setVolume,
             )
             InnerShadowTextField(
                 title = stringResource(Res.string.add_degree),
-                keyboardType = KeyboardType.Number,
+                keyboardType = KeyboardType.Decimal,
                 onValueChange = trackData::setDegree,
             )
             InnerShadowTextField(
@@ -127,7 +127,7 @@ fun CreateTrackContent(
             InnerShadowTextField(
                 title = stringResource(Res.string.add_price),
                 textValue = price,
-                keyboardType = KeyboardType.Number,
+                keyboardType = KeyboardType.Decimal,
                 onValueChange = trackData::setPrice,
                 leadingIcon = {
                     Icon(
