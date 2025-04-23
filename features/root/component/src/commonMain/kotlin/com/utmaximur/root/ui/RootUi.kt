@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.stack.animation.fade
 import com.arkivanov.decompose.extensions.compose.stack.animation.stackAnimation
+import com.utmaximur.bottombar.BottomBarState
 import com.utmaximur.bottombar.LocalBottomBarController
 import com.utmaximur.bottombar.ProvideBottomBarController
 import com.utmaximur.message.ui.MessageUi
@@ -41,7 +42,7 @@ fun RootScreen(
 
     AlcoholTrackerTheme(state.isDarkTheme) {
         CompositionLocalProvider(
-            ProvideBottomBarController(),
+            ProvideBottomBarController(BottomBarState(visible = false)),
             ProvideSnackbarController(snackbarHostState, coroutineScope)
         ) {
             Scaffold(

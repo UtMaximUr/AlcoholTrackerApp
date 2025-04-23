@@ -81,5 +81,5 @@ val LocalBottomBarController: ProvidableCompositionLocal<BottomBarController> =
  * Размещается в корне UI-иерархии.
  */
 @Composable
-fun ProvideBottomBarController() =
-    LocalBottomBarController provides DefaultBottomBarController(BottomBarState())
+fun ProvideBottomBarController(initialState: BottomBarState = BottomBarState()) =
+    LocalBottomBarController provides DefaultBottomBarController(initialState)
