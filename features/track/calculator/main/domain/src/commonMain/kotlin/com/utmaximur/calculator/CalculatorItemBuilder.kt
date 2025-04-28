@@ -22,11 +22,9 @@ import features.track.calculator.main.domain.calc_plus
 import features.track.calculator.main.domain.calc_save_result
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.getString
-import org.koin.core.annotation.Factory
 
 internal typealias MatrixItems = List<List<CalculatorItem>>
 
-@Factory
 internal class CalculatorItemBuilder {
 
     suspend fun build(): MatrixItems {

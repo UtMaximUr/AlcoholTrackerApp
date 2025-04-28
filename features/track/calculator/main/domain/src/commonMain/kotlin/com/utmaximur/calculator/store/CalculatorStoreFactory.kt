@@ -3,9 +3,8 @@ package com.utmaximur.calculator.store
 import com.arkivanov.mvikotlin.core.store.SimpleBootstrapper
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
-import com.github.murzagalin.evaluator.Evaluator
 import com.utmaximur.analytics.domain.AnalyticsManager
-import com.utmaximur.calculator.CalculatorItemBuilder
+import com.utmaximur.calculator.interactor.CalculatorOperations
 import com.utmaximur.calculator.store.CalculatorStore.Intent
 import com.utmaximur.calculator.store.CalculatorStore.Label
 import com.utmaximur.calculator.store.CalculatorStore.State
@@ -16,9 +15,8 @@ import org.koin.core.annotation.Factory
 @Factory
 internal class CalculatorStoreFactory(
     storeFactory: StoreFactory,
-    evaluator: Evaluator,
+    calculatorOperationsInteractor: CalculatorOperations,
     providerData: CalculatorProviderData,
-    calculatorItemBuilder: CalculatorItemBuilder,
     analyticsManager: AnalyticsManager
 ) : CalculatorStore,
     Store<Intent, State, Label> by storeFactory.create(
@@ -27,9 +25,8 @@ internal class CalculatorStoreFactory(
         bootstrapper = SimpleBootstrapper(Unit),
         executorFactory = {
             CalculatorExecutor(
-                evaluator = evaluator,
+                calculatorOperationsInteractor = calculatorOperationsInteractor,
                 providerData = providerData,
-                itemBuilder = calculatorItemBuilder,
                 analyticsManager = analyticsManager
             )
         },
