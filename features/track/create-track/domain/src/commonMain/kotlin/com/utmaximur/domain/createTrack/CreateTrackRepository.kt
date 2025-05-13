@@ -1,7 +1,6 @@
 package com.utmaximur.domain.createTrack
 
 import com.utmaximur.domain.Drink
-import com.utmaximur.domain.Place
 import com.utmaximur.domain.Track
 import kotlinx.coroutines.flow.Flow
 
@@ -11,8 +10,6 @@ interface CreateTrackRepository {
     val drinksStream: Flow<List<Drink>>
 
     suspend fun saveTrack(track: Track): Long
-
-    suspend fun savePlace(place: Place)
 
     suspend fun deleteDrink(id: Long)
 }

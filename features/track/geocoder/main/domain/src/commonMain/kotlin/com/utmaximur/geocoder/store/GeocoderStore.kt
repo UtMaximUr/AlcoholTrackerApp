@@ -2,8 +2,7 @@ package com.utmaximur.geocoder.store
 
 import com.arkivanov.mvikotlin.core.store.Store
 import com.utmaximur.core.mvi_mapper.RequestUi
-import com.utmaximur.domain.EMPTY_STRING
-import com.utmaximur.domain.Place
+import com.utmaximur.domain.geocoder.Place
 import com.utmaximur.geocoder.store.GeocoderStore.Intent
 import com.utmaximur.geocoder.store.GeocoderStore.Label
 import com.utmaximur.geocoder.store.GeocoderStore.State
@@ -11,14 +10,15 @@ import com.utmaximur.geocoder.store.GeocoderStore.State
 interface GeocoderStore : Store<Intent, State, Label> {
 
     data class State(
-        val query: String,
         val requestPlacesUi: RequestUi<List<Place>>,
+        val selectedPlace: Place?,
         val searchStarted: Boolean,
         val isMapEnabled: Boolean,
     ) {
+        val query: String = selectedPlace?.title.orEmpty()
         constructor() : this(
-            query = EMPTY_STRING,
             requestPlacesUi = RequestUi(),
+            selectedPlace = null,
             searchStarted = false,
             isMapEnabled = true,
         )
@@ -26,9 +26,11 @@ interface GeocoderStore : Store<Intent, State, Label> {
 
     sealed interface Intent {
 
-        data class Search(val query: String) : Intent
+        data class SearchPlace(val query: String) : Intent
 
         data class SelectedPlace(val place: Place) : Intent
+
+        data class SavePlace(val trackId: Long) : Intent
     }
 
     sealed interface Label

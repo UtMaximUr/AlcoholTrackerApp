@@ -23,7 +23,7 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
 import com.utmaximur.design.text.InnerShadowTextField
 import com.utmaximur.design.text.TextOutlinedLabel
-import com.utmaximur.domain.Place
+import com.utmaximur.domain.geocoder.Place
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

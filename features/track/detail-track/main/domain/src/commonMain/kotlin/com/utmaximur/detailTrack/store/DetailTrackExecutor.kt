@@ -7,23 +7,28 @@ import com.utmaximur.detailTrack.interactor.UpdateTrack
 import com.utmaximur.detailTrack.store.DetailTrackStore.Intent
 import com.utmaximur.detailTrack.store.DetailTrackStore.Label
 import com.utmaximur.detailTrack.store.DetailTrackStore.State
+import com.utmaximur.domain.Track
+import com.utmaximur.domain.TrackData
 import com.utmaximur.domain.calculator.CalculatorProviderData
 import com.utmaximur.domain.confirmDialog.ConfirmDialogProviderData
 import com.utmaximur.domain.datePicker.DateProviderData
 import com.utmaximur.domain.detailTrack.DetailTrackRepository
-import com.utmaximur.domain.Track
-import com.utmaximur.domain.TrackData
 import com.utmaximur.message.models.MessageContainer
 import com.utmaximur.message.models.MessageService
 import com.utmaximur.utils.extensions.getTodayDateUi
 import com.utmaximur.utils.extensions.parseToLong
 import com.utmaximur.utils.extensions.toDateUi
+import features.track.detail_track.main.domain.Res
+import features.track.detail_track.main.domain.successful_update
+import features.track.detail_track.main.domain.updated_error
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.StringResource
+import org.jetbrains.compose.resources.getString
 
 
 internal sealed interface Message {
@@ -99,7 +104,7 @@ internal class DetailTrackExecutor(
 
     private fun handleSelectedDate(dateUi: String) {
         dispatch(Message.UpdateSelectedDate(dateUi))
-        publish(Label.DateEvent(dateUi))
+        publish(Label.DateSelected(dateUi))
     }
 
     private fun saveTrack(trackData: TrackData) {
@@ -112,20 +117,32 @@ internal class DetailTrackExecutor(
     private suspend fun updateTrack(trackData: TrackData) {
         val params = UpdateTrack.Params(state().track, trackData)
         interactor.invoke(params)
-            .onSuccess { publish(Label.CloseEvent) }
-            .onFailure { error -> showErrorMessage(error) }
+            .onSuccess {
+                publish(Label.TrackLinked)
+                handleSaveSuccess()
+            }
+            .onFailure { error -> handleSaveError(error) }
     }
 
     private fun handleDateSelection(date: String) {
-        publish(Label.DatePickerEvent(date.parseToLong()))
+        publish(Label.DateConfirmed(date.parseToLong()))
     }
 
     private fun handleTodaySelection() {
         dispatch(Message.UpdateSelectedDate(getTodayDateUi()))
     }
 
-    private fun showErrorMessage(error: Throwable) {
-        val message = error.message.orEmpty()
+    private suspend fun handleSaveError(error: Throwable) {
+        showMessage(Res.string.updated_error, error.message)
+    }
+
+    private suspend fun handleSaveSuccess() {
+        showMessage(Res.string.successful_update)
+        publish(Label.CloseEvent)
+    }
+
+    private suspend fun showMessage(res: StringResource, args: String? = null) {
+        val message = getString(res, args.orEmpty())
         messageService.showMessage(MessageContainer.SimpleMessage(message))
     }
 }

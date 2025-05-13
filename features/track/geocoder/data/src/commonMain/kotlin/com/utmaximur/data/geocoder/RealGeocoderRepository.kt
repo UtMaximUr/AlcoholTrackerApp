@@ -5,8 +5,8 @@ import com.utmaximur.data.geocoder.mapper.MapperHolder
 import com.utmaximur.data.geocoder.network.GeocoderApi
 import com.utmaximur.databaseRoom.place.PlaceDao
 import com.utmaximur.domain.geocoder.GeocoderRepository
+import com.utmaximur.domain.geocoder.Place
 import com.utmaximur.domain.geocoder.SearchQuery
-import com.utmaximur.domain.Place
 import com.utmaximur.geocoder.BuildKonfig
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -42,4 +42,8 @@ internal class RealGeocoderRepository(
         .getPlaceByTrackId(trackId)
         .filterNotNull()
         .map(mapper.placeDomainMapper::transform)
+
+    override suspend fun savePlace(place: Place) {
+        placeDao.upsertPlace(mapper.placeLocalMapper.transform(place))
+    }
 }

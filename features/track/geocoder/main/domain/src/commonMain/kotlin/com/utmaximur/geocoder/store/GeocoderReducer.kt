@@ -17,7 +17,7 @@ internal class GeocoderReducer(
             copy(requestPlacesUi = newRequestUi, searchStarted = false)
         }
 
-        is Message.UpdateQuery -> copy(query = msg.query)
+        is Message.UpdateSelectedPlace -> copy(selectedPlace = msg.selectedPlace)
         is Message.UpdateSearchStarted -> copy(searchStarted = msg.searchStarted)
         is Message.UpdateMapState -> copy(isMapEnabled = msg.isMapEnabled)
     }

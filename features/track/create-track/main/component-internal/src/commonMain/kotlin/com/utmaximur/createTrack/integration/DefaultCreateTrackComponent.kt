@@ -13,7 +13,6 @@ import com.utmaximur.bottombar.LocalBottomBarController
 import com.utmaximur.createTrack.CreateTrackComponent
 import com.utmaximur.createTrack.store.CreateTrackStore
 import com.utmaximur.createTrack.ui.CreateTrackScreen
-import com.utmaximur.domain.Place
 import com.utmaximur.domain.TrackData
 import com.utmaximur.geocoder.GeocoderComponent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -36,20 +35,12 @@ internal class DefaultCreateTrackComponent(
 
     private val store: CreateTrackStore = instanceKeeper.getStore(::get)
     private val trackBuilder = TrackData.Builder()
-    private val placeOutputHandler: (place: Place) -> Unit = {
-        trackBuilder.setPlace(it)
-    }
 
     @OptIn(ExperimentalCoroutinesApi::class)
     override val model: StateFlow<CreateTrackStore.State> = store.stateFlow
 
     override val geocoderComponent: GeocoderComponent by lazy {
-        get {
-            parameterArrayOf(
-                childContext(GeocoderComponent::class.simpleName.orEmpty()),
-                placeOutputHandler,
-            )
-        }
+        get { parameterArrayOf(childContext(GeocoderComponent::class.simpleName.orEmpty())) }
     }
 
     override fun navigateBack() = output(CreateTrackComponent.Output.NavigateBack)
@@ -77,11 +68,14 @@ internal class DefaultCreateTrackComponent(
     init {
         store.labels.onEach { event ->
             when (event) {
-                is CreateTrackStore.Label.DatePickerEvent ->
+                is CreateTrackStore.Label.DateConfirmed ->
                     output(CreateTrackComponent.Output.OpenDatePickerDialog(event.date))
 
-                is CreateTrackStore.Label.DateEvent ->
+                is CreateTrackStore.Label.DateSelected ->
                     trackBuilder.setDate(event.date)
+
+                is CreateTrackStore.Label.TrackLinked ->
+                    geocoderComponent.savePlaceToTrack(event.trackId)
 
                 is CreateTrackStore.Label.CloseEvent ->
                     output(CreateTrackComponent.Output.NavigateBack)

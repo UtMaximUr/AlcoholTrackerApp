@@ -7,7 +7,6 @@ plugins {
 
 dependencies {
     commonMainImplementation(projects.coreData.local.trackManager.api)
-    commonMainImplementation(projects.coreData.local.placeManager.api)
     commonMainImplementation(projects.coreData.settingsManager.api)
     commonMainImplementation(projects.core.base)
     commonMainImplementation(projects.features.track.detailTrack.domain)

@@ -1,10 +1,9 @@
 package com.utmaximur.detailTrack.interactor
 
 import com.utmaximur.domain.Interactor
-import com.utmaximur.domain.detailTrack.DetailTrackRepository
-import com.utmaximur.domain.Place
 import com.utmaximur.domain.Track
 import com.utmaximur.domain.TrackData
+import com.utmaximur.domain.detailTrack.DetailTrackRepository
 import com.utmaximur.utils.extensions.decimalToFloat
 import com.utmaximur.utils.extensions.parseToLongNotNull
 import kotlinx.coroutines.Dispatchers
@@ -23,10 +22,6 @@ internal class UpdateTrack(
         withContext(Dispatchers.IO) {
             val track = params.track
             repository.updateTrack(params.transform(track))
-            params.trackData.place.ifNotEmpty { place ->
-                val updatedPlace = place.copy(trackId = track.id)
-                repository.updatePlace(updatedPlace)
-            }
         }
     }
 
@@ -40,12 +35,6 @@ internal class UpdateTrack(
         price = trackData.price.ifEmpty { track.price }.decimalToFloat(),
         date = trackData.date.parseToLongNotNull()
     )
-
-    private inline fun Place.ifNotEmpty(block: (Place) -> Unit) {
-        if (this != Place.EMPTY) {
-            block(this)
-        }
-    }
 
     private inline fun <T> String.ifEmpty(block: () -> T): String {
         return when {

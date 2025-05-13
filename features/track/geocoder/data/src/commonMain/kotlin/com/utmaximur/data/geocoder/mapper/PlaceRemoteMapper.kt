@@ -2,7 +2,7 @@ package com.utmaximur.data.geocoder.mapper
 
 import com.utmaximur.data.Mapper
 import com.utmaximur.data.geocoder.network.Feature
-import com.utmaximur.domain.Place
+import com.utmaximur.domain.geocoder.Place
 import org.koin.core.annotation.Factory
 
 @Factory

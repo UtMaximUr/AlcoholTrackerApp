@@ -1,11 +1,10 @@
 package com.utmaximur.createTrack.interactor
 
 import com.utmaximur.domain.Interactor
-import com.utmaximur.domain.ZERO_VALUE_STRING
-import com.utmaximur.domain.createTrack.CreateTrackRepository
-import com.utmaximur.domain.Place
 import com.utmaximur.domain.Track
 import com.utmaximur.domain.TrackData
+import com.utmaximur.domain.ZERO_VALUE_STRING
+import com.utmaximur.domain.createTrack.CreateTrackRepository
 import com.utmaximur.utils.extensions.decimalToFloat
 import com.utmaximur.utils.extensions.parseToLongNotNull
 import kotlinx.coroutines.Dispatchers
@@ -16,17 +15,13 @@ import org.koin.core.annotation.Factory
 @Factory
 internal class CreateTrack(
     createTrackRepository: Lazy<CreateTrackRepository>
-) : Interactor<TrackData, Unit>() {
+) : Interactor<TrackData, Long>() {
 
     private val repository by createTrackRepository
 
-    override suspend fun doWork(params: TrackData) {
-        withContext(Dispatchers.IO) {
-            val trackId = repository.saveTrack(params.toTrack())
-            params.place.ifNotEmpty { place ->
-                val updatedPlace = place.copy(trackId = trackId)
-                repository.savePlace(updatedPlace)
-            }
+    override suspend fun doWork(params: TrackData): Long {
+        return withContext(Dispatchers.IO) {
+            repository.saveTrack(params.toTrack())
         }
     }
 
@@ -39,10 +34,4 @@ internal class CreateTrack(
         price = price.ifEmpty { ZERO_VALUE_STRING }.decimalToFloat(),
         date = date.parseToLongNotNull()
     )
-
-    private inline fun Place.ifNotEmpty(block: (Place) -> Unit) {
-        if (this != Place.EMPTY) {
-            block(this)
-        }
-    }
 }

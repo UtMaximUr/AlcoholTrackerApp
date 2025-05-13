@@ -19,7 +19,6 @@ dependencies {
     commonMainImplementation(projects.core.base)
     commonMainImplementation(projects.coreData.models)
     commonMainImplementation(projects.coreData.databaseRoom)
-    commonMainImplementation(projects.coreData.local.placeManager.api)
     commonMainImplementation(projects.core.utils)
     commonMainImplementation(projects.features.track.geocoder.domain)
 }

@@ -7,6 +7,6 @@ dependencies {
     commonMainImplementation(libs.arkivanov.decompose)
     commonMainImplementation(projects.core.decompose)
 
-    commonMainImplementation(projects.domain.models)
     commonMainImplementation(projects.features.track.geocoder.main.domain)
+    commonMainImplementation(projects.features.track.geocoder.domain)
 }

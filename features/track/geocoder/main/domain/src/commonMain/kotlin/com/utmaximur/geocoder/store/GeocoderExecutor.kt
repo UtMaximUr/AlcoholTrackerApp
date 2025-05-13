@@ -5,8 +5,9 @@ import com.utmaximur.core.mvi_mapper.Request
 import com.utmaximur.core.mvi_mapper.asRequest
 import com.utmaximur.domain.EMPTY_STRING
 import com.utmaximur.domain.geocoder.GeocoderRepository
+import com.utmaximur.domain.geocoder.Place
 import com.utmaximur.domain.geocoder.SearchQuery
-import com.utmaximur.domain.Place
+import com.utmaximur.geocoder.interactor.SavePlaceToTrack
 import com.utmaximur.geocoder.store.GeocoderStore.Intent
 import com.utmaximur.geocoder.store.GeocoderStore.Label
 import com.utmaximur.geocoder.store.GeocoderStore.State
@@ -21,9 +22,10 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 internal sealed interface Message {
-    data class UpdateQuery(val query: String) : Message
+    data class UpdateSelectedPlace(val selectedPlace: Place) : Message
     data class UpdatePlaces(val requestPlacesUi: Request<List<Place>>) : Message
     data class UpdateSearchStarted(val searchStarted: Boolean) : Message
     data class UpdateMapState(val isMapEnabled: Boolean) : Message
@@ -31,6 +33,7 @@ internal sealed interface Message {
 
 internal class GeocoderExecutor(
     private val geocoderRepository: GeocoderRepository,
+    private val interactor: SavePlaceToTrack
 ) : CoroutineExecutor<Intent, Action, State, Message, Label>() {
 
     private val searchQuery = MutableStateFlow(EMPTY_STRING)
@@ -49,8 +52,9 @@ internal class GeocoderExecutor(
 
     override fun executeIntent(intent: Intent) {
         when (intent) {
-            is Intent.Search -> searchQuery.update { intent.query }
-            is Intent.SelectedPlace -> dispatch(Message.UpdateQuery(intent.place.title))
+            is Intent.SearchPlace -> searchQuery.update { intent.query }
+            is Intent.SelectedPlace -> dispatch(Message.UpdateSelectedPlace(intent.place))
+            is Intent.SavePlace -> savePlaceToTrack(intent.trackId)
         }
     }
 
@@ -79,6 +83,17 @@ internal class GeocoderExecutor(
 
     private fun fetchPlace(trackId: Long) = geocoderRepository
         .getPlaceByTrackId(trackId)
-        .onEach { place -> dispatch(Message.UpdateQuery(place.title)) }
+        .onEach { place -> dispatch(Message.UpdateSelectedPlace(place)) }
         .launchIn(scope)
+
+    private fun savePlaceToTrack(trackId: Long) {
+        val selectedPlace = state().selectedPlace ?: run {
+            println("Attempted to save place with null selectedPlace")
+            return
+        }
+        scope.launch {
+            val params = SavePlaceToTrack.Params(trackId = trackId, place = selectedPlace)
+            interactor.doWork(params)
+        }
+    }
 }

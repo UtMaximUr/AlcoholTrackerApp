@@ -107,7 +107,10 @@ internal class CreateTrackExecutor(
     private suspend fun processTrackData(trackData: TrackData) {
         interactor.invoke(trackData)
             .onFailure { error -> handleSaveError(error) }
-            .onSuccess { handleSaveSuccess() }
+            .onSuccess { trackId ->
+                publish(Label.TrackLinked(trackId))
+                handleSaveSuccess()
+            }
     }
 
     private suspend fun handleSaveError(error: Throwable) {
@@ -120,7 +123,7 @@ internal class CreateTrackExecutor(
     }
 
     private fun handleDatePicker(date: String) {
-        publish(Label.DatePickerEvent(date.parseToLong()))
+        publish(Label.DateConfirmed(date.parseToLong()))
     }
 
     private fun handleTodayIntent() {
@@ -129,7 +132,7 @@ internal class CreateTrackExecutor(
 
     private fun handleSelectedDate(dateUi: String) {
         dispatch(Message.UpdateSelectedDate(dateUi))
-        publish(Label.DateEvent(dateUi))
+        publish(Label.DateSelected(dateUi))
     }
 
     private suspend fun showMessage(res: StringResource, args: String? = null) {

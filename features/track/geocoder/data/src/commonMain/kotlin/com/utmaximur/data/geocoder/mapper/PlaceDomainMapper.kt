@@ -1,13 +1,11 @@
-package com.utmaximur.data.places
+package com.utmaximur.data.geocoder.mapper
 
 import com.utmaximur.data.Mapper
 import com.utmaximur.databaseRoom.place.DbPlace
-import com.utmaximur.domain.Place
+import com.utmaximur.domain.geocoder.Place
 import org.koin.core.annotation.Factory
-import org.koin.core.annotation.Named
 
 @Factory
-@Named(NAMED_PLACE_DOMAIN_MAPPER)
 internal class PlaceDomainMapper : Mapper<DbPlace, Place> {
     override fun transform(from: DbPlace) = Place(
         id = from.id,

@@ -8,7 +8,7 @@ plugins {
 dependencies {
     commonMainImplementation(libs.kotlinx.serialization.core)
 
-    commonMainImplementation(projects.domain.models)
     commonMainImplementation(projects.features.track.geocoder.main.componentApi)
     commonMainImplementation(projects.features.track.geocoder.main.domain)
+    commonMainImplementation(projects.features.track.geocoder.domain)
 }

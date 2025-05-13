@@ -13,7 +13,6 @@ import com.utmaximur.bottombar.LocalBottomBarController
 import com.utmaximur.detailTrack.DetailTrackComponent
 import com.utmaximur.detailTrack.store.DetailTrackStore
 import com.utmaximur.detailTrack.ui.DetailTrackScreen
-import com.utmaximur.domain.Place
 import com.utmaximur.domain.TrackData
 import com.utmaximur.geocoder.GeocoderComponent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -40,9 +39,6 @@ internal class DefaultDetailTrackComponent(
         get { parametersOf(trackId) }
     }
     private val trackBuilder = TrackData.Builder()
-    private val placeOutputHandler: (place: Place) -> Unit = {
-        trackBuilder.setPlace(it)
-    }
 
     @OptIn(ExperimentalCoroutinesApi::class)
     override val model: StateFlow<DetailTrackStore.State> = store.stateFlow
@@ -51,7 +47,6 @@ internal class DefaultDetailTrackComponent(
         get {
             parameterArrayOf(
                 childContext(GeocoderComponent::class.simpleName.orEmpty()),
-                placeOutputHandler,
                 trackId,
             )
         }
@@ -76,11 +71,14 @@ internal class DefaultDetailTrackComponent(
     init {
         store.labels.onEach { event ->
             when (event) {
-                is DetailTrackStore.Label.DatePickerEvent ->
+                is DetailTrackStore.Label.DateConfirmed ->
                     output(DetailTrackComponent.Output.OpenDatePickerDialog(event.date))
 
-                is DetailTrackStore.Label.DateEvent ->
+                is DetailTrackStore.Label.DateSelected ->
                     trackBuilder.setDate(event.date)
+
+                is DetailTrackStore.Label.TrackLinked ->
+                    geocoderComponent.savePlaceToTrack(trackId)
 
                 is DetailTrackStore.Label.CloseEvent ->
                     output(DetailTrackComponent.Output.NavigateBack)

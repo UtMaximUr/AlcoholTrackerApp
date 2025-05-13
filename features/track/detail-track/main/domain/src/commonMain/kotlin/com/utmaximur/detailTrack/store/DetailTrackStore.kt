@@ -5,9 +5,9 @@ import com.utmaximur.detailTrack.store.DetailTrackStore.Intent
 import com.utmaximur.detailTrack.store.DetailTrackStore.Label
 import com.utmaximur.detailTrack.store.DetailTrackStore.State
 import com.utmaximur.domain.EMPTY_STRING
-import com.utmaximur.domain.ZERO_VALUE_F
 import com.utmaximur.domain.Track
 import com.utmaximur.domain.TrackData
+import com.utmaximur.domain.ZERO_VALUE_F
 
 interface DetailTrackStore : Store<Intent, State, Label> {
 
@@ -37,9 +37,11 @@ interface DetailTrackStore : Store<Intent, State, Label> {
 
     sealed interface Label {
 
-        data class DatePickerEvent(val date: Long?) : Label
+        data class DateConfirmed(val date: Long?) : Label
 
-        data class DateEvent(val date: String): Label
+        data class DateSelected(val date: String) : Label
+
+        data object TrackLinked : Label
 
         data object CloseEvent : Label
     }

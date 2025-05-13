@@ -5,10 +5,10 @@ import com.utmaximur.core.mvi_mapper.RequestUi
 import com.utmaximur.createTrack.store.CreateTrackStore.Intent
 import com.utmaximur.createTrack.store.CreateTrackStore.Label
 import com.utmaximur.createTrack.store.CreateTrackStore.State
-import com.utmaximur.domain.EMPTY_STRING
-import com.utmaximur.domain.ZERO_VALUE_F
 import com.utmaximur.domain.Drink
+import com.utmaximur.domain.EMPTY_STRING
 import com.utmaximur.domain.TrackData
+import com.utmaximur.domain.ZERO_VALUE_F
 
 interface CreateTrackStore : Store<Intent, State, Label> {
 
@@ -40,9 +40,11 @@ interface CreateTrackStore : Store<Intent, State, Label> {
 
     sealed interface Label {
 
-        data class DateEvent(val date: String) : Label
+        data class DateSelected(val date: String) : Label
 
-        data class DatePickerEvent(val date: Long?) : Label
+        data class DateConfirmed(val date: Long?) : Label
+
+        data class TrackLinked(val trackId: Long): Label
 
         data object CloseEvent : Label
     }

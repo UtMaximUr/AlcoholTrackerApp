@@ -39,7 +39,6 @@ kotlin {
             implementation(projects.coreData.remote.client.base)
             implementation(projects.coreData.local.drinkManager.internal)
             implementation(projects.coreData.local.trackManager.internal)
-            implementation(projects.coreData.local.placeManager.internal)
 
             implementation(projects.features.root.component)
             implementation(projects.features.root.domain)

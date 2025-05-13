@@ -4,6 +4,7 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.utmaximur.core.mvi_mapper.ErrorHandler
 import com.utmaximur.domain.geocoder.GeocoderRepository
+import com.utmaximur.geocoder.interactor.SavePlaceToTrack
 import com.utmaximur.geocoder.store.GeocoderStore.Intent
 import com.utmaximur.geocoder.store.GeocoderStore.Label
 import com.utmaximur.geocoder.store.GeocoderStore.State
@@ -15,6 +16,7 @@ internal class GeocoderStoreFactory(
     storeFactory: StoreFactory,
     @InjectedParam trackId: Long?,
     geocoderRepository: GeocoderRepository,
+    interactor: SavePlaceToTrack,
     errorHandler: ErrorHandler,
 ) : GeocoderStore,
     Store<Intent, State, Label> by storeFactory.create(
@@ -24,6 +26,7 @@ internal class GeocoderStoreFactory(
         executorFactory = {
             GeocoderExecutor(
                 geocoderRepository = geocoderRepository,
+                interactor = interactor,
             )
         },
         reducer = GeocoderReducer(errorHandler),

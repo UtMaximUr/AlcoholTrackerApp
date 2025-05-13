@@ -2,6 +2,7 @@ package com.utmaximur.databaseRoom.place
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.utmaximur.databaseRoom.track.DbTrack
 
@@ -13,7 +14,8 @@ import com.utmaximur.databaseRoom.track.DbTrack
             childColumns = ["trackId"],
             onDelete = ForeignKey.CASCADE
         )
-    ]
+    ],
+    indices = [Index(value = ["trackId"], unique = true)]
 )
 
 data class DbPlace(

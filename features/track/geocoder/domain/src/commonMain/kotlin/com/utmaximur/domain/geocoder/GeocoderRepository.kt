@@ -1,6 +1,5 @@
 package com.utmaximur.domain.geocoder
 
-import com.utmaximur.domain.Place
 import kotlinx.coroutines.flow.Flow
 
 interface GeocoderRepository {
@@ -10,4 +9,6 @@ interface GeocoderRepository {
     fun searchStream(query: SearchQuery): Flow<List<Place>>
 
     fun getPlaceByTrackId(trackId: Long): Flow<Place>
+
+    suspend fun savePlace(place: Place)
 }

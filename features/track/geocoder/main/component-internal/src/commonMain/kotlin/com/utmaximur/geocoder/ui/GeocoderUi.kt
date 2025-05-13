@@ -28,8 +28,8 @@ internal fun GeocoderUi(
             textValue = state.query,
             enabled = state.isMapEnabled,
             searchIndicatorActive = state.searchStarted,
-            onValueChange = component::handleQuery,
-            onValueSelect = component::handleSelectedPlace,
+            onValueChange = component::onQueryChange,
+            onValueSelect = component::onPlaceSelected,
             foundContent = {
                 RequestWidget(
                     state = state.requestPlacesUi,
