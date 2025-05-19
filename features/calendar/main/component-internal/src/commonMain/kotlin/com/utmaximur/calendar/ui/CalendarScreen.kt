@@ -25,7 +25,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import com.utmaximur.calendar.CalendarComponent
 import com.utmaximur.calendar.models.localized
 import com.utmaximur.calendar.ui.calendar.CalendarViewLayout
+import com.utmaximur.calendar.ui.calendar.icon
 import com.utmaximur.calendar.ui.calendar.rememberCalendarState
+import com.utmaximur.calendar.ui.calendar.title
 import com.utmaximur.design.button.AddFloatingActionButton
 import com.utmaximur.design.topbar.NavigationBackButton
 import org.jetbrains.compose.resources.painterResource

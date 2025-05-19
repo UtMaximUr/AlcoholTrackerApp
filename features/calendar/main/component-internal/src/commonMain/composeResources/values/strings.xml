@@ -2,6 +2,8 @@
 <resources>
     <string name="safe_dose_note">*a safe dose of 100 ml of ethyl alcohol according\nto a study by the University of Cambridge</string>
     <string name="calendar_empty">Not a single gram was drunk on this day!:)\nPress «+» to get started</string>
+    <string name="schedule_day_view">Day</string>
+    <string name="schedule_month_view">Month</string>
 
     <string name="cd_info_safe_dose">Safe dose</string>
     <string name="cd_event">Event</string>
