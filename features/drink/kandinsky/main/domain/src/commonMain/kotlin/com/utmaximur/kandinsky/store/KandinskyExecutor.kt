@@ -21,15 +21,11 @@ import com.utmaximur.kandinsky.store.KandinskyScreenStore.State
 import com.utmaximur.kandinsky.validation.RequestValidator
 import com.utmaximur.message.models.MessageContainer
 import com.utmaximur.message.models.MessageService
-import features.drink.kandinsky.main.domain.Res
-import features.drink.kandinsky.main.domain.generate_error
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import org.jetbrains.compose.resources.StringResource
-import org.jetbrains.compose.resources.getString
 
 internal sealed interface Message {
     data class UpdateNetworkStatus(val available: Boolean) : Message
@@ -94,12 +90,12 @@ internal class KandinskyExecutor(
 
     private fun processGeneration(data: GenerateImageData) = scope.launch {
         val validatorResult = requestValidator.validate(data)
-        validatorResult.errors.firstOrNull()?.let { error -> showMessage(error.message) }
+        validatorResult.errors.firstOrNull()?.let { error -> handleErrorMessage(error.message) }
             ?: run {
                 val (prompt, style) = validatorResult.generateImageData
                 analyticsManager.trackEvent(GenerationImageEvent(prompt = prompt, style = style))
                 generateImageInteractor.invoke(validatorResult.generateImageData)
-                    .onFailure { showMessage(Res.string.generate_error, it.message) }
+                    .onFailure { error -> handleErrorMessage(error.message) }
             }
     }
 
@@ -114,8 +110,7 @@ internal class KandinskyExecutor(
         publish(Label.CloseEvent)
     }
 
-    private suspend fun showMessage(res: StringResource, args: String? = null) {
-        val message = getString(res, args.orEmpty())
-        messageService.showMessage(MessageContainer.SimpleMessage(message))
+    private fun handleErrorMessage(message: String?) {
+        messageService.showMessage(MessageContainer.ErrorMessage(message))
     }
 }

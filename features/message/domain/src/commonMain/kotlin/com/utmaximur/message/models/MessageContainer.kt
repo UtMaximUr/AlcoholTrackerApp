@@ -4,6 +4,12 @@ sealed interface MessageContainer {
 
     data class SimpleMessage(val text: String) : MessageContainer
 
+    data object SuccessfulSaveMessage : MessageContainer
+
+    data object SuccessfulUpdateMessage : MessageContainer
+
+    data class ErrorMessage(val text: String?) : MessageContainer
+
     data class SnackbarMessage(
         val userMessage: String,
         val actionLabelMessage: String? = null,

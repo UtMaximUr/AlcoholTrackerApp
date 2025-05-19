@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="successful_save_message">Successful save</string>
+    <string name="successful_update_message">Successful update</string>
+    <string name="error_message">Error: %1$s</string>
+    <string name="unknown_error_message">Unknown</string>
+</resources>

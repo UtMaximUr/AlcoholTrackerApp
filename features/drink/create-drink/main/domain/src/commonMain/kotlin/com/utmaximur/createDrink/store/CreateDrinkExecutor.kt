@@ -15,15 +15,10 @@ import com.utmaximur.domain.createDrink.CreateDrinkRepository
 import com.utmaximur.domain.createDrink.Icon
 import com.utmaximur.message.models.MessageContainer
 import com.utmaximur.message.models.MessageService
-import features.drink.create_drink.main.domain.Res
-import features.drink.create_drink.main.domain.saving_error
-import features.drink.create_drink.main.domain.successful_save
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import org.jetbrains.compose.resources.StringResource
-import org.jetbrains.compose.resources.getString
 
 
 internal sealed interface Message {
@@ -70,7 +65,7 @@ internal class CreateDrinkExecutor(
         validateAndProcessDrinkData(drinkData) { data ->
             analyticsManager.trackEvent(SaveDrinkEvent(data.name))
             interactor.invoke(data)
-                .onFailure { error -> handleSaveError(error) }
+                .onFailure { error -> handleErrorMessage(error.message) }
                 .onSuccess { handleSaveSuccess() }
         }
 
@@ -78,23 +73,18 @@ internal class CreateDrinkExecutor(
         savingJob?.cancel()
         savingJob = scope.launch {
             val validatorResult = drinkValidator.validate(data)
-            validatorResult.errors.firstOrNull()?.let { error -> showMessage(error.message) }
+            validatorResult.errors.firstOrNull()?.let { error -> handleErrorMessage(error.message) }
                 ?: block(validatorResult.drinkData)
         }
     }
 
-    private suspend fun handleSaveSuccess() {
-        showMessage(Res.string.successful_save)
+    private fun handleSaveSuccess() {
+        messageService.showMessage(MessageContainer.SuccessfulSaveMessage)
         publish(Label.CloseEvent)
     }
 
-    private suspend fun handleSaveError(error: Throwable) {
-        showMessage(Res.string.saving_error, error.message)
+    private fun handleErrorMessage(message: String?) {
+        messageService.showMessage(MessageContainer.ErrorMessage(message))
         savingJob?.cancel()
-    }
-
-    private suspend fun showMessage(res: StringResource, args: String? = null) {
-        val message = getString(res, args.orEmpty())
-        messageService.showMessage(MessageContainer.SimpleMessage(message))
     }
 }

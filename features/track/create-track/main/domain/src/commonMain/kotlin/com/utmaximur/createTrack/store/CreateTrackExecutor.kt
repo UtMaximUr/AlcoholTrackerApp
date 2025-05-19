@@ -20,17 +20,12 @@ import com.utmaximur.message.models.MessageService
 import com.utmaximur.utils.extensions.getTodayDateUi
 import com.utmaximur.utils.extensions.parseToLong
 import com.utmaximur.utils.extensions.toDateUi
-import features.track.create_track.main.domain.Res
-import features.track.create_track.main.domain.saving_error
-import features.track.create_track.main.domain.successful_save
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import org.jetbrains.compose.resources.StringResource
-import org.jetbrains.compose.resources.getString
 
 
 internal sealed interface Message {
@@ -113,12 +108,12 @@ internal class CreateTrackExecutor(
             }
     }
 
-    private suspend fun handleSaveError(error: Throwable) {
-        showMessage(Res.string.saving_error, error.message)
+    private fun handleSaveError(error: Throwable) {
+        messageService.showMessage(MessageContainer.ErrorMessage(error.message))
     }
 
-    private suspend fun handleSaveSuccess() {
-        showMessage(Res.string.successful_save)
+    private fun handleSaveSuccess() {
+        messageService.showMessage(MessageContainer.SuccessfulSaveMessage)
         publish(Label.CloseEvent)
     }
 
@@ -133,10 +128,5 @@ internal class CreateTrackExecutor(
     private fun handleSelectedDate(dateUi: String) {
         dispatch(Message.UpdateSelectedDate(dateUi))
         publish(Label.DateSelected(dateUi))
-    }
-
-    private suspend fun showMessage(res: StringResource, args: String? = null) {
-        val message = getString(res, args.orEmpty())
-        messageService.showMessage(MessageContainer.SimpleMessage(message))
     }
 }

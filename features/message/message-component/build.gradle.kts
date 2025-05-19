@@ -1,12 +1,12 @@
 plugins {
     alias(libs.plugins.custom.multiplatform.library)
     alias(libs.plugins.custom.feature.internal)
-    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.custom.koin.platform)
+    alias(libs.plugins.custom.multiplatform.composeResources)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 dependencies {
-    commonMainApi(compose.material3)
     commonMainImplementation(libs.arkivanov.decompose)
     commonMainImplementation(libs.arkivanov.decompose.extensions.compose)
     commonMainImplementation(libs.arkivanov.mvi)

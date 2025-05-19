@@ -11,14 +11,9 @@ import com.utmaximur.sortingDrinks.interactor.UpdateSortedDrinks
 import com.utmaximur.sortingDrinks.store.SortingDrinksStore.Intent
 import com.utmaximur.sortingDrinks.store.SortingDrinksStore.Label
 import com.utmaximur.sortingDrinks.store.SortingDrinksStore.State
-import features.settings.sorting_drinks.main.domain.Res
-import features.settings.sorting_drinks.main.domain.saving_error
-import features.settings.sorting_drinks.main.domain.successful_save
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import org.jetbrains.compose.resources.StringResource
-import org.jetbrains.compose.resources.getString
 
 
 internal sealed interface Message {
@@ -29,7 +24,7 @@ internal class SortingDrinksExecutor(
     private val repository: SortingDrinksRepository,
     private val interactor: UpdateSortedDrinks,
     private val messageService: MessageService,
-    private val analyticsManager: AnalyticsManager
+    private val analyticsManager: AnalyticsManager,
 ) : CoroutineExecutor<Intent, Unit, State, Message, Label>() {
 
     override fun executeAction(action: Unit) {
@@ -65,18 +60,12 @@ internal class SortingDrinksExecutor(
             .onFailure { error -> handleSaveError(error) }
     }
 
-
-    private suspend fun handleSaveError(error: Throwable) {
-        showMessage(Res.string.saving_error, error.message)
+    private fun handleSaveError(error: Throwable) {
+        messageService.showMessage(MessageContainer.ErrorMessage(error.message))
     }
 
-    private suspend fun handleSaveSuccess() {
-        showMessage(Res.string.successful_save)
+    private fun handleSaveSuccess() {
+        messageService.showMessage(MessageContainer.SuccessfulUpdateMessage)
         publish(Label.CloseEvent)
-    }
-
-    private suspend fun showMessage(res: StringResource, args: String? = null) {
-        val message = getString(res, args.orEmpty())
-        messageService.showMessage(MessageContainer.SimpleMessage(message))
     }
 }
