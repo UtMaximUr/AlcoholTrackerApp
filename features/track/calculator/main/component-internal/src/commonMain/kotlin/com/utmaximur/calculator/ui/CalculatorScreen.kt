@@ -15,10 +15,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.utmaximur.calculator.CalculatorComponent
 import com.utmaximur.design.modal.ModalBottomSheetApp
 import features.track.calculator.main.Res
+import features.track.calculator.main.save_result
 import features.track.calculator.main.calculator
 import features.track.calculator.main.cd_close
 import features.track.calculator.main.ic_close_button
@@ -76,6 +78,13 @@ internal fun CalculatorScreen(
                     },
                 )
             }
+            CalculatorButton(
+                modifier = Modifier.fillMaxWidth(),
+                containerColor = MaterialTheme.colorScheme.tertiary,
+                textColor = Color.White,
+                title = stringResource(Res.string.save_result),
+                onClick = component::onSaveResult,
+            )
         }
     }
 }

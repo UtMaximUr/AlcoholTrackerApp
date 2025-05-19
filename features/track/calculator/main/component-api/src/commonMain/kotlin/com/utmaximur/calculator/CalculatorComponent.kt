@@ -7,4 +7,6 @@ import kotlinx.coroutines.flow.StateFlow
 interface CalculatorComponent : ComposeDialogComponent, CommandHandler {
 
     val model: StateFlow<CalculatorStore.State>
+
+    fun onSaveResult()
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="calculator">Calculator</string>
+    <string name="save_result">Save result</string>
 
     <string name="cd_close">Back</string>
 </resources>

@@ -26,6 +26,8 @@ interface CalculatorStore : Store<Intent, State, Label> {
 
         data class Command(val command: CalculatorCommand) : Intent
 
+        data object SaveResult : Intent
+
     }
 
     sealed interface Label {

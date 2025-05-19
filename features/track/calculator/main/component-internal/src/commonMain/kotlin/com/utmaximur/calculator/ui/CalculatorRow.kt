@@ -37,11 +37,11 @@ internal fun CalculatorRow(
             }
             val modifier = Modifier.weight(weight)
             val containerColor = when {
-                item.isMainAction -> MaterialTheme.colorScheme.tertiary
+                item.isHighlighted -> MaterialTheme.colorScheme.tertiary
                 else -> MaterialTheme.colorScheme.background
             }
             val textColor = when {
-                item.isMainAction -> Color.White
+                item.isHighlighted -> Color.White
                 else -> MaterialTheme.colorScheme.primary
             }
 

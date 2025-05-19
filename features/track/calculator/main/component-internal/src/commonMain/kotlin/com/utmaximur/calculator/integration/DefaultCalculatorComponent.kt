@@ -33,6 +33,8 @@ internal class DefaultCalculatorComponent(
     @OptIn(ExperimentalCoroutinesApi::class)
     override val model: StateFlow<CalculatorStore.State> = store.stateFlow
 
+    override fun onSaveResult() = store.accept(CalculatorStore.Intent.SaveResult)
+
     override fun dismiss() = closeDialog()
 
     override fun handleCommand(command: CalculatorCommand) =

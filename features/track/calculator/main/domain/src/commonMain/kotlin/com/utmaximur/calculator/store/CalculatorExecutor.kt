@@ -40,6 +40,7 @@ internal class CalculatorExecutor(
     override fun executeIntent(intent: Intent): Unit =
         when (intent) {
             is Intent.Command -> handleCommand(intent.command)
+            Intent.SaveResult -> handleResult()
         }
 
     private fun trackScreenOpen() = scope.launch {
@@ -56,10 +57,8 @@ internal class CalculatorExecutor(
     }
 
     private fun initializeCalculatorItems() {
-        scope.launch {
-            val matrixCalculatorItems = itemBuilder.build()
-            dispatch(Message.UpdateActions(matrixCalculatorItems))
-        }
+        val matrixCalculatorItems = itemBuilder.build()
+        dispatch(Message.UpdateActions(matrixCalculatorItems))
     }
 
     private fun handleCommand(command: CalculatorCommand) {
@@ -68,7 +67,6 @@ internal class CalculatorExecutor(
             CalculatorCommand.Clear -> handleClear()
             is CalculatorCommand.MathOperation -> handleMathOperation(command.operation)
             is CalculatorCommand.Equals -> handleEquals()
-            CalculatorCommand.Result -> handleResult()
             is CalculatorCommand.Number -> handleNumber(command.number)
         }
     }
@@ -94,10 +92,12 @@ internal class CalculatorExecutor(
         }
     }
 
-    private fun handleResult() = scope.launch {
-        val result = stateManager.input.value.toFloatOrNull()
-        providerData.sendData(result)
-        publish(Label.CloseEvent)
+    private fun handleResult() {
+        scope.launch {
+            val result = stateManager.input.value.toFloatOrNull()
+            providerData.sendData(result)
+            publish(Label.CloseEvent)
+        }
     }
 
     private fun handleNumber(number: Int) =
