@@ -3,7 +3,6 @@ plugins {
     alias(libs.plugins.custom.android.codequality)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.custom.koin.platform)
-    alias(libs.plugins.custom.multiplatform.composeResources.common)
 }
 
 dependencies {

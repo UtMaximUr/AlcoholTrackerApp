@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="successful_update">Successful update</string>
-    <string name="updated_error">Error: %1$s</string>
-</resources>

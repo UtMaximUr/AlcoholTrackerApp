@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="prompt_empty">Enter text to request the creation of an image</string>
-    <string name="style_empty">Select an image generation style</string>
-    <string name="generate_error">Error: %1$s</string>
-</resources>

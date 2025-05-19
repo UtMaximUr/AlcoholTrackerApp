@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="photo_url_empty">Take a photo or choose from the gallery</string>
-    <string name="name_empty">Enter the name of the drink</string>
-    <string name="icon_url_empty">Select the drink icon</string>
-    <string name="successful_save">Successful save</string>
-    <string name="saving_error">Error: %1$s</string>
-</resources>
