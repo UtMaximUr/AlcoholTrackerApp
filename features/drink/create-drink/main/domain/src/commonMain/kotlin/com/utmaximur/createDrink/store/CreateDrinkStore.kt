@@ -5,6 +5,7 @@ import com.utmaximur.createDrink.DrinkData
 import com.utmaximur.createDrink.store.CreateDrinkStore.Intent
 import com.utmaximur.createDrink.store.CreateDrinkStore.Label
 import com.utmaximur.createDrink.store.CreateDrinkStore.State
+import com.utmaximur.createDrink.validation.ValidationError
 import com.utmaximur.domain.EMPTY_STRING
 import com.utmaximur.domain.createDrink.Icon
 
@@ -22,10 +23,11 @@ interface CreateDrinkStore : Store<Intent, State, Label> {
 
     sealed interface Intent {
         data class SaveDrinkData(val drinkData: DrinkData) : Intent
+        data class ShowError(val errorMessage: String) : Intent
     }
 
     sealed interface Label {
-
-        data object CloseEvent: Label
+        data class ValidatorError(val error: ValidationError) : Label
+        data object CloseEvent : Label
     }
 }

@@ -1,19 +1,24 @@
 package com.utmaximur.kandinsky.validation
 
-import features.drink.kandinsky.main.domain.Res
-import features.drink.kandinsky.main.domain.prompt_empty
-import features.drink.kandinsky.main.domain.style_empty
-import org.jetbrains.compose.resources.StringResource
+/**
+ * Иерархия ошибок валидации, используемая в доменном слое.
+ *
+ * Представляет ошибки, связанные с проверкой пользовательского ввода
+ * или бизнес-правил приложения.
+ */
+sealed interface ValidationError {
+    /**
+     * Ошибка валидации: пустое поле "Промпт"
+     *
+     * Возникает, когда обязательное текстовое поле не заполнено.
+     */
+    data object PromptEmpty : ValidationError
 
-internal sealed interface ValidationError {
-
-    val message: StringResource
-
-    data object PromptEmpty : ValidationError {
-        override val message: StringResource = Res.string.prompt_empty
-    }
-
-    data object StyleEmpty : ValidationError {
-        override val message: StringResource = Res.string.style_empty
-    }
+    /**
+     * Ошибка валидации: не выбран стиль
+     *
+     * Фиксируется, когда пользователь не выбрал требуемый стиль
+     * из доступных опций.
+     */
+    data object StyleEmpty : ValidationError
 }

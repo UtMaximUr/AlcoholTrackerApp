@@ -8,6 +8,7 @@ import com.utmaximur.kandinsky.GenerateImageData
 import com.utmaximur.kandinsky.store.KandinskyScreenStore.Intent
 import com.utmaximur.kandinsky.store.KandinskyScreenStore.Label
 import com.utmaximur.kandinsky.store.KandinskyScreenStore.State
+import com.utmaximur.kandinsky.validation.ValidationError
 
 interface KandinskyScreenStore : Store<Intent, State, Label> {
 
@@ -30,10 +31,12 @@ interface KandinskyScreenStore : Store<Intent, State, Label> {
         data class Generate(val data: GenerateImageData) : Intent
         data object RetryStyles : Intent
         data object GenerationCompletion : Intent
+        data class ShowError(val errorMessage: String) : Intent
         data object Close : Intent
     }
 
     sealed interface Label {
+        data class ValidatorError(val error: ValidationError) : Label
         data object CloseEvent : Label
     }
 }

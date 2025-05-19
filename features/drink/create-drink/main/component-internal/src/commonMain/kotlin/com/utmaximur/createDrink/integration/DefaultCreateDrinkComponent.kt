@@ -49,6 +49,12 @@ internal class DefaultCreateDrinkComponent(
             when (event) {
                 is CreateDrinkStore.Label.CloseEvent ->
                     output(CreateDrinkComponent.Output.NavigateBack)
+
+                is CreateDrinkStore.Label.ValidatorError -> store.accept(
+                    CreateDrinkStore.Intent.ShowError(
+                        event.error.toLocalizedMessage()
+                    )
+                )
             }
         }.launchIn(coroutineScope())
     }

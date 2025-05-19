@@ -46,6 +46,7 @@ internal class CreateDrinkExecutor(
     override fun executeIntent(intent: Intent) {
         when (intent) {
             is Intent.SaveDrinkData -> saveDrink(intent.drinkData)
+            is Intent.ShowError -> handleErrorMessage(intent.errorMessage)
         }
     }
 
@@ -73,8 +74,9 @@ internal class CreateDrinkExecutor(
         savingJob?.cancel()
         savingJob = scope.launch {
             val validatorResult = drinkValidator.validate(data)
-            validatorResult.errors.firstOrNull()?.let { error -> handleErrorMessage(error.message) }
-                ?: block(validatorResult.drinkData)
+            validatorResult.errors.firstOrNull()?.let { error ->
+                publish(Label.ValidatorError(error))
+            } ?: block(validatorResult.drinkData)
         }
     }
 

@@ -59,6 +59,7 @@ internal class KandinskyExecutor(
             Intent.RetryStyles -> retryFetchStyles()
             Intent.GenerationCompletion -> handleGenerationCompletion()
             Intent.Close -> finalizeImageGeneration()
+            is Intent.ShowError -> handleErrorMessage(intent.errorMessage)
         }
     }
 
@@ -90,7 +91,7 @@ internal class KandinskyExecutor(
 
     private fun processGeneration(data: GenerateImageData) = scope.launch {
         val validatorResult = requestValidator.validate(data)
-        validatorResult.errors.firstOrNull()?.let { error -> handleErrorMessage(error.message) }
+        validatorResult.errors.firstOrNull()?.let { error -> publish(Label.ValidatorError(error)) }
             ?: run {
                 val (prompt, style) = validatorResult.generateImageData
                 analyticsManager.trackEvent(GenerationImageEvent(prompt = prompt, style = style))

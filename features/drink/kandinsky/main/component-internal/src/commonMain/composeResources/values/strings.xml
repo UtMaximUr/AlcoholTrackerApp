@@ -5,6 +5,8 @@
     <string name="title_enter_text">Enter the text to generate the image</string>
     <string name="create_generation">Create generation</string>
     <string name="generation_progress">The image creation process is in progress.\nIt will take about 10 seconds, please wait.</string>
+    <string name="prompt_empty">Enter text to request the creation of an image</string>
+    <string name="style_empty">Select an image generation style</string>
 
     <string name="cd_generate_image">generate image placeholder</string>
 </resources>

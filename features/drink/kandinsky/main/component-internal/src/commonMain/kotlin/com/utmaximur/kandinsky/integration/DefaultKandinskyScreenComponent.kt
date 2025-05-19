@@ -7,8 +7,8 @@ import com.arkivanov.essenty.lifecycle.coroutines.coroutineScope
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.arkivanov.mvikotlin.extensions.coroutines.stateFlow
-import com.utmaximur.kandinsky.KandinskyScreenComponent
 import com.utmaximur.kandinsky.GenerateImageData
+import com.utmaximur.kandinsky.KandinskyScreenComponent
 import com.utmaximur.kandinsky.store.KandinskyScreenStore
 import com.utmaximur.kandinsky.ui.KandinskyScreen
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -51,6 +51,12 @@ internal class DefaultSplashScreenComponent(
             when (event) {
                 KandinskyScreenStore.Label.CloseEvent ->
                     output(KandinskyScreenComponent.Output.NavigateBack)
+
+                is KandinskyScreenStore.Label.ValidatorError -> store.accept(
+                    KandinskyScreenStore.Intent.ShowError(
+                        event.error.toLocalizedMessage()
+                    )
+                )
             }
         }.launchIn(coroutineScope())
     }
