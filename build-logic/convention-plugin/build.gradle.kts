@@ -89,9 +89,5 @@ gradlePlugin {
             id = "custom.multiplatform.composeResources"
             implementationClass = "MultiplatformComposeResourcesConventionPlugin"
         }
-        register("multiplatformComposeResourcesCommon") {
-            id = "custom.multiplatform.composeResourcesCommon"
-            implementationClass = "MultiplatformComposeResourcesCommonConventionPlugin"
-        }
     }
 }
