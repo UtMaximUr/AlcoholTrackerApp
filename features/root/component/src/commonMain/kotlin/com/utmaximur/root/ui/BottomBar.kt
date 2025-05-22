@@ -1,7 +1,14 @@
 package com.utmaximur.root.ui
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
@@ -19,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
+import com.utmaximur.bottombar.LocalBottomBarController
 import com.utmaximur.calendar.CalendarNavigationComponent
 import com.utmaximur.map.MapNavigationComponent
 import com.utmaximur.root.RootComponent
@@ -43,42 +51,58 @@ internal fun BottomBar(
     component: RootComponent,
     isMapEnabled: Boolean
 ) {
-
     val stack by component.stack.subscribeAsState()
     val activeChild = stack.active.instance
+    val bottomBarController = LocalBottomBarController.current
+    val bottomBarState by bottomBarController.state
 
-    NavigationBar(containerColor = Color.Transparent) {
-        NavigationItem(
-            icon = Res.drawable.ic_calendar_24dp,
-            title = Res.string.calendar,
-            selected = activeChild is CalendarNavigationComponent,
-            onClick = component::onCalendarScreenClicked
-        )
-        NavigationItem(
-            icon = Res.drawable.ic_map_24dp,
-            title = Res.string.map,
-            selected = activeChild is MapNavigationComponent,
-            enabled = isMapEnabled,
-            onClick = component::onMapScreenClicked
-        )
-        NavigationItem(
-            icon = Res.drawable.ic_statistic_24dp,
-            title = Res.string.statistic,
-            selected = activeChild is StatisticComponent,
-            onClick = component::onStatisticScreenClicked
-        )
-        NavigationItem(
-            icon = Res.drawable.ic_settings_24dp,
-            title = Res.string.settings,
-            selected = activeChild is SettingsNavigationComponent,
-            onClick = component::onSettingsScreenClicked
+    AnimatedVisibility(
+        visible = bottomBarState.visible,
+        enter = slideInVertically(
+            initialOffsetY = { it },
+            animationSpec = spring(stiffness = Spring.StiffnessHigh)
+        ),
+        exit = slideOutVertically(targetOffsetY = { it })
+    ) {
+        BottomAppBar(
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
+            contentPadding = PaddingValues(horizontal = 0.dp),
+            content = {
+                NavigationBar(containerColor = Color.Transparent) {
+                    NavigationItem(
+                        icon = Res.drawable.ic_calendar_24dp,
+                        title = Res.string.calendar,
+                        selected = activeChild is CalendarNavigationComponent,
+                        onClick = component::onCalendarScreenClicked
+                    )
+                    NavigationItem(
+                        icon = Res.drawable.ic_map_24dp,
+                        title = Res.string.map,
+                        selected = activeChild is MapNavigationComponent,
+                        enabled = isMapEnabled,
+                        onClick = component::onMapScreenClicked
+                    )
+                    NavigationItem(
+                        icon = Res.drawable.ic_statistic_24dp,
+                        title = Res.string.statistic,
+                        selected = activeChild is StatisticComponent,
+                        onClick = component::onStatisticScreenClicked
+                    )
+                    NavigationItem(
+                        icon = Res.drawable.ic_settings_24dp,
+                        title = Res.string.settings,
+                        selected = activeChild is SettingsNavigationComponent,
+                        onClick = component::onSettingsScreenClicked
+                    )
+                }
+            }
         )
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RowScope.NavigationItem(
+private fun RowScope.NavigationItem(
     icon: DrawableResource,
     title: StringResource,
     iconTint: Color? = null,
