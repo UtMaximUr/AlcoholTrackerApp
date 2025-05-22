@@ -29,7 +29,7 @@ internal fun StatisticScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                val rowModifier = remember { Modifier.weight(1f).aspectRatio(1f) }
+                val rowModifier = remember(Unit) { Modifier.weight(1f).aspectRatio(1f) }
                 component.statisticMoneyComponent.Render(rowModifier)
                 component.statisticDayComponent.Render(rowModifier)
             }

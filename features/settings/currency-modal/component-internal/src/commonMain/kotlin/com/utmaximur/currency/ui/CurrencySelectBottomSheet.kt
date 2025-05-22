@@ -20,7 +20,7 @@ internal fun CurrencySelectBottomSheet(
         onDismissRequest = component::dismiss,
     ) {
         LazyColumn(contentPadding = PaddingValues(vertical = 16.dp)) {
-            items(state.currencies) { item ->
+            items(state.currencies, key = { it.ordinal }) { item ->
                 CurrencyItem(
                     currency = item,
                     isSelected = state.currentCurrency == item,

@@ -23,7 +23,7 @@ internal fun DayContent(
     onItemClick: (Long) -> Unit,
 ) {
     LazyColumn(modifier = Modifier.fillMaxSize()) {
-        items(tracks) { track ->
+        items(tracks, key = { it.id }) { track ->
             TrackItem(
                 drinkName = track.drink.name,
                 drinkPhoto = track.drink.photo,

@@ -27,7 +27,7 @@ internal fun TracksModalDialog(
             contentPadding = PaddingValues(horizontal = 8.dp),
             verticalArrangement = Arrangement.spacedBy(6.dp)
         ) {
-            items(state.tracks) { track ->
+            items(state.tracks, key = { it.id }) { track ->
                 ElevatedCardApp {
                     TrackItem(
                         drinkName = track.drink.name,

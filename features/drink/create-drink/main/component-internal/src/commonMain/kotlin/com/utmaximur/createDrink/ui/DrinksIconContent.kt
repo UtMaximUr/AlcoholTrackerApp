@@ -42,7 +42,7 @@ internal fun DrinksIconContent(
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             contentPadding = PaddingValues(16.dp),
         ) {
-            items(icons) { icon ->
+            items(icons, key = { it.id }) { icon ->
                 DrinkItem(
                     url = icon.url,
                     isSelected = selectedIcon == icon,
