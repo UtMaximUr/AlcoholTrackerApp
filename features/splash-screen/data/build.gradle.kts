@@ -3,7 +3,6 @@ plugins {
     alias(libs.plugins.custom.multiplatform.library)
     alias(libs.plugins.custom.android.codequality)
     alias(libs.plugins.custom.koin.platform)
-    alias(libs.plugins.custom.ktorfit.plugin)
     alias(libs.plugins.ktorfit)
     alias(libs.plugins.kotlin.serialization)
 }

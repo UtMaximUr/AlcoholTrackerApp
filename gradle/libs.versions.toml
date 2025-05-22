@@ -5,20 +5,19 @@ android-minSdk = "23"
 android-targetSdk = "35"
 
 # AndroidX
-androidx-datastore = "1.1.4"
+androidx-datastore = "1.1.7"
 activity-compose = "1.10.1"
-androidx-room = "2.7.0-rc03"
-work-runtime-ktx = "2.10.0"
+androidx-room = "2.7.1"
+work-runtime-ktx = "2.10.1"
 
 # Jetpack Compose
 jb-compose = "1.7.1"
 shimmerVer = "1.2.0"
-uiAndroid = "1.7.8"
 
 # Kotlin
 kotlin = "2.1.10"
-kotlinx-serialization = "1.8.0"
-kotlinx-coroutines = "1.10.1"
+kotlinx-serialization = "1.8.1"
+kotlinx-coroutines = "1.10.2"
 kotlinx-datetime = "0.6.0"
 
 # Koin
@@ -26,9 +25,9 @@ koin = "3.6.0-Beta4"
 koinAnnotations = "1.3.1"
 
 # ArkIvanov Libraries
-arkivanov-decompose = "3.2.2"
-arkivanov-essenty = "2.2.1"
-arkivanov-mvi = "4.2.0"
+arkivanov-decompose = "3.3.0"
+arkivanov-essenty = "2.5.0"
+arkivanov-mvi = "4.3.0"
 
 # Static Code Analysis
 detekt = "1.23.3"
@@ -36,14 +35,14 @@ spotless = "6.21.0"
 ktlint_jlleitschuh = "11.5.0"
 
 # Image Loading
-coil = "3.1.0"
+coil = "3.2.0"
 
 # Networking (Ktor)
-ktor = "3.1.0"
-ktorfitLib = "2.4.0"
+ktor = "3.1.2"
+ktorfitLib = "2.5.2"
 
 # Database
-sqlite = "2.5.0-rc03"
+sqlite = "2.5.1"
 
 # Miscellaneous
 desugar-jdk-libs = "2.1.5"
@@ -64,7 +63,6 @@ androidx-datastore-preferences = { module = "androidx.datastore:datastore-prefer
 activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidx-room" }
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "androidx-room" }
-androidx-ui-android = { group = "androidx.compose.ui", name = "ui-android", version.ref = "uiAndroid" }
 androidx-startup-runtime = { module = "androidx.startup:startup-runtime", version = "1.2.0" }
 androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "work-runtime-ktx" }
 
@@ -80,8 +78,10 @@ kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serializa
 # Koin
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+# do not comment this line, it's needed for the plugin
 koin-annotations = { module = "io.insert-koin:koin-annotations", version.ref = "koinAnnotations" }
 koin-kspCompiler = { module = "io.insert-koin:koin-ksp-compiler", version.ref = "koinAnnotations" }
+# end region
 
 # ArkIvanov
 arkivanov-decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "arkivanov-decompose" }
@@ -109,6 +109,7 @@ coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-ktor3", version.
 # Networking (Ktor)
 ktorfit-lib = { module = "de.jensklingenberg.ktorfit:ktorfit-lib", version.ref = "ktorfitLib" }
 ktorfit-flow = { module = "de.jensklingenberg.ktorfit:ktorfit-converters-flow", version.ref = "ktorfitLib" }
+# do not comment this line, it's needed for the plugin
 ktorfit-ksp = { module = "de.jensklingenberg.ktorfit:ktorfit-ksp", version.ref = "ktorfitLib" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
@@ -124,9 +125,7 @@ sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sql
 
 # Miscellaneous
 store5 = { module = "org.mobilenativefoundation.store:store5", version = "5.0.0" }
-#napier = { module = "io.github.aakira:napier", version.ref = "napier" }
 desugar-jdk-libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar-jdk-libs" }
-#image-zoomable = { module = "com.mxalbert.zoomable:zoomable", version.ref = "zoomable" }
 multiplatform-expressio-evaluator = { module = "io.github.murzagalin:multiplatform-expressions-evaluator", version.ref = "evaluator" }
 yandex-map-mobile = { module = "com.yandex.android:maps.mobile", version.ref = "yandexMapsMobile" }
 reorderable = { module = "sh.calvin.reorderable:reorderable", version.ref = "reorderable" }
@@ -154,10 +153,11 @@ coil = [
 ]
 
 [plugins]
+# do not comment this line, it's needed for the plugin
 android-application = { id = "com.android.application", version.ref = "plugin-android" }
 android-library = { id = "com.android.library", version.ref = "plugin-android" }
+# end region
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version = "2.0.0-RC3" }
-# do not comment this line, it's needed for the plugin
 cocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
 devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "jb-compose" }

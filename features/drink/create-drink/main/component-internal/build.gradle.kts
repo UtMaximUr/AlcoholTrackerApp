@@ -6,7 +6,6 @@ plugins {
 }
 
 dependencies {
-    implementation(libs.androidx.ui.android)
     commonMainImplementation(libs.kotlinx.serialization.core)
     commonMainImplementation(libs.bundles.coil)
 
