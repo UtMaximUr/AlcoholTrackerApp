@@ -3,6 +3,7 @@ package com.utmaximur.message.integration
 import androidx.compose.material3.SnackbarDuration
 import com.utmaximur.message.models.MessageContainer
 import com.utmaximur.message.store.MessageStore
+import com.utmaximur.message.ui.SnackbarType
 import features.message.message_.Res
 import features.message.message_.successful_save_message
 import features.message.message_.successful_update_message
@@ -46,7 +47,22 @@ internal class ErrorMessageConverter(
 
     override suspend fun toSnackbarMessageUi() = MessageStore.Label.SnackbarMessage(
         userMessage = getFallbackText(Res.string.unknown_error_message),
-        duration = SnackbarDuration.Long
+        duration = SnackbarDuration.Long,
+        type = SnackbarType.ERROR,
+        withDismissAction = true,
+    )
+}
+
+internal class InfoMessageConverter(
+    message: MessageContainer.InfoMessage
+) : TextMessageContainer() {
+    override val text: String = message.text
+
+    override suspend fun toSnackbarMessageUi() = MessageStore.Label.SnackbarMessage(
+        userMessage = text,
+        duration = SnackbarDuration.Short,
+        type = SnackbarType.INFO,
+        withDismissAction = true,
     )
 }
 
@@ -55,7 +71,8 @@ internal class SuccessMessageConverter(
 ) : MessageToSnackbarConverter {
     override suspend fun toSnackbarMessageUi() = MessageStore.Label.SnackbarMessage(
         userMessage = getString(resId),
-        duration = SnackbarDuration.Short
+        duration = SnackbarDuration.Short,
+        type = SnackbarType.SUCCESS,
     )
 }
 
@@ -74,6 +91,7 @@ internal fun MessageContainer.toConverter(): MessageToSnackbarConverter = when (
 
     is MessageContainer.SimpleMessage -> SimpleMessageConverter(this)
     is MessageContainer.ErrorMessage -> ErrorMessageConverter(this)
+    is MessageContainer.InfoMessage -> InfoMessageConverter(this)
     MessageContainer.SuccessfulSaveMessage -> SuccessMessageConverter(Res.string.successful_save_message)
     MessageContainer.SuccessfulUpdateMessage -> SuccessMessageConverter(Res.string.successful_update_message)
 }

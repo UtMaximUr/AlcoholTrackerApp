@@ -59,7 +59,7 @@ internal class KandinskyExecutor(
             Intent.RetryStyles -> retryFetchStyles()
             Intent.GenerationCompletion -> handleGenerationCompletion()
             Intent.Close -> finalizeImageGeneration()
-            is Intent.ShowError -> handleErrorMessage(intent.errorMessage)
+            is Intent.ShowInfo -> handleInfoMessage(intent.errorMessage)
         }
     }
 
@@ -113,5 +113,9 @@ internal class KandinskyExecutor(
 
     private fun handleErrorMessage(message: String?) {
         messageService.showMessage(MessageContainer.ErrorMessage(message))
+    }
+
+    private fun handleInfoMessage(message: String) {
+        messageService.showMessage(MessageContainer.InfoMessage(message))
     }
 }

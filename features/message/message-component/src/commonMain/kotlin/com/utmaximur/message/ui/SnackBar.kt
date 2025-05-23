@@ -24,6 +24,7 @@ interface SnackbarController {
         actionLabel: String? = null,
         withDismissAction: Boolean = false,
         duration: SnackbarDuration = SnackbarDuration.Short,
+        type: SnackbarType,
         onSnackbarResult: (SnackbarResult) -> Unit = {},
     )
 }
@@ -51,6 +52,7 @@ internal fun SnackbarMessageHandler(
             actionLabel = actionLabel,
             withDismissAction = snackbarMessage.withDismissAction,
             duration = snackbarMessage.duration,
+            type = snackbarMessage.type,
             onSnackbarResult = snackbarMessage.onSnackbarResult,
         )
         onDismiss()
@@ -76,14 +78,18 @@ private class SnackbarControllerImpl(
         actionLabel: String?,
         withDismissAction: Boolean,
         duration: SnackbarDuration,
+        type: SnackbarType,
         onSnackbarResult: (SnackbarResult) -> Unit,
     ) {
         coroutineScope.launch {
             snackbarHostState.showSnackbar(
-                message,
-                actionLabel,
-                withDismissAction,
-                duration,
+                SnackbarVisualsCustom(
+                    message = message,
+                    actionLabel = actionLabel,
+                    withDismissAction = withDismissAction,
+                    duration = duration,
+                    type = type,
+                )
             ).let(onSnackbarResult)
         }
     }

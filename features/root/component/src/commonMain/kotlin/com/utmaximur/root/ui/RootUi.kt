@@ -20,6 +20,7 @@ import com.utmaximur.bottombar.BottomBarState
 import com.utmaximur.bottombar.ProvideBottomBarController
 import com.utmaximur.message.ui.MessageUi
 import com.utmaximur.message.ui.ProvideSnackbarController
+import com.utmaximur.message.ui.SnackbarVisualsCustom
 import com.utmaximur.root.RootComponent
 import com.utmaximur.root.ui.theme.AlcoholTrackerTheme
 import com.utmaximur.splash.SplashScreenComponent
@@ -46,7 +47,12 @@ fun RootScreen(
                     )
                 },
                 snackbarHost = {
-                    SnackbarHost(hostState = snackbarHostState)
+                    SnackbarHost(hostState = snackbarHostState) { data ->
+                        SnackbarCustom(
+                            visuals = data.visuals as SnackbarVisualsCustom,
+                            dismiss = data::dismiss
+                        )
+                    }
                 },
                 containerColor = MaterialTheme.colorScheme.primaryContainer,
                 content = { innerPadding ->

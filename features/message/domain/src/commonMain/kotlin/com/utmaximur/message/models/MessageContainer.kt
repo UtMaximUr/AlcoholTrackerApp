@@ -10,6 +10,8 @@ sealed interface MessageContainer {
 
     data class ErrorMessage(val text: String?) : MessageContainer
 
+    data class InfoMessage(val text: String) : MessageContainer
+
     data class SnackbarMessage(
         val userMessage: String,
         val actionLabelMessage: String? = null,

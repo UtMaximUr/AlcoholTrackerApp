@@ -51,7 +51,7 @@ internal class DefaultCreateDrinkComponent(
                     output(CreateDrinkComponent.Output.NavigateBack)
 
                 is CreateDrinkStore.Label.ValidatorError -> store.accept(
-                    CreateDrinkStore.Intent.ShowError(
+                    CreateDrinkStore.Intent.ShowInfo(
                         event.error.toLocalizedMessage()
                     )
                 )

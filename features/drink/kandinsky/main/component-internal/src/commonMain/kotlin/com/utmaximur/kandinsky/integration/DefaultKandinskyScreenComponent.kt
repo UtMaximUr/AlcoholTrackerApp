@@ -53,7 +53,7 @@ internal class DefaultSplashScreenComponent(
                     output(KandinskyScreenComponent.Output.NavigateBack)
 
                 is KandinskyScreenStore.Label.ValidatorError -> store.accept(
-                    KandinskyScreenStore.Intent.ShowError(
+                    KandinskyScreenStore.Intent.ShowInfo(
                         event.error.toLocalizedMessage()
                     )
                 )

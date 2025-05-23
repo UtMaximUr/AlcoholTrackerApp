@@ -23,7 +23,7 @@ interface CreateDrinkStore : Store<Intent, State, Label> {
 
     sealed interface Intent {
         data class SaveDrinkData(val drinkData: DrinkData) : Intent
-        data class ShowError(val errorMessage: String) : Intent
+        data class ShowInfo(val errorMessage: String) : Intent
     }
 
     sealed interface Label {

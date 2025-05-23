@@ -31,7 +31,7 @@ interface KandinskyScreenStore : Store<Intent, State, Label> {
         data class Generate(val data: GenerateImageData) : Intent
         data object RetryStyles : Intent
         data object GenerationCompletion : Intent
-        data class ShowError(val errorMessage: String) : Intent
+        data class ShowInfo(val errorMessage: String) : Intent
         data object Close : Intent
     }
 

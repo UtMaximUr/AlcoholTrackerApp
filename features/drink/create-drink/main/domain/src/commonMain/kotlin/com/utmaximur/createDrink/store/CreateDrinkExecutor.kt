@@ -46,7 +46,7 @@ internal class CreateDrinkExecutor(
     override fun executeIntent(intent: Intent) {
         when (intent) {
             is Intent.SaveDrinkData -> saveDrink(intent.drinkData)
-            is Intent.ShowError -> handleErrorMessage(intent.errorMessage)
+            is Intent.ShowInfo -> handleInfoMessage(intent.errorMessage)
         }
     }
 
@@ -87,6 +87,11 @@ internal class CreateDrinkExecutor(
 
     private fun handleErrorMessage(message: String?) {
         messageService.showMessage(MessageContainer.ErrorMessage(message))
+        savingJob?.cancel()
+    }
+
+    private fun handleInfoMessage(message: String) {
+        messageService.showMessage(MessageContainer.InfoMessage(message))
         savingJob?.cancel()
     }
 }
