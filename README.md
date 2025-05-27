@@ -1,4 +1,4 @@
-# AlcoholTrackerApp
+# AlcoholTrackerApp [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/UtMaximUr/AlcoholTrackerApp)
 
 In this app, you can mark all your drinking days, keep statistics about your drinks, mark places on a map, create new drinks and generate images for them using Fusion Brain AI.
 
