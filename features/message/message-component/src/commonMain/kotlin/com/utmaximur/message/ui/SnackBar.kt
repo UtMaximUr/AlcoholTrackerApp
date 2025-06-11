@@ -5,7 +5,6 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.staticCompositionLocalOf
 import com.utmaximur.message.store.MessageStore
@@ -46,17 +45,15 @@ internal fun SnackbarMessageHandler(
 ) {
     val userMessage = snackbarMessage.userMessage
     val actionLabel = snackbarMessage.actionLabelMessage
-    LaunchedEffect(snackbarMessage) {
-        snackbarController.showMessage(
-            message = userMessage,
-            actionLabel = actionLabel,
-            withDismissAction = snackbarMessage.withDismissAction,
-            duration = snackbarMessage.duration,
-            type = snackbarMessage.type,
-            onSnackbarResult = snackbarMessage.onSnackbarResult,
-        )
-        onDismiss()
-    }
+    snackbarController.showMessage(
+        message = userMessage,
+        actionLabel = actionLabel,
+        withDismissAction = snackbarMessage.withDismissAction,
+        duration = snackbarMessage.duration,
+        type = snackbarMessage.type,
+        onSnackbarResult = snackbarMessage.onSnackbarResult,
+    )
+    onDismiss()
 }
 
 @Stable
