@@ -202,3 +202,5 @@ includeFeature("drink:kandinsky:domain")
 includeFeature("drink:kandinsky:main:domain")
 includeFeature("drink:kandinsky:main:component-api")
 includeFeature("drink:kandinsky:main:component-internal")
+
+includeFeature("app-widget:component")

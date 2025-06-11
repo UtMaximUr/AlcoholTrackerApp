@@ -9,6 +9,7 @@ androidx-datastore = "1.1.7"
 activity-compose = "1.10.1"
 androidx-room = "2.7.1"
 work-runtime-ktx = "2.10.1"
+glanceAppWidget = "1.1.1"
 
 # Jetpack Compose
 jb-compose = "1.7.1"
@@ -65,6 +66,9 @@ androidx-room-compiler = { group = "androidx.room", name = "room-compiler", vers
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "androidx-room" }
 androidx-startup-runtime = { module = "androidx.startup:startup-runtime", version = "1.2.0" }
 androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "work-runtime-ktx" }
+androidx-glance-appwidget = { module = "androidx.glance:glance-appwidget", version.ref = "glanceAppWidget" }
+androidx-glance-material3 = { module = "androidx.glance:glance-material3", version.ref = "glanceAppWidget" }
+androidx-glance-preview = { module = "androidx.glance:glance-preview", version.ref = "glanceAppWidget" }
 
 # Jetpack Compose
 shimmer-compose = { group = "com.valentinilk.shimmer", name = "compose-shimmer", version.ref = "shimmerVer" }

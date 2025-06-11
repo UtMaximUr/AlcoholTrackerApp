@@ -3,9 +3,9 @@ package com.utmaximur.root
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.Value
 import com.utmaximur.core.decompose.ComposeComponent
-import kotlinx.coroutines.flow.StateFlow
 import com.utmaximur.domain.root.store.RootStore
 import com.utmaximur.message.MessageComponent
+import kotlinx.coroutines.flow.StateFlow
 
 interface RootComponent {
 
@@ -20,4 +20,6 @@ interface RootComponent {
     fun onStatisticScreenClicked()
 
     fun onSettingsScreenClicked()
+
+    fun handleDeepLink(deepLink: String?)
 }

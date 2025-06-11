@@ -15,6 +15,7 @@ import com.utmaximur.detailTrack.store.DetailTrackStore
 import com.utmaximur.detailTrack.ui.DetailTrackScreen
 import com.utmaximur.domain.TrackData
 import com.utmaximur.geocoder.GeocoderComponent
+import com.utmaximur.widget.AppWidgetComponent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
@@ -39,6 +40,10 @@ internal class DefaultDetailTrackComponent(
         get { parametersOf(trackId) }
     }
     private val trackBuilder = TrackData.Builder()
+
+    private val appWidgetComponent: AppWidgetComponent by lazy {
+        get { parameterArrayOf(childContext(AppWidgetComponent::class.simpleName.orEmpty())) }
+    }
 
     @OptIn(ExperimentalCoroutinesApi::class)
     override val model: StateFlow<DetailTrackStore.State> = store.stateFlow
@@ -80,8 +85,10 @@ internal class DefaultDetailTrackComponent(
                 is DetailTrackStore.Label.TrackLinked ->
                     geocoderComponent.savePlaceToTrack(trackId)
 
-                is DetailTrackStore.Label.CloseEvent ->
+                is DetailTrackStore.Label.CloseEvent -> {
+                    appWidgetComponent.updateAll()
                     output(DetailTrackComponent.Output.NavigateBack)
+                }
             }
         }.launchIn(coroutineScope())
     }

@@ -19,4 +19,7 @@ internal sealed class Configuration {
 
     @Serializable
     data object SettingsScreen : Configuration()
+
+    @Serializable
+    data object CreateTrackScreen : Configuration()
 }

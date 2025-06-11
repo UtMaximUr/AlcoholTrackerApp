@@ -34,6 +34,7 @@ kotlin {
 
             implementation(projects.di)
             implementation(projects.features.root.component)
+            implementation(projects.features.appWidget.component)
         }
 
         androidMain.dependencies {

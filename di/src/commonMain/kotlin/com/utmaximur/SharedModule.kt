@@ -59,6 +59,7 @@ import com.utmaximur.splash.SplashScreenComponentModule
 import com.utmaximur.statistic.StatisticMainComponentModule
 import com.utmaximur.tracker.TrackerAnalyticsModule
 import com.utmaximur.tracksModal.TracksModalMainComponentModule
+import com.utmaximur.widget.AppWidgetModule
 import com.utmaximur.yandex_map.YandexMapModule
 import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Module
@@ -128,7 +129,8 @@ import org.koin.core.annotation.Single
         KandinskyScreenComponentModule::class,
         KandinskyDataModule::class,
         SortingDrinksDataModule::class,
-        SortingDrinksMainComponentModule::class
+        SortingDrinksMainComponentModule::class,
+        AppWidgetModule::class,
     ]
 )
 

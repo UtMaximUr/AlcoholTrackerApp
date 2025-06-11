@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_week">Week</string>
+    <string name="title_month">Month</string>
+    <string name="title_year">Year</string>
+    <string name="title_spent">I spent in a</string>
+    <string name="title_add_track">Add track</string>
+
+    <string name="cd_icon">Icon app</string>
+</resources>

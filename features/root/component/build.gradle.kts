@@ -13,6 +13,8 @@ dependencies {
     commonMainImplementation(projects.features.map.navigation.componentApi)
     commonMainImplementation(projects.features.statistic.main.componentApi)
     commonMainImplementation(projects.features.settings.navigation.componentApi)
+    commonMainImplementation(projects.features.track.createTrack.navigation.componentApi)
+    commonMainImplementation(projects.features.appWidget.component)
     commonMainImplementation(projects.features.message.messageComponent)
     commonMainImplementation(projects.features.root.domain)
     commonMainImplementation(projects.features.root.bottombar)

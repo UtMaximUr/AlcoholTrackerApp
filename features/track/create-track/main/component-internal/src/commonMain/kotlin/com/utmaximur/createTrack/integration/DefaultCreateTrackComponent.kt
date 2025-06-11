@@ -15,6 +15,7 @@ import com.utmaximur.createTrack.store.CreateTrackStore
 import com.utmaximur.createTrack.ui.CreateTrackScreen
 import com.utmaximur.domain.TrackData
 import com.utmaximur.geocoder.GeocoderComponent
+import com.utmaximur.widget.AppWidgetComponent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
@@ -35,6 +36,10 @@ internal class DefaultCreateTrackComponent(
 
     private val store: CreateTrackStore = instanceKeeper.getStore(::get)
     private val trackBuilder = TrackData.Builder()
+
+    private val appWidgetComponent: AppWidgetComponent by lazy {
+        get { parameterArrayOf(childContext(AppWidgetComponent::class.simpleName.orEmpty())) }
+    }
 
     @OptIn(ExperimentalCoroutinesApi::class)
     override val model: StateFlow<CreateTrackStore.State> = store.stateFlow
@@ -77,8 +82,10 @@ internal class DefaultCreateTrackComponent(
                 is CreateTrackStore.Label.TrackLinked ->
                     geocoderComponent.savePlaceToTrack(event.trackId)
 
-                is CreateTrackStore.Label.CloseEvent ->
+                is CreateTrackStore.Label.CloseEvent -> {
+                    appWidgetComponent.updateAll()
                     output(CreateTrackComponent.Output.NavigateBack)
+                }
             }
         }.launchIn(coroutineScope())
     }

@@ -18,6 +18,13 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="app"/>
+                <data android:host="open.add.track"/>
+                <data android:host="open.app"/>
+            </intent-filter>
         </activity>
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -28,5 +35,17 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+        <receiver
+            android:name="com.utmaximur.widget.AppWidgetReceiver"
+            android:enabled="@bool/glance_appwidget_available"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/app_widget_info" />
+        </receiver>
     </application>
 </manifest>
