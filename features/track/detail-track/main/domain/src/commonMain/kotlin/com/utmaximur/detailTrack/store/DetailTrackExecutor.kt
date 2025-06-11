@@ -49,7 +49,7 @@ internal class DetailTrackExecutor(
 
     override fun executeAction(action: Unit) {
         trackScreenOpen()
-        observeTrackDetails()
+        getTrackDetails()
         observePriceUpdates()
         observeDateUpdates()
         observeDeleteConfirmation()
@@ -66,13 +66,14 @@ internal class DetailTrackExecutor(
         analyticsManager.trackEvent(OpenScreenEvent())
     }
 
-    private fun observeTrackDetails() = repository.observeTrackById(trackId)
-        .onEach { track ->
+    private fun getTrackDetails() {
+        scope.launch {
+            val track = repository.getTrackById(trackId)
             handleSelectedDate(track.date.toDateUi())
             dispatch(Message.UpdatePrice(track.price))
             dispatch(Message.UpdateTrack(track))
         }
-        .launchIn(scope)
+    }
 
     private fun observePriceUpdates() = calculatorProviderData.dataFlow
         .filterNotNull()

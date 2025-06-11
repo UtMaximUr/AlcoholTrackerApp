@@ -3,15 +3,15 @@ package com.utmaximur.databaseRoom.track
 
 import androidx.room.Dao
 import androidx.room.Query
-import kotlinx.coroutines.flow.Flow
 import com.utmaximur.databaseRoom.base.BaseDao
+import kotlinx.coroutines.flow.Flow
 
 
 @Dao
 interface TrackDao : BaseDao<DbTrack> {
 
     @Query("SELECT * FROM DbTrack WHERE id=:id")
-    fun getTrackById(id: Long): Flow<DbTrack>
+    suspend fun getTrackById(id: Long): DbTrack
 
     @Query("SELECT * FROM DbTrack WHERE id IN (:ids)")
     fun getTracksByIds(ids: List<Long>): Flow<List<DbTrack>>

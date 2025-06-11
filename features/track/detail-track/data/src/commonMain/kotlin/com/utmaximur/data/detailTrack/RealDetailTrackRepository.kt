@@ -4,7 +4,6 @@ import com.utmaximur.databaseRoom.track.TrackDao
 import com.utmaximur.domain.Track
 import com.utmaximur.domain.detailTrack.DetailTrackRepository
 import com.utmaximur.settingsManager.CurrencySettingsManager
-import kotlinx.coroutines.flow.map
 import org.koin.core.annotation.Factory
 
 @Factory
@@ -16,8 +15,8 @@ internal class RealDetailTrackRepository(
 
     override val currencyStream = currencySettingsManager.currencyStateStream
 
-    override fun observeTrackById(trackId: Long) = trackDao.getTrackById(trackId)
-        .map(mapper.trackDomainMapper::transform)
+    override suspend fun getTrackById(trackId: Long): Track =
+        trackDao.getTrackById(trackId).let(mapper.trackDomainMapper::transform)
 
     override suspend fun updateTrack(track: Track) =
         trackDao.update(mapper.trackLocalMapper.transform(track))

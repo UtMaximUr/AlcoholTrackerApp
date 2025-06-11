@@ -7,7 +7,7 @@ interface DetailTrackRepository {
 
     val currencyStream: Flow<String>
 
-    fun observeTrackById(trackId: Long): Flow<Track>
+    suspend fun getTrackById(trackId: Long): Track
 
     suspend fun updateTrack(track: Track)
 
