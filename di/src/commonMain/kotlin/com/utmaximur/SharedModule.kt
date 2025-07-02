@@ -4,6 +4,7 @@ import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.logging.store.LoggingStoreFactory
 import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
 import com.utmaximur.actions.ActionImageComponentModule
+import com.utmaximur.alcohol_calculator.AlcoholCalculatorMainComponentModule
 import com.utmaximur.app.base.BaseModule
 import com.utmaximur.calculator.CalculatorMainComponentModule
 import com.utmaximur.calendar.CalendarComponentModule
@@ -131,6 +132,7 @@ import org.koin.core.annotation.Single
         SortingDrinksDataModule::class,
         SortingDrinksMainComponentModule::class,
         AppWidgetModule::class,
+        AlcoholCalculatorMainComponentModule::class
     ]
 )
 

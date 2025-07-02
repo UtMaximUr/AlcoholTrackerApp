@@ -33,4 +33,5 @@ object ParamValues {
     const val CREATE_DRINK_SCREEN = "create_drink_screen"
     const val KANDINSKY_SCREEN = "kandinsky_screen"
     const val SORTING_DRINKS_SCREEN = "sorting_drinks_screen"
+    const val ALCOHOL_CALCULATOR_SCREEN = "alcohol_calculator_screen"
 }

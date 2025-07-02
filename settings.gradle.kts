@@ -204,3 +204,7 @@ includeFeature("drink:kandinsky:main:component-api")
 includeFeature("drink:kandinsky:main:component-internal")
 
 includeFeature("app-widget:component")
+
+includeFeature("alcohol-calculator:main:domain")
+includeFeature("alcohol-calculator:main:component-api")
+includeFeature("alcohol-calculator:main:component-internal")

@@ -1,0 +1,5 @@
+package com.utmaximur.alcohol_calculator.result_dilaog
+
+import com.utmaximur.core.decompose.ComposeDialogComponent
+
+internal interface ResultDialogComponent: ComposeDialogComponent

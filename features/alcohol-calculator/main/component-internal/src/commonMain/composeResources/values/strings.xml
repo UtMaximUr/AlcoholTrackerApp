@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="info">The ppm alcohol calculator calculates the concentration of alcohol in the blood and the estimated time for its elimination from the body. The calculator works based on the internationally recognized Widmark formula (Widmark Erik M.P.), which gives the most accurate results.</string>
+    <string name="about_you">About you</string>
+    <string name="cm">cm</string>
+    <string name="kg">kg</string>
+    <string name="calculate">Calculate</string>
+    <string name="add_drink">+ Add drink</string>
+    <string name="height">Height</string>
+    <string name="weight">Weight</string>
+    <string name="gender">Gender</string>
+
+    <string name="drink">Drink %1$d</string>
+    <string name="degree">Degree:</string>
+    <string name="degree_symbol">%</string>
+    <string name="volume">Volume:</string>
+    <string name="volume_symbol">ml</string>
+
+    <string name="cd_male">Male</string>
+    <string name="cd_female">Female</string>
+    <string name="cd_info">Info</string>
+
+    <!-- Result dialog -->
+    <string name="bac">Maximum concentration: %1$d ‰</string>
+    <string name="elimination">Time of elimination from the body: %1$d h %2$d min</string>
+    <string name="warning">The calculator does not take into account individual characteristics and other factors. The result of the calculations is approximate; it cannot be used to challenge the results of an examination for alcohol intoxication, including medical intoxication. We do not make conclusions, but make recommendations. If, based on the results of the calculator, you decide to get behind the wheel, and you are stopped, examined and deprived of your driver's license, the responsibility will be on you. To prevent this from happening, add a margin of time to the indicator calculated by the calculator - the more, the better.</string>
+    <string name="proceed">Continue</string>
+
+</resources>

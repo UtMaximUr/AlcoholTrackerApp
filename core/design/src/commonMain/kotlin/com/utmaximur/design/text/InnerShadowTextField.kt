@@ -32,6 +32,7 @@ import com.utmaximur.design.ui.trailingOrBlockedIcon
  * @param title Заголовок текстового поля. Если не указан, используется [placeholderText].
  * @param textValue Текущее значение текстового поля. Может быть любого типа, но будет преобразовано в строку.
  * @param placeholderText Текст-заполнитель, который отображается, когда поле пустое.
+ * @param suffixText Текст-суффикс, который отображается в конце текстового поля.
  * @param leadingIcon Иконка, отображаемая в начале текстового поля.
  * @param trailingIcon Иконка, отображаемая в конце текстового поля.
  * @param supportingText Дополнительный текст, отображаемый под полем (например, подсказка или сообщение об ошибке).
@@ -51,6 +52,7 @@ fun InnerShadowTextField(
     title: String? = null,
     textValue: Any? = null,
     placeholderText: String = title.orEmpty(),
+    suffixText: String? = null,
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
     supportingText: @Composable (() -> Unit)? = null,
@@ -110,6 +112,15 @@ fun InnerShadowTextField(
             },
             minLines = minLines,
             isError = isError,
+            suffix = suffixText?.let {
+                {
+                    Text(
+                        text = it,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.secondary,
+                    )
+                }
+            }
         )
         supportingText?.let { it() }
     }

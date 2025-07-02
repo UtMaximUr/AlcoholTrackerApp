@@ -17,6 +17,8 @@ interface RootComponent {
 
     fun onMapScreenClicked()
 
+    fun onAlcoholCalculatorScreenClicked()
+
     fun onStatisticScreenClicked()
 
     fun onSettingsScreenClicked()

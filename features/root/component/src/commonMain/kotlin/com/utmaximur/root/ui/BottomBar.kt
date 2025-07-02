@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
+import com.utmaximur.alcohol_calculator.AlcoholCalculatorComponent
 import com.utmaximur.bottombar.LocalBottomBarController
 import com.utmaximur.calendar.CalendarNavigationComponent
 import com.utmaximur.map.MapNavigationComponent
@@ -33,7 +34,9 @@ import com.utmaximur.root.RootComponent
 import com.utmaximur.settings.SettingsNavigationComponent
 import com.utmaximur.statistic.StatisticComponent
 import features.root.Res
+import features.root.alcohol_calculator
 import features.root.calendar
+import features.root.ic_alcohol_calculator_24dp
 import features.root.ic_calendar_24dp
 import features.root.ic_map_24dp
 import features.root.ic_settings_24dp
@@ -81,6 +84,12 @@ internal fun BottomBar(
                         selected = activeChild is MapNavigationComponent,
                         enabled = isMapEnabled,
                         onClick = component::onMapScreenClicked
+                    )
+                    NavigationItem(
+                        icon = Res.drawable.ic_alcohol_calculator_24dp,
+                        title = Res.string.alcohol_calculator,
+                        selected = activeChild is AlcoholCalculatorComponent,
+                        onClick = component::onAlcoholCalculatorScreenClicked
                     )
                     NavigationItem(
                         icon = Res.drawable.ic_statistic_24dp,

@@ -15,6 +15,9 @@ internal sealed class Configuration {
     data object MapScreen : Configuration()
 
     @Serializable
+    data object AlcoholCalculatorScreen : Configuration()
+
+    @Serializable
     data object StatisticScreen : Configuration()
 
     @Serializable

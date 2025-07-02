@@ -11,6 +11,7 @@ dependencies {
     commonMainImplementation(projects.features.splashScreen.main.componentApi)
     commonMainImplementation(projects.features.calendar.navigation.componentApi)
     commonMainImplementation(projects.features.map.navigation.componentApi)
+    commonMainImplementation(projects.features.alcoholCalculator.main.componentApi)
     commonMainImplementation(projects.features.statistic.main.componentApi)
     commonMainImplementation(projects.features.settings.navigation.componentApi)
     commonMainImplementation(projects.features.track.createTrack.navigation.componentApi)

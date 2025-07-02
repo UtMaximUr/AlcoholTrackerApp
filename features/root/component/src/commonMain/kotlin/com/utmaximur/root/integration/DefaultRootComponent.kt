@@ -10,6 +10,7 @@ import com.arkivanov.decompose.router.stack.replaceAll
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.stateFlow
+import com.utmaximur.alcohol_calculator.AlcoholCalculatorComponent
 import com.utmaximur.calendar.CalendarNavigationComponent
 import com.utmaximur.core.decompose.ComposeComponent
 import com.utmaximur.createTrack.CreateTrackNavigationComponent
@@ -77,6 +78,10 @@ internal class DefaultRootComponent(
                 parameterArrayOf(componentContext)
             }
 
+            Configuration.AlcoholCalculatorScreen -> get<AlcoholCalculatorComponent> {
+                parameterArrayOf(componentContext)
+            }
+
             Configuration.StatisticScreen -> get<StatisticComponent> {
                 parameterArrayOf(componentContext)
             }
@@ -103,6 +108,9 @@ internal class DefaultRootComponent(
 
     override fun onMapScreenClicked() =
         navigation.replaceAll(Configuration.MapScreen)
+
+    override fun onAlcoholCalculatorScreenClicked() =
+        navigation.replaceAll(Configuration.AlcoholCalculatorScreen)
 
     override fun onStatisticScreenClicked() =
         navigation.replaceAll(Configuration.StatisticScreen)
